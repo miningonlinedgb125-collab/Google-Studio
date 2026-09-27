@@ -1,13 +1,13 @@
 {
   "channel": "Noreen Kids",
   "dailyPublishTimeCairo": "19:00",
-  "privacyStatus": "unlisted",
+  "privacyStatus": "private",
   "shortsPlaylistId": "PLPwfeXzB3ozU",
   "longPlaylistId": "PLbjN20PzrCYk",
   "containsSyntheticMedia": true,
   "madeForKids": true,
-  "syncedAtIso": "2026-09-27T06:53:22.881Z",
-  "encryptedVault": "488b5fe1091b0999ac60e1df89280223:ac17ddb8fc167acea8e28f6f6f5bfd13222f8a8c42764ebdfa1c8fde4f48a0420f76ff20a7c0c5570ecc0181e39b45dfb326ae5a88920d5e53fe26836f485574d9a64fc1dbf0c986093fb841c9c64430d001386cafb329202feff0f2115215c5d99a611d32381c85620572fcdac551acbc17cfb05b228b2e56c7002a9a5877e1370d275cb974d98f91425804d8f2ded26ce1043e49529dfd2ff3f22031d09ff8620ad8517f19c8c6bbd3ad3aa55c1992ee3ff6c8b274861c967f23a5da40cd83bb8c5a71dd85277c3b584566c073bee967eaac0e2eb18908990f7c365fa8c93c5e5b6cc6b1686a25d0220f013eeda6cf8916bbfb190e2628a48192a2c6ec29a1dc2645d08d7085f39e212e9275269778d79f7b79bcf3d4eadd383da3ac260781c4e45fa1df491478e24a5a1f65d918140e89be5aab64f0e38552817ac29090356d926cd18aa282dce274ee42db04f78d4d6e97ae8b7f0144102c3931c159ce75a64ee0dcd7f0acca1f38af7a10f04568",
+  "syncedAtIso": "2026-09-27T07:33:57.168Z",
+  "encryptedVault": "56245a287c314196c0db72be334b9f39:8a621a3c78e37c5273431fd08ee58fb973672abb412f3cb44f16e62da60fdfd7db63e84f964451c38e825a32ff93b0f2c2769f8aa8af2635cb36d5d05a86f3dc1bae1ee4b5090c7b287e7ca34450888a96a0e6ce1bb42dcc7ff45f584acb5ae5a1eaf30533c52e1aa35153520cd0bcef006fbce26241f4afe230179b7ea87bea5ec6f28beb9aa834ffe90fe96169ea3b6f9aa557d463a90300a756434ebd26a36f18b75802ab9483b41bc0914bb18753da3ce240898460293f5d9bb6ee992437ab2147ad3d71786e6612b15336933aa607d9f326bc752264840ed755d4977a7e95898a34e237f581532c7dd0518fe66515526917e2c6990e27b1ad132c525e6788fc53467f9f8ea0421400324401303effd95bde2e4917c18a4cd58a287a7f9dbcf9bfe2244824cb6fb1ac6a7ec2bc9d7a55472f1aeec30a975fd8e0bb67b7c4456a20ffbd620cb5bfebeaf88fbdf39a1eefd7fa047171ee8415aa4929d01eaab81ab4152fa7f5760f37de476b27e5a8",
   "shortEpisode": {
     "id": "ep-short-star-compass",
     "title": "لغز الكوكب البلوري في مرصد الفضاء",
@@ -278,7 +278,7 @@
         ]
       },
       {
-        "id": "sc-enh-1790491985125-6",
+        "id": "sc-enh-1790493913866-6",
         "sceneNumber": 7,
         "title": "مشهد المغامرة 7",
         "environmentPreset": "floating_library",
@@ -299,7 +299,7 @@
         ]
       },
       {
-        "id": "sc-enh-1790491985125-7",
+        "id": "sc-enh-1790493913866-7",
         "sceneNumber": 8,
         "title": "مشهد المغامرة 8",
         "environmentPreset": "cloud_ship",
