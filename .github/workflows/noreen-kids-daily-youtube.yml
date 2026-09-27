@@ -1,0 +1,43 @@
+name: Noreen Kids 24/7 Daily YouTube Schedule (Short + Long 3D)
+
+on:
+  schedule:
+    # Runs daily at 19:00 Egypt Time (Africa/Cairo) -> 17:00 UTC
+    - cron: '0 17 * * *'
+  workflow_dispatch:
+    inputs:
+      publish_mode:
+        description: 'نوع التشغيل (daily_schedule أو manual_instant)'
+        required: false
+        default: 'daily_schedule'
+
+jobs:
+  generate-and-upload-noreen-kids:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout Noreen Kids 3D Studio Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20 & FFmpeg
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install FFmpeg for H.264 + AAC-LC + FastStart MP4 Rendering
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y ffmpeg
+
+      - name: Trigger Noreen Kids 3D Studio Daily Pair Upload (Short PLPwfeXzB3ozU + Long PLbjN20PzrCYk)
+        env:
+          APP_URL: ${{ secrets.APP_URL }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+        run: |
+          echo "Starting Noreen Kids 24/7 Automated YouTube Pipeline..."
+          if [ -n "$APP_URL" ]; then
+            curl -sS -X POST "${APP_URL%/}/api/youtube/schedule-upload" -H "Content-Type: application/json" -d @noreen-kids-schedule.json || true
+          fi
