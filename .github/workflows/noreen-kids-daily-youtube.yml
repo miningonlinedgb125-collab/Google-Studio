@@ -8,7 +8,7 @@ on:
     inputs:
       publish_mode:
         description: 'نوع التشغيل (daily_schedule أو manual_instant)'
-        required: false
+        required: true
         default: 'daily_schedule'
 
 jobs:
