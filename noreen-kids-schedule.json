@@ -6,8 +6,8 @@
   "longPlaylistId": "PLbjN20PzrCYk",
   "containsSyntheticMedia": true,
   "madeForKids": true,
-  "syncedAtIso": "2026-09-27T07:33:57.168Z",
-  "encryptedVault": "56245a287c314196c0db72be334b9f39:8a621a3c78e37c5273431fd08ee58fb973672abb412f3cb44f16e62da60fdfd7db63e84f964451c38e825a32ff93b0f2c2769f8aa8af2635cb36d5d05a86f3dc1bae1ee4b5090c7b287e7ca34450888a96a0e6ce1bb42dcc7ff45f584acb5ae5a1eaf30533c52e1aa35153520cd0bcef006fbce26241f4afe230179b7ea87bea5ec6f28beb9aa834ffe90fe96169ea3b6f9aa557d463a90300a756434ebd26a36f18b75802ab9483b41bc0914bb18753da3ce240898460293f5d9bb6ee992437ab2147ad3d71786e6612b15336933aa607d9f326bc752264840ed755d4977a7e95898a34e237f581532c7dd0518fe66515526917e2c6990e27b1ad132c525e6788fc53467f9f8ea0421400324401303effd95bde2e4917c18a4cd58a287a7f9dbcf9bfe2244824cb6fb1ac6a7ec2bc9d7a55472f1aeec30a975fd8e0bb67b7c4456a20ffbd620cb5bfebeaf88fbdf39a1eefd7fa047171ee8415aa4929d01eaab81ab4152fa7f5760f37de476b27e5a8",
+  "syncedAtIso": "2026-09-27T07:39:13.987Z",
+  "encryptedVault": "5290d822b77409ed12dec448fc13d4ba:f932241e9c24445269f7d9eccc5dcb39332dd4d302d941f302c9b45889c4be56f25e35a2d5ae9965c8c419f55b16c9454d707ed53d8d7c2e5ca84de6dffa0e38250fb028761864a87aae750b1162b2ba61c8f88ce358ceb6aca042e0d966d5d67c27bbc7420be7c7da415b94f983c98b35f534dd04c71a7e136f0495c54363967affc236236075d7e7ca96eb4b43a1e2da7c6807ad31a6a290ed59dd007bf026410ad5361d6cfb4c988d6c85bb7566179f0a02de144a0eee461811780278ed6891949f178c85fc603192133723b5d857233bd567297c8ad5a47c30de7fb65d12459d93ac0bb640db4f10d47a7e1e58e96fe81e29ba9eab32b082a25870497b6adffe0f03aee4e3affbb0c55651a613d75c4932ad91d4b2d37157d611625aa23cae409756cedcc6a73269f7be002ad87513666a0dba091804ebbbda024dab20d2b62ecc6dc2b241eecc9bf3667c5c9c3628472fc893a32a97b77d0204aa2d74ab478b298faf3a6c9d0c2f38e94e83dba1",
   "shortEpisode": {
     "id": "ep-short-star-compass",
     "title": "لغز الكوكب البلوري في مرصد الفضاء",
@@ -278,7 +278,7 @@
         ]
       },
       {
-        "id": "sc-enh-1790493913866-6",
+        "id": "sc-enh-1790494704438-6",
         "sceneNumber": 7,
         "title": "مشهد المغامرة 7",
         "environmentPreset": "floating_library",
@@ -299,7 +299,7 @@
         ]
       },
       {
-        "id": "sc-enh-1790493913866-7",
+        "id": "sc-enh-1790494704439-7",
         "sceneNumber": 8,
         "title": "مشهد المغامرة 8",
         "environmentPreset": "cloud_ship",
