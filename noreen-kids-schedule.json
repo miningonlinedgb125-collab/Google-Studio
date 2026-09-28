@@ -12,9 +12,9 @@
   "shortsPlaylistId": "PLPwfeXzB3ozU",
   "longPlaylistId": "PLbjN20PzrCYk",
   "containsSyntheticMedia": false,
-  "syncedAtIso": "2026-09-28T15:52:44.123Z",
+  "syncedAtIso": "2026-09-28T15:52:48.823Z",
   "syncReason": "dashboard_state_updated",
-  "encryptedVault": "077383d11eded741bc217054762e04a5:599df6b6acd9a1c1b66b2b4035c81e15b34224ced51247503ffcedabccef92c711bb62243851aa0a9a1728081993d7ffe2a460c0c1d70b803263e92c6367c6a2b7808ca43b6c65526a5c5edd3bce1bfca52636e6e1a282c53a2430303731bcc3ff66bff463aadccaa1f4d5e5f6be815d5dd96fa6ac9f120190c32f9170a1039a039e2070f1e7430263eb8614634b2646faef7b1f5e6ede98539a875de7340d93ed093bcf692036edcac6eaa9cc1af8b957248a51f9855fb39b227392b97b9c7823253bb0307522404f2c520ad4018562cf209bc6d67efc4706bfa138246bec964d7073b8d5688c3ac66757a5bf78c8178410a3c087877448446a8f0ae7982377b6f6abc2a5e6f5a9a54838caa8ab55bb22bb7ab41594dc33ad01eccd010c754d6d35e13e1031f50695b92b6b4969d2129e187cdd2a2c5511a1636fc87a2709d0c35dd68dd4a4b36170e2ef5fd8fad781f67a631c9bcd930659735fd41f1bdbe9fdeb698feac054c1dc3933f969909512b6b6ab26932e89756e282c30819009f0d31e16b20182bd66503ef1755a21d974283a4b4dfdf6bbcfc8392e369889b45a59f921469c175337fe419ac0cdc112c9fa6c9de9b4fa6a1e0ee6c3542174a427",
+  "encryptedVault": "f5efbb6a95dc5384ba7ea22a281ddabe:5e895b5600063b4c67495274d8dbc14613aefc4fe5d73642f5193f478b199746eaf4fc39d7a2da519b6d45091ba712e94db55747333852c47246c611c958725703135f353b3937021494d4329523960571c84580c4de06921237c42004b8de382881023ec10d11ba323db3532f8e4d73c49004fae4c78b2982ea8ceb1681655a4c7b0b3ac8241b8497f170dd5420bc42d2e7f8ef02ed6a0a744d85dd3ed9c9a4e70402165e0eb5b108fe8530d0fd50d00ac9f444eb798817dcdadad7ff31050a6771c0521661e129dfb1fcb97db559235842db88e13969d393108022ec09b43139808ffb3a7d22f373a6df80cf4f4bb6608f01941a2e2f12a80a5680e2b0706e1e45ad86dfd7091499477007e50b5b9a8604cf83cfcc26ac839c7f03f8188a61439b5c9a9550176f82ea4355bbbb35cec7b55d4191be801fe043a9136bcd82503d023af49aa90e20e05f8b12d1713b04c860752d8ae6def26127f13da6554a6ef894e1aee13953e80341bd0b76489d1cdc27d607c0026c67bd248d6c7bdc1a1bb6deae789cac0ea14eda624668238c4f6ecb0a326ca2bf8ecc5a9db2e59bccee62f5c6b3ce8733c53bb25f0729067b96c6998a55c07fb50f39b6d97bc8e2366f",
   "shortEpisode": {
     "id": "ep-short-star-compass",
     "title": "لغز الكوكب البلوري في مرصد الفضاء",
@@ -63,7 +63,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T15:39:39.273Z"
+          "checkedAtIso": "2026-09-28T15:52:38.251Z"
         }
       },
       {
@@ -101,7 +101,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T15:39:39.275Z"
+          "checkedAtIso": "2026-09-28T15:52:38.257Z"
         }
       },
       {
@@ -136,7 +136,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T15:39:39.276Z"
+          "checkedAtIso": "2026-09-28T15:52:38.262Z"
         }
       },
       {
@@ -172,14 +172,14 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T15:39:39.278Z"
+          "checkedAtIso": "2026-09-28T15:52:38.268Z"
         }
       }
     ],
     "youtubePackage": {
       "videoTitleAr": "Noreen Kids: لغز الكوكب البلوري في مرصد الفضاء | مغامرات نور وبلبل",
       "videoTitleEn": "Noreen Kids: Mystery of the Crystal Planet | Noor & Bulbul 3D Short",
-      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nفي مغامرة فضائية شيقة داخل مرصد النجوم الطائر، تكتشف رائدة الفضاء الصغيرة \"نور\" مع صديقها الآلي \"بلبل\" إشارة ضوئية عجيبة من كوكب بلوري بعيد، ويتعلمان معاً كيف يفسر العلم جمال الكواكب والنجوم!\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- حب التأمل في الكون وطرح الأسئلة العلمية الذكية.\n- أهمية القراءة والبحث العلمي في اكتشاف أسرار الفضاء.\n\n🕖 موعد النشر اليومي: الساعة 7:30 مساءً بتوقيت مصر.\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #قصص_اطفال_قبل_النوم #رسوم_متحركة #أفلام_كرتون #حواديت_مصرية #اطفال #تعليم_الاطفال #KidsAnimation #3DCartoon #BedtimeStoriesForKids #ArabicKidsCartoon #AnimatedStories #PixarStyle3D #KidsLearning #FamilyFriendly",
+      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nفي مغامرة فضائية شيقة داخل مرصد النجوم الطائر، تكتشف رائدة الفضاء الصغيرة \"نور\" مع صديقها الآلي \"بلبل\" إشارة ضوئية عجيبة من كوكب بلوري بعيد، ويتعلمان معاً كيف يفسر العلم جمال الكواكب والنجوم!\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- حب التأمل في الكون وطرح الأسئلة العلمية الذكية.\n- أهمية القراءة والبحث العلمي في اكتشاف أسرار الفضاء.\n\n🕖 موعد النشر اليومي: الساعة 7:00 مساءً بتوقيت مصر.\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #قصص_اطفال_قبل_النوم #رسوم_متحركة #أفلام_كرتون #حواديت_مصرية #اطفال #تعليم_الاطفال #KidsAnimation #3DCartoon #BedtimeStoriesForKids #ArabicKidsCartoon #AnimatedStories #PixarStyle3D #KidsLearning #FamilyFriendly",
       "tags": [
         "Noreen Kids",
         "كرتون أطفال 3D",
@@ -263,7 +263,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T15:39:39.237Z"
+          "checkedAtIso": "2026-09-28T15:52:38.143Z"
         }
       },
       {
@@ -306,7 +306,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T15:39:39.242Z"
+          "checkedAtIso": "2026-09-28T15:52:38.156Z"
         }
       },
       {
@@ -350,7 +350,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T15:39:39.247Z"
+          "checkedAtIso": "2026-09-28T15:52:38.172Z"
         }
       },
       {
@@ -391,7 +391,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T15:39:39.252Z"
+          "checkedAtIso": "2026-09-28T15:52:38.184Z"
         }
       },
       {
@@ -428,7 +428,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T15:39:39.256Z"
+          "checkedAtIso": "2026-09-28T15:52:38.194Z"
         }
       },
       {
@@ -467,7 +467,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T15:39:39.261Z"
+          "checkedAtIso": "2026-09-28T15:52:38.205Z"
         }
       },
       {
@@ -509,7 +509,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T15:39:39.266Z"
+          "checkedAtIso": "2026-09-28T15:52:38.230Z"
         }
       },
       {
@@ -551,14 +551,14 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T15:39:39.271Z"
+          "checkedAtIso": "2026-09-28T15:52:38.243Z"
         }
       }
     ],
     "youtubePackage": {
       "videoTitleAr": "Noreen Kids: سر الفانوس المفقود في غابة النجوم | حواديت فارس وزعتر",
       "videoTitleEn": "Noreen Kids: The Lost Star Lantern | 3D Animated Kids Movie | Faris & Zaatar",
-      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nينطلق بطلنا الشجاع \"فارس المستكشف\" مع صاحبه الذكي \"زعتر\" في رحلة ساحرة جوه غابة النجوم المنورة علشان يدوروا على الفانوس المفقود ويرجعوا النور والأمل لكل أشجار الغابة من خلال التعاون والصدق.\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- قيمة التعاون والعمل الجماعي بين الأصحاب.\n- حب الاستكشاف والبحث العلمي.\n- الصدق ومساعدة الآخرين.\n\n🕖 موعد النشر اليومي: الساعة 7:30 مساءً بتوقيت مصر.\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #قصص_اطفال_قبل_النوم #رسوم_متحركة #أفلام_كرتون #حواديت_مصرية #اطفال #تعليم_الاطفال #KidsAnimation #3DCartoon #BedtimeStoriesForKids #ArabicKidsCartoon #AnimatedStories #PixarStyle3D #KidsLearning #FamilyFriendly\n\nالفصول الزمنية:\n00:00 دخول غابة الأشجار المنورة\n00:54 اكتشاف خريطة المرصد القديم\n01:48 التحليق بسفينة السحاب الذهبية\n02:42 عبور واحة الكريستال وحل اللغز\n03:36 إضاءة منارة المحيط السحرية\n04:30 عودة النور إلى الغابة السحرية\n05:24 مشهد المغامرة 7\n06:21 مشهد المغامرة 8",
+      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nينطلق بطلنا الشجاع \"فارس المستكشف\" مع صاحبه الذكي \"زعتر\" في رحلة ساحرة جوه غابة النجوم المنورة علشان يدوروا على الفانوس المفقود ويرجعوا النور والأمل لكل أشجار الغابة من خلال التعاون والصدق.\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- قيمة التعاون والعمل الجماعي بين الأصحاب.\n- حب الاستكشاف والبحث العلمي.\n- الصدق ومساعدة الآخرين.\n\n🕖 موعد النشر اليومي: الساعة 7:00 مساءً بتوقيت مصر.\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #قصص_اطفال_قبل_النوم #رسوم_متحركة #أفلام_كرتون #حواديت_مصرية #اطفال #تعليم_الاطفال #KidsAnimation #3DCartoon #BedtimeStoriesForKids #ArabicKidsCartoon #AnimatedStories #PixarStyle3D #KidsLearning #FamilyFriendly\n\nالفصول الزمنية:\n00:00 دخول غابة الأشجار المنورة\n00:54 اكتشاف خريطة المرصد القديم\n01:48 التحليق بسفينة السحاب الذهبية\n02:42 عبور واحة الكريستال وحل اللغز\n03:36 إضاءة منارة المحيط السحرية\n04:30 عودة النور إلى الغابة السحرية\n05:24 مشهد المغامرة 7\n06:21 مشهد المغامرة 8",
       "tags": [
         "Noreen Kids",
         "كرتون أطفال 3D",
