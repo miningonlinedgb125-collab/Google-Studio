@@ -774,6 +774,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
 
   // Build clean static Duo composite card from approved local character portraits (zero pixel warping)
   const duoCardPath = path.join(tmpDir, `duo_card_${videoFormat}.jpg`);
+  const thumbnail1280Path = path.join(tmpDir, `thumbnail_1280x720_${videoFormat}.jpg`);
   try {
     const halfW = Math.floor(W / 2);
     await execFileAsync("ffmpeg", [
@@ -783,7 +784,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       "-i",
       heroImg,
       "-filter_complex",
-      `[0:v]scale=${halfW}:${H}:force_original_aspect_ratio=increase,crop=${halfW}:${H}[left];[1:v]scale=${W - halfW}:${H}:force_original_aspect_ratio=increase,crop=${W - halfW}:${H}[right];[left][right]hstack=inputs=2,eq=saturation=1.10:contrast=1.03[outv]`,
+      `[0:v]scale=${halfW}:${H}:force_original_aspect_ratio=increase,crop=${halfW}:${H}[left];[1:v]scale=${W - halfW}:${H}:force_original_aspect_ratio=increase,crop=${W - halfW}:${H}[right];[left][right]hstack=inputs=2,eq=saturation=1.16:contrast=1.06,drawbox=x=${halfW - 3}:y=0:w=6:h=${H}:color=0xFBBF24@0.95:t=fill[outv]`,
       "-map",
       "[outv]",
       "-frames:v",
@@ -791,6 +792,24 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       "-q:v",
       "2",
       duoCardPath,
+    ]);
+
+    // Also build a dedicated 1280x720 YouTube Cover Thumbnail strictly with the Episode's Main Hero + Companion ONLY
+    await execFileAsync("ffmpeg", [
+      "-y",
+      "-i",
+      compImg,
+      "-i",
+      heroImg,
+      "-filter_complex",
+      `[0:v]scale=640:720:force_original_aspect_ratio=increase,crop=640:720,eq=saturation=1.24:contrast=1.08:brightness=0.02,unsharp=5:5:0.85:5:5:0.0[left];[1:v]scale=640:720:force_original_aspect_ratio=increase,crop=640:720,eq=saturation=1.24:contrast=1.08:brightness=0.02,unsharp=5:5:0.85:5:5:0.0[right];[left][right]hstack=inputs=2,vignette=PI/7,drawbox=x=634:y=0:w=12:h=720:color=0xF59E0B@0.95:t=fill,drawbox=x=638:y=0:w=4:h=720:color=0xFEF08A@1.0:t=fill,drawbox=x=0:y=0:w=1280:h=720:color=0xFBBF24@0.95:t=12,drawbox=x=12:y=12:w=1256:h=696:color=0x38BDF8@0.65:t=4,setsar=1,format=yuvj420p[outv]`,
+      "-map",
+      "[outv]",
+      "-frames:v",
+      "1",
+      "-q:v",
+      "3",
+      thumbnail1280Path,
     ]);
   } catch {}
 
@@ -880,7 +899,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       isCompTurn ? companionName : heroName
     );
     const hasDuoCard = fs.existsSync(duoCardPath);
-    const shotImg = i % 3 === 1 && hasDuoCard ? duoCardPath : activeImg;
+    const shotImg = (i === 0 || i % 3 === 1) && hasDuoCard ? duoCardPath : activeImg;
     const prebakedImg = await getPrebakedPortrait(shotImg, i);
 
     console.log(
@@ -1078,6 +1097,8 @@ async function getYouTubeAccessToken({ clientId, clientSecret, refreshToken }) {
 async function uploadMp4ToYouTube({
   accessToken,
   mp4Path,
+  thumbnailJpgPath,
+  thumbnailBase64,
   title,
   description,
   tags,
@@ -1170,6 +1191,37 @@ async function uploadMp4ToYouTube({
   const uploadedData = await putRes.json();
   const videoId = uploadedData.id;
 
+  // Automatically upload the 1280x720 Dual-Hero (Main Hero + Companion ONLY) Thumbnail to YouTube (`thumbnails.set`)
+  let thumbnailUploaded = false;
+  if (videoId) {
+    try {
+      let thumbBuf = null;
+      if (typeof thumbnailBase64 === "string" && thumbnailBase64.length > 500) {
+        const cleanB64 = thumbnailBase64.replace(/^data:image\/\w+;base64,/, "");
+        thumbBuf = Buffer.from(cleanB64, "base64");
+      } else if (thumbnailJpgPath && fs.existsSync(thumbnailJpgPath)) {
+        thumbBuf = fs.readFileSync(thumbnailJpgPath);
+      }
+      if (thumbBuf && thumbBuf.length > 500) {
+        const thumbRes = await fetch(
+          `https://www.googleapis.com/upload/youtube/v3/thumbnails/set?videoId=${encodeURIComponent(
+            String(videoId).trim()
+          )}&uploadType=media`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Content-Type": "image/jpeg",
+              "Content-Length": String(thumbBuf.length),
+            },
+            body: new Uint8Array(thumbBuf),
+          }
+        );
+        thumbnailUploaded = thumbRes.ok;
+      }
+    } catch {}
+  }
+
   let playlistAdded = false;
   if (playlistId && videoId) {
     try {
@@ -1201,6 +1253,7 @@ async function uploadMp4ToYouTube({
     cleanTitle,
     playlistId,
     playlistAdded,
+    thumbnailUploaded,
     fileSizeMb: (mp4Buffer.length / (1024 * 1024)).toFixed(2),
   };
 }
@@ -1661,11 +1714,14 @@ async function main() {
       `✅ PRE-UPLOAD UNIT TEST GATE PASSED: Duration=${durSec}s | AV-Drift=${avDrift.toFixed(2)}s | Codec=${vCodec}/${pixFmt}/${aCodec} 48kHz Stereo (Closed-GOP=${closedGop}) | Dialogue=100% Egyptian Verified | ExternalImages=0 | FastStart=Enabled`
     );
 
-    console.log(`☁️ [Step 4/4] Uploading ${task.label} to YouTube Channel (Noreen Kids)...`);
+    console.log(`☁️ [Step 4/4] Uploading ${task.label} + 1280x720 Dual-Hero Thumbnail to YouTube Channel (Noreen Kids)...`);
     const pkg = task.episode?.youtubePackage || {};
+    const expectedThumbPath = path.join(tmpDir, `thumbnail_1280x720_${task.videoFormat}.jpg`);
     const uploadRes = await uploadMp4ToYouTube({
       accessToken,
       mp4Path,
+      thumbnailJpgPath: expectedThumbPath,
+      thumbnailBase64: pkg.thumbnailBase64,
       title: pkg.videoTitleAr || task.episode?.title,
       description: pkg.descriptionAr || task.episode?.subtitle,
       tags: pkg.tags,
@@ -1678,6 +1734,7 @@ async function main() {
     });
 
     console.log(`🎉 SUCCESS! Uploaded Video ID: ${uploadRes.videoId}`);
+    console.log(`🖼️ Custom 1280x720 Thumbnail (Hero + Companion): ${uploadRes.thumbnailUploaded ? "Uploaded Automatically ✓" : "Default Frame"}`);
     console.log(`🔗 Watch URL: https://www.youtube.com/watch?v=${uploadRes.videoId}`);
     console.log(`📂 Playlist (${uploadRes.playlistId}): ${uploadRes.playlistAdded ? "Added ✓" : "Skipped"}`);
 
