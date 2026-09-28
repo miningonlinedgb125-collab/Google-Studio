@@ -1,20 +1,20 @@
 {
   "channel": "Noreen Kids",
-  "dailyPublishTimeCairo": "23:30",
+  "dailyPublishTimeCairo": "19:00",
   "githubPublishTimeCairo": "07:00",
   "dailyDialect": "egyptian",
   "selectedWorkflowMode": "daily_schedule",
   "isAutoDailyScheduleEnabled": true,
-  "isGitHubScheduleEnabled": true,
+  "isGitHubScheduleEnabled": false,
   "privacyStatus": "unlisted",
   "madeForKids": false,
   "categoryId": "1",
   "shortsPlaylistId": "PLPwfeXzB3ozU",
   "longPlaylistId": "PLbjN20PzrCYk",
   "containsSyntheticMedia": false,
-  "syncedAtIso": "2026-09-28T16:42:19.574Z",
+  "syncedAtIso": "2026-09-28T23:38:03.452Z",
   "syncReason": "dashboard_state_updated",
-  "encryptedVault": "fdb1000ac8c27bc4c403cccf0dc9d0a1:578d8ffe7344cfb05d0576a76fd584433ac381187c0a29cf0f2292c3e8aa6e7238af2982b0bd6dd49e6e3bc5ae1ff9ce769be03063cdd6010b91dffedacd62a62d2a86acb10879516d8bcdab6efa42f93547cc82f5ace1130241e827af00c69f8f2cb023356faa253f9c56458611952381f28531077f65cdbef80a5157d28fc7c9a009bf49fb146c11cd175af546be664a8c28b3eb18f9aa3dcadafc4c3bbbefa9ab0ff4fba8e19faf4bf999d9174d3886b79b131086fb142a3bec1075a3a6f41b3e760d58c592e0c1b8394eecfebb2a690a4d9e7d94ab9ad9d3394ab145f9ad7166c7abb5d343ed925b6b8000d66de8d423d07397329086c6df791d0bd86b74262b38feba40ed9a0780a7178a0cc5341c1b7936fbe44ce4085b721adb3fa6095a57386629ca5bf932ae0324fa0ec2ab4d83ddb50d45ea5a243f5f301941dd9cc0feda9814a87a44283bdc5f84c274818925a8a13ff6cd4e4ac6173042b78e217cf57f2045501162f35084f94268c84c28162b2f1191b3431079e1d4f58173432af3b7c80a6dd691ebb3f2643ef4a3cf823c210d3e6e71ae6ee649bff824f451ceb78b44850e3b231936376c21f3b82bdc8432a8c7e40a504eb1117b6b893059",
+  "encryptedVault": "6834abbb4d12b6d1d66bfecd0e22af50:edeb195cb56094c0e688e6a2a2c94e2982a8c3c1202bb85f9360647a3d5aa13e61b0313f41d733455a86a02da1f38bc5e5dc4bf8d37cd62aea34db25f10afc334fcbe611565d450a003d8ae7cda9acb682054b4b420e9a3e2bb7ee086140c0ce2fdc56e3aad359a7104434408f25cf01d75ebe7f6f21df83c43688149577c325604f1a1533f74dbd2a01cfd6bf94111056b03c2682626d3c00c3f5704e311ba8d4ebd5b6f73e51459d788cb4e226200675ff8b65846faac1abca74d378dc7a14fad0bf3c63bbaac758feeb2fb11246bc97e3d8cdede8f8e7d006f4b75bf162f22ee4afc3990e189325b84496cb4ca318137de13ebc5ffe351f70f0ef1d95f4cd27f7ec879e083a3e098ed1a34634c67733c9b6e6378df3d383e8815dd4390885437e3cc280c7421c9ebd9768b377e342ccdca75213bc11ee28f05cac6ef3b1175f750467d1b560498f324405d2cbe2efc98c2d7e9d20b8d5a95c7942039dcbe7b23b5c213ef15aed01dede30b9595d67f41cd9131118318947ee76abd553201d883ec5ce56c759f1928dd777c8ebeb9ec282b2a8c354de2c16df15d43128ca424dc6c89483479a8b777a23bd5f2f18d53b66cc41a7108bce92f0fa6a9c5a372a",
   "shortEpisode": {
     "id": "ep-short-star-compass",
     "title": "لغز الكوكب البلوري في مرصد الفضاء",
@@ -63,7 +63,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T16:42:29.518Z"
+          "checkedAtIso": "2026-09-28T23:36:22.120Z"
         }
       },
       {
@@ -101,7 +101,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T16:42:29.525Z"
+          "checkedAtIso": "2026-09-28T23:36:22.125Z"
         }
       },
       {
@@ -136,7 +136,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T16:42:29.530Z"
+          "checkedAtIso": "2026-09-28T23:36:22.130Z"
         }
       },
       {
@@ -172,7 +172,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T16:42:29.536Z"
+          "checkedAtIso": "2026-09-28T23:36:22.136Z"
         }
       }
     ],
@@ -263,7 +263,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T16:42:29.416Z"
+          "checkedAtIso": "2026-09-28T23:36:22.040Z"
         }
       },
       {
@@ -306,7 +306,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T16:42:29.428Z"
+          "checkedAtIso": "2026-09-28T23:36:22.054Z"
         }
       },
       {
@@ -350,7 +350,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T16:42:29.438Z"
+          "checkedAtIso": "2026-09-28T23:36:22.060Z"
         }
       },
       {
@@ -391,7 +391,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T16:42:29.451Z"
+          "checkedAtIso": "2026-09-28T23:36:22.066Z"
         }
       },
       {
@@ -428,7 +428,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T16:42:29.462Z"
+          "checkedAtIso": "2026-09-28T23:36:22.074Z"
         }
       },
       {
@@ -467,7 +467,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T16:42:29.472Z"
+          "checkedAtIso": "2026-09-28T23:36:22.087Z"
         }
       },
       {
@@ -509,7 +509,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T16:42:29.494Z"
+          "checkedAtIso": "2026-09-28T23:36:22.101Z"
         }
       },
       {
@@ -551,7 +551,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-28T16:42:29.508Z"
+          "checkedAtIso": "2026-09-28T23:36:22.114Z"
         }
       }
     ],
