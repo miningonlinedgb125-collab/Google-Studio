@@ -33,13 +33,13 @@
     "longCustomHashtags": [],
     "customFacebookPackages": {}
   },
-  "syncedAtIso": "2026-09-29T21:58:36.841Z",
-  "syncReason": "facebook_publisher_saved",
-  "encryptedVault": "26d2f55bf52395dfe2dcd0be87745c0f:b2a1bd572261e6c049a44560533e2b5c794534df8fbac42bac8b79d95542abf0ecd20f11876788a2261fef3f4187401316ed422e6e092e70abb6494db6503982d1e9e9dd5d7c8c7cf681423dd66c5a3c953015352173a4ea644eb08f508670d10ae867db7e07f2872eafaf43d98a05d5fdd78011d00a5d60f493eadb0e2e42904898d11e67e884ca9743738463b5e194dde977ca7a96fc836aa3c9ce36ba9b2488786bdce6ca08dfa97d1d9f6c220200a90118ccd881571edee863470bac6658d3913d96d96a7c3e5c669d65f86248f7b7efa451524ea7eb0a63093a05630dfea16997479fcc555dc6093436480bf5beae4ea886a6ded326732113b8e2ca2887d9916c03f8028071281f2486450c4b739a323f48d92949fc720c017a8e3ab9a6a1180f02a74869f26237b5e03717b42cd60b1fab15447945ed79b68e9aa59a25e51c7009783d856ae4fccbed6c5329615cac4ee5bd99c66b18b52a03f9a81b76a699548fbc22625ee58c7324afe44795d04f46dc6886acc65fb3ae91b26f298d4368eb5327a4eabfdef570322ecdaf45f02f90fb0df66cd984dbb63c2de2733015d13d28b2b6e6eb80fffddd05a5d9ec2b7fb1accd58b1242ac1bed6ea5586ea1c8d4e0590a42cd6cf5a284a2e394d240c808acf8e30977eb657db98efdbfb83679036cb6588ac2770a98375ccb97ed83fe5341c5e120c1a4055f99fcaddfc88c7ed807087778ba6b311c6ec1f5238f9e4dbfb2e00bb191a4722bf2038513b94fab955ea76980877ab7996d31a0ada573a61d947df9df510c58942f61efa5b0d2085fae8585698a1ddec3853d3262a22205828430fcb3e7f5e2fc07b3f019ae7fe2f6d0cbb5ac13e635bebd10bea359cf90612df8119c22822a93f9fc24cb20c739d06ad5ffc851b53c35a66696c35091dc2492a211a1e15a16271a4e049bc79923664da296b9b215071866a050539a018cd13854e1c0316116817d313ee312c",
+  "syncedAtIso": "2026-09-29T21:58:44.085Z",
+  "syncReason": "dashboard_state_updated",
+  "encryptedVault": "01138daccf8e5d46284abe10074e2e0c:0e97a2837906218a8990488e0e9727f280409b12d6ccbd1393c6a31a90efa7297f05c728c659975a31e72574edfd41ce2df873c144a3f8c80cc0e295236deabeb4b7d4434d1f8df78bf2ac175ae9b024e873aea49176f155bfdb154bf59584cc65bb857045b2a74465975faa7fb4e68e8bbe1b6a987032501156cc11b27acbd1b0a2c03357ef707c65253041205672a4591d02cd79ef8c0f9dac33d4ab7b142de45be6aa118729050013a3d9a8f70fc4d4d6b95d5d95d1d53ef1bb375892642d632980a0a58d5e38ac7e4b6ddd13e3fa9e0335ce0573db8b8a82110b983bfb3870805aa457e85f08fcd8ff7d002e4b07f35e3c6e68c4fee41c35140d350628abec106add909d8336a4a83da43b5d5bd3e025dc8927a3dc0b65f937bc889b98d4a559801328626d2a07b4d2d28cb803fc29dbfae31900e9bae3798987dd6c1408cac51715ebbe3a01e711047e403719fce0ad88d9dcad2165e75bc6ec07967dd0a57319457e6bb8c12a09215c5c0cdd9157a5fe92701d899bf7ca8ccdd0b39d8c10bf7d7ca0b3e1222b9a213d7128365df82fd5ea962fc691a19853a7e0f2cc6c4090ef8d446ebba99aae2a1f5abe5cb669614cecf6d1533293568fdd104ce59993efacc08c21a42fccdaabfabe89464404d336f69e8e2029761eec397efa5d5d7e5e75f0d7ac43abef4d9d65aca94df9993bcf71f949b1c0d633c82bda3fb554c6b51aa736f2cf96926771cd3b7a6d1b4e8efc1bd51a4403a3fd12257df1f3ca669cfbe80e9c3be65ac122e5f387fbebeb9ff4d49dca0c2edd387e09eacb7137b7650076d87b906eab390c881902fe6570fe4a5267e3da4dbf3014f2c689032e7fda27be5a0abae8f9e2742b53346ef26ff8b4069573e88b3cb5c47df5a62f98348833cb007b7597dcab8a2b9dabb516ebedf9856df60840d66e2c7d84f47c27f7829e624c6e709ea652dd044e5d63c6a31f39bac40242b24cf1e12afdf2a0f54bd008c5ecbc706676c9ad3b193d13da",
   "shortEpisode": {
     "id": "ep-short-star-compass",
     "title": "لغز الكوكب البلوري في مرصد الفضاء",
-    "subtitle": "مغامرات جنى وبلبل · Noreen Kids",
+    "subtitle": "Noreen Kids · فيديو شورت 9:16 (60-80 ثانية) · مغامرات نور وبلبل",
     "moralLesson": "التفكير العلمي وحب التأمل في الكون والتعاون",
     "targetAge": "4-8 سنوات",
     "visualStyle": "Pixar Vertical 9:16 Shorts 3D",
@@ -51,66 +51,156 @@
     "companionCharacterId": "bulbul",
     "scenes": [
       {
+        "id": "sc-sh-1",
         "sceneNumber": 1,
-        "title": "1. البداية: انطلاق جنى وبلبل",
-        "environmentPreset": "space_forest",
-        "cameraMotion": "dolly_in",
-        "lightingMood": "bioluminescent_twilight",
-        "particleEffect": "fireflies",
-        "speakerName": "جنى رائدة الفضاء",
-        "voiceName": "Zephyr",
-        "dialogueArabic": "ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بص كده معانا يا بلبل، النهارده عندنا حكاية جميلة أوي عن لغز الكوكب البلوري في مرصد الفضاء! أنا جهزت خوذة الفضاء المنورة وجهاز الجاذبية علشان نبدأ رحلتنا ونشوف إيه السر اللي مستنينا هناك!",
-        "characterAction": "جنى رائدة الفضاء يمسك خوذة الفضاء المنورة وجهاز الجاذبية بحماس ويشاور على الأفق المنور وبجانبه بلبل الروبوت اللطيف",
-        "prompt3D": "Pixar 3D animated scene for Noreen Kids channel, Pixar Vertical 9:16 Shorts 3D, جنى رائدة الفضاء and بلبل الروبوت اللطيف in space_forest, topic: لغز الكوكب البلوري في مرصد الفضاء, dynamic camera motion, volumetric lighting, 8k",
-        "durationSec": 17
-      },
-      {
-        "sceneNumber": 2,
-        "title": "2. التطور: ملاحظة العلامات العجيبة مع بلبل",
+        "title": "إشارة غامضة في تلسكوب الفضاء",
         "environmentPreset": "floating_library",
-        "cameraMotion": "orbit_slow",
+        "cameraMotion": "dolly_in",
         "lightingMood": "warm_lantern",
         "particleEffect": "sparkles",
-        "speakerName": "بلبل الروبوت اللطيف",
-        "voiceName": "Fenrir",
-        "dialogueArabic": "يا خبر يا جنى! أنا فتحت شاشة تحليل الإشارات الفضائية وبصيت على المكان، ولقيت إن فيه مشكلة غير متوقعة في لغز الكوكب البلوري في مرصد الفضاء محتاجة مننا تفكير ذكي وتعاون سريع علشان نحلها!",
-        "characterAction": "بلبل الروبوت اللطيف يستخدم شاشة تحليل الإشارات الفضائية فوق المنصة المنورة ويفحص الإشارات ثلاثية الأبعاد",
-        "prompt3D": "Pixar 3D animated scene for Noreen Kids channel, Pixar Vertical 9:16 Shorts 3D, جنى رائدة الفضاء and بلبل الروبوت اللطيف in floating_library, topic: لغز الكوكب البلوري في مرصد الفضاء, dynamic camera motion, volumetric lighting, 8k",
-        "durationSec": 17
+        "speakerName": "جنى رائدة الفضاء",
+        "voiceName": "Zephyr",
+        "dialect": "egyptian",
+        "dialogueArabic": "بص يا بلبل على التلسكوب الفضائي! فيه كوكب بلوري جديد بيبعت إشارات ضوئية جميلة أوي في السما الليلة دي!",
+        "characterAction": "نور رائدة الفضاء تضبط التلسكوب العملاق بينما يحلق الروبوت بلبل بجانبها بحماس.",
+        "prompt3D": "Vertical 9:16 3D Pixar YouTube Short frame, young girl astronaut Noor and cute hovering robot Bulbul looking through a giant brass telescope, 8k.",
+        "durationSec": 17,
+        "characterId": "noor",
+        "foleySoundEffects": [
+          "wind",
+          "jump"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "بص يا بلبل على التلسكوب الفضائي! فيه كوكب بلوري جديد بيبعت إشارات ضوئية جميلة أوي في السما الليلة دي!",
+          "validatedText": "بص يا بلبل على التلسكوب الفضائي! فيه كوكب بلوري جديد بيبعت إشارات ضوئية جميلة أوي في السما الليلة دي!",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "بص",
+            "دي",
+            "أوي",
+            "اللي"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-09-29T21:57:28.068Z"
+        }
       },
       {
+        "id": "sc-sh-2",
+        "sceneNumber": 2,
+        "title": "تحليل الروبوت بلبل للإشارة الضوئية",
+        "environmentPreset": "crystal_oasis",
+        "cameraMotion": "orbit_slow",
+        "lightingMood": "starlight_nebula",
+        "particleEffect": "starlight",
+        "speakerName": "بلبل الروبوت اللطيف",
+        "voiceName": "Fenrir",
+        "dialect": "egyptian",
+        "dialogueArabic": "بصوا كده يا أصحابي الحلوين! يا نور! الحسابات الذكية بتقول إن الكوكب ده مليان كريستالات بتعكس نور الشمس فبيبان كأنه نجمة بتغني! يلا بينا نكمل سوا!",
+        "characterAction": "بلبل يعرض خريطة ثلاثية الأبعاد للكوكب البلوري وحلقاته المضيئة.",
+        "prompt3D": "Vertical 9:16 3D Pixar Short, cute hovering teal robot projecting a glowing 3D hologram of a crystal planet, 8k.",
+        "durationSec": 17,
+        "characterId": "bulbul",
+        "foleySoundEffects": [
+          "wind",
+          "magic"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "بصوا كده يا أصحابي الحلوين! يا نور! الحسابات الذكية بتقول إن الكوكب ده مليان كريستالات بتعكس نور الشمس فبيبان كأنه نجمة بتغني! يلا بينا نكمل سوا!",
+          "validatedText": "بصوا كده يا أصحابي الحلوين! يا نور! الحسابات الذكية بتقول إن الكوكب ده مليان كريستالات بتعكس نور الشمس فبيبان كأنه نجمة بتغني! يلا بينا نكمل سوا!",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "بص",
+            "كده",
+            "ده",
+            "يلا",
+            "سوا"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-09-29T21:57:28.073Z"
+        }
+      },
+      {
+        "id": "sc-sh-3",
         "sceneNumber": 3,
-        "title": "3. الحدث المفاجئ: ظهور العقبة والتفكير العلمي",
+        "title": "الانطلاق بسفينة السحاب نحو النجوم",
         "environmentPreset": "cloud_ship",
         "cameraMotion": "pan_right",
         "lightingMood": "golden_sunset",
         "particleEffect": "clouds",
         "speakerName": "جنى رائدة الفضاء",
         "voiceName": "Zephyr",
-        "dialogueArabic": "عندك حق يا بلبل! يلا بينا نستخدم خوذة الفضاء المنورة وجهاز الجاذبية ونتصرف بذكاء وهدوء، لأن لما بنكون إيد واحدة وبنتعاون بصدق، بنلاقي الحل الصح لكل مشكلة صعبة!",
-        "characterAction": "جنى رائدة الفضاء يوجه خوذة الفضاء المنورة وجهاز الجاذبية بمهارة عالية لشرح الحل العلمي والعملي",
-        "prompt3D": "Pixar 3D animated scene for Noreen Kids channel, Pixar Vertical 9:16 Shorts 3D, جنى رائدة الفضاء and بلبل الروبوت اللطيف in cloud_ship, topic: لغز الكوكب البلوري في مرصد الفضاء, dynamic camera motion, volumetric lighting, 8k",
-        "durationSec": 17
+        "dialect": "egyptian",
+        "dialogueArabic": "العلم ده ساحر يا بلبل! كل يوم بنقرا فيه كتاب جديد بنكتشف عجايب أكتر في الكون الواسع بتاعنا!",
+        "characterAction": "نور وبلبل ينطلقان بمركبة الاستكشاف وسط السحب الذهبية المضيئة.",
+        "prompt3D": "Vertical 9:16 3D Pixar Short, girl astronaut and robot flying through glowing golden clouds, 8k.",
+        "durationSec": 17,
+        "characterId": "noor",
+        "foleySoundEffects": [
+          "wind",
+          "jump"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "العلم ده ساحر يا بلبل! كل يوم بنقرا فيه كتاب جديد بنكتشف عجايب أكتر في الكون الواسع بتاعنا!",
+          "validatedText": "العلم ده ساحر يا بلبل! كل يوم بنقرا فيه كتاب جديد بنكتشف عجايب أكتر في الكون الواسع بتاعنا!",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "ده",
+            "دي"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-09-29T21:57:28.078Z"
+        }
       },
       {
+        "id": "sc-sh-4",
         "sceneNumber": 4,
-        "title": "8. النهاية: رسالة جنى وبلبل لأبطال Noreen Kids",
-        "environmentPreset": "coral_kingdom",
+        "title": "رسالة نور وبلبل لأبطال Noreen Kids",
+        "environmentPreset": "space_forest",
         "cameraMotion": "crane_up",
-        "lightingMood": "aqua_glow",
-        "particleEffect": "bubbles",
+        "lightingMood": "bioluminescent_twilight",
+        "particleEffect": "fireflies",
         "speakerName": "بلبل الروبوت اللطيف",
         "voiceName": "Fenrir",
-        "dialogueArabic": "هيييه! حلينا اللغز ونجحت المهمة يا جنى! لو عجبتكم حدوتة النهارده يا أصحابنا الشطار، ما تنسوش تشتركوا في قناة نورين كيدز وتفعلوا الجرس وتعملوا لايك علشان تعيشوا معانا مغامرة جديدة كل يوم! مع السلامة!",
-        "characterAction": "جنى رائدة الفضاء وبلبل الروبوت اللطيف يلوحان بحماس لجمهور قناة Noreen Kids تحت سماء النجوم المتلألئة",
-        "prompt3D": "Pixar 3D animated scene for Noreen Kids channel, Pixar Vertical 9:16 Shorts 3D, جنى رائدة الفضاء and بلبل الروبوت اللطيف in coral_kingdom, topic: لغز الكوكب البلوري في مرصد الفضاء, dynamic camera motion, volumetric lighting, 8k",
-        "durationSec": 17
+        "dialect": "egyptian",
+        "dialogueArabic": "وانتوا يا أصحابنا الشطار، بتحبوا علوم الفضاء والكواكب؟ اشتركوا في قناة نورين كيدز واستنوا مغامرة جديدة كل يوم! ما تنسوش تشتركوا في قناة نورين كيدز علشان نشوف بعض كل يوم!",
+        "characterAction": "نور وبلبل يلوحان للكاميرا العمودية وسط الشهب والنجوم المضيئة.",
+        "prompt3D": "Vertical 9:16 3D Pixar Short finale, girl astronaut and robot waving excitedly under starry sky, 8k.",
+        "durationSec": 17,
+        "characterId": "bulbul",
+        "foleySoundEffects": [
+          "wind",
+          "magic"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "وانتوا يا أصحابنا الشطار، بتحبوا علوم الفضاء والكواكب؟ اشتركوا في قناة نورين كيدز واستنوا مغامرة جديدة كل يوم! ما تنسوش تشتركوا في قناة نورين كيدز علشان نشوف بعض كل يوم!",
+          "validatedText": "وانتوا يا أصحابنا الشطار، بتحبوا علوم الفضاء والكواكب؟ اشتركوا في قناة نورين كيدز واستنوا مغامرة جديدة كل يوم! ما تنسوش تشتركوا في قناة نورين كيدز علشان نشوف بعض كل يوم!",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "دي",
+            "ما تنسوش",
+            "علشان"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-09-29T21:57:28.084Z"
+        }
       }
     ],
     "youtubePackage": {
-      "videoTitleAr": "Noreen Kids: لغز الكوكب البلوري في مرصد الفضاء | مغامرات جنى وبلبل",
+      "videoTitleAr": "Noreen Kids: لغز الكوكب البلوري في مرصد الفضاء | مغامرات نور وبلبل",
       "videoTitleEn": "Noreen Kids: Mystery of the Crystal Planet | Noor & Bulbul 3D Short",
-      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nينطلق بطلنا الشجاع \"جنى رائدة الفضاء\" مع صديقه الذكي \"بلبل الروبوت اللطيف\" في مغامرة ثلاثية الأبعاد متجددة حول (لغز الكوكب البلوري في مرصد الفضاء)، حيث يواجهان ألغازاً مشوقة ويتعلمان كيف يصنع التعاون والصدق والذكاء المعجزات.\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- قيمة التعاون والعمل الجماعي بين الأصحاب.\n- حب الاستكشاف والتفكير العلمي لحل المشكلات.\n- الصدق والأمانة ومساعدة الآخرين في كل وقت.\n\n🕖 موعد النشر اليومي: الساعة 7:00 مساءً بتوقيت مصر.\n\nالفصول الزمنية:\n00:00 1. البداية: انطلاق جنى وبلبل\n00:17 2. التطور: ملاحظة العلامات العجيبة مع بلبل\n00:34 3. الحدث المفاجئ: ظهور العقبة والتفكير العلمي\n00:51 8. النهاية: رسالة جنى وبلبل لأبطال Noreen Kids\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #رسوم_متحركة #قصص_أطفال_قبل_النوم #حواديت_مصرية #أفلام_كرتون #تعليم_الأطفال #KidsAnimation #3DCartoon #ArabicKidsCartoon #BedtimeStoriesForKids #PixarStyle3D #KidsLearning #TrendingKids",
+      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nفي مغامرة فضائية شيقة داخل مرصد النجوم الطائر، تكتشف رائدة الفضاء الصغيرة \"نور\" مع صديقها الآلي \"بلبل\" إشارة ضوئية عجيبة من كوكب بلوري بعيد، ويتعلمان معاً كيف يفسر العلم جمال الكواكب والنجوم!\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- حب التأمل في الكون وطرح الأسئلة العلمية الذكية.\n- أهمية القراءة والبحث العلمي في اكتشاف أسرار الفضاء.\n\n🕖 موعد النشر اليومي: الساعة 7:00 مساءً بتوقيت مصر.\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #قصص_اطفال_قبل_النوم #رسوم_متحركة #أفلام_كرتون #حواديت_مصرية #اطفال #تعليم_الاطفال #KidsAnimation #3DCartoon #BedtimeStoriesForKids #ArabicKidsCartoon #AnimatedStories #PixarStyle3D #KidsLearning #FamilyFriendly",
       "tags": [
         "Noreen Kids",
         "كرتون أطفال 3D",
@@ -130,14 +220,14 @@
         "3D Kids Animation",
         "Arabic Cartoon for Kids",
         "Pixar Style 3D Story",
-        "يوتيوب شورتس أطفال"
+        "يوتيوب شورتس أطفال",
+        "مغامرات جنى رائدة الفضاء وبلبل",
+        "جنى رائدة الفضاء"
       ],
       "thumbnailTextAr": "لغز الكوكب البلوري! 🪐",
       "thumbnailPrompt3D": "Vertical 9:16 3D Pixar YouTube Short cover for Noreen Kids, girl astronaut Noor and cute robot Bulbul looking at a glowing crystal planet, 8k."
     },
-    "preUploadVerified": true,
-    "mainCharacterName": "جنى رائدة الفضاء",
-    "companionName": "بلبل الروبوت اللطيف"
+    "preUploadVerified": true
   },
   "longEpisode": {
     "id": "ep-long-lantern-forest",
@@ -161,8 +251,8 @@
         "cameraMotion": "dolly_in",
         "lightingMood": "bioluminescent_twilight",
         "particleEffect": "fireflies",
-        "speakerName": "فارس المستكشف",
-        "voiceName": "Puck",
+        "speakerName": "عمرو المستكشف",
+        "voiceName": "Charon",
         "dialect": "egyptian",
         "dialogueArabic": "ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بص كده معانا يا زعتر، النهارده عندنا حكاية كبيرة ومشوقة أوي عن سر الفانوس المفقود في غابة النجوم! ازيكم يا أصحابي الحلوين في قناة نورين كيدز! عاملين إيه النهارده؟ بص كده يا زعتر! الشجر المنور في غابة النجوم بدأ نوره يهدى خالص النهاردة، وأكيد فانوس النجوم الكبير محتاج مساعدتنا حالا علشان الغابة ترجع تضحك وتنور من تاني! شايف يا زعتر الألوان الجميلة اللي هناك دي؟ يلا بينا نقرب خطوة بخطوة ونفتح عينينا كويس علشان نكتشف أول سر في رحلتنا النهارده! . شايف يا زعتر الألوان الجميلة والنور اللي بيلمع قدامنا في المكان السحري ده؟ تفتكروا يا أصحابنا الشطار إيه السر اللي مستنينا جوه؟ يلا بينا نقرب خطوة بخطوة ونفتح عينينا كويس علشان نكتشف أول علامة في رحلتنا النهارده!",
         "characterAction": "فارس يرفع بوصلته المضيئة بيد، ويشير باليد الأخرى نحو الأشجار المتلألئة بينما يقفز زعتر بحماس.",
@@ -196,7 +286,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T12:31:47.733Z"
+          "checkedAtIso": "2026-09-29T21:57:27.975Z"
         }
       },
       {
@@ -239,7 +329,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T12:31:47.746Z"
+          "checkedAtIso": "2026-09-29T21:57:27.986Z"
         }
       },
       {
@@ -250,8 +340,8 @@
         "cameraMotion": "pan_right",
         "lightingMood": "golden_sunset",
         "particleEffect": "clouds",
-        "speakerName": "فارس المستكشف",
-        "voiceName": "Puck",
+        "speakerName": "عمرو المستكشف",
+        "voiceName": "Charon",
         "dialect": "egyptian",
         "dialogueArabic": "عندك حق يا زعتر! شوف إزاي المكان كله بدأ ينور أول ما اتعاونا وفكرنا سوا! يلا نرفع الشراع الدهبي يا بطل! الهوا هنا جميل أوي، وسوا هنرجع الفانوس لأعلى سحابة علشان ينور الطريق لكل أصحابنا الصغيرين! . أحلى حاجة في مغامراتنا في قناة نورين كيدز إننا عمرنا ما بنستسلم خالص مهما كان التحدي كبير، لأن التعاون والصدق بيخلوا قلبنا أوي وشجاع! بصوا هناك كده يا أصحابي، فيه طريق جديد ظهر قدامنا مليان أسرار وحكايات مفيدة، يلا بينا نكتشفه حالا!",
         "characterAction": "فارس وزعتر يقفان على مقدمة سفينة السحاب الخشبية ويلوّحان بسعادة وسط الفوانيس الطائرة.",
@@ -283,7 +373,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T12:31:47.759Z"
+          "checkedAtIso": "2026-09-29T21:57:27.997Z"
         }
       },
       {
@@ -324,7 +414,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T12:31:47.770Z"
+          "checkedAtIso": "2026-09-29T21:57:28.010Z"
         }
       },
       {
@@ -335,8 +425,8 @@
         "cameraMotion": "orbit_slow",
         "lightingMood": "aqua_glow",
         "particleEffect": "bubbles",
-        "speakerName": "فارس المستكشف",
-        "voiceName": "Puck",
+        "speakerName": "عمرو المستكشف",
+        "voiceName": "Charon",
         "dialect": "egyptian",
         "dialogueArabic": "يا سلام على الذكاء والشطارة يا زعتر! شوف النور بينعكس على المية الصافية إزاي! كل مخلوقات الغابة والبحر فرحانة بتعاوننا وأمانتنا النهاردة! . شفتوا يا أصحابنا إزاي لما جربنا مرة واتنين بصبر وهدوء قدرنا نشغل الجهاز السحري وننور المكان كله؟ العلم والمعرفة وحب القراءة والاستكشاف هما الكنز الحقيقي اللي بيخلينا ننجح ونساعد كل اللي حوالينا! فاضل خطوة واحدة بس ونوصل لقلب المغامرة الكبيرة!",
         "characterAction": "الفانوس الذهبي يرسل أشعة دافئة تنعكس فوق المياه الفيروزية المتلألئة.",
@@ -361,7 +451,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T12:31:47.779Z"
+          "checkedAtIso": "2026-09-29T21:57:28.023Z"
         }
       },
       {
@@ -372,8 +462,8 @@
         "cameraMotion": "crane_up",
         "lightingMood": "starlight_nebula",
         "particleEffect": "starlight",
-        "speakerName": "فارس المستكشف",
-        "voiceName": "Puck",
+        "speakerName": "عمرو المستكشف",
+        "voiceName": "Charon",
         "dialect": "egyptian",
         "dialogueArabic": "بصي يا فارس وبصوا يا كل أصحابنا الشطار! شفتوا الجمال يا أصحابي في قناة نورين كيدز؟ لما بنتعاون مع بعض وبنقول الصدق، النور بيملا الدنيا كلها! متنسوش تشتركوا في القناة! . اللحظة دي من أحلى اللحظات في رحلتنا النهارده، لأن كل أصحابنا في العالم السحري فرحانين باللي عملناه علشانهم بحب وأمانة من غير ما نطلب أي مقابل! التعاون والطيبة دايما بيرسموا الابتسامة على وشوش الكل وبيخلوا الدنيا منورة ومليانة بهجة وسعادة!",
         "characterAction": "الأشجار تتوهج بألوان النجوم الساحرة، وفارس وزعتر يلوّحان للمشاهدين بابتسامة عريضة.",
@@ -400,7 +490,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T12:31:47.790Z"
+          "checkedAtIso": "2026-09-29T21:57:28.036Z"
         }
       },
       {
@@ -411,9 +501,9 @@
         "cameraMotion": "pan_right",
         "lightingMood": "warm_lantern",
         "particleEffect": "sparkles",
-        "speakerName": "فارس المستكشف",
+        "speakerName": "عمرو المستكشف",
         "characterId": "faris",
-        "voiceName": "Puck",
+        "voiceName": "Charon",
         "dialect": "egyptian",
         "dialogueArabic": "بجد يا زعتر دي كانت مغامرة لا يمكن ننساها خالص في حكاية سر الفانوس المفقود في غابة النجوم! بجد يا زعتر دي كانت مغامرة لا يمكن ننساها خالص في حكاية سر الفانوس المفقود في غابة النجوم! بص يا زعتر! في المشهد ده بنتعلم إزاي التعاون والذكاء بيخلوا رحلتنا أجمل ومليانة نور وسعادة! . اتعلمنا النهارده سوا دروس جميلة أوي عن الشجاعة والصدق والذكاء ومساعدة أصحابنا في كل وقت، وكمان شفنا إزاي العمل الجماعي بيحول أي مشكلة صعبة لنجاح كبير يفرح كل القلوب! . اتعلمنا النهارده سوا من البداية لغاية الحل إن الشجاعة والصدق والتفكير العلمي ومساعدة أصحابنا هما الكنز الحقيقي اللي بيحول أي مشكلة صعبة لنجاح كبير يفرح كل القلوب!",
         "characterAction": "فارس المستكشف يتحرك ويمشي بحيوية وتعبيرات وجه كرتونية ثلاثية الأبعاد مع تحريك الشفاه واليدين ومؤثرات صوتية وحركية متكاملة",
@@ -442,7 +532,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T12:31:47.801Z"
+          "checkedAtIso": "2026-09-29T21:57:28.050Z"
         }
       },
       {
@@ -484,7 +574,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T12:31:47.813Z"
+          "checkedAtIso": "2026-09-29T21:57:28.063Z"
         }
       }
     ],
@@ -511,7 +601,9 @@
         "كرتون عربي جديد",
         "Arabic Cartoon for Kids",
         "Pixar Style 3D Story",
-        "فيلم كرتون طويل للأطفال"
+        "فيلم كرتون طويل للأطفال",
+        "مغامرات عمرو المستكشف وزعتر",
+        "عمرو المستكشف"
       ],
       "thumbnailTextAr": "سر الفانوس المنور!",
       "thumbnailPrompt3D": "YouTube high-CTR 3D Pixar style thumbnail for Noreen Kids channel, close-up of Faris and Zaatar holding a brightly glowing golden star lantern, 8k."
