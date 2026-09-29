@@ -388,71 +388,382 @@ function splitArabicTextForGeminiLive(text, maxChars = 195) {
 
 function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
   const s = String(speakerName || "");
+  const matureWarmFemaleFilter =
+    "equalizer=f=210:t=q:w=1.1:g=3.2,equalizer=f=2800:t=q:w=1.2:g=1.8,dynaudnorm=f=150:g=15:p=0.95,volume=2.35,alimiter=limit=0.98:attack=5:release=50";
+  const elderlyGrandmaFilter =
+    "equalizer=f=195:t=q:w=1.0:g=3.8,equalizer=f=1800:t=q:w=1.2:g=1.5,equalizer=f=4200:t=q:w=1.3:g=-1.5,dynaudnorm=f=150:g=15:p=0.95,volume=2.4,alimiter=limit=0.98:attack=5:release=50";
+  const youngWomanDoctorFilter =
+    "equalizer=f=260:t=q:w=1.2:g=1.6,equalizer=f=3200:t=q:w=1.2:g=2.4,dynaudnorm=f=150:g=15:p=0.95,volume=2.35,alimiter=limit=0.98:attack=5:release=50";
+  const toddlerGirlBrightFilter =
+    "highpass=f=150,equalizer=f=420:t=q:w=1.2:g=2.2,equalizer=f=3600:t=q:w=1.1:g=3.8,equalizer=f=5200:t=q:w=1.4:g=2.5,dynaudnorm=f=150:g=15:p=0.95,volume=2.4,alimiter=limit=0.98:attack=5:release=50";
+  const childGirlSweetFilter =
+    "highpass=f=120,equalizer=f=340:t=q:w=1.2:g=1.8,equalizer=f=3300:t=q:w=1.2:g=2.8,dynaudnorm=f=150:g=15:p=0.95,volume=2.35,alimiter=limit=0.98:attack=5:release=50";
+  const childGirlLivelyFilter =
+    "highpass=f=130,equalizer=f=380:t=q:w=1.2:g=2.0,equalizer=f=3500:t=q:w=1.1:g=3.2,dynaudnorm=f=150:g=15:p=0.95,volume=2.35,alimiter=limit=0.98:attack=5:release=50";
+  const elderlyGrandpaFilter =
+    "equalizer=f=145:t=q:w=1.0:g=4.2,equalizer=f=240:t=q:w=1.1:g=2.8,equalizer=f=2600:t=q:w=1.2:g=1.6,dynaudnorm=f=150:g=15:p=0.95,volume=2.4,alimiter=limit=0.98:attack=5:release=50";
+  const adultMaleDeepFilter =
+    "equalizer=f=165:t=q:w=1.1:g=3.4,equalizer=f=2900:t=q:w=1.2:g=2.2,dynaudnorm=f=150:g=15:p=0.95,volume=2.35,alimiter=limit=0.98:attack=5:release=50";
+  const youngAdultMaleFilter =
+    "equalizer=f=190:t=q:w=1.1:g=2.4,equalizer=f=3100:t=q:w=1.2:g=2.5,dynaudnorm=f=150:g=15:p=0.95,volume=2.35,alimiter=limit=0.98:attack=5:release=50";
+  const boyHeroCrispFilter =
+    "highpass=f=115,equalizer=f=310:t=q:w=1.2:g=2.2,equalizer=f=3400:t=q:w=1.1:g=3.0,dynaudnorm=f=150:g=15:p=0.95,volume=2.35,alimiter=limit=0.98:attack=5:release=50";
+  const cartoonBrightCompanionFilter =
+    "highpass=f=140,equalizer=f=450:t=q:w=1.2:g=2.4,equalizer=f=3700:t=q:w=1.1:g=3.6,dynaudnorm=f=150:g=15:p=0.95,volume=2.4,alimiter=limit=0.98:attack=5:release=50";
+  const cartoonWarmCompanionFilter =
+    "equalizer=f=175:t=q:w=1.1:g=3.5,equalizer=f=2950:t=q:w=1.2:g=2.4,dynaudnorm=f=150:g=15:p=0.95,volume=2.4,alimiter=limit=0.98:attack=5:release=50";
+  const cartoonRobotCompanionFilter =
+    "highpass=f=130,equalizer=f=520:t=q:w=1.8:g=2.8,equalizer=f=2400:t=q:w=1.6:g=3.0,equalizer=f=3900:t=q:w=1.2:g=2.6,dynaudnorm=f=150:g=15:p=0.95,volume=2.4,alimiter=limit=0.98:attack=5:release=50";
+
   if (s.includes("أم ملك") || s.includes("ام ملك") || s.includes("المعلمة")) {
-    return { isFemale: true, geminiVoice: "Kore", pitch: "-4Hz", rate: "-3%" };
+    return {
+      isFemale: true,
+      geminiVoice: "Kore",
+      pitch: "-4Hz",
+      rate: "-3%",
+      styleInstruction:
+        "تحدثي بصوت سيدة مصرية ناضجة وحنونة عمرها 45 سنة (المعلمة أم ملك) بنبرة أمومية دافئة وحكيمة باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: matureWarmFemaleFilter,
+      animalSfxLavfi: null,
+    };
   }
   if (s.includes("تيتة") || s.includes("تيته") || s.includes("الجدة")) {
-    return { isFemale: true, geminiVoice: "Kore", pitch: "-7Hz", rate: "-6%" };
+    return {
+      isFemale: true,
+      geminiVoice: "Kore",
+      pitch: "-7Hz",
+      rate: "-6%",
+      styleInstruction:
+        "تحدثي بصوت جدة مصرية كبيرة في السن وحنونة جداً (تيتة) بنبرة دافئة هادئة ومليئة بالحنان باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: elderlyGrandmaFilter,
+      animalSfxLavfi: null,
+    };
   }
   if (s.includes("ملك") || s.includes("طوارئ")) {
-    return { isFemale: true, geminiVoice: "Kore", pitch: "+0Hz", rate: "+1%" };
+    return {
+      isFemale: true,
+      geminiVoice: "Kore",
+      pitch: "+0Hz",
+      rate: "+1%",
+      styleInstruction:
+        "تحدثي بصوت شابة مصرية عمرها 20 سنة (الدكتورة ملك طبيبة الطوارئ) بنبرة شابة واثقة وهادئة ولطيفة باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: youngWomanDoctorFilter,
+      animalSfxLavfi: null,
+    };
   }
   if (s.includes("سدرة الصغنونة") || (s.includes("سدرة") && !s.includes("المهندسة"))) {
-    return { isFemale: true, geminiVoice: "Zephyr", pitch: "+16Hz", rate: "+5%" };
+    return {
+      isFemale: true,
+      geminiVoice: "Zephyr",
+      pitch: "+16Hz",
+      rate: "+5%",
+      styleInstruction:
+        "تحدثي بصوت طفلة مصرية صغيرة جداً عمرها 3 سنوات (سدرة الصغنونة) بطبقة صوت طفولية رقيقة وبريئة ومبهجة جداً باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: toddlerGirlBrightFilter,
+      animalSfxLavfi: null,
+    };
   }
   if (s.includes("لوليتا") || s.includes("القطة")) {
-    return { isFemale: true, geminiVoice: "Zephyr", pitch: "+11Hz", rate: "+4%" };
+    return {
+      isFemale: true,
+      geminiVoice: "Zephyr",
+      pitch: "+11Hz",
+      rate: "+4%",
+      styleInstruction:
+        "تحدثي بصوت القطة الكرتونية الشقية والمدللة (لوليتا) بنبرة بناتية رقيقة ومرحة وخفيفة الظل باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: cartoonBrightCompanionFilter,
+      animalSfxLavfi:
+        "aevalsrc='(0.24*sin(2*PI*(540+380*sin(PI*t/0.85))*t)+0.10*sin(4*PI*(540+380*sin(PI*t/0.85))*t))*sin(PI*t/0.85)':s=24000:d=0.85",
+    };
   }
   if (s.includes("الفراشة")) {
-    return { isFemale: true, geminiVoice: "Kore", pitch: "+9Hz", rate: "+2%" };
+    return {
+      isFemale: true,
+      geminiVoice: "Kore",
+      pitch: "+9Hz",
+      rate: "+2%",
+      styleInstruction:
+        "تحدثي بصوت الفراشة الملونة الكرتونية الرقيقة بنبرة غنائية ناعمة ومبهجة للأطفال باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: cartoonBrightCompanionFilter,
+      animalSfxLavfi:
+        "aevalsrc='(0.20*sin(2*PI*(659.25+220*floor(t*4.7))*t)+0.09*sin(2*PI*1760*t)*(0.5+0.5*sin(2*PI*22*t)))*exp(-2.2*mod(t,0.21))':s=24000:d=0.85",
+    };
   }
   if (s.includes("العصفورة")) {
-    return { isFemale: true, geminiVoice: "Zephyr", pitch: "+13Hz", rate: "+5%" };
+    return {
+      isFemale: true,
+      geminiVoice: "Zephyr",
+      pitch: "+13Hz",
+      rate: "+5%",
+      styleInstruction:
+        "تحدثي بصوت العصفورة الفرفوشة المغردة بنبرة كرتونية رقيقة ومزقزقة ومليئة بالبهجة والنشاط باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: cartoonBrightCompanionFilter,
+      animalSfxLavfi:
+        "aevalsrc='0.24*sin(2*PI*(1350+380*floor(mod(t*4.5,3))+75*sin(2*PI*26*t))*t)*exp(-5.5*mod(t,0.22))':s=24000:d=0.85",
+    };
   }
   if (s.includes("نورين") || s.includes("طبيبة") || s.includes("دكتورة")) {
-    return { isFemale: true, geminiVoice: "Zephyr", pitch: "+4Hz", rate: "+0%" };
+    return {
+      isFemale: true,
+      geminiVoice: "Zephyr",
+      pitch: "+4Hz",
+      rate: "+0%",
+      styleInstruction:
+        "تحدثي بصوت بنوتة مصرية ذكية عمرها 8 سنوات (الطبيبة الصغيرة نورين) بنبرة طفولية مشرقة ودافئة وواضحة باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: childGirlSweetFilter,
+      animalSfxLavfi: null,
+    };
   }
   if (s.includes("نوران") || s.includes("مهندسة")) {
-    return { isFemale: true, geminiVoice: "Kore", pitch: "+2Hz", rate: "+2%" };
+    return {
+      isFemale: true,
+      geminiVoice: "Kore",
+      pitch: "+2Hz",
+      rate: "+2%",
+      styleInstruction:
+        "تحدثي بصوت بنوتة مصرية نشيطة عمرها 9 سنوات (المهندسة نوران) بنبرة حماسية ذكية ومبهجة باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: childGirlLivelyFilter,
+      animalSfxLavfi: null,
+    };
   }
   if (s.includes("كارمن") || s.includes("سلمى") || s.includes("مخترعة")) {
-    return { isFemale: true, geminiVoice: "Kore", pitch: "+8Hz", rate: "+3%" };
+    return {
+      isFemale: true,
+      geminiVoice: "Kore",
+      pitch: "+8Hz",
+      rate: "+3%",
+      styleInstruction:
+        "تحدثي بصوت طفلة مصرية عبقرية ومرحة عمرها 7 سنوات (كارمن المخترعة الصغيرة) بنبرة طفولية منطلقة وسريعة البديهة باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: childGirlLivelyFilter,
+      animalSfxLavfi: null,
+    };
   }
   if (s.includes("جنى") || s.includes("نور")) {
-    return { isFemale: true, geminiVoice: "Zephyr", pitch: "+6Hz", rate: "-1%" };
+    return {
+      isFemale: true,
+      geminiVoice: "Zephyr",
+      pitch: "+6Hz",
+      rate: "-1%",
+      styleInstruction:
+        "تحدثي بصوت طفلة مصرية حالمة عمرها 8 سنوات (جنى رائدة الفضاء) بنبرة رقيقة متأملة ومليئة بالدهشة باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: childGirlSweetFilter,
+      animalSfxLavfi: null,
+    };
   }
   if (s.includes("جدو") || s.includes("الجد")) {
-    return { isFemale: false, geminiVoice: "Charon", pitch: "-7Hz", rate: "-6%" };
+    return {
+      isFemale: false,
+      geminiVoice: "Charon",
+      pitch: "-7Hz",
+      rate: "-6%",
+      styleInstruction:
+        "تحدث بصوت جد مصري حكيم وحنون كبير في السن (جدو الحكواتي) بنبرة عميقة دافئة وهادئة ومليئة بالحنان باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: elderlyGrandpaFilter,
+      animalSfxLavfi: null,
+    };
   }
   if (s.includes("شريف") || s.includes("محاسب")) {
-    return { isFemale: false, geminiVoice: "Charon", pitch: "-4Hz", rate: "-1%" };
+    return {
+      isFemale: false,
+      geminiVoice: "Charon",
+      pitch: "-4Hz",
+      rate: "-1%",
+      styleInstruction:
+        "تحدث بصوت رجل مصري ناضج وذكي ومنظم (الأستاذ شريف المحاسب) بنبرة رجالية واثقة وهادئة وودودة باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: adultMaleDeepFilter,
+      animalSfxLavfi: null,
+    };
   }
   if (s.includes("ذياد") || s.includes("زياد")) {
-    return { isFemale: false, geminiVoice: "Fenrir", pitch: "-1Hz", rate: "+1%" };
+    return {
+      isFemale: false,
+      geminiVoice: "Fenrir",
+      pitch: "-1Hz",
+      rate: "+1%",
+      styleInstruction:
+        "تحدث بصوت شاب مصري رياضي ومتعاون (ذياد) بنبرة شبابية مشجعة وودودة وحيوية باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: youngAdultMaleFilter,
+      animalSfxLavfi: null,
+    };
   }
   if (s.includes("الصقر")) {
-    return { isFemale: false, geminiVoice: "Fenrir", pitch: "-6Hz", rate: "+0%" };
+    return {
+      isFemale: false,
+      geminiVoice: "Fenrir",
+      pitch: "-6Hz",
+      rate: "+0%",
+      styleInstruction:
+        "تحدث بصوت الصقر الذكي الحكيم بنبرة كرتونية قوية وواثقة ولمحة فكاهية ذكية باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: cartoonWarmCompanionFilter,
+      animalSfxLavfi:
+        "aevalsrc='(0.23*sin(2*PI*(1240-520*(t/0.85))*t)+0.09*sin(4*PI*(1240-520*(t/0.85))*t))*sin(PI*t/0.85)':s=24000:d=0.85",
+    };
   }
   if (s.includes("البطريق")) {
-    return { isFemale: false, geminiVoice: "Puck", pitch: "+10Hz", rate: "+4%" };
+    return {
+      isFemale: false,
+      geminiVoice: "Puck",
+      pitch: "+10Hz",
+      rate: "+4%",
+      styleInstruction:
+        "تحدث بصوت البطريق المرح الكوميدي بنبرة كرتونية مبهجة وخفيفة الظل تضحك الأطفال باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: cartoonBrightCompanionFilter,
+      animalSfxLavfi:
+        "aevalsrc='(0.24*sin(2*PI*(390+140*floor(mod(t*6,3)))*t)+0.11*sin(4*PI*(390+140*floor(mod(t*6,3)))*t))*exp(-6*mod(t,0.16))':s=24000:d=0.85",
+    };
   }
   if (s.includes("الفأر") || s.includes("فأر") || s.includes("مشاكس")) {
-    return { isFemale: false, geminiVoice: "Puck", pitch: "+15Hz", rate: "+6%" };
+    return {
+      isFemale: false,
+      geminiVoice: "Puck",
+      pitch: "+15Hz",
+      rate: "+6%",
+      styleInstruction:
+        "تحدث بصوت الفأر الصغير المشاكس والذكي بنبرة كرتونية سريعة وشقية ومضحكة جداً للأطفال باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: cartoonBrightCompanionFilter,
+      animalSfxLavfi:
+        "aevalsrc='0.24*sin(2*PI*(1480+360*sin(2*PI*9*t))*t)*exp(-7.5*mod(t,0.18))':s=24000:d=0.82",
+    };
   }
   if (s.includes("باندا")) {
-    return { isFemale: false, geminiVoice: "Fenrir", pitch: "-3Hz", rate: "-2%" };
+    return {
+      isFemale: false,
+      geminiVoice: "Fenrir",
+      pitch: "-3Hz",
+      rate: "-2%",
+      styleInstruction:
+        "تحدث بصوت الدب باندا الكرتوني الطيب واللطيف بنبرة دافئة وحنونة وخفيفة الظل باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: cartoonWarmCompanionFilter,
+      animalSfxLavfi:
+        "aevalsrc='(0.25*sin(2*PI*(220+85*sin(2*PI*3.5*t))*t)+0.12*sin(2*PI*440*t))*exp(-3.2*mod(t,0.28))':s=24000:d=0.85",
+    };
   }
-  if (s.includes("فرفوش") || s.includes("النمر") || s.includes("بلبل") || s.includes("تامر") || s.includes("ياسين")) {
-    return { isFemale: false, geminiVoice: "Fenrir", pitch: "+2Hz", rate: "+1%" };
+  if (s.includes("فرفوش") || s.includes("النمر") || s.includes("نمور")) {
+    return {
+      isFemale: false,
+      geminiVoice: "Fenrir",
+      pitch: "-5Hz",
+      rate: "+0%",
+      styleInstruction:
+        "تحدث بصوت النمر الفرفوش الطيب والمرح بنبرة كرتونية دافئة وعميقة ومبهجة للأطفال باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: cartoonWarmCompanionFilter,
+      animalSfxLavfi:
+        "aevalsrc='(0.26*sin(2*PI*(135+45*sin(PI*t/0.85))*t)+0.15*sin(2*PI*(270+90*sin(PI*t/0.85))*t))*(0.65+0.35*sin(2*PI*18*t))*sin(PI*t/0.85)':s=24000:d=0.85",
+    };
   }
-  if (s.includes("شوشو") || s.includes("كريم") || s.includes("كركور")) {
-    return { isFemale: false, geminiVoice: "Charon", pitch: "+1Hz", rate: "+1%" };
+  if (s.includes("بلبل") || s.includes("روبوت")) {
+    return {
+      isFemale: false,
+      geminiVoice: "Fenrir",
+      pitch: "+6Hz",
+      rate: "+2%",
+      styleInstruction:
+        "تحدث بصوت الروبوت الصغير الذكي والودود (بلبل) بنبرة كرتونية مستقبلية منغمة ومحببة للأطفال باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: cartoonRobotCompanionFilter,
+      animalSfxLavfi:
+        "aevalsrc='0.24*sin(2*PI*(523.25+260*floor(mod(t*7.5,4)))*t)*exp(-6.5*mod(t,0.133))':s=24000:d=0.85",
+    };
   }
-  if (s.includes("أرنوب") || s.includes("مرجان") || s.includes("سمسم")) {
-    return { isFemale: true, geminiVoice: "Puck", pitch: "+12Hz", rate: "+4%" };
+  if (s.includes("تامر") || s.includes("ياسين") || s.includes("الواحة")) {
+    return {
+      isFemale: false,
+      geminiVoice: "Fenrir",
+      pitch: "+3Hz",
+      rate: "+1%",
+      styleInstruction:
+        "تحدث بصوت ولد مصري نبيل وشجاع عمره 10 سنوات (تامر فارس الواحة) بنبرة فروسية دافئة ومميزة باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: boyHeroCrispFilter,
+      animalSfxLavfi: null,
+    };
   }
-  if (s.includes("عمرو") || s.includes("فارس") || s.includes("زعتر")) {
-    return { isFemale: false, geminiVoice: "Puck", pitch: "+6Hz", rate: "+3%" };
+  if (s.includes("كركور") || s.includes("ببغاء")) {
+    return {
+      isFemale: false,
+      geminiVoice: "Charon",
+      pitch: "+7Hz",
+      rate: "+2%",
+      styleInstruction:
+        "تحدث بصوت الببغاء الحكيم والفصيح (كركور) بنبرة كرتونية مسرحية منغمة ومبهجة للأطفال باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: cartoonBrightCompanionFilter,
+      animalSfxLavfi:
+        "aevalsrc='if(lt(t,0.42),0.24*sin(2*PI*(820+440*(t/0.42))*t)*sin(PI*t/0.42),0.24*sin(2*PI*(1260-380*((t-0.42)/0.43))*t)*sin(PI*(t-0.42)/0.43))':s=24000:d=0.85",
+    };
+  }
+  if (s.includes("شوشو") || s.includes("كريم") || s.includes("القبطان")) {
+    return {
+      isFemale: false,
+      geminiVoice: "Charon",
+      pitch: "+1Hz",
+      rate: "+1%",
+      styleInstruction:
+        "تحدث بصوت ولد مصري شجاع ومرح عمره 10 سنوات (شوشو القبطان الصغير) بنبرة بحرية واثقة ومبهجة باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: boyHeroCrispFilter,
+      animalSfxLavfi: null,
+    };
+  }
+  if (s.includes("أرنوب") || s.includes("ارنوب")) {
+    return {
+      isFemale: true,
+      geminiVoice: "Puck",
+      pitch: "+12Hz",
+      rate: "+4%",
+      styleInstruction:
+        "تحدث بصوت أرنوب الأرنب الكرتوني الشقي والمرح بنبرة نطاطة سريعة وخفيفة الظل تضحك الأطفال باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: cartoonBrightCompanionFilter,
+      animalSfxLavfi:
+        "aevalsrc='if(lt(t,0.42),0.26*sin(2*PI*(220+480*(t/0.42))*t)*sin(PI*t/0.42),0.22*sin(2*PI*(880+180*sin(2*PI*14*t))*t)*exp(-8*mod(t-0.42,0.20)))':s=24000:d=0.85",
+    };
+  }
+  if (s.includes("مرجان") || s.includes("دلفين")) {
+    return {
+      isFemale: true,
+      geminiVoice: "Puck",
+      pitch: "+10Hz",
+      rate: "+3%",
+      styleInstruction:
+        "تحدث بصوت الدلفين المرح (مرجان) بنبرة كرتونية بحرية مبهجة ومنطلقة باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: cartoonBrightCompanionFilter,
+      animalSfxLavfi:
+        "aevalsrc='(0.23*sin(2*PI*(920+460*sin(2*PI*3.2*t))*t)+0.10*sin(2*PI*(1480+320*cos(2*PI*11*t))*t))*sin(PI*t/0.85)':s=24000:d=0.85",
+    };
+  }
+  if (s.includes("سمسم") || s.includes("سنجاب")) {
+    return {
+      isFemale: true,
+      geminiVoice: "Puck",
+      pitch: "+14Hz",
+      rate: "+5%",
+      styleInstruction:
+        "تحدث بصوت السنجاب الطائر السريع والنشيط (سمسم) بنبرة كرتونية حماسية وشقية ومبهجة باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: cartoonBrightCompanionFilter,
+      animalSfxLavfi:
+        "aevalsrc='0.24*sin(2*PI*(780+260*floor(mod(t*8,3)))*t)*exp(-8*mod(t,0.125))':s=24000:d=0.82",
+    };
+  }
+  if (s.includes("زعتر") || s.includes("ثعلب")) {
+    return {
+      isFemale: false,
+      geminiVoice: "Puck",
+      pitch: "+9Hz",
+      rate: "+4%",
+      styleInstruction:
+        "تحدث بصوت الثعلب الصغير الذكي (زعتر) بنبرة كرتونية لماحة وسريعة ومرحة باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: cartoonBrightCompanionFilter,
+      animalSfxLavfi:
+        "aevalsrc='0.25*sin(2*PI*(520+360*mod(t*3.8,1))*t)*exp(-5.5*mod(t,0.26))':s=24000:d=0.82",
+    };
+  }
+  if (s.includes("عمرو") || s.includes("فارس")) {
+    return {
+      isFemale: false,
+      geminiVoice: "Charon",
+      pitch: "+5Hz",
+      rate: "+2%",
+      styleInstruction:
+        "تحدث بصوت ولد مصري صغير مغامر وشجاع عمره 9 سنوات (عمرو المستكشف) بنبرة ولادية متحمسة ومشرقة باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: boyHeroCrispFilter,
+      animalSfxLavfi: null,
+    };
   }
   const fallbackFemale = sceneIndex % 2 === 0;
   return {
@@ -460,6 +771,11 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
     geminiVoice: fallbackFemale ? "Zephyr" : "Puck",
     pitch: fallbackFemale ? "+4Hz" : "+3Hz",
     rate: "+2%",
+    styleInstruction: fallbackFemale
+      ? "تحدثي بصوت بنوتة مصرية مبهجة باللهجة المصرية القاهرية الطبيعية للأطفال"
+      : "تحدث بصوت ولد مصري متحمس باللهجة المصرية القاهرية الطبيعية للأطفال",
+    voiceFilter: fallbackFemale ? childGirlSweetFilter : boyHeroCrispFilter,
+    animalSfxLavfi: null,
   };
 }
 
@@ -467,7 +783,14 @@ function resolveGeminiVoiceForSpeaker(speakerName = "", isFemale = true) {
   return resolveRunnerVoiceProfileForSpeaker(speakerName, isFemale ? 0 : 1).geminiVoice;
 }
 
-async function synthesizeChunkViaGeminiLiveRunner(ai, liveModel, chunkText, voiceName, isEgyptian) {
+async function synthesizeChunkViaGeminiLiveRunner(
+  ai,
+  liveModel,
+  chunkText,
+  voiceName,
+  styleInstruction,
+  isEgyptian
+) {
   const chunks = [];
   try {
     await new Promise(async (resolve, reject) => {
@@ -487,8 +810,8 @@ async function synthesizeChunkViaGeminiLiveRunner(ai, liveModel, chunkText, voic
               parts: [
                 {
                   text: isEgyptian
-                    ? "أنت مؤدي صوتي مصري قاهري محترف في أفلام كرتون ديزني وبيكسار المدبلجة بالمصري. مهمتك الوحيدة هي قراءة النص المطلوب منك حرفياً باللهجة المصرية العامية القاهرية الصافية والطبيعية جداً للأطفال بنطق الجيم المصرية غير المعطشة (G) من أول كلمة لآخر كلمة بدون أي فصحى نهائياً وبدون إضافة أي كلمة من عندك."
-                    : "اقرأ النص المطلوب منك فقط بوضوح للأطفال بدون إضافة أي كلمة.",
+                    ? `${styleInstruction}. أنت مؤدي صوتي مصري قاهري محترف في أفلام كرتون ديزني وبيكسار المدبلجة بالمصري. التزم تماماً بطبقة الصوت والعمر والشخصية المطلوبة منك، ومهمتك الوحيدة هي قراءة النص المطلوب منك حرفياً باللهجة المصرية العامية القاهرية الصافية والطبيعية جداً للأطفال بنطق الجيم المصرية غير المعطشة (G) من أول كلمة لآخر كلمة بدون أي فصحى نهائياً وبدون إضافة أي كلمة من عندك.`
+                    : `${styleInstruction}. اقرأ النص المطلوب منك فقط بوضوح للأطفال وبنبرة الشخصية المطلوبة بدون إضافة أي كلمة.`,
                 },
               ],
             },
@@ -526,8 +849,8 @@ async function synthesizeChunkViaGeminiLiveRunner(ai, liveModel, chunkText, voic
               parts: [
                 {
                   text: isEgyptian
-                    ? `انطق هذا النص فقط باللهجة المصرية القاهرية العامية الصافية حرفياً وبنطق الجيم المصرية (G) بدون إضافة أي كلمة قبله أو بعده:\n${chunkText}`
-                    : `انطق هذا النص فقط حرفياً بدون إضافة أي كلمة قبله أو بعده:\n${chunkText}`,
+                    ? `توجيه الأداء الصوتي للشخصية: (${styleInstruction}). انطق هذا النص فقط باللهجة المصرية القاهرية العامية الصافية حرفياً وبنطق الجيم المصرية (G) بدون إضافة أي كلمة قبله أو بعده:\n${chunkText}`
+                    : `توجيه الأداء الصوتي للشخصية: (${styleInstruction}). انطق هذا النص فقط حرفياً بدون إضافة أي كلمة قبله أو بعده:\n${chunkText}`,
                 },
               ],
             },
@@ -549,11 +872,62 @@ async function synthesizeChunkViaGeminiLiveRunner(ai, liveModel, chunkText, voic
   }
 }
 
+async function applyRunnerCharacterTimbreAndCompanionSfx(rawAudioPath, vp, sceneIndex, tmpDir) {
+  try {
+    const shapedPath = path.join(tmpDir, `shaped_voice_${sceneIndex}.wav`);
+    await execFileAsync("ffmpeg", [
+      "-y",
+      "-i",
+      rawAudioPath,
+      "-af",
+      vp.voiceFilter || "dynaudnorm=f=150:g=15:p=0.95,volume=2.3,alimiter=limit=0.98",
+      "-ar",
+      "24000",
+      "-ac",
+      "1",
+      "-c:a",
+      "pcm_s16le",
+      shapedPath,
+    ]);
+    if (vp.animalSfxLavfi) {
+      const withSfxPath = path.join(tmpDir, `with_sfx_voice_${sceneIndex}.wav`);
+      await execFileAsync("ffmpeg", [
+        "-y",
+        "-f",
+        "lavfi",
+        "-i",
+        vp.animalSfxLavfi,
+        "-i",
+        shapedPath,
+        "-filter_complex",
+        "[0:a]aresample=24000,pan=mono|c0=c0,adelay=200,volume=1.35,apad=pad_dur=0.12[sfx];[1:a]aresample=24000,pan=mono|c0=c0[sp];[sfx][sp]concat=n=2:v=0:a=1[aout]",
+        "-map",
+        "[aout]",
+        "-ar",
+        "24000",
+        "-ac",
+        "1",
+        "-c:a",
+        "pcm_s16le",
+        withSfxPath,
+      ]);
+      if (fs.existsSync(withSfxPath) && fs.statSync(withSfxPath).size > 1000) {
+        return withSfxPath;
+      }
+    }
+    if (fs.existsSync(shapedPath) && fs.statSync(shapedPath).size > 1000) {
+      return shapedPath;
+    }
+  } catch {}
+  return rawAudioPath;
+}
+
 async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, dialect = "egyptian") {
   const speaker = String(scene.speakerName || "");
   const vp = resolveRunnerVoiceProfileForSpeaker(speaker, sceneIndex);
   const isFemale = vp.isFemale;
   const geminiVoice = vp.geminiVoice;
+  const styleInstruction = vp.styleInstruction || "";
   const edgeVoice =
     dialect === "fusha"
       ? isFemale
@@ -611,6 +985,7 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
             liveModel,
             segments[sIdx],
             geminiVoice,
+            styleInstruction,
             isEgyptian
           );
           if (!segPcm || segPcm.length <= 1000) {
@@ -624,8 +999,14 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
         if (allSegmentsOk && pcmParts.length > 0) {
           const wavBuf = ensureWavBuffer(Buffer.concat(pcmParts));
           fs.writeFileSync(liveWavPath, wavBuf);
-          const durSec = await measureAudioDurationSec(liveWavPath, 14);
-          return { audioPath: liveWavPath, voiceDurSec: durSec, dialogue };
+          const finalPath = await applyRunnerCharacterTimbreAndCompanionSfx(
+            liveWavPath,
+            vp,
+            sceneIndex,
+            tmpDir
+          );
+          const durSec = await measureAudioDurationSec(finalPath, 14);
+          return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
         }
       }
 
@@ -634,8 +1015,8 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
       for (const ttsModel of ttsModels) {
         try {
           const ttsPrompt = isEgyptian
-            ? `أنت مؤدي صوتي مصري قاهري محترف في أفلام كرتون ديزني وبيكسار المدبلجة باللهجة المصرية العامية القاهرية للأطفال. انطق النص التالي فقط باللهجة المصرية العامية القاهرية الصافية ببهجة وحيوية وبنطق الجيم المصرية غير المعطشة (G) بدون أي فصحى نهائياً:\n${dialogue}`
-            : `اقرأ النص التالي بوضوح وحيوية للأطفال:\n${dialogue}`;
+            ? `${styleInstruction}. أنت مؤدي صوتي مصري قاهري محترف في أفلام كرتون ديزني وبيكسار المدبلجة باللهجة المصرية العامية القاهرية للأطفال. انطق النص التالي فقط باللهجة المصرية العامية القاهرية الصافية ببهجة وحيوية وبنطق الجيم المصرية غير المعطشة (G) بدون أي فصحى نهائياً:\n${dialogue}`
+            : `${styleInstruction}. اقرأ النص التالي بوضوح وحيوية للأطفال:\n${dialogue}`;
           const gemRes = await ai.models.generateContent({
             model: ttsModel,
             contents: [{ role: "user", parts: [{ text: ttsPrompt }] }],
@@ -654,8 +1035,14 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
             if (rawPcm.length > 1000) {
               const wavBuf = ensureWavBuffer(rawPcm);
               fs.writeFileSync(liveWavPath, wavBuf);
-              const durSec = await measureAudioDurationSec(liveWavPath, 14);
-              return { audioPath: liveWavPath, voiceDurSec: durSec, dialogue };
+              const finalPath = await applyRunnerCharacterTimbreAndCompanionSfx(
+                liveWavPath,
+                vp,
+                sceneIndex,
+                tmpDir
+              );
+              const durSec = await measureAudioDurationSec(finalPath, 14);
+              return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
             }
           }
         } catch {}
@@ -683,8 +1070,14 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
       const mp3Buf = Buffer.concat(chunks);
       if (mp3Buf.length > 500) {
         fs.writeFileSync(mp3Path, mp3Buf);
-        const durSec = await measureAudioDurationSec(mp3Path, 14);
-        return { audioPath: mp3Path, voiceDurSec: durSec, dialogue };
+        const finalPath = await applyRunnerCharacterTimbreAndCompanionSfx(
+          mp3Path,
+          vp,
+          sceneIndex,
+          tmpDir
+        );
+        const durSec = await measureAudioDurationSec(finalPath, 14);
+        return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
       }
     } catch (e) {
       if (attempt < 2) {
