@@ -1258,46 +1258,458 @@ async function uploadMp4ToYouTube({
   };
 }
 
+async function resolveTrueFacebookPageAccessToken({ rawToken, targetPageId }) {
+  const cleanToken = String(rawToken || "").trim();
+  if (!cleanToken) return "";
+  let resolvedToken = cleanToken;
+  try {
+    const pageTokRes = await fetch(
+      `https://graph.facebook.com/v21.0/${encodeURIComponent(targetPageId)}?fields=id,name,access_token`,
+      { headers: { Authorization: `Bearer ${cleanToken}` } }
+    );
+    const pageTokData = await pageTokRes.json().catch(() => ({}));
+    if (pageTokRes.ok && typeof pageTokData?.access_token === "string" && pageTokData.access_token.trim()) {
+      return pageTokData.access_token.trim();
+    }
+    const accRes = await fetch(
+      `https://graph.facebook.com/v21.0/me/accounts?fields=id,name,access_token&limit=50`,
+      { headers: { Authorization: `Bearer ${cleanToken}` } }
+    );
+    const accData = await accRes.json().catch(() => ({}));
+    const pagesList = Array.isArray(accData?.data) ? accData.data : [];
+    const matched =
+      pagesList.find((p) => String(p?.id) === String(targetPageId)) ||
+      pagesList.find((p) => String(p?.name || "").toLowerCase().includes("noreen"));
+    if (matched && typeof matched.access_token === "string" && matched.access_token.trim()) {
+      resolvedToken = matched.access_token.trim();
+    }
+  } catch {}
+  return resolvedToken;
+}
+
+function buildIndependentFacebookMetadataForRunner({
+  episode,
+  videoFormat,
+  facebookSettings,
+  customFacebookPackages,
+}) {
+  const isShort = videoFormat === "short_9_16";
+  const epId = String(episode?.id || "");
+  const savedCustom = (epId && customFacebookPackages && customFacebookPackages[epId]) || episode?.facebookPackage || null;
+
+  const rawTopic = String(episode?.title || "مغامرة جديدة في عالم نورين كيدز")
+    .replace(/^Noreen\s*Kids\s*[:\-|]?\s*/i, "")
+    .split("|")[0]
+    .replace(/#[^\s#]+/g, "")
+    .trim();
+
+  const heroName = String(episode?.mainCharacterName || episode?.scenes?.[0]?.speakerName || "الطبيبة نورين");
+  const compName = String(episode?.companionName || episode?.scenes?.[1]?.speakerName || "أرنوب الشقي الممرض");
+  const titlePrefix = String(facebookSettings?.defaultFacebookTitlePrefix || "Noreen Kids |").trim();
+
+  const customFormatTitle = isShort
+    ? facebookSettings?.shortCustomTitleAr
+    : facebookSettings?.longCustomTitleAr;
+
+  const facebookTitle = String(
+    savedCustom?.facebookTitleAr ||
+      customFormatTitle ||
+      `${titlePrefix} ${rawTopic} - مغامرة ${heroName} و${compName}`
+  )
+    .replace(/#[^\s#]+/g, "")
+    .trim()
+    .slice(0, 120);
+
+  const moralLesson = String(
+    episode?.moralLesson ||
+      episode?.summary ||
+      "التعاون والتفكير الذكي ومساعدة الأصدقاء بحب وأمانة"
+  ).trim();
+
+  const defaultCaption = isShort
+    ? `🌟 ريلز جديد لأطفالنا الشطار على صفحة Noreen Kids!\n🎬 مغامرة سريعة وممتعة: "${rawTopic}" مع ${heroName} وصديقنا ${compName}!\n💡 قيمة الحلقة: ${moralLesson}.\n💬 شاركونا في التعليقات: إيه أكتر موقف عجب أطفالكم في مغامرة النهاردة؟ ولا تنسوا متابعة الصفحة لمشاهدة حكاية جديدة كل يوم!`
+    : `🎬 فيلم كرتون 3D كامل لأطفالنا الحلوين على صفحة Noreen Kids!\n✨ حكاية النهاردة: "${rawTopic}" مع البطلين ${heroName} و${compName} في رحلة مليانة تشويق ومعلومات مفيدة!\n🌟 الدرس التربوي للحلقة: ${moralLesson}.\n👨‍👩‍👧‍👦 تفرجوا على الحلقة مع أطفالكم واكتبوا لنا في التعليقات اسم بطلكم المفضل في Noreen Kids!`;
+
+  const customFormatCaption = isShort
+    ? facebookSettings?.shortCustomCaptionAr
+    : facebookSettings?.longCustomCaptionAr;
+
+  const facebookCaption = String(
+    savedCustom?.facebookCaptionAr ||
+      customFormatCaption ||
+      (isShort
+        ? facebookSettings?.defaultFacebookCaptionTemplateShort
+        : facebookSettings?.defaultFacebookCaptionTemplateLong) ||
+      defaultCaption
+  ).trim();
+
+  const fallbackHashtags = isShort
+    ? ["#Noreen_Kids", "#نورين_كيدز", "#Reels", "#قصص_أطفال", "#كرتون_أطفال_3D", "#حكايات_مصرية", "#تربية_إيجابية"]
+    : ["#Noreen_Kids", "#نورين_كيدز", "#أفلام_كرتون_3D", "#قصص_أطفال", "#حكايات_قبل_النوم", "#تعليم_الأطفال", "#كرتون_مصري"];
+
+  const customFormatHashtags = isShort
+    ? facebookSettings?.shortCustomHashtags
+    : facebookSettings?.longCustomHashtags;
+
+  const rawTags =
+    Array.isArray(savedCustom?.facebookHashtags) && savedCustom.facebookHashtags.length > 0
+      ? savedCustom.facebookHashtags
+      : Array.isArray(customFormatHashtags) && customFormatHashtags.length > 0
+      ? customFormatHashtags
+      : isShort && Array.isArray(facebookSettings?.defaultFacebookHashtagsShort) && facebookSettings.defaultFacebookHashtagsShort.length > 0
+      ? facebookSettings.defaultFacebookHashtagsShort
+      : !isShort && Array.isArray(facebookSettings?.defaultFacebookHashtagsLong) && facebookSettings.defaultFacebookHashtagsLong.length > 0
+      ? facebookSettings.defaultFacebookHashtagsLong
+      : fallbackHashtags;
+
+  const facebookHashtags = rawTags
+    .map((t) => {
+      const clean = String(t || "").trim().replace(/\s+/g, "_");
+      if (!clean) return "";
+      return clean.startsWith("#") ? clean : `#${clean}`;
+    })
+    .filter(Boolean);
+
+  const hashtagsLine = facebookHashtags.join(" ");
+  const composedMessage = hashtagsLine ? `${facebookCaption}\n\n${hashtagsLine}` : facebookCaption;
+  const isPublished = facebookSettings?.facebookPublishedStatus !== "DRAFT";
+
+  return {
+    facebookTitle,
+    facebookCaption,
+    facebookHashtags,
+    composedMessage,
+    isPublished,
+  };
+}
+
+async function uploadMp4ToFacebookPage({
+  rawPageAccessToken,
+  pageId,
+  mp4Path,
+  thumbnailJpgPath,
+  videoFormat,
+  episode,
+  facebookSettings,
+  customFacebookPackages,
+}) {
+  const activeToken = await resolveTrueFacebookPageAccessToken({
+    rawToken: rawPageAccessToken,
+    targetPageId: pageId,
+  });
+  if (!activeToken) {
+    throw new Error("FACEBOOK_PAGE_ACCESS_TOKEN غير متوفر للرفع على صفحة فيسبوك.");
+  }
+
+  const mp4Buffer = fs.readFileSync(mp4Path);
+  const isShort = videoFormat === "short_9_16";
+  const fbMeta = buildIndependentFacebookMetadataForRunner({
+    episode,
+    videoFormat,
+    facebookSettings,
+    customFacebookPackages,
+  });
+
+  let thumbBuffer = null;
+  if (
+    facebookSettings?.autoAttachCoverThumbnail !== false &&
+    thumbnailJpgPath &&
+    fs.existsSync(thumbnailJpgPath)
+  ) {
+    try {
+      const tb = fs.readFileSync(thumbnailJpgPath);
+      if (tb.length > 1000) thumbBuffer = tb;
+    } catch {}
+  }
+
+  const uploadViaResumableVideosEndpoint = async () => {
+    const startForm = new URLSearchParams({
+      upload_phase: "start",
+      file_size: String(mp4Buffer.length),
+    });
+    const startRes = await fetch(
+      `https://graph-video.facebook.com/v21.0/${encodeURIComponent(pageId)}/videos`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${activeToken}`,
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: startForm.toString(),
+      }
+    );
+    const startData = await startRes.json().catch(() => ({}));
+    if (!startRes.ok || !startData?.upload_session_id || !startData?.video_id) {
+      throw new Error(
+        startData?.error?.message || `HTTP ${startRes.status} on /${pageId}/videos (start)`
+      );
+    }
+    const uploadSessionId = String(startData.upload_session_id);
+    const videoId = String(startData.video_id);
+    let startOffset = Number(startData.start_offset || 0);
+    let endOffset = Number(startData.end_offset || mp4Buffer.length);
+
+    while (startOffset < endOffset) {
+      const chunk = mp4Buffer.subarray(startOffset, endOffset);
+      const formData = new FormData();
+      formData.append("upload_phase", "transfer");
+      formData.append("upload_session_id", uploadSessionId);
+      formData.append("start_offset", String(startOffset));
+      formData.append(
+        "video_file_chunk",
+        new Blob([new Uint8Array(chunk)], { type: "video/mp4" }),
+        "noreen_kids_video.mp4"
+      );
+
+      const transferRes = await fetch(
+        `https://graph-video.facebook.com/v21.0/${encodeURIComponent(pageId)}/videos`,
+        {
+          method: "POST",
+          headers: { Authorization: `Bearer ${activeToken}` },
+          body: formData,
+        }
+      );
+      const transferData = await transferRes.json().catch(() => ({}));
+      if (!transferRes.ok || transferData?.error) {
+        throw new Error(
+          transferData?.error?.message || `HTTP ${transferRes.status} during Facebook chunk transfer`
+        );
+      }
+      startOffset = Number(transferData.start_offset ?? endOffset);
+      endOffset = Number(transferData.end_offset ?? endOffset);
+    }
+
+    const finishForm = new FormData();
+    finishForm.append("upload_phase", "finish");
+    finishForm.append("upload_session_id", uploadSessionId);
+    finishForm.append("title", fbMeta.facebookTitle);
+    finishForm.append("description", fbMeta.composedMessage);
+    finishForm.append("published", fbMeta.isPublished ? "true" : "false");
+    if (thumbBuffer && thumbBuffer.length > 1000) {
+      finishForm.append(
+        "thumb",
+        new Blob([new Uint8Array(thumbBuffer)], { type: "image/jpeg" }),
+        "noreen_kids_cover.jpg"
+      );
+    }
+
+    const finishRes = await fetch(
+      `https://graph-video.facebook.com/v21.0/${encodeURIComponent(pageId)}/videos`,
+      {
+        method: "POST",
+        headers: { Authorization: `Bearer ${activeToken}` },
+        body: finishForm,
+      }
+    );
+    const finishData = await finishRes.json().catch(() => ({}));
+    if (!finishRes.ok || finishData?.error) {
+      throw new Error(
+        finishData?.error?.message || `HTTP ${finishRes.status} on /${pageId}/videos (finish)`
+      );
+    }
+    return {
+      facebookVideoId: videoId,
+      facebookPostId: String(finishData?.post_id || `${pageId}_${videoId}`),
+      facebookPermalinkUrl: `https://www.facebook.com/${pageId}/videos/${videoId}`,
+      ...fbMeta,
+    };
+  };
+
+  if (isShort) {
+    try {
+      const startRes = await fetch(
+        `https://graph.facebook.com/v21.0/${encodeURIComponent(pageId)}/video_reels`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${activeToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ upload_phase: "start" }),
+        }
+      );
+      const startData = await startRes.json().catch(() => ({}));
+      if (!startRes.ok || !startData?.video_id || !startData?.upload_url) {
+        return await uploadViaResumableVideosEndpoint();
+      }
+      const videoId = String(startData.video_id);
+      const uploadUrl = String(startData.upload_url);
+
+      const transferRes = await fetch(uploadUrl, {
+        method: "POST",
+        headers: {
+          Authorization: `OAuth ${activeToken}`,
+          offset: "0",
+          file_size: String(mp4Buffer.length),
+          "Content-Type": "application/octet-stream",
+        },
+        body: new Uint8Array(mp4Buffer),
+      });
+      const transferData = await transferRes.json().catch(() => ({}));
+      if (!transferRes.ok || transferData?.error) {
+        throw new Error(
+          transferData?.error?.message || `HTTP ${transferRes.status} on rupload.facebook.com`
+        );
+      }
+
+      const finishRes = await fetch(
+        `https://graph.facebook.com/v21.0/${encodeURIComponent(pageId)}/video_reels`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${activeToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            upload_phase: "finish",
+            video_id: videoId,
+            video_state: fbMeta.isPublished ? "PUBLISHED" : "DRAFT",
+            description: fbMeta.composedMessage,
+            title: fbMeta.facebookTitle,
+          }),
+        }
+      );
+      const finishData = await finishRes.json().catch(() => ({}));
+      if (!finishRes.ok || finishData?.error) {
+        throw new Error(
+          finishData?.error?.message || `HTTP ${finishRes.status} on /video_reels (finish)`
+        );
+      }
+      return {
+        facebookVideoId: videoId,
+        facebookPostId: String(finishData?.post_id || `${pageId}_${videoId}`),
+        facebookPermalinkUrl: `https://www.facebook.com/reel/${videoId}`,
+        ...fbMeta,
+      };
+    } catch {
+      return await uploadViaResumableVideosEndpoint();
+    }
+  }
+
+  return await uploadViaResumableVideosEndpoint();
+}
+
 async function main() {
+  const publishTarget = String(process.env.PUBLISH_TARGET || "unified").toLowerCase();
+  const isFacebookWorkflow = publishTarget.includes("facebook");
   console.log("==================================================================");
-  console.log("🚀 Noreen Kids 3D Studio - 24/7 Automated YouTube Pipeline");
+  console.log(
+    isFacebookWorkflow
+      ? "🚀 Noreen Kids 3D Studio - 24/7 Facebook Page & Unified Cloud Pipeline"
+      : "🚀 Noreen Kids 3D Studio - 24/7 Unified Dual-Platform Pipeline (YouTube + Facebook)"
+  );
   console.log("==================================================================");
 
   const schedulePath = path.resolve(process.cwd(), "noreen-kids-schedule.json");
   let schedule = {};
   if (fs.existsSync(schedulePath)) {
-    schedule = JSON.parse(fs.readFileSync(schedulePath, "utf8"));
+    try {
+      schedule = JSON.parse(fs.readFileSync(schedulePath, "utf8"));
+    } catch {}
   }
 
-  const vault = decryptVault(schedule.encryptedVault || "");
+  const fbSchedulePath = path.resolve(process.cwd(), "noreen-kids-facebook-schedule.json");
+  let fbSchedule = {};
+  if (fs.existsSync(fbSchedulePath)) {
+    try {
+      fbSchedule = JSON.parse(fs.readFileSync(fbSchedulePath, "utf8"));
+    } catch {}
+  }
+
+  const vault = {
+    ...decryptVault(schedule.encryptedVault || ""),
+    ...decryptVault(fbSchedule.encryptedVault || ""),
+  };
   if (!process.env.GEMINI_API_KEY && vault.geminiApiKey) {
     process.env.GEMINI_API_KEY = String(vault.geminiApiKey).trim();
   }
   const clientId = (process.env.YOUTUBE_CLIENT_ID || vault.youtubeClientId || "").trim();
   const clientSecret = (process.env.YOUTUBE_CLIENT_SECRET || vault.youtubeClientSecret || "").trim();
   const refreshToken = (process.env.YOUTUBE_REFRESH_TOKEN || vault.youtubeRefreshToken || "").trim();
+  const hasYouTubeCreds = Boolean(clientId && clientSecret && refreshToken);
+
+  const mergedFbBlock = {
+    ...(schedule.facebookSettings || {}),
+    ...(schedule.facebook || {}),
+    ...(fbSchedule.facebook || {}),
+    ...fbSchedule,
+  };
+
+  const facebookPageAccessToken = (
+    process.env.FACEBOOK_PAGE_ACCESS_TOKEN ||
+    vault.facebookPageAccessToken ||
+    ""
+  ).trim();
+  const facebookPageId = (
+    process.env.FACEBOOK_PAGE_ID ||
+    vault.facebookPageId ||
+    mergedFbBlock.pageId ||
+    schedule.facebookPageId ||
+    "1330185823512542"
+  ).trim();
+  const unifiedDualPublishEnabled =
+    typeof schedule.unifiedDualPublishEnabled === "boolean"
+      ? schedule.unifiedDualPublishEnabled
+      : typeof fbSchedule.unifiedDualPublishEnabled === "boolean"
+      ? fbSchedule.unifiedDualPublishEnabled
+      : true;
+  const facebookSettings = mergedFbBlock;
+  const customFacebookPackages = {
+    ...(schedule.customFacebookPackages || {}),
+    ...(mergedFbBlock.customFacebookPackages || {}),
+  };
 
   const isCronEvent = process.env.GITHUB_EVENT_NAME === "schedule";
-  const isGitHubScheduleEnabled =
-    typeof schedule.isGitHubScheduleEnabled === "boolean"
-      ? schedule.isGitHubScheduleEnabled
-      : true;
+  const isGitHubScheduleEnabled = isFacebookWorkflow
+    ? typeof fbSchedule.githubActionsAutoEnabled === "boolean"
+      ? fbSchedule.githubActionsAutoEnabled
+      : typeof mergedFbBlock.githubActionsAutoEnabled === "boolean"
+      ? mergedFbBlock.githubActionsAutoEnabled
+      : true
+    : typeof schedule.isGitHubScheduleEnabled === "boolean"
+    ? schedule.isGitHubScheduleEnabled
+    : true;
 
   if (isCronEvent && !isGitHubScheduleEnabled) {
     console.log(
-      "⏸️ [GitHub Schedule Paused] جدولة GitHub Actions التلقائية متوقفة حالياً من الداشبورد (isGitHubScheduleEnabled = false). تم إلغاء التشغيل التلقائي."
+      "⏸️ [GitHub Schedule Paused] جدولة GitHub Actions التلقائية متوقفة حالياً من الداشبورد. تم إلغاء التشغيل التلقائي."
+    );
+    process.exit(0);
+  }
+
+  // If both workflows are scheduled at the exact same Cairo time and Unified Dual Publish is enabled,
+  // avoid duplicate cron runs when the Facebook cron fires at the same minute as the Unified YouTube+Facebook cron:
+  const ytGhTime = String(schedule.githubPublishTimeCairo || schedule.dailyPublishTimeCairo || "19:00").trim();
+  const fbGhTime = String(fbSchedule.githubActionsTimeCairo || mergedFbBlock.githubActionsTimeCairo || ytGhTime).trim();
+  if (
+    isCronEvent &&
+    isFacebookWorkflow &&
+    unifiedDualPublishEnabled &&
+    Boolean(schedule.isGitHubScheduleEnabled) &&
+    hasYouTubeCreds &&
+    fbGhTime === ytGhTime
+  ) {
+    console.log(
+      `🔒 [Single-Execution Lock] النظام المشترك الموحد مفعّل وموعد جدولة GitHub Actions موحّد (${fbGhTime} بتوقيت مصر) — يتولى مسار الجدولة الموحد رفع الفيديوهات على يوتيوب وفيسبوك معاً لمنع تكرار التوليد.`
     );
     process.exit(0);
   }
 
   const runMode = parseRunMode(
-    process.env.RUN_MODE || schedule.selectedWorkflowMode || "daily_schedule"
+    process.env.RUN_MODE ||
+      (isFacebookWorkflow ? fbSchedule.selectedWorkflowMode : schedule.selectedWorkflowMode) ||
+      schedule.selectedWorkflowMode ||
+      "daily_schedule"
   );
-  const dailyTime =
-    schedule.githubPublishTimeCairo ||
-    schedule.dailyPublishTimeCairo ||
-    "19:00";
-  const dailyDialect = schedule.dailyDialect === "fusha" ? "fusha" : "egyptian";
+  const dailyTime = isFacebookWorkflow
+    ? fbGhTime
+    : schedule.githubPublishTimeCairo ||
+      schedule.dailyPublishTimeCairo ||
+      "19:00";
+  const dailyDialect =
+    (isFacebookWorkflow ? fbSchedule.dailyDialect : schedule.dailyDialect) === "fusha"
+      ? "fusha"
+      : "egyptian";
   const privacyStatus = schedule.privacyStatus || "private";
   const madeForKids =
     typeof schedule.madeForKids === "boolean" ? schedule.madeForKids : true;
@@ -1310,38 +1722,49 @@ async function main() {
   const longPlaylistId = schedule.longPlaylistId || "PLbjN20PzrCYk";
   const appUrl = (process.env.APP_URL || vault.appUrl || "").trim();
 
-  console.log(`📌 Run Mode Selected : ${runMode}`);
+  const shouldUploadToYouTube = isFacebookWorkflow
+    ? Boolean(unifiedDualPublishEnabled && hasYouTubeCreds)
+    : hasYouTubeCreds;
+  const shouldUploadToFacebook = isFacebookWorkflow
+    ? Boolean(facebookPageAccessToken)
+    : Boolean(unifiedDualPublishEnabled && facebookPageAccessToken);
+
+  console.log(`📌 Run Mode Selected : ${runMode} (Target: ${publishTarget})`);
   console.log(
     `🕖 GitHub Schedule Time (Cairo): ${dailyTime} (Enabled: ${isGitHubScheduleEnabled}) | Dialect: ${dailyDialect}`
   );
   console.log(
-    `⚙️ Upload Settings   : Privacy=${privacyStatus} | MadeForKids=${madeForKids} | SyntheticAI=${containsSyntheticMedia} | Category=${categoryId}`
+    `⚙️ YouTube Independent Settings : Upload=${shouldUploadToYouTube} | Privacy=${privacyStatus} | MadeForKids=${madeForKids} | SyntheticAI=${containsSyntheticMedia} | Category=${categoryId}`
   );
-  console.log(`📂 Playlists         : Short=${shortsPlaylistId} | Long=${longPlaylistId}`);
+  console.log(`📂 YouTube Playlists            : Short=${shortsPlaylistId} | Long=${longPlaylistId}`);
+  console.log(
+    `📘 Facebook Independent Settings: Upload=${shouldUploadToFacebook} | PageID=${facebookPageId} | DualPublish=${unifiedDualPublishEnabled} | TokenReady=${Boolean(facebookPageAccessToken)}`
+  );
 
-  if (!clientId || !clientSecret || !refreshToken) {
+  let accessToken = "";
+  if (shouldUploadToYouTube) {
+    console.log("🔑 [Step 1/5] Verifying YouTube OAuth 2.0 Refresh Token...");
+    accessToken = await getYouTubeAccessToken({
+      clientId,
+      clientSecret,
+      refreshToken,
+    });
+    console.log("✅ YouTube OAuth 2.0 Access Token obtained successfully!");
+  } else if (!shouldUploadToFacebook) {
     console.error(
-      "❌ خطأ: مفاتيح YouTube OAuth (YOUTUBE_CLIENT_ID / YOUTUBE_CLIENT_SECRET / YOUTUBE_REFRESH_TOKEN) غير متوفرة!"
-    );
-    console.error(
-      "يرجى إدخال مفاتيح يوتيوب في لوحة التحكم والضغط على زر (مزامنة Workflow 24/7 مع GitHub)."
+      "❌ خطأ: لا تتوفر مفاتيح رفع ليوتيوب أو فيسبوك! يرجى حفظ المفاتيح في لوحة التحكم ومزامنة GitHub Actions."
     );
     process.exit(1);
   }
-
-  console.log("🔑 [Step 1/4] Verifying YouTube OAuth 2.0 Refresh Token...");
-  const accessToken = await getYouTubeAccessToken({
-    clientId,
-    clientSecret,
-    refreshToken,
-  });
-  console.log("✅ YouTube OAuth 2.0 Access Token obtained successfully!");
 
   const daySeed = Math.floor(Date.now() / (1000 * 60 * 60 * 12));
 
   const DAILY_SHORT_STORIES = [
     {
       title: "Noreen Kids: لغز السماعة المضيئة في عيادة الغابة | مغامرات الطبيبة نورين وأرنوب الشقي",
+      mainCharacterName: "الطبيبة نورين",
+      companionName: "أرنوب الشقي الممرض",
+      moralLesson: "النظافة وشرب المياه الصحية والتعاون لعلاج الأصدقاء",
       summary:
         "مغامرة متكاملة الأركان (بداية ومشكلة وتصرف وحل) تكتشف فيها الطبيبة نورين وأرنوب الشقي سبب تعب العصفور الصغير ويعالجانه بذكاء وتعاون.",
       scenes: [
@@ -1377,6 +1800,9 @@ async function main() {
     },
     {
       title: "Noreen Kids: إصلاح جسر الغيوم المتحرك | مغامرات المهندسة سدرة والنمر الفرفوش",
+      mainCharacterName: "المهندسة سدرة",
+      companionName: "النمر الفرفوش",
+      moralLesson: "التفكير الهندسي المنظم والصبر في حل المشكلات",
       summary:
         "رحلة هندسية مشوقة تواجه فيها المهندسة سدرة والنمر الفرفوش مشكلة توقف جسر الغيوم ويبتكران الحل بالعلم والتعاون.",
       scenes: [
@@ -1412,6 +1838,9 @@ async function main() {
     },
     {
       title: "Noreen Kids: إنقاذ الدلفين الصغير في مملكة المرجان | مغامرات القبطان كريم ومرجان",
+      mainCharacterName: "كريم القبطان الصغير",
+      companionName: "مرجان الدلفين المرح",
+      moralLesson: "حماية الكائنات البحرية والتعاون الذكي وقت الأزمات",
       summary:
         "مغامرة بحرية متكاملة يقود فيها القبطان كريم والدلفين مرجان الغواصة الذهبية لتحرير الممر المرجاني بالتفكير العلمي.",
       scenes: [
@@ -1450,6 +1879,9 @@ async function main() {
   const DAILY_LONG_STORIES = [
     {
       title: "Noreen Kids: سر المختبر الطائر وبلورة الطاقة النظيفة | مغامرات المهندسة سدرة والنمر الفرفوش",
+      mainCharacterName: "المهندسة سدرة",
+      companionName: "النمر الفرفوش",
+      moralLesson: "العلم والصبر والعمل الجماعي يحولون أي عقبة لنجاح كبير",
       summary:
         "حلقة طويلة متكاملة الحبكة (بداية وتطور وحدث ومشكلة وتصرف وحل ونهاية) داخل المختبر الطائر لإعادة تشغيل بلورة الطاقة النظيفة وإنقاذ مدينة المستقبل.",
       scenes: [
@@ -1513,6 +1945,9 @@ async function main() {
     },
     {
       title: "Noreen Kids: مهمة السماعة الذهبية في واحة الكريستال | مغامرات الطبيبة نورين وأرنوب الشقي",
+      mainCharacterName: "الطبيبة نورين",
+      companionName: "أرنوب الشقي الممرض",
+      moralLesson: "الحفاظ على نظافة المياه ومساعدة الكائنات الحية بحب",
       summary:
         "فيلم كرتون 3D طويل متكامل الأركان تنطلق فيه الطبيبة نورين وأرنوب الشقي لعلاج نبع المياه البلوري وإسعاف كائنات الواحة.",
       scenes: [
@@ -1584,6 +2019,10 @@ async function main() {
       ? schedule.shortEpisode
       : {
           title: dynamicShortStory.title,
+          mainCharacterName: dynamicShortStory.mainCharacterName,
+          companionName: dynamicShortStory.companionName,
+          moralLesson: dynamicShortStory.moralLesson,
+          summary: dynamicShortStory.summary,
           scenes: dynamicShortStory.scenes,
           youtubePackage: {
             videoTitleAr: dynamicShortStory.title,
@@ -1597,6 +2036,10 @@ async function main() {
       ? schedule.longEpisode
       : {
           title: dynamicLongStory.title,
+          mainCharacterName: dynamicLongStory.mainCharacterName,
+          companionName: dynamicLongStory.companionName,
+          moralLesson: dynamicLongStory.moralLesson,
+          summary: dynamicLongStory.summary,
           scenes: dynamicLongStory.scenes,
           youtubePackage: {
             videoTitleAr: dynamicLongStory.title,
@@ -1634,10 +2077,10 @@ async function main() {
   for (let tIdx = 0; tIdx < tasks.length; tIdx++) {
     const task = tasks[tIdx];
     console.log("------------------------------------------------------------------");
-    console.log(`🎬 [Step 2/4] Rendering ${task.label} (${tIdx + 1}/${tasks.length})...`);
+    console.log(`🎬 [Step 2/5] Rendering Shared MP4 for ${task.label} (${tIdx + 1}/${tasks.length})...`);
     const mp4Path = await renderEpisodeMp4(task.episode, task.videoFormat, tmpDir, dailyDialect);
 
-    console.log(`🔍 [Step 3/4] Running Pre-Upload Unit Test & ffprobe Gate on ${path.basename(mp4Path)}...`);
+    console.log(`🔍 [Step 3/5] Running Pre-Upload Unit Test & ffprobe Gate on ${path.basename(mp4Path)}...`);
     const { stdout: probeOut } = await execFileAsync("ffprobe", [
       "-v",
       "quiet",
@@ -1698,12 +2141,13 @@ async function main() {
     }
 
     // 3. Zero External Images Gate
+    const allowedImagesDir = path.resolve(process.cwd(), "src", "assets", "images");
     for (let sIdx = 0; sIdx < epScenes.length; sIdx++) {
-      const resolvedCharImg = resolveSpeakerImageFile(epScenes[sIdx]?.speakerName || "");
+      const resolvedCharImg = resolveCharacterAvatarPath(epScenes[sIdx]?.speakerName || "");
       if (
         !resolvedCharImg ||
         /^https?:\/\//i.test(resolvedCharImg) ||
-        !resolvedCharImg.startsWith(path.join(ROOT_DIR, "src/assets/images")) ||
+        !resolvedCharImg.startsWith(allowedImagesDir) ||
         !fs.existsSync(resolvedCharImg)
       ) {
         throw new Error(`[Pre-Upload Unit Test FAILED] External or missing image detected in scene ${sIdx + 1}: ${resolvedCharImg}. Upload blocked.`);
@@ -1714,32 +2158,80 @@ async function main() {
       `✅ PRE-UPLOAD UNIT TEST GATE PASSED: Duration=${durSec}s | AV-Drift=${avDrift.toFixed(2)}s | Codec=${vCodec}/${pixFmt}/${aCodec} 48kHz Stereo (Closed-GOP=${closedGop}) | Dialogue=100% Egyptian Verified | ExternalImages=0 | FastStart=Enabled`
     );
 
-    console.log(`☁️ [Step 4/4] Uploading ${task.label} + 1280x720 Dual-Hero Thumbnail to YouTube Channel (Noreen Kids)...`);
     const pkg = task.episode?.youtubePackage || {};
     const expectedThumbPath = path.join(tmpDir, `thumbnail_1280x720_${task.videoFormat}.jpg`);
-    const uploadRes = await uploadMp4ToYouTube({
-      accessToken,
-      mp4Path,
-      thumbnailJpgPath: expectedThumbPath,
-      thumbnailBase64: pkg.thumbnailBase64,
-      title: pkg.videoTitleAr || task.episode?.title,
-      description: pkg.descriptionAr || task.episode?.subtitle,
-      tags: pkg.tags,
-      privacyStatus,
-      madeForKids,
-      containsSyntheticMedia,
-      categoryId,
-      publishAtIso,
+    let uploadRes = {
+      videoId: "",
+      cleanTitle: String(pkg.videoTitleAr || task.episode?.title || "Noreen Kids"),
       playlistId: task.playlistId,
-    });
+      playlistAdded: false,
+      thumbnailUploaded: false,
+      fileSizeMb: (fs.statSync(mp4Path).size / (1024 * 1024)).toFixed(2),
+    };
 
-    console.log(`🎉 SUCCESS! Uploaded Video ID: ${uploadRes.videoId}`);
-    console.log(`🖼️ Custom 1280x720 Thumbnail (Hero + Companion): ${uploadRes.thumbnailUploaded ? "Uploaded Automatically ✓" : "Default Frame"}`);
-    console.log(`🔗 Watch URL: https://www.youtube.com/watch?v=${uploadRes.videoId}`);
-    console.log(`📂 Playlist (${uploadRes.playlistId}): ${uploadRes.playlistAdded ? "Added ✓" : "Skipped"}`);
+    if (shouldUploadToYouTube && accessToken) {
+      console.log(`☁️ [Step 4/5] Uploading ${task.label} + 1280x720 Dual-Hero Thumbnail to YouTube (with YouTube Settings)...`);
+      uploadRes = await uploadMp4ToYouTube({
+        accessToken,
+        mp4Path,
+        thumbnailJpgPath: expectedThumbPath,
+        thumbnailBase64: pkg.thumbnailBase64,
+        title: pkg.videoTitleAr || task.episode?.title,
+        description: pkg.descriptionAr || task.episode?.subtitle,
+        tags: pkg.tags,
+        privacyStatus,
+        madeForKids,
+        containsSyntheticMedia,
+        categoryId,
+        publishAtIso,
+        playlistId: task.playlistId,
+      });
+
+      console.log(`🎉 YOUTUBE SUCCESS! Uploaded Video ID: ${uploadRes.videoId}`);
+      console.log(`🖼️ YouTube Custom 1280x720 Thumbnail: ${uploadRes.thumbnailUploaded ? "Uploaded Automatically ✓" : "Default Frame"}`);
+      console.log(`🔗 YouTube Watch URL: https://www.youtube.com/watch?v=${uploadRes.videoId}`);
+      console.log(`📂 YouTube Playlist (${uploadRes.playlistId}): ${uploadRes.playlistAdded ? "Added ✓" : "Skipped"}`);
+    }
+
+    let fbUploadRes = null;
+    if (shouldUploadToFacebook && facebookPageAccessToken) {
+      try {
+        console.log(`📘 [Step 5/5] Uploading EXACT SAME MP4 + Cover to Facebook Page (${facebookPageId}) with Independent Facebook Settings...`);
+        fbUploadRes = await uploadMp4ToFacebookPage({
+          rawPageAccessToken: facebookPageAccessToken,
+          pageId: facebookPageId,
+          mp4Path,
+          thumbnailJpgPath: expectedThumbPath,
+          videoFormat: task.videoFormat,
+          episode: task.episode,
+          facebookSettings,
+          customFacebookPackages,
+        });
+        console.log(`🎉 FACEBOOK SUCCESS! Uploaded Facebook Video ID: ${fbUploadRes.facebookVideoId}`);
+        console.log(`📝 Facebook Title: ${fbUploadRes.facebookTitle}`);
+        console.log(`🔗 Facebook Permalink: ${fbUploadRes.facebookPermalinkUrl}`);
+      } catch (fbErr) {
+        console.warn(
+          `⚠️ Facebook Upload Warning: ${
+            fbErr instanceof Error ? fbErr.message : fbErr
+          }`
+        );
+        if (!shouldUploadToYouTube) {
+          throw fbErr;
+        }
+      }
+    } else {
+      console.log(`ℹ️ [Step 5/5] Skipping Facebook upload (UploadEnabled=${shouldUploadToFacebook}, TokenReady=${Boolean(facebookPageAccessToken)})`);
+    }
 
     results.push({
       ...uploadRes,
+      facebookVideoId: fbUploadRes?.facebookVideoId || null,
+      facebookPostId: fbUploadRes?.facebookPostId || null,
+      facebookPermalinkUrl: fbUploadRes?.facebookPermalinkUrl || null,
+      facebookTitle: fbUploadRes?.facebookTitle || null,
+      facebookCaption: fbUploadRes?.facebookCaption || null,
+      facebookHashtags: fbUploadRes?.facebookHashtags || null,
       videoFormat: task.videoFormat,
       label: task.label,
       durationSec: durSec,
@@ -1769,6 +2261,17 @@ async function main() {
           containsSyntheticMedia,
           categoryId,
           dialect: dailyDialect,
+          facebookPageId,
+          facebookShortVideoId: shortRes?.facebookVideoId,
+          facebookLongVideoId: longRes?.facebookVideoId,
+          facebookShortPermalinkUrl: shortRes?.facebookPermalinkUrl,
+          facebookLongPermalinkUrl: longRes?.facebookPermalinkUrl,
+          facebookShortTitle: shortRes?.facebookTitle,
+          facebookLongTitle: longRes?.facebookTitle,
+          facebookShortCaption: shortRes?.facebookCaption,
+          facebookLongCaption: longRes?.facebookCaption,
+          facebookShortHashtags: shortRes?.facebookHashtags,
+          facebookLongHashtags: longRes?.facebookHashtags,
         }),
       });
     } catch {}
@@ -1776,15 +2279,17 @@ async function main() {
 
   if (process.env.GITHUB_STEP_SUMMARY) {
     const summaryLines = [
-      "## 🎬 تقرير تشغيل وإنتاج قناة Noreen Kids 3D Studio",
+      "## 🎬 تقرير النشر الموحد لقناة وصفحة Noreen Kids 3D Studio (YouTube + Facebook)",
       `- **وضع التشغيل:** \`${runMode}\``,
       `- **موعد الجدولة اليومية (توقيت مصر):** \`${dailyTime}\``,
       "",
-      "| نوع الفيديو | العنوان | المدة | الحجم | قائمة التشغيل | رابط يوتيوب |",
-      "|---|---|---|---|---|---|",
+      "| نوع الفيديو | عنوان يوتيوب | عنوان فيسبوك | المدة | الحجم | رابط يوتيوب | رابط فيسبوك |",
+      "|---|---|---|---|---|---|---|",
       ...results.map(
         (r) =>
-          `| ${r.label} | ${r.cleanTitle} | ${r.durationSec}s | ${r.fileSizeMb} MB | \`${r.playlistId}\` | [https://youtu.be/${r.videoId}](https://youtu.be/${r.videoId}) |`
+          `| ${r.label} | ${r.cleanTitle} | ${r.facebookTitle || "—"} | ${r.durationSec}s | ${r.fileSizeMb} MB | [YouTube](https://youtu.be/${r.videoId}) | ${
+            r.facebookPermalinkUrl ? `[Facebook](${r.facebookPermalinkUrl})` : "—"
+          } |`
       ),
       "",
     ];
@@ -1795,7 +2300,7 @@ async function main() {
     fs.rmSync(tmpDir, { recursive: true, force: true });
   } catch {}
   console.log("==================================================================");
-  console.log("✅ All Noreen Kids YouTube tasks completed and uploaded!");
+  console.log("✅ All Noreen Kids Unified (YouTube + Facebook) tasks completed!");
   console.log("==================================================================");
 }
 
