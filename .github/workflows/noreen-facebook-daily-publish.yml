@@ -1,0 +1,54 @@
+name: Noreen Kids Facebook Page 24/7 Daily Schedule (SHORT Reel + LONG Video)
+
+on:
+  # [PAUSED FROM FACEBOOK DASHBOARD] Automated daily cron is currently disabled (Configured time: 19:00 Egypt Time -> 17:00 UTC)
+  workflow_dispatch:
+    inputs:
+      run_mode:
+        description: 'اختر وضع التشغيل والرفع على صفحة فيسبوك (الجدولة اليومية / قصير فقط / طويل فقط / الاثنين معاً)'
+        required: true
+        type: choice
+        default: 'daily_schedule (الجدولة اليومية: قصير + طويل)'
+        options:
+          - 'daily_schedule (الجدولة اليومية: قصير + طويل)'
+          - 'short_only (تشغيل قصير فقط - Short 9:16)'
+          - 'long_only (تشغيل طويل فقط - Long 16:9)'
+          - 'both_now (تشغيل الاثنين معاً: قصير + طويل)'
+
+jobs:
+  publish-noreen-facebook-daily:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: 1. Checkout Noreen Kids 3D Studio Repository
+        uses: actions/checkout@v4
+
+      - name: 2. Setup Node.js 20 Runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 3. Install FFmpeg, ffprobe & Gemini Live Native Audio SDK (@google/genai)
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y ffmpeg
+          npm install --no-save @google/genai msedge-tts
+
+      - name: 4. Run Pre-Upload Short Pipeline Unit Test Gate (Duration 60-80s, Egyptian Dialogue, Zero External Images)
+        run: |
+          node tests/short-pipeline-unit-test.mjs
+
+      - name: 5. Render 3D Episode MP4 + Cover & Publish to Facebook Page (and Unified YouTube if enabled)
+        env:
+          PUBLISH_TARGET: 'facebook_workflow'
+          RUN_MODE: ${{ github.event.inputs.run_mode || 'daily_schedule' }}
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          APP_URL: ${{ secrets.APP_URL }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          FACEBOOK_PAGE_ACCESS_TOKEN: ${{ secrets.FACEBOOK_PAGE_ACCESS_TOKEN }}
+          FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID || '1330185823512542' }}
+        run: |
+          node scripts/noreen-kids-youtube-runner.mjs
