@@ -33,9 +33,9 @@
     "longCustomHashtags": [],
     "customFacebookPackages": {}
   },
-  "syncedAtIso": "2026-09-29T14:22:30.112Z",
+  "syncedAtIso": "2026-09-29T14:22:41.034Z",
   "syncReason": "dashboard_state_updated",
-  "encryptedVault": "af18a83dfbd86de622629a0c85e8584b:de6eb3ecb795f98ade642c367c0dc269ef55762543a892e6126cbc095cfe61e6c8a2395a762bb1b3c236328ba64260ede61bb9e0a3b92e1521fa80fcd02771f4e645577ad0a5666d1017d4d08c8ffe09c4256c5c9ac7ebd1dca34d944206f6a0650bd1303bb360a907a055dc75c36b47ea96a52ceb998e1fbd8f3b7ad89d60cf457b899a68099e5fdb46ecf9a19b4fdf26fd85089f4e0b052e6f709c1b0bbf328bb55460ebb8635a8d5c072ea9d1780f90d68c95586bafe97c385ff700b840ad7bd5da846bba4538685cfbe31bc9f65e5e5d528e75b63a9735c51e73abdf1d54c4b66532a83b94add9a841c52eb5107bc7c94c9e49799091d792b5ef8754899fbf0ce7017294c08205324a19b3c5ceb5cc89b3e9b3203fcb5f1806b613241bf9480e9bf536f9f6fcab317f3278ff8dd5d4cc877782729e0faa4a3c62050769653312204d7d9f63d588998d9dbbb4ffa322832507b59c05ff47bea2d913342a7beed55ab94c9ceacae174ae76a2ad1c4792c79f7432afb6267cc56fd5771ea25469c7db5925d5fef309665dc71abfa0ac258610b6d1df3ed2b8d86d404959d58621e56143e71ebeffac4cb4531e0f7637ede4d33ac562ac380a334dc921ffea3588afec58b625ee51df83f0dc80ad2f09e665e52a15aed87e5a0b5b44e14050c677789b69d8cfba99353791b7e730b84b97f50e28ea07716c95de33d9e96b3211d977d6e028274f741a27fac783adad87be89e0943fd00ead20e68130d20e86736fce9a6c54d697c2b946bfd401da57ac61c712ff2279f2bdfe28c1ee2dd5a6b9ede4ad8a1377fcc867c8f56375064260384d710e9781e93f003f35f58ef316344d5d2d10cf256d2949b7bdd0461a99b2ed354d8f79a3e9d1f181869ef13b23eebe586a7070d277fd29b944cb667b7df67ea579d728e8d1f1d5b3171125e3512ae1316b73d697b95959a05f75da39ae17b9607c53b2680894ddc151130f367503",
+  "encryptedVault": "3af6deeede03195e107903586fa8a3a3:1875b8a325dec101853e3905fdfd0afaed0c0a62fe9180191963be45c3dbfe83165a837558f98abe85b65a6b0138b8d8cdac0efcafb114e47708ee60476b38e080271b1739d70f6dad70c6f17f16ba4a18c3bab05b7c74a26f461f89683f2874c7a7cdcdc1619b28e581e84d20c477b06b1edd11d3f6de2240b05bbcdb58fa058c927a98df15f70cf485bb863bb3126e1df840d2bff26f450d9839d1ddd2db433d5a13b64de56b2a1bd872273aabb8093b8b921f375ee6f9402bd05649cb958d72ca51712d66b744af8ad39447ed3e8b20d35cc17b39201377d43b8d53d3943b77282026490543ce72a9bfe40c2fa3538852a525919af414d9148b622bc51e56ad507d70831a14d9359b117fbaf09981dbe03c8d948dd84dcce99e7e51f34b6284296877bf42953cda216fba822dc91f17b54e5e1100e36ba3edbaa5b1085fef46751ffaacc3ab1614a4aac6588cb6ee82f76335fb9c1f5247974005953d8c7b0911d1dae4469f3f8dcf3f00b33c2e031477cbceab9e8fae6797be29ad390009370b5d220cb7d6860d6e443a378d4b326c2626ff4818c75ed853518efbd0be2fe500153b7b058ebe89ef54e89f7436c361a75fb74167c55c2bf6d795d4f8e59add23977615f9537405e25fa0ff984b8b9280be138d9f7812a1d1b3d423e9c29cf1b8d0032bb054a94e287ce55fb579d4687ab55a1706ed07acde1e80797992e2f1f391f478c53026c062c0bcd5bf91fbd9fc7024532e8153692d05145856d9c33ea2897c8974ba434ab4a5cedcd133d6c0d6ca80805cfdea90b938bea694f1e823cdc251e10e1185a079726e446a400d743957634fb2defa87b2a431556e2f471bdf7c9a885be0e11c4d19c4e29876b6e3ec92b3a649ec51ab69cd1ce09edfc45e56d36b401e6543315f124a8b6c3e98766dfc3f9a5c3d3c853301b7e389b73caa74c694f289ac7e6740b544934388d3cd3b7ea636c277660cf21cf69e870267",
   "shortEpisode": {
     "id": "ep-short-star-compass",
     "title": "لغز الكوكب البلوري في مرصد الفضاء",
@@ -84,7 +84,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T14:11:43.981Z"
+          "checkedAtIso": "2026-09-29T14:22:40.373Z"
         }
       },
       {
@@ -122,7 +122,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T14:11:43.984Z"
+          "checkedAtIso": "2026-09-29T14:22:40.377Z"
         }
       },
       {
@@ -157,7 +157,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T14:11:43.986Z"
+          "checkedAtIso": "2026-09-29T14:22:40.378Z"
         }
       },
       {
@@ -193,7 +193,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T14:11:43.988Z"
+          "checkedAtIso": "2026-09-29T14:22:40.380Z"
         }
       }
     ],
@@ -286,7 +286,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T14:11:43.940Z"
+          "checkedAtIso": "2026-09-29T14:22:40.337Z"
         }
       },
       {
@@ -329,7 +329,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T14:11:43.944Z"
+          "checkedAtIso": "2026-09-29T14:22:40.342Z"
         }
       },
       {
@@ -373,7 +373,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T14:11:43.949Z"
+          "checkedAtIso": "2026-09-29T14:22:40.347Z"
         }
       },
       {
@@ -414,7 +414,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T14:11:43.953Z"
+          "checkedAtIso": "2026-09-29T14:22:40.351Z"
         }
       },
       {
@@ -451,7 +451,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T14:11:43.959Z"
+          "checkedAtIso": "2026-09-29T14:22:40.356Z"
         }
       },
       {
@@ -490,7 +490,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T14:11:43.965Z"
+          "checkedAtIso": "2026-09-29T14:22:40.360Z"
         }
       },
       {
@@ -532,7 +532,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T14:11:43.972Z"
+          "checkedAtIso": "2026-09-29T14:22:40.365Z"
         }
       },
       {
@@ -574,7 +574,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T14:11:43.979Z"
+          "checkedAtIso": "2026-09-29T14:22:40.371Z"
         }
       }
     ],
