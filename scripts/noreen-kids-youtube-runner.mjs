@@ -367,7 +367,7 @@ function ensureWavBuffer(rawBuffer) {
   return Buffer.concat([header, rawBuffer]);
 }
 
-function splitArabicTextForGeminiLive(text, maxChars = 195) {
+function splitArabicTextForGeminiLive(text, maxChars = 340) {
   const cleaned = String(text || "").replace(/\s+/g, " ").trim();
   if (!cleaned) return [];
   if (cleaned.length <= maxChars) return [cleaned];
@@ -379,7 +379,20 @@ function splitArabicTextForGeminiLive(text, maxChars = 195) {
       current = (current + " " + s).trim();
     } else {
       if (current) parts.push(current);
-      current = s;
+      if (s.length <= maxChars) {
+        current = s;
+      } else {
+        const words = s.split(" ");
+        current = "";
+        for (const w of words) {
+          if ((current + " " + w).trim().length <= maxChars) {
+            current = (current + " " + w).trim();
+          } else {
+            if (current) parts.push(current);
+            current = w;
+          }
+        }
+      }
     }
   }
   if (current) parts.push(current);
@@ -974,7 +987,7 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
       const liveModels = ["gemini-3.8-live", "gemini-2.5-flash-native-audio-preview-12-2025"];
 
       for (const liveModel of liveModels) {
-        const segments = splitArabicTextForGeminiLive(dialogue, 195);
+        const segments = splitArabicTextForGeminiLive(dialogue, 340);
         const pcmParts = [];
         const pauseBuf = Buffer.alloc(8640, 0);
         let allSegmentsOk = segments.length > 0;
@@ -1339,11 +1352,21 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
   } else if (totalDur > maxTotalSec) {
     let excess = totalDur - maxTotalSec;
     for (let i = preparedScenes.length - 1; i >= 0 && excess > 0; i--) {
-      const minAllowed = Math.ceil(preparedScenes[i].voiceDurSec + 0.8);
+      const minAllowed = Math.ceil(preparedScenes[i].voiceDurSec + 1.1);
       const reducible = Math.max(0, preparedScenes[i].durationSec - minAllowed);
       const cut = Math.min(excess, reducible);
       preparedScenes[i].durationSec -= cut;
       excess -= cut;
+    }
+    let currentSum = preparedScenes.reduce((acc, s) => acc + s.durationSec, 0);
+    let cursor = 0;
+    while (isShort && currentSum > 79 && cursor < 40) {
+      const idx = cursor % preparedScenes.length;
+      if (preparedScenes[idx].durationSec > 15) {
+        preparedScenes[idx].durationSec -= 1;
+        currentSum -= 1;
+      }
+      cursor++;
     }
   }
 
@@ -1400,6 +1423,13 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       }" | Voice=${item.voiceDurSec.toFixed(1)}s | Scene=${dur}s (YouTube Fast-Processing Closed-GOP H.264 + Continuous PCM)...`
     );
 
+    const maxAllowedSpeech = Math.max(4, dur - 1.1);
+    const gentleTempo =
+      item.voiceDurSec > maxAllowedSpeech
+        ? Math.min(1.22, Math.max(1.01, Number((item.voiceDurSec / maxAllowedSpeech).toFixed(3))))
+        : 1.0;
+    const tempoChain = gentleTempo > 1.005 ? `,atempo=${gentleTempo}` : "";
+
     const mixedWav = path.join(tmpDir, `scene_mixed_${i}.wav`);
     await execFileAsync("ffmpeg", [
       "-y",
@@ -1410,7 +1440,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       "-i",
       `aevalsrc='0.036*sin(2*PI*(261.63+68*mod(floor(t*0.85),3))*t)*exp(-1.4*mod(t*0.85,1))+0.028*sin(2*PI*(880+220*mod(floor(t*1.8),3))*t)*exp(-5.5*mod(t*0.30,1))':s=48000:c=stereo:d=${dur}`,
       "-filter_complex",
-      `[0:a]aresample=48000,pan=stereo|c0=c0|c1=c0,volume=2.15,adelay=220|220,apad=whole_dur=${dur}[voice];[1:a]volume=0.50,afade=t=in:st=0:d=0.5,afade=t=out:st=${Math.max(
+      `[0:a]aresample=48000${tempoChain},pan=stereo|c0=c0|c1=c0,volume=2.15,adelay=220|220,apad=whole_dur=${dur}[voice];[1:a]volume=0.50,afade=t=in:st=0:d=0.5,afade=t=out:st=${Math.max(
         0.5,
         dur - 0.9
       )}:d=0.7[bgm];[voice][bgm]amix=inputs=2:duration=first:weights='1.0 0.22':normalize=0,alimiter=limit=0.96,asetpts=PTS-STARTPTS[outa]`,
