@@ -269,19 +269,34 @@ function validateAndAutoFixEgyptianDialect(rawText, sceneIndex = 0, totalScenes 
 }
 
 const CHAR_AVATAR_MAP = [
+  { keywords: ["أم ملك", "ام ملك", "المعلمة"], relPath: "src/assets/images/char_om_malak_teacher_1790685841625.jpg" },
+  { keywords: ["البطريق", "بطريق"], relPath: "src/assets/images/char_funny_penguin_1790685854532.jpg" },
+  { keywords: ["ملك", "طبيبة طوارئ", "دكتورة ملك"], relPath: "src/assets/images/char_malak_emergency_doctor_1790685772412.jpg" },
+  { keywords: ["لوليتا", "القطة", "قطة"], relPath: "src/assets/images/char_lolita_cat_1790685786758.jpg" },
+  { keywords: ["سدرة الصغنونة", "سدرة الصغيرة"], relPath: "src/assets/images/char_baby_sidra_toddler_1790685815760.jpg" },
+  { keywords: ["الفراشة", "فراشة"], relPath: "src/assets/images/char_colorful_butterfly_1790685827095.jpg" },
+  { keywords: ["ذياد", "زياد"], relPath: "src/assets/images/char_ziad_young_man_1790685879815.jpg" },
+  { keywords: ["العصفورة", "عصفورة"], relPath: "src/assets/images/char_cheerful_bird_1790685899352.jpg" },
+  { keywords: ["شريف", "أستاذ شريف", "محاسب"], relPath: "src/assets/images/char_mr_sherif_accountant_1790685911579.jpg" },
+  { keywords: ["الصقر", "صقر"], relPath: "src/assets/images/char_smart_falcon_1790685922310.jpg" },
+  { keywords: ["جدو", "الجد"], relPath: "src/assets/images/char_gedo_grandpa_1790685953317.jpg" },
+  { keywords: ["الفأر", "فأر", "فار", "مشاكس"], relPath: "src/assets/images/char_mischievous_mouse_1790685967206.jpg" },
+  { keywords: ["تيتة", "تيته", "الجدة"], relPath: "src/assets/images/char_teta_grandma_1790685980597.jpg" },
+  { keywords: ["باندا", "الدب باندا"], relPath: "src/assets/images/char_panda_bear_1790685992445.jpg" },
   { keywords: ["نورين", "الطبيبة", "دكتورة"], relPath: "src/assets/images/char_dr_noreen_girl_1790461976876.jpg" },
   { keywords: ["أرنوب", "ارنوب", "أرنب", "الممرض"], relPath: "src/assets/images/char_arnoob_nurse_rabbit_1790462042886.jpg" },
-  { keywords: ["سدرة", "المهندسة"], relPath: "src/assets/images/char_eng_sidra_girl_1790461988894.jpg" },
-  { keywords: ["النمر", "فرفوش", "نمور", "بومبو", "القط"], relPath: "src/assets/images/char_namoor_cheerful_tiger_1790462054821.jpg" },
-  { keywords: ["ياسين", "فارس الواحة", "الواحة"], relPath: "src/assets/images/char_yassin_boy_knight_1790462110000.jpg" },
+  { keywords: ["نوران", "المهندسة"], relPath: "src/assets/images/char_eng_sidra_girl_1790461988894.jpg" },
+  { keywords: ["سدرة"], relPath: "src/assets/images/char_baby_sidra_toddler_1790685815760.jpg" },
+  { keywords: ["النمر", "فرفوش", "نمور", "بومبو"], relPath: "src/assets/images/char_namoor_cheerful_tiger_1790462054821.jpg" },
+  { keywords: ["تامر", "ياسين", "فارس الواحة", "الواحة"], relPath: "src/assets/images/char_yassin_boy_knight_1790462110000.jpg" },
   { keywords: ["كركور", "الببغاء", "ببغاء"], relPath: "src/assets/images/char_karkour_wise_parrot_1790462097550.jpg" },
-  { keywords: ["فارس المستكشف", "فارس", "المستكشف"], relPath: "src/assets/images/char_faris_astronaut_1790446843914.jpg" },
-  { keywords: ["زعتر", "الثعلب", "فلفول", "الدب"], relPath: "src/assets/images/char_zaatar_fox_1790446857963.jpg" },
-  { keywords: ["نور رائدة", "نور"], relPath: "src/assets/images/char_noor_girl_astronaut_1790462000705.jpg" },
+  { keywords: ["عمرو", "فارس المستكشف", "فارس", "المستكشف"], relPath: "src/assets/images/char_faris_astronaut_1790446843914.jpg" },
+  { keywords: ["زعتر", "الثعلب", "فلفول"], relPath: "src/assets/images/char_zaatar_fox_1790446857963.jpg" },
+  { keywords: ["جنى", "نور رائدة", "نور"], relPath: "src/assets/images/char_noor_girl_astronaut_1790462000705.jpg" },
   { keywords: ["بلبل", "الروبوت"], relPath: "src/assets/images/char_bulbul_cute_robot_1790462065051.jpg" },
-  { keywords: ["كريم", "القبطان", "كابتن"], relPath: "src/assets/images/char_karim_boy_captain_1790462024983.jpg" },
+  { keywords: ["شوشو", "كريم", "القبطان", "كابتن"], relPath: "src/assets/images/char_karim_boy_captain_1790462024983.jpg" },
   { keywords: ["مرجان", "الدلفين"], relPath: "src/assets/images/char_marjan_playful_dolphin_1790462076093.jpg" },
-  { keywords: ["سلمى", "المخترعة"], relPath: "src/assets/images/char_salma_girl_inventor_1790462010894.jpg" },
+  { keywords: ["كارمن", "سلمى", "المخترعة"], relPath: "src/assets/images/char_salma_girl_inventor_1790462010894.jpg" },
   { keywords: ["سمسم", "السنجاب"], relPath: "src/assets/images/char_simsim_flying_squirrel_1790462087579.jpg" },
 ];
 
@@ -301,7 +316,7 @@ function resolveCharacterAvatarPath(speakerName, fallbackName = "الطبيبة 
   return (
     findMatch(speakerName) ||
     findMatch(fallbackName) ||
-    path.resolve(process.cwd(), CHAR_AVATAR_MAP[0].relPath)
+    path.resolve(process.cwd(), "src/assets/images/char_dr_noreen_girl_1790461976876.jpg")
   );
 }
 
@@ -371,16 +386,85 @@ function splitArabicTextForGeminiLive(text, maxChars = 195) {
   return parts;
 }
 
-function resolveGeminiVoiceForSpeaker(speakerName = "", isFemale = true) {
+function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
   const s = String(speakerName || "");
-  if (s.includes("نورين") || s.includes("طبيبة") || s.includes("دكتورة")) return "Zephyr";
-  if (s.includes("سدرة") || s.includes("مهندسة")) return "Kore";
-  if (s.includes("سلمى") || s.includes("مخترعة")) return "Kore";
-  if (s.includes("نور")) return "Zephyr";
-  if (s.includes("فرفوش") || s.includes("النمر") || s.includes("بلبل") || s.includes("ياسين")) return "Fenrir";
-  if (s.includes("كريم") || s.includes("كركور")) return "Charon";
-  if (s.includes("أرنوب") || s.includes("فارس") || s.includes("زعتر") || s.includes("مرجان") || s.includes("سمسم")) return "Puck";
-  return isFemale ? "Zephyr" : "Puck";
+  if (s.includes("أم ملك") || s.includes("ام ملك") || s.includes("المعلمة")) {
+    return { isFemale: true, geminiVoice: "Kore", pitch: "-4Hz", rate: "-3%" };
+  }
+  if (s.includes("تيتة") || s.includes("تيته") || s.includes("الجدة")) {
+    return { isFemale: true, geminiVoice: "Kore", pitch: "-7Hz", rate: "-6%" };
+  }
+  if (s.includes("ملك") || s.includes("طوارئ")) {
+    return { isFemale: true, geminiVoice: "Kore", pitch: "+0Hz", rate: "+1%" };
+  }
+  if (s.includes("سدرة الصغنونة") || (s.includes("سدرة") && !s.includes("المهندسة"))) {
+    return { isFemale: true, geminiVoice: "Zephyr", pitch: "+16Hz", rate: "+5%" };
+  }
+  if (s.includes("لوليتا") || s.includes("القطة")) {
+    return { isFemale: true, geminiVoice: "Zephyr", pitch: "+11Hz", rate: "+4%" };
+  }
+  if (s.includes("الفراشة")) {
+    return { isFemale: true, geminiVoice: "Kore", pitch: "+9Hz", rate: "+2%" };
+  }
+  if (s.includes("العصفورة")) {
+    return { isFemale: true, geminiVoice: "Zephyr", pitch: "+13Hz", rate: "+5%" };
+  }
+  if (s.includes("نورين") || s.includes("طبيبة") || s.includes("دكتورة")) {
+    return { isFemale: true, geminiVoice: "Zephyr", pitch: "+4Hz", rate: "+0%" };
+  }
+  if (s.includes("نوران") || s.includes("مهندسة")) {
+    return { isFemale: true, geminiVoice: "Kore", pitch: "+2Hz", rate: "+2%" };
+  }
+  if (s.includes("كارمن") || s.includes("سلمى") || s.includes("مخترعة")) {
+    return { isFemale: true, geminiVoice: "Kore", pitch: "+8Hz", rate: "+3%" };
+  }
+  if (s.includes("جنى") || s.includes("نور")) {
+    return { isFemale: true, geminiVoice: "Zephyr", pitch: "+6Hz", rate: "-1%" };
+  }
+  if (s.includes("جدو") || s.includes("الجد")) {
+    return { isFemale: false, geminiVoice: "Charon", pitch: "-7Hz", rate: "-6%" };
+  }
+  if (s.includes("شريف") || s.includes("محاسب")) {
+    return { isFemale: false, geminiVoice: "Charon", pitch: "-4Hz", rate: "-1%" };
+  }
+  if (s.includes("ذياد") || s.includes("زياد")) {
+    return { isFemale: false, geminiVoice: "Fenrir", pitch: "-1Hz", rate: "+1%" };
+  }
+  if (s.includes("الصقر")) {
+    return { isFemale: false, geminiVoice: "Fenrir", pitch: "-6Hz", rate: "+0%" };
+  }
+  if (s.includes("البطريق")) {
+    return { isFemale: false, geminiVoice: "Puck", pitch: "+10Hz", rate: "+4%" };
+  }
+  if (s.includes("الفأر") || s.includes("فأر") || s.includes("مشاكس")) {
+    return { isFemale: false, geminiVoice: "Puck", pitch: "+15Hz", rate: "+6%" };
+  }
+  if (s.includes("باندا")) {
+    return { isFemale: false, geminiVoice: "Fenrir", pitch: "-3Hz", rate: "-2%" };
+  }
+  if (s.includes("فرفوش") || s.includes("النمر") || s.includes("بلبل") || s.includes("تامر") || s.includes("ياسين")) {
+    return { isFemale: false, geminiVoice: "Fenrir", pitch: "+2Hz", rate: "+1%" };
+  }
+  if (s.includes("شوشو") || s.includes("كريم") || s.includes("كركور")) {
+    return { isFemale: false, geminiVoice: "Charon", pitch: "+1Hz", rate: "+1%" };
+  }
+  if (s.includes("أرنوب") || s.includes("مرجان") || s.includes("سمسم")) {
+    return { isFemale: true, geminiVoice: "Puck", pitch: "+12Hz", rate: "+4%" };
+  }
+  if (s.includes("عمرو") || s.includes("فارس") || s.includes("زعتر")) {
+    return { isFemale: false, geminiVoice: "Puck", pitch: "+6Hz", rate: "+3%" };
+  }
+  const fallbackFemale = sceneIndex % 2 === 0;
+  return {
+    isFemale: fallbackFemale,
+    geminiVoice: fallbackFemale ? "Zephyr" : "Puck",
+    pitch: fallbackFemale ? "+4Hz" : "+3Hz",
+    rate: "+2%",
+  };
+}
+
+function resolveGeminiVoiceForSpeaker(speakerName = "", isFemale = true) {
+  return resolveRunnerVoiceProfileForSpeaker(speakerName, isFemale ? 0 : 1).geminiVoice;
 }
 
 async function synthesizeChunkViaGeminiLiveRunner(ai, liveModel, chunkText, voiceName, isEgyptian) {
@@ -467,8 +551,9 @@ async function synthesizeChunkViaGeminiLiveRunner(ai, liveModel, chunkText, voic
 
 async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, dialect = "egyptian") {
   const speaker = String(scene.speakerName || "");
-  const isFemale = /نورين|سدرة|نور|سلمى|طبيبة|مهندسة|مخترعة/.test(speaker) || sceneIndex % 2 === 0;
-  const geminiVoice = resolveGeminiVoiceForSpeaker(speaker, isFemale);
+  const vp = resolveRunnerVoiceProfileForSpeaker(speaker, sceneIndex);
+  const isFemale = vp.isFemale;
+  const geminiVoice = vp.geminiVoice;
   const edgeVoice =
     dialect === "fusha"
       ? isFemale
@@ -586,8 +671,8 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
       const tts = new MsEdgeTTS();
       await tts.setMetadata(edgeVoice, OUTPUT_FORMAT.AUDIO_24KHZ_96KBITRATE_MONO_MP3);
       const { audioStream } = tts.toStream(dialogue, {
-        rate: "+2%",
-        pitch: isFemale ? "+5Hz" : "+3Hz",
+        rate: vp.rate || "+2%",
+        pitch: vp.pitch || (isFemale ? "+5Hz" : "+3Hz"),
       });
       const chunks = [];
       await new Promise((resolve, reject) => {
@@ -751,20 +836,34 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     .trim();
 
   let matchedDuo = null;
-  if (/سنان|أسنان|الابتسامة|السوسة|عيادة|إسعاف|طبيبة|دكتورة|نورين|أرنوب|غسيل الإيدين|غسل اليدين|فواكه/.test(rawTopicText)) {
+  if (/أم ملك|ام ملك|المعلمة|البطريق المرح/.test(rawTopicText)) {
+    matchedDuo = { hero: "أم ملك", comp: "البطريق المرح" };
+  } else if (/ملك|لوليتا|طوارئ|القطة لوليتا/.test(rawTopicText)) {
+    matchedDuo = { hero: "ملك", comp: "القطة لوليتا" };
+  } else if (/سدرة الصغنونة|الفراشة الملونة|حديقة الألوان/.test(rawTopicText)) {
+    matchedDuo = { hero: "سدرة الصغنونة", comp: "الفراشة الملونة" };
+  } else if (/ذياد|العصفورة الفرفوشة/.test(rawTopicText)) {
+    matchedDuo = { hero: "ذياد", comp: "العصفورة الفرفوشة" };
+  } else if (/شريف|الصقر الذكي|الأرقام الذهبية|محاسب/.test(rawTopicText)) {
+    matchedDuo = { hero: "أستاذ شريف", comp: "الصقر الذكي" };
+  } else if (/جدو|الفأر المشاكس/.test(rawTopicText)) {
+    matchedDuo = { hero: "جدو", comp: "الفأر المشاكس" };
+  } else if (/تيتة|الدب باندا|باندا/.test(rawTopicText)) {
+    matchedDuo = { hero: "تيتة", comp: "الدب باندا" };
+  } else if (/سنان|أسنان|الابتسامة|السوسة|عيادة|إسعاف|طبيبة|دكتورة|نورين|أرنوب|غسيل الإيدين|غسل اليدين|فواكه/.test(rawTopicText)) {
     matchedDuo = { hero: "الطبيبة نورين", comp: "أرنوب الشقي الممرض" };
-  } else if (/المهندسة|سدرة|فرفوش|هندسة|جسر|مصعد|منارة|طاحونة/.test(rawTopicText)) {
-    matchedDuo = { hero: "المهندسة سدرة", comp: "النمر الفرفوش" };
-  } else if (/الغواصة|الحوت|مملكة المرجان|اللؤلؤة|المحيط|كريم|مرجان|شاطئ المرجان/.test(rawTopicText)) {
-    matchedDuo = { hero: "كريم القبطان الصغير", comp: "مرجان الدلفين المرح" };
-  } else if (/الكوكب|حلقات زحل|المسبار|التلسكوب|الفضاء|نور رائدة|بلبل/.test(rawTopicText)) {
-    matchedDuo = { hero: "نور رائدة الفضاء", comp: "بلبل الروبوت اللطيف" };
-  } else if (/سلمى|سمسم|جناح الرياح|جناح الهوا|تدوير المخلفات|المناطيد الشمسية|اختراع/.test(rawTopicText)) {
-    matchedDuo = { hero: "سلمى المخترعة الصغيرة", comp: "سمسم السنجاب الطائر" };
-  } else if (/ياسين|كركور|الساعة الرملية|القلعة البلورية|واحة الكريستال/.test(rawTopicText)) {
-    matchedDuo = { hero: "ياسين فارس الواحة", comp: "كركور الببغاء الحكيم" };
-  } else if (/فارس المستكشف|زعتر|شجرة الأمانة|البذرة العجيبة|غزالة الوادي/.test(rawTopicText)) {
-    matchedDuo = { hero: "فارس المستكشف", comp: "زعتر الثعلب الذكي" };
+  } else if (/المهندسة|نوران|فرفوش|هندسة|جسر|مصعد|منارة|طاحونة/.test(rawTopicText)) {
+    matchedDuo = { hero: "المهندسة نوران", comp: "النمر الفرفوش" };
+  } else if (/الغواصة|الحوت|مملكة المرجان|اللؤلؤة|المحيط|شوشو|كريم|مرجان|شاطئ المرجان/.test(rawTopicText)) {
+    matchedDuo = { hero: "شوشو القبطان الصغير", comp: "مرجان الدلفين المرح" };
+  } else if (/الكوكب|حلقات زحل|المسبار|التلسكوب|الفضاء|جنى|نور رائدة|بلبل/.test(rawTopicText)) {
+    matchedDuo = { hero: "جنى رائدة الفضاء", comp: "بلبل الروبوت اللطيف" };
+  } else if (/كارمن|سلمى|سمسم|جناح الرياح|جناح الهوا|تدوير المخلفات|المناطيد الشمسية|اختراع/.test(rawTopicText)) {
+    matchedDuo = { hero: "كارمن المخترعة الصغيرة", comp: "سمسم السنجاب الطائر" };
+  } else if (/تامر|ياسين|كركور|الساعة الرملية|القلعة البلورية|واحة الكريستال/.test(rawTopicText)) {
+    matchedDuo = { hero: "تامر فارس الواحة", comp: "كركور الببغاء الحكيم" };
+  } else if (/عمرو|فارس المستكشف|زعتر|شجرة الأمانة|البذرة العجيبة|غزالة الوادي/.test(rawTopicText)) {
+    matchedDuo = { hero: "عمرو المستكشف", comp: "زعتر الثعلب الذكي" };
   }
 
   const heroName = matchedDuo?.hero || scenes[0]?.speakerName || "الطبيبة نورين";
@@ -1799,16 +1898,16 @@ async function main() {
       ],
     },
     {
-      title: "Noreen Kids: إصلاح جسر الغيوم المتحرك | مغامرات المهندسة سدرة والنمر الفرفوش",
-      mainCharacterName: "المهندسة سدرة",
+      title: "Noreen Kids: إصلاح جسر الغيوم المتحرك | مغامرات المهندسة نوران والنمر الفرفوش",
+      mainCharacterName: "المهندسة نوران",
       companionName: "النمر الفرفوش",
       moralLesson: "التفكير الهندسي المنظم والصبر في حل المشكلات",
       summary:
-        "رحلة هندسية مشوقة تواجه فيها المهندسة سدرة والنمر الفرفوش مشكلة توقف جسر الغيوم ويبتكران الحل بالعلم والتعاون.",
+        "رحلة هندسية مشوقة تواجه فيها المهندسة نوران والنمر الفرفوش مشكلة توقف جسر الغيوم ويبتكران الحل بالعلم والتعاون.",
       scenes: [
         {
           id: "s1",
-          speakerName: "المهندسة سدرة",
+          speakerName: "المهندسة نوران",
           durationSec: 17,
           dialogueArabic:
             "ازيكم يا أصحابي الحلوين في قناة نورين كيدز! النهارده أنا والنمر الفرفوش معانا التابلت الهندسي الهولوغرامي علشان نتابع جسر الغيوم الذكي!",
@@ -1818,11 +1917,11 @@ async function main() {
           speakerName: "النمر الفرفوش",
           durationSec: 17,
           dialogueArabic:
-            "بصي يا سدرة! فيه مشكلة حصلت فجأة، التروس الدهبية بتاعة الجسر وقفت والقطار الطاير مش عارف يعدي الناحية التانية!",
+            "بصي يا مهندسة نوران! فيه مشكلة حصلت فجأة، التروس الدهبية بتاعة الجسر وقفت والقطار الطاير مش عارف يعدي الناحية التانية!",
         },
         {
           id: "s3",
-          speakerName: "المهندسة سدرة",
+          speakerName: "المهندسة نوران",
           durationSec: 17,
           dialogueArabic:
             "فكرت صح يا نمور! يلا نستخدم مفتاح التروس الذهبي ونرتب القطع حسب حجمها بالظبط علشان الطاقة ترجع تمشي في الجسر كله!",
@@ -1837,16 +1936,16 @@ async function main() {
       ],
     },
     {
-      title: "Noreen Kids: إنقاذ الدلفين الصغير في مملكة المرجان | مغامرات القبطان كريم ومرجان",
-      mainCharacterName: "كريم القبطان الصغير",
+      title: "Noreen Kids: إنقاذ الدلفين الصغير في مملكة المرجان | مغامرات شوشو القبطان الصغير ومرجان",
+      mainCharacterName: "شوشو القبطان الصغير",
       companionName: "مرجان الدلفين المرح",
       moralLesson: "حماية الكائنات البحرية والتعاون الذكي وقت الأزمات",
       summary:
-        "مغامرة بحرية متكاملة يقود فيها القبطان كريم والدلفين مرجان الغواصة الذهبية لتحرير الممر المرجاني بالتفكير العلمي.",
+        "مغامرة بحرية متكاملة يقود فيها شوشو القبطان الصغير والدلفين مرجان الغواصة الذهبية لتحرير الممر المرجاني بالتفكير العلمي.",
       scenes: [
         {
           id: "s1",
-          speakerName: "كريم القبطان الصغير",
+          speakerName: "شوشو القبطان الصغير",
           durationSec: 17,
           dialogueArabic:
             "ازيكم يا أصحابي الحلوين في قناة نورين كيدز! إحنا النهارده في الغواصة الذهبية بنستكشف أعماق مملكة المرجان مع صاحبي الدلفين مرجان!",
@@ -1856,11 +1955,11 @@ async function main() {
           speakerName: "مرجان الدلفين المرح",
           durationSec: 17,
           dialogueArabic:
-            "يا خبر يا كابتن كريم! فيه صخرة بلورية سدت ممر المرجان والسمك الصغير مش عارف يرجع لبيته قبل الليل!",
+            "يا خبر يا شوشو! فيه صخرة بلورية سدت ممر المرجان والسمك الصغير مش عارف يرجع لبيته قبل الليل!",
         },
         {
           id: "s3",
-          speakerName: "كريم القبطان الصغير",
+          speakerName: "شوشو القبطان الصغير",
           durationSec: 17,
           dialogueArabic:
             "يلا نتصرف بذكاء يا مرجان! هنشغل فقاعات الدفع المائي من الغواصة ومن طوق اللؤلؤ المنور في نفس اللحظة علشان نحرك الصخرة بهدوء!",
@@ -1878,8 +1977,8 @@ async function main() {
 
   const DAILY_LONG_STORIES = [
     {
-      title: "Noreen Kids: سر المختبر الطائر وبلورة الطاقة النظيفة | مغامرات المهندسة سدرة والنمر الفرفوش",
-      mainCharacterName: "المهندسة سدرة",
+      title: "Noreen Kids: سر المختبر الطائر وبلورة الطاقة النظيفة | مغامرات المهندسة نوران والنمر الفرفوش",
+      mainCharacterName: "المهندسة نوران",
       companionName: "النمر الفرفوش",
       moralLesson: "العلم والصبر والعمل الجماعي يحولون أي عقبة لنجاح كبير",
       summary:
@@ -1887,7 +1986,7 @@ async function main() {
       scenes: [
         {
           id: "l_1",
-          speakerName: "المهندسة سدرة",
+          speakerName: "المهندسة نوران",
           durationSec: 39,
           dialogueArabic:
             "ازيكم يا أصحابي الحلوين في قناة نورين كيدز! عاملين إيه النهارده؟ بص كده معانا يا نمور، إحنا النهارده في بداية رحلة كبيرة جوه المختبر الطائر فوق السحاب، ومعانا التابلت الهندسي الهولوغرامي علشان نطمن على بلورة الطاقة النظيفة اللي بتنور مدينة المستقبل كلها من غير أي دخان خالص! يلا بينا نقرب خطوة بخطوة ونفتح عينينا كويس علشان نشوف إزاي المحطة بتشتغل!",
@@ -1897,11 +1996,11 @@ async function main() {
           speakerName: "النمر الفرفوش",
           durationSec: 39,
           dialogueArabic:
-            "يا خبر يا سدرة! أنا فتحت حقيبة التروس الذكية وبصيت على عدادات الطاقة، ولاحظت تطور عجيب بيحصل دلوقتي! النور الأزرق الجميل بتاع البلورة بدأ يضعف شوية بشوية، والمراوح الهوائية اللي فوق المختبر سرعتها بتقل! تفتكروا يا أصحابي الحلوين إيه اللي بيحصل جوه غرفة التحكم؟ يلا نركز سوا ونفحص المسارات!",
+            "يا خبر يا مهندسة نوران! أنا فتحت حقيبة التروس الذكية وبصيت على عدادات الطاقة، ولاحظت تطور عجيب بيحصل دلوقتي! النور الأزرق الجميل بتاع البلورة بدأ يضعف شوية بشوية، والمراوح الهوائية اللي فوق المختبر سرعتها بتقل! تفتكروا يا أصحابي الحلوين إيه اللي بيحصل جوه غرفة التحكم؟ يلا نركز سوا ونفحص المسارات!",
         },
         {
           id: "l_3",
-          speakerName: "المهندسة سدرة",
+          speakerName: "المهندسة نوران",
           durationSec: 39,
           dialogueArabic:
             "بصوا كده يا أصحابي الحلوين! فجأة حصل الحدث اللي كنا بنفرز علاماته يا نمور! صفارة الإنذار اللطيفة رنت علشان السحابة الكثيفة غطت العدسات الشمسية اللي بتغذي البلورة! بس إحنا في قناة نورين كيدز عمرنا ما بنقلق ولا بنستسلم خالص مهما كان التحدي كبير، لأن التفكير العلمي الهادي بيخلينا نفهم كل حاجة!",
@@ -1911,11 +2010,11 @@ async function main() {
           speakerName: "النمر الفرفوش",
           durationSec: 39,
           dialogueArabic:
-            "أيوة يا سدرة! أنا قربت بمفتاح التروس الذهبي وعرفت المشكلة فين بالظبط! العدسات البلورية محتاجة تتنضف من بخار السحاب، وكمان محتاجين نعدل زاويتها علشان تلقط نور الشمس من فوق الغيوم! شفتوا يا أصحابنا إزاي لما بندور على سبب المشكلة بهدوء بنعرف نوصل للحل بسرعة؟ يلا نبدأ التصرف العملي حالاً!",
+            "أيوة يا مهندسة نوران! أنا قربت بمفتاح التروس الذهبي وعرفت المشكلة فين بالظبط! العدسات البلورية محتاجة تتنضف من بخار السحاب، وكمان محتاجين نعدل زاويتها علشان تلقط نور الشمس من فوق الغيوم! شفتوا يا أصحابنا إزاي لما بندور على سبب المشكلة بهدوء بنعرف نوصل للحل بسرعة؟ يلا نبدأ التصرف العملي حالاً!",
         },
         {
           id: "l_5",
-          speakerName: "المهندسة سدرة",
+          speakerName: "المهندسة نوران",
           durationSec: 39,
           dialogueArabic:
             "يلا بينا يا نمور نبدأ التصرف الصح دلوقتي! أنا هبرمج ذراع التوجيه في التابلت الهندسي علشان يرفع العدسات لفوق، وإنت ساعدني بربط التروس الدهبية في نفس اللحظة! شفتوا يا أصحابنا الحلوين إزاي لما اتعاونا وجربنا بصبر وهدوء بدأت العدسات تلمع وتجمع أشعة الشمس الذهبية من تاني؟",
@@ -1925,11 +2024,11 @@ async function main() {
           speakerName: "النمر الفرفوش",
           durationSec: 39,
           dialogueArabic:
-            "هيييه! الحل نجح مية في المية يا سدرة! بصوا يا كل أصحابنا الشطار في قناة نورين كيدز! أول ما العدسات اتظبطت، انطلق شعاع النور الصافي ورجعت بلورة الطاقة النظيفة تشتغل بأقصى قوة، والمختبر الطائر كله بقى منور ومليان بهجة وسعادة بفضل التعاون والتفكير العلمي السليم!",
+            "هيييه! الحل نجح مية في المية يا مهندسة نوران! بصوا يا كل أصحابنا الشطار في قناة نورين كيدز! أول ما العدسات اتظبطت، انطلق شعاع النور الصافي ورجعت بلورة الطاقة النظيفة تشتغل بأقصى قوة، والمختبر الطائر كله بقى منور ومليان بهجة وسعادة بفضل التعاون والتفكير العلمي السليم!",
         },
         {
           id: "l_7",
-          speakerName: "المهندسة سدرة",
+          speakerName: "المهندسة نوران",
           durationSec: 39,
           dialogueArabic:
             "بجد يا نمور دي كانت مغامرة جميلة أوي لا يمكن ننساها! بدأنا رحلتنا بملاحظة صغيرة، ولما واجهتنا المشكلة متخليناش عن بعض خالص، وفكرنا وتصرفنا بذكاء لحد ما وصلنا للحل النهائي! اتعلمنا النهارده سوا يا أصحابي إن العلم والصبر والعمل الجماعي بيحولوا أي عقبة صعبة لنجاح كبير يفرح كل القلوب!",
@@ -1939,7 +2038,7 @@ async function main() {
           speakerName: "النمر الفرفوش",
           durationSec: 39,
           dialogueArabic:
-            "ودلوقتي يا أصحابنا الحلوين في قناة نورين كيدز، وصلنا لنهاية حدوتة النهارده الجميلة بعد ما عشنا سوا البداية والمشكلة والحل السعيد! لو عجبتكم المغامرة مع المهندسة سدرة والنمر الفرفوش، ما تنسوش تشتركوا في قناة نورين كيدز وتفعلوا الجرس وتعملوا لايك علشان تستنونا كل يوم في مغامرة جديدة! مع السلامة يا أصحابي!",
+            "ودلوقتي يا أصحابنا الحلوين في قناة نورين كيدز، وصلنا لنهاية حدوتة النهارده الجميلة بعد ما عشنا سوا البداية والمشكلة والحل السعيد! لو عجبتكم المغامرة مع المهندسة نوران والنمر الفرفوش، ما تنسوش تشتركوا في قناة نورين كيدز وتفعلوا الجرس وتعملوا لايك علشان تستنونا كل يوم في مغامرة جديدة! مع السلامة يا أصحابي!",
         },
       ],
     },
