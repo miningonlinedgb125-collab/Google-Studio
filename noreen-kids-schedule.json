@@ -30,9 +30,9 @@
     "longCustomHashtags": [],
     "customFacebookPackages": {}
   },
-  "syncedAtIso": "2026-09-29T13:07:35.923Z",
-  "syncReason": "facebook_publisher_saved",
-  "encryptedVault": "cebb4945126784377aab6392a1b2e623:93d5976c28a605c5fd92d6e501ad3927b1064304e69df051a5585e14c6b0db987419df8af3491fcf841e8433faaefa0c421667ae1b5c3da393a9ac53d749fd3d2010acbf48381c871867b0171ada7d2e9a9916b278729882ea6ce6d8ef46bbe426cf411ddeaa5ed529518725dd23de5d2fcf240c64471ee520a7890f422ce0766d9ff6f1f9d65beaf85f9d4b707ac42dfc90819856b56c74bdc2e25f20ae10e2ac8ffe0dad9d4907df071b6be6b97f6c8dfc1d09a4cdc7aff1db34cde039338351fdbc0aed4dea86db7fbe35d2ae1cc02edb3260bce45077d35499a5f5be6069fdae99d694d5336aa9e5e7f70f70aea1ddd2b03a9a91e6d5bef322faa49b7f7ffdf2140a04296b8d8d9d531f428eb9067f9b0f36603b0c546aabd3d91d3ceb4f03e356a6621af9abd5303f00def8b4d6172b3e941a6ab0096f40b578ef0958f53e70d77a1228f38b5cf7156b59e54a7cb60aadbebc1c13da2079a8e2c5c3eacebceede8273cad89559b91695d07bd18dd3b892cc06c6f85293b09658aac776a21db7b5c0538a06a29fa7e37ef6f25747b382eb01fb6a888820bc061bd5f2e96c8f016b2775f55793c0f08a6b2e98805e1c6fa54abdf9402f78f631257188f26a606e27a20e2dc3143033d55484bf26992a68b67dc20a2287faf350620d8b64888f3b4c56e7a65c81f45cd7438dfd7f53eb7b3219f5e437dac8de7f047ccb7da8043854f1500dd922e2102e0765c4b303ef11a629ece1a0e240487e1aca2fe10f68eef821241f7aecbfb23cbeb6c35509796dc71683c1b79532df023c032018b0d5cb1b0c0c80195e5b9919f36fa254b4c9132682a236037b06a3f26beeeeb5e1123a7eef4099cc0974cb4305ed4c0eb174d467a5a5e8d3a3d9d746baee7dbe67558a023c31e3ddd64483c0000116a0a806938f7bf7010699105ecf112a3a03fff3e768b2ea6df934aa04c931cd29910fc6279bbe9234b263b5fd92b9ca702398",
+  "syncedAtIso": "2026-09-29T13:10:52.601Z",
+  "syncReason": "dashboard_state_updated",
+  "encryptedVault": "4bb1bb8146da9326a800fe8400557b3f:d81665db24a7d2fc016e873ad817d7081ecbb5e91139fa6531228ce51748b9570547c915763c4406010c13069fbf06e611b3506990f918516300939874a89b81fc2b7eabb5b77eb6c8f56c79e27b4501117a2cd94f9a995083ccefa57e0b7b0783ea458a5208fcc4cdf6fa668ea546a38db4a2c4bb854e68e7170c5bba2df9b8bc83e77c9a2edce71495d1cc83bc9ce63ba761781149847a1416910a24b739f7eecf03e6eec81a0323f63f5d0e59a6f5be41a5f18e3b500cb5bb4bfd70a128ae9cca55cfe971c0857de03a40caa00acc3c5ca1fcde871d0fe6c89a3cedd15c9c033deb77da91290b296c916645dffbf8f187209b69787693e4b689e1690ab7d0e4c06d3a54b1554d85b7a1e26b877a8fc783bc8cc58e7e32cfac77efe362b60d3baac97660e1cf9d23cd5bcb8094d2cebf2bd269b0a4081a05a89d2ca6a6ba2b57c031d249c6b90b3ac01f2a78d52d05ae7d287b40fba03ab76e65af6c87de32b5532804eed76dfcb5141d5baeaff749f0e03248d9da438630712c05d4feabd1ab29e4c86cc710c439bf933b84d1d75ca8362bbcd6d4c5e28faeeb9e1a6fcd718c6c77803ff607ec9a48a7368cf0ddf81f56d514cb5ded3498805598352447535c72be7ce280e5ea452910fb7db94b82d31f0890ca0111b2b00b10c1827da443a2102dd83d3937e5af58f2e842b738198706244276f242b146a7e1dfffc72ab09108e196547c74ba8287838cecce1b099994bc172dfcb3e0d06a8b7b195cd8e6569783fb04159da942511a8d281905e22874c995764de87e41760c13e914db28234e63e31aa6e6af59c42ace423244081e868e1485e88b284c4d7900f41c4050516649e1510da545271afcd359c7fe686ff4b3fd25436e22e028a84dc7704986003ec2510f3eff36d08d578b9f23565d8e8aaf4f98b60110f72bb4122b44306b41c1805a1fc4dc12721c0060cd9514d7d7ef902dfb3266214b8aaaef5df745d2",
   "shortEpisode": {
     "id": "ep-short-star-compass",
     "title": "لغز الكوكب البلوري في مرصد الفضاء",
@@ -81,7 +81,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T13:07:36.106Z"
+          "checkedAtIso": "2026-09-29T13:11:04.007Z"
         }
       },
       {
@@ -119,7 +119,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T13:07:36.110Z"
+          "checkedAtIso": "2026-09-29T13:11:04.012Z"
         }
       },
       {
@@ -154,7 +154,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T13:07:36.113Z"
+          "checkedAtIso": "2026-09-29T13:11:04.015Z"
         }
       },
       {
@@ -190,7 +190,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T13:07:36.118Z"
+          "checkedAtIso": "2026-09-29T13:11:04.021Z"
         }
       }
     ],
@@ -281,7 +281,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T13:07:36.024Z"
+          "checkedAtIso": "2026-09-29T13:11:03.918Z"
         }
       },
       {
@@ -324,7 +324,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T13:07:36.034Z"
+          "checkedAtIso": "2026-09-29T13:11:03.931Z"
         }
       },
       {
@@ -368,7 +368,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T13:07:36.046Z"
+          "checkedAtIso": "2026-09-29T13:11:03.943Z"
         }
       },
       {
@@ -409,7 +409,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T13:07:36.057Z"
+          "checkedAtIso": "2026-09-29T13:11:03.956Z"
         }
       },
       {
@@ -446,7 +446,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T13:07:36.067Z"
+          "checkedAtIso": "2026-09-29T13:11:03.966Z"
         }
       },
       {
@@ -485,7 +485,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T13:07:36.076Z"
+          "checkedAtIso": "2026-09-29T13:11:03.977Z"
         }
       },
       {
@@ -527,7 +527,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T13:07:36.088Z"
+          "checkedAtIso": "2026-09-29T13:11:03.989Z"
         }
       },
       {
@@ -569,7 +569,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-29T13:07:36.101Z"
+          "checkedAtIso": "2026-09-29T13:11:04.001Z"
         }
       }
     ],
