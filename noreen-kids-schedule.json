@@ -1,6 +1,6 @@
 {
   "channel": "Noreen Kids",
-  "dailyPublishTimeCairo": "18:00",
+  "dailyPublishTimeCairo": "19:00",
   "githubPublishTimeCairo": "17:00",
   "dailyDialect": "egyptian",
   "selectedWorkflowMode": "daily_schedule",
@@ -30,9 +30,9 @@
     "longCustomHashtags": [],
     "customFacebookPackages": {}
   },
-  "syncedAtIso": "2026-09-30T23:08:35.187Z",
+  "syncedAtIso": "2026-09-30T23:09:08.949Z",
   "syncReason": "dashboard_state_updated",
-  "encryptedVault": "09e19d5f61d55e0bebebb3dd292c8a16:6917fb44dae8a8ce924e124af0bba50fcf8a240ab48629dd9e7847cafcc2f7115511935ded85089581efc7a0af517d90bf374e2b4a6bdd5f804748eed00626ce5c3d25d6af6a7c1fc2ee024b11a45249d98831ad8efa639790a3162cf24f67365cc4ba2c7a4f8ca84c16bfa5f4182d71ca4493cac92b47292a595be821cd9f53107773d2d7332b314b0133751d87dca0c23cd54b168ac1eab4c7e6d324810258132145ddd479bc198ee26b04ce21ab919a5dda2c2b8ba6c693785ab87517fff36c51b2fc3cf4ff09f54f29098f113ea4770dbe8fabe7155eca209b69bd0aa67531fb6586d559297f1421f5f8c976fd418adce40752c6e541d415d31391c4cc2806de48212494c87deb047ac1bc749d5f548f1e2140046895c57d0aab2a99b9d0a0071ac104403916ca06191633106045ef6cd766a48078633b195b4ab205f4e3a859b1334abb062c0b32073e1134973d4cd65736877b87086f516b3041a82fd6076a29614c4c0f909c015ea25b869aa3313c16e4543ba65127dfcb95ccb02ce20f106dded923219abd2620136a5fa6bc5400e3dd9fb04dd91fc695bda08aeb5edfdb27e1ef2bb3e1d77752a4f4f85e8e5ef10049ecd690eb2c8cc6e5a7d7d87697474c3081ef6591c73680f16cbcd78c98e378d26644469de8aaff25a5a8426945cea3e9a399f324dcf85b970aedaaa62443230fadb045cc8f15b64c63c509bc43c5f7fcb31044031610318c58fb69a998af07c4d2272c7623ed6b5cfa4a087b19ba6d3c739ee2105c93ff6bb5a7a1f6a206023eee3f741d36ec8072ea0d615222dbca702cfaa517f7ff02516c51e84cf315d95511db7122874f4c95acfc1ce9041abec8c103c01b79456873f452ce98e752c4c51e27bbb221d688f981832fc09a5a2f79d8da7041281ff15beb743ba76985db2dee064172f236d3cdd4d6769412dc5d4a7c48600228a4a08a37278448f2ed4e7f5a82341f44d3b2d8e58e451188f19374cd9dda1d054bc616f72167388c9a9bfc89b045208541b3616273ba42f37890cdf758ae7d96e976eef2a7b78ec88df5ee15f480db3d234086c8cccd34b0a1652369380c544d9cf2cb3cd78a7e0b40358a4e280ce4857340a9ab2d814fd574cbd710fc4660e35e2a20325b95ef854b13083307fc026a9dbc1d2c9ebde304e81a410a04d4db0a76edf79c87965662d8710216df6318dbc53fa255f32d999afa9554ee4e97123f055e23157eed5de0ac8eb46e675b61d2308c4c7c95ebb39adf858e4620197e0a51c558fd5243ce2b2e0c0de2ef3c9f7792c2d56eb2a4c61e092d6061df3eeabe1de00b4ef41608bee35643c3def4f0237f7787aba92c095aecf332880ff908617e84be72f181fe119f20395c43ebb4f8eaed92ea6c379dc5b2dbabffed6ab69038b310df48732a765e23f51b6840b3c0e40127925a841623555acef527aa16b952da7fee8b982ca4a9583eef63f881112633604ead9f66a1ca731d962b5afe0528ad872b0cc3b84f2fb7c706c3dc92ff89f06cef9d06a6b661ac1df50d3018e1fd35c89c263aab7234d7d89e74beb6f48ea76e8dcece3f65c758893294e453b6da42f0cd48051826c9e87c03dc3e8759069e73715dc36505b66959bc8185192039c5c4ac751a27cfc7bfe0db3e83e2a4cce0627b74631331155e78d649e0a1041c90f78fb1af8f0dd14a748298beecb76df146f33b2f9b2afe0b94f2efd9096d98c94060f5651e4ded88fcb2d652e41175fc51b975c3eaa3d58a4ebfbaa0e5d74e4c0e6c8d0abdc12ba84f6077100e703056bb3cb56cdc11481a32853ddfce8fd0a43b4ba4ddde02835bfbb16d1007a89725231e94bae83194f29c896f944846b92315d265485add5d7a47bd4c62441313ff4330bff43fd4b811f5ff221c56fd2f1def4ced95798a5b253e142f6817500d7c41421e0d9cd5bca04297427648c991c9410c67862f0b6d743cd58cf2023e0afafdd0d753d18bce500d09df656f7ec9ccfd9d327d77",
+  "encryptedVault": "bd2e36aa7336343e3226e90a24ae6170:1966979119bc39941d3e5229eb49a7498f23c9dd9115f88a539e2687da04a2fdbac1156b97fab4237cb807077f69dc182fd1847272f5a6cf72479087f18104080599f67fe0e3d829eecbda9ceeda83f684f5f3c2998c1a53c4623b55376c1cbf7d8b7ef6e8531482d71087b2575cd1b5cd855615009f5dbf61fd863d5d01166e8e49e6e9a1a61cc144721af0207c3fa7d0b313f47fd0a80aa1341574fa6406c927b3567fd35b68041cdf8cb5ad3df75aaf79df4dedb093eb481d09a2ea348e6e2170561bbdc020cd0a67743028c5d9a6983d0ecc4d15b4627ab07620322a50868e0831d161c36ac7898be8af26e94e02853ae3f55476b58745e3eb4ac240715b4355f9b78f0f28ba3f235a8bea436f13ee0c7c1331f54d05f5e55d82419245fd0c2dae3c82d4f1edc43fcee5289db0c1dd0a08e45d2d081279b475bc7effba131272d63136a14b7e034c6af1c1bbf669c01c6f9326888945b3034b4d7e6b40991e940fa39edaeb64cf32546531b078f44b870f79ea163033067d6e5bec34b3b359a2cb4c6c3b4bda8543811b14ca5b2d908324ca8e1055572b69d094f4af231cc5651338a2a2037831a1a32632e4e95bc33215665f0ff31c8a38540e1e0163e3696161ff221842871c964bf1466cabad126fb5d1ba4cdbb07e03208d5e79f18c082deb517dccea15801552a2de4e6032600d3ffda0497354ad380a7f9dbfca0ffa9e1df1148d061a9fc487070868ba23d7aa13b44d0fad5ea02b83e8d4749aa000c492679352f8635a743ff73c4af7e044875936602fdb9efdd5e4d4abafbe128df962354bfaa7e549b3a14938b51e50d07e61ddde621c5371940d8c61ba1c4611f0b5dacd2048117e50e5193ba1ce724da3b1b0490b8fc1dce0f6a22716f6f2d5c47c1ccad508ac840daa2af1471e1e6595c22e4b92ae9acd69a7b8f73691034686e78cd52bafb040798aa6515451518d5b6fb59b7d0f20e7bc3773b0edbc4393ef316f44c67f49c4f134113c41b0d805e988fcf59759c7ed619338d0fb9a66c20fa9dd09c61e2e09d1952c93384fc756c82c181776195499ecb87917892ef02f8edbb96a0e6f92dc6e8d1019e33939dea8fabd6d22ba5cbe1e978eacc8e0bd8f3288dbc438d93fd87da15eadf0d5fc9b81f6ba786f6570d4bf261b9e65955a45c0e0737a2c4939d8d3f09db3c7cdb38a5b48978bfd1fff5078c6d96d9d6876a24cc3ee48e0a85c40d083cd0279292bec638a6cc0ad88854f80bcc8a1473c94fbf0fb8b4ce456e99e39d511301f8c10215ebc07251322f6856e6b1a856491841a27e06a69a88c98c7f464d610e1251c12fae8c427bf604cfaf596b7d4d1f73253fe3a448b6bd21541da3d3d3550de4bfa468a8095a373e08fef7cb01de5be38c87c909fe060d2f1735cb9b8406e0591b91462bd33c5c43167b92e362e7aeb632666b3a0a78af2e34f0893df6de3afd0e0b7d5579906cf1821d420267c31c65612604416f94037c281962db33a8fbf741f455db1fd67073f436cdf356631b689f4b104116f11d72544c5483e729435af5c5dc6712d1b439efa776fa16e868332635155072cbe780c7cfb2255148f1da7160d79e36be3f12bacac75ac3e84f4dad35b6c39862ac34ccbd20adcd5f7bc46328b92d3b0dca1c27264e2ce96abe3dbeb991204597c076a535550ea12476c78517605cf5d0952600393604c0644adbfe56e69fb07d05c06ce5c4dd784a058eae76dcfadfae15051a0f551074320bf313c7b8b85aedead8dae95b3fc6cde9c17171693bed4d86648402218ffbfe8869c636337f0c33b4d4739d7027c9f4a4ef459c9813654462b4c82d2103b2d60382001a3ac36d23329d5ecd04ec420622d8c5507f0dd74f9349c36af69f44fe53a5780e3107dab8077785ab54086b66509b99b04977032421dabf381dfbe1d58b90429ab82c47aedf6a6212c16c6d9805159df66c15a18d141ece7676e6f910a8dc05484c47c8c846de74c552b342458b71f",
   "shortEpisode": {
     "id": "ep-short-star-compass",
     "title": "لغز الكوكب البلوري في مرصد الفضاء",
@@ -83,7 +83,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T23:07:41.564Z"
+          "checkedAtIso": "2026-09-30T23:09:19.282Z"
         }
       },
       {
@@ -117,7 +117,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T23:07:41.566Z"
+          "checkedAtIso": "2026-09-30T23:09:19.284Z"
         }
       },
       {
@@ -150,7 +150,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T23:07:41.567Z"
+          "checkedAtIso": "2026-09-30T23:09:19.285Z"
         }
       },
       {
@@ -185,14 +185,14 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T23:07:41.569Z"
+          "checkedAtIso": "2026-09-30T23:09:19.287Z"
         }
       }
     ],
     "youtubePackage": {
       "videoTitleAr": "Noreen Kids: لغز الكوكب البلوري في مرصد الفضاء | مغامرات جنى وبلبل",
       "videoTitleEn": "Noreen Kids: Mystery of the Crystal Planet | Jana & Bulbul 3D Short",
-      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nينطلق بطلنا الشجاع \"جنى رائدة الفضاء\" مع صديقه الذكي \"بلبل الروبوت اللطيف\" في مغامرة ثلاثية الأبعاد متجددة حول (لغز الكوكب البلوري في مرصد الفضاء)، حيث يواجهان ألغازاً مشوقة ويتعلمان كيف يصنع التعاون والصدق والذكاء المعجزات.\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- قيمة التعاون والعمل الجماعي بين الأصحاب.\n- حب الاستكشاف والتفكير العلمي لحل المشكلات.\n- الصدق والأمانة ومساعدة الآخرين في كل وقت.\n\n🕖 موعد النشر اليومي: الساعة 6:00 مساءً بتوقيت مصر.\n\nالفصول الزمنية:\n00:00 1. البداية: انطلاق جنى وبلبل\n00:17 2. التطور: ملاحظة العلامات العجيبة مع بلبل\n00:34 3. الحدث المفاجئ: ظهور العقبة والتفكير العلمي\n00:51 8. النهاية: رسالة جنى وبلبل لأبطال Noreen Kids\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #رسوم_متحركة #قصص_أطفال_قبل_النوم #حواديت_مصرية #أفلام_كرتون #تعليم_الأطفال #KidsAnimation #3DCartoon #ArabicKidsCartoon #BedtimeStoriesForKids #PixarStyle3D #KidsLearning #TrendingKids",
+      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nينطلق بطلنا الشجاع \"جنى رائدة الفضاء\" مع صديقه الذكي \"بلبل الروبوت اللطيف\" في مغامرة ثلاثية الأبعاد متجددة حول (لغز الكوكب البلوري في مرصد الفضاء)، حيث يواجهان ألغازاً مشوقة ويتعلمان كيف يصنع التعاون والصدق والذكاء المعجزات.\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- قيمة التعاون والعمل الجماعي بين الأصحاب.\n- حب الاستكشاف والتفكير العلمي لحل المشكلات.\n- الصدق والأمانة ومساعدة الآخرين في كل وقت.\n\n🕖 موعد النشر اليومي: الساعة 7:00 مساءً بتوقيت مصر.\n\nالفصول الزمنية:\n00:00 1. البداية: انطلاق جنى وبلبل\n00:17 2. التطور: ملاحظة العلامات العجيبة مع بلبل\n00:34 3. الحدث المفاجئ: ظهور العقبة والتفكير العلمي\n00:51 8. النهاية: رسالة جنى وبلبل لأبطال Noreen Kids\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #رسوم_متحركة #قصص_أطفال_قبل_النوم #حواديت_مصرية #أفلام_كرتون #تعليم_الأطفال #KidsAnimation #3DCartoon #ArabicKidsCartoon #BedtimeStoriesForKids #PixarStyle3D #KidsLearning #TrendingKids",
       "tags": [
         "Noreen Kids",
         "كرتون أطفال 3D",
@@ -277,7 +277,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T23:07:41.530Z"
+          "checkedAtIso": "2026-09-30T23:09:19.252Z"
         }
       },
       {
@@ -320,7 +320,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T23:07:41.535Z"
+          "checkedAtIso": "2026-09-30T23:09:19.256Z"
         }
       },
       {
@@ -365,7 +365,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T23:07:41.541Z"
+          "checkedAtIso": "2026-09-30T23:09:19.260Z"
         }
       },
       {
@@ -407,7 +407,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T23:07:41.546Z"
+          "checkedAtIso": "2026-09-30T23:09:19.265Z"
         }
       },
       {
@@ -448,7 +448,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T23:07:41.550Z"
+          "checkedAtIso": "2026-09-30T23:09:19.269Z"
         }
       },
       {
@@ -484,7 +484,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T23:07:41.553Z"
+          "checkedAtIso": "2026-09-30T23:09:19.273Z"
         }
       },
       {
@@ -525,7 +525,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T23:07:41.558Z"
+          "checkedAtIso": "2026-09-30T23:09:19.276Z"
         }
       },
       {
@@ -567,14 +567,14 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T23:07:41.562Z"
+          "checkedAtIso": "2026-09-30T23:09:19.280Z"
         }
       }
     ],
     "youtubePackage": {
       "videoTitleAr": "Noreen Kids: سر الفانوس المفقود في غابة النجوم | حواديت عمرو المستكشف وزعتر",
       "videoTitleEn": "Noreen Kids: The Lost Star Lantern | 3D Animated Kids Movie | Amr & Zaatar",
-      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nينطلق بطلنا الشجاع \"عمرو المستكشف\" مع صاحبه الذكي \"زعتر\" في رحلة ساحرة جوه غابة النجوم المنورة علشان يدوروا على الفانوس المفقود ويرجعوا النور والأمل لكل أشجار الغابة من خلال التعاون والصدق.\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- قيمة التعاون والعمل الجماعي بين الأصحاب.\n- حب الاستكشاف والبحث العلمي.\n- الصدق ومساعدة الآخرين.\n\n🕖 موعد النشر اليومي: الساعة 6:00 مساءً بتوقيت مصر.\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #قصص_اطفال_قبل_النوم #رسوم_متحركة #أفلام_كرتون #حواديت_مصرية #اطفال #تعليم_الاطفال #KidsAnimation #3DCartoon #BedtimeStoriesForKids #ArabicKidsCartoon #AnimatedStories #PixarStyle3D #KidsLearning #FamilyFriendly",
+      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nينطلق بطلنا الشجاع \"عمرو المستكشف\" مع صاحبه الذكي \"زعتر\" في رحلة ساحرة جوه غابة النجوم المنورة علشان يدوروا على الفانوس المفقود ويرجعوا النور والأمل لكل أشجار الغابة من خلال التعاون والصدق.\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- قيمة التعاون والعمل الجماعي بين الأصحاب.\n- حب الاستكشاف والبحث العلمي.\n- الصدق ومساعدة الآخرين.\n\n🕖 موعد النشر اليومي: الساعة 7:00 مساءً بتوقيت مصر.\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #قصص_اطفال_قبل_النوم #رسوم_متحركة #أفلام_كرتون #حواديت_مصرية #اطفال #تعليم_الاطفال #KidsAnimation #3DCartoon #BedtimeStoriesForKids #ArabicKidsCartoon #AnimatedStories #PixarStyle3D #KidsLearning #FamilyFriendly",
       "tags": [
         "Noreen Kids",
         "كرتون أطفال 3D",
