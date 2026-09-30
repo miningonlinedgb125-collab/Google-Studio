@@ -30,13 +30,13 @@
     "longCustomHashtags": [],
     "customFacebookPackages": {}
   },
-  "syncedAtIso": "2026-09-30T22:59:42.931Z",
-  "syncReason": "dashboard_state_updated",
-  "encryptedVault": "c7a760da526cc5fbb3c2d8025e303115:b6178cad444a31f723bece8a9671e8d822fc671d1767ebbe1a37871e005d558b8fbd2941b7c7b5c907cdc9fed9b3cad5d11092eaace11194c2e5ebebbe4173b5cc67008e3ab58fa3c2eb0f5e32f258de9beb32efdbc44d72ed7807e4f52d68c6f9e242bfa8136942809e2f4d1695d04fe649bf720977d8ea15396a081512b2a8e81601a7f87d4d94eb7159b8d48aef10df576cccc29ea96f34e13e7331602daf6db4f0425acf80870bf231d74d5955b69419771c48dcea4dd2ee9c015a004d498614dc1d900de4a778c8f1d8f1679f5f6e0e4ae064d88b6ce998cd9e6ffc707fb9a345a77223c2c0742a8314c4bfd9340235fc0ed62d621b00b54136b9fe6645e071a4a5c42c5ce87b8002c13e344eb87a800c4030e3ed162559886206f212ad44d485653d79b3112fa87d9562e04ef7705e99b457f86369e62756d199de7bec32f3cc5a8850d49e0954c0f9ca61a6792cdbada203c96c9e94ab87208f736cc82ca76e5dbb08c1b5963b67fae73f6f5387d01326c038789d55a1b5d327eb8b6472286fccf8f28c9f24be4303e326e32e119b9f8018551bb69de6cef4ccae73c148cbd89c68028f032e7fd42840a2e2f54388c042b61423d628e1e3d6cd3c214455eb4fb5692b744aa02b39c9823ec9decacabc11446e6c88d1e33ef95e9a889646fee81538c3b87f21a80d4b3d80700f43ace87b05f3b34635689017ff16790f853c3bed22059c77e2ccdb11c1bfd277d1256aaa87c2753d74f390665948b0ba92c2391d903c3cdc8605485645d083debba0eafa7d032e5a561363b902da48e84d4d88d07dcfdcedca7f9befbb8245bd868a57251bfd3fb3a9e3ba41f79efd486822fa0848a89d3010d62356decff1db04b2a825e211638075c720bfba7722a74102f6680d9eaf61c33c90f69568ef092f36d31dd55b5d585876ef702b1a26ec618a067d5e65c559696cbaf6be9077a4625237c6ef5fd406ac03bd56379f8751ba95d90d429a2ddca1eb31c216bb87386ea8b5684deceb3bf352dbb27144b935def5a27ee93b33d6b6702f8e9ef3292ff95b6aca656d156dacc7ed7f91bfab30cf89d8891282f4778efcfab3bdab487412dcf267b7dd3d16700a9b8da82b22005a47a03b9f04db29e56171b39376e0bc3baa2271739886f7ad4c5bd0092fbceb22fdd8d33fc7bb8c7ac157bd6b11965fc55893fd4bc8ee6043642a46722140c33d51eb844eb3c7eea0c20249e43e603e4ad343835bf19211b0419bae9548163c2be89b106037559f915d21c77e218241e12d043da8dce7882a16093ae37747e027d68e624e753d8edd8f7ae1dd59fb7796eb421ef31398115782856af9bb02b2653c51520994fb7dc48f810fc651014537a40dd23be65647bd4a728d023cee3308d3aca24b712bfdf093fa9c09f43af818efe7fd2231486d1129fb52443b4732b141de92fc3cd0275db5b0ddef685c1790378686802d23eed59b3d9403bae840283d1244034c84e998abc996bf00fd5901c59fa7091c57db477d2850f56e894a578ec43ef83eee7790353d25d42eab89702be92900604b8f8c0a794307c2553c127c91a4290a4c2924888a3098a44d9ed13d6dd3c184b222a22a491c1cbb9c048969e3f84a497dd0d7c30b178f35a9a15d1e70327599bab11ce4b4eeeee73d93bbd7155124b6b91d8f152a21c720d15e7cf131f62166e18fe6276c5772575d02e819c47c6ec7953c3a01efcdc4c41cd4aef5e9db564a155490cd3ef9c22bd416b6e5fe509a31e4be05a36b75da5cd56c77ea7b1d59a46a304dab910fb86e2b3cdc61913b4f92031321982bf51549a3cae8a7c4690d1194370e8754fed0dc51a61405bdcbaf93d2dce731bc846421aa0726a43d0476d75aec2effeb38a7687fb9a6a593187f706081d2a23913c4eb48c655c43d5e622a25bbe3b1f28fa6256d691d32a16838d83066e2d327c1eb5c83adb6c75cf24ddcd10f8758b3bcb68b8922bee7f5648d8dfde25b181b4c4ddc8f21",
+  "syncedAtIso": "2026-09-30T22:59:51.404Z",
+  "syncReason": "server_startup_auto_sync",
+  "encryptedVault": "5fc6b6b70960eb70fe1782c6de0e7fed:90e1fa2b6e5646274f77e55abbcc73f20b16403caf7bcac2a621170aa44270143523435adbb344c776fd0b2c5ddcfeeec0cec8a91c97b76ec49169b5db89806dbecd11e111cb2a81bce61e5573b4794ccf7fa3306255cd67fa10dcfe712c3ba3305d9d55d6e96240b27328b39e8e257d9d20d4cb6834e6a3f9b1efcb9d7cfa67de02da8e8b50df6c3c97e896cbb138a4238d2849b3dbafada9bad082dbbd2827bfaa413d833e3c38ca79f61a36a82930cf0341c9c2a7f389a37fc906606ac2c55bb55ecc7af0a28ea21b21bd07fb4f293e3702fe10411c4238366eec3fafcbec7462ac885544c69f32cd51021e3496ed09c3273d058f97ffd1e70121dca8a1b382bfc534a36da75d1e7baa307a8015ec91af2120b79030659a3d2754b1b28c47cc8247cf7ee2a0a59c42dfa54574ef262110cb68e32ff16d45b67d6033a103a83c324ce47e13680fbc7065408ee0bfb8ab66c9579bb5a64e0d7491a2f9c71a686027c4c0ed74cf2c803bc9163540a4ab515c249fe9bc63783344f5332ccb4c34efd93aad1994ec5df556c868bf54b016bb069349952a9740603f29175f50e8c74be6b633a84c3118204a81a91bc744f75daba50e04bc46974150bc54314e5fde9ba76dc119e298b8852dec45ff0ee704d48d0e273e16b28bb765eeaccee29f8c1d390d0fe6711a700bf8935f3979dfa00290b3ba9f65678f0c1c337957e8a85d8ff74e332a805e136182b242dd07a90ca7f9f72366f5cbfaabf7c1abc954544d9e0c1fc5206eab0a6671a248d601a8d6edefe516bdca37efaf017da8809700d3e46881d5b09bc0eddb199818aaf1767fcbd0d0b3e51e34edc6a667c056447aecdfb3b63fed450e941ee8bf0044410b6c86524bcca33232fc352f1cbfab1c5d802b3026e7a0545896a2c200afc87c7a413b1ca5aaaf2969a709cbdd192ea1fac84e42fdb352b0cd272e370a3612e6ed825b9e1335e18af4f2fcd4bbe5e2a2ca66809baecedbc98d822f091ca374222a8adedaeb850c21f415d206b54dadb67f9d92cf74c45c3433b80548134876f28a3965fbdd0938f0b90ac1f02614dc705200282e690b9bd2d0210ea54cb1036fa4a1b3ef447d0353523de28beaa62d15a98da92197c7b752a664a57d6cc111af145493749f4542d7568a9e58815e02a9a4c9245b75c0bd8f12e174b62651b576f135f9903e98c7a9b32746703a320fcd289b5d3bba50beca2a6d16b28ccbb3ad301335313bf1070d047c3ab046a5d9c641ff5d5399c9f9f4e08bb4e187a5584fb1bcfa35d366f428d61375cc74bc41cc6a6d395a4caf354525dce8f1d41843f552fb65d6496c134e26445343e41d71d20a1a143152a3e52343408bb0290dba02e82061d307f44c1c139feaf202c1da9017bcc3e8b11b3ad3a97af7ed5ddab1030d455bdbaaaba35adb2f4370120eff702753146d0fdbeb1ad59c852f20c8edee07fc63289e5b526b6ba9120ef932274d9bc8f7761d3a7c79b2d9716b0b562cd29acb7891156e7da8a6ae2ad1911befa8e5185e3a51460b628b7757e5581dd8235e1502cd2e5753c7fa72438f575f07ebfa319da9b5e4e7a2623ea68baf75a583654a3d89e453e4233c4bf17d4668d4967dd5e7a4dfa88336f72aeb776977d9af8b9cb0b159b721e7a41238aa7b7ac1c2d9fd8b302192eeefc9cf8d7b4675e6cd0398fffc0e5ea4ef55652ea847ee845b80c0e237349d60205144cd6d0ea4c9290624e642ecd26b0133098499ebdd91635ab775a49c5ed92b467f96c3c512396778a81ea8d22f5974dec1191cddb079ddc6a540f17d86ec8e80904a8f7f0bd6d26bf3151482041657a2028c45faa650ab963cbd338fb09188018f53fefb7bbb0e4a191b4a20013df804c6fd2edd55d17bd0ba30c447106b03f2b002bdb1f9a00ed424fbe43f7b5b115d9743ea11576c368fb02add2a254a1723819e1e1b58eaa0d9c3fbe210e7be2b764e73570e04d88f0e51f77a5f85f49eb1bfb6722dc05fb3260e",
   "shortEpisode": {
     "id": "ep-short-star-compass",
     "title": "لغز الكوكب البلوري في مرصد الفضاء",
-    "subtitle": "Noreen Kids · فيديو شورت 9:16 (60-80 ثانية) · مغامرات جنى وبلبل",
+    "subtitle": "مغامرات جنى وبلبل · Noreen Kids",
     "moralLesson": "التفكير العلمي وحب التأمل في الكون والتعاون",
     "targetAge": "4-8 سنوات",
     "visualStyle": "Pixar Vertical 9:16 Shorts 3D",
@@ -48,150 +48,66 @@
     "companionCharacterId": "bulbul",
     "scenes": [
       {
-        "id": "sc-sh-1",
         "sceneNumber": 1,
-        "title": "إشارة غامضة في تلسكوب الفضاء",
-        "environmentPreset": "floating_library",
+        "title": "1. البداية: انطلاق جنى وبلبل",
+        "environmentPreset": "space_forest",
         "cameraMotion": "dolly_in",
-        "lightingMood": "warm_lantern",
-        "particleEffect": "sparkles",
+        "lightingMood": "bioluminescent_twilight",
+        "particleEffect": "fireflies",
         "speakerName": "جنى رائدة الفضاء",
         "voiceName": "Zephyr",
-        "dialect": "egyptian",
-        "dialogueArabic": "بص يا بلبل على التلسكوب الفضائي! فيه كوكب بلوري جديد بيبعت إشارات ضوئية جميلة أوي في السما الليلة دي!",
-        "characterAction": "جنى رائدة الفضاء تضبط التلسكوب العملاق بينما يحلق الروبوت بلبل بجانبها بحماس.",
-        "prompt3D": "Vertical 9:16 3D Pixar YouTube Short frame, young girl astronaut Jana and cute hovering robot Bulbul looking through a giant brass telescope, 8k.",
-        "durationSec": 17,
-        "characterId": "noor",
-        "foleySoundEffects": [
-          "wind",
-          "jump"
-        ],
-        "dialectValidationReport": {
-          "passed": true,
-          "isPureEgyptian": true,
-          "originalText": "بص يا بلبل على التلسكوب الفضائي! فيه كوكب بلوري جديد بيبعت إشارات ضوئية جميلة أوي في السما الليلة دي!",
-          "validatedText": "بص يا بلبل على التلسكوب الفضائي! فيه كوكب بلوري جديد بيبعت إشارات ضوئية جميلة أوي في السما الليلة دي!",
-          "detectedNonEgyptianWords": [],
-          "egyptianMarkersFound": [
-            "بص",
-            "دي",
-            "أوي",
-            "اللي"
-          ],
-          "autoRepairedCount": 0,
-          "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T22:28:15.374Z"
-        }
+        "dialogueArabic": "ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بص كده معانا يا بلبل، النهارده عندنا حكاية جميلة أوي عن لغز الكوكب البلوري في مرصد الفضاء! أنا جهزت خوذة الفضاء المنورة وجهاز الجاذبية علشان نبدأ رحلتنا ونشوف إيه السر اللي مستنينا هناك!",
+        "characterAction": "جنى رائدة الفضاء يمسك خوذة الفضاء المنورة وجهاز الجاذبية بحماس ويشاور على الأفق المنور وبجانبه بلبل الروبوت اللطيف",
+        "prompt3D": "Pixar 3D animated scene for Noreen Kids channel, Pixar Vertical 9:16 Shorts 3D, جنى رائدة الفضاء and بلبل الروبوت اللطيف in space_forest, topic: لغز الكوكب البلوري في مرصد الفضاء, dynamic camera motion, volumetric lighting, 8k",
+        "durationSec": 17
       },
       {
-        "id": "sc-sh-2",
         "sceneNumber": 2,
-        "title": "تحليل الروبوت بلبل للإشارة الضوئية",
-        "environmentPreset": "crystal_oasis",
+        "title": "2. التطور: ملاحظة العلامات العجيبة مع بلبل",
+        "environmentPreset": "floating_library",
         "cameraMotion": "orbit_slow",
-        "lightingMood": "starlight_nebula",
-        "particleEffect": "starlight",
+        "lightingMood": "warm_lantern",
+        "particleEffect": "sparkles",
         "speakerName": "بلبل الروبوت اللطيف",
         "voiceName": "Fenrir",
-        "dialect": "egyptian",
-        "dialogueArabic": "يا جنى! الحسابات الذكية بتقول إن الكوكب ده مليان كريستالات بتعكس نور الشمس فبيبان كأنه نجمة بتغني!",
-        "characterAction": "بلبل يعرض خريطة ثلاثية الأبعاد للكوكب البلوري وحلقاته المضيئة.",
-        "prompt3D": "Vertical 9:16 3D Pixar Short, cute hovering teal robot projecting a glowing 3D hologram of a crystal planet, 8k.",
-        "durationSec": 17,
-        "characterId": "bulbul",
-        "foleySoundEffects": [
-          "wind",
-          "magic"
-        ],
-        "dialectValidationReport": {
-          "passed": true,
-          "isPureEgyptian": true,
-          "originalText": "يا جنى! الحسابات الذكية بتقول إن الكوكب ده مليان كريستالات بتعكس نور الشمس فبيبان كأنه نجمة بتغني!",
-          "validatedText": "يا جنى! الحسابات الذكية بتقول إن الكوكب ده مليان كريستالات بتعكس نور الشمس فبيبان كأنه نجمة بتغني!",
-          "detectedNonEgyptianWords": [],
-          "egyptianMarkersFound": [
-            "ده"
-          ],
-          "autoRepairedCount": 0,
-          "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T22:28:15.379Z"
-        }
+        "dialogueArabic": "يا خبر يا جنى! أنا فتحت شاشة تحليل الإشارات الفضائية وبصيت على المكان، ولقيت إن فيه مشكلة غير متوقعة في لغز الكوكب البلوري في مرصد الفضاء محتاجة مننا تفكير ذكي وتعاون سريع علشان نحلها!",
+        "characterAction": "بلبل الروبوت اللطيف يستخدم شاشة تحليل الإشارات الفضائية فوق المنصة المنورة ويفحص الإشارات ثلاثية الأبعاد",
+        "prompt3D": "Pixar 3D animated scene for Noreen Kids channel, Pixar Vertical 9:16 Shorts 3D, جنى رائدة الفضاء and بلبل الروبوت اللطيف in floating_library, topic: لغز الكوكب البلوري في مرصد الفضاء, dynamic camera motion, volumetric lighting, 8k",
+        "durationSec": 17
       },
       {
-        "id": "sc-sh-3",
         "sceneNumber": 3,
-        "title": "الانطلاق بسفينة السحاب نحو النجوم",
+        "title": "3. الحدث المفاجئ: ظهور العقبة والتفكير العلمي",
         "environmentPreset": "cloud_ship",
         "cameraMotion": "pan_right",
         "lightingMood": "golden_sunset",
         "particleEffect": "clouds",
         "speakerName": "جنى رائدة الفضاء",
         "voiceName": "Zephyr",
-        "dialect": "egyptian",
-        "dialogueArabic": "العلم ده ساحر يا بلبل! كل يوم بنقرا فيه كتاب جديد بنكتشف عجايب أكتر في الكون الواسع بتاعنا!",
-        "characterAction": "جنى وبلبل ينطلقان بمركبة الاستكشاف وسط السحب الذهبية المضيئة.",
-        "prompt3D": "Vertical 9:16 3D Pixar Short, girl astronaut and robot flying through glowing golden clouds, 8k.",
-        "durationSec": 17,
-        "characterId": "noor",
-        "foleySoundEffects": [
-          "wind",
-          "jump"
-        ],
-        "dialectValidationReport": {
-          "passed": true,
-          "isPureEgyptian": true,
-          "originalText": "العلم ده ساحر يا بلبل! كل يوم بنقرا فيه كتاب جديد بنكتشف عجايب أكتر في الكون الواسع بتاعنا!",
-          "validatedText": "العلم ده ساحر يا بلبل! كل يوم بنقرا فيه كتاب جديد بنكتشف عجايب أكتر في الكون الواسع بتاعنا!",
-          "detectedNonEgyptianWords": [],
-          "egyptianMarkersFound": [
-            "ده",
-            "دي"
-          ],
-          "autoRepairedCount": 0,
-          "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T22:28:15.383Z"
-        }
+        "dialogueArabic": "عندك حق يا بلبل! يلا بينا نستخدم خوذة الفضاء المنورة وجهاز الجاذبية ونتصرف بذكاء وهدوء، لأن لما بنكون إيد واحدة وبنتعاون بصدق، بنلاقي الحل الصح لكل مشكلة صعبة!",
+        "characterAction": "جنى رائدة الفضاء يوجه خوذة الفضاء المنورة وجهاز الجاذبية بمهارة عالية لشرح الحل العلمي والعملي",
+        "prompt3D": "Pixar 3D animated scene for Noreen Kids channel, Pixar Vertical 9:16 Shorts 3D, جنى رائدة الفضاء and بلبل الروبوت اللطيف in cloud_ship, topic: لغز الكوكب البلوري في مرصد الفضاء, dynamic camera motion, volumetric lighting, 8k",
+        "durationSec": 17
       },
       {
-        "id": "sc-sh-4",
         "sceneNumber": 4,
-        "title": "رسالة جنى وبلبل لأبطال Noreen Kids",
-        "environmentPreset": "space_forest",
+        "title": "8. النهاية: رسالة جنى وبلبل لأبطال Noreen Kids",
+        "environmentPreset": "coral_kingdom",
         "cameraMotion": "crane_up",
-        "lightingMood": "bioluminescent_twilight",
-        "particleEffect": "fireflies",
+        "lightingMood": "aqua_glow",
+        "particleEffect": "bubbles",
         "speakerName": "بلبل الروبوت اللطيف",
         "voiceName": "Fenrir",
-        "dialect": "egyptian",
-        "dialogueArabic": "وانتوا يا أصحابنا الشطار، بتحبوا علوم الفضاء والكواكب؟ اشتركوا في قناة نورين كيدز واستنوا مغامرة جديدة كل يوم!",
-        "characterAction": "جنى وبلبل يلوحان للكاميرا العمودية وسط الشهب والنجوم المضيئة.",
-        "prompt3D": "Vertical 9:16 3D Pixar Short finale, girl astronaut and robot waving excitedly under starry sky, 8k.",
-        "durationSec": 17,
-        "characterId": "bulbul",
-        "foleySoundEffects": [
-          "wind",
-          "magic"
-        ],
-        "dialectValidationReport": {
-          "passed": true,
-          "isPureEgyptian": true,
-          "originalText": "وانتوا يا أصحابنا الشطار، بتحبوا علوم الفضاء والكواكب؟ اشتركوا في قناة نورين كيدز واستنوا مغامرة جديدة كل يوم!",
-          "validatedText": "وانتوا يا أصحابنا الشطار، بتحبوا علوم الفضاء والكواكب؟ اشتركوا في قناة نورين كيدز واستنوا مغامرة جديدة كل يوم!",
-          "detectedNonEgyptianWords": [],
-          "egyptianMarkersFound": [
-            "دي"
-          ],
-          "autoRepairedCount": 0,
-          "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T22:28:15.388Z"
-        }
+        "dialogueArabic": "هيييه! حلينا اللغز ونجحت المهمة يا جنى! لو عجبتكم حدوتة النهارده يا أصحابنا الشطار، ما تنسوش تشتركوا في قناة نورين كيدز وتفعلوا الجرس وتعملوا لايك علشان تعيشوا معانا مغامرة جديدة كل يوم! مع السلامة!",
+        "characterAction": "جنى رائدة الفضاء وبلبل الروبوت اللطيف يلوحان بحماس لجمهور قناة Noreen Kids تحت سماء النجوم المتلألئة",
+        "prompt3D": "Pixar 3D animated scene for Noreen Kids channel, Pixar Vertical 9:16 Shorts 3D, جنى رائدة الفضاء and بلبل الروبوت اللطيف in coral_kingdom, topic: لغز الكوكب البلوري في مرصد الفضاء, dynamic camera motion, volumetric lighting, 8k",
+        "durationSec": 17
       }
     ],
     "youtubePackage": {
-      "videoTitleAr": "Noreen Kids: لغز الكوكب البلوري في مرصد الفضاء | مغامرات جنى رائدة الفضاء وبلبل",
+      "videoTitleAr": "Noreen Kids: لغز الكوكب البلوري في مرصد الفضاء | مغامرات جنى وبلبل",
       "videoTitleEn": "Noreen Kids: Mystery of the Crystal Planet | Jana & Bulbul 3D Short",
-      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nفي مغامرة فضائية شيقة داخل مرصد النجوم الطائر، تكتشف رائدة الفضاء الصغيرة \"جنى\" مع صديقها الآلي \"بلبل\" إشارة ضوئية عجيبة من كوكب بلوري بعيد، ويتعلمان معاً كيف يفسر العلم جمال الكواكب والنجوم!\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- حب التأمل في الكون وطرح الأسئلة العلمية الذكية.\n- أهمية القراءة والبحث العلمي في اكتشاف أسرار الفضاء.\n\n🕖 موعد النشر اليومي: الساعة 7:00 مساءً بتوقيت مصر.\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #قصص_اطفال_قبل_النوم #رسوم_متحركة #أفلام_كرتون #حواديت_مصرية #اطفال #تعليم_الاطفال #KidsAnimation #3DCartoon #BedtimeStoriesForKids #ArabicKidsCartoon #AnimatedStories #PixarStyle3D #KidsLearning #FamilyFriendly",
+      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nينطلق بطلنا الشجاع \"جنى رائدة الفضاء\" مع صديقه الذكي \"بلبل الروبوت اللطيف\" في مغامرة ثلاثية الأبعاد متجددة حول (لغز الكوكب البلوري في مرصد الفضاء)، حيث يواجهان ألغازاً مشوقة ويتعلمان كيف يصنع التعاون والصدق والذكاء المعجزات.\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- قيمة التعاون والعمل الجماعي بين الأصحاب.\n- حب الاستكشاف والتفكير العلمي لحل المشكلات.\n- الصدق والأمانة ومساعدة الآخرين في كل وقت.\n\n🕖 موعد النشر اليومي: الساعة 7:00 مساءً بتوقيت مصر.\n\nالفصول الزمنية:\n00:00 1. البداية: انطلاق جنى وبلبل\n00:17 2. التطور: ملاحظة العلامات العجيبة مع بلبل\n00:34 3. الحدث المفاجئ: ظهور العقبة والتفكير العلمي\n00:51 8. النهاية: رسالة جنى وبلبل لأبطال Noreen Kids\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #رسوم_متحركة #قصص_أطفال_قبل_النوم #حواديت_مصرية #أفلام_كرتون #تعليم_الأطفال #KidsAnimation #3DCartoon #ArabicKidsCartoon #BedtimeStoriesForKids #PixarStyle3D #KidsLearning #TrendingKids",
       "tags": [
         "Noreen Kids",
         "كرتون أطفال 3D",
@@ -217,7 +133,9 @@
       "thumbnailTextAr": "لغز الكوكب البلوري! 🪐",
       "thumbnailPrompt3D": "Vertical 9:16 3D Pixar YouTube Short cover for Noreen Kids, girl astronaut Jana and cute robot Bulbul looking at a glowing crystal planet, 8k."
     },
-    "preUploadVerified": true
+    "preUploadVerified": true,
+    "mainCharacterName": "جنى رائدة الفضاء",
+    "companionName": "بلبل الروبوت اللطيف"
   },
   "longEpisode": {
     "id": "ep-long-lantern-forest",
