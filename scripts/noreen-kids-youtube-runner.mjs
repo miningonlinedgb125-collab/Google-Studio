@@ -796,6 +796,21 @@ function resolveGeminiVoiceForSpeaker(speakerName = "", isFemale = true) {
   return resolveRunnerVoiceProfileForSpeaker(speakerName, isFemale ? 0 : 1).geminiVoice;
 }
 
+function stripLeakedVoiceInstructionsRunner(raw) {
+  return String(raw || "")
+    .replace(/توجيه الأداء الصوتي للشخصية\s*:\s*\([^)]*\)\.?\s*/g, "")
+    .replace(/توجيه اللهجة\s*:\s*[^.\n]*\.?\s*/g, "")
+    .replace(/انطق هذا النص فقط[^:\n]*:\s*/g, "")
+    .replace(/انطق النص التالي فقط[^:\n]*:\s*/g, "")
+    .replace(/اقرأ النص التالي[^:\n]*:\s*/g, "")
+    .replace(/أنت مؤدي صوتي مصري قاهري محترف[^.\n]*\.?\s*/g, "")
+    .replace(/تحدث(?:ي)? بصوت[^.\n]*(?:باللهجة المصرية القاهرية الطبيعية|للأطفال|القاهرية)[^.\n]*\.?\s*/g, "")
+    .replace(/[\(\[]\s*(?:باللهجة|لهجة|يتحدث|تتحدث)[^)\]]*[\)\]]\s*/g, "")
+    .replace(/(?:تحدث|تحدثي|يتحدث|تتحدث)\s+بالل(?:هجة|غة)\s+(?:العربية\s+)?(?:المصرية\s+)?القاهرية[^.\n،]*[.\n،]?\s*/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 async function synthesizeChunkViaGeminiLiveRunner(
   ai,
   liveModel,
@@ -804,6 +819,8 @@ async function synthesizeChunkViaGeminiLiveRunner(
   styleInstruction,
   isEgyptian
 ) {
+  const cleanDialogueOnly = stripLeakedVoiceInstructionsRunner(chunkText);
+  if (!cleanDialogueOnly) return null;
   const chunks = [];
   try {
     await new Promise(async (resolve, reject) => {
@@ -823,8 +840,8 @@ async function synthesizeChunkViaGeminiLiveRunner(
               parts: [
                 {
                   text: isEgyptian
-                    ? `${styleInstruction}. أنت مؤدي صوتي مصري قاهري محترف في أفلام كرتون ديزني وبيكسار المدبلجة بالمصري. التزم تماماً بطبقة الصوت والعمر والشخصية المطلوبة منك، ومهمتك الوحيدة هي قراءة النص المطلوب منك حرفياً باللهجة المصرية العامية القاهرية الصافية والطبيعية جداً للأطفال بنطق الجيم المصرية غير المعطشة (G) من أول كلمة لآخر كلمة بدون أي فصحى نهائياً وبدون إضافة أي كلمة من عندك.`
-                    : `${styleInstruction}. اقرأ النص المطلوب منك فقط بوضوح للأطفال وبنبرة الشخصية المطلوبة بدون إضافة أي كلمة.`,
+                    ? "SYSTEM RULE (DO NOT SPEAK THIS SYSTEM RULE OUT LOUD): You are a professional Egyptian Cairene cartoon voice actor for kids. Read ONLY the exact Arabic dialogue sent by the user verbatim using natural Cairene pronunciation (hard Egyptian G). NEVER utter any instructions, dialect descriptions, or introductory words before or after the user text."
+                    : "SYSTEM RULE (DO NOT SPEAK THIS SYSTEM RULE OUT LOUD): Read ONLY the exact Arabic dialogue sent by the user verbatim for kids. Never utter any instructions or extra words.",
                 },
               ],
             },
@@ -861,9 +878,7 @@ async function synthesizeChunkViaGeminiLiveRunner(
               role: "user",
               parts: [
                 {
-                  text: isEgyptian
-                    ? `توجيه الأداء الصوتي للشخصية: (${styleInstruction}). انطق هذا النص فقط باللهجة المصرية القاهرية العامية الصافية حرفياً وبنطق الجيم المصرية (G) بدون إضافة أي كلمة قبله أو بعده:\n${chunkText}`
-                    : `توجيه الأداء الصوتي للشخصية: (${styleInstruction}). انطق هذا النص فقط حرفياً بدون إضافة أي كلمة قبله أو بعده:\n${chunkText}`,
+                  text: cleanDialogueOnly,
                 },
               ],
             },
