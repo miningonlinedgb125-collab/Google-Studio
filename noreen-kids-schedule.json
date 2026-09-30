@@ -30,9 +30,9 @@
     "longCustomHashtags": [],
     "customFacebookPackages": {}
   },
-  "syncedAtIso": "2026-09-30T19:00:46.751Z",
+  "syncedAtIso": "2026-09-30T20:06:07.636Z",
   "syncReason": "server_startup_auto_sync",
-  "encryptedVault": "352d7f00483e0725dc84b7332f60665a:36b661873c37d07d96794cb546dff55ae926408578f283230e3b6b0898fa26280a76aa1650ef9771f24f10c82b99a248958979435a128efe597d2cd23ecc96623eb7d079a1209719f648da045285903ef5d3f7838c299777db7ae5fb02ced04a7ff88a197fdf6cdcf6cf9794b4731aa332fca18c0d828591d4000a9e59820e65bb49fe115040116a199d8dd06e9f64fa8c5d6eadc246dc21beb9b8a7ee9a55e3bf2267c58e4fd0580acd274df6adfb5a9fc6e324aad4a05cadd7f9b50576ed9b88f96332f0e77a68cd4b5f736385145f0f0bc1dfe65346abf11a1b28de53d488aa84abcc641132aa1b7576bb3c33d841e664ddd23955d44a440a94868c2ad366066d8ff14393ccb87ed4ee54c555e49eaec8d7a795b1a289f399eb741869b233870b9c2458e85ba6f88f27cfc4a317984853bf615d0e5f1360d6443df63faf7fbced9c7ee7047739f3a1018dad056a286db0f482a12729d2221e3f16e6a8daba0c118a596c12c435a51c533fc98b99b44c636ad6f1987e1a0fa2792db5d862aab9d72defc530667429ddd21e640e6d3b9e32e9d678e36b8432f064510050b59055efed7493656948a3ab6cde38e6544124d05b8bff0a65a37e82fa718e274217f06240985919c20120ec67b1942e27da81ae02ef9ba0232ac387eaa19ac2441b7e6da0933485abf5f762af8d85f7b2156c6041a0f4dac896d499d5c87f9936d8f5e2e98a4c62bf1aeb7bf115f175e2b70b48dbeb338bc1e05f16bc61e13622d264ff270b88f05680db37f254eb77611adb78b9f54e8c3b9769aa603d6d38d80e917602f65068f4a9e82f6b676ecd54abf6fe90b51a122b70a1fd471fbaf1da1b4be6381407153b67738783e38312f9ed067568fb19e2ba7e6a634063851ca4fc5fdada102025fb2b11f573678d448d6b0f67c904e94b995be6d2632e26f97e24ebd002f01632aa74f222b1b7c889ede42c0f445e6a263192bdbcfb617a2ca37d",
+  "encryptedVault": "dbad0764f0d1427cb3928d71bb5dcc53:adac46e6486892ba1ad7ee3ee1d37d9668f0ef9dccd6e4f862ea0b1021a7b0f44c086854aae8f024d98a2e751277652f2af26b96296aeebead2b7d34b1c4e6dfbae621374cc77c83756cfdcdd5784abd60cb9680320d273e228d131d4e57fa94709b24b5098bb9250310a96771abb60fa4cab1c5f5ec48894136df416d47e138e6799c77bfc6675f977fcd49c0eed2b733c168e11c61c86794f67cd92770b2ebbd8d930f58d0e7c4f13958212c179046d61cdf9e1d7532ac6e554ca7b1e1258f1dc5ecb3f631a9d9ea686c0f65a5c4ecc9ae39c2560b94536063989d531ad7132b83093b29dfc9a2b6d1bf4bbf715a436387f6815655986b41cfad8174bc565abda412e1a95f968aaa55de16d5eb3ff189d3c3d58ba394c710d4c01e78c4e37d2d1e8e0f703725b722dc5752bca7f921d563be329f846c89fbb5fb90e8a358d9ed7e7ca059fa36b3dc1c4998ac3f05f5188f70545c9173de4a2e4b75e2aba10b1ec86a25cf367aaed8d662af59b2453e14e3a40741b7a840ca03e69916095c0f56e8589990f43d30701fb29e1d791cbb7a01c36dfb09080ca02fed8bdb15699e699b593c0289fd5530b0067ae6736468d687fe1ee3ff1bb65fcea41a3e443c96e5378031cb5d3faa2c2b8bac70a39216cea5a26633ac13d21cd05815356e795ad7cd039518ffe6fb74888360b3a34714957c2b302a003e902b90c32c1a9699f769fb20ba94d823a98264dc23d4d911df3d28fe53530dff72117ce4c81026f66da6a0e97df40c5650085101b54a7c9cb2207b1ee94e5123da84e46f3b458fbbb58e380736f17e56055b21edf1570b7729e279cb412685c10be15a8ee8291f6b59793edd9428120833f40b91a43a5b6afa58767c5b116db3ede02ea3219df5f340dde1565d38a9df8be9c519a33e369593e9cfb5123a9c5a0277c19c5037327568498f8da391b459d59f6fe42a9749ee78823f90f71c1e57a0379b62f8df5f445cb91e61f5ae1ab7e731f584d2f45312cc",
   "shortEpisode": {
     "id": "ep-short-star-compass",
     "title": "لغز الكوكب البلوري في مرصد الفضاء",
@@ -192,7 +192,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T18:34:28.030Z"
+          "checkedAtIso": "2026-09-30T18:15:30.476Z"
         }
       },
       {
@@ -235,7 +235,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T18:34:28.041Z"
+          "checkedAtIso": "2026-09-30T18:15:30.484Z"
         }
       },
       {
@@ -280,7 +280,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T18:34:28.051Z"
+          "checkedAtIso": "2026-09-30T18:15:30.488Z"
         }
       },
       {
@@ -322,7 +322,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T18:34:28.063Z"
+          "checkedAtIso": "2026-09-30T18:15:30.493Z"
         }
       },
       {
@@ -363,7 +363,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T18:34:28.075Z"
+          "checkedAtIso": "2026-09-30T18:15:30.497Z"
         }
       },
       {
@@ -399,7 +399,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T18:34:28.085Z"
+          "checkedAtIso": "2026-09-30T18:15:30.501Z"
         }
       },
       {
@@ -440,7 +440,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T18:34:28.096Z"
+          "checkedAtIso": "2026-09-30T18:15:30.505Z"
         }
       },
       {
@@ -482,7 +482,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T18:34:28.108Z"
+          "checkedAtIso": "2026-09-30T18:15:30.509Z"
         }
       }
     ],
