@@ -33,9 +33,8 @@
     "longCustomHashtags": [],
     "customFacebookPackages": {}
   },
-  "syncedAtIso": "2026-09-30T23:02:02.897Z",
-  "syncReason": "dashboard_state_updated",
-  "encryptedVault": "2979868f6e8835c044f06823909a8484:6c6fcc0c2067bf99e889867753dceee8a67c4780fb9eac103c12c86ac85276076bc68cfe97bf054adad803ce39a96a301e4b4849a8fdec5f82b20cf08f8bebbba45398b6a63a2b6e5e0498b07ad32b7684b3fbebf3db64b74375201dd1af5426afcd4b6b8b05534aa40bb2f96422d18b2d2069e0112a0ba525bc1d8bd119131f5cb14f54990803ea2dd29c78da9f9d1cd947c34e3d87cccfc8f71ff0879ecf3cfdff68ab6a7c976ade0c005b55fa84ec13d29862b4ebe437f26fb1c1ac8e46f785210e0a118d864a75791f054db5f8f953dc6a8506bb90dbb2cdd29f33bd446f3f59817658ce76f135d54d1ce34a711c1464799e3cfbcd1c2de1827db9bf3b342707b92b9587e72f2f757aaa66d944222b1a30dfd48ac9a440cbf58891ede8639ae1221cadb0a5f50e766e1ed771e3dc459b492d5c33fe73c5e1adf8878a9edc4940358e4f8cbf1ccccff3a13ca5418cb4dccaf90621127288950dac8abefb00eda25beccca7a39ba6287a3ce9aad449378e4aedd7201fccbb4aac5132a9a470103094bbe3c4a88f534d9513d1995fd5e67fbe0075bd579d2d0d9897df4ec86d174b9d2e8ab64e5da9e4f4e30d7b6146cb386b9d2fa1a8ee93f8279343d0248669efef3a08deb3a301959f698ced9763856b230222b4c8d4b35a1685a16c7386db1c4e34ce53c60c963e1871ad5d2d0f5f76b8a82e9b1771d8c32c6e458a3b3291f3fbcea202524aae5fd7eb5159b7f3c78dea2be3fa1a271859af6d0b0ec6bf917f1392b1e786394623e0c4ab68d1c0d43b5c031908cf4c2af705b66431483a72d6525dbde2ea977a9571704a027b870a3ae86e313b7ebe84b0ab5f4621fc9414f0fcd3e0a6a63f241ba787156c480a413f70569b16d812647760408ecd1d01498c8cf824a8bf134ab3338926e648dca05af959c49753d79f55abc648068e9ad9305e2f82328b0ec69d57a68bee49f9167962beb36502bb3cf098842a27898d211b6fc448f0e065735980d2903fc17ae5a436ba3294eaa0eb350f398846d4ce4028fa64857bde67e234a1833f169a7c9ebe75e7b0bf1fe09d922fc9fe3c529179c2514ce15984a0ed2b9ca9a79215abb35491ec4d50495b7dd9d4f2fe7ae646138bbde90ab5f57bee979ce22d24c474adcfda4c87dc2f283091e578236fd18545de7586a18e5f54d310af45b89ed8b63ff988ee3338ccfbaa28aefc23a82a1a97fbeb41f7736569d03eaddbc2a6c3f6534350aa84db4d2aa7f11fec3b42d88bcec0f9a18a8afd85368698ddf199b5fd709487437d2fa64134c7dea7ac53c7ce4c2ae58c3d369f45504e1b7c5e16b66fb25c6951c5d7a1d2621440a5bb8b3a4d86b287748e1a51ccfc503ad9bcc34d289ec71242ce0a6a38ec731b71147114432f3d61809c970843c8222917a44d5294fac01255ce07baa2491aa559cc75e83bfac4ea58c4a84dee4cf72344514954e2d110be3230b32769ba6150b553f8a04830d7317156c7742ad8fccaf285204319c92053b3b32648eb708fc8b635dc6dae96a98dcf5fd17edce2c4523f401d159151f0ea921c300f8a84a7c882f8151caa22f148fea2bcfa9472d8ccb272413732544343fe88199007d1de305cdc1c9cef4629edfcbaf9852c60d863b65ef914c21733957c4cfb6b7062348fb7b682124915489aa95933a4271c8619facc92d27c15633e5daae8b5ed13a79248bfd8660c82fec093c5f028acfcb63a3b426510db101685dcb3d05e7a662be4e937238ad888eaad33e19ed3bdcb9141f96bf622da24e6674485396318f400289e6467d9c235b115b7262c1e0a9fa9f66649d43654d78fe9b84fc27a6f0a53ba9390e83bd3baf546217e04820878d3b119dd550dc91d4924154fffebb94c765a81a8a421d099219e9b96d2047a6a8cca56942feb2e5c776ef01ca839c7e0f81d25079a058ed68b9a7991b69cd3c7db888e03e915ea53fd8876c6927bc9c1ec414cb3d5e617ab716e00cd60c24fcb9d45935aebc7e9",
+  "syncedAtIso": "2026-09-30T23:02:54.018Z",
+  "encryptedVault": "86083751df980b810557933834d19843:9a63f2912de7741aeb2bfc28c2b4dcd2f66fc9ab8def717de6f0abb52f24cf9748642271205537a855dfe56cebd3958e864d1dba897f3d7512052cd0b853b6286b5b3162ed064c2e9da41a1b12c2b24f971a9ceee15ba13588d3702da988121054f0e2acb80009eb8445f59b4675ee1c0776293d80dba454606f6c838e92f3946f083b0277b0fbd4b6d51f95a76143dc8808a57b69b385f840fdb46a1a55fea2fe84ac7f2f26f48d65b2d00520e507d1194424fd8945132dfea5c8c86da6946db8a76da4a5510b28d11c7598149061163b4dcf4cdce85d429a9bcb75f364be284ef34740185674c15604e138b2052129091883c4f5145c0417e95224da31bb26959f278d8b0e2603898abc11ef52df65ac49f47d070c472b8973195940b9eea7f12d2e4517d2f82e6bf7f5740e624f462e0909b4b674bb002ccee0c2d4277f336c6e92ad263e8d343659394e7d14a3b10a44c475e9b2c22d065e39171061ad1a0f892f642dd7236f2b554ac19b681d9e4193421850ff6ffbc70fcebd39297ec3be43294549735bff2762bf99635468ac8302ef43c42d124f343a5132782c5bdc71c3ce7bf89a9d7eb50a670adea07fe9bee0d61529d477f3d1fce7c48973f6f60380effefba42813596d90c9bbd58c3e90059562ac326b16e1560e60fa2bb096731cdf2122f3e4712b3f676a6506187f1404dde2e00c9fab8bb60bd023d5cda6847c5cb69b818c600a304198ed4113b8a00874f4b42be28e770923a43aa2a5b82acc8057490a02cfcbf643d07653018f7d2618034ec999203c7600402ed8d528fa9930b589aab56d300327b94b4da77230da9fb261305298ab806208554f9678ee296d745d66f8cec08920d6a1749fd6e02c07d74a626671198c7f30cacfda97086e60ec7fa1a12a3854f2167f0aa9658449d29cb36fcc28000964d43a5909aec5b2b9e362791fd0e5c94d5f922fb8948cc1412927145f4a4cc4a58b15f5c7594aa1e958948e14063cb0003f7ea0d0086dc93de1ec2014492f50ddae8cb37ea981f821b3db2e36a15fdd77ea54d350ef0b11b81a3c4506ab622366059676bd332b02491186366902b3b93ce4f01cccef756684e34613c3b9d52dd6b97bc71149d1a7ae0880ecead9a85a3de80eb1f678f61a4b2df24bbd51a16970f90b62552610537918f231ce4ea47ea091849b747baa7a47b875ae2f3a72b50410333571594984155c4f8789896ee91ecc782f47eaa68a88d1c306b90f4a71dde16006b8f1aa9d5b9b590c8cbb580352e721fe6451fe89696a33e6757d7fc7c63b342761a9",
   "shortEpisode": {
     "id": "ep-short-star-compass",
     "title": "لغز الكوكب البلوري في مرصد الفضاء",
@@ -62,7 +61,32 @@
         "dialogueArabic": "ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بص كده معانا يا بلبل، النهارده عندنا حكاية جميلة أوي عن لغز الكوكب البلوري في مرصد الفضاء! أنا جهزت خوذة الفضاء المنورة وجهاز الجاذبية علشان نبدأ رحلتنا ونشوف إيه السر اللي مستنينا هناك!",
         "characterAction": "جنى رائدة الفضاء يمسك خوذة الفضاء المنورة وجهاز الجاذبية بحماس ويشاور على الأفق المنور وبجانبه بلبل الروبوت اللطيف",
         "prompt3D": "Pixar 3D animated scene for Noreen Kids channel, Pixar Vertical 9:16 Shorts 3D, جنى رائدة الفضاء and بلبل الروبوت اللطيف in space_forest, topic: لغز الكوكب البلوري في مرصد الفضاء, dynamic camera motion, volumetric lighting, 8k",
-        "durationSec": 17
+        "durationSec": 17,
+        "characterId": "noor",
+        "foleySoundEffects": [
+          "wind",
+          "jump"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بص كده معانا يا بلبل، النهارده عندنا حكاية جميلة أوي عن لغز الكوكب البلوري في مرصد الفضاء! أنا جهزت خوذة الفضاء المنورة وجهاز الجاذبية علشان نبدأ رحلتنا ونشوف إيه السر اللي مستنينا هناك!",
+          "validatedText": "ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بص كده معانا يا بلبل، النهارده عندنا حكاية جميلة أوي عن لغز الكوكب البلوري في مرصد الفضاء! أنا جهزت خوذة الفضاء المنورة وجهاز الجاذبية علشان نبدأ رحلتنا ونشوف إيه السر اللي مستنينا هناك!",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "ازيكم",
+            "بص",
+            "كده",
+            "النهارده",
+            "أوي",
+            "علشان",
+            "إيه",
+            "اللي"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-09-30T23:03:07.858Z"
+        }
       },
       {
         "sceneNumber": 2,
@@ -76,7 +100,27 @@
         "dialogueArabic": "يا خبر يا جنى! أنا فتحت شاشة تحليل الإشارات الفضائية وبصيت على المكان، ولقيت إن فيه مشكلة غير متوقعة في لغز الكوكب البلوري في مرصد الفضاء محتاجة مننا تفكير ذكي وتعاون سريع علشان نحلها!",
         "characterAction": "بلبل الروبوت اللطيف يستخدم شاشة تحليل الإشارات الفضائية فوق المنصة المنورة ويفحص الإشارات ثلاثية الأبعاد",
         "prompt3D": "Pixar 3D animated scene for Noreen Kids channel, Pixar Vertical 9:16 Shorts 3D, جنى رائدة الفضاء and بلبل الروبوت اللطيف in floating_library, topic: لغز الكوكب البلوري في مرصد الفضاء, dynamic camera motion, volumetric lighting, 8k",
-        "durationSec": 17
+        "durationSec": 17,
+        "characterId": "bulbul",
+        "foleySoundEffects": [
+          "wind",
+          "magic"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "يا خبر يا جنى! أنا فتحت شاشة تحليل الإشارات الفضائية وبصيت على المكان، ولقيت إن فيه مشكلة غير متوقعة في لغز الكوكب البلوري في مرصد الفضاء محتاجة مننا تفكير ذكي وتعاون سريع علشان نحلها!",
+          "validatedText": "يا خبر يا جنى! أنا فتحت شاشة تحليل الإشارات الفضائية وبصيت على المكان، ولقيت إن فيه مشكلة غير متوقعة في لغز الكوكب البلوري في مرصد الفضاء محتاجة مننا تفكير ذكي وتعاون سريع علشان نحلها!",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "يا خبر",
+            "بص",
+            "علشان"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-09-30T23:03:07.860Z"
+        }
       },
       {
         "sceneNumber": 3,
@@ -90,7 +134,26 @@
         "dialogueArabic": "عندك حق يا بلبل! يلا بينا نستخدم خوذة الفضاء المنورة وجهاز الجاذبية ونتصرف بذكاء وهدوء، لأن لما بنكون إيد واحدة وبنتعاون بصدق، بنلاقي الحل الصح لكل مشكلة صعبة!",
         "characterAction": "جنى رائدة الفضاء يوجه خوذة الفضاء المنورة وجهاز الجاذبية بمهارة عالية لشرح الحل العلمي والعملي",
         "prompt3D": "Pixar 3D animated scene for Noreen Kids channel, Pixar Vertical 9:16 Shorts 3D, جنى رائدة الفضاء and بلبل الروبوت اللطيف in cloud_ship, topic: لغز الكوكب البلوري في مرصد الفضاء, dynamic camera motion, volumetric lighting, 8k",
-        "durationSec": 17
+        "durationSec": 17,
+        "characterId": "noor",
+        "foleySoundEffects": [
+          "wind",
+          "magic"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "عندك حق يا بلبل! يلا بينا نستخدم خوذة الفضاء المنورة وجهاز الجاذبية ونتصرف بذكاء وهدوء، لأن لما بنكون إيد واحدة وبنتعاون بصدق، بنلاقي الحل الصح لكل مشكلة صعبة!",
+          "validatedText": "عندك حق يا بلبل! يلا بينا نستخدم خوذة الفضاء المنورة وجهاز الجاذبية ونتصرف بذكاء وهدوء، لأن لما بنكون إيد واحدة وبنتعاون بصدق، بنلاقي الحل الصح لكل مشكلة صعبة!",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "يلا",
+            "بص"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-09-30T23:03:07.862Z"
+        }
       },
       {
         "sceneNumber": 4,
@@ -104,7 +167,28 @@
         "dialogueArabic": "هيييه! حلينا اللغز ونجحت المهمة يا جنى! لو عجبتكم حدوتة النهارده يا أصحابنا الشطار، ما تنسوش تشتركوا في قناة نورين كيدز وتفعلوا الجرس وتعملوا لايك علشان تعيشوا معانا مغامرة جديدة كل يوم! مع السلامة!",
         "characterAction": "جنى رائدة الفضاء وبلبل الروبوت اللطيف يلوحان بحماس لجمهور قناة Noreen Kids تحت سماء النجوم المتلألئة",
         "prompt3D": "Pixar 3D animated scene for Noreen Kids channel, Pixar Vertical 9:16 Shorts 3D, جنى رائدة الفضاء and بلبل الروبوت اللطيف in coral_kingdom, topic: لغز الكوكب البلوري في مرصد الفضاء, dynamic camera motion, volumetric lighting, 8k",
-        "durationSec": 17
+        "durationSec": 17,
+        "characterId": "bulbul",
+        "foleySoundEffects": [
+          "wind",
+          "jump"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "هيييه! حلينا اللغز ونجحت المهمة يا جنى! لو عجبتكم حدوتة النهارده يا أصحابنا الشطار، ما تنسوش تشتركوا في قناة نورين كيدز وتفعلوا الجرس وتعملوا لايك علشان تعيشوا معانا مغامرة جديدة كل يوم! مع السلامة!",
+          "validatedText": "هيييه! حلينا اللغز ونجحت المهمة يا جنى! لو عجبتكم حدوتة النهارده يا أصحابنا الشطار، ما تنسوش تشتركوا في قناة نورين كيدز وتفعلوا الجرس وتعملوا لايك علشان تعيشوا معانا مغامرة جديدة كل يوم! مع السلامة!",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "النهارده",
+            "ما تنسوش",
+            "علشان",
+            "دي"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-09-30T23:03:07.864Z"
+        }
       }
     ],
     "youtubePackage": {
@@ -195,7 +279,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T22:28:15.290Z"
+          "checkedAtIso": "2026-09-30T23:03:07.812Z"
         }
       },
       {
@@ -238,7 +322,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T22:28:15.301Z"
+          "checkedAtIso": "2026-09-30T23:03:07.817Z"
         }
       },
       {
@@ -283,7 +367,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T22:28:15.312Z"
+          "checkedAtIso": "2026-09-30T23:03:07.822Z"
         }
       },
       {
@@ -325,7 +409,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T22:28:15.326Z"
+          "checkedAtIso": "2026-09-30T23:03:07.838Z"
         }
       },
       {
@@ -366,7 +450,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T22:28:15.336Z"
+          "checkedAtIso": "2026-09-30T23:03:07.842Z"
         }
       },
       {
@@ -402,7 +486,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T22:28:15.346Z"
+          "checkedAtIso": "2026-09-30T23:03:07.847Z"
         }
       },
       {
@@ -443,7 +527,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T22:28:15.356Z"
+          "checkedAtIso": "2026-09-30T23:03:07.851Z"
         }
       },
       {
@@ -485,7 +569,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-09-30T22:28:15.367Z"
+          "checkedAtIso": "2026-09-30T23:03:07.856Z"
         }
       }
     ],
