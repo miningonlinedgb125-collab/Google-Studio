@@ -1335,9 +1335,29 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
   // STEP 1: Synthesize all scene voiceovers first and measure exact audio durations so dialogue is NEVER cut off
   const preparedScenes = [];
   for (let i = 0; i < scenes.length; i++) {
+    const isHeroTurn = i % 2 === 0;
+    const spk = isHeroTurn ? heroName : companionName;
+    const prt = isHeroTurn ? companionName : heroName;
+    let sceneDialogue = String(scenes[i]?.dialogueArabic || "").trim();
+    if (i === 0 && !/أعضاء.*نورين كيدز|عيلة.*نورين كيدز/.test(sceneDialogue.slice(0, 140))) {
+      const stripped = sceneDialogue
+        .replace(
+          /^(ازيكم يا أصحابي الحلوين في قناة نورين كيدز\s*[!،.]?\s*(عاملين إيه النهارده\s*[؟!،.]?\s*)?|ازيكم يا أصحابي الحلوين\s*[!،.]?\s*)/i,
+          ""
+        )
+        .trim();
+      const greetPrefix =
+        dialect === "fusha"
+          ? `أَهْلاً وَسَهْلاً بِكُلِّ أَعْضَاءِ وَأَبْطَالِ عَائِلَةِ قَنَاةِ نُورِين كِيدْز الْغَالِين! أَنَا ${spk} وَمَعِي رَفِيقِي ${prt}!`
+          : isShort
+          ? `أهلاً وسهلاً بكل أعضاء وعيلة قناة نورين كيدز الغاليين! ازيكم يا أحلى أبطال؟ أنا ${spk} ومعايا ${prt}، منورين عالمنا السحري النهارده!`
+          : `أهلاً وسهلاً بكل أعضاء وعيلة قناة نورين كيدز الغاليين في كل مكان! ازيكم يا أشطر وأجمل أبطال؟ وحشتونا أوي! أنا ${spk} ومعايا رفيق المغامرة ${prt}، منورين عالمنا السحري النهارده!`;
+      sceneDialogue = stripped ? `${greetPrefix} ${stripped}` : greetPrefix;
+    }
     const sc = {
       ...scenes[i],
-      speakerName: i % 2 === 0 ? heroName : companionName,
+      speakerName: spk,
+      dialogueArabic: sceneDialogue || scenes[i]?.dialogueArabic,
     };
     const synth = await synthesizeRawSpeechOnly(sc, i, scenes.length, tmpDir, dialect);
     const minSceneFloor = isShort ? 15 : 38;
@@ -1384,8 +1404,8 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     }
   }
 
-  const overscanW = Math.round(W * 1.12);
-  const overscanH = Math.round(H * 1.12);
+  const overscanW = Math.round(W * 1.14);
+  const overscanH = Math.round(H * 1.14);
   const panRangeX = Math.max(8, overscanW - W);
   const panRangeY = Math.max(8, overscanH - H);
 
@@ -1402,7 +1422,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       "-i",
       rawImgPath,
       "-vf",
-      `scale=${overscanW}:${overscanH}:force_original_aspect_ratio=increase,crop=${overscanW}:${overscanH},eq=saturation=1.12:contrast=1.03,vignette=PI/6,setsar=1,format=yuv420p`,
+      `scale=${overscanW}:${overscanH}:force_original_aspect_ratio=increase,crop=${overscanW}:${overscanH},eq=saturation=1.14:contrast=1.05,vignette=PI/6,setsar=1,format=yuv420p`,
       "-frames:v",
       "1",
       "-q:v",
@@ -1427,14 +1447,14 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       sc.speakerName || (isCompTurn ? companionName : heroName),
       isCompTurn ? companionName : heroName
     );
-    const hasDuoCard = fs.existsSync(duoCardPath);
-    const shotImg = (i === 0 || i % 3 === 1) && hasDuoCard ? duoCardPath : activeImg;
+    // Strictly show the speaking character's full portrait (Hero when Hero speaks, Companion when Companion speaks)
+    const shotImg = activeImg;
     const prebakedImg = await getPrebakedPortrait(shotImg, i);
 
     console.log(
       `   -> [Scene ${i + 1}/${preparedScenes.length}] Speaker="${
         sc.speakerName || (isCompTurn ? companionName : heroName)
-      }" | Voice=${item.voiceDurSec.toFixed(1)}s | Scene=${dur}s (YouTube Fast-Processing Closed-GOP H.264 + Continuous PCM)...`
+      }" | Voice=${item.voiceDurSec.toFixed(1)}s | Scene=${dur}s (YouTube Fast-Processing Closed-GOP H.264 + Story VFX + Continuous PCM)...`
     );
 
     const maxAllowedSpeech = Math.max(4, dur - 1.1);
@@ -1473,24 +1493,85 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
 
     const sceneVidOnlyMp4 = path.join(tmpDir, `scene_vid_${i}.mp4`);
     const fadeOutStart = Math.max(0.4, Number((dur - 0.35).toFixed(2)));
+    const combinedStoryText = `${rawTopicText} ${sc.dialogueArabic || ""} ${sc.title || ""} ${sc.speakerName || ""}`;
+    let sprite1Lavfi =
+      "color=c=black@0.0:s=42x42:r=30:d=0.04,format=rgba,geq=r=255:g=232:b=95:a='240*exp(-((X-21)*(X-21)+(Y-21)*(Y-21))/56)',format=yuva420p,loop=loop=-1:size=1:start=0";
+    let sprite2Lavfi =
+      "color=c=black@0.0:s=40x40:r=30:d=0.04,format=rgba,geq=r=255:g=180:b=225:a='clip(240*exp(-(abs(X-20)*abs(Y-20))/9)*exp(-((X-20)*(X-20)+(Y-20)*(Y-20))/165),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
+    let borderColorHex = "0xFBBF24";
+
+    if (/بحر|محيط|غواصة|مرجان|حوت|دلفين|شوشو|ماء|مياه|شلال|نهر|مطر|سلحفاة/.test(combinedStoryText)) {
+      sprite1Lavfi =
+        "color=c=black@0.0:s=44x44:r=30:d=0.04,format=rgba,geq=r=145:g=238:b=255:a='clip(230*exp(-pow(sqrt((X-22)*(X-22)+(Y-22)*(Y-22))-14,2)/9)+165*exp(-((X-16)*(X-16)+(Y-15)*(Y-15))/12),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
+      sprite2Lavfi =
+        "color=c=black@0.0:s=34x34:r=30:d=0.04,format=rgba,geq=r=85:g=255:b=235:a='220*exp(-((X-17)*(X-17)+(Y-17)*(Y-17))/50)',format=yuva420p,loop=loop=-1:size=1:start=0";
+      borderColorHex = "0x38BDF8";
+    } else if (/فضاء|كوكب|نجوم|نجمة|زحل|قمر|تلسكوب|مسبار|جنى|بلبل|سماء/.test(combinedStoryText)) {
+      sprite1Lavfi =
+        "color=c=black@0.0:s=44x44:r=30:d=0.04,format=rgba,geq=r=225:g=245:b=255:a='clip(248*exp(-(abs(X-22)*abs(Y-22))/9)*exp(-((X-22)*(X-22)+(Y-22)*(Y-22))/185),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
+      sprite2Lavfi =
+        "color=c=black@0.0:s=36x36:r=30:d=0.04,format=rgba,geq=r=255:g=215:b=90:a='230*exp(-((X-18)*(X-18)+(Y-18)*(Y-18))/54)',format=yuva420p,loop=loop=-1:size=1:start=0";
+      borderColorHex = "0x818CF8";
+    } else if (/سنان|أسنان|عيادة|إسعاف|طبيبة|دكتورة|نورين|أرنوب|ملك|لوليتا|نظافة|غسيل|فواكه/.test(combinedStoryText)) {
+      sprite1Lavfi =
+        "color=c=black@0.0:s=44x44:r=30:d=0.04,format=rgba,geq=r=255:g=255:b=255:a='clip(250*exp(-(abs(X-22)*abs(Y-22))/8)*exp(-((X-22)*(X-22)+(Y-22)*(Y-22))/175),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
+      sprite2Lavfi =
+        "color=c=black@0.0:s=36x36:r=30:d=0.04,format=rgba,geq=r=90:g=250:b=200:a='225*exp(-((X-18)*(X-18)+(Y-18)*(Y-18))/52)',format=yuva420p,loop=loop=-1:size=1:start=0";
+      borderColorHex = "0x34D399";
+    } else if (/مهندسة|نوران|فرفوش|كارمن|سمسم|شريف|صقر|اختراع|جسر|منارة|طاحونة|قطار|مصعد|أرقام/.test(combinedStoryText)) {
+      sprite1Lavfi =
+        "color=c=black@0.0:s=44x44:r=30:d=0.04,format=rgba,geq=r=255:g=210:b=55:a='clip(248*exp(-(abs(X-22)*abs(Y-22))/9)*exp(-((X-22)*(X-22)+(Y-22)*(Y-22))/180),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
+      sprite2Lavfi =
+        "color=c=black@0.0:s=36x36:r=30:d=0.04,format=rgba,geq=r=75:g=200:b=255:a='225*exp(-((X-18)*(X-18)+(Y-18)*(Y-18))/52)',format=yuva420p,loop=loop=-1:size=1:start=0";
+      borderColorHex = "0xF59E0B";
+    }
+
+    const halfSpanX = Math.round(panRangeX * 0.5);
+    const halfSpanY = Math.round(panRangeY * 0.5);
+    const ampX = Math.max(4, Math.round(panRangeX * 0.45));
+    const ampY = Math.max(4, Math.round(panRangeY * 0.42));
     const camExprX =
       i % 2 === 0
-        ? `(${panRangeX}/2)+(${Math.floor(panRangeX * 0.38)})*sin(t*0.42)`
-        : `(${panRangeX}/2)-(${Math.floor(panRangeX * 0.38)})*cos(t*0.38)`;
-    const camExprY = `(${panRangeY}/2)+(${Math.floor(panRangeY * 0.32)})*cos(t*0.35)`;
+        ? `${halfSpanX}+${ampX}*sin(2*PI*t/9.5)`
+        : `${halfSpanX}-${ampX}*cos(2*PI*t/10.0)`;
+    const camExprY =
+      i % 2 === 0
+        ? `${halfSpanY}+${ampY}*cos(2*PI*t/12.0)`
+        : `${halfSpanY}+${ampY}*sin(2*PI*t/11.5)`;
+
+    const marginX = Math.round(W * 0.07);
+    const rangeX = Math.max(120, W - marginX * 2 - 48);
+    const bottomY = Math.round(H * 0.92);
+    const travelY = Math.max(160, Math.round(H * 0.85));
+
+    const vfxFilterComplex = [
+      `[0:v]format=yuv420p,loop=loop=-1:size=1:start=0,fps=30,trim=duration=${dur},crop=${W}:${H}:x='${camExprX}':y='${camExprY}'[base]`,
+      `[1:v]split=3[s1][s2][s3]`,
+      `[2:v]split=3[o1][o2][o3]`,
+      `[base][s1]overlay=x='${marginX}+${rangeX}*(0.5+0.46*sin(t*0.85+0.4))':y='${bottomY}-${travelY}*mod(t*0.21+0.08,1)':format=yuv420:shortest=1[v1]`,
+      `[v1][s2]overlay=x='${marginX}+${rangeX}*(0.5+0.45*cos(t*1.05+1.9))':y='${bottomY}-${travelY}*mod(t*0.26+0.42,1)':format=yuv420:shortest=1[v2]`,
+      `[v2][s3]overlay=x='${marginX}+${rangeX}*(0.5+0.46*sin(t*0.95+3.3))':y='${bottomY}-${travelY}*mod(t*0.23+0.74,1)':format=yuv420:shortest=1[v3]`,
+      `[v3][o1]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.78+1.1))':y='${bottomY}-${travelY}*mod(t*0.19+0.24,1)':format=yuv420:shortest=1[v4]`,
+      `[v4][o2]overlay=x='${marginX}+${rangeX}*(0.5+0.44*sin(t*1.12+2.6))':y='${bottomY}-${travelY}*mod(t*0.29+0.58,1)':format=yuv420:shortest=1[v5]`,
+      `[v5][o3]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.92+4.2))':y='${bottomY}-${travelY}*mod(t*0.24+0.86,1)':format=yuv420:shortest=1,drawbox=x=0:y=0:w=${W}:h=${H}:color=${borderColorHex}@0.88:t=8,setsar=1,fade=t=in:st=0:d=0.30,fade=t=out:st=${fadeOutStart}:d=0.30,format=yuv420p[vout]`,
+    ].join(";");
 
     await execFileAsync("ffmpeg", [
       "-y",
-      "-loop",
-      "1",
-      "-framerate",
-      "30",
-      "-t",
-      String(dur),
       "-i",
       prebakedImg,
-      "-vf",
-      `crop=${W}:${H}:x='${camExprX}':y='${camExprY}',fade=t=in:st=0:d=0.30,fade=t=out:st=${fadeOutStart}:d=0.30,format=yuv420p,setsar=1`,
+      "-f",
+      "lavfi",
+      "-i",
+      sprite1Lavfi,
+      "-f",
+      "lavfi",
+      "-i",
+      sprite2Lavfi,
+      "-filter_complex",
+      vfxFilterComplex,
+      "-map",
+      "[vout]",
       "-an",
       "-t",
       String(dur),
