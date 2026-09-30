@@ -1024,15 +1024,14 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
       }
 
       // 1b) Secondary Gemini Native TTS (`gemini-3.8-flash-lite-tts` / `gemini-3.8-flash-tts`)
+      // Send ONLY pure dialogue text in `contents` so the TTS model never reads dialect instructions out loud!
       const ttsModels = ["gemini-3.8-flash-lite-tts", "gemini-3.8-flash-tts", "gemini-2.5-flash-preview-tts"];
+      const pureDialogueForTts = stripLeakedVoiceInstructionsRunner(dialogue);
       for (const ttsModel of ttsModels) {
         try {
-          const ttsPrompt = isEgyptian
-            ? `${styleInstruction}. أنت مؤدي صوتي مصري قاهري محترف في أفلام كرتون ديزني وبيكسار المدبلجة باللهجة المصرية العامية القاهرية للأطفال. انطق النص التالي فقط باللهجة المصرية العامية القاهرية الصافية ببهجة وحيوية وبنطق الجيم المصرية غير المعطشة (G) بدون أي فصحى نهائياً:\n${dialogue}`
-            : `${styleInstruction}. اقرأ النص التالي بوضوح وحيوية للأطفال:\n${dialogue}`;
           const gemRes = await ai.models.generateContent({
             model: ttsModel,
-            contents: [{ role: "user", parts: [{ text: ttsPrompt }] }],
+            contents: [{ role: "user", parts: [{ text: pureDialogueForTts }] }],
             config: {
               responseModalities: [Modality.AUDIO],
               speechConfig: {
