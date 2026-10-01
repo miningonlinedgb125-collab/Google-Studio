@@ -1255,39 +1255,26 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     .split("|")[0]
     .trim();
 
-  let matchedDuo = null;
-  if (/أم ملك|ام ملك|المعلمة|البطريق المرح/.test(rawTopicText)) {
-    matchedDuo = { hero: "أم ملك", comp: "البطريق المرح" };
-  } else if (/ملك|لوليتا|طوارئ|القطة لوليتا/.test(rawTopicText)) {
-    matchedDuo = { hero: "ملك", comp: "القطة لوليتا" };
-  } else if (/سدرة الصغنونة|الفراشة الملونة|حديقة الألوان/.test(rawTopicText)) {
-    matchedDuo = { hero: "سدرة الصغنونة", comp: "الفراشة الملونة" };
-  } else if (/ذياد|العصفورة الفرفوشة/.test(rawTopicText)) {
-    matchedDuo = { hero: "ذياد", comp: "العصفورة الفرفوشة" };
-  } else if (/شريف|الصقر الذكي|الأرقام الذهبية|محاسب/.test(rawTopicText)) {
-    matchedDuo = { hero: "أستاذ شريف", comp: "الصقر الذكي" };
-  } else if (/جدو|الفأر المشاكس/.test(rawTopicText)) {
-    matchedDuo = { hero: "جدو", comp: "الفأر المشاكس" };
-  } else if (/تيتة|الدب باندا|باندا/.test(rawTopicText)) {
-    matchedDuo = { hero: "تيتة", comp: "الدب باندا" };
-  } else if (/سنان|أسنان|الابتسامة|السوسة|عيادة|إسعاف|طبيبة|دكتورة|نورين|أرنوب|غسيل الإيدين|غسل اليدين|فواكه/.test(rawTopicText)) {
-    matchedDuo = { hero: "الطبيبة نورين", comp: "أرنوب الشقي الممرض" };
-  } else if (/المهندسة|نوران|فرفوش|هندسة|جسر|مصعد|منارة|طاحونة/.test(rawTopicText)) {
-    matchedDuo = { hero: "المهندسة نوران", comp: "النمر الفرفوش" };
-  } else if (/الغواصة|الحوت|مملكة المرجان|اللؤلؤة|المحيط|شوشو|كريم|مرجان|شاطئ المرجان/.test(rawTopicText)) {
-    matchedDuo = { hero: "شوشو القبطان الصغير", comp: "مرجان الدلفين المرح" };
-  } else if (/الكوكب|حلقات زحل|المسبار|التلسكوب|الفضاء|جنى|نور رائدة|بلبل/.test(rawTopicText)) {
-    matchedDuo = { hero: "جنى رائدة الفضاء", comp: "بلبل الروبوت اللطيف" };
-  } else if (/كارمن|سلمى|سمسم|جناح الرياح|جناح الهوا|تدوير المخلفات|المناطيد الشمسية|اختراع/.test(rawTopicText)) {
-    matchedDuo = { hero: "كارمن المخترعة الصغيرة", comp: "سمسم السنجاب الطائر" };
-  } else if (/تامر|ياسين|كركور|الساعة الرملية|القلعة البلورية|واحة الكريستال/.test(rawTopicText)) {
-    matchedDuo = { hero: "تامر فارس الواحة", comp: "كركور الببغاء الحكيم" };
-  } else if (/عمرو|فارس المستكشف|زعتر|شجرة الأمانة|البذرة العجيبة|غزالة الوادي/.test(rawTopicText)) {
-    matchedDuo = { hero: "عمرو المستكشف", comp: "زعتر الثعلب الذكي" };
-  }
+  const matchedTeam = resolveCanonicalTeamForRunner(
+    rawTopicText,
+    episode?.mainCharacterName || scenes[0]?.speakerName || "",
+    episode?.companionName || scenes[1]?.speakerName || ""
+  );
 
-  const heroName = matchedDuo?.hero || scenes[0]?.speakerName || "الطبيبة نورين";
-  const companionName = matchedDuo?.comp || scenes[1]?.speakerName || "أرنوب الشقي الممرض";
+  const heroName =
+    matchedTeam?.mainCharacterName ||
+    episode?.mainCharacterName ||
+    scenes[0]?.speakerName ||
+    "الطبيبة نورين";
+  const companionName =
+    matchedTeam?.companionName ||
+    episode?.companionName ||
+    scenes[1]?.speakerName ||
+    "أرنوب الشقي الممرض";
+  if (episode && typeof episode === "object") {
+    episode.mainCharacterName = heroName;
+    episode.companionName = companionName;
+  }
   const heroImg = resolveCharacterAvatarPath(heroName, heroName);
   const compImg = resolveCharacterAvatarPath(companionName, companionName);
 
@@ -1988,8 +1975,8 @@ const RUNNER_CHARACTER_TEAMS = [
     stories: [
       "سر الساعة الرملية المضيئة في واحة الكريستال وتعلّم تنظيم الوقت",
       "شجرة الأمانة الذهبية في غابة النجوم وإزاي الصدق بيكسب دايما",
-      "جسر قوس قزح بين السحاب وإزاي نصالح أصحابنا بالتسامح والكلمة الحلوة",
-      "مفتاح القلعة البلورية وأهمية طاعة ماما وبابا وسماع النصيحة",
+      "خيمة التسامح الذهبية في واحة الكريستال وإزاي نصالح أصحابنا بالكلمة الحلوة",
+      "مفتاح بوابة الواحة الذهبية وأهمية طاعة ماما وبابا وسماع النصيحة",
       "المراية الصادقة في واحة الكريستال وتعلّم الثقة في النفس ومساعدة غيرنا",
       "مهرجان الفوانيس الطائرة في غابة النجوم وقيمة مشاركة اللعب مع أصحابنا",
     ],
@@ -2093,6 +2080,86 @@ const RUNNER_CHARACTER_TEAMS = [
     ],
   },
 ];
+
+function resolveCanonicalTeamForRunner(
+  topicText = "",
+  existingMainChar = "",
+  existingCompChar = ""
+) {
+  const t = String(topicText || "").replace(/هـاننا/g, "سناننا").trim();
+  const mainClean = String(existingMainChar || "").trim();
+  const compClean = String(existingCompChar || "").trim();
+
+  // 1) Exact or high-overlap match against any team's official stories array
+  if (t) {
+    for (const team of RUNNER_CHARACTER_TEAMS) {
+      for (const st of team.stories) {
+        if (t.includes(st) || st.includes(t)) {
+          return team;
+        }
+        const stWords = st.split(/\s+/).filter((w) => w.length > 3);
+        const matchCount = stWords.filter((w) => t.includes(w)).length;
+        if (stWords.length >= 4 && matchCount >= 4) {
+          return team;
+        }
+      }
+    }
+  }
+
+  // 2) Explicit character name mentioned inside the topic text itself
+  if (t) {
+    if (/أم ملك|ام ملك|البطريق المرح/.test(t)) return RUNNER_CHARACTER_TEAMS[9];
+    if (/القطة لوليتا|لوليتا|الدكتورة ملك|الطبيبة ملك/.test(t)) return RUNNER_CHARACTER_TEAMS[7];
+    if (/سدرة الصغنونة|سدرة|الفراشة الملونة/.test(t)) return RUNNER_CHARACTER_TEAMS[8];
+    if (/ذياد|العصفورة الفرفوشة/.test(t)) return RUNNER_CHARACTER_TEAMS[10];
+    if (/أستاذ شريف|شريف|الصقر الذكي/.test(t)) return RUNNER_CHARACTER_TEAMS[11];
+    if (/جدو|الفأر المشاكس/.test(t)) return RUNNER_CHARACTER_TEAMS[12];
+    if (/تيتة|تيته|الدب باندا/.test(t)) return RUNNER_CHARACTER_TEAMS[13];
+    if (/نورين|أرنوب/.test(t)) return RUNNER_CHARACTER_TEAMS[0];
+    if (/المهندسة نوران|نوران|النمر الفرفوش/.test(t)) return RUNNER_CHARACTER_TEAMS[1];
+    if (/عمرو المستكشف|عمرو|زعتر/.test(t)) return RUNNER_CHARACTER_TEAMS[2];
+    if (/جنى رائدة|جنى|بلبل الروبوت/.test(t)) return RUNNER_CHARACTER_TEAMS[3];
+    if (/شوشو القبطان|شوشو|مرجان الدلفين/.test(t)) return RUNNER_CHARACTER_TEAMS[4];
+    if (/كارمن المخترعة|كارمن|سمسم السنجاب/.test(t)) return RUNNER_CHARACTER_TEAMS[5];
+    if (/تامر فارس|تامر|كركور/.test(t)) return RUNNER_CHARACTER_TEAMS[6];
+  }
+
+  // 3) If the episode already has a valid assigned team hero, strictly preserve it!
+  if (mainClean) {
+    const byExisting = RUNNER_CHARACTER_TEAMS.find(
+      (tm) =>
+        tm.mainCharacterName === mainClean ||
+        mainClean.includes(tm.mainCharacterName) ||
+        tm.mainCharacterName.includes(mainClean) ||
+        (compClean && tm.companionName === compClean)
+    );
+    if (byExisting) return byExisting;
+  }
+
+  // 4) Fallback domain keyword match only when no character was assigned
+  if (/سنان|أسنان|الابتسامة|عيادة|إسعاف|طبيبة|دكتورة|غسيل الإيدين/.test(t)) {
+    return RUNNER_CHARACTER_TEAMS[0];
+  }
+  if (/بناء جسر|هندسة|المصعد الهوائي|منارة المرجان|نافورة الموسيقى|قبة النجوم/.test(t)) {
+    return RUNNER_CHARACTER_TEAMS[1];
+  }
+  if (/الغواصة|الحوت|مملكة المرجان|اللؤلؤة الموسيقية|المحيط/.test(t)) {
+    return RUNNER_CHARACTER_TEAMS[4];
+  }
+  if (/الكوكب|حلقات زحل|المسبار|التلسكوب|مكتبة الفضاء/.test(t)) {
+    return RUNNER_CHARACTER_TEAMS[3];
+  }
+  if (/جناح الهوا|تدوير المخلفات|المناطيد الشمسية|القطار المغناطيسي|طاحونة الهواء/.test(t)) {
+    return RUNNER_CHARACTER_TEAMS[5];
+  }
+  if (/الساعة الرملية|واحة الكريستال|شجرة الأمانة|خيمة التسامح|الفوانيس الطائرة|المراية الصادقة/.test(t)) {
+    return RUNNER_CHARACTER_TEAMS[6];
+  }
+  if (/البذرة العجيبة|بوصلة الرياح|المنطاد البلوري|فراشة النور|البلورة الزرقاء|كهف الصدى/.test(t)) {
+    return RUNNER_CHARACTER_TEAMS[2];
+  }
+  return RUNNER_CHARACTER_TEAMS[0];
+}
 
 function getShortCharacterDisplayNameRunner(fullName = "", dialect = "egyptian") {
   const clean = String(fullName || "").trim();
@@ -2920,16 +2987,45 @@ async function main() {
     process.exit(0);
   }
 
-  // If this is a delayed GitHub native `schedule` cron event, check if the Studio Server's exact-minute dispatcher
-  // already triggered and ran (or is currently running) this scheduled slot within the last 60 minutes:
+  // If this is a delayed GitHub native `schedule` cron event:
+  // 1) Verify current Cairo time is actually within the configured schedule window (blocks stale crons from old times the user already changed!)
+  // 2) Verify the Studio Server's exact-minute dispatcher hasn't already triggered this slot within the last 90 minutes.
   if (isCronEvent) {
+    const targetCronHHMM = isFacebookWorkflow ? fbGhTime : ytGhTime;
+    const [tH, tM] = String(targetCronHHMM || "19:00")
+      .split(":")
+      .map((n) => Number(n) || 0);
+    const nowCairoParts = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Africa/Cairo",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    })
+      .format(new Date())
+      .split(":")
+      .map((n) => Number(n) || 0);
+    const targetTotalMin = tH * 60 + tM;
+    const currentTotalMin = (nowCairoParts[0] || 0) * 60 + (nowCairoParts[1] || 0);
+    let diffFromTargetMin = currentTotalMin - targetTotalMin;
+    if (diffFromTargetMin < -720) diffFromTargetMin += 1440;
+    if (diffFromTargetMin > 720) diffFromTargetMin -= 1440;
+
+    if (diffFromTargetMin < -3 || diffFromTargetMin > 40) {
+      console.log(
+        `⏸️ [Stale Cron Guard] الوقت الحالي في مصر (${String(nowCairoParts[0]).padStart(2, "0")}:${String(
+          nowCairoParts[1]
+        ).padStart(2, "0")}) خارج نافذة الموعد المحفوظ حالياً (${targetCronHHMM} بتوقيت مصر) — تخطي تشغيل الـ Cron القديم.`
+      );
+      process.exit(0);
+    }
+
     const lastReportIso =
       schedule?.lastCloudRunReport?.reportedAtIso ||
       fbSchedule?.lastCloudRunReport?.reportedAtIso ||
       "";
     if (lastReportIso) {
       const elapsedMs = Date.now() - Date.parse(lastReportIso);
-      if (!Number.isNaN(elapsedMs) && elapsedMs >= 0 && elapsedMs < 60 * 60 * 1000) {
+      if (!Number.isNaN(elapsedMs) && elapsedMs >= 0 && elapsedMs < 90 * 60 * 1000) {
         console.log(
           `⏭️ [Duplicate Cron Guard] تم تنفيذ جدولة GitHub Actions بالفعل لهذا الموعد قبل ${Math.round(
             elapsedMs / 60000
@@ -2966,14 +3062,14 @@ async function main() {
             const ageMin = (Date.now() - createdMs) / 60000;
             return (
               ageMin >= 0 &&
-              ageMin <= 50 &&
+              ageMin <= 90 &&
               (r.status === "in_progress" ||
                 (r.status === "completed" && r.conclusion === "success"))
             );
           });
           if (recentDuplicate) {
             console.log(
-              `⏭️ [Duplicate Cron Guard] توجد تشغيلة مجدولة نشطة أو مكتملة بالفعل (#${recentDuplicate.id}) خلال الـ 50 دقيقة الماضية — تخطي تكرار الـ Cron المتأخر.`
+              `⏭️ [Duplicate Cron Guard] توجد تشغيلة مجدولة نشطة أو مكتملة بالفعل (#${recentDuplicate.id}) خلال الـ 90 دقيقة الماضية — تخطي تكرار الـ Cron المتأخر.`
             );
             process.exit(0);
           }
