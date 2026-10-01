@@ -577,5 +577,58 @@
     "mainCharacterId": "karim",
     "companionCharacterId": "marjan",
     "preUploadVerified": true
-  }
+  },
+  "scheduledHistory": [
+    {
+      "id": "gh-run-36891939447",
+      "uploadMode": "daily_schedule",
+      "triggerSource": "github_actions_cloud",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-01 (19:55 بتوقيت مصر)",
+      "shortEpisodeTitle": "Noreen Kids: رحلة البحث عن مفتاح البوابة القديمة مع الشاب - مغامرة ذياد والعصفورة الفرفوشة",
+      "shortTitle": "Noreen Kids: رحلة البحث عن مفتاح البوابة القديمة مع الشاب - مغامرة ذياد والعصفورة الفرفوشة",
+      "shortPlaylistId": "PLPwfeXzB3ozU",
+      "privacyStatus": "public",
+      "madeForKids": false,
+      "containsSyntheticMedia": false,
+      "categoryId": "1",
+      "dialect": "egyptian",
+      "status": "uploaded_live",
+      "youtubeShortVideoId": "U9eHXZK9T2E",
+      "facebookShortVideoId": "1462857405810865",
+      "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1462857405810865",
+      "facebookShortTitle": "Noreen Kids | رحلة البحث عن مفتاح البوابة القديمة مع الشاب - مغامرة ذياد والعصفورة الفرفوشة",
+      "ffprobeReport": {
+        "valid": true,
+        "passed": true,
+        "containerFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "width": 720,
+        "height": 1280,
+        "fps": 30,
+        "audioCodec": "aac",
+        "audioSampleRate": 48000,
+        "audioChannels": 2,
+        "fastStartMoovFirst": true,
+        "durationSec": 79,
+        "fileSizeBytes": 4200000,
+        "inspectedAt": "19:55"
+      },
+      "processingDetails": {
+        "processingStatus": "succeeded",
+        "partsTotal": 100,
+        "partsProcessed": 100,
+        "timeLeftMs": 0,
+        "fileDetailsAvailability": "available"
+      }
+    }
+  ],
+  "recentStoryHistory": [
+    {
+      "topic": "رحلة البحث عن مفتاح البوابة القديمة مع الشاب الطيب ذياد والعصفورة",
+      "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة"
+    }
+  ]
 }
