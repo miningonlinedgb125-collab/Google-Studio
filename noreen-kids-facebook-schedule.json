@@ -364,9 +364,68 @@
   ],
   "recentStoryHistory": [
     {
+      "topic": "تصميم القلعة البلورية القوية قدام الهوا في واحة",
+      "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "رحلة المسبار الصغير حوالين حلقات زحل وتعلّم الشجاعة",
+      "mainCharacterName": "جنى رائدة الفضاء",
+      "companionName": "بلبل الروبوت اللطيف"
+    },
+    {
       "topic": "رحلة البحث عن مفتاح البوابة القديمة مع الشاب الطيب ذياد والعصفورة",
       "mainCharacterName": "ذياد",
       "companionName": "العصفورة الفرفوشة"
     }
-  ]
+  ],
+  "lastFacebookCloudRunReport": {
+    "id": "gh-run-36932392713",
+    "uploadMode": "manual_instant",
+    "triggerSource": "github_actions_cloud",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-02 (01:10 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1790892103637-oyq4",
+    "longEpisodeId": "ep-gh-long-1790892103724-xlus",
+    "shortEpisodeTitle": "تصميم القلعة البلورية القوية قدام الهوا في واحة",
+    "longEpisodeTitle": "Noreen Kids: رحلة المسبار الصغير حوالين حلقات زحل وتعلّم الشجاعة | مغامرات جنى وبلبل",
+    "shortTitle": "تصميم القلعة البلورية القوية قدام الهوا في واحة",
+    "longTitle": "Noreen Kids: رحلة المسبار الصغير حوالين حلقات زحل وتعلّم الشجاعة | مغامرات جنى وبلبل",
+    "longPlaylistId": "PLbjN20PzrCYk",
+    "privacyStatus": "public",
+    "madeForKids": false,
+    "containsSyntheticMedia": false,
+    "categoryId": "1",
+    "dialect": "egyptian",
+    "status": "uploaded_live",
+    "youtubeLongVideoId": "XJYy1JWCHVs",
+    "facebookLongVideoId": "972920985120717",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/972920985120717",
+    "facebookLongTitle": "Noreen Kids | رحلة المسبار الصغير حوالين حلقات زحل وتعلّم الشجاعة - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
+    "ffprobeReport": {
+      "valid": true,
+      "passed": true,
+      "containerFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+      "videoCodec": "h264",
+      "videoProfile": "High",
+      "pixelFormat": "yuv420p",
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "audioCodec": "aac",
+      "audioSampleRate": 48000,
+      "audioChannels": 2,
+      "fastStartMoovFirst": true,
+      "durationSec": 323,
+      "fileSizeBytes": 38472253,
+      "inspectedAt": "01:10"
+    },
+    "processingDetails": {
+      "processingStatus": "succeeded",
+      "partsTotal": 100,
+      "partsProcessed": 100,
+      "timeLeftMs": 0,
+      "fileDetailsAvailability": "available"
+    },
+    "reportedAtIso": "2026-10-01T22:10:44.702Z"
+  }
 }
