@@ -2920,6 +2920,68 @@ async function main() {
     process.exit(0);
   }
 
+  // If this is a delayed GitHub native `schedule` cron event, check if the Studio Server's exact-minute dispatcher
+  // already triggered and ran (or is currently running) this scheduled slot within the last 60 minutes:
+  if (isCronEvent) {
+    const lastReportIso =
+      schedule?.lastCloudRunReport?.reportedAtIso ||
+      fbSchedule?.lastCloudRunReport?.reportedAtIso ||
+      "";
+    if (lastReportIso) {
+      const elapsedMs = Date.now() - Date.parse(lastReportIso);
+      if (!Number.isNaN(elapsedMs) && elapsedMs >= 0 && elapsedMs < 60 * 60 * 1000) {
+        console.log(
+          `⏭️ [Duplicate Cron Guard] تم تنفيذ جدولة GitHub Actions بالفعل لهذا الموعد قبل ${Math.round(
+            elapsedMs / 60000
+          )} دقيقة — تخطي تكرار الـ Cron المتأخر.`
+        );
+        process.exit(0);
+      }
+    }
+    const ghTokenCheck = String(
+      process.env.GITHUB_TOKEN || vault.githubToken || ""
+    ).trim();
+    const ghRepoCheck = String(
+      process.env.GITHUB_REPOSITORY || vault.githubSelectedRepo || ""
+    ).trim();
+    const currentRunId = Number(process.env.GITHUB_RUN_ID || 0);
+    if (ghTokenCheck && ghRepoCheck && ghRepoCheck.includes("/")) {
+      try {
+        const runsRes = await fetch(
+          `https://api.github.com/repos/${ghRepoCheck}/actions/runs?per_page=8`,
+          {
+            headers: {
+              Authorization: `Bearer ${ghTokenCheck}`,
+              Accept: "application/vnd.github+json",
+              "User-Agent": "Noreen-Kids-3D-Studio-Runner",
+            },
+          }
+        );
+        if (runsRes.ok) {
+          const runsData = await runsRes.json();
+          const recentDuplicate = (runsData?.workflow_runs || []).find((r) => {
+            if (!r || (currentRunId && Number(r.id) === currentRunId)) return false;
+            const createdMs = Date.parse(r.created_at || "");
+            if (Number.isNaN(createdMs)) return false;
+            const ageMin = (Date.now() - createdMs) / 60000;
+            return (
+              ageMin >= 0 &&
+              ageMin <= 50 &&
+              (r.status === "in_progress" ||
+                (r.status === "completed" && r.conclusion === "success"))
+            );
+          });
+          if (recentDuplicate) {
+            console.log(
+              `⏭️ [Duplicate Cron Guard] توجد تشغيلة مجدولة نشطة أو مكتملة بالفعل (#${recentDuplicate.id}) خلال الـ 50 دقيقة الماضية — تخطي تكرار الـ Cron المتأخر.`
+            );
+            process.exit(0);
+          }
+        }
+      } catch {}
+    }
+  }
+
   const runMode = parseRunMode(
     process.env.RUN_MODE ||
       (isFacebookWorkflow ? fbSchedule.selectedWorkflowMode : schedule.selectedWorkflowMode) ||
