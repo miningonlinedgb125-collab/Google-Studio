@@ -19,8 +19,14 @@ on:
 
 jobs:
   publish-noreen-facebook-daily:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 35
+    permissions:
+      contents: write
+      actions: read
+    concurrency:
+      group: noreen-facebook-daily-publish-workflow
+      cancel-in-progress: false
     steps:
       - name: 1. Checkout Noreen Kids 3D Studio Repository
         uses: actions/checkout@v4
