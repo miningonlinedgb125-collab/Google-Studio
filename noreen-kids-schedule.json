@@ -30,68 +30,23 @@
     "longCustomHashtags": [],
     "customFacebookPackages": {}
   },
-  "syncedAtIso": "2026-10-01T05:25:12.164Z",
-  "syncReason": "facebook_publisher_saved",
-  "encryptedVault": "fc10076ff4e6ac2e96c290eb1dbe7b2a:7c2d51577c576ab704c0d3d55295f7fc808b2c649142b4fc2e1de21d4a1fe9b7403fc51e7d87662567cf0a0ab6f36a526b3b34afb506ecc3ec5c9349ac8d16493b2c571125082c0f02fa815186eb1de136228fd57cdb9d81ade08ccbc7ac828432ffcf5cb0be2fc4b4b5c707210377edc066bfd9e0a4a8a2f7eba9d751b50bdce4270e60b730986ce036f1b668549b5cda5229de89dc53a3238ac841ac30e56b7963284ec7ed369e2a208b6fa40a66f9c8150c8baeb161bcbce7e93a9110f135f691f6c2e89d48ccb153691257555d794bd8111cfaaaa4bb68feb6c3527ca7a711234eaa3de2042b0b4173c64175722fdcc66f82d222b7d7d933ee442170ecc6c83f16943de4e26befc6810ca65e5d1582d443e2c97b75e94af5b962ae4291ba79093fee638599b81edfde6cfdb16188f39b0803cdd7f891078b049d1c7070408477db17940f2889f40eb8ea64bf3a2a3e1a43fb44c89c07e43ef9fe6bb9bf7420f2435d400050d02536718329e24852ce6888063b4cc6a6bd2d947b7ca51894bc1e72090382671d55cb924cf9a1837704f0aadb3e889fcf91e2c687df57dabcca1b11532db11627ddb05568c1805b9e117d811e64f079f0c886fd76dbd846bd7ac4e426868954a114a55c176d6351ac24ffd2748fc5f6034979730ff794af1bca389229c6a0d6a0dbc99a9ed6de92bbb033ba793a4f0f0a750d1ef9b687628e033ce324762ddcc74d52d4c9c3c7b4128f1cfcc4545fbe0d36c04b58affc68a3ce04c8329a9bbf173cf80072c57ee7c644e2c89f1056be6956b14cfcf63b83618f469a960e3954343ce608b7fd11e5416b1b01061b6f94485073f6f0ea201dfebbd9fe2dc3e42b8c75afe8674ec6f740e892149171fa31261fc47c60b11dd1a39cecc7a271c922dccb6c507481223ffc83e6c85bc2fc167adc148bc19ce675faeaac31e556dd252e0afa068d2a2d698d5746bd35b1c39bd675b5b4f9209aa6c820175a48e4743dbbfaeed16f58b372a6683655391cd6b5fa4989662e1f5098dcabfb6e615d5e13facfa353555fedb8886bdfd50d9c7a4a954c10e3aa85e7a94f52d008d5a561a3a7ea3b7975827dc92eab1bbe4f59a90842b44e0a2d28ed6bf09746f47968df3d54f5d7de7cd2c72ece6f736d03a04d1158e46656d6c557aafccefc2a9894b436d3141fdb70f29cfcf561b42722c857b344fa0c9ea17cb30f2e4b127e2ad5e9150136aab75d3a7d1eafb0898380c05c74d5aac3ed9ea79b7a8df7e9a08f1948fbae128e55bd6294a0f909c383be48593b4dd1a67d41fa86132b67f036ea8d2c11775f5bac8e9c924202087d34e350c94b340709c59847cb7c501ef6491af29804dc7452a71c013f8b48177e3365d5a73e0784fac01618c04f6d50d2014734a21cc2761fb22f71ca70a14073db5a4d14633cc64eb9c071f77629c6b20f0ed0116f3ca8422e70e7fc19aef12ba5a9cef93d9cfd3728d316d0cc907fb63138ed230f3ee250b2fe95ed94307a4fb053d96362486d619f65927ca4b9686aa91d202b0ca8ab859103b4ec911cc242119de080bda74522d2903bff559ae3b17633f8784a8189e3537cf6ed3149d7d7118299a676fcbbd74f1918d1375e198181f9faa1e3b6acbf817c3f2980dcbb2a3a61d3fdd8d9b9c3a07b88c2cff9cf83b628ec8e69c05e7062bbfa7c6c02ccb971d316f0a57ac4315569ebc26a707275b9d6f83a1da89988b07783702986b7251bd33e9e4b7af346d9e0ea3e9dba338a04bf9b2d029f9acfc4cc41517ad4bc95590058c94152e63f0b6b530c50b3b295a90c6a4bd134ec05e09475a3fa08d45943245ccd6a4745a9f98f79db2c8beb2050b4f95e7b6678d344736e11ad43718c6b94fe3b9753b5d408316833b091a10387111a46588d2c591f9785f103453d6223b799bac3f048c56f6d769d5e02519e64b4d142eea509f9646646ab27597ff6fa9ac4d11647565be7f4316e92bcaf8170dfdd27370bb5063275e97f6106dc77ecf508fa86b54eff31d578df6476df5858ceb7db1b40aff32d76687505b17c219d5a594e7aefa4464cdfdfcd1966faaab386de9fba1c900c71ff49abf1e76b36710b684e1d36c1c9bd5929e4b3d3406e268dbd7c88d058ff3b39e636b9ad97b017f1089eeb18d0eb419bcb86d609",
+  "syncedAtIso": "2026-10-01T05:25:16.265Z",
+  "syncReason": "dashboard_state_updated",
+  "encryptedVault": "ed4d1e8f49502a8403f053d7263b1d42:81420b1769610d94627fa6ef9be8560d66727ad499ec8039bb713bd89f98075affe159e0953b49b09bebb3a54d91a776e9ffce2e8064eeb44213372688067f2c3f09e7ca0c2f452415425ca4532e1faa015b90f2e8bb513417f871a5d52657957f606f9efd51db03000379a2073dd02e3b0b128c23fc42ffc304e31c11e8ad9a0980f3a1f3fa3701a31659047b02eb72f77d8f3a9e4af967893d7747571ace34b9b9eada7c3498489d547060eb5e383d13818792da062818e9f4ed8570e6211c735ee956d8e375cd4a71d5e3730ede8e6393a82737b5bed9be8558924fb861e18074cf5fba9581297e728db426809b78b7d2c5082a53f64bf44f0057d3e1d187b83ca8da908252d6b5eda6e66708261ebe76dbf361aec089daa170f96de2782239e13c3cd2cea683cef49e4d082294f951b41734f615bb780d36c8c76eb3b5a7536710ece5d7a82e0174e8079ae01b686b7bbb1dfa32aee1d262c8bc41e24f83d0adede3359b97b477eaf5934fbdc3e0ffaae7fd9e4245b9b90058f0303220e97eeccf1d61b9423715482b1a23b8d5b6ad30479f13c7a6dd0f41e0ec1b9b84902693e7b4283f3d5aa01cbaf00fd4d72d8e1efc137aa4f904bdbfd964890a33dd7656ed36607bc07dd4733b0ed004a98cdc2c422b281c278ad11857ec2db88d60fcd531ffd872f4b850bb3e2d15fd24c490d3e923a9b257d6ac4efeb3c797a8e8f8fa776ba820c35e2fac16aba0dd62d8e89a5e28b6d0a0460bb9596adf6b226e2653a966ecb35173e988b498a74c672af07d921a98961c718b959c320f02bf3b4a2bac9f708f6486cc3af08258b67c82a4db488da54282b84a04b24429cbeba9077cbab2e6c0a966b3a16fbb00e27d96be389ddcf6b30e87d3c9a20841b740b27924690bbfceb321130d8ab09ed5659c47f26e996084cebd93bfe18087ba7014c4ae8187179e1ffb7de50923f7d0824ee0e6934c38095d4c30662e3e641e81870054a90c8350688fa040bfbea79f636b74c129177b49e16019159e63c19b7270f1fe963bb6cd0791deeff2e1374f3bfae0affb6a570b951378d76edb3086b4612e872b1c0053f9ab981c438d1a9264595ec481bd4fbaed7ddffbca74fccbd1549dfa09dfe1cc569a9b397f3c75481d467cd64e2bab3230f5de0321408594b8c9d8c0219e3c04433c7b6b40946570d69655433a5a812e8b042249289c9e3ed5fbd405cded51ef2c21c7c55c2411a50a11b3cdfadb4f970ce6f4e8c63a0157fe73dbcb9df57b3d566def512132d08eea039dd43e096015663fe3430eac07ae3bdf11a38b334ef2450a27ec2fec4866c4f878c2acb39a92f4a96453a8b5486dce1141476bd7802e5f34bd00f5c6ea6df486133e930b197e064c77d43a6029a5172a36099f8141dada4c435148e709d3dc22620c922319b7331b1be5b17aeb488425cd9767161908c36bbe490d619401a8269d419b04ac9b9ff28d02a0af4d75b33687d9e282d0e6f15f7b19cdd6601c4a796b8c39dbcc59e7cbb21292a984007298b50eecfec373fcf968e029e672d5f9b6574d7483e304858582f339cf8d9df6b7353e5ef157cffce150f816b41cc3abc11d22e49452300b0593505082a87004e598eedf8a1c74591862b1c887c0650eb0341e2560830267d9a2d87796fea33957d43490b22127ed04884fd960511cdeff5c2400631d69385a723b9a01f053279cb1d38043dcd67b4024981d0c853a4c162107315c945ed0e37e91b710f8273a661ef6ddcecb86b0f60d7b264cf5aa47768b745be214cd1e381922ba54ba737829fe900c2aed9e1b58dc3de9aa55483a9a17e788d2a41a90132c8934e78b5c1eeddb83d9739edc2bef78e629a3e9061e6b6bdd9630978887eb4e4f9193b0a0c34984a64a12a032bc6af212431c9ed05b3d50b1fd6ec5d86e8a9909e4db28e0995644a57dbdbc2508165c96cbf59beb8e61ab794f3ba84ccb4dac4cd7ad3ee7a7923e87c26289b9d279f30d1227db9f84ec2f343406fe7756dbce3822d88b20759b36b43abec91a940f16ca2b5861173f948d566bde286f34a89dcf70c72ff871de958d90ae1344995b09ba8e32249033e6ebdf6848facac2bca17fc0f528aa279616659a1b0ed9d46ce05d29c36ac8119f0026318b9707a8d2724fa8b729146af6",
   "recentStoryHistory": [],
   "scheduledHistory": [
-    {
-      "id": "yt-sync-taLlu9ecTlo-",
-      "uploadMode": "manual_instant",
-      "scheduledDateCairo": "مرفوع على القناة · 2026-10-01 (08:18 بتوقيت مصر)",
-      "shortEpisodeTitle": "Noreen Kids: مسابقة القراءة الممتعة ونصائح المعلمة أم ملك الحنونة | مغامرات أم ملك والبطريق المرح",
-      "manualEpisodeTitle": "Noreen Kids: مسابقة القراءة الممتعة ونصائح المعلمة أم ملك الحنونة | مغامرات أم ملك والبطريق المرح",
-      "manualVideoFormat": "short_9_16",
-      "manualPlaylistId": "PLPwfeXzB3ozU",
-      "shortPlaylistId": "PLPwfeXzB3ozU",
-      "privacyStatus": "public",
-      "madeForKids": true,
-      "containsSyntheticMedia": false,
-      "categoryId": "1",
-      "dialect": "egyptian",
-      "status": "uploaded_live",
-      "youtubeManualVideoId": "taLlu9ecTlo",
-      "ffprobeReport": {
-        "valid": true,
-        "containerFormat": "mov,mp4,m4a,3gp,3g2,mj2",
-        "videoCodec": "h264",
-        "videoProfile": "High",
-        "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
-        "fps": 30,
-        "audioCodec": "aac",
-        "audioSampleRate": 48000,
-        "audioChannels": 2,
-        "fastStartMoovFirst": true,
-        "durationSec": 68,
-        "fileSizeBytes": 4250000,
-        "inspectedAt": "08:18"
-      },
-      "processingDetails": {
-        "processingStatus": "succeeded",
-        "partsTotal": 100,
-        "partsProcessed": 100,
-        "timeLeftMs": 0,
-        "fileDetailsAvailability": "available"
-      }
-    },
     {
       "id": "yt-sync-taLlu9ecTlo-mEpmwLVFMRI",
       "uploadMode": "daily_schedule",
       "scheduledDateCairo": "جدولة يومية · 2026-10-01 (07:44 بتوقيت مصر)",
       "shortEpisodeTitle": "Noreen Kids: مسابقة القراءة الممتعة ونصائح المعلمة أم ملك الحنونة | مغامرات أم ملك والبطريق المرح",
-      "longEpisodeTitle": "Noreen Kids: علاج الجناح المكسور للطائر الصغير في عيادة الغابة | مغامرات الطبيبة نورين وأرنوب",
       "shortPlaylistId": "PLPwfeXzB3ozU",
-      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": true,
       "containsSyntheticMedia": false,
       "categoryId": "1",
       "dialect": "egyptian",
       "status": "uploaded_live",
-      "youtubeShortVideoId": "taLlu9ecTlo",
-      "youtubeLongVideoId": "mEpmwLVFMRI",
       "ffprobeReport": {
         "valid": true,
         "containerFormat": "mov,mp4,m4a,3gp,3g2,mj2",
@@ -115,7 +70,11 @@
         "partsProcessed": 100,
         "timeLeftMs": 0,
         "fileDetailsAvailability": "available"
-      }
+      },
+      "longEpisodeTitle": "Noreen Kids: علاج الجناح المكسور للطائر الصغير في عيادة الغابة | مغامرات الطبيبة نورين وأرنوب",
+      "longPlaylistId": "PLbjN20PzrCYk",
+      "youtubeShortVideoId": "taLlu9ecTlo",
+      "youtubeLongVideoId": "mEpmwLVFMRI"
     },
     {
       "id": "yt-sync-mV7mVp0zE5o-mEpmwLVFMRI",
@@ -1377,6 +1336,25 @@
         "partsProcessed": 100,
         "timeLeftMs": 0,
         "fileDetailsAvailability": "available"
+      }
+    },
+    {
+      "id": "sched-err-1790498384108",
+      "uploadMode": "daily_schedule",
+      "scheduledDateCairo": "2026-09-28 · الساعة 11:39 صباحاً بتوقيت مصر (غداً)",
+      "shortEpisodeId": "ep-short-star-compass",
+      "longEpisodeId": "ep-long-lantern-forest",
+      "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
+      "privacyStatus": "private",
+      "madeForKids": true,
+      "containsSyntheticMedia": true,
+      "categoryId": "1",
+      "status": "failed",
+      "errorMessage": "رسالة خادم يوتيوب: 400 - {\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"The user has exceeded the number of videos they may upload.\",\n    \"errors\": [\n      {\n        \"message\": \"The user has exceeded the number of videos they may upload.\",\n        \"domain\": \"youtube.video\",\n        \"reason\": \"uploadLimitExceeded\"\n      }\n    ]\n  }\n}\n",
+      "processingDetails": {
+        "processingStatus": "failed",
+        "processingFailureReason": "رسالة خادم يوتيوب: 400 - {\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"The user has exceeded the number of videos they may upload.\",\n    \"errors\": [\n      {\n        \"message\": \"The user has exceeded the number of videos they may upload.\",\n        \"domain\": \"youtube.video\",\n        \"reason\": \"uploadLimitExceeded\"\n      }\n    ]\n  }\n}\n"
       }
     }
   ],
