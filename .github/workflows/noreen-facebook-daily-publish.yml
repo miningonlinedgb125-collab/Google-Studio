@@ -1,7 +1,9 @@
 name: Noreen Kids Facebook Page 24/7 Daily Schedule (SHORT Reel + LONG Video)
 
 on:
-  # [PAUSED FROM FACEBOOK DASHBOARD] Automated daily cron is currently disabled (Configured time: 10:00 Egypt Time -> 07:00 UTC)
+  schedule:
+    # Runs daily at 10:00 Egypt Time (Africa/Cairo) -> 07:00 UTC
+    - cron: '0 7 * * *'
   workflow_dispatch:
     inputs:
       run_mode:
