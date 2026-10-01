@@ -3010,7 +3010,7 @@ async function main() {
     if (diffFromTargetMin < -720) diffFromTargetMin += 1440;
     if (diffFromTargetMin > 720) diffFromTargetMin -= 1440;
 
-    if (diffFromTargetMin < -3 || diffFromTargetMin > 40) {
+    if (diffFromTargetMin < -3 || diffFromTargetMin > 90) {
       console.log(
         `⏸️ [Stale Cron Guard] الوقت الحالي في مصر (${String(nowCairoParts[0]).padStart(2, "0")}:${String(
           nowCairoParts[1]
@@ -3019,15 +3019,17 @@ async function main() {
       process.exit(0);
     }
 
-    const lastReportIso =
-      schedule?.lastCloudRunReport?.reportedAtIso ||
-      fbSchedule?.lastCloudRunReport?.reportedAtIso ||
-      "";
+    const expectedWfFile = isFacebookWorkflow
+      ? "noreen-facebook-daily-publish.yml"
+      : "noreen-kids-daily-youtube.yml";
+    const lastReportIso = isFacebookWorkflow
+      ? fbSchedule?.lastFacebookCloudRunReport?.reportedAtIso || ""
+      : schedule?.lastCloudRunReport?.reportedAtIso || "";
     if (lastReportIso) {
       const elapsedMs = Date.now() - Date.parse(lastReportIso);
-      if (!Number.isNaN(elapsedMs) && elapsedMs >= 0 && elapsedMs < 90 * 60 * 1000) {
+      if (!Number.isNaN(elapsedMs) && elapsedMs >= 0 && elapsedMs < 35 * 60 * 1000) {
         console.log(
-          `⏭️ [Duplicate Cron Guard] تم تنفيذ جدولة GitHub Actions بالفعل لهذا الموعد قبل ${Math.round(
+          `⏭️ [Duplicate Cron Guard] تم تنفيذ جدولة GitHub Actions (${expectedWfFile}) بالفعل لهذا الموعد قبل ${Math.round(
             elapsedMs / 60000
           )} دقيقة — تخطي تكرار الـ Cron المتأخر.`
         );
@@ -3057,19 +3059,21 @@ async function main() {
           const runsData = await runsRes.json();
           const recentDuplicate = (runsData?.workflow_runs || []).find((r) => {
             if (!r || (currentRunId && Number(r.id) === currentRunId)) return false;
+            const rPath = String(r.path || "");
+            if (rPath && !rPath.endsWith(expectedWfFile)) return false;
             const createdMs = Date.parse(r.created_at || "");
             if (Number.isNaN(createdMs)) return false;
             const ageMin = (Date.now() - createdMs) / 60000;
             return (
               ageMin >= 0 &&
-              ageMin <= 90 &&
+              ageMin <= 35 &&
               (r.status === "in_progress" ||
                 (r.status === "completed" && r.conclusion === "success"))
             );
           });
           if (recentDuplicate) {
             console.log(
-              `⏭️ [Duplicate Cron Guard] توجد تشغيلة مجدولة نشطة أو مكتملة بالفعل (#${recentDuplicate.id}) خلال الـ 90 دقيقة الماضية — تخطي تكرار الـ Cron المتأخر.`
+              `⏭️ [Duplicate Cron Guard] توجد تشغيلة مجدولة نشطة أو مكتملة بالفعل (#${recentDuplicate.id}) لـ (${expectedWfFile}) خلال الـ 35 دقيقة الماضية — تخطي تكرار الـ Cron المتأخر.`
             );
             process.exit(0);
           }
@@ -3549,16 +3553,23 @@ async function main() {
       schedule.longEpisode = chosenLongEp;
       schedule.scheduledHistory = [cloudHistoryEntry, ...prevHist.slice(0, 35)];
       schedule.recentStoryHistory = [...newRecent, ...prevRecent.slice(0, 30)];
-      schedule.lastCloudRunReport = {
+      const reportObj = {
         ...cloudHistoryEntry,
         reportedAtIso: new Date().toISOString(),
       };
+      if (!isFacebookWorkflow) {
+        schedule.lastCloudRunReport = reportObj;
+      }
       fs.writeFileSync(schedulePath, JSON.stringify(schedule, null, 2), "utf8");
 
       if (fs.existsSync(fbSchedulePath)) {
         fbSchedule.shortEpisode = chosenShortEp;
         fbSchedule.longEpisode = chosenLongEp;
-        fbSchedule.lastCloudRunReport = schedule.lastCloudRunReport;
+        fbSchedule.scheduledHistory = schedule.scheduledHistory;
+        fbSchedule.recentStoryHistory = schedule.recentStoryHistory;
+        if (isFacebookWorkflow) {
+          fbSchedule.lastFacebookCloudRunReport = reportObj;
+        }
         fs.writeFileSync(fbSchedulePath, JSON.stringify(fbSchedule, null, 2), "utf8");
       }
 
