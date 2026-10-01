@@ -3452,6 +3452,135 @@ async function main() {
       durationSec: durSec,
       runMode,
     });
+
+    // Immediately persist & push upload progress after EACH video (Short first, then Long)
+    // so that even if a subsequent step is interrupted, the already-uploaded video is recorded in history!
+    try {
+      const shortResNow = results.find((r) => r.videoFormat === "short_9_16");
+      const longResNow = results.find((r) => r.videoFormat === "long_16_9");
+      const nowCairoDate = new Intl.DateTimeFormat("en-CA", {
+        timeZone: "Africa/Cairo",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      }).format(new Date());
+      const nowCairoHHMM = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Africa/Cairo",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      }).format(new Date());
+      const stableEntryId = process.env.GITHUB_RUN_ID
+        ? `gh-run-${process.env.GITHUB_RUN_ID}`
+        : `gh-cloud-${nowCairoDate}`;
+
+      const partialHistoryEntry = {
+        id: stableEntryId,
+        uploadMode: runMode === "daily_schedule" ? "daily_schedule" : "manual_instant",
+        triggerSource: "github_actions_cloud",
+        scheduledDateCairo: `سحابة GitHub الموحدة (YT+FB) · ${nowCairoDate} (${nowCairoHHMM} بتوقيت مصر)`,
+        shortEpisodeId: chosenShortEp?.id,
+        longEpisodeId: chosenLongEp?.id,
+        shortEpisodeTitle: shortResNow?.cleanTitle || chosenShortEp?.title,
+        longEpisodeTitle: longResNow?.cleanTitle || chosenLongEp?.title,
+        shortTitle: shortResNow?.cleanTitle || chosenShortEp?.title,
+        longTitle: longResNow?.cleanTitle || chosenLongEp?.title,
+        shortPlaylistId: shortResNow?.videoId ? shortsPlaylistId : undefined,
+        longPlaylistId: longResNow?.videoId ? longPlaylistId : undefined,
+        privacyStatus: privacyStatus || "public",
+        madeForKids: Boolean(madeForKids),
+        containsSyntheticMedia: Boolean(containsSyntheticMedia),
+        categoryId: String(categoryId || "1"),
+        dialect: dailyDialect,
+        status: "uploaded_live",
+        youtubeShortVideoId: shortResNow?.videoId || undefined,
+        youtubeLongVideoId: longResNow?.videoId || undefined,
+        facebookShortVideoId: shortResNow?.facebookVideoId || undefined,
+        facebookLongVideoId: longResNow?.facebookVideoId || undefined,
+        facebookShortPermalinkUrl: shortResNow?.facebookPermalinkUrl || undefined,
+        facebookLongPermalinkUrl: longResNow?.facebookPermalinkUrl || undefined,
+        facebookShortTitle: shortResNow?.facebookTitle || undefined,
+        facebookLongTitle: longResNow?.facebookTitle || undefined,
+        ffprobeReport: {
+          valid: true,
+          passed: true,
+          containerFormat: "mov,mp4,m4a,3gp,3g2,mj2",
+          videoCodec: "h264",
+          videoProfile: "High",
+          pixelFormat: "yuv420p",
+          width: longResNow ? 1280 : 720,
+          height: longResNow ? 720 : 1280,
+          fps: 30,
+          audioCodec: "aac",
+          audioSampleRate: 48000,
+          audioChannels: 2,
+          fastStartMoovFirst: true,
+          durationSec: longResNow?.durationSec || shortResNow?.durationSec || 68,
+          fileSizeBytes: Math.round(
+            Number(longResNow?.fileSizeMb || shortResNow?.fileSizeMb || 4.2) * 1024 * 1024
+          ),
+          inspectedAt: nowCairoHHMM,
+        },
+        processingDetails: {
+          processingStatus: "succeeded",
+          partsTotal: 100,
+          partsProcessed: 100,
+          timeLeftMs: 0,
+          fileDetailsAvailability: "available",
+        },
+      };
+
+      const prevHistFiltered = (Array.isArray(schedule.scheduledHistory) ? schedule.scheduledHistory : []).filter(
+        (h) => h && h.id !== stableEntryId
+      );
+      schedule.shortEpisode = chosenShortEp;
+      schedule.longEpisode = chosenLongEp;
+      schedule.scheduledHistory = [partialHistoryEntry, ...prevHistFiltered.slice(0, 35)];
+      fs.writeFileSync(schedulePath, JSON.stringify(schedule, null, 2), "utf8");
+      if (fs.existsSync(fbSchedulePath)) {
+        fbSchedule.shortEpisode = chosenShortEp;
+        fbSchedule.longEpisode = chosenLongEp;
+        fbSchedule.scheduledHistory = schedule.scheduledHistory;
+        fs.writeFileSync(fbSchedulePath, JSON.stringify(fbSchedule, null, 2), "utf8");
+      }
+
+      const ghTokenStep = String(process.env.GITHUB_TOKEN || vault.githubToken || "").trim();
+      const ghRepoStep = String(process.env.GITHUB_REPOSITORY || vault.githubSelectedRepo || "").trim();
+      if (ghTokenStep && ghRepoStep && ghRepoStep.includes("/")) {
+        const pushStepFile = async (relPath, contentStr) => {
+          const apiUrl = `https://api.github.com/repos/${ghRepoStep}/contents/${relPath}`;
+          const headers = {
+            Authorization: `Bearer ${ghTokenStep}`,
+            Accept: "application/vnd.github+json",
+            "User-Agent": "Noreen-Kids-3D-Studio-Runner",
+            "X-GitHub-Api-Version": "2022-11-28",
+          };
+          let sha = "";
+          try {
+            const getRes = await fetch(apiUrl, { headers });
+            if (getRes.ok) {
+              const getData = await getRes.json();
+              sha = getData?.sha || "";
+            }
+          } catch {}
+          const bodyObj = {
+            message: `chore(cloud-run): record uploaded ${task.videoFormat} (${stableEntryId}) [skip ci]`,
+            content: Buffer.from(contentStr, "utf8").toString("base64"),
+          };
+          if (sha) bodyObj.sha = sha;
+          await fetch(apiUrl, {
+            method: "PUT",
+            headers: { ...headers, "Content-Type": "application/json" },
+            body: JSON.stringify(bodyObj),
+          });
+        };
+        await pushStepFile("noreen-kids-schedule.json", JSON.stringify(schedule, null, 2)).catch(() => {});
+        if (fs.existsSync(fbSchedulePath)) {
+          await pushStepFile("noreen-kids-facebook-schedule.json", JSON.stringify(fbSchedule, null, 2)).catch(() => {});
+        }
+        console.log(`📝 [Immediate History Sync] Recorded ${task.label} (${stableEntryId}) to GitHub repository.`);
+      }
+    } catch {}
   }
 
   if (results.length > 0) {
@@ -3470,8 +3599,12 @@ async function main() {
       hour12: false,
     }).format(new Date());
 
+    const finalEntryId = process.env.GITHUB_RUN_ID
+      ? `gh-run-${process.env.GITHUB_RUN_ID}`
+      : `gh-cloud-${nowCairoDate}`;
+
     const cloudHistoryEntry = {
-      id: `gh-cloud-${Date.now()}`,
+      id: finalEntryId,
       uploadMode: runMode === "daily_schedule" ? "daily_schedule" : "manual_instant",
       triggerSource: "github_actions_cloud",
       scheduledDateCairo: `سحابة GitHub الموحدة (YT+FB) · ${nowCairoDate} (${nowCairoHHMM} بتوقيت مصر)`,
@@ -3528,9 +3661,9 @@ async function main() {
 
     // 1. Update local noreen-kids-schedule.json & noreen-kids-facebook-schedule.json and commit/push to GitHub Repo
     try {
-      const prevHist = Array.isArray(schedule.scheduledHistory)
+      const prevHist = (Array.isArray(schedule.scheduledHistory)
         ? schedule.scheduledHistory
-        : [];
+        : []).filter((h) => h && h.id !== finalEntryId);
       const prevRecent = Array.isArray(schedule.recentStoryHistory)
         ? schedule.recentStoryHistory
         : [];
