@@ -1,7 +1,7 @@
 name: Noreen Kids 24/7 Daily YouTube Schedule (Short + Long 3D)
 
 on:
-  # [PAUSED FROM STUDIO DASHBOARD] Automated daily cron is currently disabled (Configured time: 17:00 Egypt Time -> 14:00 UTC)
+  # [PAUSED FROM STUDIO DASHBOARD] Automated daily cron is currently disabled (Configured time: 21:00 Egypt Time -> 18:00 UTC)
   workflow_dispatch:
     inputs:
       run_mode:
