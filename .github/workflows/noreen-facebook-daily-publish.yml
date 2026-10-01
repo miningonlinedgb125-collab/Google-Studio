@@ -2,8 +2,8 @@ name: Noreen Kids Facebook Page 24/7 Daily Schedule (SHORT Reel + LONG Video)
 
 on:
   schedule:
-    # Runs daily at 18:15 Egypt Time (Africa/Cairo) -> 15:15 UTC
-    - cron: '15 15 * * *'
+    # Runs daily at 20:00 Egypt Time (Africa/Cairo) -> 17:00 UTC
+    - cron: '0 17 * * *'
   workflow_dispatch:
     inputs:
       run_mode:
