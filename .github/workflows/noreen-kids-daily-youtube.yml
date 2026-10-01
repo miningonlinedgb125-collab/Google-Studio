@@ -2,8 +2,8 @@ name: Noreen Kids 24/7 Daily YouTube Schedule (Short + Long 3D)
 
 on:
   schedule:
-    # Runs daily at 08:00 Egypt Time (Africa/Cairo) -> 05:00 UTC
-    - cron: '0 5 * * *'
+    # Runs daily at 07:58 Egypt Time (Africa/Cairo) -> 04:58 UTC
+    - cron: '58 4 * * *'
   workflow_dispatch:
     inputs:
       run_mode:
