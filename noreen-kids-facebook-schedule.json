@@ -33,8 +33,9 @@
     "longCustomHashtags": [],
     "customFacebookPackages": {}
   },
-  "syncedAtIso": "2026-10-01T00:17:13.873Z",
-  "encryptedVault": "6ff2167f64e8fec6d55e988f178166c9:4961c374a169c6743da880474abc2dcad7f4fd924cbe736347e9823787be109209b5f228c079dccb572682ab56b83c74dfbb2e8675a6f3b40c31ec5651dd40b2dbd96f04b85035ab6e025371045e67140f3bd82458f763ffc88b2620c8455c56b88c8b5b7a7062017df4efc88fc68fe02277fbfd1d1a420ffc1afde821eba0c77bffa275da078fd38cc458a1fa973afee6c06587d28ddc1f10968f174145bb429e49726e445c33bae71c1fa4d6dd1f76ff55afe77e68b282a6c3f5e0b80d2bddb2347ff875d9fb793f60abf13f31742b0652cc2d028275254ce9ff25cf43bdb427f6ac50fb91c238b5b37f94f02b3547b907a8c645e242b9004624634e996f22b917d9d43c5fae1d85cee53283a444376ad5ebb724715850988a6e36f7dd91fe554530995346cec2e217640cda181988e9fc5e8c870c16f374f305c0400fef816fe96c49ddb2c3620e1dd9d2ef8be0b1ef0a8aab59e1a141dbead7ca16699cd6362b07b60de5b80f857022b2af1ca9fed7e9eaa65905705b8031c411d9b77b3126e93c8ee331a6867042c8d9764e57da7f96b0674ef5e8ce6cdada3c39e592c1efc909c11bf6bb5dd3f6dc6e827ec43728f78ee8c6d0edd569fe5e7ffa6d62cc0c079fab5caa61daffde7718f6840c9e51fdfc3953dd4d33d68f2f838770cf001bce53b086643e0a4a8e422e0dd9ece416b6056c53c162c5327e766f92d62dff6276ab5d9b16ddbfbf66f6bd657f3d6e1700ca36b7b138114f7711acaccbd730b1ab9e1b9688a07a86142414c16cd5bf3cb07a5f918e1c06f7e420dd4aa0510b7fa407cb567f5eebd16cc45f28d982c5bf34a37b88a04a6d21ded59ab3e9f3857176dff0f8286f72ef4b82e75863f6ca6609b61cb4918708d28d37e540dd27a8ac34022bbba9a4c4112e5252a201fd16d615c0c3420f8f13cad30dcca710d0716165d06e16c052c301fb0c18abd68da4fd69feb83538fd7c01aadd9fe789ce6b8a03c67e1d6ddce71adf74d036e6946a4ff8f5394e3316e71f9e8ad2d1abdea804eb8ca88add6b4d4c3a0e42f1fc642c587cab75b16b4cc500fd4e87fcf170a93bf36ba1f6b3a771da391dc73fe86ed29703b7be6e14e17df08d34908247f9a4dffcf52cc48382327bb6f2bc53ac0113ec99e91bf1d89c6f2bff8c5f57dce7741e699377592ec662e19c279994ea74497d593047538e2750f891cb66da4d705d71a901b8273681b701d94d1c8de28b559d4314280ecfea2cd1cadb1cd32bc0a0e632fd69a40dc669beb3b395283674677c9cb1749f902f4fd0db94a71b536e7e",
+  "syncedAtIso": "2026-10-01T00:17:21.639Z",
+  "syncReason": "facebook_publisher_saved",
+  "encryptedVault": "f36df1eac11684e539d7d435ebb1283a:66764503c096dda7faba12026c83354f59f94723a3fe3108b46775027248b489e3d52687c4472d232a7353754d6f30648ae8e4db4751975e08abba50b409492a7e1e8a7b86887be7cf354ba6d641d17036cdc207b5bec6bb4db57ae85cab89af16c6730b379e116c5d7f287f13dc45601b1423766279cbe722e51d8c318182a32a609fb4e1d28ca758eb3278b5f1637a9113260d756e8886656f32f2589c422ed045453e9b8066fc3c96b39ab6cc4d52f7ea0eb84dca4a0bceecaac67b6142a9a6f678131c19883d3dbc1607f5be588c8f24d0bbf89d3628abaeef919a26d7121ba0abd3e04cea2be43b0e80fa4611dae18f868a42cbd6f690f0f3506c3b70be5a3385ca14f2fb27fc20d68caaba3711765c93b2a805f88204f0c48b87f40a234077fb44258684b27677fe84aca89f88490ca06fe60d5ec654898214fb045b5dc20eb4110b503c1c430ab5a6746a4789ce41d67c4877e0075e8beecb472befeb2b98193ad8b1f17c707fad6dac1ce8e9d383de642419f7d628f71c1ede451ccd884dc321d53ee22d9870fb17be0aabcc7d8eebb357da7e453d592eff941ba4b6c31711d163f6ac4ac7b650f1476bedabe8a2b5476bb92537dfa06d76d1b4c630168708cc31e03bcb7fe5b6d2c2b944b98ef54978ad732b9535b2d25087fb04ddd343fce9c879821e098cf6b4972a1379abaf65b24425e73b9b381ec1ee9ebe836c1c686e5c3ed9b3910991d5beb7fb8cf81ab7d91a9b6dab686d9baf8676cc4c42a8f93b1f53c5381144e564d11295ab96699808d34bbc83eb5f304c07555585d20047968f55249d40c74974d7bb03f74ab5a1ba8b77721117965b4177e4fce10c3da688fe69ba11c44def7b29421f92c3ce410ed533624aad391852fa36915f45834cd709390a896b03f310facfebb584677238077fb8c98a8e99d19517f354c5a1bf4ae138ef6487d32daaac453a59684ade3877bc61b43b4611285366d8d8d9c8d2825529150ac60924df2f287dd5e029155544befd7461b3b62ae4a8e8eedbb4601c28d9499d61d2a2f3f80c39bf4eb3311fb7c0200683bea24dff638656ff12a0da32f67b2b7f1de5d94f204227ab70b468b5fc6b06d818a0b25c30961ab2019e3db148f3fe5483baed9468796f2b6b93bcda6fedd379a8d0eff1c8c0ca24b415c70c3ec9aeb1a4090b5e3a8f7030bb9da9c5275f24150700eb43c512f2212f3505dd3c03d759ce4cc1b4e91824e0054204ed48b600cd551676d1255893a0b4ecc232f977b2bf08bf5e8c36cb48b6c92d0dc13e6b05af85152e745a37dd063a14d40ca3bab989b03996bccc9c41820a313bda04941ae46a1cbe50cf23ca6a487806ec63ea58af9be4506e5306e52661e6ff482e3d279a7c87c9dd35accffc75cae927f20b68c9b5174763317d066f39e6d2f5d82232f8ed704265f15f5a910c087649715df46bc1952fbcdaf408e5692511a33f81be41d7d709fe374fca20f53032628bfdc2b7bd48c478c370135fe53888731cff871a5cdc8320481fde24c98fc05306915d6b2364b30d2a7c7bd46b3dfd08336fa7264363e910989e179b3a49559d31b664ede866a369d37128804314f85aab8e924d046310ea50a8e56756a968a68eb583f573426dd49792116ef4322938fed2fc068a166bd32505f598f3a6b23834a1c05f80214de73790d41500bc2049b65b5c93ee13f1f6f9293c3efc2ba2b0f5091af92d1043c8b2cfea3728392585fbe3236be279764bdda4d15bd973fa04ff5f68d0b1d751d0ff5d7f0f069b5b719f24cfa6c563d0478317b2ed03b4d90876bf3340f19dfdd2f3e8499a68635f0a358c7aea6f3b1572d137741df85e2062ef23093f80bae5c1e8a9f60397ef8aff1c0cd88b20a7ad5ee49bd7a7293bffeeb7bc88e73daf76c62c941fa0773bf0fdd2c88cf86562d1895d6d8e0b17b9e5eee0949a846c7e92a1aa36b01089b62fde38881f47262f9b2c9600c40b1a0678a981689575c9403354883610",
   "shortEpisode": {
     "id": "ep-short-star-compass",
     "title": "لغز الكوكب البلوري في مرصد الفضاء",
@@ -85,7 +86,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-10-01T00:17:26.533Z"
+          "checkedAtIso": "2026-10-01T00:17:28.993Z"
         }
       },
       {
@@ -119,7 +120,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-10-01T00:17:26.543Z"
+          "checkedAtIso": "2026-10-01T00:17:28.997Z"
         }
       },
       {
@@ -152,7 +153,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-10-01T00:17:26.554Z"
+          "checkedAtIso": "2026-10-01T00:17:29.004Z"
         }
       },
       {
@@ -187,14 +188,14 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-10-01T00:17:26.563Z"
+          "checkedAtIso": "2026-10-01T00:17:29.009Z"
         }
       }
     ],
     "youtubePackage": {
       "videoTitleAr": "Noreen Kids: لغز الكوكب البلوري في مرصد الفضاء | مغامرات جنى وبلبل",
       "videoTitleEn": "Noreen Kids: Mystery of the Crystal Planet | Jana & Bulbul 3D Short",
-      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nينطلق بطلنا الشجاع \"جنى رائدة الفضاء\" مع صديقه الذكي \"بلبل الروبوت اللطيف\" في مغامرة ثلاثية الأبعاد متجددة حول (لغز الكوكب البلوري في مرصد الفضاء)، حيث يواجهان ألغازاً مشوقة ويتعلمان كيف يصنع التعاون والصدق والذكاء المعجزات.\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- قيمة التعاون والعمل الجماعي بين الأصحاب.\n- حب الاستكشاف والتفكير العلمي لحل المشكلات.\n- الصدق والأمانة ومساعدة الآخرين في كل وقت.\n\n🕖 موعد النشر اليومي: الساعة 7:00 مساءً بتوقيت مصر.\n\nالفصول الزمنية:\n00:00 1. البداية: انطلاق جنى وبلبل\n00:17 2. التطور: ملاحظة العلامات العجيبة مع بلبل\n00:34 3. الحدث المفاجئ: ظهور العقبة والتفكير العلمي\n00:51 8. النهاية: رسالة جنى وبلبل لأبطال Noreen Kids\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #رسوم_متحركة #قصص_أطفال_قبل_النوم #حواديت_مصرية #أفلام_كرتون #تعليم_الأطفال #KidsAnimation #3DCartoon #ArabicKidsCartoon #BedtimeStoriesForKids #PixarStyle3D #KidsLearning #TrendingKids",
+      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nينطلق بطلنا الشجاع \"جنى رائدة الفضاء\" مع صديقه الذكي \"بلبل الروبوت اللطيف\" في مغامرة ثلاثية الأبعاد متجددة حول (لغز الكوكب البلوري في مرصد الفضاء)، حيث يواجهان ألغازاً مشوقة ويتعلمان كيف يصنع التعاون والصدق والذكاء المعجزات.\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- قيمة التعاون والعمل الجماعي بين الأصحاب.\n- حب الاستكشاف والتفكير العلمي لحل المشكلات.\n- الصدق والأمانة ومساعدة الآخرين في كل وقت.\n\n🕖 موعد النشر اليومي: الساعة 5:00 مساءً بتوقيت مصر.\n\nالفصول الزمنية:\n00:00 1. البداية: انطلاق جنى وبلبل\n00:17 2. التطور: ملاحظة العلامات العجيبة مع بلبل\n00:34 3. الحدث المفاجئ: ظهور العقبة والتفكير العلمي\n00:51 8. النهاية: رسالة جنى وبلبل لأبطال Noreen Kids\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #رسوم_متحركة #قصص_أطفال_قبل_النوم #حواديت_مصرية #أفلام_كرتون #تعليم_الأطفال #KidsAnimation #3DCartoon #ArabicKidsCartoon #BedtimeStoriesForKids #PixarStyle3D #KidsLearning #TrendingKids",
       "tags": [
         "Noreen Kids",
         "كرتون أطفال 3D",
@@ -279,7 +280,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-10-01T00:17:26.384Z"
+          "checkedAtIso": "2026-10-01T00:17:28.895Z"
         }
       },
       {
@@ -322,7 +323,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-10-01T00:17:26.404Z"
+          "checkedAtIso": "2026-10-01T00:17:28.917Z"
         }
       },
       {
@@ -367,7 +368,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-10-01T00:17:26.421Z"
+          "checkedAtIso": "2026-10-01T00:17:28.929Z"
         }
       },
       {
@@ -409,7 +410,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-10-01T00:17:26.440Z"
+          "checkedAtIso": "2026-10-01T00:17:28.940Z"
         }
       },
       {
@@ -450,7 +451,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-10-01T00:17:26.461Z"
+          "checkedAtIso": "2026-10-01T00:17:28.956Z"
         }
       },
       {
@@ -486,7 +487,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-10-01T00:17:26.481Z"
+          "checkedAtIso": "2026-10-01T00:17:28.966Z"
         }
       },
       {
@@ -527,7 +528,7 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-10-01T00:17:26.500Z"
+          "checkedAtIso": "2026-10-01T00:17:28.976Z"
         }
       },
       {
@@ -569,14 +570,14 @@
           ],
           "autoRepairedCount": 0,
           "compliancePercent": 100,
-          "checkedAtIso": "2026-10-01T00:17:26.521Z"
+          "checkedAtIso": "2026-10-01T00:17:28.987Z"
         }
       }
     ],
     "youtubePackage": {
       "videoTitleAr": "Noreen Kids: سر الفانوس المفقود في غابة النجوم | حواديت عمرو المستكشف وزعتر",
       "videoTitleEn": "Noreen Kids: The Lost Star Lantern | 3D Animated Kids Movie | Amr & Zaatar",
-      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nينطلق بطلنا الشجاع \"عمرو المستكشف\" مع صاحبه الذكي \"زعتر\" في رحلة ساحرة جوه غابة النجوم المنورة علشان يدوروا على الفانوس المفقود ويرجعوا النور والأمل لكل أشجار الغابة من خلال التعاون والصدق.\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- قيمة التعاون والعمل الجماعي بين الأصحاب.\n- حب الاستكشاف والبحث العلمي.\n- الصدق ومساعدة الآخرين.\n\n🕖 موعد النشر اليومي: الساعة 7:00 مساءً بتوقيت مصر.\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #قصص_اطفال_قبل_النوم #رسوم_متحركة #أفلام_كرتون #حواديت_مصرية #اطفال #تعليم_الاطفال #KidsAnimation #3DCartoon #BedtimeStoriesForKids #ArabicKidsCartoon #AnimatedStories #PixarStyle3D #KidsLearning #FamilyFriendly",
+      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nينطلق بطلنا الشجاع \"عمرو المستكشف\" مع صاحبه الذكي \"زعتر\" في رحلة ساحرة جوه غابة النجوم المنورة علشان يدوروا على الفانوس المفقود ويرجعوا النور والأمل لكل أشجار الغابة من خلال التعاون والصدق.\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- قيمة التعاون والعمل الجماعي بين الأصحاب.\n- حب الاستكشاف والبحث العلمي.\n- الصدق ومساعدة الآخرين.\n\n🕖 موعد النشر اليومي: الساعة 5:00 مساءً بتوقيت مصر.\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #قصص_اطفال_قبل_النوم #رسوم_متحركة #أفلام_كرتون #حواديت_مصرية #اطفال #تعليم_الاطفال #KidsAnimation #3DCartoon #BedtimeStoriesForKids #ArabicKidsCartoon #AnimatedStories #PixarStyle3D #KidsLearning #FamilyFriendly",
       "tags": [
         "Noreen Kids",
         "كرتون أطفال 3D",
