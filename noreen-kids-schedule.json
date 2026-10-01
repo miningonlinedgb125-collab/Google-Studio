@@ -30,9 +30,9 @@
     "longCustomHashtags": [],
     "customFacebookPackages": {}
   },
-  "syncedAtIso": "2026-10-01T00:44:39.398Z",
-  "syncReason": "cloud_pipeline_completed",
-  "encryptedVault": "e48dccc0f96bec7d13e0b26b239af249:3dd7a453f6183bf69cc550d0e3a0bb6cb2db142de000bbf0c2374e3eb8d2efcf88d57100c53640e95f65eed24b3ab9a977d3dbb52bdeeb2bb22bbfc592dd96eb6644f974e6be9b63ee80ee2412f01b69728849ba803ecb968878ac3cd4814441d47f0355a14f8e3b372321c2ae0704c5d0c4ece60c9a7ad355af2cfc8927952e2dec98bdfd3e9c96e7ac6b484beaff9da8a68ddff7c7064c4156afdb6a3580e237e7d3d770968d56ed0a2056203de5cc99c3d8707c8abc56e4e089820482af9697fc9f31a1017e44c5770f5a56b346f64265198f063010faf99955dfb463dae42a24f882d122ff7c5f7b90293e3f77977f0fdf0f2d15447ce135e29646808a46de61f941b843a7ff3f691c0c86a177f36cb7784944a6f86ebe5450dc190bab390ead4175f423274919d5834edce6cd36ba62470e79c625fa2ddf92aa8ca298ad6cceea86235c48ff1ac7660c55b72a2d20a868b72636063433b25bd33892713e265c1a11f836f8dd7d1f61ce9b74f6396ea4e1e213b62cec20c3489d19af5f979088a32eca4f62097e321895c6e286757e278e9b252ff64593f334fe30059ee9e5729610a260c79ea9ca7cca3ac5c65e31563b329e3e4a5caa8b8e6caed2aaa86a38b42561b1cff2c9010e04b6b595914bd18e3811e89e2314513dda7617821bf7630633d8c48904c358039e71953ea3ad069ee24ed9472e14b66d6ff586c959ac676394e5dacd0f5a446fcf96de7ffdfc9f0ba0dbf002511d59deef6db4c0e5628e2e212ab19dcbeb4400f9daf7de03790c0f8c5b36bf4c8c63dcb17ef299f2033f17b6de78601b37db8b834aad68373c7efe9f05779be74171a952c121ff45d39ee5c38721d8784503dff293190448a8d5fecd58216a5fbc3ba4aab0c4ed78596f13e91a2a7e1017dcfce35e25c59c3a510e3ee910936397d3971f892c3c4a2fc0379558850c091d922eb857044c063d33f0e14673db2f10673e48122ae75da2e4108b52ddb5654daead3805df1811f98d05cdeb667ffd7afe40526559f5addab228c55fb62ce53034025cb6b53d04452a302b5dbd8b43f31c2a1b58be7d95fce1a5ba55619c3836db4050d036bc1986c4df9de958e7960ebcf1a24c02103df7c63516832ef46fc08926a1ffdc436b5255b8fc4aaaa73e5a86e651b2ef610c1c055345b9942708adb7d8d7cf10fa0a4ad6964f9d42d4ebf7ff5b56dcbfdfa0d5d89cc244e53094cc81f30b5069be75f68f026d8c1a77881946d7f78d0b25bc4a28c56892aae39f4f15b844b0fe23e1888f965d33195dabc2505c298503eb0fedd59a5a759a7f4a3601235eb4beb2fafcb64254cdb69773a86ef6c44dee0ab447c3e80c3cfa66a66a998760bf30dbad29f93441e8e8387718973c725901e267fbd88d90b1c76f4a04ccdd8d773b8c2a41d42d75f4a9a66cc1bb853f055fd559bda99e5927e39230e77042cafabff0cc1e95fb4d94780e9ce4368b15aaf70c3206b0c26b2530581a8b6fafaebc57b1f1f6df210012e7788cc51fab83f7f5cb691b2d2aae77c3f91310b24d67fce931842218e28c458a5108ecbd1e5ea9cf7807cd5a548970a333e44e3dfad5710a78b48a54c9c03b92cd95d740d170d6dd9217097adf36cd2493d661675c553835a007ea23292b9d85a6d8b83b32482e7aaab7fce175e99039d73cf5e91c508f8bef0c6471bda45358e0fb35cda7cf4f287585d9bc311695ed6d2c8fa6c77a066890b36cfe79a8c5aa7e89ce8d635cd3c2b1221781b54f81a84d06e03f7b73344530cf0441fe49283fa0f25510b665021b525ed7fbdc82e9a6ee741df8378c166adb7e28e941f92eaaf1312baf25c0ccf7ef966b67fd857b163fd5d6a351bb51b8aa73a799b8b71469e36115368140026f68c1808d65e65d945b60b5398a314953fc3b760f4ddae939936795afcae30877b304d15b14e186f97548a5a9eff575e1b0c95316b1d59001703b996a9c5f528312241eebb4dc639edf46abcd7170d9be70f1",
+  "syncedAtIso": "2026-10-01T01:12:14.906Z",
+  "syncReason": "dashboard_state_updated",
+  "encryptedVault": "911cefc16338fc66044af093e0d01381:581c36215357717bee5d891424357a2e319f6b211bbaab4adde369d62278dd3115622c5bdd54090cb942a870f1a5763e4982b088ed808e4ead4ebcdfad731e86ca518f01706c26ab2cb8725d0bf38d6f881d382ee57939100c5ae90b8a05a04589c1ee3774a4239c26e31e5085df7d1fc40308a80005ce9a4954ba4363179c4241cca25654a5f961078ea7e1b7c64f999e5ea6cac02776c618a68b22062576eed56798d3bc56a46707b65b77aa27814c947395f726e137037deba16056afa832a53a38ff4715524acc20a6148976184b19ebee0e954d2a45f5396e6606fc5efde587519949364812ae1248d3bbe422caa6ebe620d13f423d276e98cfb7aa84c34f616dbd8d58a2109c0b46a07f9ed0cf60a9f97e40c513de404673bb502d8e728f96ac6cb111b6ead2b62a338483cd96de298fdc4dfa5e6c522f934c3845f8693db2d70b1d999a88b357fd463bd38e1c0105a52a9ec3b25b6033dd330bfc2f3d90e3a1b9c4349b45b5fc83090fac5883289ad7ecd813f1532e0de86854bcd8c69b2af8ce8bef79c57977aa6a0611d81024a05a84d00a5ab74bb46ac2a3f201f9afb7b9d9e2d5daf4d6a8cd0cc0d05e15154e9910ff620d8b501f1c3e743f70355d3608beaae9cdd74da452868bb0221469c91854129fa6d44a7f079bd381fd1b84fdcda0877b63f79746b26ea02afe4fb68729ac6d4c75941114b7dc76671afd71bd38e55697023786c09462a9cc42e21778701c210bd9f49872bbf632d665dabc8085ade980ab608a92893cfa2b7c7dbfbfe9231d97bbf08a427b6ebafe57845c21dbae2b10bfbcc2087c4cf788235814c5dda168212c8b383ddedc22a9de1acbc6e92254fcd915a1647a3d2bd456a62bc3a4bc59a9d533650d2dc7456687461b8f03bfc6a14aca1537d2a2eb51e956fe9caeb929856473c32503531cdd933130ac1dbca82a0e7ddb13cd49bf3918fb8dd18924d7d6130a2d4962778ded8509787c2c9260352b51d0717799d962a4b9a79ad6114fb788d49a00936848a2ea6546fd1914969fb0297fce6b068e249998f4af3e0911b925cbbde2bcde4a1a7fce89219d5beeeac67edacc84351696263966990be254493ed317b94ccc6a72c216b002af9f580ce90d97f10b2c3fe48e1e2da251e06113dd72be990086c5618919587932634d049932f2ed1045cae332a7e027353202a7d8350894a912d50bf9f1b2c6ddb3c80269dd322ee71d1fd26f13ae8273aa46dc36961fda8bd24f2c05bdbbc594630a5b5cd02be860f9d8bdc8db4aead012e288761fec7f8aa2e20fa09a1b2978e5cce27fa58a93bdcd302f7f1c0f346a77a0de0fa39020f29350ebbc32e567ac86679683837c8ff22b9ff7fb85872745fd5e6bbf8349e34c47a3d8b895c170e27c6f1562bdb563ab5332070bf54d1df2bb7fb6d6ae87659572cf103c54443518e668433fe051ad6963054361352ae40d0bbb1a2ddec7f667e57690adcfded52b8ea1dc5113c81868ce9098381c764a30be36b22a5fdd157b081b6fb384299af4b343c3ebaf5bd830f496bc8c2f208c367fbf88d3e7dd5466624300b16818e974acbc763e4c5dc3cea1e15ef23dab6cf7cd9be36d19d12c092f74e606feaad982d5a7ca8f8aeed1784b749ed314aa7f1bb0c1f5241732d41a2d2fe828b3105b89eccfb4da89d3ba38d3ad6a9000d0ded750ba7c2fa9a72efeb145db83e32d633743b742ef4997a0c46d82d82e88c73407319b7ec446e245ad211a5fcc1dac68f5aecaab7035adaea5fe1b506837e802af7dccd17ae2a2c52a298f610e9574ea11bba3676a4511bdd7551f244ff1abe579510e6699d4a8b3cefbfdf6e46c0058f3fc29b08f3bfcdfb800ddb1d31af574fd98dcf45def6107c7fe118aab8f5784c2e5c53bdcf7234d78ec0895382905219da15a8bd91d415e7918fc5765fa79f5f5664f911f570d3298580ac68674b93165218041ace094526bd9b9aad8b7a208c92b85a94536d636564a4abc761b",
   "shortEpisode": {
     "title": "سدرة وزهرة النور الضاحكة",
     "subtitle": "مغامرات سدرة الصغنونة والفراشة الملونة · Noreen Kids",
@@ -44,7 +44,7 @@
     "scenes": [
       {
         "title": "لعبة الاستغماية مع الفراشة",
-        "dialogueArabic": "أهلا وسهلا بكل أعضاء وعيلة قناة نورين كيدز الغاليين! ازيكم يا أحلى أبطال؟ أنا سدرة الصغنونة ومعايا الفراشة الملونة، منورين عالمنا السحري النهارده! يا فراشة يا ملونة! استني يا شقية، رايحة فين؟ مش هعرف أمسكك كدة خالص!",
+        "dialogueArabic": "ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بصوا كده معانا النهارده، أهلا وسهلا بكل أعضاء وعيلة قناة نورين كيدز الغاليين! ازيكم يا أحلى أبطال؟ أنا سدرة الصغنونة ومعايا الفراشة الملونة، منورين عالمنا السحري النهارده! يا فراشة يا ملونة! استني يا شقية، رايحة فين؟ مش هعرف أمسكك كدة خالص!",
         "characterAction": "تجري سدرة بضحكة طفولية وراء الفراشة وسط أعشاب خضراء طويلة.",
         "environmentPreset": "space_forest",
         "sceneNumber": 1,
@@ -55,11 +55,33 @@
         "dialect": "egyptian",
         "particleEffect": "fireflies",
         "cameraMotion": "dolly_in",
-        "lightingMood": "bioluminescent_twilight"
+        "lightingMood": "bioluminescent_twilight",
+        "prompt3D": "3D Pixar & DreamWorks animated scene, سدرة الصغنونة (3D Pixar adorable 3-year-old toddler girl in yellow and pink overalls with colorful hair clips, sparkling innocent eyes, 8k render) and الفراشة الملونة (3D Pixar magical rainbow pastel butterfly with glowing wings and sweet cartoon eyes, 8k render), full body rigging and facial lip-sync, volumetric global illumination, 8k render.",
+        "foleySoundEffects": [
+          "magic"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بصوا كده معانا النهارده، أهلا وسهلا بكل أعضاء وعيلة قناة نورين كيدز الغاليين! ازيكم يا أحلى أبطال؟ أنا سدرة الصغنونة ومعايا الفراشة الملونة، منورين عالمنا السحري النهارده! يا فراشة يا ملونة! استني يا شقية، رايحة فين؟ مش هعرف أمسكك كدة خالص!",
+          "validatedText": "ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بصوا كده معانا النهارده، أهلا وسهلا بكل أعضاء وعيلة قناة نورين كيدز الغاليين! ازيكم يا أحلى أبطال؟ أنا سدرة الصغنونة ومعايا الفراشة الملونة، منورين عالمنا السحري النهارده! يا فراشة يا ملونة! استني يا شقية، رايحة فين؟ مش هعرف أمسكك كدة خالص!",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "ازيكم",
+            "بص",
+            "كده",
+            "النهارده",
+            "فين",
+            "خالص"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-10-01T01:12:25.004Z"
+        }
       },
       {
         "title": "اكتشاف النور الغريب",
-        "dialogueArabic": "إيه ده؟ بصي يا فراشة! في حاجة بتنور هناك وسط الزرع.. تفتكري ده إيه؟ تعالوا نشوف بالراحة.",
+        "dialogueArabic": "إيه ده؟ بصي يا فراشة! في حاجة بتنور هناك وسط الزرع.. تفتكري ده إيه؟ يلا يلا يلا تعالوا نشوف بالراحة.",
         "characterAction": "تمشي سدرة على طرطوف صوابعها وهي بتشاور للفراشة بفضول وبراءة.",
         "environmentPreset": "floating_library",
         "sceneNumber": 2,
@@ -70,7 +92,28 @@
         "dialect": "egyptian",
         "particleEffect": "sparkles",
         "cameraMotion": "pan_right",
-        "lightingMood": "warm_lantern"
+        "lightingMood": "warm_lantern",
+        "prompt3D": "3D Pixar & DreamWorks animated scene, الفراشة الملونة (3D Pixar magical rainbow pastel butterfly with glowing wings and sweet cartoon eyes, 8k render) and سدرة الصغنونة (3D Pixar adorable 3-year-old toddler girl in yellow and pink overalls with colorful hair clips, sparkling innocent eyes, 8k render), full body rigging and facial lip-sync, volumetric global illumination, 8k render.",
+        "foleySoundEffects": [
+          "magic"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "إيه ده؟ بصي يا فراشة! في حاجة بتنور هناك وسط الزرع.. تفتكري ده إيه؟ يلا تعالوا نشوف بالراحة.",
+          "validatedText": "إيه ده؟ بصي يا فراشة! في حاجة بتنور هناك وسط الزرع.. تفتكري ده إيه؟ يلا يلا يلا تعالوا نشوف بالراحة.",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "إيه",
+            "ده",
+            "بص",
+            "حاجة",
+            "يلا"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-10-01T01:12:25.015Z"
+        }
       },
       {
         "title": "زقزوقة والوردة الضاحكة",
@@ -85,7 +128,26 @@
         "dialect": "egyptian",
         "particleEffect": "clouds",
         "cameraMotion": "crane_up",
-        "lightingMood": "golden_sunset"
+        "lightingMood": "golden_sunset",
+        "prompt3D": "3D Pixar & DreamWorks animated scene, سدرة الصغنونة (3D Pixar adorable 3-year-old toddler girl in yellow and pink overalls with colorful hair clips, sparkling innocent eyes, 8k render) and الفراشة الملونة (3D Pixar magical rainbow pastel butterfly with glowing wings and sweet cartoon eyes, 8k render), full body rigging and facial lip-sync, volumetric global illumination, 8k render.",
+        "foleySoundEffects": [
+          "wind"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "يا خبر! دي وردة بس بتضحك! هغدغدك يا وردة.. زقزوقة! بصي يا فراشة لونها بيبقى بمبي لما بتضحك!",
+          "validatedText": "يا خبر! دي وردة بس بتضحك! هغدغدك يا وردة.. زقزوقة! بصي يا فراشة لونها بيبقى بمبي لما بتضحك!",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "يا خبر",
+            "دي",
+            "بص"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-10-01T01:12:25.027Z"
+        }
       },
       {
         "title": "فرحة الأصدقاء",
@@ -100,13 +162,32 @@
         "dialect": "egyptian",
         "particleEffect": "bubbles",
         "cameraMotion": "gentle_float",
-        "lightingMood": "aqua_glow"
+        "lightingMood": "aqua_glow",
+        "prompt3D": "3D Pixar & DreamWorks animated scene, الفراشة الملونة (3D Pixar magical rainbow pastel butterfly with glowing wings and sweet cartoon eyes, 8k render) and سدرة الصغنونة (3D Pixar adorable 3-year-old toddler girl in yellow and pink overalls with colorful hair clips, sparkling innocent eyes, 8k render), full body rigging and facial lip-sync, volumetric global illumination, 8k render.",
+        "foleySoundEffects": [
+          "jump",
+          "water"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "الدنيا مليانة حاجات حلوة أوي لما نفتح عينينا وندور بقلبنا. يلا نغني كلنا مع الوردة المنورة!",
+          "validatedText": "الدنيا مليانة حاجات حلوة أوي لما نفتح عينينا وندور بقلبنا. يلا نغني كلنا مع الوردة المنورة!",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "أوي",
+            "يلا"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-10-01T01:12:25.038Z"
+        }
       }
     ],
     "youtubePackage": {
       "videoTitleAr": "Noreen Kids: سدرة وزهرة النور الضاحكة | مغامرات سدرة الصغنونة والفراشة الملونة",
       "videoTitleEn": "Noreen Kids: 3D Adventure of سدرة الصغنونة & الفراشة الملونة",
-      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nينطلق بطلنا الشجاع \"سدرة الصغنونة\" مع صديقه الذكي \"الفراشة الملونة\" في مغامرة ثلاثية الأبعاد متجددة حول (اكتشاف زهرة النور الضاحكة بفضول وبراءة سدرة الصغنونة)، حيث يواجهان ألغازاً مشوقة ويتعلمان كيف يصنع التعاون والصدق والذكاء المعجزات.\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- قيمة التعاون والعمل الجماعي بين الأصحاب.\n- حب الاستكشاف والتفكير العلمي لحل المشكلات.\n- الصدق والأمانة ومساعدة الآخرين في كل وقت.\n\n🕖 موعد النشر اليومي: الساعة 8:00 صباحاً بتوقيت مصر.\n\nالفصول الزمنية:\n00:00 1. البداية: انطلاق سدرة الصغنونة والفراشة الملونة\n00:17 2. التطور: ملاحظة العلامات العجيبة مع الفراشة الملونة\n00:34 3. الحدث المفاجئ: ظهور العقبة والتفكير العلمي\n00:51 8. النهاية: رسالة سدرة الصغنونة والفراشة الملونة لأبطال Noreen Kids\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #رسوم_متحركة #قصص_أطفال_قبل_النوم #حواديت_مصرية #أفلام_كرتون #تعليم_الأطفال #KidsAnimation #3DCartoon #ArabicKidsCartoon #BedtimeStoriesForKids #PixarStyle3D #KidsLearning #TrendingKids",
+      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nينطلق بطلنا الشجاع \"سدرة الصغنونة\" مع صديقه الذكي \"الفراشة الملونة\" في مغامرة ثلاثية الأبعاد متجددة حول (اكتشاف زهرة النور الضاحكة بفضول وبراءة سدرة الصغنونة)، حيث يواجهان ألغازاً مشوقة ويتعلمان كيف يصنع التعاون والصدق والذكاء المعجزات.\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- قيمة التعاون والعمل الجماعي بين الأصحاب.\n- حب الاستكشاف والتفكير العلمي لحل المشكلات.\n- الصدق والأمانة ومساعدة الآخرين في كل وقت.\n\n🕖 موعد النشر اليومي: الساعة 6:00 مساءً بتوقيت مصر.\n\nالفصول الزمنية:\n00:00 1. البداية: انطلاق سدرة الصغنونة والفراشة الملونة\n00:17 2. التطور: ملاحظة العلامات العجيبة مع الفراشة الملونة\n00:34 3. الحدث المفاجئ: ظهور العقبة والتفكير العلمي\n00:51 8. النهاية: رسالة سدرة الصغنونة والفراشة الملونة لأبطال Noreen Kids\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #رسوم_متحركة #قصص_أطفال_قبل_النوم #حواديت_مصرية #أفلام_كرتون #تعليم_الأطفال #KidsAnimation #3DCartoon #ArabicKidsCartoon #BedtimeStoriesForKids #PixarStyle3D #KidsLearning #TrendingKids",
       "tags": [
         "Noreen Kids",
         "أفلام كرتون 3D للأطفال",
@@ -114,7 +195,19 @@
         "قصص أطفال هادفة",
         "مغامرات سدرة الصغنونة والفراشة الملونة",
         "رسوم متحركة ثلاثية الأبعاد",
-        "3D Kids Animation"
+        "3D Kids Animation",
+        "قناة نورين كيدز",
+        "كرتون أطفال 3D",
+        "قصص أطفال قبل النوم",
+        "أفلام كرتون تعليمية للأطفال",
+        "سدرة الصغنونة",
+        "الفراشة الملونة",
+        "حواديت مصرية للأطفال",
+        "قصص اطفال هادفة",
+        "كرتون عربي جديد",
+        "Arabic Cartoon for Kids",
+        "Pixar Style 3D Story",
+        "يوتيوب شورتس أطفال"
       ],
       "thumbnailTextAr": "اكتشاف زهرة النور الضاحكة",
       "thumbnailPrompt3D": "3D Pixar movie poster for Noreen Kids YouTube channel, سدرة الصغنونة and الفراشة الملونة discovering اكتشاف زهرة النور الضاحكة بفضول وبراءة سدرة الصغنونة, ultra vibrant colors, 8k"
@@ -125,7 +218,8 @@
     "generatedByAiRandom": true,
     "maxDurationLimitSec": 80,
     "mainCharacterId": "baby_sidra",
-    "companionCharacterId": "colorful_butterfly"
+    "companionCharacterId": "colorful_butterfly",
+    "preUploadVerified": true
   },
   "longEpisode": {
     "title": "مغامرات شوشو القبطان ومرجان المرح",
@@ -138,7 +232,7 @@
     "scenes": [
       {
         "title": "بداية الرحلة",
-        "dialogueArabic": "أهلا وسهلا بكل أعضاء وعيلة قناة نورين كيدز الغاليين في كل مكان! ازيكم يا أشطر وأجمل أبطال؟ أنا شوشو ومعايا صاحبي الجميل مرجان، منورين عالمنا السحري النهارده في حكاية كبيرة ومشوقة أوي عن مغامرات شوشو القبطان ومرجان المرح! ازيكم يا أصحابي الحلوين! يا صباح الفل والياسمين! جاهز يا مرجان لرحلة النهاردة؟ البحر شكله رايق والجو يجنن! . شايف يا مرجان الألوان الجميلة والنور اللي بيلمع قدامنا في المكان السحري ده؟ تفتكروا يا أصحابنا الشطار إيه السر اللي مستنينا جوه؟ يلا بينا نقرب خطوة بخطوة ونفتح عينينا كويس علشان نكتشف أول علامة في رحلتنا النهارده!",
+        "dialogueArabic": "ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بصوا كده معانا النهارده، أهلا وسهلا بكل أعضاء وعيلة قناة نورين كيدز الغاليين في كل مكان! ازيكم يا أشطر وأجمل أبطال؟ أنا شوشو ومعايا صاحبي الجميل مرجان، منورين عالمنا السحري النهارده في حكاية كبيرة ومشوقة أوي عن مغامرات شوشو القبطان ومرجان المرح! ازيكم يا أصحابي الحلوين! يا صباح الفل والياسمين! جاهز يا مرجان لرحلة النهاردة؟ البحر شكله رايق والجو يجنن! . شايف يا مرجان الألوان الجميلة والنور اللي بيلمع قدامنا في المكان السحري ده؟ تفتكروا يا أصحابنا الشطار إيه السر اللي مستنينا جوه؟ يلا بينا نقرب خطوة بخطوة ونفتح عينينا كويس علشان نكتشف أول علامة في رحلتنا النهارده!",
         "characterAction": "شوشو يقف على مقدمة المركب الملونة ويمسك بالمنظار ويلوح بيده لمرجان.",
         "environmentPreset": "space_forest",
         "sceneNumber": 1,
@@ -150,7 +244,35 @@
         "particleEffect": "fireflies",
         "cameraMotion": "dolly_in",
         "lightingMood": "bioluminescent_twilight",
-        "durationSec": 39
+        "durationSec": 39,
+        "prompt3D": "3D Pixar & DreamWorks animated scene, شوشو القبطان الصغير (Waterproof deep-sea captain suit, glowing sonar badge, Pixar 3D character shading) and مرجان الدلفين المرح (Iridescent aqua skin shader, glowing pearl collar, expressive cartoon eyes), full body rigging and facial lip-sync, volumetric global illumination, 8k render.",
+        "foleySoundEffects": [
+          "water",
+          "magic"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بصوا كده معانا النهارده، أهلا وسهلا بكل أعضاء وعيلة قناة نورين كيدز الغاليين في كل مكان! ازيكم يا أشطر وأجمل أبطال؟ أنا شوشو ومعايا صاحبي الجميل مرجان، منورين عالمنا السحري النهارده في حكاية كبيرة ومشوقة أوي عن مغامرات شوشو القبطان ومرجان المرح! ازيكم يا أصحابي الحلوين! يا صباح الفل والياسمين! جاهز يا مرجان لرحلة النهاردة؟ البحر شكله رايق والجو يجنن! . شايف يا مرجان الألوان الجميلة والنور اللي بيلمع قدامنا في المكان السحري ده؟ تفتكروا يا أصحابنا الشطار إيه السر اللي مستنينا جوه؟ يلا بينا نقرب خطوة بخطوة ونفتح عينينا كويس علشان نكتشف أول علامة في رحلتنا النهارده!",
+          "validatedText": "ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بصوا كده معانا النهارده، أهلا وسهلا بكل أعضاء وعيلة قناة نورين كيدز الغاليين في كل مكان! ازيكم يا أشطر وأجمل أبطال؟ أنا شوشو ومعايا صاحبي الجميل مرجان، منورين عالمنا السحري النهارده في حكاية كبيرة ومشوقة أوي عن مغامرات شوشو القبطان ومرجان المرح! ازيكم يا أصحابي الحلوين! يا صباح الفل والياسمين! جاهز يا مرجان لرحلة النهاردة؟ البحر شكله رايق والجو يجنن! . شايف يا مرجان الألوان الجميلة والنور اللي بيلمع قدامنا في المكان السحري ده؟ تفتكروا يا أصحابنا الشطار إيه السر اللي مستنينا جوه؟ يلا بينا نقرب خطوة بخطوة ونفتح عينينا كويس علشان نكتشف أول علامة في رحلتنا النهارده!",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "ازيكم",
+            "بص",
+            "كده",
+            "النهارده",
+            "أوي",
+            "شايف",
+            "اللي",
+            "ده",
+            "إيه",
+            "يلا",
+            "علشان"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-10-01T01:12:25.064Z"
+        }
       },
       {
         "title": "مفاجأة في الأعماق",
@@ -166,7 +288,33 @@
         "particleEffect": "sparkles",
         "cameraMotion": "pan_right",
         "lightingMood": "warm_lantern",
-        "durationSec": 39
+        "durationSec": 39,
+        "prompt3D": "3D Pixar & DreamWorks animated scene, مرجان الدلفين المرح (Iridescent aqua skin shader, glowing pearl collar, expressive cartoon eyes) and شوشو القبطان الصغير (Waterproof deep-sea captain suit, glowing sonar badge, Pixar 3D character shading), full body rigging and facial lip-sync, volumetric global illumination, 8k render.",
+        "foleySoundEffects": [
+          "jump",
+          "water"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "يا خبر يا مرجان! بص كده على العلامة المنورة دي! بص يا شوشو! الشعب المرجانية ألوانها تحفة بس في حاجة غلط.. ليه في أكياس بلاستيك وقزايز كتير هنا؟ . أنا لما فكرت بهدوء وركزت في التفاصيل، لقيت إن كل حاجة هنا ليها معنى جميل وبتعلمنا إن الصبر والتفكير الذكي بيحلوا أصعب الألغاز! إيه رأيكم يا أصحابي نساعد بعض ونجمع الخيوط دي سوا؟ يلا يا شوشو نكمل طريقنا بحماس ونشوف المفاجأة اللي ورا البوابة الكبيرة!",
+          "validatedText": "يا خبر يا مرجان! بص كده على العلامة المنورة دي! بص يا شوشو! الشعب المرجانية ألوانها تحفة بس في حاجة غلط.. ليه في أكياس بلاستيك وقزايز كتير هنا؟ . أنا لما فكرت بهدوء وركزت في التفاصيل، لقيت إن كل حاجة هنا ليها معنى جميل وبتعلمنا إن الصبر والتفكير الذكي بيحلوا أصعب الألغاز! إيه رأيكم يا أصحابي نساعد بعض ونجمع الخيوط دي سوا؟ يلا يا شوشو نكمل طريقنا بحماس ونشوف المفاجأة اللي ورا البوابة الكبيرة!",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "يا خبر",
+            "بص",
+            "كده",
+            "دي",
+            "حاجة",
+            "إيه",
+            "سوا",
+            "يلا",
+            "اللي"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-10-01T01:12:25.088Z"
+        }
       },
       {
         "title": "السلحفاة لولو في ورطة",
@@ -182,7 +330,32 @@
         "particleEffect": "clouds",
         "cameraMotion": "crane_up",
         "lightingMood": "golden_sunset",
-        "durationSec": 39
+        "durationSec": 39,
+        "prompt3D": "3D Pixar & DreamWorks animated scene, شوشو القبطان الصغير (Waterproof deep-sea captain suit, glowing sonar badge, Pixar 3D character shading) and مرجان الدلفين المرح (Iridescent aqua skin shader, glowing pearl collar, expressive cartoon eyes), full body rigging and facial lip-sync, volumetric global illumination, 8k render.",
+        "foleySoundEffects": [
+          "wind",
+          "jump"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "عندك حق يا مرجان! شوف إزاي المكان كله بدأ ينور أول ما اتعاونا وفكرنا سوا! الحقنا يا شوشو! طنط لولو السلحفاة محبوسة في شبكة قديمة ومش عارفة تعوم.. لازم نتصرف بسرعة! . أحلى حاجة في مغامراتنا في قناة نورين كيدز إننا عمرنا ما بنستسلم خالص مهما كان التحدي كبير، لأن التعاون والصدق بيخلوا قلبنا قوي وشجاع! بصوا هناك كده يا أصحابي، فيه طريق جديد ظهر قدامنا مليان أسرار وحكايات مفيدة، يلا بينا نكتشفه حالا!",
+          "validatedText": "عندك حق يا مرجان! شوف إزاي المكان كله بدأ ينور أول ما اتعاونا وفكرنا سوا! الحقنا يا شوشو! طنط لولو السلحفاة محبوسة في شبكة قديمة ومش عارفة تعوم.. لازم نتصرف بسرعة! . أحلى حاجة في مغامراتنا في قناة نورين كيدز إننا عمرنا ما بنستسلم خالص مهما كان التحدي كبير، لأن التعاون والصدق بيخلوا قلبنا قوي وشجاع! بصوا هناك كده يا أصحابي، فيه طريق جديد ظهر قدامنا مليان أسرار وحكايات مفيدة، يلا بينا نكتشفه حالا!",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "إزاي",
+            "سوا",
+            "دي",
+            "حاجة",
+            "خالص",
+            "بص",
+            "كده",
+            "يلا"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-10-01T01:12:25.110Z"
+        }
       },
       {
         "title": "خطة الإنقاذ",
@@ -198,11 +371,37 @@
         "particleEffect": "bubbles",
         "cameraMotion": "gentle_float",
         "lightingMood": "aqua_glow",
-        "durationSec": 39
+        "durationSec": 39,
+        "prompt3D": "3D Pixar & DreamWorks animated scene, مرجان الدلفين المرح (Iridescent aqua skin shader, glowing pearl collar, expressive cartoon eyes) and شوشو القبطان الصغير (Waterproof deep-sea captain suit, glowing sonar badge, Pixar 3D character shading), full body rigging and facial lip-sync, volumetric global illumination, 8k render.",
+        "foleySoundEffects": [
+          "jump",
+          "water"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "واااو يا مرجان! المنظر هنا يخطف العقل بجد! متخافيش يا طنط لولو، أنا ومرجان جنبك.. ايدي على ايدك يا مرجان عشان نفك الشبكة دي من غير ما نجرحها. . أنا فرحان أوي إن أصحابنا الحلوين بيتفرجوا علينا وبيفكروا معانا في كل خطوة بنخطيها في حكاية مغامرات شوشو القبطان ومرجان المرح! عارفين يا أصحابي؟ لما بنسمع النصيحة الكويسة وبنحافظ على النظام والنظافة والأمانة، كل خطوة صعبة بتبقى سهلة وجميلة خالص! يلا نكمل ونشوف إيه اللي هيحصل دلوقتي!",
+          "validatedText": "واااو يا مرجان! المنظر هنا يخطف العقل بجد! متخافيش يا طنط لولو، أنا ومرجان جنبك.. ايدي على ايدك يا مرجان عشان نفك الشبكة دي من غير ما نجرحها. . أنا فرحان أوي إن أصحابنا الحلوين بيتفرجوا علينا وبيفكروا معانا في كل خطوة بنخطيها في حكاية مغامرات شوشو القبطان ومرجان المرح! عارفين يا أصحابي؟ لما بنسمع النصيحة الكويسة وبنحافظ على النظام والنظافة والأمانة، كل خطوة صعبة بتبقى سهلة وجميلة خالص! يلا نكمل ونشوف إيه اللي هيحصل دلوقتي!",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "دي",
+            "عشان",
+            "أوي",
+            "فين",
+            "خالص",
+            "يلا",
+            "إيه",
+            "اللي",
+            "دلوقتي"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-10-01T01:12:25.134Z"
+        }
       },
       {
         "title": "دعوة للأصدقاء",
-        "dialogueArabic": "يا سلام على الذكاء والشطارة يا مرجان! يا سمك البحر يا صحابنا.. تعالوا ساعدونا ننضف بيتنا الجميل من البلاستيك اللي بيخنق المرجان! . شفتوا يا أصحابنا إزاي لما جربنا مرة واتنين بصبر وهدوء قدرنا نشغل الجهاز السحري وننور المكان كله؟ العلم والمعرفة وحب القراءة والاستكشاف هما الكنز الحقيقي اللي بيخلينا ننجح ونساعد كل اللي حوالينا! فاضل خطوة واحدة بس ونوصل لقلب المغامرة الكبيرة!",
+        "dialogueArabic": "يا سلام على الذكاء والشطارة يا مرجان! يا سمك البحر يا صحابنا.. يلا يلا يلا يلا يلا تعالوا ساعدونا ننضف بيتنا الجميل من البلاستيك اللي بيخنق المرجان! . شفتوا يا أصحابنا إزاي لما جربنا مرة واتنين بصبر وهدوء قدرنا نشغل الجهاز السحري وننور المكان كله؟ العلم والمعرفة وحب القراءة والاستكشاف هما الكنز الحقيقي اللي بيخلينا ننجح ونساعد كل اللي حوالينا! فاضل خطوة واحدة بس ونوصل لقلب المغامرة الكبيرة!",
         "characterAction": "مرجان يطلق أصواتاً عالية (سونار) لتجميع الأسماك الملونة حوله.",
         "environmentPreset": "crystal_oasis",
         "sceneNumber": 5,
@@ -214,7 +413,29 @@
         "particleEffect": "starlight",
         "cameraMotion": "dolly_in",
         "lightingMood": "starlight_nebula",
-        "durationSec": 39
+        "durationSec": 39,
+        "prompt3D": "3D Pixar & DreamWorks animated scene, شوشو القبطان الصغير (Waterproof deep-sea captain suit, glowing sonar badge, Pixar 3D character shading) and مرجان الدلفين المرح (Iridescent aqua skin shader, glowing pearl collar, expressive cartoon eyes), full body rigging and facial lip-sync, volumetric global illumination, 8k render.",
+        "foleySoundEffects": [
+          "water",
+          "magic"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "يا سلام على الذكاء والشطارة يا مرجان! يا سمك البحر يا صحابنا.. يلا يلا يلا تعالوا ساعدونا ننضف بيتنا الجميل من البلاستيك اللي بيخنق المرجان! . شفتوا يا أصحابنا إزاي لما جربنا مرة واتنين بصبر وهدوء قدرنا نشغل الجهاز السحري وننور المكان كله؟ العلم والمعرفة وحب القراءة والاستكشاف هما الكنز الحقيقي اللي بيخلينا ننجح ونساعد كل اللي حوالينا! فاضل خطوة واحدة بس ونوصل لقلب المغامرة الكبيرة!",
+          "validatedText": "يا سلام على الذكاء والشطارة يا مرجان! يا سمك البحر يا صحابنا.. يلا يلا يلا يلا يلا تعالوا ساعدونا ننضف بيتنا الجميل من البلاستيك اللي بيخنق المرجان! . شفتوا يا أصحابنا إزاي لما جربنا مرة واتنين بصبر وهدوء قدرنا نشغل الجهاز السحري وننور المكان كله؟ العلم والمعرفة وحب القراءة والاستكشاف هما الكنز الحقيقي اللي بيخلينا ننجح ونساعد كل اللي حوالينا! فاضل خطوة واحدة بس ونوصل لقلب المغامرة الكبيرة!",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "يا سلام",
+            "يلا",
+            "اللي",
+            "إزاي",
+            "بص"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-10-01T01:12:25.154Z"
+        }
       },
       {
         "title": "مهمة التنظيف الكبرى",
@@ -230,7 +451,30 @@
         "particleEffect": "fireflies",
         "cameraMotion": "orbit_slow",
         "lightingMood": "bioluminescent_twilight",
-        "durationSec": 39
+        "durationSec": 39,
+        "prompt3D": "3D Pixar & DreamWorks animated scene, مرجان الدلفين المرح (Iridescent aqua skin shader, glowing pearl collar, expressive cartoon eyes) and شوشو القبطان الصغير (Waterproof deep-sea captain suit, glowing sonar badge, Pixar 3D character shading), full body rigging and facial lip-sync, volumetric global illumination, 8k render.",
+        "foleySoundEffects": [
+          "jump",
+          "water"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "بص يا مرجان وبصوا يا كل أصحابنا الشطار! عاش يا أبطال! السمك كله بيساعد.. هنلم كل الزبالة دي في الأكياس المخصصة عشان نوديها لإعادة التدوير. . اللحظة دي من أحلى اللحظات في رحلتنا النهارده، لأن كل أصحابنا في العالم السحري فرحانين باللي عملناه علشانهم بحب وأمانة من غير ما نطلب أي مقابل! التعاون والطيبة دايما بيرسموا الابتسامة على وشوش الكل وبيخلوا الدنيا منورة ومليانة بهجة وسعادة!",
+          "validatedText": "بص يا مرجان وبصوا يا كل أصحابنا الشطار! عاش يا أبطال! السمك كله بيساعد.. هنلم كل الزبالة دي في الأكياس المخصصة عشان نوديها لإعادة التدوير. . اللحظة دي من أحلى اللحظات في رحلتنا النهارده، لأن كل أصحابنا في العالم السحري فرحانين باللي عملناه علشانهم بحب وأمانة من غير ما نطلب أي مقابل! التعاون والطيبة دايما بيرسموا الابتسامة على وشوش الكل وبيخلوا الدنيا منورة ومليانة بهجة وسعادة!",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "بص",
+            "دي",
+            "عشان",
+            "النهارده",
+            "اللي",
+            "علشان"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-10-01T01:12:25.171Z"
+        }
       },
       {
         "title": "فرحة البحر",
@@ -246,7 +490,32 @@
         "particleEffect": "sparkles",
         "cameraMotion": "pan_right",
         "lightingMood": "warm_lantern",
-        "durationSec": 39
+        "durationSec": 39,
+        "prompt3D": "3D Pixar & DreamWorks animated scene, شوشو القبطان الصغير (Waterproof deep-sea captain suit, glowing sonar badge, Pixar 3D character shading) and مرجان الدلفين المرح (Iridescent aqua skin shader, glowing pearl collar, expressive cartoon eyes), full body rigging and facial lip-sync, volumetric global illumination, 8k render.",
+        "foleySoundEffects": [
+          "jump",
+          "water"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "بجد يا مرجان دي كانت مغامرة لا يمكن ننساها خالص في حكاية مغامرات شوشو القبطان ومرجان المرح! بصوا كده يا أصحابي، شكرا يا شوشو، شكرا يا مرجان.. رجعتوا الألوان للبحر والضحكة لقلوبنا. البحر بقى أمان ونضيف تاني! . اتعلمنا النهارده سوا دروس جميلة أوي عن الشجاعة والصدق والذكاء ومساعدة أصحابنا في كل وقت، وكمان شفنا إزاي العمل الجماعي بيحول أي مشكلة صعبة لنجاح كبير يفرح كل القلوب!",
+          "validatedText": "بجد يا مرجان دي كانت مغامرة لا يمكن ننساها خالص في حكاية مغامرات شوشو القبطان ومرجان المرح! بصوا كده يا أصحابي، شكرا يا شوشو، شكرا يا مرجان.. رجعتوا الألوان للبحر والضحكة لقلوبنا. البحر بقى أمان ونضيف تاني! . اتعلمنا النهارده سوا دروس جميلة أوي عن الشجاعة والصدق والذكاء ومساعدة أصحابنا في كل وقت، وكمان شفنا إزاي العمل الجماعي بيحول أي مشكلة صعبة لنجاح كبير يفرح كل القلوب!",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "دي",
+            "خالص",
+            "بص",
+            "كده",
+            "النهارده",
+            "سوا",
+            "أوي",
+            "إزاي"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-10-01T01:12:25.186Z"
+        }
       },
       {
         "title": "وعد القبطان",
@@ -262,13 +531,37 @@
         "particleEffect": "clouds",
         "cameraMotion": "crane_up",
         "lightingMood": "golden_sunset",
-        "durationSec": 39
+        "durationSec": 39,
+        "prompt3D": "3D Pixar & DreamWorks animated scene, مرجان الدلفين المرح (Iridescent aqua skin shader, glowing pearl collar, expressive cartoon eyes) and شوشو القبطان الصغير (Waterproof deep-sea captain suit, glowing sonar badge, Pixar 3D character shading), full body rigging and facial lip-sync, volumetric global illumination, 8k render.",
+        "foleySoundEffects": [
+          "wind",
+          "water"
+        ],
+        "dialectValidationReport": {
+          "passed": true,
+          "isPureEgyptian": true,
+          "originalText": "ودلوقتي يا أصحابنا الحلوين في قناة نورين كيدز، وصلنا لنهاية حدوتة النهارده الجميلة! النهاردة اتعلمنا إن البحر أمانة في ايدينا.. لو كل واحد فينا حافظ على نظافته، عالمنا هيبقى أجمل بكتير. . لو عجبتكم المغامرة مع مرجان وشوشو، ما تنسوش تشتركوا في قناة نورين كيدز وتفعلوا الجرس وتعملوا لايك علشان تستنونا كل يوم في حدوتة جديدة ومفيدة! بنحبكم أوي، مع السلامة يا أصحابي!",
+          "validatedText": "ودلوقتي يا أصحابنا الحلوين في قناة نورين كيدز، وصلنا لنهاية حدوتة النهارده الجميلة! النهاردة اتعلمنا إن البحر أمانة في ايدينا.. لو كل واحد فينا حافظ على نظافته، عالمنا هيبقى أجمل بكتير. . لو عجبتكم المغامرة مع مرجان وشوشو، ما تنسوش تشتركوا في قناة نورين كيدز وتفعلوا الجرس وتعملوا لايك علشان تستنونا كل يوم في حدوتة جديدة ومفيدة! بنحبكم أوي، مع السلامة يا أصحابي!",
+          "detectedNonEgyptianWords": [],
+          "egyptianMarkersFound": [
+            "دلوقتي",
+            "النهارده",
+            "دي",
+            "فين",
+            "ما تنسوش",
+            "علشان",
+            "أوي"
+          ],
+          "autoRepairedCount": 0,
+          "compliancePercent": 100,
+          "checkedAtIso": "2026-10-01T01:12:25.202Z"
+        }
       }
     ],
     "youtubePackage": {
       "videoTitleAr": "Noreen Kids: مغامرات شوشو القبطان ومرجان المرح | مغامرات شوشو ومرجان",
       "videoTitleEn": "Noreen Kids: 3D Adventure of شوشو & مرجان",
-      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nينطلق بطلنا الشجاع \"شوشو القبطان الصغير\" مع صديقه الذكي \"مرجان الدلفين المرح\" في مغامرة ثلاثية الأبعاد متجددة حول (تنظيف شعب المرجان الملونة وحماية السلاحف البحرية اللطيفة)، حيث يواجهان ألغازاً مشوقة ويتعلمان كيف يصنع التعاون والصدق والذكاء المعجزات.\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- قيمة التعاون والعمل الجماعي بين الأصحاب.\n- حب الاستكشاف والتفكير العلمي لحل المشكلات.\n- الصدق والأمانة ومساعدة الآخرين في كل وقت.\n\n🕖 موعد النشر اليومي: الساعة 8:00 صباحاً بتوقيت مصر.\n\nالفصول الزمنية:\n00:00 1. البداية: انطلاق شوشو ومرجان\n00:39 2. التطور: ملاحظة العلامات العجيبة مع مرجان\n01:18 3. الحدث المفاجئ: ظهور العقبة والتفكير العلمي\n01:57 4. المشكلة: تحديد سبب المشكلة بدقة\n02:36 5. التصرف: العمل الجماعي وتجربة الحل\n03:15 6. الحل الذكي: نجاح المهمة وعودة النور\n03:54 7. الاحتفال بالنجاح والدرس المستفاد\n04:33 8. النهاية: رسالة شوشو ومرجان لأبطال Noreen Kids\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #رسوم_متحركة #قصص_أطفال_قبل_النوم #حواديت_مصرية #أفلام_كرتون #تعليم_الأطفال #KidsAnimation #3DCartoon #ArabicKidsCartoon #BedtimeStoriesForKids #PixarStyle3D #KidsLearning #TrendingKids",
+      "descriptionAr": "أهلاً بكم يا أصحابنا في قناة Noreen Kids لأفلام الرسوم المتحركة!\n\n📖 ملخص القصة:\nينطلق بطلنا الشجاع \"شوشو القبطان الصغير\" مع صديقه الذكي \"مرجان الدلفين المرح\" في مغامرة ثلاثية الأبعاد متجددة حول (تنظيف شعب المرجان الملونة وحماية السلاحف البحرية اللطيفة)، حيث يواجهان ألغازاً مشوقة ويتعلمان كيف يصنع التعاون والصدق والذكاء المعجزات.\n\n🌟 هنتعلم إيه في حلقة النهاردة؟\n- قيمة التعاون والعمل الجماعي بين الأصحاب.\n- حب الاستكشاف والتفكير العلمي لحل المشكلات.\n- الصدق والأمانة ومساعدة الآخرين في كل وقت.\n\n🕖 موعد النشر اليومي: الساعة 6:00 مساءً بتوقيت مصر.\n\nالفصول الزمنية:\n00:00 1. البداية: انطلاق شوشو ومرجان\n00:39 2. التطور: ملاحظة العلامات العجيبة مع مرجان\n01:18 3. الحدث المفاجئ: ظهور العقبة والتفكير العلمي\n01:57 4. المشكلة: تحديد سبب المشكلة بدقة\n02:36 5. التصرف: العمل الجماعي وتجربة الحل\n03:15 6. الحل الذكي: نجاح المهمة وعودة النور\n03:54 7. الاحتفال بالنجاح والدرس المستفاد\n04:33 8. النهاية: رسالة شوشو ومرجان لأبطال Noreen Kids\n\n✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!\nوجودكم في عيلتنا السحرية بينور عالمنا 💖🎬\n\n#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #رسوم_متحركة #قصص_أطفال_قبل_النوم #حواديت_مصرية #أفلام_كرتون #تعليم_الأطفال #KidsAnimation #3DCartoon #ArabicKidsCartoon #BedtimeStoriesForKids #PixarStyle3D #KidsLearning #TrendingKids",
       "tags": [
         "Noreen Kids",
         "أفلام كرتون 3D للأطفال",
@@ -276,7 +569,20 @@
         "قصص أطفال هادفة",
         "مغامرات شوشو ومرجان",
         "رسوم متحركة ثلاثية الأبعاد",
-        "3D Kids Animation"
+        "3D Kids Animation",
+        "قناة نورين كيدز",
+        "كرتون أطفال 3D",
+        "قصص أطفال قبل النوم",
+        "أفلام كرتون تعليمية للأطفال",
+        "مغامرات شوشو القبطان الصغير ومرجان",
+        "شوشو القبطان الصغير",
+        "مرجان الدلفين المرح",
+        "حواديت مصرية للأطفال",
+        "قصص اطفال هادفة",
+        "كرتون عربي جديد",
+        "Arabic Cartoon for Kids",
+        "Pixar Style 3D Story",
+        "فيلم كرتون طويل للأطفال"
       ],
       "thumbnailTextAr": "تنظيف شعب المرجان الملونة",
       "thumbnailPrompt3D": "3D Pixar movie poster for Noreen Kids YouTube channel, شوشو القبطان الصغير and مرجان الدلفين المرح discovering تنظيف شعب المرجان الملونة وحماية السلاحف البحرية اللطيفة, ultra vibrant colors, 8k"
@@ -287,6 +593,7 @@
     "generatedByAiRandom": true,
     "maxDurationLimitSec": 600,
     "mainCharacterId": "karim",
-    "companionCharacterId": "marjan"
+    "companionCharacterId": "marjan",
+    "preUploadVerified": true
   }
 }
