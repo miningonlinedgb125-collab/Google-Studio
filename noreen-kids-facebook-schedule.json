@@ -329,7 +329,23 @@
       "thumbnailTextAr": "حل معادلة الكنز البلوري"
     }
   },
-  "recentStoryHistory": [],
+  "recentStoryHistory": [
+    {
+      "topic": "سر وصفة السعادة والحنان في بيت تيتة مع",
+      "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا"
+    },
+    {
+      "topic": "حل معادلة الكنز البلوري بالحساب والتفكير المنظم مع",
+      "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "رحلة البحث عن مفتاح البوابة القديمة مع الشاب الطيب ذياد والعصفورة",
+      "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة"
+    }
+  ],
   "scheduledHistory": [
     {
       "id": "gh-cloud-2026-10-02",
