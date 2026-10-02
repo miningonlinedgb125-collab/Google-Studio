@@ -2971,11 +2971,10 @@ async function publishDailyInteractive3DPhotoPostForRunner({
   excludedHeroes = new Set(),
   forcePublish = false,
 }) {
-  const tokenRes = await resolveTrueFacebookPageAccessTokenForRunner(
+  const activeToken = await resolveTrueFacebookPageAccessToken(
     rawPageAccessToken,
     pageId
   );
-  const activeToken = tokenRes.pageToken;
   if (!activeToken) {
     return { published: false, reason: "missing_token" };
   }
@@ -3175,11 +3174,10 @@ async function scanAndAutoReplyFacebookCommentsForRunner({
   pageId,
   fbSchedule,
 }) {
-  const tokenRes = await resolveTrueFacebookPageAccessTokenForRunner(
+  const activeToken = await resolveTrueFacebookPageAccessToken(
     rawPageAccessToken,
     pageId
   );
-  const activeToken = tokenRes.pageToken;
   if (!activeToken) {
     return { scannedObjects: 0, newRepliesCount: 0 };
   }
@@ -3529,23 +3527,22 @@ async function main() {
     ? schedule.isGitHubScheduleEnabled
     : true;
 
-  if (isCronEvent && !isGitHubScheduleEnabled) {
-    console.log(
-      "⏸️ [GitHub Schedule Paused] جدولة GitHub Actions التلقائية متوقفة حالياً من الداشبورد. تم إلغاء التشغيل التلقائي."
-    );
-    process.exit(0);
-  }
-
   const ytGhTime = String(schedule.githubPublishTimeCairo || schedule.dailyPublishTimeCairo || "19:00").trim();
   const fbGhTime = String(fbSchedule.githubActionsTimeCairo || mergedFbBlock.githubActionsTimeCairo || ytGhTime).trim();
   const dailyInteractivePhotoPostEnabled =
-    typeof fbSchedule.dailyInteractivePhotoPostEnabled === "boolean"
+    typeof fbSchedule.dailyInteractivePhotoGitHubActionsEnabled === "boolean"
+      ? fbSchedule.dailyInteractivePhotoGitHubActionsEnabled
+      : typeof mergedFbBlock.dailyInteractivePhotoGitHubActionsEnabled === "boolean"
+      ? mergedFbBlock.dailyInteractivePhotoGitHubActionsEnabled
+      : typeof fbSchedule.dailyInteractivePhotoPostEnabled === "boolean"
       ? fbSchedule.dailyInteractivePhotoPostEnabled
       : typeof mergedFbBlock.dailyInteractivePhotoPostEnabled === "boolean"
       ? mergedFbBlock.dailyInteractivePhotoPostEnabled
       : true;
   const dailyInteractivePhotoTimeCairo = String(
-    fbSchedule.dailyInteractivePhotoTimeCairo ||
+    fbSchedule.dailyInteractivePhotoGitHubTimeCairo ||
+      mergedFbBlock.dailyInteractivePhotoGitHubTimeCairo ||
+      fbSchedule.dailyInteractivePhotoTimeCairo ||
       mergedFbBlock.dailyInteractivePhotoTimeCairo ||
       "16:00"
   ).trim();
@@ -3555,6 +3552,13 @@ async function main() {
       : typeof mergedFbBlock.autoCommentResponderEnabled === "boolean"
       ? mergedFbBlock.autoCommentResponderEnabled
       : true;
+
+  if (isCronEvent && !isGitHubScheduleEnabled && !dailyInteractivePhotoPostEnabled) {
+    console.log(
+      "⏸️ [GitHub Schedule Paused] جدولة GitHub Actions التلقائية (الفيديوهات + المنشور التفاعلي اليومي) متوقفة حالياً من الداشبورد. تم إلغاء التشغيل التلقائي."
+    );
+    process.exit(0);
+  }
 
   let isPhotoEngagementCronOnly = false;
 
@@ -3587,7 +3591,8 @@ async function main() {
     if (diffFromPhotoMin < -720) diffFromPhotoMin += 1440;
     if (diffFromPhotoMin > 720) diffFromPhotoMin -= 1440;
 
-    const isInsideVideoWindow = diffFromTargetMin >= -3 && diffFromTargetMin <= 90;
+    const isInsideVideoWindow =
+      isGitHubScheduleEnabled && diffFromTargetMin >= -3 && diffFromTargetMin <= 90;
     const isInsidePhotoWindow =
       dailyInteractivePhotoPostEnabled &&
       Boolean(facebookPageAccessToken) &&
@@ -4406,6 +4411,13 @@ async function main() {
   }
 
   // Execute Daily 3D Interactive Photo Post & Autonomous AI Comment Auto-Replier on GitHub Actions!
+  let engagementPhotoSummary = null;
+  let engagementCommentsSummary = null;
+  if (runMode === "engagement_only" && !facebookPageAccessToken) {
+    throw new Error(
+      "Missing FACEBOOK_PAGE_ACCESS_TOKEN for engagement_only run mode on GitHub Actions."
+    );
+  }
   if (facebookPageAccessToken) {
     let fbEngagementUpdated = false;
     if (dailyInteractivePhotoPostEnabled || runMode === "engagement_only") {
@@ -4421,6 +4433,10 @@ async function main() {
           excludedHeroes,
           forcePublish: runMode === "engagement_only" && !isCronEvent,
         });
+        engagementPhotoSummary = photoRes;
+        if (photoRes?.reason === "missing_token" && runMode === "engagement_only") {
+          throw new Error("Could not resolve a valid Facebook Page Access Token for photo post.");
+        }
         if (photoRes?.published || photoRes?.skippedDuplicate) {
           fbEngagementUpdated = true;
         }
@@ -4430,6 +4446,9 @@ async function main() {
             photoErr instanceof Error ? photoErr.message : photoErr
           }`
         );
+        if (runMode === "engagement_only") {
+          throw photoErr;
+        }
       }
     }
 
@@ -4443,6 +4462,7 @@ async function main() {
           pageId: facebookPageId,
           fbSchedule,
         });
+        engagementCommentsSummary = scanRes;
         if (scanRes.scannedObjects > 0 || scanRes.newRepliesCount > 0) {
           fbEngagementUpdated = true;
         }
@@ -4498,6 +4518,20 @@ async function main() {
             body: JSON.stringify(bodyObj),
           }).catch(() => {});
         }
+        const appUrlEng = String(process.env.APP_URL || vault.appUrl || "").trim();
+        if (appUrlEng) {
+          await fetch(`${appUrlEng.replace(/\/$/, "")}/api/facebook/growth/settings`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              lastInteractivePhotoDateKey: fbSchedule.lastInteractivePhotoDateKey,
+              interactivePhotoPostsLog: fbSchedule.interactivePhotoPostsLog,
+              repliedCommentIds: fbSchedule.repliedCommentIds,
+              recentAutoRepliesLog: fbSchedule.recentAutoRepliesLog,
+              lastAutoCommentScanAtCairo: fbSchedule.lastAutoCommentScanAtCairo,
+            }),
+          }).catch(() => {});
+        }
       } catch {}
     }
   }
@@ -4506,18 +4540,37 @@ async function main() {
     const summaryLines = [
       "## 🎬 تقرير النشر الموحد لقناة وصفحة Noreen Kids 3D Studio (YouTube + Facebook)",
       `- **وضع التشغيل:** \`${runMode}\``,
-      `- **موعد الجدولة اليومية (توقيت مصر):** \`${dailyTime}\``,
-      "",
-      "| نوع الفيديو | عنوان يوتيوب | عنوان فيسبوك | المدة | الحجم | رابط يوتيوب | رابط فيسبوك |",
-      "|---|---|---|---|---|---|---|",
-      ...results.map(
-        (r) =>
-          `| ${r.label} | ${r.cleanTitle} | ${r.facebookTitle || "—"} | ${r.durationSec}s | ${r.fileSizeMb} MB | [YouTube](https://youtu.be/${r.videoId}) | ${
-            r.facebookPermalinkUrl ? `[Facebook](${r.facebookPermalinkUrl})` : "—"
-          } |`
-      ),
+      `- **موعد الجدولة اليومية للفيديوهات (توقيت مصر):** \`${dailyTime}\``,
+      `- **موعد المنشور التفاعلي المصور 3D على GitHub Actions (توقيت مصر):** \`${dailyInteractivePhotoTimeCairo}\``,
       "",
     ];
+    if (results.length > 0) {
+      summaryLines.push(
+        "| نوع الفيديو | عنوان يوتيوب | عنوان فيسبوك | المدة | الحجم | رابط يوتيوب | رابط فيسبوك |",
+        "|---|---|---|---|---|---|---|",
+        ...results.map(
+          (r) =>
+            `| ${r.label} | ${r.cleanTitle} | ${r.facebookTitle || "—"} | ${r.durationSec}s | ${r.fileSizeMb} MB | [YouTube](https://youtu.be/${r.videoId}) | ${
+              r.facebookPermalinkUrl ? `[Facebook](${r.facebookPermalinkUrl})` : "—"
+            } |`
+        ),
+        ""
+      );
+    }
+    if (engagementPhotoSummary || engagementCommentsSummary) {
+      summaryLines.push(
+        "### 📸 المنشور التفاعلي المصور 3D ومجيب التعليقات الذكي (GitHub Actions)",
+        engagementPhotoSummary?.published
+          ? `- **المنشور التفاعلي 3D:** ✅ تم النشر بنجاح — **${engagementPhotoSummary.themeTitle}** ([فتح المنشور على فيسبوك](${engagementPhotoSummary.permalinkUrl}))`
+          : engagementPhotoSummary?.skippedDuplicate
+          ? `- **المنشور التفاعلي 3D:** ⏭️ تم نشره لهذا اليوم بالفعل (تم تخطي التكرار)`
+          : `- **المنشور التفاعلي 3D:** لم يتم النشر في هذه الجولة`,
+        engagementCommentsSummary
+          ? `- **فحص التعليقات والرد التلقائي:** تم فحص \`${engagementCommentsSummary.scannedObjects}\` منشور/فيديو والرد التلقائي على \`${engagementCommentsSummary.newRepliesCount}\` تعليق جديد`
+          : "",
+        ""
+      );
+    }
     fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summaryLines.join("\n"));
   }
 
