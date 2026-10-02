@@ -1326,7 +1326,12 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     const spk = isHeroTurn ? heroName : companionName;
     const prt = isHeroTurn ? companionName : heroName;
     let sceneDialogue = String(scenes[i]?.dialogueArabic || "").trim();
-    if (i === 0 && !/أعضاء.*نورين كيدز|عيلة.*نورين كيدز/.test(sceneDialogue.slice(0, 140))) {
+    if (
+      i === 0 &&
+      !/يا خبر يا أبطال|الحقوا يا أبطال|بصوا بسرعة يا أبطال|أعضاء.*نورين كيدز|عيلة.*نورين كيدز/.test(
+        sceneDialogue.slice(0, 150)
+      )
+    ) {
       const stripped = sceneDialogue
         .replace(
           /^(ازيكم يا أصحابي الحلوين في قناة نورين كيدز\s*[!،.]?\s*(عاملين إيه النهارده\s*[؟!،.]?\s*)?|ازيكم يا أصحابي الحلوين\s*[!،.]?\s*)/i,
@@ -1335,10 +1340,10 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
         .trim();
       const greetPrefix =
         dialect === "fusha"
-          ? `أَهْلاً وَسَهْلاً بِكُلِّ أَعْضَاءِ وَأَبْطَالِ عَائِلَةِ قَنَاةِ نُورِين كِيدْز الْغَالِين! أَنَا ${spk} وَمَعِي رَفِيقِي ${prt}!`
+          ? `يَا لَلْمُفَاجَأَةِ يَا أَبْطَالَ وَأَعْضَاءَ عَائِلَةِ نُورِين كِيدْز! أَسْرِعْ يَا ${prt}! أَنَا ${spk} وَمَعِي رَفِيقِي ${prt}، هَيَّا نَكْتَشِفُ السِّرَّ مَعاً!`
           : isShort
-          ? `أهلاً وسهلاً بكل أعضاء وعيلة قناة نورين كيدز الغاليين! ازيكم يا أحلى أبطال؟ أنا ${spk} ومعايا ${prt}، منورين عالمنا السحري النهارده!`
-          : `أهلاً وسهلاً بكل أعضاء وعيلة قناة نورين كيدز الغاليين في كل مكان! ازيكم يا أشطر وأجمل أبطال؟ وحشتونا أوي! أنا ${spk} ومعايا رفيق المغامرة ${prt}، منورين عالمنا السحري النهارده!`;
+          ? `يا خبر يا أبطال وعيلة نورين كيدز! الحقني بسرعة يا ${prt}! شايفين اللي حصل فجأة في مغامرتنا النهاردة؟ أنا ${spk} ومعايا ${prt}، يلا نشوف هنحل المفاجأة دي إزاي!`
+          : `يا خبر يا أبطال وعيلة نورين كيدز الغاليين في كل مكان! الحقني بسرعة يا ${prt}! شايفين العلامة العجيبة اللي ظهرت فجأة في مغامرتنا النهاردة؟ أنا ${spk} ومعايا رفيق المغامرة ${prt}، ويلا بينا نبدأ رحلتنا فوراً!`;
       sceneDialogue = stripped ? `${greetPrefix} ${stripped}` : greetPrefix;
     }
     const sc = {
@@ -2277,8 +2282,8 @@ function buildSmartEpisodeForRunner({
   const sceneTemplates = [
     {
       title: `1. البداية: انطلاق ${shortHero} و${shortComp}`,
-      egyptianShort: `ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بص كده معانا يا ${shortComp}، النهارده عندنا حكاية جميلة أوي عن ${egyptianTopic}! أنا جهزت ${heroProp} علشان نبدأ رحلتنا ونشوف إيه السر اللي مستنينا هناك!`,
-      egyptianLong: `ازيكم يا أصحابي الحلوين في قناة نورين كيدز! عاملين إيه النهارده؟ بص كده معانا يا ${shortComp}، النهارده عندنا حكاية كبيرة ومشوقة أوي عن ${egyptianTopic}! أنا جهزت معايا ${heroProp}، وصاحبي ${shortComp} محضر ${compProp} علشان نكون مستعدين لأي مفاجأة تقابلنا في الطريق! شايفين يا أصحابنا الشطار الألوان الجميلة والنور العجيب اللي بيلمع هناك في قلب المكان السحري ده؟ يلا بينا نقرب خطوة بخطوة ونفتح عينينا كويس علشان نبدأ أول فصل في مغامرتنا النهارده مع بعض!`,
+      egyptianShort: `يا خبر يا أبطال وعيلة نورين كيدز! الحقني بسرعة يا ${shortComp}! شايفين المفاجأة العجيبة اللي حصلت في ${egyptianTopic}؟ أنا ${shortHero} وجهزت ${heroProp} علشان نبدأ رحلتنا فوراً ونشوف إيه السر اللي مستنينا هناك!`,
+      egyptianLong: `يا خبر يا أبطال وعيلة نورين كيدز الغاليين في كل مكان! الحقني بسرعة يا ${shortComp}! شايفين العلامة العجيبة اللي ظهرت فجأة في ${egyptianTopic}؟ أنا ${shortHero} وجهزت معايا ${heroProp}، وصاحبي ${shortComp} محضر ${compProp} علشان نكون مستعدين لأي مفاجأة تقابلنا في الطريق! شايفين يا أصحابنا الشطار الألوان الجميلة والنور العجيب اللي بيلمع هناك في قلب المكان السحري ده؟ يلا بينا نقرب خطوة بخطوة ونفتح عينينا كويس علشان نبدأ أول فصل في مغامرتنا النهارده مع بعض!`,
       speaker: effectiveMainName,
       voice: heroVoice,
     },
@@ -2326,8 +2331,8 @@ function buildSmartEpisodeForRunner({
     },
     {
       title: `8. النهاية: رسالة ${shortHero} و${shortComp} لأبطال Noreen Kids`,
-      egyptianShort: `هيييه! حلينا اللغز ونجحت المهمة يا ${shortHero}! لو عجبتكم حدوتة النهارده يا أصحابنا الشطار، ما تنسوش تشتركوا في قناة نورين كيدز وتفعلوا الجرس وتعملوا لايك علشان تعيشوا معانا مغامرة جديدة كل يوم! مع السلامة!`,
-      egyptianLong: `ودلوقتي يا أصحابنا الحلوين في قناة نورين كيدز، وصلنا لنهاية حدوتة النهارده الجميلة بعد ما عشنا سوا البداية والتحدي والحل السعيد! لو عجبتكم المغامرة مع ${shortHero} و${shortComp}، ما تنسوش تشتركوا في قناة نورين كيدز وتفعلوا الجرس وتعملوا لايك علشان تعيشوا معانا مغامرة جديدة ومفيدة كل يوم في نفس الميعاد! بنحبكم أوي يا أبطال، مع السلامة يا أصحابي!`,
+      egyptianShort: `هيييه! حلينا اللغز ونجحت المهمة يا ${shortHero}! لو عجبتكم حدوتة النهارده يا أصحابنا الشطار، اعملوا لايك ومتابعة لـ نورين كيدز واكتبوا اسمكم في التعليقات علشان نحييكم في مغامرتنا الجديدة كل يوم! مع السلامة!`,
+      egyptianLong: `ودلوقتي يا أصحابنا الحلوين في نورين كيدز، وصلنا لنهاية حدوتة النهارده الجميلة بعد ما عشنا سوا البداية والتحدي والحل السعيد! لو عجبتكم المغامرة مع ${shortHero} و${shortComp}، اعملوا لايك ومتابعة لـ نورين كيدز واكتبوا اسمكم في التعليقات علشان نحييكم في مغامرة جديدة ومفيدة كل يوم في نفس الميعاد! بنحبكم أوي يا أبطال، مع السلامة يا أصحابي!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
@@ -2606,7 +2611,9 @@ function buildIndependentFacebookMetadataForRunner({
   const facebookTitle = String(
     savedCustom?.facebookTitleAr ||
       customFormatTitle ||
-      `${titlePrefix} ${rawTopic} - مغامرة ${heroName} و${compName}`
+      (isShort
+        ? `يا ترى إيه المفاجأة اللي حصلت مع ${heroName} و${compName} في "${rawTopic}"؟ 🤔🎬 | ${titlePrefix.replace(/\|$/, "").trim()}`
+        : `حدوتة النهاردة لأطفالنا الشطار: إزاي تصرف ${heroName} و${compName} في "${rawTopic}"؟ 🌟🎬 | ${titlePrefix.replace(/\|$/, "").trim()}`)
   )
     .replace(/#[^\s#]+/g, "")
     .trim()
@@ -2619,8 +2626,8 @@ function buildIndependentFacebookMetadataForRunner({
   ).trim();
 
   const defaultCaption = isShort
-    ? `🌟 ريلز جديد لأطفالنا الشطار على صفحة Noreen Kids!\n🎬 مغامرة سريعة وممتعة: "${rawTopic}" مع ${heroName} وصديقنا ${compName}!\n💡 قيمة الحلقة: ${moralLesson}.\n💬 شاركونا في التعليقات: إيه أكتر موقف عجب أطفالكم في مغامرة النهاردة؟ ولا تنسوا متابعة الصفحة لمشاهدة حكاية جديدة كل يوم!`
-    : `🎬 فيلم كرتون 3D كامل لأطفالنا الحلوين على صفحة Noreen Kids!\n✨ حكاية النهاردة: "${rawTopic}" مع البطلين ${heroName} و${compName} في رحلة مليانة تشويق ومعلومات مفيدة!\n🌟 الدرس التربوي للحلقة: ${moralLesson}.\n👨‍👩‍👧‍👦 تفرجوا على الحلقة مع أطفالكم واكتبوا لنا في التعليقات اسم بطلكم المفضل في Noreen Kids!`;
+    ? `يا ترى إيه المفاجأة اللي حصلت مع ${heroName} و${compName} في "${rawTopic}"؟ وإزاي قدروا يحلوها في آخر لحظة؟ 🤔✨\n🎬 فرّجي طفلك على المغامرة الكرتونية 3D للآخر وشوفي رد فعله!\n💡 قيمة وحدوتة النهاردة: ${moralLesson}.\n👇 تحدي الأبطال في التعليقات: اكتبوا لنا اسم طفلكم في كومنت عشان ${heroName} و${compName} يحيوه بالاسم في حلقة بكرة، واعملوا متابعة لصفحة Noreen Kids 🔔👍 وشير مع كل الأمهات عشان توصلكم حدوتة جديدة كل يوم!`
+    : `لكل أم بتدور على محتوى آمن وهادف يفرح أطفالها: شوفوا إيه اللي حصل مع ${heroName} و${compName} في "${rawTopic}"! 🌟🎬\n✨ فيلم كرتون 3D كامل باللهجة المصرية المحببة للأطفال، يجمع بين المتعة والتربية الإيجابية!\n💡 الدرس التربوي للحلقة: ${moralLesson}.\n👨‍👩‍👧‍👦 تفرجوا على الحلقة مع أطفالكم واكتبوا اسم طفلكم وبطله المفضل في التعليقات عشان نرحب بيه بالاسم، ومتنسوش متابعة صفحة Noreen Kids 🔔👍 ومشاركة الفيديو مع أصحابكم!`;
 
   const customFormatCaption = isShort
     ? facebookSettings?.shortCustomCaptionAr
@@ -2636,8 +2643,8 @@ function buildIndependentFacebookMetadataForRunner({
   ).trim();
 
   const fallbackHashtags = isShort
-    ? ["#Noreen_Kids", "#نورين_كيدز", "#Reels", "#قصص_أطفال", "#كرتون_أطفال_3D", "#حكايات_مصرية", "#تربية_إيجابية"]
-    : ["#Noreen_Kids", "#نورين_كيدز", "#أفلام_كرتون_3D", "#قصص_أطفال", "#حكايات_قبل_النوم", "#تعليم_الأطفال", "#كرتون_مصري"];
+    ? ["#Noreen_Kids", "#نورين_كيدز", "#Reels", "#قصص_أطفال", "#حواديت_قبل_النوم", "#كرتون_أطفال_3D", "#تربية_إيجابية", "#أمهات_مصر"]
+    : ["#Noreen_Kids", "#نورين_كيدز", "#أفلام_كرتون_3D", "#قصص_أطفال", "#حواديت_قبل_النوم", "#تربية_إيجابية", "#أمهات_مصر", "#كرتون_مصري"];
 
   const customFormatHashtags = isShort
     ? facebookSettings?.shortCustomHashtags
@@ -2799,6 +2806,19 @@ async function uploadMp4ToFacebookPage({
         finishData?.error?.message || `HTTP ${finishRes.status} on /${pageId}/videos (finish)`
       );
     }
+    try {
+      const heroName = String(episode?.mainCharacterName || episode?.scenes?.[0]?.speakerName || "دكتورة نورين");
+      const compName = String(episode?.companionName || episode?.scenes?.[1]?.speakerName || "أرنوب");
+      const firstCommentMsg = `🌟 تحدي أبطال نورين كيدز في حلقة النهاردة!\nيا ترى مين الشاطر اللي ركز مع ${heroName} و${compName} وعرف إيه أهم نصيحة اتعلمناها في الحلقة؟ 🤔✨\n👇 اكتبوا لنا اسم طفلكم في تعليق هنا عشان ${heroName} و${compName} يردوا عليه ويحيوه بالاسم، ومتنسوش تعملوا متابعة للصفحة 🔔👍 عشان توصلكم حدوتة بكرة!`;
+      await fetch(`https://graph.facebook.com/v21.0/${encodeURIComponent(videoId)}/comments`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${activeToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: firstCommentMsg }),
+      }).catch(() => {});
+    } catch {}
     return {
       facebookVideoId: videoId,
       facebookPostId: String(finishData?.post_id || `${pageId}_${videoId}`),
@@ -2867,6 +2887,19 @@ async function uploadMp4ToFacebookPage({
           finishData?.error?.message || `HTTP ${finishRes.status} on /video_reels (finish)`
         );
       }
+      try {
+        const heroName = String(episode?.mainCharacterName || episode?.scenes?.[0]?.speakerName || "دكتورة نورين");
+        const compName = String(episode?.companionName || episode?.scenes?.[1]?.speakerName || "أرنوب");
+        const firstCommentMsg = `🌟 تحدي أبطال نورين كيدز في ريلز النهاردة!\nيا ترى مين الشاطر اللي ركز مع ${heroName} و${compName} وعرف إزاي حلوا المفاجأة؟ 🤔✨\n👇 اكتبوا لنا اسم طفلكم في تعليق هنا عشان ${heroName} و${compName} يردوا عليه ويحيوه بالاسم، ومتنسوش متابعة الصفحة 🔔👍 عشان توصلكم حدوتة بكرة!`;
+        await fetch(`https://graph.facebook.com/v21.0/${encodeURIComponent(videoId)}/comments`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${activeToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message: firstCommentMsg }),
+        }).catch(() => {});
+      } catch {}
       return {
         facebookVideoId: videoId,
         facebookPostId: String(finishData?.post_id || `${pageId}_${videoId}`),
