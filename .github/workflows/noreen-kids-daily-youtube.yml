@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       run_mode:
-        description: 'اختر وضع التشغيل والرفع على يوتيوب (الجدولة اليومية / قصير فقط / طويل فقط / الاثنين معاً)'
+        description: 'اختر وضع التشغيل والرفع على يوتيوب وفيسبوك (الجدولة اليومية / قصير فقط / طويل فقط / الاثنين معاً / التفاعل المصور والتعليقات)'
         required: true
         type: choice
         default: 'daily_schedule (الجدولة اليومية: قصير + طويل)'
@@ -16,6 +16,7 @@ on:
           - 'short_only (تشغيل قصير فقط - Short 9:16)'
           - 'long_only (تشغيل طويل فقط - Long 16:9)'
           - 'both_now (تشغيل الاثنين معاً: قصير + طويل)'
+          - 'engagement_only (المنشور التفاعلي المصور 3D + فحص التعليقات والرد التلقائي)'
 
 jobs:
   generate-and-upload-noreen-kids:
