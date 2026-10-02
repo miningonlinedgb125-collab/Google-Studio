@@ -2565,7 +2565,13 @@ async function generateFreshAiEpisodeForRunner({
   });
 }
 
-async function resolveTrueFacebookPageAccessToken({ rawToken, targetPageId }) {
+async function resolveTrueFacebookPageAccessToken(arg1, arg2) {
+  const rawToken =
+    arg1 && typeof arg1 === "object" ? arg1.rawToken || arg1.rawPageAccessToken : arg1;
+  const targetPageId =
+    arg1 && typeof arg1 === "object"
+      ? arg1.targetPageId || arg1.pageId || "1330185823512542"
+      : arg2 || "1330185823512542";
   const cleanToken = String(rawToken || "").trim();
   if (!cleanToken) return "";
   let resolvedToken = cleanToken;
@@ -2971,10 +2977,10 @@ async function publishDailyInteractive3DPhotoPostForRunner({
   excludedHeroes = new Set(),
   forcePublish = false,
 }) {
-  const activeToken = await resolveTrueFacebookPageAccessToken(
-    rawPageAccessToken,
-    pageId
-  );
+  const activeToken = await resolveTrueFacebookPageAccessToken({
+    rawToken: rawPageAccessToken,
+    targetPageId: pageId,
+  });
   if (!activeToken) {
     return { published: false, reason: "missing_token" };
   }
@@ -3174,10 +3180,10 @@ async function scanAndAutoReplyFacebookCommentsForRunner({
   pageId,
   fbSchedule,
 }) {
-  const activeToken = await resolveTrueFacebookPageAccessToken(
-    rawPageAccessToken,
-    pageId
-  );
+  const activeToken = await resolveTrueFacebookPageAccessToken({
+    rawToken: rawPageAccessToken,
+    targetPageId: pageId,
+  });
   if (!activeToken) {
     return { scannedObjects: 0, newRepliesCount: 0 };
   }
