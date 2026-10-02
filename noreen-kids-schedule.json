@@ -28,6 +28,16 @@
   "encryptedVault": "afaf4bd09bd71f868b3197c2a70a55e8:a93f87c23b51d03f78029dc58e3ad6964889308b6ab34b7e43672e59bf8bc262a8ccbbbc4997826eaf4523fdad196e2106b107b1d3f0d04ce20e8b1632aa7899a19dc5463e7805609655c7c36e27f1180a052e19925157bcd29663469464cdc81c244044eedcea87d7dbe13f3c6102b16edbf8ae99f3d036fd334d208710bf35bb6234b426bf2ac67555210412f2252ae82555d6a62b7ee7cd0f662c7940c80d7ed7f061af8889f75af4cd8976a8966dc96ecf8d6f49567f886e6daa14d90f7791caf014c7ab6256b8a5c5083774e4a673a8337facb1fb280d62447028fdee510d0f03ada7b7dd2f95e4054d56903c6c80faf0ca4d5f452566824c301ad004c7d28d56fd05204c9949e7f2cdee2b4ef9badc7146c8da18c38aa91fee1bd2c1d0d3cd3eda05a7cacd43d669842196e2f7c46615137145403a02be2f174452cf6531419e730f5b18f043610ca2195fe9b5ed6902b4ac0c90589b2f11019b92538a033219e8c7df16caf67107bbe601692e22ad695017696d22e0be052b023f14dc8c212137149dbed2d802512f09a3815cfffc135b59cdf3c26ad394ca46c8431f2451c7550f5002fcae63253872198076fecd63d498a71094ff8bf20992ceee38048b437987463cbbae2195d95032dc28a72aa82073c0fe5bce9d9332070920fecf3ebfac8d1fadeb8550ba70a4da9354097dc063bda227def3e10054e5e5eda16c3e6051d4921f54a4e40bca370957dc630dc5fede127fc773855284efd2fc8bb10df805c57790b3064b77587289272bd51e10afeb0d77998f6c2b944ac42c5e48932d9e2983fc646f170c42c2594b8f89b8595f1bcf74b29bb279a311438859ad1ba2522b261a9f33efa8f5a1c51d5f0186b5ae250fb4b5c6d70cb9348cb23558db26d5913162891630cf9c2562cae0a984dac075fefe8ca5449fdf580174b2b110736f570744ed4445219948a969aca507331a32508fa4b6109be55071d02c25a64b5b725476b9a409b1535eaa39c48de0b09b0ffc19de525336397dedec689c46284e4b4f84f1dc95a4857d6d7cec",
   "recentStoryHistory": [
     {
+      "topic": "سر الابتسامة المنورة وإزاي نحافظ على سناننا بيضا",
+      "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "البذرة العجيبة اللي فتحت بالصبر والتعاون في غابة",
+      "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي"
+    },
+    {
       "topic": "رحلة البحث عن مفتاح البوابة القديمة مع الشاب الطيب ذياد والعصفورة",
       "mainCharacterName": "ذياد",
       "companionName": "العصفورة الفرفوشة",
@@ -1691,5 +1701,59 @@
       ],
       "thumbnailTextAr": "البذرة العجيبة اللي فتحت"
     }
+  },
+  "lastCloudRunReport": {
+    "id": "gh-run-36943008940",
+    "uploadMode": "daily_schedule",
+    "triggerSource": "github_actions_cloud",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-02 (03:03 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1790898756377-si6s",
+    "longEpisodeId": "ep-gh-long-1790898756513-xg4y",
+    "shortEpisodeTitle": "Noreen Kids: سر الابتسامة المنورة وإزاي نحافظ على سناننا بيضا | مغامرات الطبيبة نورين وأرنوب",
+    "longEpisodeTitle": "Noreen Kids: البذرة العجيبة اللي فتحت بالصبر والتعاون في غابة | مغامرات عمرو وزعتر",
+    "shortTitle": "Noreen Kids: سر الابتسامة المنورة وإزاي نحافظ على سناننا بيضا | مغامرات الطبيبة نورين وأرنوب",
+    "longTitle": "Noreen Kids: البذرة العجيبة اللي فتحت بالصبر والتعاون في غابة | مغامرات عمرو وزعتر",
+    "shortPlaylistId": "PLPwfeXzB3ozU",
+    "longPlaylistId": "PLbjN20PzrCYk",
+    "privacyStatus": "public",
+    "madeForKids": false,
+    "containsSyntheticMedia": false,
+    "categoryId": "1",
+    "dialect": "egyptian",
+    "status": "uploaded_live",
+    "youtubeShortVideoId": "lMGHJSaaWaM",
+    "youtubeLongVideoId": "lOhtBQZzYVg",
+    "facebookShortVideoId": "1614868806966895",
+    "facebookLongVideoId": "2005194820163857",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1614868806966895",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2005194820163857",
+    "facebookShortTitle": "Noreen Kids | سر الابتسامة المنورة وإزاي نحافظ على سناننا بيضا - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
+    "facebookLongTitle": "Noreen Kids | البذرة العجيبة اللي فتحت بالصبر والتعاون في غابة - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
+    "ffprobeReport": {
+      "valid": true,
+      "passed": true,
+      "containerFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+      "videoCodec": "h264",
+      "videoProfile": "High",
+      "pixelFormat": "yuv420p",
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "audioCodec": "aac",
+      "audioSampleRate": 48000,
+      "audioChannels": 2,
+      "fastStartMoovFirst": true,
+      "durationSec": 326,
+      "fileSizeBytes": 33858519,
+      "inspectedAt": "03:03"
+    },
+    "processingDetails": {
+      "processingStatus": "succeeded",
+      "partsTotal": 100,
+      "partsProcessed": 100,
+      "timeLeftMs": 0,
+      "fileDetailsAvailability": "available"
+    },
+    "reportedAtIso": "2026-10-02T00:03:24.661Z"
   }
 }
