@@ -1,13 +1,15 @@
-name: Noreen Kids Facebook Page 24/7 Daily Schedule (SHORT Reel + LONG Video)
+name: Noreen Kids Facebook Page 24/7 Daily Schedule (SHORT Reel + LONG Video + 3D Photo Challenge & Comment Auto-Replier)
 
 on:
   schedule:
-    # Runs daily at 18:15 Egypt Time (Africa/Cairo) -> 15:15 UTC
+    # Runs daily at 18:15 Egypt Time (Africa/Cairo) -> 15:15 UTC (Daily Videos + Photo Post Guard + Comment Auto-Replier)
     - cron: '15 15 * * *'
+    # Runs daily at 16:00 Egypt Time (Africa/Cairo) -> 13:00 UTC (Daily 3D Interactive Photo Challenge + Comment Auto-Replier)
+    - cron: '0 13 * * *'
   workflow_dispatch:
     inputs:
       run_mode:
-        description: 'اختر وضع التشغيل والرفع على صفحة فيسبوك (الجدولة اليومية / قصير فقط / طويل فقط / الاثنين معاً)'
+        description: 'اختر وضع التشغيل والرفع على صفحة فيسبوك (الجدولة اليومية / قصير فقط / طويل فقط / الاثنين معاً / المنشور التفاعلي المصور والتعليقات)'
         required: true
         type: choice
         default: 'daily_schedule (الجدولة اليومية: قصير + طويل)'
@@ -16,6 +18,7 @@ on:
           - 'short_only (تشغيل قصير فقط - Short 9:16)'
           - 'long_only (تشغيل طويل فقط - Long 16:9)'
           - 'both_now (تشغيل الاثنين معاً: قصير + طويل)'
+          - 'engagement_only (المنشور التفاعلي المصور 3D + فحص التعليقات والرد التلقائي)'
 
 jobs:
   publish-noreen-facebook-daily:
