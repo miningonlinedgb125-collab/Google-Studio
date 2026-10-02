@@ -329,7 +329,18 @@
       "thumbnailTextAr": "بناء قبة النجوم المضيئة"
     }
   },
-  "recentStoryHistory": [],
+  "recentStoryHistory": [
+    {
+      "topic": "سر الساعة الرملية المضيئة في واحة الكريستال وتعلّم",
+      "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم"
+    },
+    {
+      "topic": "بناء قبة النجوم المضيئة لحماية عصافير الغابة من المطر",
+      "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    }
+  ],
   "scheduledHistory": [
     {
       "id": "gh-run-36966992629",
