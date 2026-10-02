@@ -243,16 +243,16 @@ function runPreTtsEgyptianValidationLayer(rawText, sceneIndex = 0, totalScenes =
   if (
     sceneIndex === 0 &&
     validatedText &&
-    !/^(ازيكم|يا خبر|بص|بصوا|شايف|شايفين|يلا بينا)/.test(validatedText)
+    !/^(ازيكم|يا خبر|الحقوا|الحقني|بص|بصوا|شايف|شايفين|يلا بينا)/.test(validatedText)
   ) {
-    validatedText = `ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بصوا كده معانا النهارده، ${validatedText}`;
+    validatedText = `يا خبر يا أبطال وعيلة نورين كيدز! بصوا بسرعة معانا النهارده، ${validatedText}`;
   }
   if (
     sceneIndex === totalScenes - 1 &&
     validatedText &&
-    !/(اشتركوا|تشتركوا|لايك|مع السلامة)/.test(validatedText)
+    !/(اشتركوا|تشتركوا|متابعة|لايك|مع السلامة)/.test(validatedText)
   ) {
-    validatedText = `${validatedText} لو عجبتكم حدوتة النهارده ما تنسوش تشتركوا في قناة نورين كيدز وتعملوا لايك، مع السلامة يا أصحابي!`;
+    validatedText = `${validatedText} لو عجبتكم حدوتة النهارده اعملوا لايك ومتابعة لـ نورين كيدز واكتبوا اسمكم في التعليقات علشان نحييكم بالاسم، مع السلامة يا أصحابي!`;
   }
   validatedText = normalizeEgyptianColloquial(validatedText);
 
@@ -2497,12 +2497,14 @@ async function generateFreshAiEpisodeForRunner({
   if (apiKey) {
     try {
       const ai = new GoogleGenAI({ apiKey });
-      const prompt = `أنت المخرج الإبداعي لقناة الأطفال ثلاثية الأبعاد "Noreen Kids".
+      const prompt = `أنت المخرج الإبداعي لقناة وصفحة الأطفال ثلاثية الأبعاد "Noreen Kids".
 قم بتوليد حلقة كرتون 3D جديدة كلياً ومبتكرة (${
         isShort
-          ? "فيديو قصير YouTube Shorts مدته 68 ثانية من 4 مشاهد مترابطة"
+          ? "فيديو قصير عمودي مدته 68 ثانية من 4 مشاهد مترابطة"
           : "فيلم كرتون طويل مدته 312 ثانية من 8 مشاهد مترابطة، كل مشهد 55 إلى 75 كلمة"
       }) باللهجة المصرية القاهرية الطبيعية المحببة للأطفال بدون أي تشكيل فصحى.
+- ابدأ المشهد الأول (sceneNumber: 1) دائماً بخطاف تشويقي ناري في أول 3 ثوانٍ من قلب الحدث مثل: "يا خبر يا أبطال وعيلة نورين كيدز! الحقني بسرعة يا ${team.companionName}! شايفين المفاجأة اللي حصلت دلوقتي..." يتبعه ترحيب دافئ وسريع.
+- اختم المشهد الأخير بدعوة مشتركة تصلح ليوتيوب وفيسبوك معاً: "اعملوا لايك ومتابعة لـ نورين كيدز واكتبوا اسمكم في التعليقات علشان نحييكم بالاسم!".
 البطل الرئيسي: "${team.mainCharacterName}" (الأداة: ${team.heroProp}).
 المرافق: "${team.companionName}" (الأداة: ${team.compProp}).
 فكرة القصة الجديدة: "${topic}".
