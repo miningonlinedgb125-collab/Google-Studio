@@ -518,7 +518,7 @@
       }
     }
   ],
-  "lastAutoCommentScanAtCairo": "2026-10-02 · 17:27 بتوقيت مصر",
+  "lastAutoCommentScanAtCairo": "2026-10-02 · 18:55 بتوقيت مصر",
   "lastFacebookCloudRunReport": {
     "id": "gh-run-37027847489",
     "uploadMode": "daily_schedule",
@@ -572,5 +572,6 @@
       "fileDetailsAvailability": "available"
     },
     "reportedAtIso": "2026-10-02T15:55:45.335Z"
-  }
+  },
+  "lastInteractivePhotoPublishedAtIso": "2026-10-02T13:47:44+0000"
 }
