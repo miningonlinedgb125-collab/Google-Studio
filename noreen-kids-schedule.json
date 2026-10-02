@@ -360,9 +360,73 @@
   ],
   "recentStoryHistory": [
     {
+      "topic": "سر وصفة السعادة والحنان في بيت تيتة مع",
+      "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا"
+    },
+    {
+      "topic": "حل معادلة الكنز البلوري بالحساب والتفكير المنظم مع",
+      "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
       "topic": "رحلة البحث عن مفتاح البوابة القديمة مع الشاب الطيب ذياد والعصفورة",
       "mainCharacterName": "ذياد",
       "companionName": "العصفورة الفرفوشة"
     }
-  ]
+  ],
+  "lastCloudRunReport": {
+    "id": "gh-cloud-2026-10-02",
+    "uploadMode": "daily_schedule",
+    "triggerSource": "github_actions_cloud",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-02 (17:11 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1790949518685-lt1l",
+    "longEpisodeId": "ep-gh-long-1790949518860-bl6e",
+    "shortEpisodeTitle": "Noreen Kids: سر وصفة السعادة والحنان في بيت تيتة مع | مغامرات تيتة والدب باندا",
+    "longEpisodeTitle": "Noreen Kids: حل معادلة الكنز البلوري بالحساب والتفكير المنظم مع | مغامرات أستاذ شريف والصقر الذكي",
+    "shortTitle": "Noreen Kids: سر وصفة السعادة والحنان في بيت تيتة مع | مغامرات تيتة والدب باندا",
+    "longTitle": "Noreen Kids: حل معادلة الكنز البلوري بالحساب والتفكير المنظم مع | مغامرات أستاذ شريف والصقر الذكي",
+    "shortPlaylistId": "PLPwfeXzB3ozU",
+    "longPlaylistId": "PLbjN20PzrCYk",
+    "privacyStatus": "public",
+    "madeForKids": false,
+    "containsSyntheticMedia": false,
+    "categoryId": "1",
+    "dialect": "egyptian",
+    "status": "uploaded_live",
+    "youtubeShortVideoId": "EXku9H4dMNI",
+    "youtubeLongVideoId": "5d0bYyGc2A8",
+    "facebookShortVideoId": "1379036947553040",
+    "facebookLongVideoId": "1468308135204017",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1379036947553040",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1468308135204017",
+    "facebookShortTitle": "يا ترى إيه المفاجأة اللي حصلت مع تيتة والدب باندا في \"سر وصفة السعادة والحنان في بيت تيتة مع\"؟ 🤔🎬 | Noreen Kids",
+    "facebookLongTitle": "حدوتة النهاردة لأطفالنا الشطار: إزاي تصرف أستاذ شريف والصقر الذكي في \"حل معادلة الكنز البلوري بالحساب والتفكير المنظم مع",
+    "ffprobeReport": {
+      "valid": true,
+      "passed": true,
+      "containerFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+      "videoCodec": "h264",
+      "videoProfile": "High",
+      "pixelFormat": "yuv420p",
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "audioCodec": "aac",
+      "audioSampleRate": 48000,
+      "audioChannels": 2,
+      "fastStartMoovFirst": true,
+      "durationSec": 308,
+      "fileSizeBytes": 33313260,
+      "inspectedAt": "17:11"
+    },
+    "processingDetails": {
+      "processingStatus": "succeeded",
+      "partsTotal": 100,
+      "partsProcessed": 100,
+      "timeLeftMs": 0,
+      "fileDetailsAvailability": "available"
+    },
+    "reportedAtIso": "2026-10-02T14:11:38.497Z"
+  }
 }
