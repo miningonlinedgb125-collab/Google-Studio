@@ -1672,5 +1672,38 @@
         "fileDetailsAvailability": "available"
       }
     }
+  ],
+  "recentStoryHistory": [
+    {
+      "topic": "سر الابتسامة المنورة وإزاي نحافظ على سناننا بيضا",
+      "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "البذرة العجيبة اللي فتحت بالصبر والتعاون في غابة",
+      "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي"
+    },
+    {
+      "topic": "رحلة البحث عن مفتاح البوابة القديمة مع الشاب الطيب ذياد والعصفورة",
+      "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة",
+      "fingerprint": "3ea680a6881c",
+      "dialogueHash": ""
+    },
+    {
+      "topic": "رحلة المسبار الصغير حوالين حلقات زحل وتعلّم الشجاعة",
+      "mainCharacterName": "جنى رائدة الفضاء",
+      "companionName": "بلبل الروبوت اللطيف",
+      "fingerprint": "043fc2aff92b",
+      "dialogueHash": ""
+    },
+    {
+      "topic": "تصميم القلعة البلورية القوية قدام الهوا في واحة",
+      "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش",
+      "fingerprint": "372f753040ab",
+      "dialogueHash": ""
+    }
   ]
 }
