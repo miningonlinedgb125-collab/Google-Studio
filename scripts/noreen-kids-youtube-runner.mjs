@@ -4641,7 +4641,14 @@ async function main() {
   console.log("==================================================================");
 }
 
-main().catch((err) => {
-  console.error("❌ Pipeline Error:", err instanceof Error ? err.message : err);
-  process.exit(1);
-});
+const isDirectExecution =
+  process.argv[1] &&
+  (process.argv[1].endsWith("noreen-kids-youtube-runner.mjs") ||
+    process.argv[1].endsWith("noreen-kids-youtube-runner.js"));
+
+if (isDirectExecution) {
+  main().catch((err) => {
+    console.error("❌ Pipeline Error:", err instanceof Error ? err.message : err);
+    process.exit(1);
+  });
+}
