@@ -255,12 +255,13 @@ function runPreTtsEgyptianValidationLayer(rawText, sceneIndex = 0, totalScenes =
   ) {
     validatedText = `يا خبر يا أبطال وعيلة نورين كيدز! بصوا بسرعة معانا النهارده، ${validatedText}`;
   }
-  if (
-    sceneIndex === totalScenes - 1 &&
-    validatedText &&
-    !/(اشتركوا|تشتركوا|متابعة|لايك|مع السلامة)/.test(validatedText)
-  ) {
-    validatedText = `${validatedText} لو عجبتكم حدوتة النهارده اعملوا لايك ومتابعة لـ نورين كيدز واكتبوا اسمكم في التعليقات علشان نحييكم بالاسم، مع السلامة يا أصحابي!`;
+  if (sceneIndex === totalScenes - 1 && validatedText) {
+    if (!/سؤال التحدي|تحدي أبطال|تحدي الشطار/.test(validatedText)) {
+      const challengeTail = `وسؤال التحدي لشطار عيلة نورين كيدز: إيه أحلى تصرف ودرس اتعلمتوه معانا النهارده؟ اشتركوا وتابعوا عيلتنا الجميلة نورين كيدز علشان يوصلكم كل جديد، واكتبوا إجابتكم واسم أبطالكم في التعليقات عشان نحييكم بالاسم في مغامرة بكرة! مع السلامة يا أصحابي!`;
+      if (!/(اشتركوا|تشتركوا|متابعة)/.test(validatedText)) {
+        validatedText = `${validatedText.replace(/\s*(مع السلامة|باي باي).*$/g, "")} ${challengeTail}`;
+      }
+    }
   }
   validatedText = normalizeEgyptianColloquial(validatedText);
 
@@ -277,6 +278,21 @@ function validateAndAutoFixEgyptianDialect(rawText, sceneIndex = 0, totalScenes 
 }
 
 const CHAR_AVATAR_MAP = [
+  // 1. Core Heroes and Knights FIRST (Tamer/Yassin & Amr/Faris have absolute priority)
+  { keywords: ["تامر", "ياسين", "فارس الواحة", "الواحة"], relPath: "src/assets/images/char_yassin_boy_knight_1790462110000.jpg" },
+  { keywords: ["عمرو", "فارس المستكشف", "فارس", "المستكشف"], relPath: "src/assets/images/char_faris_astronaut_1790446843914.jpg" },
+  { keywords: ["نورين", "الطبيبة", "دكتورة"], relPath: "src/assets/images/char_dr_noreen_girl_1790461976876.jpg" },
+  { keywords: ["أرنوب", "ارنوب", "أرنب", "الممرض"], relPath: "src/assets/images/char_arnoob_nurse_rabbit_1790462042886.jpg" },
+  { keywords: ["نوران", "المهندسة"], relPath: "src/assets/images/char_eng_sidra_girl_1790461988894.jpg" },
+  { keywords: ["النمر", "فرفوش", "نمور", "بومبو"], relPath: "src/assets/images/char_namoor_cheerful_tiger_1790462054821.jpg" },
+  { keywords: ["شوشو", "كريم", "القبطان", "كابتن"], relPath: "src/assets/images/char_karim_boy_captain_1790462024983.jpg" },
+  { keywords: ["مرجان", "الدلفين"], relPath: "src/assets/images/char_marjan_playful_dolphin_1790462076093.jpg" },
+  { keywords: ["جنى", "نور رائدة", "نور"], relPath: "src/assets/images/char_noor_girl_astronaut_1790462000705.jpg" },
+  { keywords: ["بلبل", "الروبوت"], relPath: "src/assets/images/char_bulbul_cute_robot_1790462065051.jpg" },
+  { keywords: ["كارمن", "سلمى", "المخترعة"], relPath: "src/assets/images/char_salma_girl_inventor_1790462010894.jpg" },
+  { keywords: ["سمسم", "السنجاب"], relPath: "src/assets/images/char_simsim_flying_squirrel_1790462087579.jpg" },
+  { keywords: ["كركور", "الببغاء", "ببغاء"], relPath: "src/assets/images/char_karkour_wise_parrot_1790462097550.jpg" },
+  { keywords: ["زعتر", "الثعلب", "فلفول"], relPath: "src/assets/images/char_zaatar_fox_1790446857963.jpg" },
   { keywords: ["أم ملك", "ام ملك", "المعلمة"], relPath: "src/assets/images/char_om_malak_teacher_1790685841625.jpg" },
   { keywords: ["البطريق", "بطريق"], relPath: "src/assets/images/char_funny_penguin_1790685854532.jpg" },
   { keywords: ["ملك", "طبيبة طوارئ", "دكتورة ملك"], relPath: "src/assets/images/char_malak_emergency_doctor_1790685772412.jpg" },
@@ -288,24 +304,11 @@ const CHAR_AVATAR_MAP = [
   { keywords: ["شريف", "أستاذ شريف", "محاسب"], relPath: "src/assets/images/char_mr_sherif_accountant_1790685911579.jpg" },
   { keywords: ["الصقر", "صقر"], relPath: "src/assets/images/char_smart_falcon_1790685922310.jpg" },
   { keywords: ["جدو", "الجد"], relPath: "src/assets/images/char_gedo_grandpa_1790685953317.jpg" },
-  { keywords: ["الفأر", "فأر", "فار", "مشاكس"], relPath: "src/assets/images/char_mischievous_mouse_1790685967206.jpg" },
+  // Strict standalone mouse keywords (never matches 'فارس')
+  { keywords: ["الفأر", "فأر", "الفار", "مشاكس"], notIfContains: ["فارس"], relPath: "src/assets/images/char_mischievous_mouse_1790685967206.jpg" },
   { keywords: ["تيتة", "تيته", "الجدة"], relPath: "src/assets/images/char_teta_grandma_1790685980597.jpg" },
   { keywords: ["باندا", "الدب باندا"], relPath: "src/assets/images/char_panda_bear_1790685992445.jpg" },
-  { keywords: ["نورين", "الطبيبة", "دكتورة"], relPath: "src/assets/images/char_dr_noreen_girl_1790461976876.jpg" },
-  { keywords: ["أرنوب", "ارنوب", "أرنب", "الممرض"], relPath: "src/assets/images/char_arnoob_nurse_rabbit_1790462042886.jpg" },
-  { keywords: ["نوران", "المهندسة"], relPath: "src/assets/images/char_eng_sidra_girl_1790461988894.jpg" },
   { keywords: ["سدرة"], relPath: "src/assets/images/char_baby_sidra_toddler_1790685815760.jpg" },
-  { keywords: ["النمر", "فرفوش", "نمور", "بومبو"], relPath: "src/assets/images/char_namoor_cheerful_tiger_1790462054821.jpg" },
-  { keywords: ["تامر", "ياسين", "فارس الواحة", "الواحة"], relPath: "src/assets/images/char_yassin_boy_knight_1790462110000.jpg" },
-  { keywords: ["كركور", "الببغاء", "ببغاء"], relPath: "src/assets/images/char_karkour_wise_parrot_1790462097550.jpg" },
-  { keywords: ["عمرو", "فارس المستكشف", "فارس", "المستكشف"], relPath: "src/assets/images/char_faris_astronaut_1790446843914.jpg" },
-  { keywords: ["زعتر", "الثعلب", "فلفول"], relPath: "src/assets/images/char_zaatar_fox_1790446857963.jpg" },
-  { keywords: ["جنى", "نور رائدة", "نور"], relPath: "src/assets/images/char_noor_girl_astronaut_1790462000705.jpg" },
-  { keywords: ["بلبل", "الروبوت"], relPath: "src/assets/images/char_bulbul_cute_robot_1790462065051.jpg" },
-  { keywords: ["شوشو", "كريم", "القبطان", "كابتن"], relPath: "src/assets/images/char_karim_boy_captain_1790462024983.jpg" },
-  { keywords: ["مرجان", "الدلفين"], relPath: "src/assets/images/char_marjan_playful_dolphin_1790462076093.jpg" },
-  { keywords: ["كارمن", "سلمى", "المخترعة"], relPath: "src/assets/images/char_salma_girl_inventor_1790462010894.jpg" },
-  { keywords: ["سمسم", "السنجاب"], relPath: "src/assets/images/char_simsim_flying_squirrel_1790462087579.jpg" },
 ];
 
 function resolveCharacterAvatarPath(speakerName, fallbackName = "الطبيبة نورين") {
@@ -314,7 +317,16 @@ function resolveCharacterAvatarPath(speakerName, fallbackName = "الطبيبة 
     const s = String(txt || "").trim();
     if (!s) return null;
     for (const item of CHAR_AVATAR_MAP) {
-      if (item.keywords.some((kw) => s.includes(kw))) {
+      if (item.notIfContains && item.notIfContains.some((bad) => s.includes(bad))) {
+        continue;
+      }
+      const matched = item.keywords.some((kw) => {
+        if (kw === "فار" || kw === "فأر") {
+          return new RegExp(`(^|[\\s،.!؟])(${kw}|الفأر|الفار)([\\s،.!؟]|$)`).test(s);
+        }
+        return s.includes(kw);
+      });
+      if (matched) {
         const p = path.resolve(process.cwd(), item.relPath);
         if (p.startsWith(allowedDir) && fs.existsSync(p)) return p;
       }
@@ -2006,6 +2018,9 @@ const RUNNER_CHARACTER_TEAMS = [
       "مهمة الطوارئ السريعة مع الدكتورة ملك والقطة لوليتا لإنقاذ أرنب الوادي",
       "إسعاف الطائر الصغير وقت العاصفة بهدوء وشجاعة طبيبة الطوارئ ملك",
       "سيارة الإسعاف المنورة ومواقف القطة لوليتا المضحكة في الغابة",
+      "حقيبة الإسعافات الذكية وسر ضمادة الشفاء الملونة مع الدكتورة ملك",
+      "شجاعة الدكتورة ملك والقطة لوليتا في عيادة الحيوانات الأليفة السحرية",
+      "يوم التطعيم الشجاع في الغابة وإزاي القطة لوليتا شجعت كل أصحابها",
     ],
   },
   {
@@ -2020,6 +2035,9 @@ const RUNNER_CHARACTER_TEAMS = [
       "مغامرة سدرة الصغنونة والفراشة الملونة في حديقة الألوان السحرية",
       "لعبة الأشكال والألوان المبهجة مع سدرة الصغنونة والفراشة اللطيفة",
       "اكتشاف زهرة النور الضاحكة بفضول وبراءة سدرة الصغنونة",
+      "قوس قزح المتلألئ وسر فراشات النور في بستان سدرة الصغنونة",
+      "مكعبات البناء المنورة وحكاية ترتيب الألعاب مع سدرة والفراشة",
+      "حديقة البالونات الطائرة ومغامرة سدرة الصغنونة في عالم السكر والموسيقى",
     ],
   },
   {
@@ -2034,6 +2052,9 @@ const RUNNER_CHARACTER_TEAMS = [
       "درس المعلمة أم ملك والبطريق المرح عن آداب الحوار ومساعدة الأصحاب",
       "حكاية الصبر والنظام في مدرسة السعادة مع أم ملك والبطريق خفيف الدم",
       "مسابقة القراءة الممتعة ونصائح المعلمة أم ملك الحنونة للأطفال",
+      "حفلة ختام العام الدراسي ومواقف البطريق الكوميدية مع المعلمة أم ملك",
+      "سر الحقيبة المدرسية المنظمة وقيمة النظافة مع المعلمة أم ملك والبطريق",
+      "لوحة الشرف الذهبية وفرحة التفوق في مدرسة المعلمة أم ملك",
     ],
   },
   {
@@ -2048,6 +2069,9 @@ const RUNNER_CHARACTER_TEAMS = [
       "شجاعة ذياد والعصفورة الفرفوشة في إصلاح جسر القرية وقت المطر",
       "تعاون ذياد والعصفورة النشيطة لمساعدة جيران الواحة بهدوء وإخلاص",
       "رحلة البحث عن مفتاح البوابة القديمة مع الشاب الطيب ذياد والعصفورة",
+      "تحدي تسلق جبل الأمل وإنقاذ الغزالة الصغيرة ببطولة ذياد والعصفورة",
+      "منطاد الإنقاذ السريع ومهمة ذياد والعصفورة الفرفوشة فوق سحاب الواحة",
+      "مهرجان طائرات الورق الملونة وسر الرياح الدافية مع ذياد والعصفورة",
     ],
   },
   {
@@ -2062,6 +2086,9 @@ const RUNNER_CHARACTER_TEAMS = [
       "لغز الأرقام الذهبية مع أستاذ شريف والصقر الذكي وتنظيم حصالة التوفير",
       "كيف نرتب وقتنا وألعابنا بدقة وحكمة مع المحاسب أستاذ شريف والصقر الذكي",
       "حل معادلة الكنز البلوري بالحساب والتفكير المنظم مع أستاذ شريف",
+      "سر الساعة الدقيقة وبوصلة الأمانة مع المحاسب أستاذ شريف والصقر",
+      "سباق الحساب الذهني الذكي وتحدي التوفير والشراء الذكي مع أستاذ شريف",
+      "خريطة الأشكال الهندسية ومفتاح البرج العالي مع أستاذ شريف والصقر الذكي",
     ],
   },
   {
@@ -2076,6 +2103,9 @@ const RUNNER_CHARACTER_TEAMS = [
       "حكاية جدو والفأر المشاكس عن كنز الحكمة والصبر في الواحة القديمة",
       "مقالب الفأر المشاكس المضحكة وحكمة جدو الطيب في ليلة الفوانيس",
       "حدوتة الشجرة المباركة اللي حكاها جدو لكل أطفال القرية",
+      "صندوق ذكريات زمان وسر ساعة الجيب الذهبية مع جدو والفأر الشقي",
+      "رحلة صيد النجوم الهادية في قارب جدو العجيب مع الفأر المشاكس",
+      "حكاية الرغيف الدافي وقيمة شكر النعمة مع جدو والفأر خفيف الظل",
     ],
   },
   {
@@ -2090,6 +2120,9 @@ const RUNNER_CHARACTER_TEAMS = [
       "فطيرة التفاح الدافية مع تيتة والدب باندا وقيمة المشاركة مع الجيران",
       "حنان تيتة ومواقف الدب باندا اللطيفة في بستان الفواكه المنورة",
       "سر وصفة السعادة والحنان في بيت تيتة مع الدب باندا المحبوب",
+      "شال الصوف الملون وحكايات تيتة الدافية حول المدفأة مع الدب باندا",
+      "حديقة الزهور العطرة ومفاجأة الدب باندا في عيد ميلاد تيتة الحنونة",
+      "مربى التوت السكرية ودرس مساعدة الكبار في البيت مع تيتة والدب باندا",
     ],
   },
 ];
@@ -2338,9 +2371,9 @@ function buildSmartEpisodeForRunner({
       voice: heroVoice,
     },
     {
-      title: `8. النهاية: رسالة ${shortHero} و${shortComp} لأبطال Noreen Kids`,
-      egyptianShort: `هيييه! حلينا اللغز ونجحت المهمة يا ${shortHero}! لو عجبتكم حدوتة النهارده يا أصحابنا الشطار، اعملوا لايك ومتابعة لـ نورين كيدز واكتبوا اسمكم في التعليقات علشان نحييكم في مغامرتنا الجديدة كل يوم! مع السلامة!`,
-      egyptianLong: `ودلوقتي يا أصحابنا الحلوين في نورين كيدز، وصلنا لنهاية حدوتة النهارده الجميلة بعد ما عشنا سوا البداية والتحدي والحل السعيد! لو عجبتكم المغامرة مع ${shortHero} و${shortComp}، اعملوا لايك ومتابعة لـ نورين كيدز واكتبوا اسمكم في التعليقات علشان نحييكم في مغامرة جديدة ومفيدة كل يوم في نفس الميعاد! بنحبكم أوي يا أبطال، مع السلامة يا أصحابي!`,
+      title: `8. النهاية: رسالة ${shortHero} و${shortComp} وسؤال التحدي لأبطال Noreen Kids`,
+      egyptianShort: `هيييه! حلينا اللغز ونجحت المهمة يا ${shortHero}! وسؤال التحدي السريع لشطار عيلة نورين كيدز: إيه أكتر تصرف شجاع ومفيد عجبكم في مغامرتنا؟ اشتركوا وتابعوا عيلتنا الجميلة نورين كيدز علشان يوصلكم كل جديد، واكتبوا إجابتكم واسم أبطالكم في التعليقات عشان نحييهم بالاسم في حكاية بكرة! مع السلامة يا أصحابي!`,
+      egyptianLong: `ودلوقتي يا أصحابنا الحلوين في عيلة نورين كيدز، وصلنا لنهاية مغامرتنا النهارده بعد ما عشنا سوا كل الإثارة والتعاون والحل السعيد! وسؤال التحدي الكبير لكل الشطار: يا ترى مين يجاوبنا في التعليقات إيه أهم درس وقيمة اتعلمناها مع ${shortHero} و${shortComp} في حكاية ${egyptianTopic}؟ اشتركوا وتابعوا عيلتنا الجميلة نورين كيدز علشان يوصلكم كل جديد، واكتبوا إجابتكم واسم أبطالكم في التعليقات عشان نحييهم بالاسم في مغامرة بكرة في نفس الميعاد! بنحبكم أوي يا أبطال، مع السلامة يا أصحابي!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
@@ -2512,7 +2545,8 @@ async function generateFreshAiEpisodeForRunner({
           : "فيلم كرتون طويل مدته 312 ثانية من 8 مشاهد مترابطة، كل مشهد 55 إلى 75 كلمة"
       }) باللهجة المصرية القاهرية الطبيعية المحببة للأطفال بدون أي تشكيل فصحى.
 - ابدأ المشهد الأول (sceneNumber: 1) دائماً بخطاف تشويقي ناري في أول 3 ثوانٍ من قلب الحدث مثل: "يا خبر يا أبطال وعيلة نورين كيدز! الحقني بسرعة يا ${team.companionName}! شايفين المفاجأة اللي حصلت دلوقتي..." يتبعه ترحيب دافئ وسريع.
-- اختم المشهد الأخير بدعوة مشتركة تصلح ليوتيوب وفيسبوك معاً: "اعملوا لايك ومتابعة لـ نورين كيدز واكتبوا اسمكم في التعليقات علشان نحييكم بالاسم!".
+- اختم المشهد الأخير (مشهد النهاية) إلزامياً بدعوة تفاعل مزدوجة ذكية وسؤال تحدي بالصوت يناسب يوتيوب وفيسبوك معاً دون ذكر كلمة يوتيوب فقط أو فيسبوك فقط:
+"ودلوقتي يا أصحابنا الحلوين في عيلة نورين كيدز، وصلنا لنهاية مغامرتنا النهارده! وسؤال التحدي لشطار عيلة نورين كيدز: [اطرح سؤال فزورة ذكي وممتع عن أحداث القصة والدرس المستفاد]؟ اشتركوا وتابعوا عيلتنا الجميلة نورين كيدز علشان يوصلكم كل جديد، واكتبوا إجابتكم واسم أبطالكم في التعليقات عشان نحييهم بالاسم في مغامرة بكرة! مع السلامة يا أصحابي!".
 البطل الرئيسي: "${team.mainCharacterName}" (الأداة: ${team.heroProp}).
 المرافق: "${team.companionName}" (الأداة: ${team.compProp}).
 فكرة القصة الجديدة: "${topic}".
@@ -2525,7 +2559,7 @@ async function generateFreshAiEpisodeForRunner({
   ]
 }`;
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-3.8-flash",
         contents: prompt,
         config: {
           responseMimeType: "application/json",
@@ -2951,7 +2985,7 @@ async function buildSmartHeroReplyForFacebookCommentRunner({
 - اذكر اسم المتابع (${cleanAuthor}) بحب وترحيب حار من أبطال نورين كيدز (مثل دكتورة نورين وأرنوب والمهندسة نوران والنمر الفرفوش).
 - تفاعل بذكاء مع كلامه أو مع اسم الطفل المذكور في التعليق، واختم بسؤال تفاعلي لطيف أو دعوة لانتظار حلقة الغد.`;
       const resp = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-3.8-flash",
         contents: prompt,
       });
       const text = String(resp.text || "").trim();
@@ -2998,26 +3032,47 @@ async function publishDailyInteractive3DPhotoPostForRunner({
     hour12: false,
   }).format(new Date());
 
-  // 1) De-duplication check against local schedule state & live Facebook Page posts today
+  // 1) Cooldown-based de-duplication check (4 hours / 240 minutes)
+  // Prevents accidental immediate re-runs, while strictly allowing the scheduled afternoon challenge (16:00)
+  // even if tests were conducted earlier in the morning!
   if (!forcePublish) {
-    if (fbSchedule?.lastInteractivePhotoDateKey === nowCairoDate) {
+    const lastPublishedIso = fbSchedule?.lastInteractivePhotoPublishedAtIso || "";
+    let minutesSinceLastPhoto = 999999;
+    if (lastPublishedIso) {
+      const parsedMs = Date.parse(lastPublishedIso);
+      if (!Number.isNaN(parsedMs)) {
+        minutesSinceLastPhoto = Math.round((Date.now() - parsedMs) / 60000);
+      }
+    }
+    const lastLogged = Array.isArray(fbSchedule?.interactivePhotoPostsLog)
+      ? fbSchedule.interactivePhotoPostsLog[0]
+      : null;
+    if (lastLogged?.publishedAtIso && minutesSinceLastPhoto > 240) {
+      const lp = Date.parse(lastLogged.publishedAtIso);
+      if (!Number.isNaN(lp)) {
+        minutesSinceLastPhoto = Math.min(minutesSinceLastPhoto, Math.round((Date.now() - lp) / 60000));
+      }
+    }
+
+    if (minutesSinceLastPhoto < 240) {
       console.log(
-        `✅ [Daily 3D Photo Post Guard] تم نشر المنشور التفاعلي المصور لهذا اليوم (${nowCairoDate}) بالفعل — تخطي التكرار.`
+        `✅ [Daily 3D Photo Post Cooldown Guard] تم نشر منشور تفاعلي مصور قبل ${minutesSinceLastPhoto} دقيقة (فترة الحماية: 240 دقيقة / 4 ساعات) — تخطي التكرار المؤقت.`
       );
       return { published: false, skippedDuplicate: true };
     }
+
     try {
       const checkRes = await fetch(
         `https://graph.facebook.com/v21.0/${encodeURIComponent(
           pageId
-        )}/published_posts?fields=id,message,created_time&limit=10`,
+        )}/published_posts?fields=id,message,created_time&limit=6`,
         {
           headers: { Authorization: `Bearer ${activeToken}` },
         }
       );
       const checkJson = await checkRes.json().catch(() => ({}));
       if (checkRes.ok && Array.isArray(checkJson?.data)) {
-        const alreadyPostedTodayOnGraph = checkJson.data.some((p) => {
+        const recentChallengePost = checkJson.data.find((p) => {
           const msg = String(p?.message || "");
           if (
             !msg.includes("تحدي أبطال Noreen Kids") &&
@@ -3027,18 +3082,14 @@ async function publishDailyInteractive3DPhotoPostForRunner({
             return false;
           }
           if (!p?.created_time) return false;
-          const postCairoDate = new Intl.DateTimeFormat("en-CA", {
-            timeZone: "Africa/Cairo",
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-          }).format(new Date(p.created_time));
-          return postCairoDate === nowCairoDate;
+          const postAgeMinutes = Math.round((Date.now() - new Date(p.created_time).getTime()) / 60000);
+          return postAgeMinutes >= 0 && postAgeMinutes < 240;
         });
-        if (alreadyPostedTodayOnGraph) {
+        if (recentChallengePost) {
           fbSchedule.lastInteractivePhotoDateKey = nowCairoDate;
+          fbSchedule.lastInteractivePhotoPublishedAtIso = recentChallengePost.created_time;
           console.log(
-            `✅ [Daily 3D Photo Post Guard] تم العثور على المنشور التفاعلي المصور منشوراً بالفعل اليوم (${nowCairoDate}) على صفحة فيسبوك — تخطي التكرار.`
+            `✅ [Daily 3D Photo Post Cooldown Guard] تم العثور على منشور تفاعلي مصور حديث على صفحة فيسبوك خلال الـ 4 ساعات الماضية — تخطي التكرار.`
           );
           return { published: false, skippedDuplicate: true };
         }
@@ -3150,10 +3201,12 @@ async function publishDailyInteractive3DPhotoPostForRunner({
     heroName: shortHero,
     companionName: shortComp,
     publishedAtCairo: `${nowCairoDate} · ${nowCairoHHMM} بتوقيت مصر`,
+    publishedAtIso: new Date().toISOString(),
     permalinkUrl,
   };
 
   fbSchedule.lastInteractivePhotoDateKey = nowCairoDate;
+  fbSchedule.lastInteractivePhotoPublishedAtIso = new Date().toISOString();
   fbSchedule.interactivePhotoPostsLog = [
     logRecord,
     ...(Array.isArray(fbSchedule.interactivePhotoPostsLog)
