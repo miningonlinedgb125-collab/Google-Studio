@@ -331,6 +331,16 @@
   },
   "recentStoryHistory": [
     {
+      "topic": "سر النوم البدري وشرب اللبن الدافي علشان نكبر بصحة ونشاط",
+      "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "بوصلة الرياح الأربعة وإنقاذ طائر العنقاء الصغير فوق",
+      "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي"
+    },
+    {
       "topic": "سيارة الإسعاف المنورة ومواقف القطة لوليتا المضحكة في",
       "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا"
@@ -508,5 +518,59 @@
       }
     }
   ],
-  "lastAutoCommentScanAtCairo": "2026-10-02 · 17:27 بتوقيت مصر"
+  "lastAutoCommentScanAtCairo": "2026-10-02 · 17:27 بتوقيت مصر",
+  "lastFacebookCloudRunReport": {
+    "id": "gh-run-37027847489",
+    "uploadMode": "daily_schedule",
+    "triggerSource": "github_actions_cloud",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-02 (18:55 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1790955294700-vo5z",
+    "longEpisodeId": "ep-gh-long-1790955304256-aj4q",
+    "shortEpisodeTitle": "Noreen Kids: سر النوم البدري وشرب اللبن الدافي علشان نكبر بصحة ونشاط | مغامرات الطبيبة نورين وأرنوب",
+    "longEpisodeTitle": "Noreen Kids: بوصلة الرياح الأربعة وإنقاذ طائر العنقاء الصغير فوق | مغامرات عمرو وزعتر",
+    "shortTitle": "Noreen Kids: سر النوم البدري وشرب اللبن الدافي علشان نكبر بصحة ونشاط | مغامرات الطبيبة نورين وأرنوب",
+    "longTitle": "Noreen Kids: بوصلة الرياح الأربعة وإنقاذ طائر العنقاء الصغير فوق | مغامرات عمرو وزعتر",
+    "shortPlaylistId": "PLPwfeXzB3ozU",
+    "longPlaylistId": "PLbjN20PzrCYk",
+    "privacyStatus": "public",
+    "madeForKids": false,
+    "containsSyntheticMedia": false,
+    "categoryId": "1",
+    "dialect": "egyptian",
+    "status": "uploaded_live",
+    "youtubeShortVideoId": "kUc7IfybJAg",
+    "youtubeLongVideoId": "vsrkn0nd3Sw",
+    "facebookShortVideoId": "2107071273350150",
+    "facebookLongVideoId": "1641773640620225",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2107071273350150",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1641773640620225",
+    "facebookShortTitle": "يا ترى إيه المفاجأة اللي حصلت مع الطبيبة نورين وأرنوب الشقي الممرض في \"سر النوم البدري وشرب اللبن الدافي علشان نكبر بصحة",
+    "facebookLongTitle": "حدوتة النهاردة لأطفالنا الشطار: إزاي تصرف عمرو المستكشف وزعتر الثعلب الذكي في \"بوصلة الرياح الأربعة وإنقاذ طائر العنقاء ",
+    "ffprobeReport": {
+      "valid": true,
+      "passed": true,
+      "containerFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+      "videoCodec": "h264",
+      "videoProfile": "High",
+      "pixelFormat": "yuv420p",
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "audioCodec": "aac",
+      "audioSampleRate": 48000,
+      "audioChannels": 2,
+      "fastStartMoovFirst": true,
+      "durationSec": 312,
+      "fileSizeBytes": 32484884,
+      "inspectedAt": "18:55"
+    },
+    "processingDetails": {
+      "processingStatus": "succeeded",
+      "partsTotal": 100,
+      "partsProcessed": 100,
+      "timeLeftMs": 0,
+      "fileDetailsAvailability": "available"
+    },
+    "reportedAtIso": "2026-10-02T15:55:45.335Z"
+  }
 }
