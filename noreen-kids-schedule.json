@@ -514,6 +514,16 @@
   ],
   "recentStoryHistory": [
     {
+      "topic": "بناء جسر قوس قزح الذكي فوق مدينة السحاب بالعلم والتعاون",
+      "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "شجرة الأمانة الذهبية في غابة النجوم وإزاي الصدق",
+      "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم"
+    },
+    {
       "topic": "لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة",
       "mainCharacterName": "جنى رائدة الفضاء",
       "companionName": "بلبل الروبوت اللطيف"
@@ -560,27 +570,32 @@
     }
   ],
   "lastCloudRunReport": {
-    "id": "gh-run-37087938994",
-    "uploadMode": "manual_instant",
+    "id": "gh-run-37098380750",
+    "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-03 (04:59 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1790992602815-5ywr",
-    "longEpisodeId": "ep-gh-long-1790992602938-qc2q",
-    "shortEpisodeTitle": "Noreen Kids: لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة | مغامرات جنى وبلبل",
-    "longEpisodeTitle": "حكاية الصبر والنظام في مدرسة السعادة مع أم",
-    "shortTitle": "Noreen Kids: لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة | مغامرات جنى وبلبل",
-    "longTitle": "حكاية الصبر والنظام في مدرسة السعادة مع أم",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-03 (08:12 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1791003685733-v443",
+    "longEpisodeId": "ep-gh-long-1791003685847-vgrr",
+    "shortEpisodeTitle": "Noreen Kids: بناء جسر قوس قزح الذكي فوق مدينة السحاب بالعلم والتعاون | مغامرات المهندسة نوران والنمر الفرفوش",
+    "longEpisodeTitle": "Noreen Kids: شجرة الأمانة الذهبية في غابة النجوم وإزاي الصدق | مغامرات تامر وكركور",
+    "shortTitle": "Noreen Kids: بناء جسر قوس قزح الذكي فوق مدينة السحاب بالعلم والتعاون | مغامرات المهندسة نوران والنمر الفرفوش",
+    "longTitle": "Noreen Kids: شجرة الأمانة الذهبية في غابة النجوم وإزاي الصدق | مغامرات تامر وكركور",
     "shortPlaylistId": "PLPwfeXzB3ozU",
+    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "mzRK9uQVhkk",
-    "facebookShortVideoId": "3461694780689519",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/3461694780689519",
-    "facebookShortTitle": "يا ترى إيه المفاجأة اللي حصلت مع جنى رائدة الفضاء وبلبل الروبوت اللطيف في \"لغز الكوكب البنفسجي المفقود في مرصد المكتبة ا",
+    "youtubeShortVideoId": "eTrGq1JSF3g",
+    "youtubeLongVideoId": "JSMiYYtccI8",
+    "facebookShortVideoId": "1587158569826197",
+    "facebookLongVideoId": "2279164206215279",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1587158569826197",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2279164206215279",
+    "facebookShortTitle": "يا ترى إيه المفاجأة اللي حصلت مع المهندسة نوران والنمر الفرفوش في \"بناء جسر قوس قزح الذكي فوق مدينة السحاب بالعلم والتعا",
+    "facebookLongTitle": "حدوتة النهاردة لأطفالنا الشطار: إزاي تصرف تامر فارس الواحة وكركور الببغاء الحكيم في \"شجرة الأمانة الذهبية في غابة النجوم",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -588,16 +603,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 720,
-      "height": 1280,
+      "width": 1280,
+      "height": 720,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 79,
-      "fileSizeBytes": 9909043,
-      "inspectedAt": "04:59"
+      "durationSec": 308,
+      "fileSizeBytes": 37958451,
+      "inspectedAt": "08:12"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -606,6 +621,6 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-03T01:59:11.712Z"
+    "reportedAtIso": "2026-10-03T05:12:35.809Z"
   }
 }
