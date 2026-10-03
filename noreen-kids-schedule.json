@@ -461,6 +461,16 @@
   ],
   "recentStoryHistory": [
     {
+      "topic": "لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة",
+      "mainCharacterName": "جنى رائدة الفضاء",
+      "companionName": "بلبل الروبوت اللطيف"
+    },
+    {
+      "topic": "حكاية الصبر والنظام في مدرسة السعادة مع أم",
+      "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح"
+    },
+    {
       "topic": "سر النوم البدري وشرب اللبن الدافي علشان نكبر بصحة ونشاط",
       "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض"
@@ -497,32 +507,27 @@
     }
   ],
   "lastCloudRunReport": {
-    "id": "gh-cloud-2026-10-02",
-    "uploadMode": "daily_schedule",
+    "id": "gh-run-37087938994",
+    "uploadMode": "manual_instant",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-02 (17:27 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1790950497290-zls8",
-    "longEpisodeId": "ep-gh-long-1790950497457-tvwj",
-    "shortEpisodeTitle": "Noreen Kids: سيارة الإسعاف المنورة ومواقف القطة لوليتا المضحكة في | مغامرات الطبيبة ملك والقطة لوليتا",
-    "longEpisodeTitle": "Noreen Kids: اكتشاف زهرة النور الضاحكة بفضول وبراءة سدرة الصغنونة | مغامرات سدرة الصغنونة والفراشة الملونة",
-    "shortTitle": "Noreen Kids: سيارة الإسعاف المنورة ومواقف القطة لوليتا المضحكة في | مغامرات الطبيبة ملك والقطة لوليتا",
-    "longTitle": "Noreen Kids: اكتشاف زهرة النور الضاحكة بفضول وبراءة سدرة الصغنونة | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-03 (04:59 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1790992602815-5ywr",
+    "longEpisodeId": "ep-gh-long-1790992602938-qc2q",
+    "shortEpisodeTitle": "Noreen Kids: لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة | مغامرات جنى وبلبل",
+    "longEpisodeTitle": "حكاية الصبر والنظام في مدرسة السعادة مع أم",
+    "shortTitle": "Noreen Kids: لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة | مغامرات جنى وبلبل",
+    "longTitle": "حكاية الصبر والنظام في مدرسة السعادة مع أم",
     "shortPlaylistId": "PLPwfeXzB3ozU",
-    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "tAMvoGjaJOc",
-    "youtubeLongVideoId": "76HruvjNWVg",
-    "facebookShortVideoId": "1637139314711321",
-    "facebookLongVideoId": "4648930985435498",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1637139314711321",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/4648930985435498",
-    "facebookShortTitle": "يا ترى إيه المفاجأة اللي حصلت مع ملك والقطة لوليتا في \"سيارة الإسعاف المنورة ومواقف القطة لوليتا المضحكة في\"؟ 🤔🎬 | Nor",
-    "facebookLongTitle": "حدوتة النهاردة لأطفالنا الشطار: إزاي تصرف سدرة الصغنونة والفراشة الملونة في \"اكتشاف زهرة النور الضاحكة بفضول وبراءة سدرة",
+    "youtubeShortVideoId": "mzRK9uQVhkk",
+    "facebookShortVideoId": "3461694780689519",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/3461694780689519",
+    "facebookShortTitle": "يا ترى إيه المفاجأة اللي حصلت مع جنى رائدة الفضاء وبلبل الروبوت اللطيف في \"لغز الكوكب البنفسجي المفقود في مرصد المكتبة ا",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -530,16 +535,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 1280,
-      "height": 720,
+      "width": 720,
+      "height": 1280,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 318,
-      "fileSizeBytes": 34582036,
-      "inspectedAt": "17:27"
+      "durationSec": 79,
+      "fileSizeBytes": 9909043,
+      "inspectedAt": "04:59"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -548,6 +553,6 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-02T14:27:33.029Z"
+    "reportedAtIso": "2026-10-03T01:59:11.712Z"
   }
 }
