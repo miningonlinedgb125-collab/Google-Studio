@@ -36,6 +36,7 @@ function decryptVault(vaultHex) {
 
 function parseRunMode(raw) {
   const s = String(raw || "daily_schedule").toLowerCase();
+  if (s.includes("engagement_only") || s.includes("تفاعل") || s.includes("تعليقات")) return "engagement_only";
   if (s.includes("short_only") || s.includes("قصير فقط")) return "short_only";
   if (s.includes("long_only") || s.includes("طويل فقط")) return "long_only";
   if (s.includes("both_now") || s.includes("الاثنين معاً") || s.includes("الاثنين معا")) return "both_now";
@@ -513,6 +514,157 @@ async function uploadMp4ToYouTube({
   };
 }
 
+async function postYouTubeFirstComment({ accessToken, videoId, message }) {
+  if (!accessToken || !videoId || !message) return { success: false, error: "Missing parameters" };
+  const cleanId = String(videoId).trim();
+  const cleanMsg = String(message).trim();
+  console.log(`💬 [First Comment] Attempting to post interactive comment on YouTube video ${cleanId}...`);
+
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const res = await fetch("https://www.googleapis.com/youtube/v3/commentThreads?part=snippet", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+        body: JSON.stringify({
+          snippet: {
+            videoId: cleanId,
+            topLevelComment: {
+              snippet: {
+                textOriginal: cleanMsg,
+              },
+            },
+          },
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        console.log(`✅ [First Comment] Success! Comment ID: ${data?.id}`);
+        return { success: true, commentId: data?.id };
+      } else {
+        const errText = await res.text();
+        console.warn(`⚠️ [First Comment] Attempt ${attempt} failed (${res.status}): ${errText}`);
+        if (attempt < 3) await new Promise((r) => setTimeout(r, 3000 * attempt));
+      }
+    } catch (e) {
+      console.warn(`⚠️ [First Comment] Attempt ${attempt} error:`, e.message);
+      if (attempt < 3) await new Promise((r) => setTimeout(r, 3000 * attempt));
+    }
+  }
+  return { success: false, error: "Failed after 3 attempts" };
+}
+
+async function scanAndAutoReplyYouTubeComments({ accessToken, geminiApiKey, schedule }) {
+  console.log("🔍 [Auto-Responder] Scanning recent YouTube comment threads on channel...");
+  let channelId = schedule.channelId || "";
+  if (!channelId) {
+    try {
+      const chRes = await fetch("https://www.googleapis.com/youtube/v3/channels?part=id&mine=true", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      if (chRes.ok) {
+        const chData = await chRes.json();
+        if (chData.items?.[0]?.id) channelId = chData.items[0].id;
+      }
+    } catch {}
+  }
+
+  const repliedSet = new Set(schedule.repliedCommentIds || []);
+  let threads = [];
+
+  try {
+    const listRes = await fetch(
+      `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet,replies&allThreadsRelatedToChannelId=${encodeURIComponent(channelId)}&maxResults=30&order=time`,
+      { headers: { Authorization: `Bearer ${accessToken}`, Accept: "application/json" } }
+    );
+    if (listRes.ok) {
+      const listData = await listRes.json();
+      if (Array.isArray(listData?.items)) threads = listData.items;
+    }
+  } catch {}
+
+  const cairoTimeNow = new Date().toLocaleString("ar-EG", {
+    timeZone: "Africa/Cairo",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
+
+  let repliesCount = 0;
+  for (const thread of threads) {
+    const topComment = thread?.snippet?.topLevelComment;
+    const commentId = String(topComment?.id || "").trim();
+    if (!commentId || repliedSet.has(commentId)) continue;
+
+    const authorChannelId = topComment?.snippet?.authorChannelId?.value;
+    if (channelId && authorChannelId === channelId) continue;
+
+    const authorName = topComment?.snippet?.authorDisplayName || "صديق القناة";
+    const commentText = topComment?.snippet?.textOriginal || "";
+
+    // Generate warm Egyptian reply
+    let replyText = `أهلاً بك يا ${authorName} البطل في عيلة نورين كيدز! دكتورة نورين وأرنوب وكل أبطالنا فرحانين بيك جداً وبيقولوا لك: شاطر ومنور دايماً يا بطل! 🌟💖`;
+
+    if (geminiApiKey) {
+      try {
+        const prompt = `أنت بطل كرتون محبوب للأطفال في قناة "Noreen Kids". جاءك هذا التعليق اللطيف من طفل أو أم:
+الاسم: "${authorName}"
+التعليق: "${commentText}"
+اكتب رداً قصيراً دافئاً ومشجعاً بالعامية المصرية المحبوبة للأطفال (لا يتجاوز سطرين) مع ذكر اسم الطفل وتشجيعه على العادات الإيجابية.`;
+        const gemRes = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiApiKey}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
+          }
+        );
+        if (gemRes.ok) {
+          const gData = await gemRes.json();
+          const candidateText = gData?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+          if (candidateText) replyText = candidateText;
+        }
+      } catch {}
+    }
+
+    try {
+      const repRes = await fetch("https://www.googleapis.com/youtube/v3/comments?part=snippet", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+        body: JSON.stringify({
+          snippet: { parentId: commentId, textOriginal: replyText },
+        }),
+      });
+      if (repRes.ok) {
+        repliedSet.add(commentId);
+        repliesCount++;
+        schedule.repliedCommentIds = Array.from(repliedSet);
+        schedule.recentAutoRepliesLog = [
+          {
+            commentId,
+            authorName,
+            userCommentText: commentText,
+            replyText,
+            repliedAtCairo: `اليوم ${cairoTimeNow} بتوقيت مصر`,
+          },
+          ...(schedule.recentAutoRepliesLog || []).slice(0, 49),
+        ];
+        console.log(`✅ [Auto-Responder] Replied to ${authorName}: "${replyText.slice(0, 60)}..."`);
+      }
+    } catch (err) {
+      console.warn(`⚠️ [Auto-Responder] Failed to reply to ${commentId}:`, err.message);
+    }
+  }
+
+  schedule.lastAutoCommentScanAtCairo = `اليوم ${cairoTimeNow} بتوقيت القاهرة`;
+  return { repliesCount };
+}
+
 async function main() {
   console.log("==================================================================");
   console.log("🚀 Noreen Kids 3D Studio - 24/7 Automated YouTube Pipeline");
@@ -551,6 +703,42 @@ async function main() {
     refreshToken,
   });
   console.log("✅ YouTube OAuth 2.0 Access Token obtained successfully!");
+
+  if (runMode === "engagement_only") {
+    console.log("⚡ [Run Mode: engagement_only] Running AI auto-responder for YouTube comments...");
+    const replyRes = await scanAndAutoReplyYouTubeComments({
+      accessToken,
+      geminiApiKey: process.env.GEMINI_API_KEY,
+      schedule,
+    });
+    fs.writeFileSync(schedulePath, JSON.stringify(schedule, null, 2), "utf8");
+
+    if (process.env.GITHUB_STEP_SUMMARY) {
+      const summaryLines = [
+        "## 💬 تقرير التفاعل والرد الذكي على تعليقات YouTube (Noreen Kids)",
+        `- **وضع التشغيل:** \`engagement_only\``,
+        `- **عدد الردود الذكية الجديدة:** \`${replyRes.repliesCount}\``,
+        `- **إجمالي الردود المنفذة بالسجل:** \`${schedule.repliedCommentIds?.length || 0}\``,
+        `- **آخر توقيت فحص (القاهرة):** \`${schedule.lastAutoCommentScanAtCairo}\``,
+      ];
+      fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summaryLines.join("\n"));
+    }
+
+    if (process.env.GITHUB_TOKEN) {
+      try {
+        await execFileAsync("git", ["config", "user.name", "github-actions[bot]"]);
+        await execFileAsync("git", ["config", "user.email", "github-actions[bot]@users.noreply.github.com"]);
+        await execFileAsync("git", ["add", "noreen-kids-schedule.json"]);
+        await execFileAsync("git", ["commit", "-m", "chore: sync YouTube growth comments [skip ci]"]);
+        await execFileAsync("git", ["push"]);
+      } catch {}
+    }
+
+    console.log("==================================================================");
+    console.log(`✅ Completed engagement scan! New replies: ${replyRes.repliesCount}`);
+    console.log("==================================================================");
+    return;
+  }
 
   const tasks = [];
   if (runMode === "short_only" || runMode === "both_now" || runMode === "daily_schedule") {
@@ -630,12 +818,54 @@ async function main() {
     console.log(`🔗 Watch URL: https://www.youtube.com/watch?v=${uploadRes.videoId}`);
     console.log(`📂 Playlist (${uploadRes.playlistId}): ${uploadRes.playlistAdded ? "Added ✓" : "Skipped"}`);
 
+    // Step 1: Post First Interactive Comment if enabled
+    let firstCommentId = null;
+    if (schedule.firstCommentEnabled !== false && uploadRes.videoId) {
+      const challengeMsg = `🌟 سؤال التحدي لشطار وأبطال قناة Noreen Kids في حلقة "${uploadRes.cleanTitle}": إيه أكتر تصرف ذكي وشجاع عجبكم في مغامرة النهاردة؟ شاركونا إجاباتكم وأسامي أبطالكم الصغار في التعليقات علشان نرد عليكم بنفسنا ونفرح بيكم! 💖✨`;
+      const fcRes = await postYouTubeFirstComment({
+        accessToken,
+        videoId: uploadRes.videoId,
+        message: challengeMsg,
+      });
+      if (fcRes.success) {
+        firstCommentId = fcRes.commentId;
+      }
+    }
+
     results.push({
       ...uploadRes,
       label: task.label,
       durationSec: durSec,
+      firstCommentId,
       runMode,
     });
+  }
+
+  // Step 2: Run AI Comment Auto-Responder if enabled
+  let autoRepliesCount = 0;
+  if (schedule.autoCommentResponderEnabled !== false) {
+    console.log("------------------------------------------------------------------");
+    console.log("🤖 Running AI Auto-Responder for Recent YouTube Comments...");
+    const autoRes = await scanAndAutoReplyYouTubeComments({
+      accessToken,
+      geminiApiKey: process.env.GEMINI_API_KEY,
+      schedule,
+    });
+    autoRepliesCount = autoRes.repliesCount;
+  }
+
+  // Update schedule file
+  fs.writeFileSync(schedulePath, JSON.stringify(schedule, null, 2), "utf8");
+
+  // Sync to Git if running on GitHub Actions
+  if (process.env.GITHUB_TOKEN) {
+    try {
+      await execFileAsync("git", ["config", "user.name", "github-actions[bot]"]);
+      await execFileAsync("git", ["config", "user.email", "github-actions[bot]@users.noreply.github.com"]);
+      await execFileAsync("git", ["add", "noreen-kids-schedule.json"]);
+      await execFileAsync("git", ["commit", "-m", "chore: sync YouTube video uploads & comment replies [skip ci]"]);
+      await execFileAsync("git", ["push"]);
+    } catch {}
   }
 
   if (process.env.GITHUB_STEP_SUMMARY) {
@@ -643,12 +873,13 @@ async function main() {
       "## 🎬 تقرير تشغيل وإنتاج قناة Noreen Kids 3D Studio",
       `- **وضع التشغيل:** \`${runMode}\``,
       `- **موعد الجدولة اليومية (توقيت مصر):** \`${dailyTime}\``,
+      `- **الردود الذكية المنفذة اليوم:** \`${autoRepliesCount}\``,
       "",
-      "| نوع الفيديو | العنوان | المدة | الحجم | قائمة التشغيل | رابط يوتيوب |",
-      "|---|---|---|---|---|---|",
+      "| نوع الفيديو | العنوان | المدة | الحجم | أول تعليق تفاعلي | قائمة التشغيل | رابط يوتيوب |",
+      "|---|---|---|---|---|---|---|",
       ...results.map(
         (r) =>
-          `| ${r.label} | ${r.cleanTitle} | ${r.durationSec}s | ${r.fileSizeMb} MB | \`${r.playlistId}\` | [https://youtu.be/${r.videoId}](https://youtu.be/${r.videoId}) |`
+          `| ${r.label} | ${r.cleanTitle} | ${r.durationSec}s | ${r.fileSizeMb} MB | ${r.firstCommentId ? "تم التثبيت ✓" : "تلقائي"} | \`${r.playlistId}\` | [https://youtu.be/${r.videoId}](https://youtu.be/${r.videoId}) |`
       ),
       "",
     ];
