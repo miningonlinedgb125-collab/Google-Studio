@@ -3864,7 +3864,7 @@ async function main() {
     if (isKnownCurrentScheduleEvent) {
       const isCurrentPhotoSchedule =
         isFacebookWorkflow &&
-        ["35 19 * * *", "35 22 * * *"].includes(githubEventSchedule);
+        ["35 22 * * *"].includes(githubEventSchedule);
       if (isCurrentPhotoSchedule) {
         isPhotoEngagementCronOnly = true;
         console.log(
@@ -3888,7 +3888,7 @@ async function main() {
       : "noreen-kids-daily-youtube.yml";
     const githubEventSchedule = String(process.env.GITHUB_EVENT_SCHEDULE || "").trim();
     const currentScheduleCronList = isFacebookWorkflow
-      ? ["15 15 * * *", "35 19 * * *", "15 18 * * *", "35 22 * * *"]
+      ? ["15 18 * * *", "35 22 * * *"]
       : ["0 5 * * *", "0 8 * * *"];
     const isKnownCurrentScheduleEvent =
       isCronEvent && currentScheduleCronList.includes(githubEventSchedule);
