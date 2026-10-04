@@ -18,11 +18,11 @@
   "customFacebookPackages": {},
   "autoCommentResponderEnabled": true,
   "dailyInteractivePhotoPostEnabled": true,
-  "dailyInteractivePhotoTimeCairo": "23:00",
+  "dailyInteractivePhotoTimeCairo": "23:16",
   "dailyInteractivePhotoStudioServerEnabled": true,
   "dailyInteractivePhotoStudioTimeCairo": "15:00",
   "dailyInteractivePhotoGitHubActionsEnabled": true,
-  "dailyInteractivePhotoGitHubTimeCairo": "23:00",
+  "dailyInteractivePhotoGitHubTimeCairo": "23:16",
   "lastInteractivePhotoDateKey": "2026-10-04",
   "repliedCommentIds": [
     "122108050131484976_1437940118283880",
