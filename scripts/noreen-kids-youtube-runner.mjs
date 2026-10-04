@@ -3165,14 +3165,18 @@ async function publishDailyInteractive3DPhotoPostForRunner({
     hour12: false,
   }).format(new Date());
 
-  // 1) De-duplication check against local schedule state & live Facebook Page posts today
+  // 1) Daily limit: allow up to 3 interactive 3D posts per Cairo day
+  // (1 automatic scheduled post + up to 2 manual engagement_only posts).
+  // The limit applies even when forcePublish=true.
+  const todayInteractivePosts = Array.isArray(fbSchedule?.interactivePhotoPostsLog)
+    ? fbSchedule.interactivePhotoPostsLog.filter(
+        (entry) =>
+          String(entry?.publishedAtCairo || "").startsWith(nowCairoDate + " · ")
+      )
+    : [];
+  let todayInteractivePostCount = todayInteractivePosts.length;
+
   if (!forcePublish) {
-    if (fbSchedule?.lastInteractivePhotoDateKey === nowCairoDate) {
-      console.log(
-        `✅ [Daily 3D Photo Post Guard] تم نشر المنشور التفاعلي المصور لهذا اليوم (${nowCairoDate}) بالفعل — تخطي التكرار.`
-      );
-      return { published: false, skippedDuplicate: true };
-    }
     try {
       const checkRes = await fetch(
         `https://graph.facebook.com/v21.0/${encodeURIComponent(
@@ -3184,7 +3188,7 @@ async function publishDailyInteractive3DPhotoPostForRunner({
       );
       const checkJson = await checkRes.json().catch(() => ({}));
       if (checkRes.ok && Array.isArray(checkJson?.data)) {
-        const alreadyPostedTodayOnGraph = checkJson.data.some((p) => {
+        const graphTodayInteractivePostCount = checkJson.data.filter((p) => {
           const msg = String(p?.message || "");
           if (
             !msg.includes("تحدي أبطال Noreen Kids") &&
@@ -3201,16 +3205,20 @@ async function publishDailyInteractive3DPhotoPostForRunner({
             day: "2-digit",
           }).format(new Date(p.created_time));
           return postCairoDate === nowCairoDate;
-        });
-        if (alreadyPostedTodayOnGraph) {
-          fbSchedule.lastInteractivePhotoDateKey = nowCairoDate;
-          console.log(
-            `✅ [Daily 3D Photo Post Guard] تم العثور على المنشور التفاعلي المصور منشوراً بالفعل اليوم (${nowCairoDate}) على صفحة فيسبوك — تخطي التكرار.`
-          );
-          return { published: false, skippedDuplicate: true };
-        }
+        }).length;
+        todayInteractivePostCount = Math.max(
+          todayInteractivePostCount,
+          graphTodayInteractivePostCount
+        );
       }
     } catch {}
+  }
+
+  if (todayInteractivePostCount >= 3) {
+    console.log(
+      `✅ [Daily 3D Photo Post Guard] تم الوصول للحد اليومي (3 منشورات تفاعلية 3D) بتاريخ ${nowCairoDate} — تخطي النشر.`
+    );
+    return { published: false, skippedDailyLimit: true };
   }
 
   // Keep interactive 3D posts from repeating a previous hero/companion + theme combination.
