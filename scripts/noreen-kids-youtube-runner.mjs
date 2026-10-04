@@ -1007,7 +1007,7 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
       });
       const isEgyptian = dialect !== "fusha";
       const liveWavPath = path.join(tmpDir, `gemini_live_${sceneIndex}.wav`);
-      const liveModels = ["gemini-3.8-live", "gemini-2.5-flash-native-audio-preview-12-2025"];
+      const liveModels = ["gemini-3.8-live", "gemini-3.8-flash-native-audio-preview-12-2025"];
 
       for (const liveModel of liveModels) {
         const segments = splitArabicTextForGeminiLive(dialogue, 340);
@@ -1048,7 +1048,7 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
 
       // 1b) Secondary Gemini Native TTS (`gemini-3.8-flash-lite-tts` / `gemini-3.8-flash-tts`)
       // Send ONLY pure dialogue text in `contents` so the TTS model never reads dialect instructions out loud!
-      const ttsModels = ["gemini-3.8-flash-lite-tts", "gemini-3.8-flash-tts", "gemini-2.5-flash-preview-tts"];
+      const ttsModels = ["gemini-3.8-flash-lite-tts", "gemini-3.8-flash-tts", "gemini-3.8-flash-preview-tts"];
       const pureDialogueForTts = stripLeakedVoiceInstructionsRunner(dialogue);
       for (const ttsModel of ttsModels) {
         try {
@@ -3118,7 +3118,7 @@ async function buildSmartHeroReplyForFacebookCommentRunner({
 - اذكر اسم المتابع (${cleanAuthor}) بحب وترحيب حار من أبطال نورين كيدز (مثل دكتورة نورين وأرنوب والمهندسة نوران والنمر الفرفوش).
 - تفاعل بذكاء مع كلامه أو مع اسم الطفل المذكور في التعليق، واختم بسؤال تفاعلي لطيف أو دعوة لانتظار حلقة الغد.`;
       const resp = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-3.8-flash",
         contents: prompt,
       });
       const text = String(resp.text || "").trim();
