@@ -43,24 +43,39 @@ function parseRunMode(raw) {
   return "daily_schedule";
 }
 
+function getCairoParts(date) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Africa/Cairo",
+    year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23"
+  }).formatToParts(date);
+  return Object.fromEntries(parts.filter(p => p.type !== "literal").map(p => [p.type, p.value]));
+}
+
+function cairoLocalToUtcIso(year, month, day, hour, minute) {
+  const guess = Date.UTC(year, month - 1, day, hour, minute, 0);
+  const p = getCairoParts(new Date(guess));
+  const representedUtc = Date.UTC(Number(p.year), Number(p.month)-1, Number(p.day), Number(p.hour), Number(p.minute), Number(p.second));
+  const offsetMs = representedUtc - guess;
+  return new Date(guess - offsetMs).toISOString();
+}
+
 function computeNextCairoPublishIso(dailyPublishTime24 = "19:00") {
   const [rawH, rawM] = String(dailyPublishTime24 || "19:00").split(":");
   const targetH = Math.min(23, Math.max(0, Number(rawH) || 19));
   const targetM = Math.min(59, Math.max(0, Number(rawM) || 0));
   const now = new Date();
-  // Egypt Standard Time is UTC+2
-  const utcTargetH = (targetH - 2 + 24) % 24;
-  const candidate = new Date(Date.UTC(
-    now.getUTCFullYear(),
-    now.getUTCMonth(),
-    now.getUTCDate(),
-    utcTargetH,
-    targetM,
-    0
+  let cairo = getCairoParts(now);
+  let candidate = new Date(cairoLocalToUtcIso(
+    Number(cairo.year), Number(cairo.month), Number(cairo.day), targetH, targetM
   ));
-  // YouTube requires publishAt to be at least 20 minutes in the future
+
   if (candidate.getTime() - now.getTime() < 25 * 60 * 1000) {
-    candidate.setUTCDate(candidate.getUTCDate() + 1);
+    const nextDay = new Date(Date.UTC(Number(cairo.year), Number(cairo.month)-1, Number(cairo.day)+1, 12, 0, 0));
+    cairo = getCairoParts(nextDay);
+    candidate = new Date(cairoLocalToUtcIso(
+      Number(cairo.year), Number(cairo.month), Number(cairo.day), targetH, targetM
+    ));
   }
   return candidate.toISOString();
 }
