@@ -243,9 +243,9 @@ function runPreTtsEgyptianValidationLayer(rawText, sceneIndex = 0, totalScenes =
   if (
     sceneIndex === 0 &&
     validatedText &&
-    !/^(ازيكم|يا خبر|بص|بصوا|شايف|شايفين|يلا بينا)/.test(validatedText)
+    !/^(يا خبر|الحقوا|الحقني|بص|بصوا|شايف|شايفين|يلا بينا)/.test(validatedText)
   ) {
-    validatedText = `ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بصوا كده معانا النهارده، ${validatedText}`;
+    validatedText = `يا خبر يا أبطال وعيلة نورين كيدز! بصوا بسرعة معانا النهارده، ${validatedText}`;
   }
   if (
     sceneIndex === totalScenes - 1 &&
