@@ -3101,6 +3101,39 @@ async function buildSmartHeroReplyForFacebookCommentRunner({
   authorName,
   commentText,
   postTitle,
+}) {
+  const cleanAuthor = String(authorName || "صديقنا الغالي")
+    .replace(/[^\p{L}\p{N}\s_.-]/gu, "")
+    .trim()
+    .slice(0, 35);
+  const geminiKey = (process.env.GEMINI_API_KEY || "").trim();
+  if (geminiKey) {
+    try {
+      const ai = new GoogleGenAI({ apiKey: geminiKey });
+      const prompt = `أنت مدير مجتمع أبطال قناة وصفحة "Noreen Kids" (نورين كيدز) الكرتونية ثلاثية الأبعاد للأطفال على فيسبوك.
+كتب المتابع "${cleanAuthor}" هذا التعليق على منشور بعنوان "${postTitle || "مغامرة نورين كيدز"}":
+"${commentText}"
+
+اكتب رداً واحداً قصيراً ومبهجاً جداً باللهجة المصرية الدافئة واللطيفة (في سطرين كحد أقصى):
+- اذكر اسم المتابع (${cleanAuthor}) بحب وترحيب حار من أبطال نورين كيدز (مثل دكتورة نورين وأرنوب والمهندسة نوران والنمر الفرفوش).
+- تفاعل بذكاء مع كلامه أو مع اسم الطفل المذكور في التعليق، واختم بسؤال تفاعلي لطيف أو دعوة لانتظار حلقة الغد.`;
+      const resp = await ai.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: prompt,
+      });
+      const text = String(resp.text || "").trim();
+      if (text && text.length >= 15 && text.length <= 450) {
+        return text;
+      }
+    } catch {}
+  }
+
+  const warmReplies = [
+    `يا أهلاً بيك يا ${cleanAuthor} في عيلة نورين كيدز! 🌟💖 دكتورة نورين وأرنوب الشقي بيبعتولك أحلى تحية وبيقولولك شكراً على تعليقك الجميل.. استنونا في مغامرة جديدة بكرة! 🎬✨`,
+    `نورتوا صفحتنا يا ${cleanAuthor}! 🎉✨ كل أبطال نورين كيدز (دكتورة نورين وأرنوب والمهندسة نوران والنمر الفرفوش) بيقولولكم شكراً من القلب على كلامكم الحلو! تفتكروا مغامرة بكرة هتكون مع مين من الأبطال؟ 🤔💖`,
+    `أحلى تحية من أبطال نورين كيدز لـ ${cleanAuthor}! 🌟👏 كلامكم الجميل بيفرح قلوبنا وبيخلينا نجهز لكم حواديت ومغامرات 3D أحلى وأحلى كل يوم! 🔔❤️`,
+  ];
+  return warmReplies[Math.floor(Math.random() * warmReplies.length) % warmReplies.length];
 }
 
 async function publishDailyInteractive3DPhotoPostForRunner({
@@ -3110,12 +3143,482 @@ async function publishDailyInteractive3DPhotoPostForRunner({
   fbSchedule,
   excludedHeroes = new Set(),
   forcePublish = false,
+}) {
+  const tokenRes = await resolveTrueFacebookPageAccessTokenForRunner(
+    rawPageAccessToken,
+    pageId
+  );
+  const activeToken = tokenRes.pageToken;
+  if (!activeToken) {
+    return { published: false, reason: "missing_token" };
+  }
+
+  const nowCairoDate = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Africa/Cairo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+  const nowCairoHHMM = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Africa/Cairo",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(new Date());
+
+  // 1) De-duplication check against local schedule state & live Facebook Page posts today
+  if (!forcePublish) {
+    if (fbSchedule?.lastInteractivePhotoDateKey === nowCairoDate) {
+      console.log(
+        `✅ [Daily 3D Photo Post Guard] تم نشر المنشور التفاعلي المصور لهذا اليوم (${nowCairoDate}) بالفعل — تخطي التكرار.`
+      );
+      return { published: false, skippedDuplicate: true };
+    }
+    try {
+      const checkRes = await fetch(
+        `https://graph.facebook.com/v21.0/${encodeURIComponent(
+          pageId
+        )}/published_posts?fields=id,message,created_time&limit=10`,
+        {
+          headers: { Authorization: `Bearer ${activeToken}` },
+        }
+      );
+      const checkJson = await checkRes.json().catch(() => ({}));
+      if (checkRes.ok && Array.isArray(checkJson?.data)) {
+        const alreadyPostedTodayOnGraph = checkJson.data.some((p) => {
+          const msg = String(p?.message || "");
+          if (
+            !msg.includes("تحدي أبطال Noreen Kids") &&
+            !msg.includes("فزورة النهاردة من عالم Noreen Kids") &&
+            !msg.includes("تحية خاصة من")
+          ) {
+            return false;
+          }
+          if (!p?.created_time) return false;
+          const postCairoDate = new Intl.DateTimeFormat("en-CA", {
+            timeZone: "Africa/Cairo",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          }).format(new Date(p.created_time));
+          return postCairoDate === nowCairoDate;
+        });
+        if (alreadyPostedTodayOnGraph) {
+          fbSchedule.lastInteractivePhotoDateKey = nowCairoDate;
+          console.log(
+            `✅ [Daily 3D Photo Post Guard] تم العثور على المنشور التفاعلي المصور منشوراً بالفعل اليوم (${nowCairoDate}) على صفحة فيسبوك — تخطي التكرار.`
+          );
+          return { published: false, skippedDuplicate: true };
+        }
+      }
+    } catch {}
+  }
+
+  const pick = selectNonRepeatingTeamAndTopicForRunner({
+    excludedHeroes,
+    excludedTitles: [],
+  });
+  const heroName = pick.team.mainCharacterName || "الطبيبة نورين";
+  const compName = pick.team.companionName || "أرنوب الشقي الممرض";
+  const shortHero = getShortCharacterDisplayNameRunner(heroName, "egyptian");
+  const shortComp = getShortCharacterDisplayNameRunner(compName, "egyptian");
+
+  const interactiveThemes = [
+    {
+      themeTitle: `تحدي الملاحظة الذكية مع ${shortHero} و${shortComp}`,
+      caption: `🌟 تحدي أبطال Noreen Kids اليومي للشطار! 🌟\nبصوا كويس في الصورة مع ${shortHero} و${shortComp}.. 🤔✨\nلو هنسافر النهاردة في مغامرة جديدة: تفتكروا ${shortHero} هيستخدم أنهي أداة ذكية علشان يساعد ${shortComp}؟\n\n1️⃣ اكتبوا إجابتكم في التعليقات 👇\n2️⃣ اكتبوا اسم طفلكم الجميل عشان ${shortHero} و${shortComp} يحيوه بالاسم في حلقة بكرة! 🎬💖\n3️⃣ متنسوش متابعة صفحة Noreen Kids 🔔👍 ومشاركة البوست مع كل الأمهات!\n\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_قبل_النوم #كرتون_أطفال_3D #تربية_إيجابية #أمهات_مصر`,
+    },
+    {
+      themeTitle: `فزورة الأبطال الشطار مع ${shortHero} و${shortComp}`,
+      caption: `🎉 فزورة النهاردة من عالم Noreen Kids ثلاثي الأبعاد! 🎉\nبطلنا المحبوب "${shortHero}" وصديقنا الشقي "${shortComp}" بيجهزوا لمفاجأة كبيرة النهاردة! 🌟🎬\nسؤال للشطار الحلوين: إيه أكتر صفة جميلة بتحبوها في ${shortHero} و${shortComp}؟\n(الشجاعة 💪 - التعاون 🤝 - الذكاء 🧠 - خفة الدم 😄)؟\n\n👇 شاركونا في التعليقات واكتبوا اسم طفلكم عشان نرحب بيه بالاسم في عيلة نورين كيدز، واضغطوا متابعة للصفحة 🔔👍 عشان متفوتكمش حكاية النهاردة!\n\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_أطفال #كرتون_مصري #تربية_إيجابية #أمهات_مصر`,
+    },
+    {
+      themeTitle: `لوحة شرف أبطال Noreen Kids مع ${shortHero} و${shortComp}`,
+      caption: `💖 تحية خاصة من ${shortHero} و${shortComp} لكل أصحابنا الحلوين! 💖\nمين من أطفالنا الشطار غسل سنانه وسمع كلام ماما وبابا النهاردة؟ 🌟👏\n\n👇 كل أم تكتب اسم بطلها أو بطلتها في التعليقات تحت الصورة دي عشان ${shortHero} و${shortComp} يبعتولهم شهادة شطارة وتحية خاصة بالاسم! 🏆✨\nومتنسوش متابعة صفحة Noreen Kids 🔔👍 ومشاركة المنشور مع أصحابكم!\n\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_قبل_النوم #كرتون_أطفال_3D #تربية_إيجابية #أمهات_مصر`,
+    },
+  ];
+  const chosenTheme =
+    interactiveThemes[
+      Math.floor(Math.random() * interactiveThemes.length) %
+        interactiveThemes.length
+    ];
+
+  const heroImg = resolveCharacterAvatarPath(heroName, heroName);
+  const compImg = resolveCharacterAvatarPath(compName, compName);
+  const cardPath = path.join(tmpDir, `interactive_3d_card_${Date.now()}.jpg`);
+
+  await execFileAsync("ffmpeg", [
+    "-y",
+    "-i",
+    compImg,
+    "-i",
+    heroImg,
+    "-filter_complex",
+    `[0:v]scale=640:720:force_original_aspect_ratio=increase,crop=640:720,eq=saturation=1.24:contrast=1.08:brightness=0.02,unsharp=5:5:0.85:5:5:0.0[left];[1:v]scale=640:720:force_original_aspect_ratio=increase,crop=640:720,eq=saturation=1.24:contrast=1.08:brightness=0.02,unsharp=5:5:0.85:5:5:0.0[right];[left][right]hstack=inputs=2,vignette=PI/7,drawbox=x=634:y=0:w=12:h=720:color=0xF59E0B@0.95:t=fill,drawbox=x=638:y=0:w=4:h=720:color=0xFEF08A@1.0:t=fill,drawbox=x=0:y=0:w=1280:h=720:color=0xFBBF24@0.95:t=12,drawbox=x=12:y=12:w=1256:h=696:color=0x38BDF8@0.65:t=4,setsar=1,format=yuvj420p[outv]`,
+    "-map",
+    "[outv]",
+    "-frames:v",
+    "1",
+    "-q:v",
+    "2",
+    cardPath,
+  ]);
+
+  const cardBuffer = fs.readFileSync(cardPath);
+  const formData = new FormData();
+  formData.append("message", chosenTheme.caption);
+  formData.append("published", "true");
+  formData.append(
+    "source",
+    new Blob([new Uint8Array(cardBuffer)], { type: "image/jpeg" }),
+    "noreen_kids_3d_daily_challenge.jpg"
+  );
+
+  const upRes = await fetch(
+    `https://graph.facebook.com/v21.0/${encodeURIComponent(pageId)}/photos`,
+    {
+      method: "POST",
+      headers: { Authorization: `Bearer ${activeToken}` },
+      body: formData,
+    }
+  );
+  const upData = await upRes.json().catch(() => ({}));
+  if (!upRes.ok || upData?.error || (!upData?.id && !upData?.post_id)) {
+    throw new Error(
+      upData?.error?.message || `HTTP ${upRes.status} on /${pageId}/photos`
+    );
+  }
+
+  const photoId = String(upData.id || "");
+  const postId = String(upData.post_id || `${pageId}_${photoId}`);
+  const permalinkUrl = `https://www.facebook.com/${postId}`;
+
+  // Immediately post the interactive first comment on the photo post
+  try {
+    const firstCommentMsg = `🌟 تحدي أبطال نورين كيدز النهاردة مع ${shortHero} و${shortComp}!\n👇 اكتبوا لنا اسم طفلكم وإجابته في تعليق هنا عشان ${shortHero} و${shortComp} يردوا عليه ويحيوه بالاسم، ومتنسوش متابعة الصفحة 🔔👍 عشان توصلكم حدوتة النهاردة!`;
+    await fetch(
+      `https://graph.facebook.com/v21.0/${encodeURIComponent(postId)}/comments`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${activeToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: firstCommentMsg }),
+      }
+    ).catch(() => {});
+  } catch {}
+
+  const logRecord = {
+    postId,
+    photoId,
+    themeTitle: chosenTheme.themeTitle,
+    title: chosenTheme.themeTitle,
+    caption: chosenTheme.caption,
+    heroName: shortHero,
+    companionName: shortComp,
+    publishedAtCairo: `${nowCairoDate} · ${nowCairoHHMM} بتوقيت مصر`,
+    permalinkUrl,
+  };
+
+  fbSchedule.lastInteractivePhotoDateKey = nowCairoDate;
+  fbSchedule.interactivePhotoPostsLog = [
+    logRecord,
+    ...(Array.isArray(fbSchedule.interactivePhotoPostsLog)
+      ? fbSchedule.interactivePhotoPostsLog
+      : []
+    ).slice(0, 39),
+  ];
+
+  console.log(
+    `📸 FACEBOOK INTERACTIVE 3D PHOTO POST PUBLISHED! Post ID: ${postId} | Title: ${chosenTheme.themeTitle}`
+  );
+  return {
+    published: true,
+    postId,
+    photoId,
+    permalinkUrl,
+    themeTitle: chosenTheme.themeTitle,
+    logRecord,
+  };
 }
 
 async function scanAndAutoReplyFacebookCommentsForRunner({
   rawPageAccessToken,
   pageId,
   fbSchedule,
+}) {
+  const tokenRes = await resolveTrueFacebookPageAccessTokenForRunner(
+    rawPageAccessToken,
+    pageId
+  );
+  const activeToken = tokenRes.pageToken;
+  if (!activeToken) {
+    return { scannedObjects: 0, newRepliesCount: 0 };
+  }
+
+  const nowCairoDate = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Africa/Cairo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+  const nowCairoHHMM = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Africa/Cairo",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(new Date());
+
+  const repliedSet = new Set(
+    Array.isArray(fbSchedule?.repliedCommentIds)
+      ? fbSchedule.repliedCommentIds
+      : []
+  );
+
+  const itemsById = new Map();
+  const edgesToFetch = [
+    `https://graph.facebook.com/v21.0/${encodeURIComponent(
+      pageId
+    )}/videos?fields=id,title,description,comments.limit(25){id,message,from,created_time,comments.limit(25){id,message,from,created_time}}&limit=35`,
+    `https://graph.facebook.com/v21.0/${encodeURIComponent(
+      pageId
+    )}/video_reels?fields=id,title,description,comments.limit(25){id,message,from,created_time,comments.limit(25){id,message,from,created_time}}&limit=35`,
+    `https://graph.facebook.com/v21.0/${encodeURIComponent(
+      pageId
+    )}/published_posts?fields=id,message,comments.limit(25){id,message,from,created_time,comments.limit(25){id,message,from,created_time}}&limit=35`,
+  ];
+
+  for (const edgeUrl of edgesToFetch) {
+    try {
+      const edgeRes = await fetch(edgeUrl, {
+        headers: { Authorization: `Bearer ${activeToken}` },
+      });
+      const edgeJson = await edgeRes.json().catch(() => ({}));
+      if (edgeRes.ok && Array.isArray(edgeJson?.data)) {
+        for (const item of edgeJson.data) {
+          const objId = String(item?.id || "").trim();
+          if (!objId) continue;
+          const commList = Array.isArray(item?.comments?.data)
+            ? item.comments.data
+            : [];
+          const prev = itemsById.get(objId);
+          if (!prev || commList.length > prev.comments.length) {
+            itemsById.set(objId, {
+              id: objId,
+              title: String(
+                item?.title ||
+                  (item?.description || item?.message || "").split("\n")[0] ||
+                  "منشور Noreen Kids"
+              ).trim(),
+              comments: commList,
+            });
+          }
+        }
+      }
+    } catch {}
+  }
+
+  const isCommentFromOurPage = (cObj) => {
+    const fId = String(cObj?.from?.id || "").trim();
+    const fName = String(cObj?.from?.name || "")
+      .trim()
+      .toLowerCase();
+    return (
+      fId === pageId ||
+      fName.includes("noreen kids") ||
+      fName.includes("نورين كيدز")
+    );
+  };
+
+  let scannedObjects = 0;
+  let newRepliesCount = 0;
+
+  for (const item of itemsById.values()) {
+    scannedObjects++;
+    const topComments = Array.isArray(item.comments) ? item.comments : [];
+    for (const comm of topComments) {
+      const topId = String(comm?.id || "").trim();
+      const topMsg = String(comm?.message || "").trim();
+      if (!topId) continue;
+
+      const subComments = Array.isArray(comm?.comments?.data)
+        ? comm.comments.data
+        : [];
+
+      let inferredAuthorName = String(comm?.from?.name || "").trim();
+      if (
+        !inferredAuthorName ||
+        inferredAuthorName.toLowerCase().includes("noreen")
+      ) {
+        for (const sub of subComments) {
+          if (isCommentFromOurPage(sub)) {
+            const subText = String(sub?.message || "").trim();
+            const words = subText.split(/\s+/);
+            if (
+              words.length >= 3 &&
+              !subText.startsWith("🌟") &&
+              !subText.startsWith("💡")
+            ) {
+              inferredAuthorName = words.slice(0, 3).join(" ");
+              break;
+            }
+          }
+        }
+      }
+      if (!inferredAuthorName) inferredAuthorName = "صديقنا الغالي";
+
+      const pageRepliedToTop = subComments.some((sub) =>
+        isCommentFromOurPage(sub)
+      );
+
+      if (
+        !isCommentFromOurPage(comm) &&
+        topMsg &&
+        !pageRepliedToTop &&
+        !repliedSet.has(topId)
+      ) {
+        try {
+          await fetch(
+            `https://graph.facebook.com/v21.0/${encodeURIComponent(
+              topId
+            )}/likes`,
+            {
+              method: "POST",
+              headers: { Authorization: `Bearer ${activeToken}` },
+            }
+          );
+        } catch {}
+
+        const heroReply = await buildSmartHeroReplyForFacebookCommentRunner({
+          authorName: inferredAuthorName,
+          commentText: topMsg,
+          postTitle: item.title,
+        });
+
+        const repRes = await fetch(
+          `https://graph.facebook.com/v21.0/${encodeURIComponent(
+            topId
+          )}/comments`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${activeToken}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ message: heroReply }),
+          }
+        );
+        const repData = await repRes.json().catch(() => ({}));
+        if (repRes.ok && repData?.id) {
+          repliedSet.add(topId);
+          newRepliesCount++;
+          const logEntry = {
+            commentId: topId,
+            postId: item.id,
+            authorName: inferredAuthorName,
+            userComment: topMsg,
+            pageReply: heroReply,
+            repliedAtCairo: `${nowCairoDate} · ${nowCairoHHMM} بتوقيت مصر`,
+          };
+          fbSchedule.recentAutoRepliesLog = [
+            logEntry,
+            ...(Array.isArray(fbSchedule.recentAutoRepliesLog)
+              ? fbSchedule.recentAutoRepliesLog
+              : []
+            ).filter((x) => x.commentId !== topId),
+          ].slice(0, 50);
+        }
+      } else if (pageRepliedToTop) {
+        repliedSet.add(topId);
+      }
+
+      // Check nested replies inside subComments where a follower replied AFTER our Page's earlier reply
+      for (let sIdx = 0; sIdx < subComments.length; sIdx++) {
+        const sub = subComments[sIdx];
+        const subId = String(sub?.id || "").trim();
+        const subMsg = String(sub?.message || "").trim();
+        if (!subId || !subMsg) continue;
+        if (isCommentFromOurPage(sub)) continue;
+        if (repliedSet.has(subId)) continue;
+
+        const pageRepliedAfterSub = subComments
+          .slice(sIdx + 1)
+          .some((laterSub) => isCommentFromOurPage(laterSub));
+        if (pageRepliedAfterSub) {
+          repliedSet.add(subId);
+          continue;
+        }
+
+        const subAuthor =
+          String(sub?.from?.name || "").trim() || inferredAuthorName;
+        try {
+          await fetch(
+            `https://graph.facebook.com/v21.0/${encodeURIComponent(
+              subId
+            )}/likes`,
+            {
+              method: "POST",
+              headers: { Authorization: `Bearer ${activeToken}` },
+            }
+          );
+        } catch {}
+
+        const contextualCommentText = topMsg
+          ? `${topMsg} — ${subMsg.replace(/^Noreen\s*Kids\s*/i, "").trim()}`
+          : subMsg.replace(/^Noreen\s*Kids\s*/i, "").trim();
+
+        const heroSubReply = await buildSmartHeroReplyForFacebookCommentRunner({
+          authorName: subAuthor,
+          commentText: contextualCommentText,
+          postTitle: item.title,
+        });
+
+        const subRepRes = await fetch(
+          `https://graph.facebook.com/v21.0/${encodeURIComponent(
+            topId
+          )}/comments`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${activeToken}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ message: heroSubReply }),
+          }
+        );
+        const subRepData = await subRepRes.json().catch(() => ({}));
+        if (subRepRes.ok && subRepData?.id) {
+          repliedSet.add(subId);
+          newRepliesCount++;
+          const logEntry = {
+            commentId: subId,
+            postId: item.id,
+            authorName: subAuthor,
+            userComment: contextualCommentText,
+            pageReply: heroSubReply,
+            repliedAtCairo: `${nowCairoDate} · ${nowCairoHHMM} بتوقيت مصر`,
+          };
+          fbSchedule.recentAutoRepliesLog = [
+            logEntry,
+            ...(Array.isArray(fbSchedule.recentAutoRepliesLog)
+              ? fbSchedule.recentAutoRepliesLog
+              : []
+            ).filter((x) => x.commentId !== subId),
+          ].slice(0, 50);
+        }
+      }
+      if (newRepliesCount >= 6) break;
+    }
+    if (newRepliesCount >= 6) break;
+  }
+
+  fbSchedule.repliedCommentIds = Array.from(repliedSet).slice(-500);
+  fbSchedule.lastAutoCommentScanAtCairo = `${nowCairoDate} · ${nowCairoHHMM} بتوقيت مصر`;
+  console.log(
+    `💬 [Facebook AI Comment Responder] Scanned ${scannedObjects} posts/videos/reels | New Replies Posted: ${newRepliesCount}`
+  );
+  return { scannedObjects, newRepliesCount };
 }
 
 async function main() {
