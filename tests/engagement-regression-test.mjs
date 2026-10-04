@@ -51,3 +51,10 @@ assert.match(runner, /model: "gemini-3\\.8-flash"/);
 // Regression: firstCommentId must be scoped outside the YouTube-only block because
 // it is included in the per-result record even when YouTube upload is skipped.
 assert.match(runner, /let firstCommentId = null;\\n    if \(shouldUploadToYouTube && accessToken\)/);
+
+
+// Regression: engagement_only must be a real run mode and must not enter video task generation.
+assert.match(runner, /s\.includes\("engagement_only"\)/);
+assert.match(runner, /if \(runMode === "engagement_only"\)/);
+assert.match(runner, /runMode !== "engagement_only" && shouldUploadToYouTube/);
+assert.match(runner, /publishDailyInteractive3DPhotoPostForRunner/);
