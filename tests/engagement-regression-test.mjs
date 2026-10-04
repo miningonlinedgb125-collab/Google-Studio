@@ -58,3 +58,8 @@ assert.match(runner, /s\.includes\("engagement_only"\)/);
 assert.match(runner, /if \(runMode === "engagement_only"\)/);
 assert.match(runner, /runMode !== "engagement_only" && shouldUploadToYouTube/);
 assert.match(runner, /publishDailyInteractive3DPhotoPostForRunner/);
+
+// Regression: engagement helpers use the current shared Facebook Page token resolver.
+assert.equal(runner.includes("resolveTrueFacebookPageAccessTokenForRunner"), false);
+assert.equal(runner.includes("rawToken: rawPageAccessToken"), true);
+assert.equal(runner.includes("targetPageId: pageId"), true);
