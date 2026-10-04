@@ -1830,5 +1830,148 @@
         "fileDetailsAvailability": "available"
       }
     }
+  ],
+  "recentStoryHistory": [
+    {
+      "topic": "مغامرة الغواصة الذهبية لإنقاذ الحوت الصغير في مملكة",
+      "mainCharacterName": "شوشو القبطان الصغير",
+      "companionName": "مرجان الدلفين المرح"
+    },
+    {
+      "topic": "كيف نرتب وقتنا وألعابنا بدقة وحكمة مع المحاسب",
+      "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "ملك ولوليتا: بطلة العاصفة",
+      "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا",
+      "fingerprint": "4a71751a2262",
+      "dialogueHash": "066ffa37bdd4"
+    },
+    {
+      "topic": "أم ملك والبطريق المرح: سر الكلمة الطيبة",
+      "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح",
+      "fingerprint": "e67a41a568a6",
+      "dialogueHash": "046ee5654d2f"
+    },
+    {
+      "topic": "إسعاف الطائر الصغير وقت العاصفة بهدوء وشجاعة طبيبة الطوارئ ملك",
+      "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا",
+      "fingerprint": "fd4e5657f5a4"
+    },
+    {
+      "topic": "درس المعلمة أم ملك والبطريق المرح عن آداب الحوار ومساعدة الأصحاب",
+      "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح",
+      "fingerprint": "8711d85c08c6"
+    },
+    {
+      "topic": "مقالب الفأر المشاكس المضحكة وحكمة جدو الطيب في ليلة الفوانيس",
+      "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس",
+      "fingerprint": "9d1867c316e5",
+      "dialogueHash": ""
+    },
+    {
+      "topic": "إصلاح منارة المرجان المضيئة بأدوات الهندسة الذكية والتعاون",
+      "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش",
+      "fingerprint": "30a3baadc69d",
+      "dialogueHash": ""
+    },
+    {
+      "topic": "رحلة البحث عن مفتاح البوابة القديمة مع الشاب الطيب ذياد والعصفورة",
+      "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة",
+      "fingerprint": "3ea680a6881c",
+      "dialogueHash": ""
+    },
+    {
+      "topic": "حل معادلة الكنز البلوري بالحساب والتفكير المنظم مع",
+      "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي",
+      "fingerprint": "3c2629a0c180",
+      "dialogueHash": ""
+    },
+    {
+      "topic": "سر وصفة السعادة والحنان في بيت تيتة مع",
+      "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا",
+      "fingerprint": "fa8b453d33b0",
+      "dialogueHash": ""
+    },
+    {
+      "topic": "اكتشاف زهرة النور الضاحكة بفضول وبراءة سدرة الصغنونة",
+      "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة",
+      "fingerprint": "3432822c38ea",
+      "dialogueHash": ""
+    },
+    {
+      "topic": "سيارة الإسعاف المنورة ومواقف القطة لوليتا المضحكة في",
+      "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا",
+      "fingerprint": "de3270d425cb",
+      "dialogueHash": ""
+    },
+    {
+      "topic": "بوصلة الرياح الأربعة وإنقاذ طائر العنقاء الصغير فوق",
+      "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي",
+      "fingerprint": "9c81411ec811",
+      "dialogueHash": ""
+    },
+    {
+      "topic": "سر النوم البدري وشرب اللبن الدافي علشان نكبر بصحة ونشاط",
+      "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض",
+      "fingerprint": "8a930027c99b",
+      "dialogueHash": ""
+    },
+    {
+      "topic": "حكاية الصبر والنظام في مدرسة السعادة مع أم",
+      "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح",
+      "fingerprint": "1b9f2b7537ce",
+      "dialogueHash": ""
+    },
+    {
+      "topic": "لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة",
+      "mainCharacterName": "جنى رائدة الفضاء",
+      "companionName": "بلبل الروبوت اللطيف",
+      "fingerprint": "b1ac3f2d8de4",
+      "dialogueHash": ""
+    },
+    {
+      "topic": "شجرة الأمانة الذهبية في غابة النجوم وإزاي الصدق",
+      "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم",
+      "fingerprint": "9ddc33e51fab",
+      "dialogueHash": ""
+    },
+    {
+      "topic": "بناء جسر قوس قزح الذكي فوق مدينة السحاب بالعلم والتعاون",
+      "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش",
+      "fingerprint": "5976f6cdd683",
+      "dialogueHash": ""
+    },
+    {
+      "topic": "إنقاذ فراشة النور النادرة في حديقة الزهور العملاقة",
+      "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي",
+      "fingerprint": "6749087e52ee",
+      "dialogueHash": ""
+    },
+    {
+      "topic": "المراية الصادقة في واحة الكريستال وتعلّم الثقة في النفس ومساعدة غيرنا",
+      "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم",
+      "fingerprint": "8be66874d4de",
+      "dialogueHash": ""
+    }
   ]
 }
