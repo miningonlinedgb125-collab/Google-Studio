@@ -2941,7 +2941,7 @@ async function generateSmartCommentReply({ authorName, commentText, platform, po
 }
 
 async function scanAndAutoReplyYouTubeComments({ accessToken, geminiApiKey, schedule }) {
-  if (!accessToken) return { repliesCount: 0 };
+  if (!accessToken) return { repliesCount: 0, scannedThreads: 0 };
   let channelId = String(schedule?.channelId || "").trim();
   try {
     if (!channelId) {
@@ -2949,37 +2949,62 @@ async function scanAndAutoReplyYouTubeComments({ accessToken, geminiApiKey, sche
       const data = await ch.json().catch(() => ({}));
       channelId = String(data?.items?.[0]?.id || "");
     }
-    if (!channelId) return { repliesCount: 0 };
-    const list = await fetch(`https://www.googleapis.com/youtube/v3/commentThreads?part=snippet,replies&allThreadsRelatedToChannelId=${encodeURIComponent(channelId)}&maxResults=30&order=time`, { headers: { Authorization: `Bearer ${accessToken}` } });
-    const data = await list.json().catch(() => ({}));
+    if (!channelId) return { repliesCount: 0, scannedThreads: 0 };
+
     const replied = new Set(Array.isArray(schedule.repliedCommentIds) ? schedule.repliedCommentIds : []);
     let repliesCount = 0;
-    for (const thread of Array.isArray(data?.items) ? data.items : []) {
-      const top = thread?.snippet?.topLevelComment;
-      const id = String(top?.id || "");
-      const authorChannelId = String(top?.snippet?.authorChannelId?.value || "");
-      if (!id || replied.has(id) || (channelId && authorChannelId === channelId)) continue;
-      const replyText = await generateSmartCommentReply({
-        authorName: top?.snippet?.authorDisplayName || "صديقنا الغالي",
-        commentText: top?.snippet?.textOriginal || "",
-        platform: "YouTube",
-        postTitle: schedule?.lastCloudRunReport?.shortEpisodeTitle,
-      });
-      const rep = await fetch("https://www.googleapis.com/youtube/v3/comments?part=snippet", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json; charset=UTF-8" },
-        body: JSON.stringify({ snippet: { parentId: id, textOriginal: replyText } }),
-      });
-      if (rep.ok) { replied.add(id); repliesCount++; }
-    }
+    let scannedThreads = 0;
+    let pageToken = "";
+    let pages = 0;
+
+    // Scan multiple pages so older comments on previous videos are not skipped.
+    do {
+      const url = new URL("https://www.googleapis.com/youtube/v3/commentThreads");
+      url.searchParams.set("part", "snippet,replies");
+      url.searchParams.set("allThreadsRelatedToChannelId", channelId);
+      url.searchParams.set("maxResults", "100");
+      url.searchParams.set("order", "time");
+      if (pageToken) url.searchParams.set("pageToken", pageToken);
+
+      const list = await fetch(url, { headers: { Authorization: `Bearer ${accessToken}` } });
+      const data = await list.json().catch(() => ({}));
+      const threads = Array.isArray(data?.items) ? data.items : [];
+      scannedThreads += threads.length;
+
+      for (const thread of threads) {
+        const top = thread?.snippet?.topLevelComment;
+        const id = String(top?.id || "");
+        const authorChannelId = String(top?.snippet?.authorChannelId?.value || "");
+        if (!id || replied.has(id) || (channelId && authorChannelId === channelId)) continue;
+
+        const replyText = await generateSmartCommentReply({
+          authorName: top?.snippet?.authorDisplayName || "صديقنا الغالي",
+          commentText: top?.snippet?.textOriginal || "",
+          platform: "YouTube",
+          postTitle: schedule?.lastCloudRunReport?.shortEpisodeTitle,
+        });
+        const rep = await fetch("https://www.googleapis.com/youtube/v3/comments?part=snippet", {
+          method: "POST",
+          headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json; charset=UTF-8" },
+          body: JSON.stringify({ snippet: { parentId: id, textOriginal: replyText } }),
+        });
+        if (rep.ok) {
+          replied.add(id);
+          repliesCount++;
+        }
+      }
+
+      pageToken = String(data?.nextPageToken || "");
+      pages++;
+    } while (pageToken && pages < 10);
+
     schedule.repliedCommentIds = Array.from(replied).slice(-500);
     schedule.lastAutoCommentScanAtCairo = new Date().toLocaleString("ar-EG", { timeZone: "Africa/Cairo" });
-    return { repliesCount };
+    return { repliesCount, scannedThreads };
   } catch {
-    return { repliesCount: 0 };
+    return { repliesCount: 0, scannedThreads: 0 };
   }
 }
-
 async function postFacebookFirstComment({ rawPageAccessToken, pageId, videoId, message }) {
   const token = await resolveTrueFacebookPageAccessToken({ rawToken: rawPageAccessToken, targetPageId: pageId });
   if (!token || !videoId || !message) return { success: false };
@@ -2998,36 +3023,72 @@ async function postFacebookFirstComment({ rawPageAccessToken, pageId, videoId, m
 
 async function scanAndAutoReplyFacebookVideoComments({ rawPageAccessToken, pageId, videoId, episode, schedule }) {
   const token = await resolveTrueFacebookPageAccessToken({ rawToken: rawPageAccessToken, targetPageId: pageId });
-  if (!token || !videoId) return { repliesCount: 0 };
+  if (!token || !pageId) return { repliesCount: 0, scannedComments: 0, scannedVideos: 0 };
   try {
-    const list = await fetch(`https://graph.facebook.com/v21.0/${encodeURIComponent(videoId)}/comments?fields=id,message,from,created_time&limit=25`, { headers: { Authorization: `Bearer ${token}` } });
-    const data = await list.json().catch(() => ({}));
     const replied = new Set(Array.isArray(schedule.facebookRepliedCommentIds) ? schedule.facebookRepliedCommentIds : []);
     let repliesCount = 0;
-    for (const item of Array.isArray(data?.data) ? data.data : []) {
-      const id = String(item?.id || "");
-      const authorId = String(item?.from?.id || "");
-      if (!id || replied.has(id) || (authorId && authorId === String(pageId))) continue;
-      const replyText = await generateSmartCommentReply({
-        authorName: item?.from?.name || "صديقنا الغالي",
-        commentText: item?.message || "",
-        platform: "Facebook",
-        postTitle: episode?.title,
-      });
-      const rep = await fetch(`https://graph.facebook.com/v21.0/${encodeURIComponent(id)}/comments`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-        body: JSON.stringify({ message: replyText }),
-      });
-      if (rep.ok) { replied.add(id); repliesCount++; }
-    }
+    let scannedComments = 0;
+    let scannedVideos = 0;
+    let pageUrl = `https://graph.facebook.com/v21.0/${encodeURIComponent(pageId)}/videos?fields=id,message,created_time&limit=50`;
+    let videoPages = 0;
+
+    // Scan recent Page videos, not only the video from the current run.
+    do {
+      const videoRes = await fetch(pageUrl, { headers: { Authorization: `Bearer ${token}` } });
+      const videoData = await videoRes.json().catch(() => ({}));
+      const videos = Array.isArray(videoData?.data) ? videoData.data : [];
+
+      for (const video of videos) {
+        const currentVideoId = String(video?.id || "");
+        if (!currentVideoId) continue;
+        scannedVideos++;
+
+        let commentsUrl = `https://graph.facebook.com/v21.0/${encodeURIComponent(currentVideoId)}/comments?fields=id,message,from,created_time&limit=100`;
+        let commentPages = 0;
+        do {
+          const commentRes = await fetch(commentsUrl, { headers: { Authorization: `Bearer ${token}` } });
+          const commentData = await commentRes.json().catch(() => ({}));
+          const comments = Array.isArray(commentData?.data) ? commentData.data : [];
+          scannedComments += comments.length;
+
+          for (const item of comments) {
+            const id = String(item?.id || "");
+            const authorId = String(item?.from?.id || "");
+            if (!id || replied.has(id) || (authorId && authorId === String(pageId))) continue;
+
+            const replyText = await generateSmartCommentReply({
+              authorName: item?.from?.name || "صديقنا الغالي",
+              commentText: item?.message || "",
+              platform: "Facebook",
+              postTitle: video?.message || episode?.title,
+            });
+            const rep = await fetch(`https://graph.facebook.com/v21.0/${encodeURIComponent(id)}/comments`, {
+              method: "POST",
+              headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+              body: JSON.stringify({ message: replyText }),
+            });
+            if (rep.ok) {
+              replied.add(id);
+              repliesCount++;
+            }
+          }
+
+          commentsUrl = String(commentData?.paging?.next || "");
+          commentPages++;
+        } while (commentsUrl && commentPages < 10);
+      }
+
+      pageUrl = String(videoData?.paging?.next || "");
+      videoPages++;
+    } while (pageUrl && videoPages < 5);
+
     schedule.facebookRepliedCommentIds = Array.from(replied).slice(-500);
-    return { repliesCount };
+    schedule.lastFacebookAutoCommentScanAtCairo = new Date().toLocaleString("ar-EG", { timeZone: "Africa/Cairo" });
+    return { repliesCount, scannedComments, scannedVideos };
   } catch {
-    return { repliesCount: 0 };
+    return { repliesCount: 0, scannedComments: 0, scannedVideos: 0 };
   }
 }
-
 async function main() {
   const publishTarget = String(process.env.PUBLISH_TARGET || "unified").toLowerCase();
   const isFacebookWorkflow = publishTarget.includes("facebook");
