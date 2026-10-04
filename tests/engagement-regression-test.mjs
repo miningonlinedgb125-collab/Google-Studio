@@ -63,3 +63,11 @@ assert.match(runner, /publishDailyInteractive3DPhotoPostForRunner/);
 assert.equal(runner.includes("resolveTrueFacebookPageAccessTokenForRunner"), false);
 assert.equal(runner.includes("rawToken: rawPageAccessToken"), true);
 assert.equal(runner.includes("targetPageId: pageId"), true);
+
+// Regression: interactive 3D posts must not repeat a previously published
+// hero/companion/theme combination stored in interactivePhotoPostsLog.
+assert.match(runner, /interactivePhotoPostsLog/);
+assert.match(runner, /previousInteractiveKeys/);
+assert.match(runner, /isPreviouslyPublishedInteractivePost/);
+assert.match(runner, /previousInteractiveHeroNames/);
+assert.match(runner, /interactivePhotoPostsLog\.slice|interactivePhotoPostsLog\)/);
