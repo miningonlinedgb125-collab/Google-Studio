@@ -3861,7 +3861,21 @@ async function main() {
     const isInsidePhotoWindow =
       isFacebookWorkflow && dailyInteractivePhotoPostEnabled && Boolean(facebookPageAccessToken) &&
       diffFromPhotoMin >= -3 && diffFromPhotoMin <= 90;
-    if (!isInsideVideoWindow && isInsidePhotoWindow) {
+    if (isKnownCurrentScheduleEvent) {
+      const isCurrentPhotoSchedule =
+        isFacebookWorkflow &&
+        ["35 19 * * *", "35 22 * * *"].includes(githubEventSchedule);
+      if (isCurrentPhotoSchedule) {
+        isPhotoEngagementCronOnly = true;
+        console.log(
+          `📸 [GitHub Daily Interactive Photo Cron] تنفيذ حدث المنشور التفاعلي الحالي (${githubEventSchedule}) حتى لو وصل متأخراً.`
+        );
+      } else {
+        console.log(
+          `🎬 [GitHub Daily Video Cron] تنفيذ حدث جدولة الفيديو الحالي (${githubEventSchedule}) حتى لو وصل متأخراً.`
+        );
+      }
+    } else if (!isInsideVideoWindow && isInsidePhotoWindow) {
       isPhotoEngagementCronOnly = true;
       console.log(`📸 [GitHub Daily Interactive Photo Cron] تشغيل موعد المنشور التفاعلي المصور 3D وفحص التعليقات (${dailyInteractivePhotoTimeCairo} بتوقيت مصر)...`);
     } else if (!isInsideVideoWindow && !isInsidePhotoWindow) {
@@ -3872,6 +3886,17 @@ async function main() {
     const expectedWfFile = isFacebookWorkflow
       ? "noreen-facebook-daily-publish.yml"
       : "noreen-kids-daily-youtube.yml";
+    const githubEventSchedule = String(process.env.GITHUB_EVENT_SCHEDULE || "").trim();
+    const currentScheduleCronList = isFacebookWorkflow
+      ? ["15 15 * * *", "35 19 * * *", "15 18 * * *", "35 22 * * *"]
+      : ["0 5 * * *", "0 8 * * *"];
+    const isKnownCurrentScheduleEvent =
+      isCronEvent && currentScheduleCronList.includes(githubEventSchedule);
+    if (isKnownCurrentScheduleEvent) {
+      console.log(
+        `🕒 [Schedule Event Guard] تم التعرف على حدث الجدولة الحالي (${githubEventSchedule}) — سيتم تنفيذ المهمة حتى لو وصل حدث GitHub متأخراً.`
+      );
+    }
     const lastReportIso = isFacebookWorkflow
       ? fbSchedule?.lastFacebookCloudRunReport?.reportedAtIso || ""
       : schedule?.lastCloudRunReport?.reportedAtIso || "";
