@@ -20,7 +20,7 @@ assert.match(runner, /اكتبوا إجابتكم في التعليقات/);
 
 // YouTube first comment must use commentThreads.insert.
 assert.match(runner, /postYouTubeFirstComment/);
-assert.match(runner, /youtube\.com\/youtube\/v3\/commentThreads\?part=snippet/);
+assert.match(runner, /www.googleapis.com\/youtube\/v3\/commentThreads\?part=snippet/);
 assert.match(runner, /topLevelComment/);
 
 // Facebook first comment must be posted to the uploaded video comments edge.
