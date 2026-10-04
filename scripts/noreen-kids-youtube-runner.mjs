@@ -3229,114 +3229,92 @@ async function publishDailyInteractive3DPhotoPostForRunner({
       )
       .filter((key) => key !== "||")
   );
-  const previousInteractiveHeroNames = new Set(
-    previousInteractivePosts
-      .map((entry) => String(entry?.heroName || "").trim())
-      .filter(Boolean)
-  );
-  const pick = selectNonRepeatingTeamAndTopicForRunner({
-    excludedHeroes: new Set([
-      ...excludedHeroes,
-      ...previousInteractiveHeroNames,
-    ]),
-    excludedTitles: [],
+
+  const interactiveThemePrefixes = [
+    "تحدي الملاحظة الذكية",
+    "فزورة الأبطال الشطار",
+    "لوحة شرف أبطال Noreen Kids",
+  ];
+  const getInteractiveThemeTitle = (prefix, hero, comp) =>
+    `${prefix} مع ${hero} و${comp}`;
+  const hasUnusedInteractiveTheme = (hero, comp) =>
+    interactiveThemePrefixes.some(
+      (prefix) =>
+        !previousInteractiveKeys.has(
+          [hero, comp, getInteractiveThemeTitle(prefix, hero, comp)].join("|")
+        )
+    );
+
+  const interactiveTeamPool = RUNNER_CHARACTER_TEAMS.filter((team) => {
+    const hero = getShortCharacterDisplayNameRunner(
+      team.mainCharacterName || "",
+      "egyptian"
+    );
+    const comp = getShortCharacterDisplayNameRunner(
+      team.companionName || "",
+      "egyptian"
+    );
+    return (
+      !excludedHeroes.has(team.mainCharacterName) &&
+      hasUnusedInteractiveTheme(hero, comp)
+    );
   });
-  let heroName = pick.team.mainCharacterName || "الطبيبة نورين";
-  let compName = pick.team.companionName || "أرنوب الشقي الممرض";
-  let shortHero = getShortCharacterDisplayNameRunner(heroName, "egyptian");
-  let shortComp = getShortCharacterDisplayNameRunner(compName, "egyptian");
+  const fallbackInteractiveTeamPool = RUNNER_CHARACTER_TEAMS.filter((team) => {
+    const hero = getShortCharacterDisplayNameRunner(
+      team.mainCharacterName || "",
+      "egyptian"
+    );
+    const comp = getShortCharacterDisplayNameRunner(
+      team.companionName || "",
+      "egyptian"
+    );
+    return hasUnusedInteractiveTheme(hero, comp);
+  });
+  const finalInteractiveTeamPool =
+    interactiveTeamPool.length > 0
+      ? interactiveTeamPool
+      : fallbackInteractiveTeamPool.length > 0
+        ? fallbackInteractiveTeamPool
+        : RUNNER_CHARACTER_TEAMS;
+
+  const pick = [...finalInteractiveTeamPool].sort(
+    () => crypto.randomInt(0, 1000) - 500
+  )[0];
+  const heroName = pick.mainCharacterName || "الطبيبة نورين";
+  const compName = pick.companionName || "أرنوب الشقي الممرض";
+  const shortHero = getShortCharacterDisplayNameRunner(heroName, "egyptian");
+  const shortComp = getShortCharacterDisplayNameRunner(compName, "egyptian");
 
   const interactiveThemes = [
     {
       themeTitle: `تحدي الملاحظة الذكية مع ${shortHero} و${shortComp}`,
-      caption: `🌟 تحدي أبطال Noreen Kids اليومي للشطار! 🌟\nبصوا كويس في الصورة مع ${shortHero} و${shortComp}.. 🤔✨\nلو هنسافر النهاردة في مغامرة جديدة: تفتكروا ${shortHero} هيستخدم أنهي أداة ذكية علشان يساعد ${shortComp}؟\n\n1️⃣ اكتبوا إجابتكم في التعليقات 👇\n2️⃣ اكتبوا اسم طفلكم الجميل عشان ${shortHero} و${shortComp} يحيوه بالاسم في حلقة بكرة! 🎬💖\n3️⃣ متنسوش متابعة صفحة Noreen Kids 🔔👍 ومشاركة البوست مع كل الأمهات!\n\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_قبل_النوم #كرتون_أطفال_3D #تربية_إيجابية #أمهات_مصر`,
+      caption: `🌟 تحدي أبطال Noreen Kids اليومي للشطار! 🌟\\nبصوا كويس في الصورة مع ${shortHero} و${shortComp}.. 🤔✨\\nلو هنسافر النهاردة في مغامرة جديدة: تفتكروا ${shortHero} هيستخدم أنهي أداة ذكية علشان يساعد ${shortComp}؟\\n\\n1️⃣ اكتبوا إجابتكم في التعليقات 👇\\n2️⃣ اكتبوا اسم طفلكم الجميل عشان ${shortHero} و${shortComp} يحيوه بالاسم في حلقة بكرة! 🎬💖\\n3️⃣ متنسوش متابعة صفحة Noreen Kids 🔔👍 ومشاركة البوست مع كل الأمهات!\\n\\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_قبل_النوم #كرتون_أطفال_3D #تربية_إيجابية #أمهات_مصر`,
     },
     {
       themeTitle: `فزورة الأبطال الشطار مع ${shortHero} و${shortComp}`,
-      caption: `🎉 فزورة النهاردة من عالم Noreen Kids ثلاثي الأبعاد! 🎉\nبطلنا المحبوب "${shortHero}" وصديقنا الشقي "${shortComp}" بيجهزوا لمفاجأة كبيرة النهاردة! 🌟🎬\nسؤال للشطار الحلوين: إيه أكتر صفة جميلة بتحبوها في ${shortHero} و${shortComp}؟\n(الشجاعة 💪 - التعاون 🤝 - الذكاء 🧠 - خفة الدم 😄)؟\n\n👇 شاركونا في التعليقات واكتبوا اسم طفلكم عشان نرحب بيه بالاسم في عيلة نورين كيدز، واضغطوا متابعة للصفحة 🔔👍 عشان متفوتكمش حكاية النهاردة!\n\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_أطفال #كرتون_مصري #تربية_إيجابية #أمهات_مصر`,
+      caption: `🎉 فزورة النهاردة من عالم Noreen Kids ثلاثي الأبعاد! 🎉\\nبطلنا المحبوب "${shortHero}" وصديقنا الشقي "${shortComp}" بيجهزوا لمفاجأة كبيرة النهاردة! 🌟🎬\\nسؤال للشطار الحلوين: إيه أكتر صفة جميلة بتحبوها في ${shortHero} و${shortComp}؟\\n(الشجاعة 💪 - التعاون 🤝 - الذكاء 🧠 - خفة الدم 😄)؟\\n\\n👇 شاركونا في التعليقات واكتبوا اسم طفلكم عشان نرحب بيه بالاسم في عيلة نورين كيدز، واضغطوا متابعة للصفحة 🔔👍 عشان متفوتكمش حكاية النهاردة!\\n\\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_أطفال #كرتون_مصري #تربية_إيجابية #أمهات_مصر`,
     },
     {
       themeTitle: `لوحة شرف أبطال Noreen Kids مع ${shortHero} و${shortComp}`,
-      caption: `💖 تحية خاصة من ${shortHero} و${shortComp} لكل أصحابنا الحلوين! 💖\nمين من أطفالنا الشطار غسل سنانه وسمع كلام ماما وبابا النهاردة؟ 🌟👏\n\n👇 كل أم تكتب اسم بطلها أو بطلتها في التعليقات تحت الصورة دي عشان ${shortHero} و${shortComp} يبعتولهم شهادة شطارة وتحية خاصة بالاسم! 🏆✨\nومتنسوش متابعة صفحة Noreen Kids 🔔👍 ومشاركة المنشور مع أصحابكم!\n\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_قبل_النوم #كرتون_أطفال_3D #تربية_إيجابية #أمهات_مصر`,
+      caption: `💖 تحية خاصة من ${shortHero} و${shortComp} لكل أصحابنا الحلوين! 💖\\nمين من أطفالنا الشطار غسل سنانه وسمع كلام ماما وبابا النهاردة؟ 🌟👏\\n\\n👇 كل أم تكتب اسم بطلها أو بطلتها في التعليقات تحت الصورة دي عشان ${shortHero} و${shortComp} يبعتولهم شهادة شطارة وتحية خاصة بالاسم! 🏆✨\\nومتنسوش متابعة صفحة Noreen Kids 🔔👍 ومشاركة المنشور مع أصحابكم!\\n\\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_قبل_النوم #كرتون_أطفال_3D #تربية_إيجابية #أمهات_مصر`,
     },
   ];
-  let chosenTheme =
-    interactiveThemes[
-      Math.floor(Math.random() * interactiveThemes.length) %
-        interactiveThemes.length
+
+  const availableThemes = interactiveThemes.filter(
+    (theme) =>
+      !previousInteractiveKeys.has(
+        [shortHero, shortComp, theme.themeTitle].join("|")
+      )
+  );
+  const chosenTheme =
+    (availableThemes.length > 0 ? availableThemes : interactiveThemes)[
+      Math.floor(
+        Math.random() *
+          (availableThemes.length > 0
+            ? availableThemes.length
+            : interactiveThemes.length)
+      )
     ];
-
-  // If the randomly selected combination was already published, choose another
-  // available team/theme combination before publishing. This is intentionally
-  // limited to the interactive 3D post and does not affect video story selection.
-  const isPreviouslyPublishedInteractivePost = (theme, hero = shortHero, comp = shortComp) =>
-    previousInteractiveKeys.has(
-      [hero, comp, String(theme?.themeTitle || "").trim()].join("|")
-    );
-
-  if (isPreviouslyPublishedInteractivePost(chosenTheme)) {
-    const unusedTheme = interactiveThemes.find(
-      (theme) => !isPreviouslyPublishedInteractivePost(theme)
-    );
-    if (unusedTheme) {
-      chosenTheme = unusedTheme;
-    } else {
-      const fallbackTeams = RUNNER_CHARACTER_TEAMS.filter(
-        (team) =>
-          !previousInteractiveHeroNames.has(
-            getShortCharacterDisplayNameRunner(
-              team.mainCharacterName || "",
-              "egyptian"
-            )
-          )
-      );
-      for (const team of fallbackTeams) {
-        const candidateHero = getShortCharacterDisplayNameRunner(
-          team.mainCharacterName || "",
-          "egyptian"
-        );
-        const candidateComp = getShortCharacterDisplayNameRunner(
-          team.companionName || "",
-          "egyptian"
-        );
-        const candidateThemes = [
-          {
-            themeTitle: `تحدي الملاحظة الذكية مع ${candidateHero} و${candidateComp}`,
-          },
-          {
-            themeTitle: `فزورة الأبطال الشطار مع ${candidateHero} و${candidateComp}`,
-          },
-          {
-            themeTitle: `لوحة شرف أبطال Noreen Kids مع ${candidateHero} و${candidateComp}`,
-          },
-        ];
-        const unusedCandidate = candidateThemes.find(
-          (theme) => !isPreviouslyPublishedInteractivePost(theme, candidateHero, candidateComp)
-        );
-        if (unusedCandidate) {
-          heroName = team.mainCharacterName || heroName;
-          compName = team.companionName || compName;
-          shortHero = candidateHero;
-          shortComp = candidateComp;
-          const fullTheme = interactiveThemes.find(
-            (theme) => theme.themeTitle === unusedCandidate.themeTitle
-          );
-          if (fullTheme) chosenTheme = fullTheme;
-          else {
-            const prefix = unusedCandidate.themeTitle.replace(
-              ` مع ${candidateHero} و${candidateComp}`,
-              ""
-            );
-            chosenTheme = {
-              themeTitle: unusedCandidate.themeTitle,
-              caption: `🌟 تحدي أبطال Noreen Kids اليومي للشطار مع ${candidateHero} و${candidateComp}! 🌟`,
-            };
-          }
-          break;
-        }
-      }
-    }
-  }
 
   const heroImg = resolveCharacterAvatarPath(heroName, heroName);
   const compImg = resolveCharacterAvatarPath(compName, compName);
