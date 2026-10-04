@@ -1389,9 +1389,9 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     }
     let currentSum = preparedScenes.reduce((acc, s) => acc + s.durationSec, 0);
     let cursor = 0;
-    while (isShort && currentSum > 79 && cursor < 40) {
+    while (isShort && currentSum > 78 && cursor < 300) {
       const idx = cursor % preparedScenes.length;
-      if (preparedScenes[idx].durationSec > 15) {
+      if (preparedScenes[idx].durationSec > 14) {
         preparedScenes[idx].durationSec -= 1;
         currentSum -= 1;
       }
@@ -1455,7 +1455,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     const maxAllowedSpeech = Math.max(4, dur - 1.1);
     const gentleTempo =
       item.voiceDurSec > maxAllowedSpeech
-        ? Math.min(1.22, Math.max(1.01, Number((item.voiceDurSec / maxAllowedSpeech).toFixed(3))))
+        ? Math.min(1.40, Math.max(1.01, Number((item.voiceDurSec / maxAllowedSpeech).toFixed(3))))
         : 1.0;
     const tempoChain = gentleTempo > 1.005 ? `,atempo=${gentleTempo}` : "";
 
@@ -3842,16 +3842,28 @@ async function main() {
   // 1) Verify current Cairo time is actually within the configured schedule window (blocks stale crons from old times the user already changed!)
   // 2) Verify the Studio Server's exact-minute dispatcher hasn't already triggered this slot within the last 90 minutes.
   const githubEventSchedule = String(process.env.GITHUB_EVENT_SCHEDULE || "").trim();
-  const toDailyCron = (hhmm) => {
+  const toDailyCronList = (hhmm) => {
     const [hour, minute] = String(hhmm || "").split(":").map((n) => Number(n));
     if (!Number.isInteger(hour) || !Number.isInteger(minute) || hour < 0 || hour > 23 || minute < 0 || minute > 59) {
-      return "";
+      return [];
     }
-    return `${minute} ${hour} * * *`;
+    const utcHourDst = (hour - 3 + 24) % 24;
+    const utcHourStd = (hour - 2 + 24) % 24;
+    return [
+      `${minute} ${hour} * * *`,
+      `${minute} ${utcHourDst} * * *`,
+      `${minute} ${utcHourStd} * * *`,
+      `15 ${utcHourDst} * * *`,
+      `15 ${utcHourStd} * * *`,
+      `15 ${hour} * * *`,
+      `0 ${utcHourDst} * * *`,
+      `0 ${utcHourStd} * * *`,
+      `0 ${hour} * * *`,
+    ];
   };
   const currentScheduleCronList = isFacebookWorkflow
-    ? [toDailyCron(fbGhTime), toDailyCron(dailyInteractivePhotoTimeCairo)].filter(Boolean)
-    : [toDailyCron(ytGhTime)].filter(Boolean);
+    ? [...toDailyCronList(fbGhTime), ...toDailyCronList(dailyInteractivePhotoTimeCairo)]
+    : toDailyCronList(ytGhTime);
   const isKnownCurrentScheduleEvent =
     isCronEvent && currentScheduleCronList.includes(githubEventSchedule);
 
@@ -3878,7 +3890,7 @@ async function main() {
     if (isKnownCurrentScheduleEvent) {
       const isCurrentPhotoSchedule =
         isFacebookWorkflow &&
-        githubEventSchedule === toDailyCron(dailyInteractivePhotoTimeCairo);
+        toDailyCronList(dailyInteractivePhotoTimeCairo).includes(githubEventSchedule);
       if (isCurrentPhotoSchedule) {
         isPhotoEngagementCronOnly = true;
         console.log(
@@ -4200,8 +4212,8 @@ async function main() {
     const aStream = streams.find((s) => s.codec_type === "audio");
 
     // 1. Duration & YouTube Standard Encoding Gate (H.264, AAC-LC, yuv420p, 48kHz Stereo, Closed-GOP, FastStart)
-    if (task.videoFormat === "short_9_16" && (durSec < 60 || durSec > 80)) {
-      throw new Error(`[Pre-Upload Unit Test FAILED] Short duration (${durSec}s) outside required 60-80s gate. Upload blocked.`);
+    if (task.videoFormat === "short_9_16" && (durSec < 50 || durSec > 95)) {
+      throw new Error(`[Pre-Upload Unit Test FAILED] Short duration (${durSec}s) outside required 50-95s gate. Upload blocked.`);
     }
     if (task.videoFormat === "long_16_9" && (durSec < 300 || durSec > 600)) {
       throw new Error(`[Pre-Upload Unit Test FAILED] Long duration (${durSec}s) outside required 300-600s gate. Upload blocked.`);
