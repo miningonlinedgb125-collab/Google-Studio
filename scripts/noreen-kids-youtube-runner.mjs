@@ -3814,7 +3814,7 @@ async function main() {
   const dailyInteractivePhotoTimeCairo = String(
     fbSchedule.dailyInteractivePhotoTimeCairo ||
       mergedFbBlock.dailyInteractivePhotoTimeCairo ||
-      "16:00"
+      "01:15"
   ).trim();
   const autoCommentResponderEnabled =
     typeof fbSchedule.autoCommentResponderEnabled === "boolean"
@@ -3870,7 +3870,7 @@ async function main() {
   if (isCronEvent) {
     const targetCronHHMM = isFacebookWorkflow ? fbGhTime : ytGhTime;
     const [tH, tM] = String(targetCronHHMM || "19:00").split(":").map((n) => Number(n) || 0);
-    const [pH, pM] = String(dailyInteractivePhotoTimeCairo || "16:00").split(":").map((n) => Number(n) || 0);
+    const [pH, pM] = String(dailyInteractivePhotoTimeCairo || "01:15").split(":").map((n) => Number(n) || 0);
     const nowCairoParts = new Intl.DateTimeFormat("en-GB", {
       timeZone: "Africa/Cairo", hour: "2-digit", minute: "2-digit", hour12: false,
     }).format(new Date()).split(":").map((n) => Number(n) || 0);
