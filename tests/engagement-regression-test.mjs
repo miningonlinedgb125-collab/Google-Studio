@@ -43,3 +43,11 @@ assert.equal(schedule.autoCommentResponderEnabled, true);
 assert.equal(schedule.facebookAutoCommentResponderEnabled, true);
 
 console.log("PASS: engagement regression contracts (hook + scene 8 + YT/FB comments + smart replies)");
+
+// Regression: story generation must not use the retired Gemini 2.5 Flash model.
+assert.doesNotMatch(runner, /model: "gemini-2\\.5-flash"/);
+assert.match(runner, /model: "gemini-3\\.8-flash"/);
+
+// Regression: firstCommentId must be scoped outside the YouTube-only block because
+// it is included in the per-result record even when YouTube upload is skipped.
+assert.match(runner, /let firstCommentId = null;\\n    if \(shouldUploadToYouTube && accessToken\)/);
