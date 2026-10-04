@@ -3143,6 +3143,7 @@ async function publishDailyInteractive3DPhotoPostForRunner({
   fbSchedule,
   excludedHeroes = new Set(),
   forcePublish = false,
+  postKind = "scheduled",
 }) {
   const activeToken = await resolveTrueFacebookPageAccessToken({
     rawToken: rawPageAccessToken,
@@ -3165,26 +3166,43 @@ async function publishDailyInteractive3DPhotoPostForRunner({
     hour12: false,
   }).format(new Date());
 
-  // 1) Daily limit: allow up to 3 interactive 3D posts per Cairo day
-  // (1 automatic scheduled post + up to 2 manual engagement_only posts).
-  // The limit applies even when forcePublish=true.
+  // Reserve one daily slot for the automatic scheduled post and up to 2 manual posts.
+  // Manual posts must never consume the scheduled slot.
   const todayInteractivePosts = Array.isArray(fbSchedule?.interactivePhotoPostsLog)
     ? fbSchedule.interactivePhotoPostsLog.filter(
-        (entry) =>
-          String(entry?.publishedAtCairo || "").startsWith(nowCairoDate + " · ")
+        (entry) => String(entry?.publishedAtCairo || "").startsWith(nowCairoDate + " · ")
       )
     : [];
-  let todayInteractivePostCount = todayInteractivePosts.length;
+  const todayManualInteractivePosts = todayInteractivePosts.filter(
+    (entry) => String(entry?.postKind || "manual") === "manual"
+  );
+  const isScheduledInteractivePost = postKind === "scheduled";
 
-  if (!forcePublish) {
+  if (
+    isScheduledInteractivePost &&
+    String(fbSchedule?.lastScheduledInteractivePhotoDateKey || "") === nowCairoDate
+  ) {
+    console.log(
+      `✅ [Daily 3D Photo Scheduled Guard] تم تنفيذ المنشور التفاعلي التلقائي لهذا اليوم (${nowCairoDate}) بالفعل — تخطي التكرار.`
+    );
+    return { published: false, skippedDuplicate: true };
+  }
+
+  if (!isScheduledInteractivePost && todayManualInteractivePosts.length >= 2) {
+    console.log(
+      `✅ [Daily 3D Photo Manual Guard] تم الوصول للحد اليدوي اليومي (2 منشورين تفاعليين) بتاريخ ${nowCairoDate} — تخطي النشر.`
+    );
+    return { published: false, skippedDailyLimit: true };
+  }
+
+  // Keep the live Facebook safety check for manual runs. Scheduled runs do not
+  // use the generic "any interactive post today" check, because a manual post
+  // must not cancel the scheduled slot.
+  if (!isScheduledInteractivePost && !forcePublish) {
     try {
       const checkRes = await fetch(
-        `https://graph.facebook.com/v21.0/${encodeURIComponent(
-          pageId
-        )}/published_posts?fields=id,message,created_time&limit=10`,
-        {
-          headers: { Authorization: `Bearer ${activeToken}` },
-        }
+        `https://graph.facebook.com/v21.0/${encodeURIComponent(pageId)}/published_posts?fields=id,message,created_time&limit=10`,
+        { headers: { Authorization: `Bearer ${activeToken}` } }
       );
       const checkJson = await checkRes.json().catch(() => ({}));
       if (checkRes.ok && Array.isArray(checkJson?.data)) {
@@ -3194,31 +3212,21 @@ async function publishDailyInteractive3DPhotoPostForRunner({
             !msg.includes("تحدي أبطال Noreen Kids") &&
             !msg.includes("فزورة النهاردة من عالم Noreen Kids") &&
             !msg.includes("تحية خاصة من")
-          ) {
-            return false;
-          }
+          ) return false;
           if (!p?.created_time) return false;
           const postCairoDate = new Intl.DateTimeFormat("en-CA", {
-            timeZone: "Africa/Cairo",
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
+            timeZone: "Africa/Cairo", year: "numeric", month: "2-digit", day: "2-digit"
           }).format(new Date(p.created_time));
           return postCairoDate === nowCairoDate;
         }).length;
-        todayInteractivePostCount = Math.max(
-          todayInteractivePostCount,
-          graphTodayInteractivePostCount
-        );
+        if (graphTodayInteractivePostCount >= 3) {
+          console.log(
+            `✅ [Daily 3D Photo Manual Guard] Facebook لديه بالفعل 3 منشورات تفاعلية لهذا اليوم (${nowCairoDate}) — تخطي النشر.`
+          );
+          return { published: false, skippedDailyLimit: true };
+        }
       }
     } catch {}
-  }
-
-  if (todayInteractivePostCount >= 3) {
-    console.log(
-      `✅ [Daily 3D Photo Post Guard] تم الوصول للحد اليومي (3 منشورات تفاعلية 3D) بتاريخ ${nowCairoDate} — تخطي النشر.`
-    );
-    return { published: false, skippedDailyLimit: true };
   }
 
   // Keep interactive 3D posts from repeating a previous hero/companion + theme combination.
@@ -3400,9 +3408,13 @@ async function publishDailyInteractive3DPhotoPostForRunner({
     companionName: shortComp,
     publishedAtCairo: `${nowCairoDate} · ${nowCairoHHMM} بتوقيت مصر`,
     permalinkUrl,
+    postKind,
   };
 
   fbSchedule.lastInteractivePhotoDateKey = nowCairoDate;
+  if (isScheduledInteractivePost) {
+    fbSchedule.lastScheduledInteractivePhotoDateKey = nowCairoDate;
+  }
   fbSchedule.interactivePhotoPostsLog = [
     logRecord,
     ...(Array.isArray(fbSchedule.interactivePhotoPostsLog)
@@ -4692,6 +4704,7 @@ async function main() {
           fbSchedule,
           excludedHeroes,
           forcePublish: runMode === "engagement_only" && !isCronEvent,
+          postKind: isCronEvent ? "scheduled" : "manual",
         });
         if (photoRes?.published || photoRes?.skippedDuplicate) {
           fbEngagementUpdated = true;
