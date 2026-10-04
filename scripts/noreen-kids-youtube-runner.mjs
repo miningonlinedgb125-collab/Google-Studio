@@ -99,277 +99,170 @@ function splitArabicSentencesForTts(text) {
   return chunks.length > 0 ? chunks : [cleaned.slice(0, 160)];
 }
 
-async function synthesizeSceneVoiceWav(scene, sceneIndex, tmpDir) {
+async function synthesizeSceneVoiceWav(scene, sceneIndex, tmpDir, episode) {
   const targetDur = Math.max(8, Number(scene.durationSec) || 17);
   const outWav = path.join(tmpDir, `scene_voice_${sceneIndex}.wav`);
-  const dialogue = String(
-    scene.dialogueArabic ||
-      "ازيكم يا أصحابي الحلوين في قناة نورين كيدز! يلا بينا نبدأ مغامرة جديدة وممتعة سوا!"
-  );
+  const dialogue = String(scene.dialogueArabic || "إزيكم يا أصحابي الحلوين في قناة نورين كيدز! يلا بينا نبدأ مغامرة جديدة!");
+
+  const dialect = String(episode?.dialect || "egyptian").toLowerCase();
+  const mainId = String(episode?.mainCharacterId || "");
+  const femaleIds = new Set(["dr_noreen","eng_nouran","janna","carmen","malak","sidra","om_malak","teta"]);
+  const voiceName = dialect === "egyptian"
+    ? (femaleIds.has(mainId) ? "ar-EG-SalmaNeural" : "ar-EG-ShakirNeural")
+    : (femaleIds.has(mainId) ? "ar-SA-ZariyahNeural" : "ar-SA-HamedNeural");
 
   const chunks = splitArabicSentencesForTts(dialogue);
   const mp3Files = [];
 
-  for (let cIdx = 0; cIdx < chunks.length; cIdx++) {
-    const chunkText = chunks[cIdx];
-    const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=ar&client=tw-ob&q=${encodeURIComponent(chunkText)}`;
-    try {
-      const res = await fetch(ttsUrl, {
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124.0.0.0 Safari/537.36",
-        },
-      });
-      if (res.ok) {
-        const buf = Buffer.from(await res.arrayBuffer());
-        if (buf.length > 256) {
-          const mp3Path = path.join(tmpDir, `tts_${sceneIndex}_${cIdx}.mp3`);
-          fs.writeFileSync(mp3Path, buf);
-          mp3Files.push(mp3Path);
-        }
+  try {
+    const { MsEdgeTTS, OUTPUT_FORMAT } = await import("msedge-tts");
+    for (let cIdx = 0; cIdx < chunks.length; cIdx++) {
+      const tts = new MsEdgeTTS();
+      await tts.setMetadata(voiceName, OUTPUT_FORMAT.AUDIO_24KHZ_96KBITRATE_MONO_MP3);
+      const result = await tts.toFile(tmpDir, chunks[cIdx]);
+      const generated = result?.audioFilePath;
+      if (generated && fs.existsSync(generated) && fs.statSync(generated).size > 256) {
+        const mp3Path = path.join(tmpDir, `tts_${sceneIndex}_${cIdx}.mp3`);
+        fs.copyFileSync(generated, mp3Path);
+        mp3Files.push(mp3Path);
       }
-    } catch {}
+    }
+  } catch (edgeErr) {
+    console.warn(`⚠️ Edge TTS failed; Egyptian Google fallback: ${edgeErr?.message || edgeErr}`);
+    for (let cIdx = 0; cIdx < chunks.length; cIdx++) {
+      try {
+        const res = await fetch(`https://translate.google.com/translate_tts?ie=UTF-8&tl=ar-EG&client=tw-ob&q=${encodeURIComponent(chunks[cIdx])}`, {
+          headers: { "User-Agent": "Mozilla/5.0 Chrome/124.0.0.0 Safari/537.36" }
+        });
+        if (res.ok) {
+          const buf = Buffer.from(await res.arrayBuffer());
+          if (buf.length > 256) {
+            const mp3Path = path.join(tmpDir, `tts_${sceneIndex}_${cIdx}.mp3`);
+            fs.writeFileSync(mp3Path, buf);
+            mp3Files.push(mp3Path);
+          }
+        }
+      } catch {}
+    }
   }
 
-  if (mp3Files.length > 0) {
-    const concatListPath = path.join(tmpDir, `tts_concat_${sceneIndex}.txt`);
-    fs.writeFileSync(
-      concatListPath,
-      mp3Files.map((f) => `file '${f.replace(/'/g, "'\\''")}'`).join("\n")
-    );
-    const rawSpeechWav = path.join(tmpDir, `raw_speech_${sceneIndex}.wav`);
-    await execFileAsync("ffmpeg", [
-      "-y",
-      "-f",
-      "concat",
-      "-safe",
-      "0",
-      "-i",
-      concatListPath,
-      "-ar",
-      "48000",
-      "-ac",
-      "2",
-      rawSpeechWav,
-    ]);
-
-    // Mix clear spoken Arabic voiceover with gentle cartoon background ambiance padded to exact targetDur
-    const pitchFactor = sceneIndex % 2 === 0 ? 1.07 : 1.14;
-    const tempoFactor = (1 / pitchFactor).toFixed(4);
-    await execFileAsync("ffmpeg", [
-      "-y",
-      "-i",
-      rawSpeechWav,
-      "-f",
-      "lavfi",
-      "-i",
-      `sine=frequency=${sceneIndex % 2 === 0 ? 523.25 : 659.25}:duration=${targetDur}:sample_rate=48000`,
-      "-filter_complex",
-      `[0:a]asetrate=48000*${pitchFactor},aresample=48000,atempo=${tempoFactor},volume=2.1,apad=whole_dur=${targetDur}[voice];[1:a]volume=0.035,afade=t=in:st=0:d=0.5,afade=t=out:st=${Math.max(0.5, targetDur - 1)}:d=0.8[bgm];[voice][bgm]amix=inputs=2:duration=longest:dropout_transition=0,alimiter=limit=0.95[outa]`,
-      "-map",
-      "[outa]",
-      "-t",
-      String(targetDur),
-      "-c:a",
-      "pcm_s16le",
-      "-ar",
-      "48000",
-      "-ac",
-      "2",
-      outWav,
-    ]);
-    return outWav;
+  if (!mp3Files.length) {
+    throw new Error(`تعذر إنشاء الصوت للمشهد ${sceneIndex + 1}؛ تم إيقاف الرفع لمنع فيديو بلا صوت.`);
   }
 
-  // Fallback harmonic audio if network blocked
+  const concatListPath = path.join(tmpDir, `tts_concat_${sceneIndex}.txt`);
+  fs.writeFileSync(concatListPath, mp3Files.map((f) => `file '${f.replace(/'/g, "'\\''")}'`).join("\n"));
+  const rawSpeechWav = path.join(tmpDir, `raw_speech_${sceneIndex}.wav`);
+  await execFileAsync("ffmpeg", ["-y","-f","concat","-safe","0","-i",concatListPath,"-ar","48000","-ac","2",rawSpeechWav]);
+
+  // Stable voice: no artificial alternating pitch/tempo.
   await execFileAsync("ffmpeg", [
-    "-y",
-    "-f",
-    "lavfi",
-    "-i",
-    `sine=frequency=440:duration=${targetDur}:sample_rate=48000`,
-    "-af",
-    "volume=0.25",
-    "-t",
-    String(targetDur),
-    "-c:a",
-    "pcm_s16le",
-    "-ar",
-    "48000",
-    "-ac",
-    "2",
-    outWav,
+    "-y","-i",rawSpeechWav,
+    "-f","lavfi","-i",`sine=frequency=${sceneIndex % 2 === 0 ? 523.25 : 659.25}:duration=${targetDur}:sample_rate=48000`,
+    "-filter_complex",
+    `[0:a]volume=1.65,apad=whole_dur=${targetDur}[voice];[1:a]volume=0.018,afade=t=in:st=0:d=0.5,afade=t=out:st=${Math.max(0.5,targetDur-1)}:d=0.8[bgm];[voice][bgm]amix=inputs=2:duration=longest:dropout_transition=0,alimiter=limit=0.95[outa]`,
+    "-map","[outa]","-t",String(targetDur),"-c:a","pcm_s16le","-ar","48000","-ac","2",outWav
   ]);
   return outWav;
 }
 
-const SCENE_IMAGE_URLS = [
-  "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1280&q=80",
-  "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1280&q=80",
-  "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=1280&q=80",
-  "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1280&q=80",
-  "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1280&q=80",
-  "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1280&q=80",
-  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1280&q=80",
-  "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1280&q=80",
+const CHARACTER_ASSETS = {
+  dr_noreen:"src/assets/images/char_dr_noreen_girl_1790461976876.jpg",
+  eng_nouran:"src/assets/images/char_eng_sidra_girl_1790461988894.jpg",
+  amr:"src/assets/images/char_yassin_boy_knight_1790462110000.jpg",
+  janna:"src/assets/images/char_faris_astronaut_1790446843914.jpg",
+  shosho:"src/assets/images/char_karim_boy_captain_1790462024983.jpg",
+  carmen:"src/assets/images/char_salma_girl_inventor_1790462010894.jpg",
+  tamer:"src/assets/images/char_yassin_boy_knight_1790462110000.jpg",
+  malak:"src/assets/images/char_malak_emergency_doctor_1790685772412.jpg",
+  sidra:"src/assets/images/char_baby_sidra_toddler_1790685815760.jpg",
+  om_malak:"src/assets/images/char_om_malak_teacher_1790685841625.jpg",
+  ziad:"src/assets/images/char_ziad_young_man_1790685879815.jpg",
+  mr_sherif:"src/assets/images/char_mr_sherif_accountant_1790685911579.jpg",
+  gedo:"src/assets/images/char_gedo_grandpa_1790685953317.jpg",
+  teta:"src/assets/images/char_teta_grandma_1790685980597.jpg",
+  arnoob:"src/assets/images/char_arnoob_nurse_rabbit_1790462042886.jpg",
+  namoor:"src/assets/images/char_namoor_cheerful_tiger_1790462054821.jpg",
+  zaatar:"src/assets/images/char_zaatar_fox_1790446857963.jpg",
+  bulbul:"src/assets/images/char_bulbul_cute_robot_1790462065051.jpg",
+  marjan:"src/assets/images/char_marjan_playful_dolphin_1790462076093.jpg",
+  simsim:"src/assets/images/char_simsim_flying_squirrel_1790462087579.jpg",
+  karkour:"src/assets/images/char_karkour_wise_parrot_1790462097550.jpg",
+  lolita:"src/assets/images/char_lolita_cat_1790685786758.jpg",
+  cheerful_bird:"src/assets/images/char_cheerful_bird_1790685899352.jpg",
+  funny_penguin:"src/assets/images/char_funny_penguin_1790685854532.jpg",
+  colorful_butterfly:"src/assets/images/char_colorful_butterfly_1790685827095.jpg",
+  smart_falcon:"src/assets/images/char_smart_falcon_1790685922310.jpg",
+  mischievous_mouse:"src/assets/images/char_mischievous_mouse_1790685967206.jpg",
+  panda_bear:"src/assets/images/char_panda_bear_1790685992445.jpg"
+};
+
+const STORY_ASSETS = [
+  "src/assets/images/story_magical_clinic_discovery_1790480734838.jpg",
+  "src/assets/images/story_crystal_oasis_bridge_1790480747634.jpg",
+  "src/assets/images/story_sky_cloud_observatory_1790480767967.jpg",
+  "src/assets/images/story_coral_underwater_palace_1790480758612.jpg",
+  "src/assets/images/scene_cloud_ship_1790446831622.jpg",
+  "src/assets/images/scene_floating_library_1790446812818.jpg",
+  "src/assets/images/scene_space_forest_1790446800763.jpg"
 ];
+
+function copyAsset(relativePath, target) {
+  const source = path.resolve(process.cwd(), relativePath || "");
+  if (!relativePath || !fs.existsSync(source)) return null;
+  fs.copyFileSync(source, target);
+  return target;
+}
+
+function getEpisodeVisualAssets(episode, tmpDir) {
+  const hero = copyAsset(CHARACTER_ASSETS[episode?.mainCharacterId], path.join(tmpDir,"hero.jpg"));
+  const companion = copyAsset(CHARACTER_ASSETS[episode?.companionCharacterId], path.join(tmpDir,"companion.jpg"));
+  const story = STORY_ASSETS.map((p,i)=>copyAsset(p,path.join(tmpDir,`story_${i}.jpg`))).filter(Boolean);
+  if (!hero || !companion) {
+    throw new Error(`Character assets missing for mainCharacterId=${episode?.mainCharacterId}, companionCharacterId=${episode?.companionCharacterId}`);
+  }
+  return { hero, companion, story };
+}
 
 async function renderEpisodeMp4(episode, videoFormat, tmpDir) {
   const isShort = videoFormat === "short_9_16";
   const W = isShort ? 720 : 1280;
   const H = isShort ? 1280 : 720;
-  const scenes = Array.isArray(episode?.scenes) && episode.scenes.length > 0
+  const scenes = Array.isArray(episode?.scenes) && episode.scenes.length
     ? episode.scenes
-    : [
-        {
-          id: "s1",
-          title: "بداية المغامرة",
-          durationSec: isShort ? 17 : 39,
-          dialogueArabic: "ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بصوا كده معانا النهارده على المغامرة الجميلة دي!",
-        },
-        {
-          id: "s2",
-          title: "الاكتشاف المدهش",
-          durationSec: isShort ? 17 : 39,
-          dialogueArabic: "يلا بينا نساعد بعض ونفكر بذكاء علشان نلاقي الحل الصح ونفرح كل أصحابنا!",
-        },
-        {
-          id: "s3",
-          title: "التعاون والنجاح",
-          durationSec: isShort ? 17 : 39,
-          dialogueArabic: "إيه الجمال ده! لما بنشتغل سوا وبنسمع كلام بعض كل حاجة صعبة بتبقى سهلة وجميلة!",
-        },
-        {
-          id: "s4",
-          title: "نهاية سعيدة",
-          durationSec: isShort ? 17 : 39,
-          dialogueArabic: "شكراً ليكم يا أصحابي الحلوين! متنسوش تشتركوا في قناة نورين كيدز وتستنونا كل يوم في مغامرة جديدة!",
-        },
-      ];
+    : [{ id:"s1", title:"بداية المغامرة", durationSec:isShort?17:39,
+         dialogueArabic:"إزيكم يا أبطال نورين كيدز! يلا بينا نبدأ مغامرة جديدة!" }];
 
+  const visuals = getEpisodeVisualAssets(episode, tmpDir);
+  const visualSequence = [visuals.hero, visuals.companion, ...visuals.story];
   const sceneMp4Files = [];
 
-  for (let i = 0; i < scenes.length; i++) {
-    const sc = scenes[i];
-    const dur = Math.max(8, Number(sc.durationSec) || (isShort ? 17 : 39));
-    console.log(`   -> [Scene ${i + 1}/${scenes.length}] Synthesizing Arabic voiceover & rendering 3D motion (${dur}s)...`);
+  for (let i=0;i<scenes.length;i++) {
+    const sc=scenes[i];
+    const dur=Math.max(8,Number(sc.durationSec)||(isShort?17:39));
+    console.log(`   -> [Scene ${i+1}/${scenes.length}] Egyptian voice + local character montage (${dur}s)...`);
+    const wavPath=await synthesizeSceneVoiceWav(sc,i,tmpDir,episode);
+    const imgPath=visualSequence[i % visualSequence.length];
+    if(!imgPath || !fs.existsSync(imgPath)) throw new Error(`Local visual missing for scene ${i+1}`);
 
-    const wavPath = await synthesizeSceneVoiceWav(sc, i, tmpDir);
-    const imgPath = path.join(tmpDir, `scene_img_${i}.jpg`);
-    let hasImage = false;
-
-    const candidateImgUrl = SCENE_IMAGE_URLS[i % SCENE_IMAGE_URLS.length];
-    try {
-      const imgRes = await fetch(candidateImgUrl);
-      if (imgRes.ok) {
-        const buf = Buffer.from(await imgRes.arrayBuffer());
-        if (buf.length > 1000) {
-          fs.writeFileSync(imgPath, buf);
-          hasImage = true;
-        }
-      }
-    } catch {}
-
-    const sceneMp4 = path.join(tmpDir, `scene_out_${i}.mp4`);
-    const scaleW = Math.round(W * 1.18);
-    const scaleH = Math.round(H * 1.18);
-
-    if (hasImage) {
-      await execFileAsync("ffmpeg", [
-        "-y",
-        "-loop",
-        "1",
-        "-i",
-        imgPath,
-        "-i",
-        wavPath,
-        "-vf",
-        `scale=${scaleW}:${scaleH}:force_original_aspect_ratio=increase,crop=${W}:${H}:x='(${scaleW}-${W})/2+((${scaleW}-${W})/2)*sin(t*0.55)':y='(${scaleH}-${H})/2+((${scaleH}-${H})/2)*cos(t*0.45)',eq=saturation=1.35:contrast=1.08:brightness=0.03,format=yuv420p`,
-        "-t",
-        String(dur),
-        "-r",
-        "30",
-        "-c:v",
-        "libx264",
-        "-preset",
-        "superfast",
-        "-profile:v",
-        "high",
-        "-pix_fmt",
-        "yuv420p",
-        "-c:a",
-        "aac",
-        "-b:a",
-        "192k",
-        "-ar",
-        "48000",
-        "-ac",
-        "2",
-        "-shortest",
-        sceneMp4,
-      ]);
-    } else {
-      const hexColors = ["0x1e3a8a", "0x065f46", "0x581c87", "0x7c2d12"];
-      const cHex = hexColors[i % hexColors.length];
-      await execFileAsync("ffmpeg", [
-        "-y",
-        "-f",
-        "lavfi",
-        "-i",
-        `color=c=${cHex}:s=${W}x${H}:r=30:d=${dur}`,
-        "-i",
-        wavPath,
-        "-t",
-        String(dur),
-        "-r",
-        "30",
-        "-c:v",
-        "libx264",
-        "-preset",
-        "superfast",
-        "-profile:v",
-        "high",
-        "-pix_fmt",
-        "yuv420p",
-        "-c:a",
-        "aac",
-        "-b:a",
-        "192k",
-        "-ar",
-        "48000",
-        "-ac",
-        "2",
-        sceneMp4,
-      ]);
-    }
-
+    const sceneMp4=path.join(tmpDir,`scene_out_${i}.mp4`);
+    const scaleW=Math.round(W*1.18), scaleH=Math.round(H*1.18);
+    await execFileAsync("ffmpeg",[
+      "-y","-loop","1","-i",imgPath,"-i",wavPath,
+      "-vf",`scale=${scaleW}:${scaleH}:force_original_aspect_ratio=increase,crop=${W}:${H}:x='(${scaleW}-${W})/2+((${scaleW}-${W})/2)*sin(t*0.55)':y='(${scaleH}-${H})/2+((${scaleH}-${H})/2)*cos(t*0.45)',eq=saturation=1.2:contrast=1.05,format=yuv420p`,
+      "-t",String(dur),"-r","30","-c:v","libx264","-preset","superfast","-profile:v","high","-pix_fmt","yuv420p",
+      "-c:a","aac","-b:a","192k","-ar","48000","-ac","2","-shortest",sceneMp4
+    ]);
     sceneMp4Files.push(sceneMp4);
   }
 
-  const concatTxt = path.join(tmpDir, `concat_${videoFormat}.txt`);
-  fs.writeFileSync(
-    concatTxt,
-    sceneMp4Files.map((f) => `file '${f.replace(/'/g, "'\\''")}'`).join("\n")
-  );
-
-  const finalMp4 = path.join(tmpDir, `noreen_kids_${videoFormat}.mp4`);
-  await execFileAsync("ffmpeg", [
-    "-y",
-    "-f",
-    "concat",
-    "-safe",
-    "0",
-    "-i",
-    concatTxt,
-    "-c",
-    "copy",
-    "-movflags",
-    "+faststart",
-    finalMp4,
-  ]);
-
+  const concatTxt=path.join(tmpDir,`concat_${videoFormat}.txt`);
+  fs.writeFileSync(concatTxt,sceneMp4Files.map(f=>`file '${f.replace(/'/g,"'\\''")}'`).join("\n"));
+  const finalMp4=path.join(tmpDir,`noreen_kids_${videoFormat}.mp4`);
+  await execFileAsync("ffmpeg",["-y","-f","concat","-safe","0","-i",concatTxt,"-c","copy","-movflags","+faststart",finalMp4]);
   return finalMp4;
 }
+
 
 async function getYouTubeAccessToken({ clientId, clientSecret, refreshToken }) {
   const tokenRes = await fetch("https://oauth2.googleapis.com/token", {
@@ -391,6 +284,13 @@ async function getYouTubeAccessToken({ clientId, clientSecret, refreshToken }) {
   return tokenData.access_token;
 }
 
+function getCanonicalYouTubeTitle(episode) {
+  const pkg=episode?.youtubePackage||{};
+  const raw=String(pkg.videoTitleAr||episode?.title||"مغامرة جديدة");
+  const body=raw.replace(/#[^\s#]+/g,"").replace(/\s+/g," ").trim().replace(/^Noreen\s*Kids\s*[:\-|]?\s*/i,"");
+  return `Noreen Kids: ${body}`.slice(0,98);
+}
+
 async function uploadMp4ToYouTube({
   accessToken,
   mp4Path,
@@ -402,13 +302,7 @@ async function uploadMp4ToYouTube({
   playlistId,
 }) {
   const mp4Buffer = fs.readFileSync(mp4Path);
-  let cleanTitle = String(title || "Noreen Kids: مغامرة جديدة")
-    .replace(/#[^\s#]+/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
-  if (!cleanTitle.startsWith("Noreen Kids:")) {
-    cleanTitle = `Noreen Kids: ${cleanTitle.replace(/^Noreen\s*Kids\s*[:\-|]?\s*/i, "")}`;
-  }
+  const cleanTitle = String(title || "Noreen Kids: مغامرة جديدة").replace(/#[^\s#]+/g,"").replace(/\s+/g," ").trim().slice(0,98);
 
   const attemptInit = async (usePublishAt) => {
     const statusObj = {
@@ -806,7 +700,7 @@ async function main() {
     const uploadRes = await uploadMp4ToYouTube({
       accessToken,
       mp4Path,
-      title: pkg.videoTitleAr || task.episode?.title,
+      title: getCanonicalYouTubeTitle(task.episode),
       description: pkg.descriptionAr || task.episode?.subtitle,
       tags: pkg.tags,
       privacyStatus: schedule.privacyStatus || "private",
