@@ -5,8 +5,8 @@ on:
     # Runs daily at 18:15 Egypt Time using timezone-aware scheduling
     - cron: '15 18 * * *'
       timezone: "Africa/Cairo"
-    # Runs daily at 22:35 Egypt Time using timezone-aware scheduling
-    - cron: '35 22 * * *'
+    # Runs daily at 23:00 Egypt Time using timezone-aware scheduling
+    - cron: '0 23 * * *'
       timezone: "Africa/Cairo"
   workflow_dispatch:
     inputs:
