@@ -23,7 +23,7 @@
   "dailyInteractivePhotoStudioTimeCairo": "01:15",
   "dailyInteractivePhotoGitHubActionsEnabled": true,
   "dailyInteractivePhotoGitHubTimeCairo": "01:15",
-  "lastInteractivePhotoDateKey": "2026-10-04",
+  "lastInteractivePhotoDateKey": "2026-10-05",
   "repliedCommentIds": [
     "122108050131484976_1437940118283880",
     "122108050131484976_2061911864449592"
@@ -47,6 +47,18 @@
     }
   ],
   "interactivePhotoPostsLog": [
+    {
+      "postId": "1330185823512542_122111797179484976",
+      "photoId": "122111797155484976",
+      "themeTitle": "لوحة شرف أبطال Noreen Kids مع كارمن وسمسم",
+      "title": "لوحة شرف أبطال Noreen Kids مع كارمن وسمسم",
+      "caption": "💖 تحية خاصة من كارمن وسمسم لكل أصحابنا الحلوين! 💖\nمين من أطفالنا الشطار غسل سنانه وسمع كلام ماما وبابا النهاردة؟ 🌟👏\n\n👇 كل أم تكتب اسم بطلها أو بطلتها في التعليقات تحت الصورة دي عشان كارمن وسمسم يبعتولهم شهادة شطارة وتحية خاصة بالاسم! 🏆✨\nومتنسوش متابعة صفحة Noreen Kids 🔔👍 ومشاركة المنشور مع أصحابكم!\n\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_قبل_النوم #كرتون_أطفال_3D #تربية_إيجابية #أمهات_مصر",
+      "heroName": "كارمن",
+      "companionName": "سمسم",
+      "publishedAtCairo": "2026-10-05 · 01:30 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122111797179484976",
+      "postKind": "scheduled"
+    },
     {
       "postId": "1330185823512542_122111402901484976",
       "photoId": "122111402871484976",
@@ -2070,5 +2082,6 @@
       "dialogueHash": ""
     }
   ],
-  "lastAutoCommentScanAtCairo": "2026-10-04 · 23:44 بتوقيت مصر"
+  "lastAutoCommentScanAtCairo": "2026-10-05 · 01:31 بتوقيت مصر",
+  "lastScheduledInteractivePhotoDateKey": "2026-10-05"
 }
