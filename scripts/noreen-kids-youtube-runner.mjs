@@ -2326,8 +2326,8 @@ function buildSmartEpisodeForRunner({
     },
     {
       title: `8. النهاية: رسالة ${shortHero} و${shortComp} لأبطال Noreen Kids`,
-      egyptianShort: `هيييه! حلينا اللغز ونجحت المهمة يا ${shortHero}! لو عجبتكم حدوتة النهارده يا أصحابنا الشطار، ما تنسوش تشتركوا في قناة نورين كيدز وتفعلوا الجرس وتعملوا لايك علشان تعيشوا معانا مغامرة جديدة كل يوم! مع السلامة!`,
-      egyptianLong: `ودلوقتي يا أصحابنا الحلوين في قناة نورين كيدز، وصلنا لنهاية حدوتة النهارده الجميلة بعد ما عشنا سوا البداية والتحدي والحل السعيد! لو عجبتكم المغامرة مع ${shortHero} و${shortComp}، ما تنسوش تشتركوا في قناة نورين كيدز وتفعلوا الجرس وتعملوا لايك علشان تعيشوا معانا مغامرة جديدة ومفيدة كل يوم في نفس الميعاد! بنحبكم أوي يا أبطال، مع السلامة يا أصحابي!`,
+      egyptianShort: `هيييه! حلينا اللغز ونجحت المهمة يا ${shortHero}! 🧩 تحدي الشطار: يا ترى إيه أهم حاجة اتعلمناها من مغامرة ${egyptianTopic}؟ اكتبوا إجابتكم في التعليقات وقولوا لنا مين كان أكتر شخصية ساعدت في الحل، وما تنسوش تشتركوا في قناة نورين كيدز وتعملوا لايك! مع السلامة يا أبطال!`,
+      egyptianLong: `ودلوقتي يا أصحابنا الحلوين، وصلنا للمشهد الثامن والتحدي الأخير بعد ما عشنا مغامرة ${egyptianTopic} مع ${shortHero} و${shortComp}! 🧩 سؤال الشطار: إيه أهم درس اتعلمناه النهارده، وإزاي نقدر نستخدمه في حياتنا؟ اكتبوا إجابتكم في التعليقات وسمّوا صاحبكم اللي ساعد في الحل، وبعدها اشتركوا في قناة نورين كيدز واعملوا لايك! بنحبكم أوي يا أبطال!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
@@ -2342,12 +2342,18 @@ function buildSmartEpisodeForRunner({
     const aiSc = Array.isArray(aiScenes) ? aiScenes[idx] : null;
     const rawAiText = String(aiSc?.dialogueArabic || "").trim();
     const fallbackText = isShort ? tpl.egyptianShort : tpl.egyptianLong;
-    const chosenRaw =
+    let chosenRaw =
       rawAiText.split(/\s+/).filter(Boolean).length >= minWordsPerScene
         ? rawAiText
         : rawAiText.length > 15
         ? `${rawAiText} ${fallbackText}`
         : fallbackText;
+    if (idx === selectedTemplates.length - 1) {
+      const interactiveEnding = isShort
+        ? ` 🧩 تحدي الشطار: يا ترى إيه أهم حاجة اتعلمناها من مغامرة ${egyptianTopic}؟ اكتبوا إجابتكم في التعليقات وقولوا لنا مين كان أكتر شخصية ساعدت في الحل!`
+        : ` 🧩 سؤال الشطار: إيه أهم درس اتعلمناه النهارده من مغامرة ${egyptianTopic}، وإزاي نقدر نستخدمه في حياتنا؟ اكتبوا إجابتكم في التعليقات!`;
+      if (!/\?|؟|اكتبوا.*تعليق|إجابت/.test(chosenRaw)) chosenRaw += interactiveEnding;
+    }
     const validated = runPreTtsEgyptianValidationLayer(
       chosenRaw,
       idx,
@@ -2357,7 +2363,7 @@ function buildSmartEpisodeForRunner({
     return {
       id: `${isShort ? "sc-sh" : "sc-lg"}-${idx + 1}`,
       sceneNumber: idx + 1,
-      title: String(aiSc?.title || tpl.title),
+      title: idx === selectedTemplates.length - 1 ? tpl.title : String(aiSc?.title || tpl.title),
       environmentPreset: envCycle[idx % envCycle.length],
       cameraMotion: camCycle[idx % camCycle.length],
       lightingMood: lightCycle[idx % lightCycle.length],
@@ -2879,6 +2885,147 @@ async function uploadMp4ToFacebookPage({
   }
 
   return await uploadViaResumableVideosEndpoint();
+}
+
+/**
+ * Restored engagement layer: story-specific first challenge comments and smart replies.
+ */
+function buildInteractiveChallengeMessage(episode, platform = "youtube") {
+  const hero = String(episode?.mainCharacterName || "أبطال نورين كيدز").trim();
+  const comp = String(episode?.companionName || "أصحابنا الشطار").trim();
+  const topic = normalizeEgyptianColloquial(String(episode?.title || "مغامرة النهارده"));
+  const moral = normalizeEgyptianColloquial(String(episode?.moralLesson || "التعاون والتفكير الذكي ومساعدة الأصدقاء"));
+  return platform === "facebook"
+    ? `🌟 سؤال التحدي لأبطال نورين كيدز! يا ترى إيه أهم حاجة اتعلمناها من مغامرة "${topic}" مع ${hero} و${comp}؟ 💡 ${moral}. اكتبوا إجابتكم في التعليقات وقولوا لنا مين الشخصية اللي ساعدت أكتر في الحل! 👇💖`
+    : `🌟 سؤال التحدي لشطار Noreen Kids! يا ترى إيه أهم حاجة اتعلمناها من مغامرة "${topic}" مع ${hero} و${comp}؟ 💡 ${moral}. اكتبوا إجابتكم في التعليقات وقولوا لنا مين الشخصية اللي ساعدت أكتر في الحل! 👇💖`;
+}
+
+async function postYouTubeFirstComment({ accessToken, videoId, message }) {
+  if (!accessToken || !videoId || !message) return { success: false, error: "Missing parameters" };
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const res = await fetch("https://www.googleapis.com/youtube/v3/commentThreads?part=snippet", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json; charset=UTF-8" },
+        body: JSON.stringify({ snippet: { videoId: String(videoId).trim(), topLevelComment: { snippet: { textOriginal: String(message).trim() } } } }),
+      });
+      if (res.ok) {
+        const data = await res.json().catch(() => ({}));
+        return { success: true, commentId: data?.id || null };
+      }
+      if (attempt < 3) await sleep(3000 * attempt);
+    } catch {}
+  }
+  return { success: false, error: "Failed after 3 attempts" };
+}
+
+async function generateSmartCommentReply({ authorName, commentText, platform, postTitle }) {
+  const cleanAuthor = String(authorName || "صديقنا الغالي").replace(/[^\p{L}\p{N}\s_.-]/gu, "").trim().slice(0, 35) || "صديقنا الغالي";
+  const cleanComment = String(commentText || "").trim().slice(0, 700);
+  const key = String(process.env.GEMINI_API_KEY || "").trim();
+  if (key) {
+    try {
+      const ai = new GoogleGenAI({ apiKey: key });
+      const prompt = `أنت مدير مجتمع قناة وصفحة نورين كيدز للأطفال. اكتب رداً قصيراً ودافئاً باللهجة المصرية على تعليق المتابع.
+المنصة: ${platform}
+اسم المتابع: "${cleanAuthor}"
+التعليق: "${cleanComment}"
+عنوان الحلقة: "${String(postTitle || "مغامرة نورين كيدز").slice(0, 180)}"
+القواعد: سطران كحد أقصى، تشجيع لطيف، لا معلومات خطرة، لا تطلب بيانات شخصية، ولا تذكر أنك ذكاء اصطناعي.`;
+      const resp = await ai.models.generateContent({ model: "gemini-2.5-flash", contents: prompt });
+      const out = String(resp?.text || "").trim();
+      if (out.length >= 10 && out.length <= 450) return out;
+    } catch {}
+  }
+  return `يا أهلاً بيك يا ${cleanAuthor} في عيلة نورين كيدز! 🌟💖 إجابتك وتعليقك فرحونا أوي، استنونا في مغامرة جديدة واسألونا دايماً يا أبطال!`;
+}
+
+async function scanAndAutoReplyYouTubeComments({ accessToken, geminiApiKey, schedule }) {
+  if (!accessToken) return { repliesCount: 0 };
+  let channelId = String(schedule?.channelId || "").trim();
+  try {
+    if (!channelId) {
+      const ch = await fetch("https://www.googleapis.com/youtube/v3/channels?part=id&mine=true", { headers: { Authorization: `Bearer ${accessToken}` } });
+      const data = await ch.json().catch(() => ({}));
+      channelId = String(data?.items?.[0]?.id || "");
+    }
+    if (!channelId) return { repliesCount: 0 };
+    const list = await fetch(`https://www.googleapis.com/youtube/v3/commentThreads?part=snippet,replies&allThreadsRelatedToChannelId=${encodeURIComponent(channelId)}&maxResults=30&order=time`, { headers: { Authorization: `Bearer ${accessToken}` } });
+    const data = await list.json().catch(() => ({}));
+    const replied = new Set(Array.isArray(schedule.repliedCommentIds) ? schedule.repliedCommentIds : []);
+    let repliesCount = 0;
+    for (const thread of Array.isArray(data?.items) ? data.items : []) {
+      const top = thread?.snippet?.topLevelComment;
+      const id = String(top?.id || "");
+      const authorChannelId = String(top?.snippet?.authorChannelId?.value || "");
+      if (!id || replied.has(id) || (channelId && authorChannelId === channelId)) continue;
+      const replyText = await generateSmartCommentReply({
+        authorName: top?.snippet?.authorDisplayName || "صديقنا الغالي",
+        commentText: top?.snippet?.textOriginal || "",
+        platform: "YouTube",
+        postTitle: schedule?.lastCloudRunReport?.shortEpisodeTitle,
+      });
+      const rep = await fetch("https://www.googleapis.com/youtube/v3/comments?part=snippet", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json; charset=UTF-8" },
+        body: JSON.stringify({ snippet: { parentId: id, textOriginal: replyText } }),
+      });
+      if (rep.ok) { replied.add(id); repliesCount++; }
+    }
+    schedule.repliedCommentIds = Array.from(replied).slice(-500);
+    schedule.lastAutoCommentScanAtCairo = new Date().toLocaleString("ar-EG", { timeZone: "Africa/Cairo" });
+    return { repliesCount };
+  } catch {
+    return { repliesCount: 0 };
+  }
+}
+
+async function postFacebookFirstComment({ rawPageAccessToken, pageId, videoId, message }) {
+  const token = await resolveTrueFacebookPageAccessToken({ rawToken: rawPageAccessToken, targetPageId: pageId });
+  if (!token || !videoId || !message) return { success: false };
+  try {
+    const res = await fetch(`https://graph.facebook.com/v21.0/${encodeURIComponent(videoId)}/comments`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ message: String(message).trim() }),
+    });
+    const data = await res.json().catch(() => ({}));
+    return { success: res.ok, commentId: data?.id || null };
+  } catch {
+    return { success: false };
+  }
+}
+
+async function scanAndAutoReplyFacebookVideoComments({ rawPageAccessToken, pageId, videoId, episode, schedule }) {
+  const token = await resolveTrueFacebookPageAccessToken({ rawToken: rawPageAccessToken, targetPageId: pageId });
+  if (!token || !videoId) return { repliesCount: 0 };
+  try {
+    const list = await fetch(`https://graph.facebook.com/v21.0/${encodeURIComponent(videoId)}/comments?fields=id,message,from,created_time&limit=25`, { headers: { Authorization: `Bearer ${token}` } });
+    const data = await list.json().catch(() => ({}));
+    const replied = new Set(Array.isArray(schedule.facebookRepliedCommentIds) ? schedule.facebookRepliedCommentIds : []);
+    let repliesCount = 0;
+    for (const item of Array.isArray(data?.data) ? data.data : []) {
+      const id = String(item?.id || "");
+      const authorId = String(item?.from?.id || "");
+      if (!id || replied.has(id) || (authorId && authorId === String(pageId))) continue;
+      const replyText = await generateSmartCommentReply({
+        authorName: item?.from?.name || "صديقنا الغالي",
+        commentText: item?.message || "",
+        platform: "Facebook",
+        postTitle: episode?.title,
+      });
+      const rep = await fetch(`https://graph.facebook.com/v21.0/${encodeURIComponent(id)}/comments`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ message: replyText }),
+      });
+      if (rep.ok) { replied.add(id); repliesCount++; }
+    }
+    schedule.facebookRepliedCommentIds = Array.from(replied).slice(-500);
+    return { repliesCount };
+  } catch {
+    return { repliesCount: 0 };
+  }
 }
 
 async function main() {
@@ -3406,6 +3553,16 @@ async function main() {
       console.log(`🖼️ YouTube Custom 1280x720 Thumbnail: ${uploadRes.thumbnailUploaded ? "Uploaded Automatically ✓" : "Default Frame"}`);
       console.log(`🔗 YouTube Watch URL: https://www.youtube.com/watch?v=${uploadRes.videoId}`);
       console.log(`📂 YouTube Playlist (${uploadRes.playlistId}): ${uploadRes.playlistAdded ? "Added ✓" : "Skipped"}`);
+      let firstCommentId = null;
+      if (schedule.firstCommentEnabled !== false && uploadRes.videoId) {
+        const fc = await postYouTubeFirstComment({
+          accessToken,
+          videoId: uploadRes.videoId,
+          message: buildInteractiveChallengeMessage(task.episode, "youtube"),
+        });
+        firstCommentId = fc.commentId || null;
+        console.log(`💬 YouTube first challenge comment: ${fc.success ? "POSTED ✓" : "FAILED (upload kept successful)"}`);
+      }
     }
 
     let fbUploadRes = null;
@@ -3425,6 +3582,25 @@ async function main() {
         console.log(`🎉 FACEBOOK SUCCESS! Uploaded Facebook Video ID: ${fbUploadRes.facebookVideoId}`);
         console.log(`📝 Facebook Title: ${fbUploadRes.facebookTitle}`);
         console.log(`🔗 Facebook Permalink: ${fbUploadRes.facebookPermalinkUrl}`);
+        if (schedule.firstCommentEnabled !== false && fbUploadRes.facebookVideoId) {
+          const fbComment = await postFacebookFirstComment({
+            rawPageAccessToken: facebookPageAccessToken,
+            pageId: facebookPageId,
+            videoId: fbUploadRes.facebookVideoId,
+            message: buildInteractiveChallengeMessage(task.episode, "facebook"),
+          });
+          console.log(`💬 Facebook first challenge comment: ${fbComment.success ? "POSTED ✓" : "FAILED (upload kept successful)"}`);
+        }
+        if (schedule.facebookAutoCommentResponderEnabled !== false && fbUploadRes.facebookVideoId) {
+          const fbReplies = await scanAndAutoReplyFacebookVideoComments({
+            rawPageAccessToken: facebookPageAccessToken,
+            pageId: facebookPageId,
+            videoId: fbUploadRes.facebookVideoId,
+            episode: task.episode,
+            schedule,
+          });
+          console.log(`🤖 Facebook smart auto-replies: ${fbReplies.repliesCount}`);
+        }
       } catch (fbErr) {
         console.warn(
           `⚠️ Facebook Upload Warning: ${
@@ -3450,8 +3626,18 @@ async function main() {
       videoFormat: task.videoFormat,
       label: task.label,
       durationSec: durSec,
+      firstCommentId,
       runMode,
     });
+
+    if (schedule.autoCommentResponderEnabled !== false && shouldUploadToYouTube && accessToken) {
+      const autoRes = await scanAndAutoReplyYouTubeComments({
+        accessToken,
+        geminiApiKey: process.env.GEMINI_API_KEY,
+        schedule,
+      });
+      console.log(`🤖 YouTube smart auto-replies: ${autoRes.repliesCount}`);
+    }
 
     // Immediately persist & push upload progress after EACH video (Short first, then Long)
     // so that even if a subsequent step is interrupted, the already-uploaded video is recorded in history!
