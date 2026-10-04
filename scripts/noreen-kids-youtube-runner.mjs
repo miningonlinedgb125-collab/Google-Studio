@@ -3144,11 +3144,10 @@ async function publishDailyInteractive3DPhotoPostForRunner({
   excludedHeroes = new Set(),
   forcePublish = false,
 }) {
-  const tokenRes = await resolveTrueFacebookPageAccessTokenForRunner(
-    rawPageAccessToken,
-    pageId
-  );
-  const activeToken = tokenRes.pageToken;
+  const activeToken = await resolveTrueFacebookPageAccessToken({
+    rawToken: rawPageAccessToken,
+    targetPageId: pageId,
+  });
   if (!activeToken) {
     return { published: false, reason: "missing_token" };
   }
@@ -3348,11 +3347,10 @@ async function scanAndAutoReplyFacebookCommentsForRunner({
   pageId,
   fbSchedule,
 }) {
-  const tokenRes = await resolveTrueFacebookPageAccessTokenForRunner(
-    rawPageAccessToken,
-    pageId
-  );
-  const activeToken = tokenRes.pageToken;
+  const activeToken = await resolveTrueFacebookPageAccessToken({
+    rawToken: rawPageAccessToken,
+    targetPageId: pageId,
+  });
   if (!activeToken) {
     return { scannedObjects: 0, newRepliesCount: 0 };
   }
