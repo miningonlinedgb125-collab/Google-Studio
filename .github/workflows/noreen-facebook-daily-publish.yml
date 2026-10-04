@@ -58,6 +58,7 @@ jobs:
           PUBLISH_TARGET: 'facebook_workflow'
           RUN_MODE: ${{ github.event.inputs.run_mode || 'daily_schedule' }}
           GITHUB_EVENT_NAME: ${{ github.event_name }}
+          GITHUB_EVENT_SCHEDULE: ${{ github.event.schedule || '' }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           APP_URL: ${{ secrets.APP_URL }}
