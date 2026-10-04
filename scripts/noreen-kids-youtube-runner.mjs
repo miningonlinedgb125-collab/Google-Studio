@@ -3174,7 +3174,7 @@ async function publishDailyInteractive3DPhotoPostForRunner({
       )
     : [];
   const todayManualInteractivePosts = todayInteractivePosts.filter(
-    (entry) => String(entry?.postKind || "manual") === "manual"
+    (entry) => String(entry?.postKind || "").trim() === "manual"
   );
   const isScheduledInteractivePost = postKind === "scheduled";
 
