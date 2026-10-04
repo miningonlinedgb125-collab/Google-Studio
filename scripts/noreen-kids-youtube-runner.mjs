@@ -3841,6 +3841,13 @@ async function main() {
   // If this is a delayed GitHub native `schedule` cron event:
   // 1) Verify current Cairo time is actually within the configured schedule window (blocks stale crons from old times the user already changed!)
   // 2) Verify the Studio Server's exact-minute dispatcher hasn't already triggered this slot within the last 90 minutes.
+  const githubEventSchedule = String(process.env.GITHUB_EVENT_SCHEDULE || "").trim();
+  const currentScheduleCronList = isFacebookWorkflow
+    ? ["15 18 * * *", "0 23 * * *"]
+    : ["0 8 * * *"];
+  const isKnownCurrentScheduleEvent =
+    isCronEvent && currentScheduleCronList.includes(githubEventSchedule);
+
   if (isCronEvent) {
     const targetCronHHMM = isFacebookWorkflow ? fbGhTime : ytGhTime;
     const [tH, tM] = String(targetCronHHMM || "19:00").split(":").map((n) => Number(n) || 0);
@@ -3864,7 +3871,7 @@ async function main() {
     if (isKnownCurrentScheduleEvent) {
       const isCurrentPhotoSchedule =
         isFacebookWorkflow &&
-        ["35 22 * * *"].includes(githubEventSchedule);
+        ["0 23 * * *"].includes(githubEventSchedule);
       if (isCurrentPhotoSchedule) {
         isPhotoEngagementCronOnly = true;
         console.log(
@@ -3886,12 +3893,6 @@ async function main() {
     const expectedWfFile = isFacebookWorkflow
       ? "noreen-facebook-daily-publish.yml"
       : "noreen-kids-daily-youtube.yml";
-    const githubEventSchedule = String(process.env.GITHUB_EVENT_SCHEDULE || "").trim();
-    const currentScheduleCronList = isFacebookWorkflow
-      ? ["15 18 * * *", "0 23 * * *"]
-      : ["0 8 * * *"];
-    const isKnownCurrentScheduleEvent =
-      isCronEvent && currentScheduleCronList.includes(githubEventSchedule);
     if (isKnownCurrentScheduleEvent) {
       console.log(
         `🕒 [Schedule Event Guard] تم التعرف على حدث الجدولة الحالي (${githubEventSchedule}) — سيتم تنفيذ المهمة حتى لو وصل حدث GitHub متأخراً.`
