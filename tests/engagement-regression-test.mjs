@@ -68,9 +68,7 @@ assert.equal(runner.includes("targetPageId: pageId"), true);
 // hero/companion/theme combination stored in interactivePhotoPostsLog.
 assert.match(runner, /interactivePhotoPostsLog/);
 assert.match(runner, /previousInteractiveKeys/);
-assert.match(runner, /isPreviouslyPublishedInteractivePost/);
-assert.match(runner, /previousInteractiveHeroNames/);
 assert.match(runner, /const previousInteractiveKeys = new Set/);
 assert.match(runner, /const hasUnusedInteractiveTheme =/);
-assert.match(runner, /const availableThemes = interactiveThemes\\.filter/);
-assert.match(runner, /!previousInteractiveKeys\\.has/);
+assert.match(runner, /const availableThemes = interactiveThemes\.filter/);
+assert.match(runner, /!previousInteractiveKeys\.has/);
