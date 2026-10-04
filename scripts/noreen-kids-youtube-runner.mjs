@@ -3842,9 +3842,16 @@ async function main() {
   // 1) Verify current Cairo time is actually within the configured schedule window (blocks stale crons from old times the user already changed!)
   // 2) Verify the Studio Server's exact-minute dispatcher hasn't already triggered this slot within the last 90 minutes.
   const githubEventSchedule = String(process.env.GITHUB_EVENT_SCHEDULE || "").trim();
+  const toDailyCron = (hhmm) => {
+    const [hour, minute] = String(hhmm || "").split(":").map((n) => Number(n));
+    if (!Number.isInteger(hour) || !Number.isInteger(minute) || hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+      return "";
+    }
+    return `${minute} ${hour} * * *`;
+  };
   const currentScheduleCronList = isFacebookWorkflow
-    ? ["15 18 * * *", "0 23 * * *"]
-    : ["0 8 * * *"];
+    ? [toDailyCron(fbGhTime), toDailyCron(dailyInteractivePhotoTimeCairo)].filter(Boolean)
+    : [toDailyCron(ytGhTime)].filter(Boolean);
   const isKnownCurrentScheduleEvent =
     isCronEvent && currentScheduleCronList.includes(githubEventSchedule);
 
@@ -3871,7 +3878,7 @@ async function main() {
     if (isKnownCurrentScheduleEvent) {
       const isCurrentPhotoSchedule =
         isFacebookWorkflow &&
-        ["0 23 * * *"].includes(githubEventSchedule);
+        githubEventSchedule === toDailyCron(dailyInteractivePhotoTimeCairo);
       if (isCurrentPhotoSchedule) {
         isPhotoEngagementCronOnly = true;
         console.log(
