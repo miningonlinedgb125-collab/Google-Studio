@@ -181,14 +181,15 @@
       "id": "gh-run-37177067630",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-04 (07:33 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-04 (07:42 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1791088132783-mli5",
       "longEpisodeId": "ep-gh-long-1791088137657-2wf3",
       "shortEpisodeTitle": "Noreen Kids: شجاعة ذياد والعصفورة الفرفوشة في إصلاح جسر القرية | مغامرات ذياد والعصفورة الفرفوشة",
-      "longEpisodeTitle": "الكتاب اللي بيطير بين النجوم وسر الحفاظ على",
+      "longEpisodeTitle": "Noreen Kids: الكتاب اللي بيطير بين النجوم وسر الحفاظ على | مغامرات جنى وبلبل",
       "shortTitle": "Noreen Kids: شجاعة ذياد والعصفورة الفرفوشة في إصلاح جسر القرية | مغامرات ذياد والعصفورة الفرفوشة",
-      "longTitle": "الكتاب اللي بيطير بين النجوم وسر الحفاظ على",
+      "longTitle": "Noreen Kids: الكتاب اللي بيطير بين النجوم وسر الحفاظ على | مغامرات جنى وبلبل",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -196,9 +197,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "gG8HPo2qNhU",
+      "youtubeLongVideoId": "neZGulwc1Yo",
       "facebookShortVideoId": "1043597828712736",
+      "facebookLongVideoId": "1812152493200031",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1043597828712736",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1812152493200031",
       "facebookShortTitle": "Noreen Kids | شجاعة ذياد والعصفورة الفرفوشة في إصلاح جسر القرية - مغامرة ذياد والعصفورة الفرفوشة",
+      "facebookLongTitle": "Noreen Kids | الكتاب اللي بيطير بين النجوم وسر الحفاظ على - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -206,16 +211,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 79,
-        "fileSizeBytes": 9835643,
-        "inspectedAt": "07:33"
+        "durationSec": 311,
+        "fileSizeBytes": 37014733,
+        "inspectedAt": "07:42"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2239,7 +2244,7 @@
   "firstCommentEnabled": true,
   "autoCommentResponderEnabled": true,
   "facebookAutoCommentResponderEnabled": true,
-  "lastAutoCommentScanAtCairo": "٤‏/١٠‏/٢٠٢٦، ٧:٣٣:٣٣ ص",
+  "lastAutoCommentScanAtCairo": "٤‏/١٠‏/٢٠٢٦، ٧:٤٢:١٨ ص",
   "lastCloudRunReport": {
     "id": "gh-run-37173619585",
     "uploadMode": "manual_instant",
@@ -2292,5 +2297,5 @@
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880"
   ],
-  "lastFacebookAutoCommentScanAtCairo": "٤‏/١٠‏/٢٠٢٦، ٧:٣٢:٢٤ ص"
+  "lastFacebookAutoCommentScanAtCairo": "٤‏/١٠‏/٢٠٢٦، ٧:٤٢:١٧ ص"
 }
