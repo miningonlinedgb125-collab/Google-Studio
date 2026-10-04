@@ -2516,7 +2516,7 @@ async function generateFreshAiEpisodeForRunner({
   ]
 }`;
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-3.8-flash",
         contents: prompt,
         config: {
           responseMimeType: "application/json",
@@ -2932,7 +2932,7 @@ async function generateSmartCommentReply({ authorName, commentText, platform, po
 التعليق: "${cleanComment}"
 عنوان الحلقة: "${String(postTitle || "مغامرة نورين كيدز").slice(0, 180)}"
 القواعد: سطران كحد أقصى، تشجيع لطيف، لا معلومات خطرة، لا تطلب بيانات شخصية، ولا تذكر أنك ذكاء اصطناعي.`;
-      const resp = await ai.models.generateContent({ model: "gemini-2.5-flash", contents: prompt });
+      const resp = await ai.models.generateContent({ model: "gemini-3.8-flash", contents: prompt });
       const out = String(resp?.text || "").trim();
       if (out.length >= 10 && out.length <= 450) return out;
     } catch {}
@@ -3592,6 +3592,7 @@ async function main() {
       fileSizeMb: (fs.statSync(mp4Path).size / (1024 * 1024)).toFixed(2),
     };
 
+    let firstCommentId = null;
     if (shouldUploadToYouTube && accessToken) {
       console.log(`☁️ [Step 4/5] Uploading ${task.label} + 1280x720 Dual-Hero Thumbnail to YouTube (with YouTube Settings)...`);
       uploadRes = await uploadMp4ToYouTube({
@@ -3614,7 +3615,6 @@ async function main() {
       console.log(`🖼️ YouTube Custom 1280x720 Thumbnail: ${uploadRes.thumbnailUploaded ? "Uploaded Automatically ✓" : "Default Frame"}`);
       console.log(`🔗 YouTube Watch URL: https://www.youtube.com/watch?v=${uploadRes.videoId}`);
       console.log(`📂 YouTube Playlist (${uploadRes.playlistId}): ${uploadRes.playlistAdded ? "Added ✓" : "Skipped"}`);
-      let firstCommentId = null;
       if (schedule.firstCommentEnabled !== false && uploadRes.videoId) {
         const fc = await postYouTubeFirstComment({
           accessToken,
