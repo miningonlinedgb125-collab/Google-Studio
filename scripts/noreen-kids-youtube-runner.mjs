@@ -3889,7 +3889,7 @@ async function main() {
     const githubEventSchedule = String(process.env.GITHUB_EVENT_SCHEDULE || "").trim();
     const currentScheduleCronList = isFacebookWorkflow
       ? ["15 18 * * *", "35 22 * * *"]
-      : ["0 5 * * *", "0 8 * * *"];
+      : ["0 8 * * *"];
     const isKnownCurrentScheduleEvent =
       isCronEvent && currentScheduleCronList.includes(githubEventSchedule);
     if (isKnownCurrentScheduleEvent) {
