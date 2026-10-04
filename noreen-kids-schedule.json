@@ -2129,6 +2129,9 @@
       "repliedAtCairo": "اليوم ٠٣:١٩ ص بتوقيت مصر"
     }
   ],
+  "firstCommentEnabled": true,
+  "autoCommentResponderEnabled": true,
+  "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "اليوم ٠٦:٠٧ ص بتوقيت القاهرة",
   "lastCloudRunReport": {
     "id": "gh-run-37173619585",
