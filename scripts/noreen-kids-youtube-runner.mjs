@@ -3213,14 +3213,38 @@ async function publishDailyInteractive3DPhotoPostForRunner({
     } catch {}
   }
 
+  // Keep interactive 3D posts from repeating a previous hero/companion + theme combination.
+  // The log is persisted in fbSchedule, so this guard survives across workflow runs/days.
+  const previousInteractivePosts = Array.isArray(fbSchedule?.interactivePhotoPostsLog)
+    ? fbSchedule.interactivePhotoPostsLog
+    : [];
+  const previousInteractiveKeys = new Set(
+    previousInteractivePosts
+      .map((entry) =>
+        [
+          String(entry?.heroName || "").trim(),
+          String(entry?.companionName || "").trim(),
+          String(entry?.themeTitle || entry?.title || "").trim(),
+        ].join("|")
+      )
+      .filter((key) => key !== "||")
+  );
+  const previousInteractiveHeroNames = new Set(
+    previousInteractivePosts
+      .map((entry) => String(entry?.heroName || "").trim())
+      .filter(Boolean)
+  );
   const pick = selectNonRepeatingTeamAndTopicForRunner({
-    excludedHeroes,
+    excludedHeroes: new Set([
+      ...excludedHeroes,
+      ...previousInteractiveHeroNames,
+    ]),
     excludedTitles: [],
   });
-  const heroName = pick.team.mainCharacterName || "الطبيبة نورين";
-  const compName = pick.team.companionName || "أرنوب الشقي الممرض";
-  const shortHero = getShortCharacterDisplayNameRunner(heroName, "egyptian");
-  const shortComp = getShortCharacterDisplayNameRunner(compName, "egyptian");
+  let heroName = pick.team.mainCharacterName || "الطبيبة نورين";
+  let compName = pick.team.companionName || "أرنوب الشقي الممرض";
+  let shortHero = getShortCharacterDisplayNameRunner(heroName, "egyptian");
+  let shortComp = getShortCharacterDisplayNameRunner(compName, "egyptian");
 
   const interactiveThemes = [
     {
@@ -3236,11 +3260,83 @@ async function publishDailyInteractive3DPhotoPostForRunner({
       caption: `💖 تحية خاصة من ${shortHero} و${shortComp} لكل أصحابنا الحلوين! 💖\nمين من أطفالنا الشطار غسل سنانه وسمع كلام ماما وبابا النهاردة؟ 🌟👏\n\n👇 كل أم تكتب اسم بطلها أو بطلتها في التعليقات تحت الصورة دي عشان ${shortHero} و${shortComp} يبعتولهم شهادة شطارة وتحية خاصة بالاسم! 🏆✨\nومتنسوش متابعة صفحة Noreen Kids 🔔👍 ومشاركة المنشور مع أصحابكم!\n\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_قبل_النوم #كرتون_أطفال_3D #تربية_إيجابية #أمهات_مصر`,
     },
   ];
-  const chosenTheme =
+  let chosenTheme =
     interactiveThemes[
       Math.floor(Math.random() * interactiveThemes.length) %
         interactiveThemes.length
     ];
+
+  // If the randomly selected combination was already published, choose another
+  // available team/theme combination before publishing. This is intentionally
+  // limited to the interactive 3D post and does not affect video story selection.
+  const isPreviouslyPublishedInteractivePost = (theme, hero = shortHero, comp = shortComp) =>
+    previousInteractiveKeys.has(
+      [hero, comp, String(theme?.themeTitle || "").trim()].join("|")
+    );
+
+  if (isPreviouslyPublishedInteractivePost(chosenTheme)) {
+    const unusedTheme = interactiveThemes.find(
+      (theme) => !isPreviouslyPublishedInteractivePost(theme)
+    );
+    if (unusedTheme) {
+      chosenTheme = unusedTheme;
+    } else {
+      const fallbackTeams = RUNNER_CHARACTER_TEAMS.filter(
+        (team) =>
+          !previousInteractiveHeroNames.has(
+            getShortCharacterDisplayNameRunner(
+              team.mainCharacterName || "",
+              "egyptian"
+            )
+          )
+      );
+      for (const team of fallbackTeams) {
+        const candidateHero = getShortCharacterDisplayNameRunner(
+          team.mainCharacterName || "",
+          "egyptian"
+        );
+        const candidateComp = getShortCharacterDisplayNameRunner(
+          team.companionName || "",
+          "egyptian"
+        );
+        const candidateThemes = [
+          {
+            themeTitle: `تحدي الملاحظة الذكية مع ${candidateHero} و${candidateComp}`,
+          },
+          {
+            themeTitle: `فزورة الأبطال الشطار مع ${candidateHero} و${candidateComp}`,
+          },
+          {
+            themeTitle: `لوحة شرف أبطال Noreen Kids مع ${candidateHero} و${candidateComp}`,
+          },
+        ];
+        const unusedCandidate = candidateThemes.find(
+          (theme) => !isPreviouslyPublishedInteractivePost(theme, candidateHero, candidateComp)
+        );
+        if (unusedCandidate) {
+          heroName = team.mainCharacterName || heroName;
+          compName = team.companionName || compName;
+          shortHero = candidateHero;
+          shortComp = candidateComp;
+          const fullTheme = interactiveThemes.find(
+            (theme) => theme.themeTitle === unusedCandidate.themeTitle
+          );
+          if (fullTheme) chosenTheme = fullTheme;
+          else {
+            const prefix = unusedCandidate.themeTitle.replace(
+              ` مع ${candidateHero} و${candidateComp}`,
+              ""
+            );
+            chosenTheme = {
+              themeTitle: unusedCandidate.themeTitle,
+              caption: `🌟 تحدي أبطال Noreen Kids اليومي للشطار مع ${candidateHero} و${candidateComp}! 🌟`,
+            };
+          }
+          break;
+        }
+      }
+    }
+  }
 
   const heroImg = resolveCharacterAvatarPath(heroName, heroName);
   const compImg = resolveCharacterAvatarPath(compName, compName);
