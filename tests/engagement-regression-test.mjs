@@ -31,6 +31,11 @@ assert.match(runner, /graph\.facebook\.com\/v21\.0\/\$\{encodeURIComponent\(vide
 assert.match(runner, /scanAndAutoReplyYouTubeComments/);
 assert.match(runner, /scanAndAutoReplyFacebookVideoComments/);
 assert.match(runner, /generateSmartCommentReply/);
+assert.match(runner, /allThreadsRelatedToChannelId/);
+assert.match(runner, /nextPageToken/);
+assert.match(runner, /\/videos\?fields=id,message,created_time&limit=50/);
+assert.match(runner, /facebookRepliedCommentIds/);
+assert.match(runner, /lastFacebookAutoCommentScanAtCairo/);
 
 // Engagement must be explicitly enabled and must not be tied to upload success.
 assert.equal(schedule.firstCommentEnabled, true);
