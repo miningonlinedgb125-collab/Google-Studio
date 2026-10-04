@@ -2,8 +2,8 @@ name: Noreen Kids Facebook Page 24/7 Daily Schedule (SHORT Reel + LONG Video + 3
 
 on:
   schedule:
-    # Runs daily at 18:15 Egypt Time using timezone-aware scheduling
-    - cron: '15 18 * * *'
+    # Runs daily at 00:05 Egypt Time using timezone-aware scheduling
+    - cron: '5 0 * * *'
       timezone: "Africa/Cairo"
     # Runs daily at 23:16 Egypt Time using timezone-aware scheduling
     - cron: '0 16 * * *'
