@@ -2,10 +2,10 @@ name: Noreen Kids Facebook Page 24/7 Daily Schedule (SHORT Reel + LONG Video + 3
 
 on:
   schedule:
-    # Runs daily at 00:15 Egypt Time (21:15 UTC previous day) - avoiding top-of-hour GitHub queue congestion
-    - cron: '15 21 * * *'
-    # Runs daily at 01:15 Egypt Time (22:15 UTC previous day) - Daily Interactive 3D Photo Post & Auto-Replier
-    - cron: '15 22 * * *'
+    # Runs daily at 18:15 Egypt Time (15:15 UTC) - Facebook Daily Videos (Short + Long)
+    - cron: '15 15 * * *'
+    # Runs daily at 16:15 Egypt Time (13:15 UTC) - Daily Interactive 3D Photo Post & Auto-Replier
+    - cron: '15 13 * * *'
   workflow_dispatch:
     inputs:
       run_mode:
