@@ -39,6 +39,14 @@ function decryptVault(vaultHex) {
 
 function parseRunMode(raw) {
   const s = String(raw || "daily_schedule").toLowerCase();
+  if (
+    s.includes("engagement_only") ||
+    s.includes("منشور تفاعلي") ||
+    s.includes("فحص والرد") ||
+    s.includes("تحدي")
+  ) {
+    return "engagement_only";
+  }
   if (s.includes("short_only") || s.includes("قصير فقط")) return "short_only";
   if (s.includes("long_only") || s.includes("طويل فقط")) return "long_only";
   if (s.includes("both_now") || s.includes("الاثنين معاً") || s.includes("الاثنين معا")) return "both_now";
@@ -3089,6 +3097,27 @@ async function scanAndAutoReplyFacebookVideoComments({ rawPageAccessToken, pageI
     return { repliesCount: 0, scannedComments: 0, scannedVideos: 0 };
   }
 }
+async function buildSmartHeroReplyForFacebookCommentRunner({
+  authorName,
+  commentText,
+  postTitle,
+}
+
+async function publishDailyInteractive3DPhotoPostForRunner({
+  rawPageAccessToken,
+  pageId,
+  tmpDir,
+  fbSchedule,
+  excludedHeroes = new Set(),
+  forcePublish = false,
+}
+
+async function scanAndAutoReplyFacebookCommentsForRunner({
+  rawPageAccessToken,
+  pageId,
+  fbSchedule,
+}
+
 async function main() {
   const publishTarget = String(process.env.PUBLISH_TARGET || "unified").toLowerCase();
   const isFacebookWorkflow = publishTarget.includes("facebook");
@@ -3181,6 +3210,25 @@ async function main() {
   // avoid duplicate cron runs when the Facebook cron fires at the same minute as the Unified YouTube+Facebook cron:
   const ytGhTime = String(schedule.githubPublishTimeCairo || schedule.dailyPublishTimeCairo || "19:00").trim();
   const fbGhTime = String(fbSchedule.githubActionsTimeCairo || mergedFbBlock.githubActionsTimeCairo || ytGhTime).trim();
+  const dailyInteractivePhotoPostEnabled =
+    typeof fbSchedule.dailyInteractivePhotoPostEnabled === "boolean"
+      ? fbSchedule.dailyInteractivePhotoPostEnabled
+      : typeof mergedFbBlock.dailyInteractivePhotoPostEnabled === "boolean"
+      ? mergedFbBlock.dailyInteractivePhotoPostEnabled
+      : true;
+  const dailyInteractivePhotoTimeCairo = String(
+    fbSchedule.dailyInteractivePhotoTimeCairo ||
+      mergedFbBlock.dailyInteractivePhotoTimeCairo ||
+      "16:00"
+  ).trim();
+  const autoCommentResponderEnabled =
+    typeof fbSchedule.autoCommentResponderEnabled === "boolean"
+      ? fbSchedule.autoCommentResponderEnabled
+      : typeof mergedFbBlock.autoCommentResponderEnabled === "boolean"
+      ? mergedFbBlock.autoCommentResponderEnabled
+      : true;
+
+  let isPhotoEngagementCronOnly = false;
   if (
     isCronEvent &&
     isFacebookWorkflow &&
@@ -3200,30 +3248,29 @@ async function main() {
   // 2) Verify the Studio Server's exact-minute dispatcher hasn't already triggered this slot within the last 90 minutes.
   if (isCronEvent) {
     const targetCronHHMM = isFacebookWorkflow ? fbGhTime : ytGhTime;
-    const [tH, tM] = String(targetCronHHMM || "19:00")
-      .split(":")
-      .map((n) => Number(n) || 0);
+    const [tH, tM] = String(targetCronHHMM || "19:00").split(":").map((n) => Number(n) || 0);
+    const [pH, pM] = String(dailyInteractivePhotoTimeCairo || "16:00").split(":").map((n) => Number(n) || 0);
     const nowCairoParts = new Intl.DateTimeFormat("en-GB", {
-      timeZone: "Africa/Cairo",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-    })
-      .format(new Date())
-      .split(":")
-      .map((n) => Number(n) || 0);
+      timeZone: "Africa/Cairo", hour: "2-digit", minute: "2-digit", hour12: false,
+    }).format(new Date()).split(":").map((n) => Number(n) || 0);
     const targetTotalMin = tH * 60 + tM;
+    const photoTotalMin = pH * 60 + pM;
     const currentTotalMin = (nowCairoParts[0] || 0) * 60 + (nowCairoParts[1] || 0);
     let diffFromTargetMin = currentTotalMin - targetTotalMin;
     if (diffFromTargetMin < -720) diffFromTargetMin += 1440;
     if (diffFromTargetMin > 720) diffFromTargetMin -= 1440;
-
-    if (diffFromTargetMin < -3 || diffFromTargetMin > 90) {
-      console.log(
-        `⏸️ [Stale Cron Guard] الوقت الحالي في مصر (${String(nowCairoParts[0]).padStart(2, "0")}:${String(
-          nowCairoParts[1]
-        ).padStart(2, "0")}) خارج نافذة الموعد المحفوظ حالياً (${targetCronHHMM} بتوقيت مصر) — تخطي تشغيل الـ Cron القديم.`
-      );
+    let diffFromPhotoMin = currentTotalMin - photoTotalMin;
+    if (diffFromPhotoMin < -720) diffFromPhotoMin += 1440;
+    if (diffFromPhotoMin > 720) diffFromPhotoMin -= 1440;
+    const isInsideVideoWindow = diffFromTargetMin >= -3 && diffFromTargetMin <= 90;
+    const isInsidePhotoWindow =
+      isFacebookWorkflow && dailyInteractivePhotoPostEnabled && Boolean(facebookPageAccessToken) &&
+      diffFromPhotoMin >= -3 && diffFromPhotoMin <= 90;
+    if (!isInsideVideoWindow && isInsidePhotoWindow) {
+      isPhotoEngagementCronOnly = true;
+      console.log(`📸 [GitHub Daily Interactive Photo Cron] تشغيل موعد المنشور التفاعلي المصور 3D وفحص التعليقات (${dailyInteractivePhotoTimeCairo} بتوقيت مصر)...`);
+    } else if (!isInsideVideoWindow && !isInsidePhotoWindow) {
+      console.log(`⏸️ [Stale Cron Guard] الوقت الحالي في مصر (${String(nowCairoParts[0]).padStart(2,"0")}:${String(nowCairoParts[1]).padStart(2,"0")}) خارج نافذة الموعد المحفوظ حالياً (${targetCronHHMM} / ${dailyInteractivePhotoTimeCairo} بتوقيت مصر) — تخطي تشغيل الـ Cron القديم.`);
       process.exit(0);
     }
 
@@ -3290,12 +3337,14 @@ async function main() {
     }
   }
 
-  const runMode = parseRunMode(
-    process.env.RUN_MODE ||
-      (isFacebookWorkflow ? fbSchedule.selectedWorkflowMode : schedule.selectedWorkflowMode) ||
-      schedule.selectedWorkflowMode ||
-      "daily_schedule"
-  );
+  const runMode = isPhotoEngagementCronOnly
+    ? "engagement_only"
+    : parseRunMode(
+        process.env.RUN_MODE ||
+          (isFacebookWorkflow ? fbSchedule.selectedWorkflowMode : schedule.selectedWorkflowMode) ||
+          schedule.selectedWorkflowMode ||
+          "daily_schedule"
+      );
   const dailyTime = isFacebookWorkflow
     ? fbGhTime
     : schedule.githubPublishTimeCairo ||
@@ -3338,7 +3387,7 @@ async function main() {
   );
 
   let accessToken = "";
-  if (shouldUploadToYouTube) {
+  if (runMode !== "engagement_only" && shouldUploadToYouTube) {
     console.log("🔑 [Step 1/5] Verifying YouTube OAuth 2.0 Refresh Token...");
     accessToken = await getYouTubeAccessToken({
       clientId,
@@ -3346,7 +3395,7 @@ async function main() {
       refreshToken,
     });
     console.log("✅ YouTube OAuth 2.0 Access Token obtained successfully!");
-  } else if (!shouldUploadToFacebook) {
+  } else if (!shouldUploadToFacebook && !facebookPageAccessToken) {
     console.error(
       "❌ خطأ: لا تتوفر مفاتيح رفع ليوتيوب أو فيسبوك! يرجى حفظ المفاتيح في لوحة التحكم ومزامنة GitHub Actions."
     );
@@ -3428,7 +3477,10 @@ async function main() {
   let chosenShortEp;
   let chosenLongEp;
 
-  if (
+  if (runMode === "engagement_only") {
+    chosenShortEp = schedule.shortEpisode || fbSchedule.shortEpisode;
+    chosenLongEp = schedule.longEpisode || fbSchedule.longEpisode;
+  } else if (
     useLockedEpisodes &&
     schedule.shortEpisode &&
     Array.isArray(schedule.shortEpisode.scenes) &&
@@ -4041,6 +4093,104 @@ async function main() {
       } catch {}
     }
   }
+
+// Execute Daily 3D Interactive Photo Post & Autonomous AI Comment Auto-Replier on GitHub Actions!
+  if (facebookPageAccessToken) {
+    let fbEngagementUpdated = false;
+    if (dailyInteractivePhotoPostEnabled || runMode === "engagement_only") {
+      try {
+        console.log(
+          "📸 [Facebook Viral Growth - GitHub Cloud] Checking/Publishing Daily 3D Interactive Photo Challenge Post..."
+        );
+        const photoRes = await publishDailyInteractive3DPhotoPostForRunner({
+          rawPageAccessToken: facebookPageAccessToken,
+          pageId: facebookPageId,
+          tmpDir,
+          fbSchedule,
+          excludedHeroes,
+          forcePublish: runMode === "engagement_only" && !isCronEvent,
+        });
+        if (photoRes?.published || photoRes?.skippedDuplicate) {
+          fbEngagementUpdated = true;
+        }
+      } catch (photoErr) {
+        console.warn(
+          `⚠️ [Facebook Daily 3D Photo Post Warning]: ${
+            photoErr instanceof Error ? photoErr.message : photoErr
+          }`
+        );
+      }
+    }
+
+    if (autoCommentResponderEnabled || runMode === "engagement_only") {
+      try {
+        console.log(
+          "💬 [Facebook Viral Growth - GitHub Cloud] Scanning Page videos, reels & posts for unanswered follower comments..."
+        );
+        const scanRes = await scanAndAutoReplyFacebookCommentsForRunner({
+          rawPageAccessToken: facebookPageAccessToken,
+          pageId: facebookPageId,
+          fbSchedule,
+        });
+        if (scanRes.scannedObjects > 0 || scanRes.newRepliesCount > 0) {
+          fbEngagementUpdated = true;
+        }
+      } catch (scanErr) {
+        console.warn(
+          `⚠️ [Facebook Comment Auto-Replier Warning]: ${
+            scanErr instanceof Error ? scanErr.message : scanErr
+          }`
+        );
+      }
+    }
+
+    if (fbEngagementUpdated) {
+      try {
+        fs.writeFileSync(
+          fbSchedulePath,
+          JSON.stringify(fbSchedule, null, 2),
+          "utf8"
+        );
+        const ghTokenEng = String(
+          process.env.GITHUB_TOKEN || vault.githubToken || ""
+        ).trim();
+        const ghRepoEng = String(
+          process.env.GITHUB_REPOSITORY || vault.githubSelectedRepo || ""
+        ).trim();
+        if (ghTokenEng && ghRepoEng && ghRepoEng.includes("/")) {
+          const apiUrl = `https://api.github.com/repos/${ghRepoEng}/contents/noreen-kids-facebook-schedule.json`;
+          const headers = {
+            Authorization: `Bearer ${ghTokenEng}`,
+            Accept: "application/vnd.github+json",
+            "User-Agent": "Noreen-Kids-3D-Studio-Runner",
+            "X-GitHub-Api-Version": "2022-11-28",
+          };
+          let sha = "";
+          try {
+            const getRes = await fetch(apiUrl, { headers });
+            if (getRes.ok) {
+              const getData = await getRes.json();
+              sha = getData?.sha || "";
+            }
+          } catch {}
+          const bodyObj = {
+            message: `chore(facebook-growth): sync interactive 3D photo post & comment auto-replies [skip ci]`,
+            content: Buffer.from(
+              JSON.stringify(fbSchedule, null, 2),
+              "utf8"
+            ).toString("base64"),
+          };
+          if (sha) bodyObj.sha = sha;
+          await fetch(apiUrl, {
+            method: "PUT",
+            headers: { ...headers, "Content-Type": "application/json" },
+            body: JSON.stringify(bodyObj),
+          }).catch(() => {});
+        }
+      } catch {}
+    }
+  }
+
 
   if (process.env.GITHUB_STEP_SUMMARY) {
     const summaryLines = [
