@@ -191,14 +191,15 @@
       "id": "gh-run-37268191601",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-05 (08:35 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-05 (08:46 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1791178370256-xg6u",
       "longEpisodeId": "ep-gh-long-1791178373568-qk35",
       "shortEpisodeTitle": "Noreen Kids: فطيرة التفاح الدافية مع تيتة والدب باندا وقيمة | مغامرات تيتة والدب باندا",
-      "longEpisodeTitle": "لعبة الأشكال والألوان المبهجة مع سدرة الصغنونة والفراشة",
+      "longEpisodeTitle": "Noreen Kids: لعبة الأشكال والألوان المبهجة مع سدرة الصغنونة والفراشة | مغامرات سدرة الصغنونة والفراشة الملونة",
       "shortTitle": "Noreen Kids: فطيرة التفاح الدافية مع تيتة والدب باندا وقيمة | مغامرات تيتة والدب باندا",
-      "longTitle": "لعبة الأشكال والألوان المبهجة مع سدرة الصغنونة والفراشة",
+      "longTitle": "Noreen Kids: لعبة الأشكال والألوان المبهجة مع سدرة الصغنونة والفراشة | مغامرات سدرة الصغنونة والفراشة الملونة",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -206,9 +207,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "gPzthMJfab4",
+      "youtubeLongVideoId": "YBwNDvDmmvM",
       "facebookShortVideoId": "936302955847171",
+      "facebookLongVideoId": "1032174619869867",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/936302955847171",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1032174619869867",
       "facebookShortTitle": "Noreen Kids | فطيرة التفاح الدافية مع تيتة والدب باندا وقيمة - مغامرة تيتة والدب باندا",
+      "facebookLongTitle": "Noreen Kids | لعبة الأشكال والألوان المبهجة مع سدرة الصغنونة والفراشة - مغامرة سدرة الصغنونة والفراشة الملونة",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -216,16 +221,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 78,
-        "fileSizeBytes": 9930015,
-        "inspectedAt": "08:35"
+        "durationSec": 321,
+        "fileSizeBytes": 35462840,
+        "inspectedAt": "08:46"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2302,7 +2307,7 @@
   "firstCommentEnabled": true,
   "autoCommentResponderEnabled": true,
   "facebookAutoCommentResponderEnabled": true,
-  "lastAutoCommentScanAtCairo": "٥‏/١٠‏/٢٠٢٦، ٨:٣٥:٥٦ ص",
+  "lastAutoCommentScanAtCairo": "٥‏/١٠‏/٢٠٢٦، ٨:٤٦:٤٣ ص",
   "lastCloudRunReport": {
     "id": "gh-run-37177067630",
     "uploadMode": "daily_schedule",
@@ -2360,5 +2365,5 @@
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880"
   ],
-  "lastFacebookAutoCommentScanAtCairo": "٥‏/١٠‏/٢٠٢٦، ٨:٣٥:٥٥ ص"
+  "lastFacebookAutoCommentScanAtCairo": "٥‏/١٠‏/٢٠٢٦، ٨:٤٦:٤٣ ص"
 }
