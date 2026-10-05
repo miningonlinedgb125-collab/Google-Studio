@@ -404,7 +404,7 @@
       "id": "gh-run-37333496273",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-05 (18:48 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-05 (18:49 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1791214349395-kufx",
       "longEpisodeId": "ep-gh-long-1791214354385-ijkj",
       "shortEpisodeTitle": "Noreen Kids: مسابقة القراءة الممتعة ونصائح المعلمة أم ملك الحنونة | مغامرات أم ملك والبطريق المرح",
@@ -443,7 +443,7 @@
         "fastStartMoovFirst": true,
         "durationSec": 318,
         "fileSizeBytes": 31845253,
-        "inspectedAt": "18:48"
+        "inspectedAt": "18:49"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2037,6 +2037,16 @@
   ],
   "recentStoryHistory": [
     {
+      "topic": "مسابقة القراءة الممتعة ونصائح المعلمة أم ملك الحنونة",
+      "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح"
+    },
+    {
+      "topic": "سر النوم البدري وشرب اللبن الدافي علشان نكبر بصحة ونشاط",
+      "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
       "topic": "فطيرة التفاح الدافية مع تيتة والدب باندا وقيمة",
       "mainCharacterName": "تيتة",
       "companionName": "الدب باندا"
@@ -2199,5 +2209,59 @@
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-05 · 16:34 بتوقيت مصر",
-  "lastScheduledInteractivePhotoDateKey": "2026-10-05"
+  "lastScheduledInteractivePhotoDateKey": "2026-10-05",
+  "lastFacebookCloudRunReport": {
+    "id": "gh-run-37333496273",
+    "uploadMode": "daily_schedule",
+    "triggerSource": "github_actions_cloud",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-05 (18:49 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1791214349395-kufx",
+    "longEpisodeId": "ep-gh-long-1791214354385-ijkj",
+    "shortEpisodeTitle": "Noreen Kids: مسابقة القراءة الممتعة ونصائح المعلمة أم ملك الحنونة | مغامرات أم ملك والبطريق المرح",
+    "longEpisodeTitle": "Noreen Kids: سر النوم البدري وشرب اللبن الدافي علشان نكبر بصحة ونشاط | مغامرات الطبيبة نورين وأرنوب",
+    "shortTitle": "Noreen Kids: مسابقة القراءة الممتعة ونصائح المعلمة أم ملك الحنونة | مغامرات أم ملك والبطريق المرح",
+    "longTitle": "Noreen Kids: سر النوم البدري وشرب اللبن الدافي علشان نكبر بصحة ونشاط | مغامرات الطبيبة نورين وأرنوب",
+    "shortPlaylistId": "PLPwfeXzB3ozU",
+    "longPlaylistId": "PLbjN20PzrCYk",
+    "privacyStatus": "public",
+    "madeForKids": false,
+    "containsSyntheticMedia": false,
+    "categoryId": "1",
+    "dialect": "egyptian",
+    "status": "uploaded_live",
+    "youtubeShortVideoId": "733FBCr9-aw",
+    "youtubeLongVideoId": "vkEKfcGGWX4",
+    "facebookShortVideoId": "1427287536030969",
+    "facebookLongVideoId": "3532647443570666",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1427287536030969",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/3532647443570666",
+    "facebookShortTitle": "Noreen Kids | مسابقة القراءة الممتعة ونصائح المعلمة أم ملك الحنونة - مغامرة أم ملك والبطريق المرح",
+    "facebookLongTitle": "Noreen Kids | سر النوم البدري وشرب اللبن الدافي علشان نكبر بصحة ونشاط - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
+    "ffprobeReport": {
+      "valid": true,
+      "passed": true,
+      "containerFormat": "mov,mp4,m4a,3gp,3g2,mj2",
+      "videoCodec": "h264",
+      "videoProfile": "High",
+      "pixelFormat": "yuv420p",
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "audioCodec": "aac",
+      "audioSampleRate": 48000,
+      "audioChannels": 2,
+      "fastStartMoovFirst": true,
+      "durationSec": 318,
+      "fileSizeBytes": 31845253,
+      "inspectedAt": "18:49"
+    },
+    "processingDetails": {
+      "processingStatus": "succeeded",
+      "partsTotal": 100,
+      "partsProcessed": 100,
+      "timeLeftMs": 0,
+      "fileDetailsAvailability": "available"
+    },
+    "reportedAtIso": "2026-10-05T15:49:01.538Z"
+  }
 }
