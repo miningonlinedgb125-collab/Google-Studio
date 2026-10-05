@@ -251,7 +251,7 @@ function runPreTtsEgyptianValidationLayer(rawText, sceneIndex = 0, totalScenes =
   if (
     sceneIndex === 0 &&
     validatedText &&
-    !/^(يا خبر|الحقوا|الحقني|بص|بصوا|شايف|شايفين|يلا بينا)/.test(validatedText)
+    ! /^(يا خبر|الحقوا|الحقني|بص|بصوا|شايف|شايفين|يلا بينا)/.test(validatedText)
   ) {
     validatedText = `يا خبر يا أبطال وعيلة نورين كيدز! بصوا بسرعة معانا النهارده، ${validatedText}`;
   }
@@ -279,7 +279,7 @@ function validateAndAutoFixEgyptianDialect(rawText, sceneIndex = 0, totalScenes 
 const CHAR_AVATAR_MAP = [
   { keywords: ["أم ملك", "ام ملك", "المعلمة"], relPath: "src/assets/images/char_om_malak_teacher_1790685841625.jpg" },
   { keywords: ["البطريق", "بطريق"], relPath: "src/assets/images/char_funny_penguin_1790685854532.jpg" },
-  { keywords: ["ملك", "طبيبة طوارئ", "دكتورة ملك"], relPath: "src/assets/images/char_malak_emergency_doctor_1790685772412.jpg" },
+  { keywords: ["ملك", "طبيبة طوارئ", "دكتورة ملك", "الطبيبة ملك"], relPath: "src/assets/images/char_malak_emergency_doctor_1790685772412.jpg" },
   { keywords: ["لوليتا", "القطة", "قطة"], relPath: "src/assets/images/char_lolita_cat_1790685786758.jpg" },
   { keywords: ["سدرة الصغنونة", "سدرة الصغيرة"], relPath: "src/assets/images/char_baby_sidra_toddler_1790685815760.jpg" },
   { keywords: ["الفراشة", "فراشة"], relPath: "src/assets/images/char_colorful_butterfly_1790685827095.jpg" },
@@ -288,23 +288,23 @@ const CHAR_AVATAR_MAP = [
   { keywords: ["شريف", "أستاذ شريف", "محاسب"], relPath: "src/assets/images/char_mr_sherif_accountant_1790685911579.jpg" },
   { keywords: ["الصقر", "صقر"], relPath: "src/assets/images/char_smart_falcon_1790685922310.jpg" },
   { keywords: ["جدو", "الجد"], relPath: "src/assets/images/char_gedo_grandpa_1790685953317.jpg" },
-  { keywords: ["الفأر", "فأر", "فار", "مشاكس"], relPath: "src/assets/images/char_mischievous_mouse_1790685967206.jpg" },
+  { keywords: ["الفأر", "فأر", "المشاكس"], relPath: "src/assets/images/char_mischievous_mouse_1790685967206.jpg" },
   { keywords: ["تيتة", "تيته", "الجدة"], relPath: "src/assets/images/char_teta_grandma_1790685980597.jpg" },
   { keywords: ["باندا", "الدب باندا"], relPath: "src/assets/images/char_panda_bear_1790685992445.jpg" },
-  { keywords: ["نورين", "الطبيبة", "دكتورة"], relPath: "src/assets/images/char_dr_noreen_girl_1790461976876.jpg" },
+  { keywords: ["نورين", "الطبيبة", "دكتورة نورين"], relPath: "src/assets/images/char_dr_noreen_girl_1790461976876.jpg" },
   { keywords: ["أرنوب", "ارنوب", "أرنب", "الممرض"], relPath: "src/assets/images/char_arnoob_nurse_rabbit_1790462042886.jpg" },
-  { keywords: ["نوران", "المهندسة"], relPath: "src/assets/images/char_eng_sidra_girl_1790461988894.jpg" },
+  { keywords: ["نوران", "المهندسة"], relPath: "src/assets/images/char_eng_nouran_girl_1790461988894.jpg" },
   { keywords: ["سدرة"], relPath: "src/assets/images/char_baby_sidra_toddler_1790685815760.jpg" },
   { keywords: ["النمر", "فرفوش", "نمور", "بومبو"], relPath: "src/assets/images/char_namoor_cheerful_tiger_1790462054821.jpg" },
-  { keywords: ["تامر", "ياسين", "فارس الواحة", "الواحة"], relPath: "src/assets/images/char_yassin_boy_knight_1790462110000.jpg" },
+  { keywords: ["تامر", "فارس الواحة", "ياسين"], relPath: "src/assets/images/char_tamer_knight_1790462110000.jpg" },
   { keywords: ["كركور", "الببغاء", "ببغاء"], relPath: "src/assets/images/char_karkour_wise_parrot_1790462097550.jpg" },
-  { keywords: ["عمرو", "فارس المستكشف", "فارس", "المستكشف"], relPath: "src/assets/images/char_faris_astronaut_1790446843914.jpg" },
+  { keywords: ["عمرو", "فارس المستكشف", "المستكشف"], relPath: "src/assets/images/char_amr_explorer_1790446843914.jpg" },
   { keywords: ["زعتر", "الثعلب", "فلفول"], relPath: "src/assets/images/char_zaatar_fox_1790446857963.jpg" },
-  { keywords: ["جنى", "نور رائدة", "نور"], relPath: "src/assets/images/char_noor_girl_astronaut_1790462000705.jpg" },
+  { keywords: ["جنى", "جني", "رائدة الفضاء", "نور رائدة", "نور"], relPath: "src/assets/images/char_jana_girl_astronaut_1790462000705.jpg" },
   { keywords: ["بلبل", "الروبوت"], relPath: "src/assets/images/char_bulbul_cute_robot_1790462065051.jpg" },
-  { keywords: ["شوشو", "كريم", "القبطان", "كابتن"], relPath: "src/assets/images/char_karim_boy_captain_1790462024983.jpg" },
+  { keywords: ["شوشو", "كريم", "القبطان", "كابتن"], relPath: "src/assets/images/char_shoushou_boy_captain_1790462024983.jpg" },
   { keywords: ["مرجان", "الدلفين"], relPath: "src/assets/images/char_marjan_playful_dolphin_1790462076093.jpg" },
-  { keywords: ["كارمن", "سلمى", "المخترعة"], relPath: "src/assets/images/char_salma_girl_inventor_1790462010894.jpg" },
+  { keywords: ["كارمن", "سلمى", "المخترعة"], relPath: "src/assets/images/char_carmen_girl_inventor_1790462010894.jpg" },
   { keywords: ["سمسم", "السنجاب"], relPath: "src/assets/images/char_simsim_flying_squirrel_1790462087579.jpg" },
 ];
 
@@ -1888,6 +1888,10 @@ const RUNNER_CHARACTER_TEAMS = [
       "شنطة الإسعافات الطائرة وإنقاذ العصفور المنور في غابة النجوم",
       "علاج الجناح المكسور للطائر الصغير في عيادة الغابة السحرية",
       "سر النوم البدري وشرب اللبن الدافي علشان نكبر بصحة ونشاط",
+      "تحدي الخضروات الملونة والطاقة السحرية مع الطبيبة نورين وأرنوب",
+      "سر شرب المية النظيفة وحيوية أبطال الغابة السعيدة",
+      "الضمادة السحرية وحكاية التغلب على الخوف من الحقنة والعيادة",
+      "يوم النظافة العالمي في غابة النور وترتيب ألعابنا قبل النوم",
     ],
   },
   {
@@ -1905,6 +1909,10 @@ const RUNNER_CHARACTER_TEAMS = [
       "إصلاح منارة المرجان المضيئة بأدوات الهندسة الذكية والتعاون",
       "إصلاح نافورة الموسيقى الكريستالية بالتفكير العلمي والصبر",
       "بناء قبة النجوم المضيئة لحماية عصافير الغابة من المطر",
+      "اختراع طاحونة الهواء الملونة لتوليد الكهرباء النظيفة لبيوت القرية",
+      "ترميم ساعة البرج الأثرية وتعلّم قيمة تنظيم الوقت والعمل الجماعي",
+      "بناء مسار القطار المغناطيسي الصغير لنقل ألعاب الأطفال بأمان",
+      "تصميم مظلة الألوان الذكية لحماية أزهار الواحة من شمس الظهيرة",
     ],
   },
   {
@@ -1922,6 +1930,10 @@ const RUNNER_CHARACTER_TEAMS = [
       "إنقاذ فراشة النور النادرة في حديقة الزهور العملاقة",
       "مهمة البحث عن البلورة الزرقاء المفقودة تحت شلالات الكريستال",
       "سر الخريطة الصوتية اللي بتغني في كهف الصدى العجيب",
+      "اكتشاف ممر وادي الفراشات الذهبية وحماية النباتات النادرة",
+      "لغز آثار الأقدام الصغيرة في جبل الثلج ومساعدة الشبل التائه",
+      "مغامرة قارب البردي عبر النهر السري لاكتشاف جزيرة الزهور المضيئة",
+      "خريطة النجوم القديمة والوصول لأعلى قمة لمشاهدة الشروق الساحر",
     ],
   },
   {
@@ -1933,11 +1945,16 @@ const RUNNER_CHARACTER_TEAMS = [
     heroProp: "خوذة الفضاء المنورة وجهاز الجاذبية",
     compProp: "شاشة تحليل الإشارات الفضائية",
     stories: [
-      "لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة وحب القراءة",
-      "رحلة المسبار الصغير حوالين حلقات زحل وتعلّم الشجاعة ومواجهة الخوف",
-      "الكتاب اللي بيطير بين النجوم وسر الحفاظ على نظافة كوكب الأرض",
-      "مغامرة التلسكوب الذهبي واكتشاف نجمة الأمنيات المضيئة",
-      "لغز الصندوق الذهبي المشفر في مكتبة الفضاء الطائرة",
+      "لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة",
+      "رحلة المسبار الصغير حوالين حلقات زحل وتعلّم الشجاعة",
+      "الكتاب اللي بيطير بين النجوم وسر الحفاظ على كتب المعرفة",
+      "إصلاح محطة الفضاء الدولية المضيئة بالتعاون والذكاء",
+      "إنقاذ النيزك اللامع الصغير وإرجاعه لمداره بسلام",
+      "سر حزام الكويكبات الموسيقي والألحان الفضائية المبهجة",
+      "مغامرة استكشاف المريخ وزراعة أول نبتة خضراء في التربة الحمراء",
+      "تجميع شظايا قمر الكريستال وإنارة سماء المجرة من جديد",
+      "لغز إشارات الراديو الودودة من كوكب الألوان العجيب",
+      "رحلة بدلة الفضاء الذكية وتعلّم كيفية السباحة في انعدام الجاذبية",
     ],
   },
   {
@@ -1950,10 +1967,15 @@ const RUNNER_CHARACTER_TEAMS = [
     compProp: "صدفة الموجات الصوتية السحرية",
     stories: [
       "مغامرة الغواصة الذهبية لإنقاذ الحوت الصغير في مملكة المرجان",
-      "سر اللؤلؤة الموسيقية اللي رجعت الفرح لأسماك المحيط المضيء",
-      "كنز القرصان القديم في كهف المرجان واكتشاف إن العلم أغلى من الدهب",
-      "سباق القوارب الشراعية الذكية وتعلّم مساعدة الصديق وقت الشدة",
-      "تنظيف شعب المرجان الملونة وحماية السلاحف البحرية اللطيفة",
+      "سر اللؤلؤة الموسيقية العجيبة في قاع البحر الهادي",
+      "تنظيف شاطئ الأصداف الملونة وحماية السلاحف البحرية",
+      "مغامرة سفينة الكنز الغارقة واستخراج صندوق الذكريات الجميلة",
+      "سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر",
+      "إنقاذ نجم البحر المنور من بين الصخور المرجانية بالرفق",
+      "لغز كهف الشعاب المضيئة وسر الفانوس البحري للأعماق",
+      "حكاية قنديل البحر الخجول وإزاي لقى أصحابه بالمحبة والابتسامة",
+      "إصلاح بوصلة السفينة الشراعية وسط أمواج البحر الصافية",
+      "مهمة حماية غابات الأعشاب البحرية من التيارات القوية",
     ],
   },
   {
@@ -1965,11 +1987,16 @@ const RUNNER_CHARACTER_TEAMS = [
     heroProp: "عدسة الطاقة الشمسية وجهاز الابتكار",
     compProp: "حقيبة البلورات المغناطيسية",
     stories: [
-      "اختراع جناح الهوا الذكي فوق سفينة السحاب وعدم الاستسلام",
-      "سباق المناطيد الشمسية فوق جبال السحاب وتعلّم الروح الرياضية",
-      "سر القطار المغناطيسي الملون في مدينة الاختراعات وتعلّم النظام",
-      "اختراع روبوت تدوير المخلفات الذكي لتنظيف شاطئ المرجان",
-      "تشغيل طاحونة الهواء الذهبية لتوليد الطاقة النظيفة للقرية",
+      "كارمن وسر جناح الهوا واختراع أجنحة الطيران الآمنة للسناجب",
+      "تدوير المخلفات الورقية وابتكار أجمل كراسات الرسم الملونة",
+      "اختراع آلة جمع الثمار الذكية لمساعدة حيوانات البستان",
+      "المناطيد الشمسية الطائرة لتوصيل رسائل المحبة بين القرى",
+      "إصلاح القطار المغناطيسي الصغير بذكاء الدوائر الكهربائية البسيطة",
+      "ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام",
+      "اختراع روبوت التنظيف الصغير ومساعدة ماما في ترتيب البيت",
+      "تصميم جهاز تحلية مياه المطر الذكي لسقاية حديقة الورد",
+      "ابتكار المصباح اليدوي الذي يعمل بالحركة وبدون بطاريات",
+      "اختراع عجلة الفخار الآلية لصنع أواني الزهور الجميلة",
     ],
   },
   {
@@ -1981,12 +2008,16 @@ const RUNNER_CHARACTER_TEAMS = [
     heroProp: "درع النور الكريستالي ومصباح الحكمة",
     compProp: "جرس الرياح الذهبي",
     stories: [
-      "سر الساعة الرملية المضيئة في واحة الكريستال وتعلّم تنظيم الوقت",
-      "شجرة الأمانة الذهبية في غابة النجوم وإزاي الصدق بيكسب دايما",
-      "خيمة التسامح الذهبية في واحة الكريستال وإزاي نصالح أصحابنا بالكلمة الحلوة",
-      "مفتاح بوابة الواحة الذهبية وأهمية طاعة ماما وبابا وسماع النصيحة",
+      "شجرة الأمانة الذهبية في غابة النجوم وإزاي الصدق بينجي دايماً",
       "المراية الصادقة في واحة الكريستال وتعلّم الثقة في النفس ومساعدة غيرنا",
-      "مهرجان الفوانيس الطائرة في غابة النجوم وقيمة مشاركة اللعب مع أصحابنا",
+      "سر الساعة الرملية المضيئة في واحة الكريستال وتعلّم الصبر",
+      "خيمة التسامح والصلح بين الأصدقاء في واحة النخيل",
+      "إنقاذ المهر الصغير التائه في عاصفة الرمال بشجاعة الفارس تامر",
+      "حماية نبع الماء الصافي في قلب الصحراء ومشاركته مع القوافل",
+      "لغز القلعة القديمة وفك شفرة بوابات الشجاعة بالكلمة الطيبة",
+      "مبارزة الظلال وتعلّم أن الشجاعة الحقيقية هي كبح الغضب والرفق",
+      "وسام الوفاء بالعهد ومكافأة الفارس الأمين في مهرجان الواحة",
+      "حراسة فوانيس الواحة المضيئة في ليلة اكتمال البدر",
     ],
   },
   {
@@ -1998,9 +2029,16 @@ const RUNNER_CHARACTER_TEAMS = [
     heroProp: "حقيبة الطوارئ السريعة والسماعة الطبية الحديثة",
     compProp: "طوق المساعدة الذكي وشنطة الضمادات الملونة",
     stories: [
-      "مهمة الطوارئ السريعة مع الدكتورة ملك والقطة لوليتا لإنقاذ أرنب الوادي",
-      "إسعاف الطائر الصغير وقت العاصفة بهدوء وشجاعة طبيبة الطوارئ ملك",
-      "سيارة الإسعاف المنورة ومواقف القطة لوليتا المضحكة في الغابة",
+      "سيارة الإسعاف المنورة ومواقف القطة لوليتا المضحكة في إنقاذ الجرو الصغير",
+      "مهمة الطوارئ السريعة لإنقاذ أرنب الوادي وإسعاف قدمه برفق",
+      "دكتورة ملك ولوليتا في عيادة الحيوانات الأليفة وسر التطعيم البسيط",
+      "إنقاذ القطة الصغيرة من فوق الشجرة العالية بحكمة وهدوء",
+      "الإسعافات الأولية لجروح اللعب في الحديقة وطمأنة الأطفال الشطار",
+      "سر حقيبة الطوارئ المنظمة وأهمية الاحتفاظ بأرقام النجدة",
+      "يوم الفحص الطبي الشامل لكل طيور الغابة المغردة",
+      "حكاية الدواء اللذيذ بنكهة الفراولة والشفاء العاجل بإذن الله",
+      "مهمة إنقاذ القنفذ الصغير الذي علق في سياج الحديقة",
+      "تدريب أصدقاء المدرسة على كيفية طلب الإسعاف عند الطوارئ",
     ],
   },
   {
@@ -2008,13 +2046,20 @@ const RUNNER_CHARACTER_TEAMS = [
     companionName: "الفراشة الملونة",
     mainVoice: "Zephyr",
     compVoice: "Kore",
-    worldHint: "space_forest",
+    worldHint: "floating_library",
     heroProp: "ألوان الرسم المبهجة ولعبة المكعبات المنورة",
     compProp: "الأجنحة الملونة المتلألئة وغبار الزهور المنور",
     stories: [
-      "مغامرة سدرة الصغنونة والفراشة الملونة في حديقة الألوان السحرية",
-      "لعبة الأشكال والألوان المبهجة مع سدرة الصغنونة والفراشة اللطيفة",
       "اكتشاف زهرة النور الضاحكة بفضول وبراءة سدرة الصغنونة",
+      "لعبة الأشكال والألوان المبهجة مع سدرة الصغنونة والفراشة اللطيفة",
+      "مغامرة المكعبات السحرية وبناء أعلى برج ملون بدون ما يقع",
+      "سدرة والفراشة في حديقة الفقاعات الصابونية الطائرة والمرح",
+      "أول يوم في الحضانة وسر الابتسامة الحلوة وتكوين أصحاب جداد",
+      "حكاية الدبدوب المفقود والبحث عنه تحت السرير وخلف الستارة",
+      "رسم قوس قزح بألوان الشمع ومفاجأة ماما بأجمل لوحة",
+      "أغنية الحروف الأبجدية الراقصة مع الفراشة الملونة وسدرة",
+      "لعبة الاستغماية اللطيفة مع حيوانات المزرعة الصغيرة",
+      "مشاركة قطعة الحلوى والألعاب مع الأخت والأخ الصغير",
     ],
   },
   {
@@ -2029,6 +2074,13 @@ const RUNNER_CHARACTER_TEAMS = [
       "درس المعلمة أم ملك والبطريق المرح عن آداب الحوار ومساعدة الأصحاب",
       "حكاية الصبر والنظام في مدرسة السعادة مع أم ملك والبطريق خفيف الدم",
       "مسابقة القراءة الممتعة ونصائح المعلمة أم ملك الحنونة للأطفال",
+      "سر الكلمة الطيبة وشكراً ومن فضلك وتأثيرها الساحر في القلوب",
+      "يوم النشاط المدرسي وتوزيع المهام العادل بين كل التلاميذ",
+      "معرض الرسم المدرسي وتشجيع كل طفل على إبراز موهبته الخاصة",
+      "حكاية الإذاعة المدرسية الصباحية وتقديم المعلومات المفيدة بثقة",
+      "قيمة الاعتذار عند الخطأ وإصلاح الأمور بمحبة وابتسامة صادقة",
+      "رحلة المكتبة المدرسية وكيف نختار الكتاب المناسب لعمرنا",
+      "تنظيم حقيبة المدرسة في المساء والاستيقاظ بنشاط وسرور",
     ],
   },
   {
@@ -2043,6 +2095,13 @@ const RUNNER_CHARACTER_TEAMS = [
       "شجاعة ذياد والعصفورة الفرفوشة في إصلاح جسر القرية وقت المطر",
       "تعاون ذياد والعصفورة النشيطة لمساعدة جيران الواحة بهدوء وإخلاص",
       "رحلة البحث عن مفتاح البوابة القديمة مع الشاب الطيب ذياد والعصفورة",
+      "مساعدة عم إبراهيم بائع الخضار في ترتيب الصناديق الثقيلة",
+      "تنظيف ساحة الحي وزراعة شجيرات الظل مع شباب القرية المخلصين",
+      "إنقاذ خروف العيد الصغير من الوقوع في المجرى المائي بشهامة",
+      "إصلاح مصابيح ممر الحي المظلم ليمشي الأطفال وكبار السن بأمان",
+      "توصيل الدواء لجيراننا المرضى في ليلة البرد القارس",
+      "مبادرة إعادة تدوير ألعاب الأطفال القديمة وإهدائها للأيتام",
+      "شهامة ذياد في إرجاع المحفظة المفقودة لصاحبها ورفض أي مكافأة",
     ],
   },
   {
@@ -2057,6 +2116,13 @@ const RUNNER_CHARACTER_TEAMS = [
       "لغز الأرقام الذهبية مع أستاذ شريف والصقر الذكي وتنظيم حصالة التوفير",
       "كيف نرتب وقتنا وألعابنا بدقة وحكمة مع المحاسب أستاذ شريف والصقر الذكي",
       "حل معادلة الكنز البلوري بالحساب والتفكير المنظم مع أستاذ شريف",
+      "لعبة الميزان العادل وتعلّم أهمية الصدق في البيع والشراء والمكاييل",
+      "تحدي جدول الضرب الممتع مع صقر الحسابات في مدرسة النجوم",
+      "كيف نخطط لمصروفنا الأسبوعي وشراء ما نحتاجه قبل ما نشتهيه",
+      "ترتيب أولويات اليوم: الواجبات المدرسية أولاً ثم اللعب والمرح",
+      "لغز الساعة الدقيقة وتنظيم ساعات اليوم بين الدراسة والنوم والرياضة",
+      "حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي",
+      "موازنة ميزانية حفلة نهاية العام وشراء الزينة بأفضل الأسعار",
     ],
   },
   {
@@ -2071,6 +2137,13 @@ const RUNNER_CHARACTER_TEAMS = [
       "حكاية جدو والفأر المشاكس عن كنز الحكمة والصبر في الواحة القديمة",
       "مقالب الفأر المشاكس المضحكة وحكمة جدو الطيب في ليلة الفوانيس",
       "حدوتة الشجرة المباركة اللي حكاها جدو لكل أطفال القرية",
+      "سر الصندوق الخشبي القديم وذكريات ألعاب أيام زمان البسيطة",
+      "حكاية جدو عن بر الوالدين وحب الجد والجدة واحترام الكبير",
+      "ليلة الحكايات حول المدفأة وسر دفء العائلة واجتماع الأحباب",
+      "حدوتة النحلة النشيطة والدرس الذي تعلمه الفأر المشاكس عن الكسل",
+      "حكمة جدو في حل الخلاف بين أطفال الحارة بالعدل والرضا",
+      "سر الفانوس الأثري اللي بينور لما نقول كلمة حق وصدق",
+      "حدوتة الزارع الصبور اللي سقى البذرة لحد ما بقت نخلة عالية",
     ],
   },
   {
@@ -2085,6 +2158,13 @@ const RUNNER_CHARACTER_TEAMS = [
       "فطيرة التفاح الدافية مع تيتة والدب باندا وقيمة المشاركة مع الجيران",
       "حنان تيتة ومواقف الدب باندا اللطيفة في بستان الفواكه المنورة",
       "سر وصفة السعادة والحنان في بيت تيتة مع الدب باندا المحبوب",
+      "شال الصوف الملون الذي نسجته تيتة لتدفئة أطفال الملجأ",
+      "مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر",
+      "حكاية الدب باندا الذي تعلّم آداب المائدة والأكل باليد اليمنى",
+      "جلسة العصرية في حديقة تيتة ورواية أسرار الزهور والنباتات",
+      "حكاية طبق العاشوراء والكعك اللذيذ وتوزيعه على كل بيوت الشارع",
+      "نصائح تيتة الذهبية لعلاج الزكام بالشوربة الدافية والليمون والعسل",
+      "سلة الهدايا المفاجئة التي جهزتها تيتة لأشطر طفل في حفظ القرآن",
     ],
   },
 ];
@@ -2209,7 +2289,7 @@ async function fetchRecentYouTubeChannelTitlesAndHeroes(accessToken) {
   if (!accessToken) return { recentTitles, recentHeroKeywords };
   try {
     const sRes = await fetch(
-      "https://www.googleapis.com/youtube/v3/search?part=snippet&forMine=true&type=video&maxResults=12",
+      "https://www.googleapis.com/youtube/v3/search?part=snippet&forMine=true&type=video&order=date&maxResults=15",
       { headers: { Authorization: `Bearer ${accessToken}` } }
     );
     if (sRes.ok) {
@@ -2335,7 +2415,7 @@ function buildSmartEpisodeForRunner({
     {
       title: `8. النهاية: رسالة ${shortHero} و${shortComp} لأبطال Noreen Kids`,
       egyptianShort: `هيييه! حلينا اللغز ونجحت المهمة يا ${shortHero}! 🧩 تحدي الشطار: يا ترى إيه أهم حاجة اتعلمناها من مغامرة ${egyptianTopic}؟ اكتبوا إجابتكم في التعليقات وقولوا لنا مين كان أكتر شخصية ساعدت في الحل، وما تنسوش تشتركوا في قناة نورين كيدز وتعملوا لايك! مع السلامة يا أبطال!`,
-      egyptianLong: `ودلوقتي يا أصحابنا الحلوين، وصلنا للمشهد الثامن والتحدي الأخير بعد ما عشنا مغامرة ${egyptianTopic} مع ${shortHero} و${shortComp}! 🧩 سؤال الشطار: إيه أهم درس اتعلمناه النهارده، وإزاي نقدر نستخدمه في حياتنا؟ اكتبوا إجابتكم في التعليقات وسمّوا صاحبكم اللي ساعد في الحل، وبعدها اشتركوا في قناة نورين كيدز واعملوا لايك! بنحبكم أوي يا أبطال!`,
+      egyptianLong: `ودلوقتي يا أصحابنا الحلوين، وصلنا المشهد الثامن والتحدي الأخير بعد ما عشنا مغامرة ${egyptianTopic} مع ${shortHero} و${shortComp}! 🧩 سؤال الشطار: إيه أهم درس اتعلمناه النهارده، وإزاي نقدر نستخدمه في حياتنا؟ اكتبوا إجابتكم في التعليقات وسمّوا صاحبكم اللي ساعد في الحل، وبعدها اشتركوا في قناة نورين كيدز واعملوا لايك! بنحبكم أوي يا أبطال!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
@@ -2453,33 +2533,55 @@ ${chaptersLines.join("\n")}
 function selectNonRepeatingTeamAndTopicForRunner({
   excludedHeroes = new Set(),
   excludedTitles = [],
+  preferredTeamIndex = -1,
+  avoidTeamNames = new Set(),
 }) {
   const cleanExcludedTitles = excludedTitles
     .map((t) => String(t || "").trim())
     .filter(Boolean);
 
-  let eligibleTeams = RUNNER_CHARACTER_TEAMS.filter(
-    (t) => !excludedHeroes.has(t.mainCharacterName)
-  );
-  if (eligibleTeams.length === 0) {
-    eligibleTeams = [...RUNNER_CHARACTER_TEAMS];
+  let chosenTeam = null;
+  const totalTeams = RUNNER_CHARACTER_TEAMS.length;
+
+  // 1) Preferred team by Fair Rotation Index
+  if (preferredTeamIndex >= 0 && preferredTeamIndex < totalTeams) {
+    const candidateTeam = RUNNER_CHARACTER_TEAMS[preferredTeamIndex];
+    if (!avoidTeamNames.has(candidateTeam.mainCharacterName)) {
+      chosenTeam = candidateTeam;
+    }
   }
 
-  // Shuffle eligible teams using high-entropy crypto random
-  const shuffledTeams = [...eligibleTeams].sort(
-    () => (crypto.randomInt(0, 1000) - 500)
-  );
-  const chosenTeam = shuffledTeams[0];
+  // 2) Least-recently-used team that is not avoided or recently excluded
+  if (!chosenTeam) {
+    let eligibleTeams = RUNNER_CHARACTER_TEAMS.filter(
+      (t) =>
+        !avoidTeamNames.has(t.mainCharacterName) &&
+        !excludedHeroes.has(t.mainCharacterName)
+    );
+    if (eligibleTeams.length === 0) {
+      eligibleTeams = RUNNER_CHARACTER_TEAMS.filter(
+        (t) => !avoidTeamNames.has(t.mainCharacterName)
+      );
+    }
+    if (eligibleTeams.length === 0) {
+      eligibleTeams = [...RUNNER_CHARACTER_TEAMS];
+    }
+    chosenTeam = eligibleTeams[0];
+  }
 
-  const shuffledStories = [...chosenTeam.stories].sort(
-    () => (crypto.randomInt(0, 1000) - 500)
-  );
+  // Fisher-Yates high-entropy shuffle for candidate fallback stories
+  const shuffledStories = [...chosenTeam.stories];
+  for (let i = shuffledStories.length - 1; i > 0; i--) {
+    const j = crypto.randomInt(0, i + 1);
+    [shuffledStories[i], shuffledStories[j]] = [shuffledStories[j], shuffledStories[i]];
+  }
+
   let chosenTopic = shuffledStories[0];
   for (const candidate of shuffledStories) {
     const keyWords = candidate
-      .split(/\s+/)
+      .split(/s+/)
       .filter((w) => w.length > 3)
-      .slice(0, 4);
+      .slice(0, 5);
     const alreadyUsed = cleanExcludedTitles.some((prevTitle) =>
       keyWords.filter((kw) => prevTitle.includes(kw)).length >= 2
     );
@@ -2498,26 +2600,33 @@ async function generateFreshAiEpisodeForRunner({
   videoFormat,
   dialect = "egyptian",
   dailyTime = "19:00",
+  excludedTitles = [],
 }) {
   const isShort = videoFormat === "short_9_16";
   const scCount = isShort ? 4 : 8;
   const apiKey = String(process.env.GEMINI_API_KEY || "").trim();
-
   if (apiKey) {
     try {
       const ai = new GoogleGenAI({ apiKey });
+      const recentTitlesList = (Array.isArray(excludedTitles) ? excludedTitles : [])
+        .slice(0, 20)
+        .map((t) => `- ${t}`)
+        .join("\n");
       const prompt = `أنت المخرج الإبداعي لقناة الأطفال ثلاثية الأبعاد "Noreen Kids".
-قم بتوليد حلقة كرتون 3D جديدة كلياً ومبتكرة (${
+قم بابتكار وتوليد حلقة كرتون 3D جديدة كلياً ومبتكرة وغير مسبوقة (${
         isShort
           ? "فيديو قصير YouTube Shorts مدته 68 ثانية من 4 مشاهد مترابطة"
           : "فيلم كرتون طويل مدته 312 ثانية من 8 مشاهد مترابطة، كل مشهد 55 إلى 75 كلمة"
       }) باللهجة المصرية القاهرية الطبيعية المحببة للأطفال بدون أي تشكيل فصحى.
 البطل الرئيسي: "${team.mainCharacterName}" (الأداة: ${team.heroProp}).
 المرافق: "${team.companionName}" (الأداة: ${team.compProp}).
-فكرة القصة الجديدة: "${topic}".
+فكرة القصة ومجالها: ابتكر مغامرة ممتعة وقيمة تربوية أصيلة مستوحاة من: "${topic}".
+مهم جداً: تجنب تماماً أي تشابه أو تكرار مع هذه العناوين التي تم نشرها سابقاً:
+${recentTitlesList}
+
 أخرج JSON فقط يحتوي على:
 {
-  "title": "عنوان القصة بدون Noreen Kids وبدون هاشتاج",
+  "title": "عنوان القصة الجديد والمبتكر بدون كلمة Noreen Kids وبدون هاشتاج",
   "moralLesson": "الدرس المستفاد من الحلقة",
   "scenes": [
     { "sceneNumber": 1, "title": "عنوان المشهد", "dialogueArabic": "الحوار الكامل باللهجة المصرية القاهرية" }
@@ -2545,6 +2654,23 @@ async function generateFreshAiEpisodeForRunner({
             aiMoralLesson: parsed.moralLesson,
           });
         }
+      }
+    } catch (e) {
+      console.warn(
+        `   [AI Story Info] Using domain-matched smart episode builder for ${team.mainCharacterName}: ${
+          e instanceof Error ? e.message : e
+        }`
+      );
+    }
+  }
+  return buildSmartEpisodeForRunner({
+    team,
+    topic,
+    videoFormat,
+    dialect,
+    dailyTime,
+  });
+}
       }
     } catch (e) {
       console.warn(
@@ -3293,9 +3419,17 @@ async function publishDailyInteractive3DPhotoPostForRunner({
         ? fallbackInteractiveTeamPool
         : RUNNER_CHARACTER_TEAMS;
 
-  const pick = [...finalInteractiveTeamPool].sort(
-    () => crypto.randomInt(0, 1000) - 500
-  )[0];
+  // Strict Fair Rotation: cycle through all 14 heroes sequentially
+  const interactiveRotIdx = Number(fbSchedule?.interactiveHeroRotationIndex ?? 0);
+  const safeRotIdx = (!Number.isNaN(interactiveRotIdx) && interactiveRotIdx >= 0)
+    ? interactiveRotIdx % RUNNER_CHARACTER_TEAMS.length
+    : 0;
+
+  const pick = (finalInteractiveTeamPool.find((t) => t.mainCharacterName === RUNNER_CHARACTER_TEAMS[safeRotIdx].mainCharacterName))
+    || RUNNER_CHARACTER_TEAMS[safeRotIdx];
+
+  fbSchedule.interactiveHeroRotationIndex = (safeRotIdx + 1) % RUNNER_CHARACTER_TEAMS.length;
+  console.log(`🎯 [Fair Rotation Interactive 3D Post] Picked Hero="${pick.mainCharacterName}" & "${pick.companionName}" | NextInteractiveIndex=${fbSchedule.interactiveHeroRotationIndex}`);
   const heroName = pick.mainCharacterName || "الطبيبة نورين";
   const compName = pick.companionName || "أرنوب الشقي الممرض";
   const shortHero = getShortCharacterDisplayNameRunner(heroName, "egyptian");
@@ -3384,7 +3518,13 @@ async function publishDailyInteractive3DPhotoPostForRunner({
 
   // Immediately post the interactive first comment on the photo post
   try {
-    const firstCommentMsg = `🌟 تحدي أبطال نورين كيدز النهاردة مع ${shortHero} و${shortComp}!\n👇 اكتبوا لنا اسم طفلكم وإجابته في تعليق هنا عشان ${shortHero} و${shortComp} يردوا عليه ويحيوه بالاسم، ومتنسوش متابعة الصفحة 🔔👍 عشان توصلكم حدوتة النهاردة!`;
+    const dynamicCommentPool = [
+      `🌟 تحدي أبطال نورين كيدز النهاردة مع ${shortHero} و${shortComp}!\n👇 اكتبوا لنا اسم طفلكم الجميل وإجابته في تعليق هنا علشان ${shortHero} و${shortComp} يردوا عليه ويحيوه بالاسم في حلقة بكرة! 🎬💖 ومتنسوش متابعة الصفحة 🔔👍 ومشاركة التحدي مع كل الأمهات! #نورين_كيدز`,
+      `🎉 مين أشطر بطل هيجاوب على فزورة ${shortHero} و${shortComp} النهاردة؟\n👇 شاركونا إجابة أطفالكم الحلوين وأساميهم في تعليق، و${shortHero} هيرد عليهم باسمهم ويشجعهم! 🌟👏 وتابعوا صفحة نورين كيدز لحكاية بكرة! 🔔👍`,
+      `💖 تحية خاصة مليانة حب من ${shortHero} و${shortComp} لكل أبطال Noreen Kids الشطار!\n👇 اكتبوا لنا إجابتكم واسم طفلكم علشان نحييه في التعليقات ونبعتله شهادة شطارة وفرحة كبيرة! 🏆✨ متنسوش المتابعة واللايك 🔔👍`,
+      `🤔 لغز النهاردة الذكي مع ${shortHero} و${shortComp} لأذكياء نورين كيدز!\n👇 مستنيين إجاباتكم وأسامي أبطالنا الحلوين في التعليقات علشان نبارك لأشطر إجابة ونثبتها! 🌟✨ متنسوش متابعة الصفحة 🔔👍`
+    ];
+    const firstCommentMsg = dynamicCommentPool[safeRotIdx % dynamicCommentPool.length];
     await fetch(
       `https://graph.facebook.com/v21.0/${encodeURIComponent(postId)}/comments`,
       {
@@ -4074,13 +4214,13 @@ async function main() {
   registerPreviousEpisodeToExclude(fbSchedule.longEpisode);
 
   if (Array.isArray(schedule.recentStoryHistory)) {
-    for (const item of schedule.recentStoryHistory.slice(0, 6)) {
+    for (const item of schedule.recentStoryHistory.slice(0, 60)) {
       if (item?.mainCharacterName) excludedHeroes.add(String(item.mainCharacterName).trim());
       if (item?.topic) excludedTitles.push(String(item.topic).trim());
     }
   }
   if (Array.isArray(schedule.scheduledHistory)) {
-    for (const h of schedule.scheduledHistory.slice(0, 6)) {
+    for (const h of schedule.scheduledHistory.slice(0, 60)) {
       if (h?.shortEpisodeTitle) excludedTitles.push(String(h.shortEpisodeTitle));
       if (h?.longEpisodeTitle) excludedTitles.push(String(h.longEpisodeTitle));
       for (const team of RUNNER_CHARACTER_TEAMS) {
@@ -4097,23 +4237,21 @@ async function main() {
       }
     }
   }
-
   if (accessToken) {
     const liveChannelInfo = await fetchRecentYouTubeChannelTitlesAndHeroes(accessToken);
     for (const t of liveChannelInfo.recentTitles) excludedTitles.push(t);
-    for (const h of liveChannelInfo.recentHeroKeywords) excludedHeroes.add(h);
   }
 
-  // Keep at least 4 eligible teams even if many heroes were recently used
-  if (excludedHeroes.size > RUNNER_CHARACTER_TEAMS.length - 4) {
-    const arr = Array.from(excludedHeroes);
-    excludedHeroes.clear();
-    for (const h of arr.slice(0, 6)) excludedHeroes.add(h);
-  }
+  // Fair Rotation pointer retrieval
+  const baseFairIndex = Number(
+    schedule.heroFairRotationIndex ?? fbSchedule.heroFairRotationIndex ?? 0
+  );
+  const fairIndex = (!Number.isNaN(baseFairIndex) && baseFairIndex >= 0)
+    ? baseFairIndex % RUNNER_CHARACTER_TEAMS.length
+    : 0;
 
   const useLockedEpisodes =
     String(process.env.USE_LOCKED_EPISODES || "").toLowerCase() === "true";
-
   let chosenShortEp;
   let chosenLongEp;
 
@@ -4130,19 +4268,33 @@ async function main() {
     chosenShortEp = schedule.shortEpisode;
     chosenLongEp = schedule.longEpisode;
   } else {
+    // 1. Strict Fair Rotation selection for Short video
     const shortPick = selectNonRepeatingTeamAndTopicForRunner({
       excludedHeroes,
       excludedTitles,
-    });
-    const longExcludedHeroes = new Set(excludedHeroes);
-    longExcludedHeroes.add(shortPick.team.mainCharacterName);
-    const longPick = selectNonRepeatingTeamAndTopicForRunner({
-      excludedHeroes: longExcludedHeroes,
-      excludedTitles: [...excludedTitles, shortPick.topic],
+      preferredTeamIndex: fairIndex,
+      avoidTeamNames: new Set(),
     });
 
+    // 2. Strict Fair Rotation selection for Long video (guarantees 2 distinct heroes every day)
+    const longAvoidNames = new Set([shortPick.team.mainCharacterName]);
+    const longPick = selectNonRepeatingTeamAndTopicForRunner({
+      excludedHeroes,
+      excludedTitles: [...excludedTitles, shortPick.topic],
+      preferredTeamIndex: (fairIndex + 1) % RUNNER_CHARACTER_TEAMS.length,
+      avoidTeamNames: longAvoidNames,
+    });
+
+    // Advance fair rotation index for next run
+    let nextFairIndex = (fairIndex + 2) % RUNNER_CHARACTER_TEAMS.length;
+    if (runMode === "short_only" || runMode === "long_only") {
+      nextFairIndex = (fairIndex + 1) % RUNNER_CHARACTER_TEAMS.length;
+    }
+    schedule.heroFairRotationIndex = nextFairIndex;
+    fbSchedule.heroFairRotationIndex = nextFairIndex;
+
     console.log(
-      `✨ [AI Non-Repeating Story Selection] Short Hero="${shortPick.team.mainCharacterName}" (${shortPick.topic}) | Long Hero="${longPick.team.mainCharacterName}" (${longPick.topic})`
+      `✨ [Strict Fair Rotation & AI Infinite Stories] Short Hero="${shortPick.team.mainCharacterName}" (${shortPick.topic}) | Long Hero="${longPick.team.mainCharacterName}" (${longPick.topic}) | NextRotationIndex=${nextFairIndex}`
     );
 
     chosenShortEp = await generateFreshAiEpisodeForRunner({
@@ -4151,15 +4303,35 @@ async function main() {
       videoFormat: "short_9_16",
       dialect: dailyDialect,
       dailyTime,
+      excludedTitles,
     });
-
     chosenLongEp = await generateFreshAiEpisodeForRunner({
       team: longPick.team,
       topic: longPick.topic,
       videoFormat: "long_16_9",
       dialect: dailyDialect,
       dailyTime,
+      excludedTitles: [...excludedTitles, chosenShortEp?.title || shortPick.topic],
     });
+
+    // Persist into recentStoryHistory
+    if (!Array.isArray(schedule.recentStoryHistory)) schedule.recentStoryHistory = [];
+    schedule.recentStoryHistory.unshift(
+      {
+        topic: chosenShortEp?.title || shortPick.topic,
+        mainCharacterName: shortPick.team.mainCharacterName,
+        companionName: shortPick.team.companionName,
+        timestampIso: new Date().toISOString(),
+      },
+      {
+        topic: chosenLongEp?.title || longPick.topic,
+        mainCharacterName: longPick.team.mainCharacterName,
+        companionName: longPick.team.companionName,
+        timestampIso: new Date().toISOString(),
+      }
+    );
+    schedule.recentStoryHistory = schedule.recentStoryHistory.slice(0, 100);
+    fbSchedule.recentStoryHistory = schedule.recentStoryHistory;
   }
 
   const tasks = [];
