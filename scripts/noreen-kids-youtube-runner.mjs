@@ -2663,23 +2663,6 @@ ${recentTitlesList}
       );
     }
   }
-  return buildSmartEpisodeForRunner({
-    team,
-    topic,
-    videoFormat,
-    dialect,
-    dailyTime,
-  });
-}
-      }
-    } catch (e) {
-      console.warn(
-        `   [AI Story Info] Using domain-matched smart episode builder for ${team.mainCharacterName}: ${
-          e instanceof Error ? e.message : e
-        }`
-      );
-    }
-  }
 
   return buildSmartEpisodeForRunner({
     team,
