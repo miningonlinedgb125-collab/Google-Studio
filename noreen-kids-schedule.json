@@ -37,6 +37,16 @@
     {
       "topic": "بناء مسار القطار المغناطيسي الصغير لنقل ألعاب الأطفال",
       "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "لغز آثار الأقدام الصغيرة في جبل الثلج ومساعدة",
+      "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي"
+    },
+    {
+      "topic": "بناء مسار القطار المغناطيسي الصغير لنقل ألعاب الأطفال",
+      "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش",
       "timestampIso": "2026-10-06T07:03:31.216Z"
     },
@@ -2449,16 +2459,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٦‏/١٠‏/٢٠٢٦، ١٠:١٩:٠٣ ص",
   "lastCloudRunReport": {
-    "id": "gh-run-37268191601",
+    "id": "gh-run-37427103236",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-05 (08:46 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1791178370256-xg6u",
-    "longEpisodeId": "ep-gh-long-1791178373568-qk35",
-    "shortEpisodeTitle": "Noreen Kids: فطيرة التفاح الدافية مع تيتة والدب باندا وقيمة | مغامرات تيتة والدب باندا",
-    "longEpisodeTitle": "Noreen Kids: لعبة الأشكال والألوان المبهجة مع سدرة الصغنونة والفراشة | مغامرات سدرة الصغنونة والفراشة الملونة",
-    "shortTitle": "Noreen Kids: فطيرة التفاح الدافية مع تيتة والدب باندا وقيمة | مغامرات تيتة والدب باندا",
-    "longTitle": "Noreen Kids: لعبة الأشكال والألوان المبهجة مع سدرة الصغنونة والفراشة | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-06 (10:19 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1791270207423-zyii",
+    "longEpisodeId": "ep-gh-long-1791270211216-l7yi",
+    "shortEpisodeTitle": "Noreen Kids: بناء مسار القطار المغناطيسي الصغير لنقل ألعاب الأطفال | مغامرات المهندسة نوران والنمر الفرفوش",
+    "longEpisodeTitle": "Noreen Kids: لغز آثار الأقدام الصغيرة في جبل الثلج ومساعدة | مغامرات عمرو وزعتر",
+    "shortTitle": "Noreen Kids: بناء مسار القطار المغناطيسي الصغير لنقل ألعاب الأطفال | مغامرات المهندسة نوران والنمر الفرفوش",
+    "longTitle": "Noreen Kids: لغز آثار الأقدام الصغيرة في جبل الثلج ومساعدة | مغامرات عمرو وزعتر",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2467,14 +2477,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "gPzthMJfab4",
-    "youtubeLongVideoId": "YBwNDvDmmvM",
-    "facebookShortVideoId": "936302955847171",
-    "facebookLongVideoId": "1032174619869867",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/936302955847171",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1032174619869867",
-    "facebookShortTitle": "Noreen Kids | فطيرة التفاح الدافية مع تيتة والدب باندا وقيمة - مغامرة تيتة والدب باندا",
-    "facebookLongTitle": "Noreen Kids | لعبة الأشكال والألوان المبهجة مع سدرة الصغنونة والفراشة - مغامرة سدرة الصغنونة والفراشة الملونة",
+    "youtubeShortVideoId": "vDMtJRjh2pQ",
+    "youtubeLongVideoId": "yhu1x6DZ89g",
+    "facebookShortVideoId": "1039996025765357",
+    "facebookLongVideoId": "1806059040593951",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1039996025765357",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1806059040593951",
+    "facebookShortTitle": "Noreen Kids | بناء مسار القطار المغناطيسي الصغير لنقل ألعاب الأطفال - مغامرة المهندسة نوران والنمر الفرفوش",
+    "facebookLongTitle": "Noreen Kids | لغز آثار الأقدام الصغيرة في جبل الثلج ومساعدة - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2489,9 +2499,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 321,
-      "fileSizeBytes": 35462840,
-      "inspectedAt": "08:46"
+      "durationSec": 310,
+      "fileSizeBytes": 32233226,
+      "inspectedAt": "10:19"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2500,7 +2510,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-05T05:46:46.405Z"
+    "reportedAtIso": "2026-10-06T07:19:06.309Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880"
