@@ -23,7 +23,7 @@
   "dailyInteractivePhotoStudioTimeCairo": "16:15",
   "dailyInteractivePhotoGitHubActionsEnabled": true,
   "dailyInteractivePhotoGitHubTimeCairo": "16:15",
-  "lastInteractivePhotoDateKey": "2026-10-05",
+  "lastInteractivePhotoDateKey": "2026-10-06",
   "repliedCommentIds": [
     "122108050131484976_1437940118283880",
     "122108050131484976_2061911864449592"
@@ -47,6 +47,18 @@
     }
   ],
   "interactivePhotoPostsLog": [
+    {
+      "postId": "1330185823512542_122112443373484976",
+      "photoId": "122112443349484976",
+      "themeTitle": "فزورة الأبطال الشطار مع المهندسة نوران والنمر الفرفوش",
+      "title": "فزورة الأبطال الشطار مع المهندسة نوران والنمر الفرفوش",
+      "caption": "🎉 فزورة النهاردة من عالم Noreen Kids ثلاثي الأبعاد! 🎉\nبطلنا المحبوب \"المهندسة نوران\" وصديقنا الشقي \"النمر الفرفوش\" بيجهزوا لمفاجأة كبيرة النهاردة! 🌟🎬\nسؤال للشطار الحلوين: إيه أكتر صفة جميلة بتحبوها في المهندسة نوران والنمر الفرفوش؟\n(الشجاعة 💪 - التعاون 🤝 - الذكاء 🧠 - خفة الدم 😄)؟\n\n👇 شاركونا في التعليقات واكتبوا اسم طفلكم عشان نرحب بيه بالاسم في عيلة نورين كيدز، واضغطوا متابعة للصفحة 🔔👍 عشان متفوتكمش حكاية النهاردة!\n\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_أطفال #كرتون_مصري #تربية_إيجابية #أمهات_مصر",
+      "heroName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش",
+      "publishedAtCairo": "2026-10-06 · 10:19 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122112443373484976",
+      "postKind": "manual"
+    },
     {
       "postId": "1330185823512542_122111797179484976",
       "photoId": "122111797155484976",
@@ -2283,7 +2295,7 @@
       "dialogueHash": ""
     }
   ],
-  "lastAutoCommentScanAtCairo": "2026-10-05 · 18:49 بتوقيت مصر",
+  "lastAutoCommentScanAtCairo": "2026-10-06 · 10:19 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-05",
   "lastFacebookCloudRunReport": {
     "id": "gh-run-37333496273",
@@ -2340,5 +2352,5 @@
     "reportedAtIso": "2026-10-05T15:49:01.538Z"
   },
   "heroFairRotationIndex": 3,
-  "interactiveHeroRotationIndex": 1
+  "interactiveHeroRotationIndex": 2
 }
