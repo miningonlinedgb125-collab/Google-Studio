@@ -4490,7 +4490,7 @@ async function main() {
           specificHeroName: task.episode?.mainCharacterName || "",
           specificCompanionName: task.episode?.companionName || "",
           forcePublish: true,
-          postKind: "scheduled",
+          postKind: runMode === "daily_schedule" ? "scheduled" : "manual",
         });
       } catch (preVideoErr) {
         console.warn(`   [Pre-Video 3D Challenge Notice] ${preVideoErr?.message || preVideoErr}`);
