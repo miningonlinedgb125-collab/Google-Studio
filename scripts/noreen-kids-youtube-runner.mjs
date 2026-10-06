@@ -4282,11 +4282,23 @@ async function main() {
     chosenShortEp = schedule.shortEpisode;
     chosenLongEp = schedule.longEpisode;
   } else {
+    // Role-Swap Engine: In alternate cycles, heroes switch roles between Short and Long
+    // so every character gets both vertical Shorts (9:16) and horizontal full episodes (16:9)!
+    const isRoleSwapped = Boolean(
+      schedule.heroRoleSwapCycle ?? fbSchedule.heroRoleSwapCycle ?? false
+    );
+    const shortTeamIndex = isRoleSwapped
+      ? (fairIndex + 1) % RUNNER_CHARACTER_TEAMS.length
+      : fairIndex;
+    const longTeamIndex = isRoleSwapped
+      ? fairIndex
+      : (fairIndex + 1) % RUNNER_CHARACTER_TEAMS.length;
+
     // 1. Strict Fair Rotation selection for Short video
     const shortPick = selectNonRepeatingTeamAndTopicForRunner({
       excludedHeroes,
       excludedTitles,
-      preferredTeamIndex: fairIndex,
+      preferredTeamIndex: shortTeamIndex,
       avoidTeamNames: new Set(),
     });
 
@@ -4295,17 +4307,22 @@ async function main() {
     const longPick = selectNonRepeatingTeamAndTopicForRunner({
       excludedHeroes,
       excludedTitles: [...excludedTitles, shortPick.topic],
-      preferredTeamIndex: (fairIndex + 1) % RUNNER_CHARACTER_TEAMS.length,
+      preferredTeamIndex: longTeamIndex,
       avoidTeamNames: longAvoidNames,
     });
 
-    // Advance fair rotation index for next run
+    // Advance fair rotation index for next run & toggle role swap upon completing full cycle of 14 heroes
     let nextFairIndex = (fairIndex + 2) % RUNNER_CHARACTER_TEAMS.length;
+    let nextRoleSwap = isRoleSwapped;
     if (runMode === "short_only" || runMode === "long_only") {
       nextFairIndex = (fairIndex + 1) % RUNNER_CHARACTER_TEAMS.length;
+    } else if (fairIndex + 2 >= RUNNER_CHARACTER_TEAMS.length) {
+      nextRoleSwap = !isRoleSwapped;
     }
     schedule.heroFairRotationIndex = nextFairIndex;
     fbSchedule.heroFairRotationIndex = nextFairIndex;
+    schedule.heroRoleSwapCycle = nextRoleSwap;
+    fbSchedule.heroRoleSwapCycle = nextRoleSwap;
 
     console.log(
       `✨ [Strict Fair Rotation & AI Infinite Stories] Short Hero="${shortPick.team.mainCharacterName}" (${shortPick.topic}) | Long Hero="${longPick.team.mainCharacterName}" (${longPick.topic}) | NextRotationIndex=${nextFairIndex}`
