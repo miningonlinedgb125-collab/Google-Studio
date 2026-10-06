@@ -48,6 +48,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122112675645484976",
+      "photoId": "122112675621484976",
+      "themeTitle": "تحدي الملاحظة الذكية مع عمرو وزعتر",
+      "title": "تحدي الملاحظة الذكية مع عمرو وزعتر",
+      "caption": "🌟 تحدي أبطال Noreen Kids اليومي للشطار! 🌟\nبصوا كويس في الصورة مع عمرو وزعتر.. 🤔✨\nلو هنسافر النهاردة في مغامرة جديدة: تفتكروا عمرو هيستخدم أنهي أداة ذكية علشان يساعد زعتر؟\n\n1️⃣ اكتبوا إجابتكم في التعليقات 👇\n2️⃣ اكتبوا اسم طفلكم الجميل عشان عمرو وزعتر يحيوه بالاسم في حلقة بكرة! 🎬💖\n3️⃣ متنسوش متابعة صفحة Noreen Kids 🔔👍 ومشاركة البوست مع كل الأمهات!\n\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_قبل_النوم #كرتون_أطفال_3D #تربية_إيجابية #أمهات_مصر",
+      "heroName": "عمرو",
+      "companionName": "زعتر",
+      "publishedAtCairo": "2026-10-06 · 18:47 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122112675645484976",
+      "postKind": "scheduled"
+    },
+    {
       "postId": "1330185823512542_122112675201484976",
       "photoId": "122112675177484976",
       "themeTitle": "فزورة الأبطال الشطار مع شوشو ومرجان",
@@ -2373,7 +2385,7 @@
       "dialogueHash": ""
     }
   ],
-  "lastAutoCommentScanAtCairo": "2026-10-06 · 10:19 بتوقيت مصر",
+  "lastAutoCommentScanAtCairo": "2026-10-06 · 18:47 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-06",
   "lastFacebookCloudRunReport": {
     "id": "gh-run-37487792974",
@@ -2430,6 +2442,6 @@
     "reportedAtIso": "2026-10-06T15:47:48.461Z"
   },
   "heroFairRotationIndex": 5,
-  "interactiveHeroRotationIndex": 2,
+  "interactiveHeroRotationIndex": 3,
   "heroRoleSwapCycle": false
 }
