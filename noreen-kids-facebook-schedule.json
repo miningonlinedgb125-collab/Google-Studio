@@ -2181,6 +2181,16 @@
     {
       "topic": "تجميع شظايا قمر الكريستال وإنارة سماء المجرة من جديد",
       "mainCharacterName": "جنى رائدة الفضاء",
+      "companionName": "بلبل الروبوت اللطيف"
+    },
+    {
+      "topic": "مغامرة الغواصة الذهبية لإنقاذ الحوت الصغير في مملكة المرجان",
+      "mainCharacterName": "شوشو القبطان الصغير",
+      "companionName": "مرجان الدلفين المرح"
+    },
+    {
+      "topic": "تجميع شظايا قمر الكريستال وإنارة سماء المجرة من جديد",
+      "mainCharacterName": "جنى رائدة الفضاء",
       "companionName": "بلبل الروبوت اللطيف",
       "timestampIso": "2026-10-06T15:31:35.121Z"
     },
@@ -2361,42 +2371,21 @@
       "companionName": "كركور الببغاء الحكيم",
       "fingerprint": "9ddc33e51fab",
       "dialogueHash": ""
-    },
-    {
-      "topic": "بناء جسر قوس قزح الذكي فوق مدينة السحاب بالعلم والتعاون",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "fingerprint": "5976f6cdd683",
-      "dialogueHash": ""
-    },
-    {
-      "topic": "إنقاذ فراشة النور النادرة في حديقة الزهور العملاقة",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "fingerprint": "6749087e52ee",
-      "dialogueHash": ""
-    },
-    {
-      "topic": "المراية الصادقة في واحة الكريستال وتعلّم الثقة في النفس ومساعدة غيرنا",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم",
-      "fingerprint": "8be66874d4de",
-      "dialogueHash": ""
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-06 · 10:19 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-06",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-37333496273",
+    "id": "gh-run-37487792974",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-05 (18:49 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1791214349395-kufx",
-    "longEpisodeId": "ep-gh-long-1791214354385-ijkj",
-    "shortEpisodeTitle": "Noreen Kids: مسابقة القراءة الممتعة ونصائح المعلمة أم ملك الحنونة | مغامرات أم ملك والبطريق المرح",
-    "longEpisodeTitle": "Noreen Kids: سر النوم البدري وشرب اللبن الدافي علشان نكبر بصحة ونشاط | مغامرات الطبيبة نورين وأرنوب",
-    "shortTitle": "Noreen Kids: مسابقة القراءة الممتعة ونصائح المعلمة أم ملك الحنونة | مغامرات أم ملك والبطريق المرح",
-    "longTitle": "Noreen Kids: سر النوم البدري وشرب اللبن الدافي علشان نكبر بصحة ونشاط | مغامرات الطبيبة نورين وأرنوب",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-06 (18:47 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1791300628396-8jur",
+    "longEpisodeId": "ep-gh-long-1791300695121-rurx",
+    "shortEpisodeTitle": "Noreen Kids: تجميع شظايا قمر الكريستال وإنارة سماء المجرة من جديد | مغامرات جنى وبلبل",
+    "longEpisodeTitle": "Noreen Kids: مغامرة الغواصة الذهبية لإنقاذ الحوت الصغير في مملكة المرجان | مغامرات شوشو ومرجان",
+    "shortTitle": "Noreen Kids: تجميع شظايا قمر الكريستال وإنارة سماء المجرة من جديد | مغامرات جنى وبلبل",
+    "longTitle": "Noreen Kids: مغامرة الغواصة الذهبية لإنقاذ الحوت الصغير في مملكة المرجان | مغامرات شوشو ومرجان",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2405,14 +2394,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "733FBCr9-aw",
-    "youtubeLongVideoId": "vkEKfcGGWX4",
-    "facebookShortVideoId": "1427287536030969",
-    "facebookLongVideoId": "3532647443570666",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1427287536030969",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/3532647443570666",
-    "facebookShortTitle": "Noreen Kids | مسابقة القراءة الممتعة ونصائح المعلمة أم ملك الحنونة - مغامرة أم ملك والبطريق المرح",
-    "facebookLongTitle": "Noreen Kids | سر النوم البدري وشرب اللبن الدافي علشان نكبر بصحة ونشاط - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
+    "youtubeShortVideoId": "JRYF1M2zPKs",
+    "youtubeLongVideoId": "RrMr1v9cxPU",
+    "facebookShortVideoId": "1599919121713839",
+    "facebookLongVideoId": "4615047192099866",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1599919121713839",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/4615047192099866",
+    "facebookShortTitle": "Noreen Kids | تجميع شظايا قمر الكريستال وإنارة سماء المجرة من جديد - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
+    "facebookLongTitle": "Noreen Kids | مغامرة الغواصة الذهبية لإنقاذ الحوت الصغير في مملكة المرجان - مغامرة شوشو القبطان الصغير ومرجان الدلفين ال",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2427,9 +2416,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 318,
-      "fileSizeBytes": 31845253,
-      "inspectedAt": "18:49"
+      "durationSec": 317,
+      "fileSizeBytes": 38346424,
+      "inspectedAt": "18:47"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2438,7 +2427,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-05T15:49:01.538Z"
+    "reportedAtIso": "2026-10-06T15:47:48.461Z"
   },
   "heroFairRotationIndex": 5,
   "interactiveHeroRotationIndex": 2,
