@@ -223,14 +223,15 @@
       "id": "gh-run-37427103236",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-06 (10:07 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-06 (10:19 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1791270207423-zyii",
       "longEpisodeId": "ep-gh-long-1791270211216-l7yi",
       "shortEpisodeTitle": "Noreen Kids: بناء مسار القطار المغناطيسي الصغير لنقل ألعاب الأطفال | مغامرات المهندسة نوران والنمر الفرفوش",
-      "longEpisodeTitle": "لغز آثار الأقدام الصغيرة في جبل الثلج ومساعدة",
+      "longEpisodeTitle": "Noreen Kids: لغز آثار الأقدام الصغيرة في جبل الثلج ومساعدة | مغامرات عمرو وزعتر",
       "shortTitle": "Noreen Kids: بناء مسار القطار المغناطيسي الصغير لنقل ألعاب الأطفال | مغامرات المهندسة نوران والنمر الفرفوش",
-      "longTitle": "لغز آثار الأقدام الصغيرة في جبل الثلج ومساعدة",
+      "longTitle": "Noreen Kids: لغز آثار الأقدام الصغيرة في جبل الثلج ومساعدة | مغامرات عمرو وزعتر",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -238,9 +239,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "vDMtJRjh2pQ",
+      "youtubeLongVideoId": "yhu1x6DZ89g",
       "facebookShortVideoId": "1039996025765357",
+      "facebookLongVideoId": "1806059040593951",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1039996025765357",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1806059040593951",
       "facebookShortTitle": "Noreen Kids | بناء مسار القطار المغناطيسي الصغير لنقل ألعاب الأطفال - مغامرة المهندسة نوران والنمر الفرفوش",
+      "facebookLongTitle": "Noreen Kids | لغز آثار الأقدام الصغيرة في جبل الثلج ومساعدة - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -248,16 +253,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 78,
-        "fileSizeBytes": 9898557,
-        "inspectedAt": "10:07"
+        "durationSec": 310,
+        "fileSizeBytes": 32233226,
+        "inspectedAt": "10:19"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2442,7 +2447,7 @@
   "firstCommentEnabled": true,
   "autoCommentResponderEnabled": true,
   "facebookAutoCommentResponderEnabled": true,
-  "lastAutoCommentScanAtCairo": "٦‏/١٠‏/٢٠٢٦، ١٠:٠٧:٢٢ ص",
+  "lastAutoCommentScanAtCairo": "٦‏/١٠‏/٢٠٢٦، ١٠:١٩:٠٣ ص",
   "lastCloudRunReport": {
     "id": "gh-run-37268191601",
     "uploadMode": "daily_schedule",
@@ -2500,7 +2505,7 @@
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880"
   ],
-  "lastFacebookAutoCommentScanAtCairo": "٦‏/١٠‏/٢٠٢٦، ١٠:٠٧:١٥ ص",
+  "lastFacebookAutoCommentScanAtCairo": "٦‏/١٠‏/٢٠٢٦، ١٠:١٩:٠٢ ص",
   "heroFairRotationIndex": 3,
   "interactiveHeroRotationIndex": 1
 }
