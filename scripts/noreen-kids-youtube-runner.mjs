@@ -1744,9 +1744,14 @@ async function uploadMp4ToYouTube({
     if (usePublishAt && publishAtIso) {
       statusObj.publishAt = publishAtIso;
     }
+    let safeYtTitle = cleanTitle;
+    if (safeYtTitle.length > 99) {
+      const lastSp = safeYtTitle.slice(0, 98).lastIndexOf(" ");
+      safeYtTitle = lastSp > 50 ? safeYtTitle.slice(0, lastSp).trim() : safeYtTitle.slice(0, 98).trim();
+    }
     const metadata = {
       snippet: {
-        title: cleanTitle.slice(0, 98),
+        title: safeYtTitle,
         description: String(description || cleanTitle),
         tags: Array.isArray(tags) ? tags.slice(0, 18) : ["Noreen Kids", "كرتون اطفال 3D"],
         categoryId: String(categoryId || "1"),
@@ -2346,12 +2351,29 @@ function buildSmartEpisodeForRunner({
     .replace(/^Noreen\s*Kids\s*[:\-|]?\s*/i, "")
     .split("|")[0]
     .replace(/#[^\s#]+/g, "")
+    .replace(/\s+/g, " ")
     .trim();
-  const coreTitle =
-    rawCoreTitle.length > 56
-      ? rawCoreTitle.split(/\s+/).slice(0, 8).join(" ").trim()
-      : rawCoreTitle || cleanTopic;
-  const cleanVideoTitleAr = `Noreen Kids: ${coreTitle} | مغامرات ${titleShortHero} و${titleShortComp}`;
+
+  // Smart Word-Boundary Title Engine:
+  // Preserves full words and prevents awkward dangling prepositions
+  const heroSuffix = ` | مغامرات ${titleShortHero} و${titleShortComp}`;
+  const maxCoreLen = Math.max(30, 99 - 13 - heroSuffix.length); // 13 is "Noreen Kids: "
+
+  let coreTitle = rawCoreTitle;
+  if (coreTitle.length > maxCoreLen) {
+    const truncated = coreTitle.slice(0, maxCoreLen);
+    const lastSpace = truncated.lastIndexOf(" ");
+    if (lastSpace > 25) {
+      coreTitle = truncated.slice(0, lastSpace).trim();
+    } else {
+      coreTitle = truncated.trim();
+    }
+  }
+  // Strip any dangling prepositions/conjunctions left at the end of the title
+  coreTitle = coreTitle.replace(/\s+(في|فوق|تحت|مع|و|أو|من|إلى|عن|على|لـ|لبيوت|ومساعدة)$/g, "").trim();
+  if (!coreTitle) coreTitle = cleanTopic;
+
+  const cleanVideoTitleAr = `Noreen Kids: ${coreTitle}${heroSuffix}`;
 
   const envCycle = ["space_forest", "floating_library", "cloud_ship", "coral_kingdom", "crystal_oasis"];
   const camCycle = ["dolly_in", "orbit_slow", "pan_right", "crane_up", "gentle_float"];
@@ -2626,7 +2648,7 @@ ${recentTitlesList}
 
 أخرج JSON فقط يحتوي على:
 {
-  "title": "عنوان القصة الجديد والمبتكر بدون كلمة Noreen Kids وبدون هاشتاج",
+  "title": "عنوان القصة الجديد والمشوق بحيث يكون كامل المعنى وبطول 35 إلى 50 حرفاً دون أن ينقطع المعنى وبدون كلمة Noreen Kids وبدون هاشتاج",
   "moralLesson": "الدرس المستفاد من الحلقة",
   "scenes": [
     { "sceneNumber": 1, "title": "عنوان المشهد", "dialogueArabic": "الحوار الكامل باللهجة المصرية القاهرية" }
@@ -3253,6 +3275,8 @@ async function publishDailyInteractive3DPhotoPostForRunner({
   excludedHeroes = new Set(),
   forcePublish = false,
   postKind = "scheduled",
+  specificHeroName = "",
+  specificCompanionName = "",
 }) {
   const activeToken = await resolveTrueFacebookPageAccessToken({
     rawToken: rawPageAccessToken,
@@ -3287,19 +3311,18 @@ async function publishDailyInteractive3DPhotoPostForRunner({
   );
   const isScheduledInteractivePost = postKind === "scheduled";
 
-  if (
-    isScheduledInteractivePost &&
-    String(fbSchedule?.lastScheduledInteractivePhotoDateKey || "") === nowCairoDate
-  ) {
+  const todayScheduledInteractivePosts = todayInteractivePosts.filter(
+    (entry) => String(entry?.postKind || "").trim() !== "manual"
+  );
+  if (isScheduledInteractivePost && !forcePublish && todayScheduledInteractivePosts.length >= 5) {
     console.log(
-      `✅ [Daily 3D Photo Scheduled Guard] تم تنفيذ المنشور التفاعلي التلقائي لهذا اليوم (${nowCairoDate}) بالفعل — تخطي التكرار.`
+      `✅ [Daily 3D Photo Scheduled Guard] تم الوصول للحد التلقائي اليومي (5 منشورات تفاعلية) بتاريخ ${nowCairoDate} — تخطي النشر.`
     );
-    return { published: false, skippedDuplicate: true };
+    return { published: false, skippedDailyLimit: true };
   }
-
-  if (!isScheduledInteractivePost && todayManualInteractivePosts.length >= 2) {
+  if (!isScheduledInteractivePost && !forcePublish && todayManualInteractivePosts.length >= 5) {
     console.log(
-      `✅ [Daily 3D Photo Manual Guard] تم الوصول للحد اليدوي اليومي (2 منشورين تفاعليين) بتاريخ ${nowCairoDate} — تخطي النشر.`
+      `✅ [Daily 3D Photo Manual Guard] تم الوصول للحد اليدوي اليومي (5 منشورات تفاعلية) بتاريخ ${nowCairoDate} — تخطي النشر.`
     );
     return { published: false, skippedDailyLimit: true };
   }
@@ -3328,7 +3351,7 @@ async function publishDailyInteractive3DPhotoPostForRunner({
           }).format(new Date(p.created_time));
           return postCairoDate === nowCairoDate;
         }).length;
-        if (graphTodayInteractivePostCount >= 3) {
+        if (graphTodayInteractivePostCount >= 10) {
           console.log(
             `✅ [Daily 3D Photo Manual Guard] Facebook لديه بالفعل 3 منشورات تفاعلية لهذا اليوم (${nowCairoDate}) — تخطي النشر.`
           );
@@ -3402,16 +3425,24 @@ async function publishDailyInteractive3DPhotoPostForRunner({
         ? fallbackInteractiveTeamPool
         : RUNNER_CHARACTER_TEAMS;
 
-  // Strict Fair Rotation: cycle through all 14 heroes sequentially
+  // Select team: prioritize specificHeroName if pre-video trigger, otherwise use Fair Rotation
+  let pick = null;
+  if (specificHeroName) {
+    pick = RUNNER_CHARACTER_TEAMS.find((team) =>
+      team.mainCharacterName.includes(specificHeroName) ||
+      specificHeroName.includes(team.mainCharacterName)
+    );
+  }
   const interactiveRotIdx = Number(fbSchedule?.interactiveHeroRotationIndex ?? 0);
   const safeRotIdx = (!Number.isNaN(interactiveRotIdx) && interactiveRotIdx >= 0)
     ? interactiveRotIdx % RUNNER_CHARACTER_TEAMS.length
     : 0;
 
-  const pick = (finalInteractiveTeamPool.find((t) => t.mainCharacterName === RUNNER_CHARACTER_TEAMS[safeRotIdx].mainCharacterName))
-    || RUNNER_CHARACTER_TEAMS[safeRotIdx];
-
-  fbSchedule.interactiveHeroRotationIndex = (safeRotIdx + 1) % RUNNER_CHARACTER_TEAMS.length;
+  if (!pick) {
+    pick = (finalInteractiveTeamPool.find((t) => t.mainCharacterName === RUNNER_CHARACTER_TEAMS[safeRotIdx].mainCharacterName))
+      || RUNNER_CHARACTER_TEAMS[safeRotIdx];
+    fbSchedule.interactiveHeroRotationIndex = (safeRotIdx + 1) % RUNNER_CHARACTER_TEAMS.length;
+  }
   console.log(`🎯 [Fair Rotation Interactive 3D Post] Picked Hero="${pick.mainCharacterName}" & "${pick.companionName}" | NextInteractiveIndex=${fbSchedule.interactiveHeroRotationIndex}`);
   const heroName = pick.mainCharacterName || "الطبيبة نورين";
   const compName = pick.companionName || "أرنوب الشقي الممرض";
@@ -4427,6 +4458,27 @@ async function main() {
     console.log(
       `✅ PRE-UPLOAD UNIT TEST GATE PASSED: Duration=${durSec}s | AV-Drift=${avDrift.toFixed(2)}s | Codec=${vCodec}/${pixFmt}/${aCodec} 48kHz Stereo (Closed-GOP=${closedGop}) | Dialogue=100% Egyptian Verified | ExternalImages=0 | FastStart=Enabled`
     );
+
+    // 4. Pre-Video Dedicated 3D Interactive Challenge for this video heroes
+    if (facebookPageAccessToken && facebookPageId && runMode !== "engagement_only") {
+      console.log(
+        `📸 [Pre-Video 3D Challenge] Publishing dedicated interactive post for "${task.episode?.mainCharacterName}" & "${task.episode?.companionName}" right before ${task.label}...`
+      );
+      try {
+        await publishDailyInteractive3DPhotoPostForRunner({
+          rawPageAccessToken: facebookPageAccessToken,
+          pageId: facebookPageId,
+          tmpDir,
+          fbSchedule,
+          specificHeroName: task.episode?.mainCharacterName || "",
+          specificCompanionName: task.episode?.companionName || "",
+          forcePublish: true,
+          postKind: "scheduled",
+        });
+      } catch (preVideoErr) {
+        console.warn(`   [Pre-Video 3D Challenge Notice] ${preVideoErr?.message || preVideoErr}`);
+      }
+    }
 
     const pkg = task.episode?.youtubePackage || {};
     const expectedThumbPath = path.join(tmpDir, `thumbnail_1280x720_${task.videoFormat}.jpg`);

@@ -4,8 +4,6 @@ on:
   schedule:
     # Runs daily at 18:15 Egypt Time (15:15 UTC) - Facebook Daily Videos (Short + Long)
     - cron: '15 15 * * *'
-    # Runs daily at 16:15 Egypt Time (13:15 UTC) - Daily Interactive 3D Photo Post & Auto-Replier
-    - cron: '15 13 * * *'
   workflow_dispatch:
     inputs:
       run_mode:
