@@ -3035,8 +3035,8 @@ function buildInteractiveChallengeMessage(episode, platform = "youtube") {
   const topic = normalizeEgyptianColloquial(String(episode?.title || "مغامرة النهارده"));
   const moral = normalizeEgyptianColloquial(String(episode?.moralLesson || "التعاون والتفكير الذكي ومساعدة الأصدقاء"));
   return platform === "facebook"
-    ? `🌟 سؤال التحدي لأبطال نورين كيدز! يا ترى إيه أهم حاجة اتعلمناها من مغامرة "${topic}" مع ${hero} و${comp}؟ 💡 ${moral}. اكتبوا إجابتكم في التعليقات وقولوا لنا مين الشخصية اللي ساعدت أكتر في الحل! 👇💖`
-    : `🌟 سؤال التحدي لشطار Noreen Kids! يا ترى إيه أهم حاجة اتعلمناها من مغامرة "${topic}" مع ${hero} و${comp}؟ 💡 ${moral}. اكتبوا إجابتكم في التعليقات وقولوا لنا مين الشخصية اللي ساعدت أكتر في الحل! 👇💖`;
+    ? `📌 [تحدي الأبطال المثبت] 🌟 سؤال التحدي لشطار نورين كيدز! يا ترى إيه أهم حاجة اتعلمناها من مغامرة "${topic}" مع ${hero} و${comp}؟ 💡 ${moral}. اكتبوا إجابتكم في التعليقات وقولوا لنا مين الشخصية اللي ساعدت أكتر في الحل! 👇💖`
+    : `📌 [تحدي الأبطال المثبت] 🌟 سؤال التحدي لشطار Noreen Kids! يا ترى إيه أهم حاجة اتعلمناها من مغامرة "${topic}" مع ${hero} و${comp}؟ 💡 ${moral}. اكتبوا إجابتكم في التعليقات وقولوا لنا مين الشخصية اللي ساعدت أكتر في الحل! 👇💖`;
 }
 
 async function postYouTubeFirstComment({ accessToken, videoId, message }) {
@@ -3359,6 +3359,13 @@ async function scanAndAutoReplyFacebookVideoComments({ rawPageAccessToken, pageI
             if (rep.ok) {
               replied.add(id);
               repliesCount++;
+              // Auto-Heart / Like user's comment from the Page!
+              try {
+                await fetch(`https://graph.facebook.com/v21.0/${encodeURIComponent(id)}/likes`, {
+                  method: "POST",
+                  headers: { Authorization: `Bearer ${token}` },
+                });
+              } catch {}
             }
           }
 
@@ -3634,6 +3641,7 @@ async function publishDailyInteractive3DPhotoPostForRunner({
   const compImg = resolveCharacterAvatarPath(compName, compName);
   const cardPath = path.join(tmpDir, `interactive_3d_card_${Date.now()}.jpg`);
 
+  // Render [ أ ] vs [ ب ] Visual Puzzle Card (1280x720) with Top Banner & Badges
   await execFileAsync("ffmpeg", [
     "-y",
     "-i",
@@ -3641,7 +3649,7 @@ async function publishDailyInteractive3DPhotoPostForRunner({
     "-i",
     heroImg,
     "-filter_complex",
-    `[0:v]scale=640:720:force_original_aspect_ratio=increase,crop=640:720,eq=saturation=1.24:contrast=1.08:brightness=0.02,unsharp=5:5:0.85:5:5:0.0[left];[1:v]scale=640:720:force_original_aspect_ratio=increase,crop=640:720,eq=saturation=1.24:contrast=1.08:brightness=0.02,unsharp=5:5:0.85:5:5:0.0[right];[left][right]hstack=inputs=2,vignette=PI/7,drawbox=x=634:y=0:w=12:h=720:color=0xF59E0B@0.95:t=fill,drawbox=x=638:y=0:w=4:h=720:color=0xFEF08A@1.0:t=fill,drawbox=x=0:y=0:w=1280:h=720:color=0xFBBF24@0.95:t=12,drawbox=x=12:y=12:w=1256:h=696:color=0x38BDF8@0.65:t=4,setsar=1,format=yuvj420p[outv]`,
+    `[0:v]scale=320:654:force_original_aspect_ratio=increase,crop=320:654[c_left];[1:v]scale=320:654:force_original_aspect_ratio=increase,crop=320:654[c_right];[c_left][c_right]hstack=inputs=2[base_duo];[base_duo]split=2[panel_a_raw][panel_b_raw];[panel_a_raw]eq=saturation=1.22:contrast=1.06,drawbox=x=16:y=16:w=76:h=52:color=0xF59E0B@0.95:t=fill,drawbox=x=18:y=18:w=72:h=48:color=0xFEF08A@1.0:t=2[panel_a];[panel_b_raw]eq=saturation=1.35:contrast=1.12:brightness=0.03,colorbalance=rs=0.15:gs=0.05:bs=-0.1,drawbox=x=16:y=16:w=76:h=52:color=0x38BDF8@0.95:t=fill,drawbox=x=18:y=18:w=72:h=48:color=0xE0F2FE@1.0:t=2[panel_b];[panel_a][panel_b]hstack=inputs=2,drawbox=x=636:y=0:w=8:h=654:color=0xFBBF24@1.0:t=fill[panels];color=c=0x1E1B4B:s=1280x66:d=1,format=yuv420p[banner];[banner][panels]vstack=inputs=2,drawbox=x=0:y=0:w=1280:h=720:color=0xFBBF24@1.0:t=8,drawbox=x=8:y=62:w=1264:h=6:color=0x38BDF8@0.9:t=fill[outv]`,
     "-map",
     "[outv]",
     "-frames:v",
