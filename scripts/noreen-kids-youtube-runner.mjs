@@ -3386,26 +3386,68 @@ async function scanAndAutoReplyFacebookVideoComments({ rawPageAccessToken, pageI
     return { repliesCount: 0, scannedComments: 0, scannedVideos: 0 };
   }
 }
+function detectHeroTeamForFacebookPost(title = "", description = "") {
+  const combined = `${title || ""} ${description || ""}`.toLowerCase();
+  const rules = [
+    { keywords: ["تامر", "فارس الواحة", "كركور", "الواحة"], heroName: "تامر", companionName: "كركور" },
+    { keywords: ["جنى", "بلبل", "الببغاء"], heroName: "جنى", companionName: "بلبل" },
+    { keywords: ["نوران", "المهندسة", "مهندسة", "حكيمة", "السلحفاة"], heroName: "المهندسة نوران", companionName: "السلحفاة حكيمة" },
+    { keywords: ["نورين", "طبيبة", "دكتورة", "أرنوب", "طبيبة الأطفال"], heroName: "دكتورة نورين", companionName: "أرنوب الشقي" },
+    { keywords: ["عمرو", "مستكشف", "شاهين", "صقر"], heroName: "عمرو المستكشف", companionName: "الصقر شاهين" },
+    { keywords: ["فريدة", "بيئة", "ريم", "غزالة"], heroName: "فريدة", companionName: "الغزالة ريم" },
+    { keywords: ["يوسف", "مبرمج", "بيبو", "روبوت"], heroName: "يوسف", companionName: "الروبوت بيبو" },
+    { keywords: ["مريم", "فنانة", "مشمشة", "قطة"], heroName: "مريم", companionName: "القطة مشمشة" },
+    { keywords: ["كارمن", "سمسم"], heroName: "كارمن", companionName: "سمسم" },
+    { keywords: ["شوشو", "مرجان"], heroName: "شوشو", companionName: "مرجان" },
+  ];
+  for (const rule of rules) {
+    if (rule.keywords.some((kw) => combined.includes(kw.toLowerCase()))) {
+      return { heroName: rule.heroName, companionName: rule.companionName };
+    }
+  }
+  return { heroName: "أبطال نورين كيدز", companionName: "أصدقاؤهم" };
+}
+
 async function buildSmartHeroReplyForFacebookCommentRunner({
   authorName,
   commentText,
   postTitle,
+  postDescription = "",
+  heroName = "",
+  companionName = "",
 }) {
   const cleanAuthor = String(authorName || "صديقنا الغالي")
     .replace(/[^\p{L}\p{N}\s_.-]/gu, "")
     .trim()
     .slice(0, 35);
+
+  const detected = (!heroName || heroName === "أبطال نورين كيدز")
+    ? detectHeroTeamForFacebookPost(postTitle, postDescription)
+    : { heroName, companionName: companionName || "أصدقاؤه" };
+
+  const targetHero = heroName || detected.heroName;
+  const targetCompanion = companionName || detected.companionName;
+  const isGeneric = targetHero === "أبطال نورين كيدز";
+
+  const heroIntro = isGeneric
+    ? "أبطال نورين كيدز"
+    : `${targetHero} وصديقه ${targetCompanion}`;
+
   const geminiKey = (process.env.GEMINI_API_KEY || "").trim();
   if (geminiKey) {
     try {
       const ai = new GoogleGenAI({ apiKey: geminiKey });
-      const prompt = `أنت مدير مجتمع أبطال قناة وصفحة "Noreen Kids" (نورين كيدز) الكرتونية ثلاثية الأبعاد للأطفال على فيسبوك.
-كتب المتابع "${cleanAuthor}" هذا التعليق على منشور بعنوان "${postTitle || "مغامرة نورين كيدز"}":
+      const prompt = `أنت تمثل صفحة "Noreen Kids" (نورين كيدز) الكرتونية 3D للأطفال على فيسبوك.
+المتابع "${cleanAuthor}" كتب هذا التعليق على فيديو/منشور بعنوان "${postTitle || "مغامرة كرتون نورين كيدز"}":
 "${commentText}"
 
-اكتب رداً واحداً قصيراً ومبهجاً جداً باللهجة المصرية الدافئة واللطيفة (في سطرين كحد أقصى):
-- اذكر اسم المتابع (${cleanAuthor}) بحب وترحيب حار من أبطال نورين كيدز (مثل دكتورة نورين وأرنوب والمهندسة نوران والنمر الفرفوش).
-- تفاعل بذكاء مع كلامه أو مع اسم الطفل المذكور في التعليق، واختم بسؤال تفاعلي لطيف أو دعوة لانتظار حلقة الغد.`;
+قواعد الرد الإلزامية:
+1. أنت ترد حصرياً بصوت وروح بطل هذا الفيديو فقط: "${heroIntro}".
+2. ممنوع منعاً باتاً ذكر أي أبطال أو شخصيات أخرى ليس لها علاقة بهذا الفيديو إطلاقاً!
+3. اكتب رداً واحداً دافئاً وقصيراً ومبهجاً جداً باللهجة المصرية اللطيفة للأطفال (سطر إلى سطرين كحد أقصى).
+4. خاطب المتابع (${cleanAuthor}) أو اسم طفله إن وُجد في التعليق بحب وتشجيع دافئ باسم (${targetHero}).
+5. اختم بسؤال تفاعلي لطيف أو دعوة حماسية لحلقة بكرة.`;
+
       const resp = await ai.models.generateContent({
         model: "gemini-3.8-flash",
         contents: prompt,
@@ -3417,11 +3459,18 @@ async function buildSmartHeroReplyForFacebookCommentRunner({
     } catch {}
   }
 
-  const warmReplies = [
-    `يا أهلاً بيك يا ${cleanAuthor} في عيلة نورين كيدز! 🌟💖 دكتورة نورين وأرنوب الشقي بيبعتولك أحلى تحية وبيقولولك شكراً على تعليقك الجميل.. استنونا في مغامرة جديدة بكرة! 🎬✨`,
-    `نورتوا صفحتنا يا ${cleanAuthor}! 🎉✨ كل أبطال نورين كيدز (دكتورة نورين وأرنوب والمهندسة نوران والنمر الفرفوش) بيقولولكم شكراً من القلب على كلامكم الحلو! تفتكروا مغامرة بكرة هتكون مع مين من الأبطال؟ 🤔💖`,
-    `أحلى تحية من أبطال نورين كيدز لـ ${cleanAuthor}! 🌟👏 كلامكم الجميل بيفرح قلوبنا وبيخلينا نجهز لكم حواديت ومغامرات 3D أحلى وأحلى كل يوم! 🔔❤️`,
-  ];
+  const warmReplies = isGeneric
+    ? [
+        `يا أهلاً بيك يا ${cleanAuthor} في عيلة نورين كيدز! 🌟💖 أبطالنا كلهم بيبعتولك أحلى تحية وبيقولولك شكراً على كلامك الجميل.. استنونا في مغامرة جديدة بكرة! 🎬✨`,
+        `نورت صفحتنا يا ${cleanAuthor}! 🎉✨ أبطال نورين كيدز فرحانين جداً بتعليقك وبيشجعوك دايماً تكون بطل شاطر! تفتكروا مغامرة بكرة هتكون إيه؟ 🤔💖`,
+        `أحلى تحية من كل عيلة نورين كيدز لـ ${cleanAuthor}! 🌟👏 كلامكم الطيب بيفرح قلوبنا ويخلينا نجهز أحلى حكايات 3D كل يوم! 🔔❤️`,
+      ]
+    : [
+        `يا أهلاً بيك يا ${cleanAuthor} في عيلة نورين كيدز! 🌟💖 بطلنا ${targetHero} وصديقه ${targetCompanion} بيبعتولك أحلى تحية وبيقولولك شكراً على تعليقك الجميل.. استنونا في مغامرة جديدة بكرة! 🎬✨`,
+        `نورت صفحتنا يا ${cleanAuthor}! 🎉✨ ${targetHero} و${targetCompanion} فرحانين جداً بكلامك الحلو وبيقولولك استمر يا بطل! تفتكروا مغامرة بكرة هيكون فيها إيه؟ 🤔💖`,
+        `أحلى وأجمل تحية من ${targetHero} و${targetCompanion} لـ ${cleanAuthor}! 🌟👏 تعليقكم بيفرح قلوبنا ويشجعنا نقدملكم كل جديد وممتع كل يوم! 🔔❤️`,
+      ];
+
   return warmReplies[Math.floor(Math.random() * warmReplies.length) % warmReplies.length];
 }
 
@@ -3607,50 +3656,125 @@ async function publishDailyInteractive3DPhotoPostForRunner({
   const shortHero = getShortCharacterDisplayNameRunner(heroName, "egyptian");
   const shortComp = getShortCharacterDisplayNameRunner(compName, "egyptian");
 
-  const interactiveThemes = [
-    {
-      themeTitle: `تحدي الملاحظة الذكية مع ${shortHero} و${shortComp}`,
-      caption: `🌟 تحدي أبطال Noreen Kids اليومي للشطار! 🌟\nبصوا كويس في الصورة مع ${shortHero} و${shortComp}.. 🤔✨\nلو هنسافر النهاردة في مغامرة جديدة: تفتكروا ${shortHero} هيستخدم أنهي أداة ذكية علشان يساعد ${shortComp}؟\n\n1️⃣ اكتبوا إجابتكم في التعليقات 👇\n2️⃣ اكتبوا اسم طفلكم الجميل عشان ${shortHero} و${shortComp} يحيوه بالاسم في حلقة بكرة! 🎬💖\n3️⃣ متنسوش متابعة صفحة Noreen Kids 🔔👍 ومشاركة البوست مع كل الأمهات!\n\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_قبل_النوم #كرتون_أطفال_3D #تربية_إيجابية #أمهات_مصر`,
-    },
-    {
-      themeTitle: `فزورة الأبطال الشطار مع ${shortHero} و${shortComp}`,
-      caption: `🎉 فزورة النهاردة من عالم Noreen Kids ثلاثي الأبعاد! 🎉\nبطلنا المحبوب "${shortHero}" وصديقنا الشقي "${shortComp}" بيجهزوا لمفاجأة كبيرة النهاردة! 🌟🎬\nسؤال للشطار الحلوين: إيه أكتر صفة جميلة بتحبوها في ${shortHero} و${shortComp}؟\n(الشجاعة 💪 - التعاون 🤝 - الذكاء 🧠 - خفة الدم 😄)؟\n\n👇 شاركونا في التعليقات واكتبوا اسم طفلكم عشان نرحب بيه بالاسم في عيلة نورين كيدز، واضغطوا متابعة للصفحة 🔔👍 عشان متفوتكمش حكاية النهاردة!\n\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_أطفال #كرتون_مصري #تربية_إيجابية #أمهات_مصر`,
-    },
-    {
-      themeTitle: `لوحة شرف أبطال Noreen Kids مع ${shortHero} و${shortComp}`,
-      caption: `💖 تحية خاصة من ${shortHero} و${shortComp} لكل أصحابنا الحلوين! 💖\nمين من أطفالنا الشطار غسل سنانه وسمع كلام ماما وبابا النهاردة؟ 🌟👏\n\n👇 كل أم تكتب اسم بطلها أو بطلتها في التعليقات تحت الصورة دي عشان ${shortHero} و${shortComp} يبعتولهم شهادة شطارة وتحية خاصة بالاسم! 🏆✨\nومتنسوش متابعة صفحة Noreen Kids 🔔👍 ومشاركة المنشور مع أصحابكم!\n\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_قبل_النوم #كرتون_أطفال_3D #تربية_إيجابية #أمهات_مصر`,
-    },
-  ];
+  const puzzleCaption = `🔍 تحدي قوة الملاحظة والذكاء مع ${shortHero} و${shortComp}! 🌟
+أبطالنا الشطار وأمهاتنا الغاليين.. ركزوا كويس جداً وقارنوا بين الصورة [ أ ] والصورة [ ب ]! 🤔✨
+فيه 3 فروقات واضحة وممتعة جداً بين الصورتين.. مين أشطر بطل أو بطلة هيعرف يكتشفهم ويكتبهم؟ 🕵️‍♂️💖
 
-  const availableThemes = interactiveThemes.filter(
-    (theme) =>
-      !previousInteractiveKeys.has(
-        [shortHero, shortComp, theme.themeTitle].join("|")
-      )
-  );
-  const chosenTheme =
-    (availableThemes.length > 0 ? availableThemes : interactiveThemes)[
-      Math.floor(
-        Math.random() *
-          (availableThemes.length > 0
-            ? availableThemes.length
-            : interactiveThemes.length)
-      )
-    ];
+1️⃣ اكتبوا الفروقات الـ 3 اللي لاحظتوها في التعليقات 👇
+2️⃣ اكتبوا اسم طفلكم الشاطر عشان ${shortHero} و${shortComp} يحيوه بالاسم ويشجعوه في حلقة بكرة! 🎬✨
+3️⃣ متنسوش متابعة صفحة Noreen Kids 🔔👍 ومشاركة التحدي مع كل الأمهات وأصحابكم! 🏆🎉
+
+#نورين_كيدز #Noreen_Kids #تحدي_الملاحظة #فروقات_بين_الصورتين #كرتون_3D #قصص_أطفال #ذكاء_الأطفال #أمهات_مصر`;
+
+  const chosenTheme = {
+    themeTitle: `تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع ${shortHero} و${shortComp}`,
+    caption: puzzleCaption,
+  };
 
   const heroImg = resolveCharacterAvatarPath(heroName, heroName);
   const compImg = resolveCharacterAvatarPath(compName, compName);
   const cardPath = path.join(tmpDir, `interactive_3d_card_${Date.now()}.jpg`);
+  const svgPath = path.join(tmpDir, `interactive_puzzle_overlay_${Date.now()}.svg`);
 
-  // Render [ أ ] vs [ ب ] Visual Puzzle Card (1280x720) with Top Banner & Badges
+  // Render [ أ ] vs [ ب ] Visual Puzzle Card with clear visual differences & crisp SVG overlay
+  const puzzleSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+    <defs>
+      <linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#0f172a"/>
+        <stop offset="50%" stop-color="#1e1b4b"/>
+        <stop offset="100%" stop-color="#0f172a"/>
+      </linearGradient>
+      <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+        <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000" flood-opacity="0.6"/>
+      </filter>
+    </defs>
+
+    <!-- Top Banner -->
+    <rect x="0" y="0" width="1280" height="74" fill="url(#headerGrad)"/>
+    <rect x="0" y="70" width="1280" height="4" fill="#f59e0b"/>
+    <text x="640" y="46" font-size="26" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#fef08a" text-anchor="middle" filter="url(#shadow)">
+      🔍 تحدي قوة الملاحظة: استخرج 3 فروقات بين [ أ ] و [ ب ] 🌟
+    </text>
+
+    <!-- Central Divider -->
+    <line x1="640" y1="74" x2="640" y2="720" stroke="#f59e0b" stroke-width="6"/>
+
+    <!-- Badge [ أ ] -->
+    <g filter="url(#shadow)">
+      <rect x="24" y="90" width="80" height="52" rx="12" fill="#d97706" stroke="#fef08a" stroke-width="3"/>
+      <text x="64" y="127" font-size="28" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">[ أ ]</text>
+    </g>
+
+    <!-- Difference 1 on [ أ ]: Golden Star Badge -->
+    <g filter="url(#shadow)" transform="translate(530, 100)">
+      <circle cx="28" cy="28" r="26" fill="#fbbf24" stroke="#fef08a" stroke-width="3"/>
+      <text x="28" y="38" font-size="28" text-anchor="middle">⭐</text>
+    </g>
+
+    <!-- Difference 2 on [ أ ]: Cyan Sparkle Orb -->
+    <g filter="url(#shadow)" transform="translate(60, 270)">
+      <circle cx="24" cy="24" r="22" fill="#0284c7" stroke="#38bdf8" stroke-width="3"/>
+      <text x="24" y="33" font-size="24" text-anchor="middle">✨</text>
+    </g>
+
+    <!-- Difference 3 on [ أ ]: Golden Champion Trophy -->
+    <g filter="url(#shadow)" transform="translate(260, 620)">
+      <circle cx="26" cy="26" r="24" fill="#eab308" stroke="#fef08a" stroke-width="3"/>
+      <text x="26" y="36" font-size="26" text-anchor="middle">🏆</text>
+    </g>
+
+    <!-- Badge [ ب ] -->
+    <g filter="url(#shadow)">
+      <rect x="664" y="90" width="80" height="52" rx="12" fill="#0284c7" stroke="#bae6fd" stroke-width="3"/>
+      <text x="704" y="127" font-size="28" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">[ ب ]</text>
+    </g>
+
+    <!-- Difference 1 on [ ب ]: Pink Heart instead of Golden Star! -->
+    <g filter="url(#shadow)" transform="translate(1170, 100)">
+      <circle cx="28" cy="28" r="26" fill="#ec4899" stroke="#fbcfe8" stroke-width="3"/>
+      <text x="28" y="38" font-size="28" text-anchor="middle">💖</text>
+    </g>
+
+    <!-- Difference 2 on [ ب ]: Purple Puzzle instead of Cyan Orb! -->
+    <g filter="url(#shadow)" transform="translate(700, 270)">
+      <circle cx="24" cy="24" r="22" fill="#9333ea" stroke="#e9d5ff" stroke-width="3"/>
+      <text x="24" y="33" font-size="24" text-anchor="middle">🧩</text>
+    </g>
+
+    <!-- Difference 3 on [ ب ]: Green Lucky Clover instead of Golden Trophy! -->
+    <g filter="url(#shadow)" transform="translate(900, 620)">
+      <circle cx="26" cy="26" r="24" fill="#16a34a" stroke="#bbf7d0" stroke-width="3"/>
+      <text x="26" y="36" font-size="26" text-anchor="middle">🍀</text>
+    </g>
+
+    <!-- Outer Border -->
+    <rect x="0" y="0" width="1280" height="720" fill="none" stroke="#f59e0b" stroke-width="8"/>
+  </svg>`;
+  fs.writeFileSync(svgPath, puzzleSvg);
+
+  const filterGraph = [
+    `[0:v]scale=320:646:force_original_aspect_ratio=increase,crop=320:646[c_l];`,
+    `[1:v]scale=320:646:force_original_aspect_ratio=increase,crop=320:646[h_l];`,
+    `[c_l][h_l]hstack=inputs=2[panel_a];`,
+    `[0:v]hflip,scale=320:646:force_original_aspect_ratio=increase,crop=320:646[c_r];`,
+    `[1:v]scale=320:646:force_original_aspect_ratio=increase,crop=320:646[h_r];`,
+    `[c_r][h_r]hstack=inputs=2[panel_b];`,
+    `[panel_a][panel_b]hstack=inputs=2[panels];`,
+    `color=c=0x00000000:s=1280x74:d=1,format=rgba[spacer];`,
+    `[spacer][panels]vstack=inputs=2[combined];`,
+    `[combined][2:v]overlay=0:0[outv]`
+  ].join("");
+
   await execFileAsync("ffmpeg", [
     "-y",
     "-i",
     compImg,
     "-i",
     heroImg,
+    "-i",
+    svgPath,
     "-filter_complex",
-    `[0:v]scale=320:654:force_original_aspect_ratio=increase,crop=320:654[c_left];[1:v]scale=320:654:force_original_aspect_ratio=increase,crop=320:654[c_right];[c_left][c_right]hstack=inputs=2[base_duo];[base_duo]split=2[panel_a_raw][panel_b_raw];[panel_a_raw]eq=saturation=1.22:contrast=1.06,drawbox=x=16:y=16:w=76:h=52:color=0xF59E0B@0.95:t=fill,drawbox=x=18:y=18:w=72:h=48:color=0xFEF08A@1.0:t=2[panel_a];[panel_b_raw]eq=saturation=1.35:contrast=1.12:brightness=0.03,colorbalance=rs=0.15:gs=0.05:bs=-0.1,drawbox=x=16:y=16:w=76:h=52:color=0x38BDF8@0.95:t=fill,drawbox=x=18:y=18:w=72:h=48:color=0xE0F2FE@1.0:t=2[panel_b];[panel_a][panel_b]hstack=inputs=2,drawbox=x=636:y=0:w=8:h=654:color=0xFBBF24@1.0:t=fill[panels];color=c=0x1E1B4B:s=1280x66:d=1,format=yuv420p[banner];[banner][panels]vstack=inputs=2,drawbox=x=0:y=0:w=1280:h=720:color=0xFBBF24@1.0:t=8,drawbox=x=8:y=62:w=1264:h=6:color=0x38BDF8@0.9:t=fill[outv]`,
+    filterGraph,
     "-map",
     "[outv]",
     "-frames:v",
@@ -3807,15 +3931,17 @@ async function scanAndAutoReplyFacebookCommentsForRunner({
           const commList = Array.isArray(item?.comments?.data)
             ? item.comments.data
             : [];
+          const rawDesc = String(item?.description || item?.message || item?.title || "").trim();
           const prev = itemsById.get(objId);
           if (!prev || commList.length > prev.comments.length) {
             itemsById.set(objId, {
               id: objId,
               title: String(
                 item?.title ||
-                  (item?.description || item?.message || "").split("\n")[0] ||
+                  rawDesc.split("\n")[0] ||
                   "منشور Noreen Kids"
               ).trim(),
+              description: rawDesc,
               comments: commList,
             });
           }
@@ -3841,6 +3967,7 @@ async function scanAndAutoReplyFacebookCommentsForRunner({
 
   for (const item of itemsById.values()) {
     scannedObjects++;
+    const detectedTeam = detectHeroTeamForFacebookPost(item.title, item.description);
     const topComments = Array.isArray(item.comments) ? item.comments : [];
     for (const comm of topComments) {
       const topId = String(comm?.id || "").trim();
@@ -3899,6 +4026,9 @@ async function scanAndAutoReplyFacebookCommentsForRunner({
           authorName: inferredAuthorName,
           commentText: topMsg,
           postTitle: item.title,
+          postDescription: item.description,
+          heroName: detectedTeam.heroName,
+          companionName: detectedTeam.companionName,
         });
 
         const repRes = await fetch(
@@ -3977,6 +4107,9 @@ async function scanAndAutoReplyFacebookCommentsForRunner({
           authorName: subAuthor,
           commentText: contextualCommentText,
           postTitle: item.title,
+          postDescription: item.description,
+          heroName: detectedTeam.heroName,
+          companionName: detectedTeam.companionName,
         });
 
         const subRepRes = await fetch(
@@ -4545,6 +4678,8 @@ async function main() {
 
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "noreenkids-gh-"));
   const results = [];
+  const publishedPreVideoHeroNames = new Set();
+  let publishedPreVideoHeroPostsCount = 0;
   // Never force private future publishAt unless PUBLISH_AT_ISO is explicitly provided;
   // publish immediately using the dashboard's configured privacyStatus (e.g., "public")!
   const publishAtIso = process.env.PUBLISH_AT_ISO
@@ -4636,21 +4771,33 @@ async function main() {
     );
 
     // 4. Pre-Video Dedicated 3D Interactive Challenge for this video heroes
-    if (facebookPageAccessToken && facebookPageId && runMode !== "engagement_only") {
+    const heroToChallenge = task.episode?.mainCharacterName || "";
+    const compToChallenge = task.episode?.companionName || "";
+    if (
+      facebookPageAccessToken &&
+      facebookPageId &&
+      runMode !== "engagement_only" &&
+      heroToChallenge &&
+      !publishedPreVideoHeroNames.has(heroToChallenge)
+    ) {
       console.log(
-        `📸 [Pre-Video 3D Challenge] Publishing dedicated interactive post for "${task.episode?.mainCharacterName}" & "${task.episode?.companionName}" right before ${task.label}...`
+        `📸 [Pre-Video 3D Challenge] Publishing dedicated Spot-the-Difference interactive post for "${heroToChallenge}" & "${compToChallenge}" right before ${task.label}...`
       );
       try {
-        await publishDailyInteractive3DPhotoPostForRunner({
+        const prePostRes = await publishDailyInteractive3DPhotoPostForRunner({
           rawPageAccessToken: facebookPageAccessToken,
           pageId: facebookPageId,
           tmpDir,
           fbSchedule,
-          specificHeroName: task.episode?.mainCharacterName || "",
-          specificCompanionName: task.episode?.companionName || "",
+          specificHeroName: heroToChallenge,
+          specificCompanionName: compToChallenge,
           forcePublish: true,
           postKind: runMode === "daily_schedule" ? "scheduled" : "manual",
         });
+        if (prePostRes?.published) {
+          publishedPreVideoHeroNames.add(heroToChallenge);
+          publishedPreVideoHeroPostsCount++;
+        }
       } catch (preVideoErr) {
         console.warn(`   [Pre-Video 3D Challenge Notice] ${preVideoErr?.message || preVideoErr}`);
       }
@@ -5120,10 +5267,14 @@ async function main() {
 // Execute Daily 3D Interactive Photo Post & Autonomous AI Comment Auto-Replier on GitHub Actions!
   if (facebookPageAccessToken) {
     let fbEngagementUpdated = false;
-    if (dailyInteractivePhotoPostEnabled || runMode === "engagement_only") {
+    const shouldRunStandalonePhotoChallenge =
+      publishedPreVideoHeroPostsCount === 0 &&
+      (runMode === "engagement_only" || (dailyInteractivePhotoPostEnabled && tasks.length === 0));
+
+    if (shouldRunStandalonePhotoChallenge) {
       try {
         console.log(
-          "📸 [Facebook Viral Growth - GitHub Cloud] Checking/Publishing Daily 3D Interactive Photo Challenge Post..."
+          "📸 [Facebook Viral Growth - GitHub Cloud] Checking/Publishing Standalone Daily 3D Interactive Photo Challenge Post..."
         );
         const photoRes = await publishDailyInteractive3DPhotoPostForRunner({
           rawPageAccessToken: facebookPageAccessToken,
@@ -5144,6 +5295,10 @@ async function main() {
           }`
         );
       }
+    } else if (publishedPreVideoHeroPostsCount > 0) {
+      console.log(
+        `ℹ️ [Facebook 3D Challenge Guard] Dedicated pre-video challenge post was already published for today's heroes (${Array.from(publishedPreVideoHeroNames).join(", ")}). Skipping standalone rotation post to prevent extra duplicate posts.`
+      );
     }
 
     if (autoCommentResponderEnabled || runMode === "engagement_only") {
