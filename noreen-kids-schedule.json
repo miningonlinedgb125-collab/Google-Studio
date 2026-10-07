@@ -37,6 +37,16 @@
     {
       "topic": "مهمة إنقاذ القنفذ الصغير الذي علق في سياج الحديقة",
       "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "مغامرة المكعبات السحرية وبناء أعلى برج ملون",
+      "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "مهمة إنقاذ القنفذ الصغير الذي علق في سياج الحديقة",
+      "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا",
       "timestampIso": "2026-10-07T15:45:24.921Z"
     },
@@ -204,34 +214,6 @@
       "mainCharacterName": "أستاذ شريف",
       "companionName": "الصقر الذكي",
       "fingerprint": "3c2629a0c180",
-      "dialogueHash": ""
-    },
-    {
-      "topic": "سر وصفة السعادة والحنان في بيت تيتة مع",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "fingerprint": "fa8b453d33b0",
-      "dialogueHash": ""
-    },
-    {
-      "topic": "اكتشاف زهرة النور الضاحكة بفضول وبراءة سدرة الصغنونة",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "fingerprint": "3432822c38ea",
-      "dialogueHash": ""
-    },
-    {
-      "topic": "سيارة الإسعاف المنورة ومواقف القطة لوليتا المضحكة في",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "fingerprint": "de3270d425cb",
-      "dialogueHash": ""
-    },
-    {
-      "topic": "بوصلة الرياح الأربعة وإنقاذ طائر العنقاء الصغير فوق",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "fingerprint": "9c81411ec811",
       "dialogueHash": ""
     }
   ],
