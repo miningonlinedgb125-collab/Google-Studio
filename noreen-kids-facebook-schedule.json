@@ -2277,6 +2277,16 @@
     {
       "topic": "مهمة إنقاذ القنفذ الصغير الذي علق في سياج الحديقة",
       "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "مغامرة المكعبات السحرية وبناء أعلى برج ملون",
+      "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "مهمة إنقاذ القنفذ الصغير الذي علق في سياج الحديقة",
+      "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا",
       "timestampIso": "2026-10-07T15:45:24.921Z"
     },
@@ -2445,49 +2455,21 @@
       "companionName": "الصقر الذكي",
       "fingerprint": "3c2629a0c180",
       "dialogueHash": ""
-    },
-    {
-      "topic": "سر وصفة السعادة والحنان في بيت تيتة مع",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "fingerprint": "fa8b453d33b0",
-      "dialogueHash": ""
-    },
-    {
-      "topic": "اكتشاف زهرة النور الضاحكة بفضول وبراءة سدرة الصغنونة",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "fingerprint": "3432822c38ea",
-      "dialogueHash": ""
-    },
-    {
-      "topic": "سيارة الإسعاف المنورة ومواقف القطة لوليتا المضحكة في",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "fingerprint": "de3270d425cb",
-      "dialogueHash": ""
-    },
-    {
-      "topic": "بوصلة الرياح الأربعة وإنقاذ طائر العنقاء الصغير فوق",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "fingerprint": "9c81411ec811",
-      "dialogueHash": ""
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-07 · 08:45 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-07",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-37487792974",
+    "id": "gh-run-37645647996",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-06 (18:47 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1791300628396-8jur",
-    "longEpisodeId": "ep-gh-long-1791300695121-rurx",
-    "shortEpisodeTitle": "Noreen Kids: تجميع شظايا قمر الكريستال وإنارة سماء المجرة من جديد | مغامرات جنى وبلبل",
-    "longEpisodeTitle": "Noreen Kids: مغامرة الغواصة الذهبية لإنقاذ الحوت الصغير في مملكة المرجان | مغامرات شوشو ومرجان",
-    "shortTitle": "Noreen Kids: تجميع شظايا قمر الكريستال وإنارة سماء المجرة من جديد | مغامرات جنى وبلبل",
-    "longTitle": "Noreen Kids: مغامرة الغواصة الذهبية لإنقاذ الحوت الصغير في مملكة المرجان | مغامرات شوشو ومرجان",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-07 (19:11 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1791387913377-2j84",
+    "longEpisodeId": "ep-gh-long-1791387924920-97lt",
+    "shortEpisodeTitle": "Noreen Kids: مهمة إنقاذ القنفذ الصغير الذي علق في سياج الحديقة | مغامرات الطبيبة ملك والقطة لوليتا",
+    "longEpisodeTitle": "Noreen Kids: مغامرة المكعبات السحرية وبناء أعلى برج ملون | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "shortTitle": "Noreen Kids: مهمة إنقاذ القنفذ الصغير الذي علق في سياج الحديقة | مغامرات الطبيبة ملك والقطة لوليتا",
+    "longTitle": "Noreen Kids: مغامرة المكعبات السحرية وبناء أعلى برج ملون | مغامرات سدرة الصغنونة والفراشة الملونة",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2496,14 +2478,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "JRYF1M2zPKs",
-    "youtubeLongVideoId": "RrMr1v9cxPU",
-    "facebookShortVideoId": "1599919121713839",
-    "facebookLongVideoId": "4615047192099866",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1599919121713839",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/4615047192099866",
-    "facebookShortTitle": "Noreen Kids | تجميع شظايا قمر الكريستال وإنارة سماء المجرة من جديد - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
-    "facebookLongTitle": "Noreen Kids | مغامرة الغواصة الذهبية لإنقاذ الحوت الصغير في مملكة المرجان - مغامرة شوشو القبطان الصغير ومرجان الدلفين ال",
+    "youtubeShortVideoId": "a6jnRfm_wEc",
+    "youtubeLongVideoId": "K5QXCgWSiRU",
+    "facebookShortVideoId": "1134195825701503",
+    "facebookLongVideoId": "1809213876927010",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1134195825701503",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1809213876927010",
+    "facebookShortTitle": "Noreen Kids | مهمة إنقاذ القنفذ الصغير الذي علق في سياج الحديقة - مغامرة ملك والقطة لوليتا",
+    "facebookLongTitle": "Noreen Kids | مغامرة المكعبات السحرية وبناء أعلى برج ملون - مغامرة سدرة الصغنونة والفراشة الملونة",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2518,9 +2500,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 317,
-      "fileSizeBytes": 38346424,
-      "inspectedAt": "18:47"
+      "durationSec": 320,
+      "fileSizeBytes": 35305554,
+      "inspectedAt": "19:11"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2529,7 +2511,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-06T15:47:48.461Z"
+    "reportedAtIso": "2026-10-07T16:11:56.368Z"
   },
   "heroFairRotationIndex": 9,
   "interactiveHeroRotationIndex": 4,
