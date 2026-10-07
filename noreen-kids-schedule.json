@@ -37,6 +37,16 @@
     {
       "topic": "اختراع آلة جمع الثمار الذكية لمساعدة حيوانات البستان",
       "mainCharacterName": "كارمن المخترعة الصغيرة",
+      "companionName": "سمسم السنجاب الطائر"
+    },
+    {
+      "topic": "خيمة التسامح والصلح بين الأصدقاء في واحة النخيل",
+      "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم"
+    },
+    {
+      "topic": "اختراع آلة جمع الثمار الذكية لمساعدة حيوانات البستان",
+      "mainCharacterName": "كارمن المخترعة الصغيرة",
       "companionName": "سمسم السنجاب الطائر",
       "timestampIso": "2026-10-07T05:31:01.075Z"
     },
@@ -211,34 +221,6 @@
       "companionName": "زعتر الثعلب الذكي",
       "fingerprint": "9c81411ec811",
       "dialogueHash": ""
-    },
-    {
-      "topic": "سر النوم البدري وشرب اللبن الدافي علشان نكبر بصحة ونشاط",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "fingerprint": "8a930027c99b",
-      "dialogueHash": ""
-    },
-    {
-      "topic": "حكاية الصبر والنظام في مدرسة السعادة مع أم",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "fingerprint": "1b9f2b7537ce",
-      "dialogueHash": ""
-    },
-    {
-      "topic": "لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف",
-      "fingerprint": "b1ac3f2d8de4",
-      "dialogueHash": ""
-    },
-    {
-      "topic": "شجرة الأمانة الذهبية في غابة النجوم وإزاي الصدق",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم",
-      "fingerprint": "9ddc33e51fab",
-      "dialogueHash": ""
     }
   ],
   "scheduledHistory": [
@@ -246,7 +228,7 @@
       "id": "gh-run-37576574384",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-07 (08:44 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-07 (08:45 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1791351054288-3vqx",
       "longEpisodeId": "ep-gh-long-1791351061075-675b",
       "shortEpisodeTitle": "Noreen Kids: اختراع آلة جمع الثمار الذكية لمساعدة حيوانات البستان | مغامرات كارمن وسمسم",
@@ -285,7 +267,7 @@
         "fastStartMoovFirst": true,
         "durationSec": 308,
         "fileSizeBytes": 37601935,
-        "inspectedAt": "08:44"
+        "inspectedAt": "08:45"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2539,16 +2521,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٧‏/١٠‏/٢٠٢٦، ٨:٤٤:٥٨ ص",
   "lastCloudRunReport": {
-    "id": "gh-run-37427103236",
+    "id": "gh-run-37576574384",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-06 (10:19 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1791270207423-zyii",
-    "longEpisodeId": "ep-gh-long-1791270211216-l7yi",
-    "shortEpisodeTitle": "Noreen Kids: بناء مسار القطار المغناطيسي الصغير لنقل ألعاب الأطفال | مغامرات المهندسة نوران والنمر الفرفوش",
-    "longEpisodeTitle": "Noreen Kids: لغز آثار الأقدام الصغيرة في جبل الثلج ومساعدة | مغامرات عمرو وزعتر",
-    "shortTitle": "Noreen Kids: بناء مسار القطار المغناطيسي الصغير لنقل ألعاب الأطفال | مغامرات المهندسة نوران والنمر الفرفوش",
-    "longTitle": "Noreen Kids: لغز آثار الأقدام الصغيرة في جبل الثلج ومساعدة | مغامرات عمرو وزعتر",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-07 (08:45 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1791351054288-3vqx",
+    "longEpisodeId": "ep-gh-long-1791351061075-675b",
+    "shortEpisodeTitle": "Noreen Kids: اختراع آلة جمع الثمار الذكية لمساعدة حيوانات البستان | مغامرات كارمن وسمسم",
+    "longEpisodeTitle": "Noreen Kids: خيمة التسامح والصلح بين الأصدقاء في واحة النخيل | مغامرات تامر وكركور",
+    "shortTitle": "Noreen Kids: اختراع آلة جمع الثمار الذكية لمساعدة حيوانات البستان | مغامرات كارمن وسمسم",
+    "longTitle": "Noreen Kids: خيمة التسامح والصلح بين الأصدقاء في واحة النخيل | مغامرات تامر وكركور",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2557,14 +2539,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "vDMtJRjh2pQ",
-    "youtubeLongVideoId": "yhu1x6DZ89g",
-    "facebookShortVideoId": "1039996025765357",
-    "facebookLongVideoId": "1806059040593951",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1039996025765357",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1806059040593951",
-    "facebookShortTitle": "Noreen Kids | بناء مسار القطار المغناطيسي الصغير لنقل ألعاب الأطفال - مغامرة المهندسة نوران والنمر الفرفوش",
-    "facebookLongTitle": "Noreen Kids | لغز آثار الأقدام الصغيرة في جبل الثلج ومساعدة - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
+    "youtubeShortVideoId": "JjQLcFB3l7o",
+    "youtubeLongVideoId": "cEjoTmDWwDs",
+    "facebookShortVideoId": "1429545821970096",
+    "facebookLongVideoId": "1488415616447303",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1429545821970096",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1488415616447303",
+    "facebookShortTitle": "Noreen Kids | اختراع آلة جمع الثمار الذكية لمساعدة حيوانات البستان - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
+    "facebookLongTitle": "Noreen Kids | خيمة التسامح والصلح بين الأصدقاء في واحة النخيل - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2579,9 +2561,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 310,
-      "fileSizeBytes": 32233226,
-      "inspectedAt": "10:19"
+      "durationSec": 308,
+      "fileSizeBytes": 37601935,
+      "inspectedAt": "08:45"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2590,7 +2572,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-06T07:19:06.309Z"
+    "reportedAtIso": "2026-10-07T05:45:00.289Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880"
