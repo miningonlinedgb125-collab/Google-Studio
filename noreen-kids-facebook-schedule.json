@@ -476,7 +476,7 @@
       "id": "gh-run-37576574384",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-07 (08:44 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-07 (08:45 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1791351054288-3vqx",
       "longEpisodeId": "ep-gh-long-1791351061075-675b",
       "shortEpisodeTitle": "Noreen Kids: اختراع آلة جمع الثمار الذكية لمساعدة حيوانات البستان | مغامرات كارمن وسمسم",
@@ -515,7 +515,7 @@
         "fastStartMoovFirst": true,
         "durationSec": 308,
         "fileSizeBytes": 37601935,
-        "inspectedAt": "08:44"
+        "inspectedAt": "08:45"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2229,6 +2229,16 @@
     {
       "topic": "اختراع آلة جمع الثمار الذكية لمساعدة حيوانات البستان",
       "mainCharacterName": "كارمن المخترعة الصغيرة",
+      "companionName": "سمسم السنجاب الطائر"
+    },
+    {
+      "topic": "خيمة التسامح والصلح بين الأصدقاء في واحة النخيل",
+      "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم"
+    },
+    {
+      "topic": "اختراع آلة جمع الثمار الذكية لمساعدة حيوانات البستان",
+      "mainCharacterName": "كارمن المخترعة الصغيرة",
       "companionName": "سمسم السنجاب الطائر",
       "timestampIso": "2026-10-07T05:31:01.075Z"
     },
@@ -2402,34 +2412,6 @@
       "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي",
       "fingerprint": "9c81411ec811",
-      "dialogueHash": ""
-    },
-    {
-      "topic": "سر النوم البدري وشرب اللبن الدافي علشان نكبر بصحة ونشاط",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "fingerprint": "8a930027c99b",
-      "dialogueHash": ""
-    },
-    {
-      "topic": "حكاية الصبر والنظام في مدرسة السعادة مع أم",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "fingerprint": "1b9f2b7537ce",
-      "dialogueHash": ""
-    },
-    {
-      "topic": "لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف",
-      "fingerprint": "b1ac3f2d8de4",
-      "dialogueHash": ""
-    },
-    {
-      "topic": "شجرة الأمانة الذهبية في غابة النجوم وإزاي الصدق",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم",
-      "fingerprint": "9ddc33e51fab",
       "dialogueHash": ""
     }
   ],
