@@ -3474,6 +3474,136 @@ async function buildSmartHeroReplyForFacebookCommentRunner({
   return warmReplies[Math.floor(Math.random() * warmReplies.length) % warmReplies.length];
 }
 
+function generateDynamicPuzzleConfig(seed = Date.now()) {
+  const poolZone1 = [
+    { a: { icon: "⭐", bg: "#fbbf24", stroke: "#fef08a", name: "نجمة ذهبية" }, b: { icon: "💖", bg: "#ec4899", stroke: "#fbcfe8", name: "قلب وردي" }, aCoord: { x: 530, y: 100 }, bCoord: { x: 1170, y: 100 } },
+    { a: { icon: "👑", bg: "#f59e0b", stroke: "#fef08a", name: "تاج ذهبي" }, b: { icon: "🎈", bg: "#ef4444", stroke: "#fecaca", name: "بالونة حمراء" }, aCoord: { x: 520, y: 110 }, bCoord: { x: 1160, y: 110 } },
+    { a: { icon: "🏅", bg: "#eab308", stroke: "#fef08a", name: "ميدالية بطولة" }, b: { icon: "✨", bg: "#06b6d4", stroke: "#cffafe", name: "بريق لامع" }, aCoord: { x: 535, y: 95 }, bCoord: { x: 1175, y: 95 } },
+    { a: { icon: "🌻", bg: "#f59e0b", stroke: "#fef08a", name: "زهرة عباد الشمس" }, b: { icon: "🌙", bg: "#6366f1", stroke: "#e0e7ff", name: "هلال وقمر" }, aCoord: { x: 525, y: 105 }, bCoord: { x: 1165, y: 105 } },
+  ];
+
+  const poolZone2 = [
+    { a: { icon: "✨", bg: "#0284c7", stroke: "#38bdf8", name: "هالة زرقاء" }, b: { icon: "🧩", bg: "#9333ea", stroke: "#e9d5ff", name: "قطعة بازل" }, aCoord: { x: 60, y: 270 }, bCoord: { x: 700, y: 270 } },
+    { a: { icon: "🍓", bg: "#e11d48", stroke: "#fecdd3", name: "فراولة حمراء" }, b: { icon: "🥕", bg: "#ea580c", stroke: "#fed7aa", name: "جزرة برتقالية" }, aCoord: { x: 55, y: 280 }, bCoord: { x: 695, y: 280 } },
+    { a: { icon: "💎", bg: "#06b6d4", stroke: "#a5f3fc", name: "جوهرة زرقاء" }, b: { icon: "🔑", bg: "#f59e0b", stroke: "#fef08a", name: "مفتاح ذهبي" }, aCoord: { x: 65, y: 260 }, bCoord: { x: 705, y: 260 } },
+    { a: { icon: "🎨", bg: "#ec4899", stroke: "#fbcfe8", name: "لوحة ألوان" }, b: { icon: "🎵", bg: "#8b5cf6", stroke: "#ddd6fe", name: "نغمة موسيقية" }, aCoord: { x: 70, y: 275 }, bCoord: { x: 710, y: 275 } },
+  ];
+
+  const poolZone3 = [
+    { a: { icon: "🏆", bg: "#eab308", stroke: "#fef08a", name: "كأس شطارة" }, b: { icon: "🍀", bg: "#16a34a", stroke: "#bbf7d0", name: "ورقة شجر" }, aCoord: { x: 260, y: 620 }, bCoord: { x: 900, y: 620 } },
+    { a: { icon: "🔔", bg: "#f59e0b", stroke: "#fef08a", name: "جرس ذهبي" }, b: { icon: "🎁", bg: "#db2777", stroke: "#fbcfe8", name: "صندوق هدية" }, aCoord: { x: 250, y: 615 }, bCoord: { x: 890, y: 615 } },
+    { a: { icon: "🦋", bg: "#3b82f6", stroke: "#bfdbfe", name: "فراشة ملونة" }, b: { icon: "🌸", bg: "#ec4899", stroke: "#fbcfe8", name: "وردة ربيعية" }, aCoord: { x: 270, y: 625 }, bCoord: { x: 910, y: 625 } },
+    { a: { icon: "🔍", bg: "#0ea5e9", stroke: "#bae6fd", name: "عدسة مكبرة" }, b: { icon: "🧭", bg: "#d97706", stroke: "#fef3c7", name: "بوصلة مغامرات" }, aCoord: { x: 255, y: 610 }, bCoord: { x: 895, y: 610 } },
+  ];
+
+  const safeNum = Math.abs(Number(seed) || Date.now());
+  const idx1 = safeNum % poolZone1.length;
+  const idx2 = (safeNum + 1) % poolZone2.length;
+  const idx3 = (safeNum + 2) % poolZone3.length;
+  const shouldFlipComp = safeNum % 2 === 0;
+
+  return {
+    diff1: poolZone1[idx1],
+    diff2: poolZone2[idx2],
+    diff3: poolZone3[idx3],
+    shouldFlipComp,
+  };
+}
+
+async function buildDynamicSpotTheDifferenceCaption({
+  shortHero,
+  shortComp,
+  seed = Date.now(),
+}) {
+  const geminiKey = (process.env.GEMINI_API_KEY || "").trim();
+  if (geminiKey) {
+    try {
+      const ai = new GoogleGenAI({ apiKey: geminiKey });
+      const prompt = `أنت كاتب محتوى إبداعي لمنشورات صفحة "Noreen Kids" الرسمية للأطفال على فيسبوك.
+اكتب منشوراً تفاعلياً جديداً ومميزاً جداً باللهجة المصرية الدافئة والمبهجة للأمهات والأطفال لتحدي "قوة الملاحظة واستخراج 3 فروقات بين الصورة [ أ ] والصورة [ ب ]" مع بطلنا المحبوب "${shortHero}" وصديقه "${shortComp}".
+
+الشروط الإلزامية:
+1. المنشور باللهجة المصرية الودودة المناسبة للأسرة والأطفال.
+2. ادعُ الأطفال والأمهات لمقارنة الصورتين [ أ ] و [ ب ] والبحث عن الـ 3 فروقات الذكية.
+3. اطلب من المتابعين كتابة الفروقات وكتابة اسم طفلهم في التعليقات لكي يحييه ${shortHero} و${shortComp} بالاسم في حلقة بكرة.
+4. حفزهم على متابعة الصفحة 🔔 ومشاركة المنشور.
+5. أضف هاشتاجات مناسبة (#نورين_كيدز #Noreen_Kids #تحدي_الملاحظة #فروقات_بين_الصورتين #كرتون_أطفال #أمهات_مصر).
+6. طول المنشور مناسب وجذاب (من 4 إلى 6 أسطر مقسمة بنقاط وإيموجي). لا تذكر أي أبطال آخرين خارج ${shortHero} و${shortComp}.`;
+
+      const resp = await ai.models.generateContent({
+        model: "gemini-3.8-flash",
+        contents: prompt,
+      });
+      const text = String(resp.text || "").trim();
+      if (text && text.length >= 80 && text.length <= 800) {
+        return text;
+      }
+    } catch {}
+  }
+
+  const templates = [
+    `🔍 تحدي قوة الملاحظة والذكاء مع ${shortHero} و${shortComp}! 🌟
+أبطالنا الشطار وأمهاتنا الغاليين.. ركزوا كويس جداً وقارنوا بين الصورة [ أ ] والصورة [ ب ]! 🤔✨
+فيه 3 فروقات واضحة وممتعة جداً بين الصورتين.. مين أشطر بطل أو بطلة هيعرف يكتشفهم ويكتبهم؟ 🕵️‍♂️💖
+
+1️⃣ اكتبوا الفروقات الـ 3 اللي لاحظتوها في التعليقات 👇
+2️⃣ اكتبوا اسم طفلكم الشاطر عشان ${shortHero} و${shortComp} يحيوه بالاسم ويشجعوه في حلقة بكرة! 🎬✨
+3️⃣ متنسوش متابعة صفحة Noreen Kids 🔔👍 ومشاركة التحدي مع كل الأمهات وأصحابكم! 🏆🎉
+
+#نورين_كيدز #Noreen_Kids #تحدي_الملاحظة #فروقات_بين_الصورتين #كرتون_3D #قصص_أطفال #ذكاء_الأطفال #أمهات_مصر`,
+
+    `🎉 فزورة قوة التركيز وسرعة البديهة من عالم Noreen Kids! 🎉
+بطلنا المحبوب "${shortHero}" وصديقنا الشقي "${shortComp}" بيجهزوا لمفاجأة وعايزين مساعدة أذكى الأبطال! 🕵️‍♀️💡
+بصوا كويس على الصورتين [ أ ] و [ ب ].. فيه 3 اختلافات ذكية مستخبية! يا ترى عيونكم الحلوة هتطلعهم؟ 👀✨
+
+👇 اكتبوا لنا الفروقات الـ 3 في تعليق مع اسم طفلكم الجميل علشان نرحب بيه في حلقة النهاردة! 💖🎬
+🔔 واضغطوا متابعة للصفحة ولايك للبوست عشان متفوتكمش حكاياتنا اليومية! 👍🌟
+
+#نورين_كيدز #Noreen_Kids #فزورة_اليوم #كرتون_مصري #أطفال_أذكياء #تربية_إيجابية #أمهات_مصر`,
+
+    `🌟 مين أسرع عبقري هيطلع الـ 3 فروقات بين [ أ ] و [ ب ] مع ${shortHero} و${shortComp}؟ 🌟
+تحدي تفاعلي شيق لكل أبطالنا وأمهاتنا لتنمية التركيز وقوة الملاحظة قبل حلقة الكرتون الجديدة! 🧠✨
+
+👇 ركزوا في كل تفصيلة واكتبوا الفروقات الـ 3 في التعليقات..
+💖 واكتبوا اسم طفلكم الشاطر علشان ${shortHero} و${shortComp} يبعتوله شهادة شطارة وسلام خاص بالاسم! 🏆🎬
+🔔 متنسوش شير للتحدي ومتابعة الصفحة لمغامرات يومية جديدة! 🚀
+
+#نورين_كيدز #Noreen_Kids #قوة_الملاحظة #حكايات_أطفال #ذكاء_الأطفال #أمهات_مصر`,
+
+    `🕵️‍♂️ مغامرة البحث عن الفروقات مع ${shortHero} و${shortComp}! 🕵️‍♂️
+يا ترى عيون أبطالنا الحلوين هتقدر تلاحظ الـ 3 اختلافات بين الصورة [ أ ] والصورة [ ب ]؟ 👀🎈
+التحدي محتاج تركيز عالي وشطارة حقيقية! مين جاهز يورينا شطارته؟ 💪✨
+
+1️⃣ اكتبوا لنا الفروقات التلاتة تحت الصورة 👇
+2️⃣ واكتبوا اسم البطل أو البطلة الصغيرة عشان نعلن اسمه بين أشطر أصدقائنا في الحلقة الجاية! 🎬👏
+3️⃣ لايك ومتابعة للصفحة 🔔 لتحديات يومية مسلية وهادفة مع نورين كيدز! ❤️
+
+#نورين_كيدز #Noreen_Kids #كرتون_أطفال #مغامرات_3D #ذكاء_الطفل #أمهات_مصر`,
+
+    `💖 تحدي عائلي ممتع لكل أمهات وأطفال Noreen Kids! 💖
+${shortHero} و${shortComp} بيسألوا: مين يقدر يكتشف 3 فروقات ذكية بين الصورة [ أ ] والصورة [ ب ] في أقل من دقيقة؟ ⏱️🤔
+
+👇 شاركونا الحل في التعليقات مع اسم طفلكم الشاطر
+عشان ${shortHero} و${shortComp} يردوا عليه ويقولوا له أحلى كلام تشجيع في الحلقة الجديدة! 🌟🎬
+🔔 وتابعوا صفحتنا لمتابعة باقي حلقات ومفاجآت الأسبوع! 👍✨
+
+#نورين_كيدز #Noreen_Kids #تحدي_اليوم #حواديت_قبل_النوم #تربية_إيجابية #أمهات_مصر`,
+
+    `🏆 مسابقة شطار نورين كيدز الكبرى مع ${shortHero} و${shortComp}! 🏆
+الصورة [ أ ] شبه الصورة [ ب ] جداً، لكن فيه 3 تفاصيل ذكية مش موجودة غير في واحدة منهم بس! 🔍🧐
+مين فيكم بطل التركيز اللي هيعرف يجمعهم كلهم ويكتبهم صح؟ ✨
+
+👇 مستنيين إجاباتكم وأسامي أبطالنا الحلوين في الكومنتات!
+🎬 أسرع إجابات هتتثبت وهنوجهلها تحية باسم الطفل في مغامرتنا القادمة! 💖
+🔔 اضغطوا متابعة للصفحة ومشاركة علشان نكبر سوا كل يوم! 👍
+
+#نورين_كيدز #Noreen_Kids #تحدي_الفروقات #كرتون_أطفال_3D #أمهات_مصر`
+  ];
+
+  const pickIdx = Math.abs(Number(seed) || 0) % templates.length;
+  return templates[pickIdx];
+}
+
 async function publishDailyInteractive3DPhotoPostForRunner({
   rawPageAccessToken,
   pageId,
@@ -3656,15 +3786,19 @@ async function publishDailyInteractive3DPhotoPostForRunner({
   const shortHero = getShortCharacterDisplayNameRunner(heroName, "egyptian");
   const shortComp = getShortCharacterDisplayNameRunner(compName, "egyptian");
 
-  const puzzleCaption = `🔍 تحدي قوة الملاحظة والذكاء مع ${shortHero} و${shortComp}! 🌟
-أبطالنا الشطار وأمهاتنا الغاليين.. ركزوا كويس جداً وقارنوا بين الصورة [ أ ] والصورة [ ب ]! 🤔✨
-فيه 3 فروقات واضحة وممتعة جداً بين الصورتين.. مين أشطر بطل أو بطلة هيعرف يكتشفهم ويكتبهم؟ 🕵️‍♂️💖
-
-1️⃣ اكتبوا الفروقات الـ 3 اللي لاحظتوها في التعليقات 👇
-2️⃣ اكتبوا اسم طفلكم الشاطر عشان ${shortHero} و${shortComp} يحيوه بالاسم ويشجعوه في حلقة بكرة! 🎬✨
-3️⃣ متنسوش متابعة صفحة Noreen Kids 🔔👍 ومشاركة التحدي مع كل الأمهات وأصحابكم! 🏆🎉
-
-#نورين_كيدز #Noreen_Kids #تحدي_الملاحظة #فروقات_بين_الصورتين #كرتون_3D #قصص_أطفال #ذكاء_الأطفال #أمهات_مصر`;
+  const dynamicSeed = Math.abs(
+    (heroName.charCodeAt(0) || 1) * 31 +
+    (compName.charCodeAt(0) || 1) * 17 +
+    Number(safeRotIdx) * 13 +
+    new Date().getDate() * 7 +
+    new Date().getHours()
+  );
+  const puzzleCfg = generateDynamicPuzzleConfig(dynamicSeed);
+  const puzzleCaption = await buildDynamicSpotTheDifferenceCaption({
+    shortHero,
+    shortComp,
+    seed: dynamicSeed,
+  });
 
   const chosenTheme = {
     themeTitle: `تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع ${shortHero} و${shortComp}`,
@@ -3676,7 +3810,7 @@ async function publishDailyInteractive3DPhotoPostForRunner({
   const cardPath = path.join(tmpDir, `interactive_3d_card_${Date.now()}.jpg`);
   const svgPath = path.join(tmpDir, `interactive_puzzle_overlay_${Date.now()}.svg`);
 
-  // Render [ أ ] vs [ ب ] Visual Puzzle Card with clear visual differences & crisp SVG overlay
+  // Render [ أ ] vs [ ب ] Visual Puzzle Card with dynamic differences & crisp SVG overlay
   const puzzleSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
     <defs>
       <linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="0">
@@ -3705,22 +3839,22 @@ async function publishDailyInteractive3DPhotoPostForRunner({
       <text x="64" y="127" font-size="28" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">[ أ ]</text>
     </g>
 
-    <!-- Difference 1 on [ أ ]: Golden Star Badge -->
-    <g filter="url(#shadow)" transform="translate(530, 100)">
-      <circle cx="28" cy="28" r="26" fill="#fbbf24" stroke="#fef08a" stroke-width="3"/>
-      <text x="28" y="38" font-size="28" text-anchor="middle">⭐</text>
+    <!-- Difference 1 on [ أ ] -->
+    <g filter="url(#shadow)">
+      <circle cx="${puzzleCfg.diff1.aCoord.x}" cy="${puzzleCfg.diff1.aCoord.y}" r="26" fill="${puzzleCfg.diff1.a.bg}" stroke="${puzzleCfg.diff1.a.stroke}" stroke-width="3"/>
+      <text x="${puzzleCfg.diff1.aCoord.x}" y="${puzzleCfg.diff1.aCoord.y + 10}" font-size="28" text-anchor="middle">${puzzleCfg.diff1.a.icon}</text>
     </g>
 
-    <!-- Difference 2 on [ أ ]: Cyan Sparkle Orb -->
-    <g filter="url(#shadow)" transform="translate(60, 270)">
-      <circle cx="24" cy="24" r="22" fill="#0284c7" stroke="#38bdf8" stroke-width="3"/>
-      <text x="24" y="33" font-size="24" text-anchor="middle">✨</text>
+    <!-- Difference 2 on [ أ ] -->
+    <g filter="url(#shadow)">
+      <circle cx="${puzzleCfg.diff2.aCoord.x}" cy="${puzzleCfg.diff2.aCoord.y}" r="22" fill="${puzzleCfg.diff2.a.bg}" stroke="${puzzleCfg.diff2.a.stroke}" stroke-width="3"/>
+      <text x="${puzzleCfg.diff2.aCoord.x}" y="${puzzleCfg.diff2.aCoord.y + 9}" font-size="24" text-anchor="middle">${puzzleCfg.diff2.a.icon}</text>
     </g>
 
-    <!-- Difference 3 on [ أ ]: Golden Champion Trophy -->
-    <g filter="url(#shadow)" transform="translate(260, 620)">
-      <circle cx="26" cy="26" r="24" fill="#eab308" stroke="#fef08a" stroke-width="3"/>
-      <text x="26" y="36" font-size="26" text-anchor="middle">🏆</text>
+    <!-- Difference 3 on [ أ ] -->
+    <g filter="url(#shadow)">
+      <circle cx="${puzzleCfg.diff3.aCoord.x}" cy="${puzzleCfg.diff3.aCoord.y}" r="24" fill="${puzzleCfg.diff3.a.bg}" stroke="${puzzleCfg.diff3.a.stroke}" stroke-width="3"/>
+      <text x="${puzzleCfg.diff3.aCoord.x}" y="${puzzleCfg.diff3.aCoord.y + 10}" font-size="26" text-anchor="middle">${puzzleCfg.diff3.a.icon}</text>
     </g>
 
     <!-- Badge [ ب ] -->
@@ -3729,22 +3863,22 @@ async function publishDailyInteractive3DPhotoPostForRunner({
       <text x="704" y="127" font-size="28" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">[ ب ]</text>
     </g>
 
-    <!-- Difference 1 on [ ب ]: Pink Heart instead of Golden Star! -->
-    <g filter="url(#shadow)" transform="translate(1170, 100)">
-      <circle cx="28" cy="28" r="26" fill="#ec4899" stroke="#fbcfe8" stroke-width="3"/>
-      <text x="28" y="38" font-size="28" text-anchor="middle">💖</text>
+    <!-- Difference 1 on [ ب ] -->
+    <g filter="url(#shadow)">
+      <circle cx="${puzzleCfg.diff1.bCoord.x}" cy="${puzzleCfg.diff1.bCoord.y}" r="26" fill="${puzzleCfg.diff1.b.bg}" stroke="${puzzleCfg.diff1.b.stroke}" stroke-width="3"/>
+      <text x="${puzzleCfg.diff1.bCoord.x}" y="${puzzleCfg.diff1.bCoord.y + 10}" font-size="28" text-anchor="middle">${puzzleCfg.diff1.b.icon}</text>
     </g>
 
-    <!-- Difference 2 on [ ب ]: Purple Puzzle instead of Cyan Orb! -->
-    <g filter="url(#shadow)" transform="translate(700, 270)">
-      <circle cx="24" cy="24" r="22" fill="#9333ea" stroke="#e9d5ff" stroke-width="3"/>
-      <text x="24" y="33" font-size="24" text-anchor="middle">🧩</text>
+    <!-- Difference 2 on [ ب ] -->
+    <g filter="url(#shadow)">
+      <circle cx="${puzzleCfg.diff2.bCoord.x}" cy="${puzzleCfg.diff2.bCoord.y}" r="22" fill="${puzzleCfg.diff2.b.bg}" stroke="${puzzleCfg.diff2.b.stroke}" stroke-width="3"/>
+      <text x="${puzzleCfg.diff2.bCoord.x}" y="${puzzleCfg.diff2.bCoord.y + 9}" font-size="24" text-anchor="middle">${puzzleCfg.diff2.b.icon}</text>
     </g>
 
-    <!-- Difference 3 on [ ب ]: Green Lucky Clover instead of Golden Trophy! -->
-    <g filter="url(#shadow)" transform="translate(900, 620)">
-      <circle cx="26" cy="26" r="24" fill="#16a34a" stroke="#bbf7d0" stroke-width="3"/>
-      <text x="26" y="36" font-size="26" text-anchor="middle">🍀</text>
+    <!-- Difference 3 on [ ب ] -->
+    <g filter="url(#shadow)">
+      <circle cx="${puzzleCfg.diff3.bCoord.x}" cy="${puzzleCfg.diff3.bCoord.y}" r="24" fill="${puzzleCfg.diff3.b.bg}" stroke="${puzzleCfg.diff3.b.stroke}" stroke-width="3"/>
+      <text x="${puzzleCfg.diff3.bCoord.x}" y="${puzzleCfg.diff3.bCoord.y + 10}" font-size="26" text-anchor="middle">${puzzleCfg.diff3.b.icon}</text>
     </g>
 
     <!-- Outer Border -->
@@ -3752,11 +3886,15 @@ async function publishDailyInteractive3DPhotoPostForRunner({
   </svg>`;
   fs.writeFileSync(svgPath, puzzleSvg);
 
+  const compRightScale = puzzleCfg.shouldFlipComp
+    ? `[0:v]hflip,scale=320:646:force_original_aspect_ratio=increase,crop=320:646[c_r];`
+    : `[0:v]scale=320:646:force_original_aspect_ratio=increase,crop=320:646[c_r];`;
+
   const filterGraph = [
     `[0:v]scale=320:646:force_original_aspect_ratio=increase,crop=320:646[c_l];`,
     `[1:v]scale=320:646:force_original_aspect_ratio=increase,crop=320:646[h_l];`,
     `[c_l][h_l]hstack=inputs=2[panel_a];`,
-    `[0:v]hflip,scale=320:646:force_original_aspect_ratio=increase,crop=320:646[c_r];`,
+    compRightScale,
     `[1:v]scale=320:646:force_original_aspect_ratio=increase,crop=320:646[h_r];`,
     `[c_r][h_r]hstack=inputs=2[panel_b];`,
     `[panel_a][panel_b]hstack=inputs=2[panels];`,
@@ -3816,12 +3954,13 @@ async function publishDailyInteractive3DPhotoPostForRunner({
   // Immediately post the interactive first comment on the photo post
   try {
     const dynamicCommentPool = [
-      `🌟 تحدي أبطال نورين كيدز النهاردة مع ${shortHero} و${shortComp}!\n👇 اكتبوا لنا اسم طفلكم الجميل وإجابته في تعليق هنا علشان ${shortHero} و${shortComp} يردوا عليه ويحيوه بالاسم في حلقة بكرة! 🎬💖 ومتنسوش متابعة الصفحة 🔔👍 ومشاركة التحدي مع كل الأمهات! #نورين_كيدز`,
-      `🎉 مين أشطر بطل هيجاوب على فزورة ${shortHero} و${shortComp} النهاردة؟\n👇 شاركونا إجابة أطفالكم الحلوين وأساميهم في تعليق، و${shortHero} هيرد عليهم باسمهم ويشجعهم! 🌟👏 وتابعوا صفحة نورين كيدز لحكاية بكرة! 🔔👍`,
-      `💖 تحية خاصة مليانة حب من ${shortHero} و${shortComp} لكل أبطال Noreen Kids الشطار!\n👇 اكتبوا لنا إجابتكم واسم طفلكم علشان نحييه في التعليقات ونبعتله شهادة شطارة وفرحة كبيرة! 🏆✨ متنسوش المتابعة واللايك 🔔👍`,
-      `🤔 لغز النهاردة الذكي مع ${shortHero} و${shortComp} لأذكياء نورين كيدز!\n👇 مستنيين إجاباتكم وأسامي أبطالنا الحلوين في التعليقات علشان نبارك لأشطر إجابة ونثبتها! 🌟✨ متنسوش متابعة الصفحة 🔔👍`
+      `🔍 مين أول بطل شاطر هيكتشف الفروقات الـ 3 بين الصورة [ أ ] والصورة [ ب ]؟\n👇 اكتبوا إجابة أطفالكم الحلوين وأساميهم في تعليق، و${shortHero} و${shortComp} هيردوا عليهم باسمهم ويشجعوهم! 🌟👏 وتابعوا صفحة نورين كيدز لحكاية بكرة! 🔔👍`,
+      `🌟 ركزوا كويس في الصورة [ أ ] والصورة [ ب ] مع ${shortHero} و${shortComp}!\n👇 اكتبوا لنا اسم طفلكم الجميل والفروقات اللي شافها علشان ${shortHero} و${shortComp} يحيوه بالاسم في التعليقات ويبعتوله شهادة شطارة! 🎬💖 #نورين_كيدز`,
+      `🕵️‍♂️ تحدي أذكياء نورين كيدز مع ${shortHero} و${shortComp}!\n👇 مستنيين أسرع وأشطر إجابة من أبطالنا الصغار بالاسم علشان نثبت تعليق البطل الفائز! 🏆✨ متنسوش متابعة الصفحة 🔔👍`,
+      `💖 مين عنده قوة ملاحظة خارقة يقدر يكتشف الـ 3 فروقات بسرعة؟\n👇 اكتبوا لنا الحل واسم البطل في تعليق و${shortHero} هيرد عليه شخصياً ويشكره! 🎬✨ #نورين_كيدز`,
+      `🎉 تحدي اليوم محتاج تركيز عالي! بصوا كويس بين [ أ ] و [ ب ] 👀\n👇 اكتبوا الاختلافات في تعليق مع اسم طفلكم علشان نحتفل بيه في عيلة الشطار! 👏🌟`,
     ];
-    const firstCommentMsg = dynamicCommentPool[safeRotIdx % dynamicCommentPool.length];
+    const firstCommentMsg = dynamicCommentPool[dynamicSeed % dynamicCommentPool.length];
     await fetch(
       `https://graph.facebook.com/v21.0/${encodeURIComponent(postId)}/comments`,
       {
