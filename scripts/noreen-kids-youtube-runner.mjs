@@ -3235,19 +3235,56 @@ async function scanAndAutoReplyYouTubeComments({ accessToken, geminiApiKey, sche
   let channelId = String(schedule?.channelId || "").trim();
   try {
     if (!channelId) {
-      const ch = await fetch("https://www.googleapis.com/youtube/v3/channels?part=id&mine=true", { headers: { Authorization: `Bearer ${accessToken}` } });
+      const ch = await fetch("https://www.googleapis.com/youtube/v3/channels?part=id&mine=true", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
       const data = await ch.json().catch(() => ({}));
       channelId = String(data?.items?.[0]?.id || "");
     }
     if (!channelId) return { repliesCount: 0, scannedThreads: 0 };
 
-    const replied = new Set(Array.isArray(schedule.repliedCommentIds) ? schedule.repliedCommentIds : []);
+    const replied = new Set(
+      Array.isArray(schedule.repliedCommentIds) ? schedule.repliedCommentIds : []
+    );
     let repliesCount = 0;
     let scannedThreads = 0;
     let pageToken = "";
     let pages = 0;
 
-    // Scan multiple pages so older comments on previous videos are not skipped.
+    // Build videoId -> videoTitle cache so comments on ANY video (Tamer, Carmen, Jana, etc.)
+    // are answered strictly with the persona and name of that specific video's hero!
+    const videoTitleCache = new Map();
+    if (Array.isArray(schedule?.scheduledHistory)) {
+      for (const h of schedule.scheduledHistory) {
+        if (h?.youtubeShortVideoId && (h?.shortEpisodeTitle || h?.shortTitle)) {
+          videoTitleCache.set(String(h.youtubeShortVideoId).trim(), String(h.shortEpisodeTitle || h.shortTitle).trim());
+        }
+        if (h?.youtubeLongVideoId && (h?.longEpisodeTitle || h?.longTitle)) {
+          videoTitleCache.set(String(h.youtubeLongVideoId).trim(), String(h.longEpisodeTitle || h.longTitle).trim());
+        }
+      }
+    }
+
+    async function resolveMissingVideoTitles(neededIds) {
+      const missing = Array.from(new Set(neededIds.filter(v => v && !videoTitleCache.has(v))));
+      if (missing.length === 0) return;
+      for (let i = 0; i < missing.length; i += 50) {
+        const batch = missing.slice(i, i + 50);
+        try {
+          const vUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${encodeURIComponent(batch.join(","))}`;
+          const vRes = await fetch(vUrl, { headers: { Authorization: `Bearer ${accessToken}` } });
+          const vData = await vRes.json().catch(() => ({}));
+          if (Array.isArray(vData?.items)) {
+            for (const vItem of vData.items) {
+              const vId = String(vItem?.id || "").trim();
+              const vTitle = String(vItem?.snippet?.title || "").trim();
+              if (vId && vTitle) videoTitleCache.set(vId, vTitle);
+            }
+          }
+        } catch {}
+      }
+    }
+
     do {
       const url = new URL("https://www.googleapis.com/youtube/v3/commentThreads");
       url.searchParams.set("part", "snippet,replies");
@@ -3261,26 +3298,54 @@ async function scanAndAutoReplyYouTubeComments({ accessToken, geminiApiKey, sche
       const threads = Array.isArray(data?.items) ? data.items : [];
       scannedThreads += threads.length;
 
+      const videoIdsInBatch = threads
+        .map(t => String(t?.snippet?.videoId || "").trim())
+        .filter(Boolean);
+      await resolveMissingVideoTitles(videoIdsInBatch);
+
       for (const thread of threads) {
         const top = thread?.snippet?.topLevelComment;
         const id = String(top?.id || "");
         const authorChannelId = String(top?.snippet?.authorChannelId?.value || "");
+        const videoIdForComment = String(thread?.snippet?.videoId || top?.snippet?.videoId || "").trim();
+
         if (!id || replied.has(id) || (channelId && authorChannelId === channelId)) continue;
+
+        // Extract the title specific to THIS video
+        const specificVideoTitle = videoTitleCache.get(videoIdForComment) || "";
 
         const replyText = await generateSmartCommentReply({
           authorName: top?.snippet?.authorDisplayName || "صديقنا الغالي",
           commentText: top?.snippet?.textOriginal || "",
           platform: "YouTube",
-          postTitle: schedule?.lastCloudRunReport?.shortEpisodeTitle,
+          postTitle: specificVideoTitle,
         });
+
         const rep = await fetch("https://www.googleapis.com/youtube/v3/comments?part=snippet", {
           method: "POST",
-          headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json; charset=UTF-8" },
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json; charset=UTF-8",
+          },
           body: JSON.stringify({ snippet: { parentId: id, textOriginal: replyText } }),
         });
+
         if (rep.ok) {
           replied.add(id);
           repliesCount++;
+          if (!Array.isArray(schedule.recentAutoRepliesLog)) {
+            schedule.recentAutoRepliesLog = [];
+          }
+          schedule.recentAutoRepliesLog.unshift({
+            commentId: id,
+            videoId: videoIdForComment,
+            videoTitle: specificVideoTitle || "فيديو نورين كيدز",
+            authorName: top?.snippet?.authorDisplayName || "صديقنا الغالي",
+            userCommentText: (top?.snippet?.textOriginal || "").slice(0, 150),
+            replyText: replyText.slice(0, 200),
+            repliedAtCairo: new Date().toLocaleString("ar-EG", { timeZone: "Africa/Cairo" }),
+          });
+          schedule.recentAutoRepliesLog = schedule.recentAutoRepliesLog.slice(0, 30);
         }
       }
 
@@ -3289,12 +3354,16 @@ async function scanAndAutoReplyYouTubeComments({ accessToken, geminiApiKey, sche
     } while (pageToken && pages < 10);
 
     schedule.repliedCommentIds = Array.from(replied).slice(-500);
-    schedule.lastAutoCommentScanAtCairo = new Date().toLocaleString("ar-EG", { timeZone: "Africa/Cairo" });
+    schedule.lastAutoCommentScanAtCairo = new Date().toLocaleString("ar-EG", {
+      timeZone: "Africa/Cairo",
+    });
     return { repliesCount, scannedThreads };
-  } catch {
+  } catch (err) {
+    console.warn("⚠️ YouTube comment auto-replier warning:", err?.message || err);
     return { repliesCount: 0, scannedThreads: 0 };
   }
 }
+
 async function postFacebookFirstComment({ rawPageAccessToken, pageId, videoId, message }) {
   const token = await resolveTrueFacebookPageAccessToken({ rawToken: rawPageAccessToken, targetPageId: pageId });
   if (!token || !videoId || !message) return { success: false };
@@ -3315,14 +3384,18 @@ async function scanAndAutoReplyFacebookVideoComments({ rawPageAccessToken, pageI
   const token = await resolveTrueFacebookPageAccessToken({ rawToken: rawPageAccessToken, targetPageId: pageId });
   if (!token || !pageId) return { repliesCount: 0, scannedComments: 0, scannedVideos: 0 };
   try {
-    const replied = new Set(Array.isArray(schedule.facebookRepliedCommentIds) ? schedule.facebookRepliedCommentIds : []);
+    const replied = new Set(
+      Array.isArray(schedule.facebookRepliedCommentIds)
+        ? schedule.facebookRepliedCommentIds
+        : []
+    );
     let repliesCount = 0;
     let scannedComments = 0;
     let scannedVideos = 0;
-    let pageUrl = `https://graph.facebook.com/v21.0/${encodeURIComponent(pageId)}/videos?fields=id,message,created_time&limit=50`;
+    // Query id, title, description, and message for accurate per-video hero identification
+    let pageUrl = `https://graph.facebook.com/v21.0/${encodeURIComponent(pageId)}/videos?fields=id,title,description,message,created_time&limit=50`;
     let videoPages = 0;
 
-    // Scan recent Page videos, not only the video from the current run.
     do {
       const videoRes = await fetch(pageUrl, { headers: { Authorization: `Bearer ${token}` } });
       const videoData = await videoRes.json().catch(() => ({}));
@@ -3333,8 +3406,18 @@ async function scanAndAutoReplyFacebookVideoComments({ rawPageAccessToken, pageI
         if (!currentVideoId) continue;
         scannedVideos++;
 
+        // Determine the video title accurately from video object itself
+        const videoTitle = String(
+          video?.title ||
+          video?.description?.split("\n")[0] ||
+          video?.message?.split("\n")[0] ||
+          (currentVideoId === String(videoId) ? episode?.title : "") ||
+          ""
+        ).trim();
+
         let commentsUrl = `https://graph.facebook.com/v21.0/${encodeURIComponent(currentVideoId)}/comments?fields=id,message,from,created_time&limit=100`;
         let commentPages = 0;
+
         do {
           const commentRes = await fetch(commentsUrl, { headers: { Authorization: `Bearer ${token}` } });
           const commentData = await commentRes.json().catch(() => ({}));
@@ -3350,17 +3433,18 @@ async function scanAndAutoReplyFacebookVideoComments({ rawPageAccessToken, pageI
               authorName: item?.from?.name || "صديقنا الغالي",
               commentText: item?.message || "",
               platform: "Facebook",
-              postTitle: video?.message || episode?.title,
+              postTitle: videoTitle,
             });
+
             const rep = await fetch(`https://graph.facebook.com/v21.0/${encodeURIComponent(id)}/comments`, {
               method: "POST",
               headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
               body: JSON.stringify({ message: replyText }),
             });
+
             if (rep.ok) {
               replied.add(id);
               repliesCount++;
-              // Auto-Heart / Like user's comment from the Page!
               try {
                 await fetch(`https://graph.facebook.com/v21.0/${encodeURIComponent(id)}/likes`, {
                   method: "POST",
@@ -3369,12 +3453,10 @@ async function scanAndAutoReplyFacebookVideoComments({ rawPageAccessToken, pageI
               } catch {}
             }
           }
-
           commentsUrl = String(commentData?.paging?.next || "");
           commentPages++;
         } while (commentsUrl && commentPages < 10);
       }
-
       pageUrl = String(videoData?.paging?.next || "");
       videoPages++;
     } while (pageUrl && videoPages < 5);
@@ -3386,6 +3468,7 @@ async function scanAndAutoReplyFacebookVideoComments({ rawPageAccessToken, pageI
     return { repliesCount: 0, scannedComments: 0, scannedVideos: 0 };
   }
 }
+
 function detectHeroTeamForFacebookPost(title = "", description = "") {
   const combined = `${title || ""} ${description || ""}`.toLowerCase();
   const rules = [
