@@ -2449,60 +2449,65 @@ function buildSmartEpisodeForRunner({
   const egyptianTopic = normalizeEgyptianColloquial(cleanTopic);
   const cleanTopicForAdventure = egyptianTopic.replace(/^(مغامرة\s+|رحلة\s+)/i, "").trim() || egyptianTopic;
 
+  const shortTopicMention = cleanTopicForAdventure
+    .replace(/^حكاية\s+|^قصة\s+|^حدوتة\s+|^مغامرة\s+/g, "")
+    .slice(0, 32)
+    .trim() || cleanTopicForAdventure;
+
   const sceneTemplates = [
     {
       title: `1. البداية: انطلاق ${shortHero} و${shortComp}`,
       egyptianShort: `ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بص كده معانا يا ${shortComp}، النهارده عندنا حكاية جميلة أوي عن ${egyptianTopic}! أنا جهزت ${heroProp} علشان نبدأ رحلتنا ونشوف إيه السر اللي مستنينا هناك!`,
-      egyptianLong: `ازيكم يا أصحابي الحلوين في قناة نورين كيدز! عاملين إيه النهارده يا أحلى شطار؟ بص كده معانا يا ${shortComp}، النهارده ميعادنا مع حكاية كبيرة ومشوقة أوي عن ${cleanTopicForAdventure}! أنا جهزت معايا ${heroProp} علشان نكتشف كل الأسرار الحلوة، وصاحبي ${shortComp} محضر ${compProp} علشان نكون مستعدين لأي مفاجأة تقابلنا في السكة! شايفين يا أصحابنا الألوان الجميلة والنور اللي بيلمع هناك في قلب المكان السحري ده؟ يلا بينا نقرب خطوة بخطوة ونفتح عينينا كويس علشان نبدأ أول وأجمل خطوة في حكايتنا النهارده مع بعض بكل بهجة وحماس!`,
+      egyptianLong: `يا خبر يا أبطال وعيلة نورين كيدز! بصوا بسرعة معايا النهارده، ازيكم يا أحلى أصحاب وشطار في الدنيا! بص كده معايا يا ${shortComp}، النهارده ميعادنا مع حكاية عسل ومليانة مواقف حلوة أوي عن ${shortTopicMention}! أنا جهزت معايا ${heroProp} علشان نكتشف كل حاجة خطوة بخطوة، وصاحبي ${shortComp} محضر ${compProp} علشان يساعدنا ونكون إيد واحدة في كل خطوة! شايفين النور والبهجة اللي حوالينا في المكان ده؟ يلا بينا نقرب خطوة بخطوة ونفتح عينينا كويس ونبدأ الحكاية سوا بكل فرحة ونشاط يا أبطال!`,
       speaker: effectiveMainName,
       voice: heroVoice,
     },
     {
       title: `2. التطور: ملاحظة العلامات العجيبة مع ${shortComp}`,
       egyptianShort: `يا خبر يا ${shortHero}! أنا فتحت ${compProp} وبصيت على المكان، ولقيت إن فيه مشكلة غير متوقعة في ${egyptianTopic} محتاجة مننا تفكير ذكي وتعاون سريع علشان نحلها!`,
-      egyptianLong: `يا خبر يا ${shortHero}! بص كده شوفي معايا بسرعة! أنا مسكت ${compProp} وبصيت على الأنوار اللي حوالينا، ولقيت حاجة غريبة بتلخبط كل الترتيب في حكاية ${cleanTopicForAdventure}! النور الدهبي اللي كان منور المكان بدأ يطفي شوية بشوية، وكل حاجة كانت مظبوطة بقت محتاجة مننا تركيز وهدوء ونفهم إيه السبب بالظبط! تفتكروا إيه اللي عمل اللخبطة دي يا أصحابي الحلوين؟ يلا بينا نفتح عينينا ونفكر سوا من غير تسرع، ونقرب خطوة كمان علشان نعرف الحكاية ونشوف إزاي هنرجع النور والجمال للمكان كله سوا!`,
+      egyptianLong: `يا خبر يا ${shortHero}! بص شوف معايا كده بسرعة! أنا طلعت ${compProp} وببص حواليا، لقيت حاجة مش مظبوطة ومحتاجة مننا وئفة وتفكير هادي! شفت اللي حصل هنا؟ كل حاجة كانت ماشية تمام، وفجأة ظهر الموقف ده ومحتاج شطارة وسرعة بديهة علشان نتصرف صح! تفتكروا إيه السبب يا أصحابنا الشطار؟ يلا نفكر بعقلنا ونهدى خالص من غير ما نستعجل، ونقرب علشان نفهم إيه الحكاية بالظبط ونساعد بعض بحب وجدعنة!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
     {
       title: "3. الحدث المفاجئ: ظهور العقبة والتفكير العلمي",
       egyptianShort: `عندك حق يا ${shortComp}! يلا بينا نستخدم ${heroProp} ونتصرف بذكاء وهدوء، لأن لما بنكون إيد واحدة وبنتعاون بصدق، بنلاقي الحل الصح لكل مشكلة صعبة!`,
-      egyptianLong: `عندك حق يا ${shortComp}، وكويس إنك لاحظت الموضوع ده بدري! بصوا كده يا أصحابي الشطار، الطريق قدامنا وقف علشان تفاصيل ${cleanTopicForAdventure} محتاجة تترتب بنظام وفهم وترتيب صح خطوة بخطوة من غير ما نستعجل خالص! وإحنا هنا في عيلة نورين كيدز عمرنا ما بنخاف ولا بنستسلم أبداً، لأن الشطار دايماً بيفكروا بعقلهم بهدوء وبيتعاونوا مع بعض بحب! أنا هستخدم ${heroProp} دلوقتي حالا علشان نبدأ أول فكرة ونشوف النتيجة قدام عينينا، يلا نشجع بعض ونبدأ الخطوة الصح سوا!`,
+      egyptianLong: `جدع يا ${shortComp}، وكويس إنك نبهتني بدري! بصوا كده يا أصحابي الحلوين، الشطار في عيلة نورين كيدز عمرهم ما بيخافوا ولا بيتسرعوا أبداً، دايماً بنفكر بعقلنا ونرتب خطواتنا بالراحة واحدة واحدة! الموقف ده محتاج مننا أمانة وصبر وجدعنة علشان كل صاحب حق يرجعله حقه وكل حاجة ترجع مظبوطة! أنا هستخدم ${heroProp} دلوقتي حالا علشان نبدأ أول خطوة صح، يلا شجعونا وقولوا يا رب، وإيدينا في إيد بعض وهنعمل الصح دايماً!`,
       speaker: effectiveMainName,
       voice: heroVoice,
     },
     {
       title: "4. المشكلة: تحديد سبب المشكلة بدقة",
       egyptianShort: `بص يا ${shortHero}! إحنا عرفنا السبب خلاص، يلا نطبق الحل الصحي سوا!`,
-      egyptianLong: `أيوة كده يا ${shortHero}، كلامك مظبوط مية في المية! أنا قربت بـ ${compProp} وفهمت السر كله دلوقتي! علشان ننجح في ${cleanTopicForAdventure}، لازم كلنا نلتزم بالنظافة والنظام والخطوات المظبوطة وما نكسلش أبداً عن مساعدة بعض! شفتوا يا أصحابنا الحلوين إزاي لما بندور على أصل المشكلة بهدوء وبقلب طيب بنعرف نوصل للحل على طول؟ يلا بينا نمد إيدينا لبعض ونبدأ العمل الجماعي فوراً، علشان الفرحة ترجع وتملأ قلوب كل أصحابنا اللي مستنيين مساعدتنا في العالم السحري الجميل ده!`,
+      egyptianLong: `أيوة كده يا ${shortHero}، كلامك زي السكر ومظبوط مية في المية! أنا قربت بـ ${compProp} وفهمت السر كله دلوقتي! الشطارة مش بالنوم والكسل، الشطارة بالسعي والنشاط والجدعنة وحب الخير لكل الناس! شفتوا يا أصحابنا الحلوين إزاي لما بنتحرك ونشتغل بهمة وبقلب طيب بنعرف نوصل للحل على طول؟ يلا بينا نمد إيدينا لبعض ونبدأ التصرف الصح فوراً، علشان الفرحة ترجع وتملأ قلوب كل حبايبنا وأصحابنا الشطار اللي مستنيين فرحتنا سوا!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
     {
       title: "5. التصرف: العمل الجماعي وتجربة الحل",
       egyptianShort: `يا سلام على الشطارة يا ${shortComp}! بالعلم والنظافة قدرنا ننجح ونحل المشكلة!`,
-      egyptianLong: `يلا بينا يا ${shortComp}، إيدي في إيدك دلوقتي وهننجزها في ثواني! أنا هستخدم ${heroProp} علشان أظبط الأساس، وإنت ساعدني بـ ${compProp} علشان نكمل المهمة في نفس اللحظة ونخلي كل جزء يرجع يلمع من تاني! شايفين يا أصحابنا الشطار إزاي لما بنتعاون بصبر ومحبة ونظام، أصعب حاجة بتبقى سهلة وممتعة في ثانية؟ العلم والمعرفة واهتمامنا بصحتنا ونظافتنا هما الكنز الحقيقي اللي بيخلينا ننجح ونفرح كل اللي حوالينا، يلا نكمل لآخر خطوة بعزيمة ونشاط يا أبطال!`,
+      egyptianLong: `يلا بينا يا ${shortComp}، إيدي في إيدك ومفيش وقت نضيعه خالص! أنا جهزت ${heroProp} علشان نثبت الأساس ونبدأ صح، وإنت ساعدني بـ ${compProp} علشان نكمل الحكاية في نفس اللحظة ونخلي كل جزء يرجع يلمع ويفرح! شايفين يا أصحابنا الشطار إزاي لما بنتحرك بنشاط ومحبة، أصعب حاجة بتبقى سهلة وممتعة في ثانية؟ الجدعنة والصبر هما الكنز الحقيقي اللي بيخلينا ننجح ونفرح كل اللي حوالينا، يلا نكمل لآخر خطوة بعزيمة ونشاط يا أبطال!`,
       speaker: effectiveMainName,
       voice: heroVoice,
     },
     {
       title: "6. الحل الذكي: نجاح المهمة وعودة النور",
       egyptianShort: `بص يا ${shortHero}! الحل نجح وكل أصحابنا فرحانين بالابتسامة الجميلة!`,
-      egyptianLong: `الله يا سلام! الفكرة نجحت مية في المية يا ${shortHero}! بصوا يا كل أصحابنا الشطار وعيلة نورين كيدز في كل مكان! أول ما حطينا إيدينا في إيد بعض وطبقنا الخطوات الصح في ${cleanTopicForAdventure}، رجعت الأنوار تلمع وزادت الابتسامة والضحكة في المكان كله! اللحظة دي من أسعد اللحظات في حكايتنا النهارده، لأن كل الأصحاب في العالم السحري رجعتلهم الفرحة والنشاط، وبقت كل خطوة بتشهد على شطارتنا وذكائنا لما اتعاونا سوا بحب وصدق وإخلاص!`,
+      egyptianLong: `الله يا سلام! الفكرة نجحت مية في المية يا ${shortHero}! بصوا كده يا كل أصحابنا الشطار وعيلة نورين كيدز في كل مكان! أول ما حطينا إيدينا في إيد بعض وسيبنا الكسل على جنب وتصرفنا بأمانة وجدعنة، رجعت الأنوار تلمع وزادت الابتسامة والضحكة في المكان كله! دي من أسعد اللحظات في حكايتنا النهارده، لما بنشوف الشطارة والنشاط بيجيبوا نتيجة حلوة تفرح القلب، وبقت كل خطوة بتشهد على ذكائنا لما اتعاونا سوا بصدق وإخلاص!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
     {
       title: "7. الاحتفال بالنجاح والدرس المستفاد",
       egyptianShort: `يا سلام على الفرحة الكبيرة! دلوقتي كل واحد فينا عرف قيمة العلم والنظافة والتعاون!`,
-      egyptianLong: `بجد يا ${shortComp} دي كانت حكاية ولا أروع، وعمرنا ما هننساها أبداً في قصة ${cleanTopicForAdventure}! بدأنا المشوار بملاحظة ذكية، ولما قابلتنا العقبة ما سبناش بعض أبداً وفضلنا إيد واحدة، وفكرنا وتصرفنا بشجاعة ونظام لحد ما وصلنا للنجاح الكبير ده! اتعلمنا النهارده سوا يا أصحابي إن التعاون والنظام والصدق ومساعدة أصحابنا هما السر الحقيقي اللي بيحول أي حاجة صعبة لانتصار عظيم يفرح كل القلوب، شكراً يا ${shortComp} وشكراً لكل أصحابنا الأبطال!`,
+      egyptianLong: `بجد يا ${shortComp} دي كانت حكاية ولا أروع، وعمرنا ما هننساها أبداً! بدأنا المشوار بملاحظة ذكية، ولما قابلتنا العقبة ما سبناش بعض خالص وفضلنا إيد واحدة، وفكرنا وتصرفنا بشجاعة ونشاط لحد ما وصلنا للنجاح الجميل ده! اتعلمنا النهارده سوا يا أصحابي إن النشاط والهمة والصدق ومساعدة أصحابنا هما سر الفرحة الحقيقي اللي بيفرح كل القلوب، شكراً يا ${shortComp} وشكراً لكل أصحابنا الأبطال اللي بيشجعونا دايماً!`,
       speaker: effectiveMainName,
       voice: heroVoice,
     },
     {
       title: `8. النهاية: رسالة ${shortHero} و${shortComp} لأبطال Noreen Kids`,
       egyptianShort: `هيييه! حلينا اللغز ونجحت المهمة يا ${shortHero}! 🧩 تحدي الشطار: يا ترى إيه أهم حاجة اتعلمناها من حكاية ${cleanTopicForAdventure}؟ اكتبوا إجابتكم واسمكم في التعليقات عشان تكسبوا وسام الشطارة وتظهروا في لوحة شرف أبطال نورين كيدز في الحلقة الجاية! مع السلامة يا أبطال!`,
-      egyptianLong: `ودلوقتي يا أصحابنا الحلوين في عيلة نورين كيدز، وصلنا المشهد الثامن والتحدي الأخير بعد ما عشنا حكاية ${cleanTopicForAdventure} الجميلة مع ${shortHero} و${shortComp}! 🧩 سؤال الشطار للأبطال: إيه أكتر تصرف عجبكم في حلقة النهارده، وإزاي نقدر نساعد أصحابنا في المدرسة والبيت بنفس الطريقة؟ اكتبوا إجابتكم واسمكم في التعليقات تحت الفيديو علشان تكسبوا وسام الشطارة وتظهروا في لوحة الشرف بالحلقة الجاية! وما تنسوش تشتركوا في القناة وتعملوا لايك، بنحبكم أوي ومع السلامة يا أبطال!`,
+      egyptianLong: `ودلوقتي يا أصحابنا الحلوين في عيلة نورين كيدز، وصلنا المشهد الثامن والتحدي الأخير في حلقة النهارده مع ${shortHero} و${shortComp}! 🧩 سؤال الشطار للأبطال: إيه أكتر موقف عجبكم في حلقة النهارده، وإزاي نقدر نكون نشطاء وشطار وأمناء في المدرسة والبيت بنفس الطريقة ومفيش كسل خالص؟ اكتبوا إجابتكم واسمكم في التعليقات تحت الفيديو علشان تكسبوا وسام الشطارة وتظهروا في لوحة الشرف بالحلقة الجاية! وما تنسوش تشتركوا في القناة وتعملوا لايك، بنحبكم أوي ومع السلامة يا أبطال!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
@@ -2517,11 +2522,15 @@ function buildSmartEpisodeForRunner({
     const aiSc = Array.isArray(aiScenes) ? aiScenes[idx] : null;
     const rawAiText = String(aiSc?.dialogueArabic || "").trim();
     const fallbackText = isShort ? tpl.egyptianShort : tpl.egyptianLong;
+    // Strict Dialect Gate: Reject AI output if it contains formal Fusha markers
+    const hasFushaMarkers =
+      /\b(لقد|يجب\s+أن|علينا\s+أن|دعونا|في\s+الحقيقة|هذا\s+الأمر|تلك|ذلك|ما\s+الذي|أيها|حيث\s+أن|العلم\s+والمعرفة|العمل\s+الجماعي|أصل\s+المشكلة|انتصار\s+عظيم)\b/.test(
+        rawAiText
+      );
     let chosenRaw =
+      !hasFushaMarkers &&
       rawAiText.split(/\s+/).filter(Boolean).length >= minWordsPerScene
         ? rawAiText
-        : rawAiText.length > 15
-        ? `${rawAiText} ${fallbackText}`
         : fallbackText;
     if (idx === selectedTemplates.length - 1) {
       const interactiveEnding = isShort
@@ -3433,20 +3442,33 @@ async function scanAndAutoReplyYouTubeComments({ accessToken, geminiApiKey, sche
   }
 }
 
-async function postFacebookFirstComment({ rawPageAccessToken, pageId, videoId, message }) {
+async function postFacebookFirstComment({ rawPageAccessToken, pageId, videoId, postId, message }) {
   const token = await resolveTrueFacebookPageAccessToken({ rawToken: rawPageAccessToken, targetPageId: pageId });
-  if (!token || !videoId || !message) return { success: false };
-  try {
-    const res = await fetch(`https://graph.facebook.com/v21.0/${encodeURIComponent(videoId)}/comments`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ message: String(message).trim() }),
-    });
-    const data = await res.json().catch(() => ({}));
-    return { success: res.ok, commentId: data?.id || null };
-  } catch {
-    return { success: false };
+  if (!token || (!videoId && !postId) || !message) return { success: false };
+
+  // For Reels, target postId first, then fallback to videoId and pageId_videoId
+  const targetIds = Array.from(
+    new Set([postId, videoId && pageId ? `${pageId}_${videoId}` : null, videoId].filter(Boolean))
+  );
+
+  for (let attempt = 0; attempt < 3; attempt++) {
+    for (const targetId of targetIds) {
+      try {
+        const res = await fetch(`https://graph.facebook.com/v21.0/${encodeURIComponent(targetId)}/comments`, {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+          body: JSON.stringify({ message: String(message).trim() }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data?.id) {
+          return { success: true, commentId: data.id };
+        }
+      } catch {}
+    }
+    // Reel processing delay: wait 3.5 seconds before retrying
+    if (attempt < 2) await new Promise((r) => setTimeout(r, 3500));
   }
+  return { success: false };
 }
 
 async function scanAndAutoReplyFacebookVideoComments({ rawPageAccessToken, pageId, videoId, episode, schedule }) {
@@ -3627,38 +3649,52 @@ async function buildSmartHeroReplyForFacebookCommentRunner({
 }
 
 function generateDynamicPuzzleConfig(seed = Date.now()) {
-  const poolZone1 = [
-    { a: { icon: "⭐", bg: "#fbbf24", stroke: "#fef08a", name: "نجمة ذهبية" }, b: { icon: "💖", bg: "#ec4899", stroke: "#fbcfe8", name: "قلب وردي" }, aCoord: { x: 530, y: 100 }, bCoord: { x: 1170, y: 100 } },
-    { a: { icon: "👑", bg: "#f59e0b", stroke: "#fef08a", name: "تاج ذهبي" }, b: { icon: "🎈", bg: "#ef4444", stroke: "#fecaca", name: "بالونة حمراء" }, aCoord: { x: 520, y: 110 }, bCoord: { x: 1160, y: 110 } },
-    { a: { icon: "🏅", bg: "#eab308", stroke: "#fef08a", name: "ميدالية بطولة" }, b: { icon: "✨", bg: "#06b6d4", stroke: "#cffafe", name: "بريق لامع" }, aCoord: { x: 535, y: 95 }, bCoord: { x: 1175, y: 95 } },
-    { a: { icon: "🌻", bg: "#f59e0b", stroke: "#fef08a", name: "زهرة عباد الشمس" }, b: { icon: "🌙", bg: "#6366f1", stroke: "#e0e7ff", name: "هلال وقمر" }, aCoord: { x: 525, y: 105 }, bCoord: { x: 1165, y: 105 } },
-  ];
-
-  const poolZone2 = [
-    { a: { icon: "✨", bg: "#0284c7", stroke: "#38bdf8", name: "هالة زرقاء" }, b: { icon: "🧩", bg: "#9333ea", stroke: "#e9d5ff", name: "قطعة بازل" }, aCoord: { x: 60, y: 270 }, bCoord: { x: 700, y: 270 } },
-    { a: { icon: "🍓", bg: "#e11d48", stroke: "#fecdd3", name: "فراولة حمراء" }, b: { icon: "🥕", bg: "#ea580c", stroke: "#fed7aa", name: "جزرة برتقالية" }, aCoord: { x: 55, y: 280 }, bCoord: { x: 695, y: 280 } },
-    { a: { icon: "💎", bg: "#06b6d4", stroke: "#a5f3fc", name: "جوهرة زرقاء" }, b: { icon: "🔑", bg: "#f59e0b", stroke: "#fef08a", name: "مفتاح ذهبي" }, aCoord: { x: 65, y: 260 }, bCoord: { x: 705, y: 260 } },
-    { a: { icon: "🎨", bg: "#ec4899", stroke: "#fbcfe8", name: "لوحة ألوان" }, b: { icon: "🎵", bg: "#8b5cf6", stroke: "#ddd6fe", name: "نغمة موسيقية" }, aCoord: { x: 70, y: 275 }, bCoord: { x: 710, y: 275 } },
-  ];
-
-  const poolZone3 = [
-    { a: { icon: "🏆", bg: "#eab308", stroke: "#fef08a", name: "كأس شطارة" }, b: { icon: "🍀", bg: "#16a34a", stroke: "#bbf7d0", name: "ورقة شجر" }, aCoord: { x: 260, y: 620 }, bCoord: { x: 900, y: 620 } },
-    { a: { icon: "🔔", bg: "#f59e0b", stroke: "#fef08a", name: "جرس ذهبي" }, b: { icon: "🎁", bg: "#db2777", stroke: "#fbcfe8", name: "صندوق هدية" }, aCoord: { x: 250, y: 615 }, bCoord: { x: 890, y: 615 } },
-    { a: { icon: "🦋", bg: "#3b82f6", stroke: "#bfdbfe", name: "فراشة ملونة" }, b: { icon: "🌸", bg: "#ec4899", stroke: "#fbcfe8", name: "وردة ربيعية" }, aCoord: { x: 270, y: 625 }, bCoord: { x: 910, y: 625 } },
-    { a: { icon: "🔍", bg: "#0ea5e9", stroke: "#bae6fd", name: "عدسة مكبرة" }, b: { icon: "🧭", bg: "#d97706", stroke: "#fef3c7", name: "بوصلة مغامرات" }, aCoord: { x: 255, y: 610 }, bCoord: { x: 895, y: 610 } },
-  ];
-
   const safeNum = Math.abs(Number(seed) || Date.now());
-  const idx1 = safeNum % poolZone1.length;
-  const idx2 = (safeNum + 1) % poolZone2.length;
-  const idx3 = (safeNum + 2) % poolZone3.length;
-  const shouldFlipComp = safeNum % 2 === 0;
+
+  // Truly dynamic coordinate generator: picks 3 distinct zones from 6 varied areas
+  const zoneCoordsA = [
+    { x: 120 + ((safeNum * 17) % 180), y: 110 + ((safeNum * 13) % 60) }, // Top-left
+    { x: 420 + ((safeNum * 19) % 160), y: 110 + ((safeNum * 23) % 60) }, // Top-right
+    { x: 100 + ((safeNum * 31) % 180), y: 260 + ((safeNum * 29) % 120) }, // Mid-left
+    { x: 440 + ((safeNum * 37) % 150), y: 260 + ((safeNum * 41) % 120) }, // Mid-right
+    { x: 140 + ((safeNum * 43) % 160), y: 520 + ((safeNum * 47) % 100) }, // Lower-left
+    { x: 420 + ((safeNum * 53) % 160), y: 520 + ((safeNum * 59) % 100) }, // Lower-right
+  ];
+
+  const pickedZoneIdxs = [
+    safeNum % 2,
+    2 + ((safeNum >> 2) % 2),
+    4 + ((safeNum >> 4) % 2),
+  ];
+
+  const iconPairs = [
+    { a: { icon: "⭐", bg: "#fbbf24", stroke: "#fef08a", name: "نجمة ذهبية" }, b: { icon: "💖", bg: "#ec4899", stroke: "#fbcfe8", name: "قلب وردي" } },
+    { a: { icon: "👑", bg: "#f59e0b", stroke: "#fef08a", name: "تاج ذهبي" }, b: { icon: "🎈", bg: "#ef4444", stroke: "#fecaca", name: "بالونة حمراء" } },
+    { a: { icon: "🏅", bg: "#eab308", stroke: "#fef08a", name: "ميدالية بطولة" }, b: { icon: "✨", bg: "#06b6d4", stroke: "#cffafe", name: "بريق لامع" } },
+    { a: { icon: "🌻", bg: "#f59e0b", stroke: "#fef08a", name: "زهرة عباد الشمس" }, b: { icon: "🌙", bg: "#6366f1", stroke: "#e0e7ff", name: "هلال وقمر" } },
+    { a: { icon: "🍓", bg: "#e11d48", stroke: "#fecdd3", name: "فراولة حمراء" }, b: { icon: "🥕", bg: "#ea580c", stroke: "#fed7aa", name: "جزرة برتقالية" } },
+    { a: { icon: "💎", bg: "#06b6d4", stroke: "#a5f3fc", name: "جوهرة زرقاء" }, b: { icon: "🔑", bg: "#f59e0b", stroke: "#fef08a", name: "مفتاح ذهبي" } },
+    { a: { icon: "🎨", bg: "#ec4899", stroke: "#fbcfe8", name: "لوحة ألوان" }, b: { icon: "🎵", bg: "#8b5cf6", stroke: "#ddd6fe", name: "نغمة موسيقية" } },
+    { a: { icon: "🏆", bg: "#eab308", stroke: "#fef08a", name: "كأس شطارة" }, b: { icon: "🍀", bg: "#16a34a", stroke: "#bbf7d0", name: "ورقة شجر" } },
+    { a: { icon: "🔔", bg: "#f59e0b", stroke: "#fef08a", name: "جرس ذهبي" }, b: { icon: "🎁", bg: "#db2777", stroke: "#fbcfe8", name: "صندوق هدية" } },
+    { a: { icon: "🦋", bg: "#3b82f6", stroke: "#bfdbfe", name: "فراشة ملونة" }, b: { icon: "🌸", bg: "#ec4899", stroke: "#fbcfe8", name: "وردة ربيعية" } },
+    { a: { icon: "🔍", bg: "#0ea5e9", stroke: "#bae6fd", name: "عدسة مكبرة" }, b: { icon: "🧭", bg: "#d97706", stroke: "#fef3c7", name: "بوصلة مغامرات" } },
+    { a: { icon: "🍎", bg: "#dc2626", stroke: "#fca5a5", name: "تفاحة حمراء" }, b: { icon: "🍇", bg: "#7c3aed", stroke: "#ddd6fe", name: "عنقود عنب" } },
+  ];
+
+  const p1 = iconPairs[safeNum % iconPairs.length];
+  const p2 = iconPairs[(safeNum + 3) % iconPairs.length];
+  const p3 = iconPairs[(safeNum + 7) % iconPairs.length];
+
+  const c1 = zoneCoordsA[pickedZoneIdxs[0]];
+  const c2 = zoneCoordsA[pickedZoneIdxs[1]];
+  const c3 = zoneCoordsA[pickedZoneIdxs[2]];
 
   return {
-    diff1: poolZone1[idx1],
-    diff2: poolZone2[idx2],
-    diff3: poolZone3[idx3],
-    shouldFlipComp,
+    diff1: { ...p1, aCoord: { x: c1.x, y: c1.y }, bCoord: { x: c1.x + 640, y: c1.y } },
+    diff2: { ...p2, aCoord: { x: c2.x, y: c2.y }, bCoord: { x: c2.x + 640, y: c2.y } },
+    diff3: { ...p3, aCoord: { x: c3.x, y: c3.y }, bCoord: { x: c3.x + 640, y: c3.y } },
+    shouldFlipComp: false,
   };
 }
 
@@ -3803,13 +3839,13 @@ async function publishDailyInteractive3DPhotoPostForRunner({
   const todayScheduledInteractivePosts = todayInteractivePosts.filter(
     (entry) => String(entry?.postKind || "").trim() !== "manual"
   );
-  if (isScheduledInteractivePost && !forcePublish && todayScheduledInteractivePosts.length >= 5) {
+  if (isScheduledInteractivePost && !forcePublish && todayScheduledInteractivePosts.length >= 1) {
     console.log(
       `✅ [Daily 3D Photo Scheduled Guard] تم الوصول للحد التلقائي اليومي (5 منشورات تفاعلية) بتاريخ ${nowCairoDate} — تخطي النشر.`
     );
     return { published: false, skippedDailyLimit: true };
   }
-  if (!isScheduledInteractivePost && !forcePublish && todayManualInteractivePosts.length >= 5) {
+  if (!isScheduledInteractivePost && !forcePublish && todayManualInteractivePosts.length >= 1) {
     console.log(
       `✅ [Daily 3D Photo Manual Guard] تم الوصول للحد اليدوي اليومي (5 منشورات تفاعلية) بتاريخ ${nowCairoDate} — تخطي النشر.`
     );
@@ -4038,9 +4074,8 @@ async function publishDailyInteractive3DPhotoPostForRunner({
   </svg>`;
   fs.writeFileSync(svgPath, puzzleSvg);
 
-  const compRightScale = puzzleCfg.shouldFlipComp
-    ? `[0:v]hflip,scale=320:646:force_original_aspect_ratio=increase,crop=320:646[c_r];`
-    : `[0:v]scale=320:646:force_original_aspect_ratio=increase,crop=320:646[c_r];`;
+  // STRICT FIX: Never flip companion horizontally to prevent reversed/mirrored Arabic text!
+  const compRightScale = `[0:v]scale=320:646:force_original_aspect_ratio=increase,crop=320:646[c_r];`;
 
   const filterGraph = [
     `[0:v]scale=320:646:force_original_aspect_ratio=increase,crop=320:646[c_l];`,
@@ -5143,38 +5178,7 @@ async function main() {
       `✅ PRE-UPLOAD UNIT TEST GATE PASSED: Duration=${durSec}s | AV-Drift=${avDrift.toFixed(2)}s | Codec=${vCodec}/${pixFmt}/${aCodec} 48kHz Stereo (Closed-GOP=${closedGop}) | Dialogue=100% Egyptian Verified | ExternalImages=0 | FastStart=Enabled`
     );
 
-    // 4. Pre-Video Dedicated 3D Interactive Challenge for this video heroes
-    const heroToChallenge = task.episode?.mainCharacterName || "";
-    const compToChallenge = task.episode?.companionName || "";
-    if (
-      facebookPageAccessToken &&
-      facebookPageId &&
-      runMode !== "engagement_only" &&
-      heroToChallenge &&
-      !publishedPreVideoHeroNames.has(heroToChallenge)
-    ) {
-      console.log(
-        `📸 [Pre-Video 3D Challenge] Publishing dedicated Spot-the-Difference interactive post for "${heroToChallenge}" & "${compToChallenge}" right before ${task.label}...`
-      );
-      try {
-        const prePostRes = await publishDailyInteractive3DPhotoPostForRunner({
-          rawPageAccessToken: facebookPageAccessToken,
-          pageId: facebookPageId,
-          tmpDir,
-          fbSchedule,
-          specificHeroName: heroToChallenge,
-          specificCompanionName: compToChallenge,
-          forcePublish: true,
-          postKind: runMode === "daily_schedule" ? "scheduled" : "manual",
-        });
-        if (prePostRes?.published) {
-          publishedPreVideoHeroNames.add(heroToChallenge);
-          publishedPreVideoHeroPostsCount++;
-        }
-      } catch (preVideoErr) {
-        console.warn(`   [Pre-Video 3D Challenge Notice] ${preVideoErr?.message || preVideoErr}`);
-      }
-    }
+    // Pre-video per-task challenge removed: exactly ONE dedicated daily challenge post is published per day.
 
     const pkg = task.episode?.youtubePackage || {};
     const expectedThumbPath = path.join(tmpDir, `thumbnail_1280x720_${task.videoFormat}.jpg`);
@@ -5243,6 +5247,7 @@ async function main() {
             rawPageAccessToken: facebookPageAccessToken,
             pageId: facebookPageId,
             videoId: fbUploadRes.facebookVideoId,
+            postId: fbUploadRes.facebookPostId,
             message: buildInteractiveChallengeMessage(task.episode, "facebook"),
           });
           console.log(`💬 Facebook first challenge comment: ${fbComment.success ? "POSTED ✓" : "FAILED (upload kept successful)"}`);
@@ -5640,9 +5645,11 @@ async function main() {
 // Execute Daily 3D Interactive Photo Post & Autonomous AI Comment Auto-Replier on GitHub Actions!
   if (facebookPageAccessToken) {
     let fbEngagementUpdated = false;
+    const todayHeroToChallenge = tasks[tasks.length - 1]?.episode?.mainCharacterName || tasks[0]?.episode?.mainCharacterName || "";
+    const todayCompToChallenge = tasks[tasks.length - 1]?.episode?.companionName || tasks[0]?.episode?.companionName || "";
     const shouldRunStandalonePhotoChallenge =
-      publishedPreVideoHeroPostsCount === 0 &&
-      (runMode === "engagement_only" || (dailyInteractivePhotoPostEnabled && tasks.length === 0));
+      runMode === "engagement_only" ||
+      (dailyInteractivePhotoPostEnabled && fbSchedule?.interactivePhotoPostsLog?.filter(p => String(p?.publishedAtCairo || "").startsWith(nowCairoDate)).length === 0);
 
     if (shouldRunStandalonePhotoChallenge) {
       try {
@@ -5655,8 +5662,10 @@ async function main() {
           tmpDir,
           fbSchedule,
           excludedHeroes,
-          forcePublish: runMode === "engagement_only" && !isCronEvent,
-          postKind: isCronEvent ? "scheduled" : "manual",
+          specificHeroName: todayHeroToChallenge,
+          specificCompanionName: todayCompToChallenge,
+          forcePublish: false,
+          postKind: "scheduled",
         });
         if (photoRes?.published || photoRes?.skippedDuplicate) {
           fbEngagementUpdated = true;
