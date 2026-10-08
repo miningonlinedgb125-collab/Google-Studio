@@ -2447,6 +2447,7 @@ function buildSmartEpisodeForRunner({
   const count = isShort ? 4 : 8;
   const perSceneSec = isShort ? 17 : 39;
   const egyptianTopic = normalizeEgyptianColloquial(cleanTopic);
+  const cleanTopicForAdventure = egyptianTopic.replace(/^(مغامرة\s+|رحلة\s+)/i, "").trim() || egyptianTopic;
 
   const sceneTemplates = [
     {
@@ -2500,7 +2501,7 @@ function buildSmartEpisodeForRunner({
     },
     {
       title: `8. النهاية: رسالة ${shortHero} و${shortComp} لأبطال Noreen Kids`,
-      egyptianShort: `هيييه! حلينا اللغز ونجحت المهمة يا ${shortHero}! 🧩 تحدي الشطار: يا ترى إيه أهم حاجة اتعلمناها من مغامرة ${egyptianTopic}؟ اكتبوا إجابتكم واسمكم في التعليقات عشان تكسبوا وسام الشطارة وتظهروا في لوحة شرف أبطال نورين كيدز في الحلقة الجاية! مع السلامة يا أبطال!`,
+      egyptianShort: `هيييه! حلينا اللغز ونجحت المهمة يا ${shortHero}! 🧩 تحدي الشطار: يا ترى إيه أهم حاجة اتعلمناها من حكاية ${cleanTopicForAdventure}؟ اكتبوا إجابتكم واسمكم في التعليقات عشان تكسبوا وسام الشطارة وتظهروا في لوحة شرف أبطال نورين كيدز في الحلقة الجاية! مع السلامة يا أبطال!`,
       egyptianLong: `ودلوقتي يا أصحابنا الحلوين في عيلة نورين كيدز، وصلنا المشهد الثامن والتحدي الأخير بعد ما عشنا حكاية ${cleanTopicForAdventure} الجميلة مع ${shortHero} و${shortComp}! 🧩 سؤال الشطار للأبطال: إيه أكتر تصرف عجبكم في حلقة النهارده، وإزاي نقدر نساعد أصحابنا في المدرسة والبيت بنفس الطريقة؟ اكتبوا إجابتكم واسمكم في التعليقات تحت الفيديو علشان تكسبوا وسام الشطارة وتظهروا في لوحة الشرف بالحلقة الجاية! وما تنسوش تشتركوا في القناة وتعملوا لايك، بنحبكم أوي ومع السلامة يا أبطال!`,
       speaker: effectiveCompName,
       voice: compVoice,
