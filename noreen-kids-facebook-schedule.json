@@ -2300,6 +2300,16 @@
     {
       "topic": "تنظيم حقيبة المدرسة في المساء والاستيقاظ بنشاط وسرور",
       "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح"
+    },
+    {
+      "topic": "شهامة ذياد في إرجاع المحفظة المفقودة لصاحبها ورفض",
+      "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة"
+    },
+    {
+      "topic": "تنظيم حقيبة المدرسة في المساء والاستيقاظ بنشاط وسرور",
+      "mainCharacterName": "أم ملك",
       "companionName": "البطريق المرح",
       "timestampIso": "2026-10-08T14:25:55.994Z"
     },
@@ -2462,34 +2472,6 @@
       "mainCharacterName": "أم ملك",
       "companionName": "البطريق المرح",
       "fingerprint": "8711d85c08c6"
-    },
-    {
-      "topic": "مقالب الفأر المشاكس المضحكة وحكمة جدو الطيب في ليلة الفوانيس",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "fingerprint": "9d1867c316e5",
-      "dialogueHash": ""
-    },
-    {
-      "topic": "إصلاح منارة المرجان المضيئة بأدوات الهندسة الذكية والتعاون",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "fingerprint": "30a3baadc69d",
-      "dialogueHash": ""
-    },
-    {
-      "topic": "رحلة البحث عن مفتاح البوابة القديمة مع الشاب الطيب ذياد والعصفورة",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة",
-      "fingerprint": "3ea680a6881c",
-      "dialogueHash": ""
-    },
-    {
-      "topic": "حل معادلة الكنز البلوري بالحساب والتفكير المنظم مع",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "fingerprint": "3c2629a0c180",
-      "dialogueHash": ""
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-07 · 19:11 بتوقيت مصر",
