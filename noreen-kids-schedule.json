@@ -37,6 +37,16 @@
     {
       "topic": "لعبة الميزان العادل وتعلّم أهمية الصدق في البيع",
       "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "حدوتة النحلة النشيطة والدرس الذي تعلمه الفأر المشاكس",
+      "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "لعبة الميزان العادل وتعلّم أهمية الصدق في البيع",
+      "mainCharacterName": "أستاذ شريف",
       "companionName": "الصقر الذكي",
       "timestampIso": "2026-10-08T15:32:38.669Z"
     },
@@ -195,32 +205,6 @@
       "topic": "كيف نرتب وقتنا وألعابنا بدقة وحكمة مع المحاسب",
       "mainCharacterName": "أستاذ شريف",
       "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "ملك ولوليتا: بطلة العاصفة",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "fingerprint": "4a71751a2262",
-      "dialogueHash": "066ffa37bdd4"
-    },
-    {
-      "topic": "أم ملك والبطريق المرح: سر الكلمة الطيبة",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "fingerprint": "e67a41a568a6",
-      "dialogueHash": "046ee5654d2f"
-    },
-    {
-      "topic": "إسعاف الطائر الصغير وقت العاصفة بهدوء وشجاعة طبيبة الطوارئ ملك",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "fingerprint": "fd4e5657f5a4"
-    },
-    {
-      "topic": "درس المعلمة أم ملك والبطريق المرح عن آداب الحوار ومساعدة الأصحاب",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "fingerprint": "8711d85c08c6"
     }
   ],
   "scheduledHistory": [
