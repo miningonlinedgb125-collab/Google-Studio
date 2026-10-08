@@ -2329,6 +2329,16 @@
     {
       "topic": "لعبة الميزان العادل وتعلّم أهمية الصدق في البيع",
       "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "حدوتة النحلة النشيطة والدرس الذي تعلمه الفأر المشاكس",
+      "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "لعبة الميزان العادل وتعلّم أهمية الصدق في البيع",
+      "mainCharacterName": "أستاذ شريف",
       "companionName": "الصقر الذكي",
       "timestampIso": "2026-10-08T15:32:38.669Z"
     },
@@ -2487,47 +2497,21 @@
       "topic": "كيف نرتب وقتنا وألعابنا بدقة وحكمة مع المحاسب",
       "mainCharacterName": "أستاذ شريف",
       "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "ملك ولوليتا: بطلة العاصفة",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "fingerprint": "4a71751a2262",
-      "dialogueHash": "066ffa37bdd4"
-    },
-    {
-      "topic": "أم ملك والبطريق المرح: سر الكلمة الطيبة",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "fingerprint": "e67a41a568a6",
-      "dialogueHash": "046ee5654d2f"
-    },
-    {
-      "topic": "إسعاف الطائر الصغير وقت العاصفة بهدوء وشجاعة طبيبة الطوارئ ملك",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "fingerprint": "fd4e5657f5a4"
-    },
-    {
-      "topic": "درس المعلمة أم ملك والبطريق المرح عن آداب الحوار ومساعدة الأصحاب",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "fingerprint": "8711d85c08c6"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-08 · 18:23 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-08",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-37645647996",
+    "id": "gh-run-37801403269",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-07 (19:11 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1791387913377-2j84",
-    "longEpisodeId": "ep-gh-long-1791387924920-97lt",
-    "shortEpisodeTitle": "Noreen Kids: مهمة إنقاذ القنفذ الصغير الذي علق في سياج الحديقة | مغامرات الطبيبة ملك والقطة لوليتا",
-    "longEpisodeTitle": "Noreen Kids: مغامرة المكعبات السحرية وبناء أعلى برج ملون | مغامرات سدرة الصغنونة والفراشة الملونة",
-    "shortTitle": "Noreen Kids: مهمة إنقاذ القنفذ الصغير الذي علق في سياج الحديقة | مغامرات الطبيبة ملك والقطة لوليتا",
-    "longTitle": "Noreen Kids: مغامرة المكعبات السحرية وبناء أعلى برج ملون | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-08 (19:03 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1791473558173-ejbc",
+    "longEpisodeId": "ep-gh-long-1791473558669-i23k",
+    "shortEpisodeTitle": "Noreen Kids: لعبة الميزان العادل وتعلّم أهمية الصدق في البيع | مغامرات أستاذ شريف والصقر الذكي",
+    "longEpisodeTitle": "Noreen Kids: حدوتة النحلة النشيطة والدرس الذي تعلمه الفأر المشاكس | مغامرات جدو والفأر المشاكس",
+    "shortTitle": "Noreen Kids: لعبة الميزان العادل وتعلّم أهمية الصدق في البيع | مغامرات أستاذ شريف والصقر الذكي",
+    "longTitle": "Noreen Kids: حدوتة النحلة النشيطة والدرس الذي تعلمه الفأر المشاكس | مغامرات جدو والفأر المشاكس",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2536,14 +2520,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "a6jnRfm_wEc",
-    "youtubeLongVideoId": "K5QXCgWSiRU",
-    "facebookShortVideoId": "1134195825701503",
-    "facebookLongVideoId": "1809213876927010",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1134195825701503",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1809213876927010",
-    "facebookShortTitle": "Noreen Kids | مهمة إنقاذ القنفذ الصغير الذي علق في سياج الحديقة - مغامرة ملك والقطة لوليتا",
-    "facebookLongTitle": "Noreen Kids | مغامرة المكعبات السحرية وبناء أعلى برج ملون - مغامرة سدرة الصغنونة والفراشة الملونة",
+    "youtubeShortVideoId": "h718R1CUdyY",
+    "youtubeLongVideoId": "i0CliHwgk3g",
+    "facebookShortVideoId": "1410815590606042",
+    "facebookLongVideoId": "2366337240771391",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1410815590606042",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2366337240771391",
+    "facebookShortTitle": "Noreen Kids | لعبة الميزان العادل وتعلّم أهمية الصدق في البيع - مغامرة أستاذ شريف والصقر الذكي",
+    "facebookLongTitle": "Noreen Kids | حدوتة النحلة النشيطة والدرس الذي تعلمه الفأر المشاكس - مغامرة جدو والفأر المشاكس",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2558,9 +2542,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 320,
-      "fileSizeBytes": 35305554,
-      "inspectedAt": "19:11"
+      "durationSec": 351,
+      "fileSizeBytes": 41544581,
+      "inspectedAt": "19:03"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2569,7 +2553,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-07T16:11:56.368Z"
+    "reportedAtIso": "2026-10-08T16:03:58.280Z"
   },
   "heroFairRotationIndex": 13,
   "interactiveHeroRotationIndex": 5,
