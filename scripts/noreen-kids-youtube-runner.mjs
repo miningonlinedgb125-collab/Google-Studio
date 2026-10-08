@@ -3839,13 +3839,13 @@ async function publishDailyInteractive3DPhotoPostForRunner({
   const todayScheduledInteractivePosts = todayInteractivePosts.filter(
     (entry) => String(entry?.postKind || "").trim() !== "manual"
   );
-  if (isScheduledInteractivePost && !forcePublish && todayScheduledInteractivePosts.length >= 1) {
+  if (isScheduledInteractivePost && !forcePublish && todayScheduledInteractivePosts.length >= 5) {
     console.log(
       `✅ [Daily 3D Photo Scheduled Guard] تم الوصول للحد التلقائي اليومي (5 منشورات تفاعلية) بتاريخ ${nowCairoDate} — تخطي النشر.`
     );
     return { published: false, skippedDailyLimit: true };
   }
-  if (!isScheduledInteractivePost && !forcePublish && todayManualInteractivePosts.length >= 1) {
+  if (!isScheduledInteractivePost && !forcePublish && todayManualInteractivePosts.length >= 5) {
     console.log(
       `✅ [Daily 3D Photo Manual Guard] تم الوصول للحد اليدوي اليومي (5 منشورات تفاعلية) بتاريخ ${nowCairoDate} — تخطي النشر.`
     );
@@ -5178,7 +5178,42 @@ async function main() {
       `✅ PRE-UPLOAD UNIT TEST GATE PASSED: Duration=${durSec}s | AV-Drift=${avDrift.toFixed(2)}s | Codec=${vCodec}/${pixFmt}/${aCodec} 48kHz Stereo (Closed-GOP=${closedGop}) | Dialogue=100% Egyptian Verified | ExternalImages=0 | FastStart=Enabled`
     );
 
-    // Pre-video per-task challenge removed: exactly ONE dedicated daily challenge post is published per day.
+    // Dedicated 3D Interactive Challenge for this video hero & companion (Short hero post + Long hero post)
+    const heroToChallenge = task.episode?.mainCharacterName || "";
+    const compToChallenge = task.episode?.companionName || "";
+    if (
+      facebookPageAccessToken &&
+      facebookPageId &&
+      runMode !== "engagement_only" &&
+      heroToChallenge &&
+      !publishedPreVideoHeroNames.has(heroToChallenge)
+    ) {
+      console.log(
+        `📸 [Video 3D Challenge] Publishing dedicated Spot-the-Difference interactive post for "${heroToChallenge}" & "${compToChallenge}" (${task.label})...`
+      );
+      try {
+        const prePostRes = await publishDailyInteractive3DPhotoPostForRunner({
+          rawPageAccessToken: facebookPageAccessToken,
+          pageId: facebookPageId,
+          tmpDir,
+          fbSchedule,
+          specificHeroName: heroToChallenge,
+          specificCompanionName: compToChallenge,
+          forcePublish: false,
+          postKind: "scheduled",
+        });
+        if (prePostRes?.published) {
+          publishedPreVideoHeroNames.add(heroToChallenge);
+          publishedPreVideoHeroPostsCount++;
+        }
+      } catch (preVideoErr) {
+        console.warn(
+          `   [Video 3D Challenge Notice] ${
+            preVideoErr?.message || preVideoErr
+          }`
+        );
+      }
+    }
 
     const pkg = task.episode?.youtubePackage || {};
     const expectedThumbPath = path.join(tmpDir, `thumbnail_1280x720_${task.videoFormat}.jpg`);
@@ -5642,19 +5677,14 @@ async function main() {
     }
   }
 
-// Execute Daily 3D Interactive Photo Post & Autonomous AI Comment Auto-Replier on GitHub Actions!
+// Execute Autonomous AI Comment Auto-Replier on GitHub Actions!
   if (facebookPageAccessToken) {
     let fbEngagementUpdated = false;
-    const todayHeroToChallenge = tasks[tasks.length - 1]?.episode?.mainCharacterName || tasks[0]?.episode?.mainCharacterName || "";
-    const todayCompToChallenge = tasks[tasks.length - 1]?.episode?.companionName || tasks[0]?.episode?.companionName || "";
-    const shouldRunStandalonePhotoChallenge =
-      runMode === "engagement_only" ||
-      (dailyInteractivePhotoPostEnabled && fbSchedule?.interactivePhotoPostsLog?.filter(p => String(p?.publishedAtCairo || "").startsWith(nowCairoDate)).length === 0);
-
-    if (shouldRunStandalonePhotoChallenge) {
+    // Strictly prevent extra random posts: only run standalone if manually triggered in engagement_only mode without videos!
+    if (runMode === "engagement_only" && tasks.length === 0) {
       try {
         console.log(
-          "📸 [Facebook Viral Growth - GitHub Cloud] Checking/Publishing Standalone Daily 3D Interactive Photo Challenge Post..."
+          "📸 [Facebook Viral Growth - GitHub Cloud] Running Standalone Engagement-Only Challenge Post..."
         );
         const photoRes = await publishDailyInteractive3DPhotoPostForRunner({
           rawPageAccessToken: facebookPageAccessToken,
@@ -5662,10 +5692,8 @@ async function main() {
           tmpDir,
           fbSchedule,
           excludedHeroes,
-          specificHeroName: todayHeroToChallenge,
-          specificCompanionName: todayCompToChallenge,
-          forcePublish: false,
-          postKind: "scheduled",
+          forcePublish: !isCronEvent,
+          postKind: isCronEvent ? "scheduled" : "manual",
         });
         if (photoRes?.published || photoRes?.skippedDuplicate) {
           fbEngagementUpdated = true;
@@ -5679,7 +5707,7 @@ async function main() {
       }
     } else if (publishedPreVideoHeroPostsCount > 0) {
       console.log(
-        `ℹ️ [Facebook 3D Challenge Guard] Dedicated pre-video challenge post was already published for today's heroes (${Array.from(publishedPreVideoHeroNames).join(", ")}). Skipping standalone rotation post to prevent extra duplicate posts.`
+        `ℹ️ [Facebook 3D Challenge Guard] Dedicated challenge posts were published for today's heroes (${Array.from(publishedPreVideoHeroNames).join(", ")}). No extra random posts will be published.`
       );
     }
 
