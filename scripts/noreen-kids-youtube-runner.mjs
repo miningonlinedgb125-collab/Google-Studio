@@ -2858,9 +2858,10 @@ function buildIndependentFacebookMetadataForRunner({
       defaultCaption
   ).trim();
 
+  const topicHashtag = isShort ? "#أبطال_نورين_كيدز" : "#أبطال_نورين_كيدز";
   const fallbackHashtags = isShort
-    ? ["#Noreen_Kids", "#نورين_كيدز", "#Reels", "#قصص_أطفال", "#كرتون_أطفال_3D", "#حكايات_مصرية", "#تربية_إيجابية"]
-    : ["#Noreen_Kids", "#نورين_كيدز", "#أفلام_كرتون_3D", "#قصص_أطفال", "#حكايات_قبل_النوم", "#تعليم_الأطفال", "#كرتون_مصري"];
+    ? ["#أبطال_نورين_كيدز", "#Noreen_Kids", "#نورين_كيدز", "#Reels", "#قصص_أطفال", "#كرتون_أطفال_3D", "#حكايات_مصرية", "#تحدي_الشطار"]
+    : ["#أبطال_نورين_كيدز", "#Noreen_Kids", "#نورين_كيدز", "#أفلام_كرتون_3D", "#قصص_أطفال", "#حكايات_قبل_النوم", "#تحدي_الشطار"];
 
   const customFormatHashtags = isShort
     ? facebookSettings?.shortCustomHashtags
@@ -2886,7 +2887,8 @@ function buildIndependentFacebookMetadataForRunner({
     .filter(Boolean);
 
   const hashtagsLine = facebookHashtags.join(" ");
-  const composedMessage = hashtagsLine ? `${facebookCaption}\n\n${hashtagsLine}` : facebookCaption;
+  const topicCta = `🔍 لمشاهدة جميع مغامرات وحكايات أبطالنا السابقة، اضغطوا على تصنيف [أبطال نورين كيدز] أو [تحدي الشطار] أعلى المنشور! 🌟🎬`;
+  const composedMessage = `${facebookCaption}\n\n${topicCta}${hashtagsLine ? `\n\n${hashtagsLine}` : ""}`;
   const isPublished = facebookSettings?.facebookPublishedStatus !== "DRAFT";
 
   return {
@@ -3000,6 +3002,8 @@ async function uploadMp4ToFacebookPage({
     finishForm.append("title", fbMeta.facebookTitle);
     finishForm.append("description", fbMeta.composedMessage);
     finishForm.append("published", fbMeta.isPublished ? "true" : "false");
+    finishForm.append("content_category", "ENTERTAINMENT");
+    finishForm.append("custom_labels", JSON.stringify(["أبطال نورين كيدز", "تحدي الشطار"]));
     if (thumbBuffer && thumbBuffer.length > 1000) {
       finishForm.append(
         "thumb",
@@ -3715,7 +3719,8 @@ async function buildDynamicSpotTheDifferenceCaption({
 2. ادعُ الأطفال والأمهات لمقارنة الصورتين [ أ ] و [ ب ] والبحث عن الـ 3 فروقات الذكية.
 3. اطلب من المتابعين كتابة الفروقات وكتابة اسم طفلهم في التعليقات لكي يحييه ${shortHero} و${shortComp} بالاسم في حلقة بكرة.
 4. حفزهم على متابعة الصفحة 🔔 ومشاركة المنشور.
-5. أضف هاشتاجات مناسبة (#نورين_كيدز #Noreen_Kids #تحدي_الملاحظة #فروقات_بين_الصورتين #كرتون_أطفال #أمهات_مصر).
+5. أضف سطر توجيهي للأمهات: "🔍 عايزين فوازير وتحديات أكتر؟ اضغطوا على تصنيف [تحدي الشطار] أو [أبطال نورين كيدز] أعلى البوست لمتابعة كل الألعاب السابقة مع أطفالكم! 🕵️‍♂️✨".
+6. أضف هاشتاجات رسمية للتصنيف (#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #فروقات_بين_الصورتين #أمهات_مصر).
 6. طول المنشور مناسب وجذاب (من 4 إلى 6 أسطر مقسمة بنقاط وإيموجي). لا تذكر أي أبطال آخرين خارج ${shortHero} و${shortComp}.`;
 
       const resp = await ai.models.generateContent({
