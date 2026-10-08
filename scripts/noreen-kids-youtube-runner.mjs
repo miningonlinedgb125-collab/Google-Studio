@@ -207,6 +207,13 @@ const FUSHA_AND_GULF_TO_EGYPTIAN_PAIRS = [
   ["كي", "علشان"],
   ["إلى أين", "على فين"],
   ["كتير قوي", "كتير أوي"],
+  ["نشطاء", "شطار ونشيطين"],
+  ["نشيطون", "شطار ونشيطين"],
+  ["أمناء", "أمينين وصادقين"],
+  ["أمينون", "أمينين وصادقين"],
+  ["بالحلقة الجاية", "في الحلقة الجاية"],
+  ["بالحلقة القادمة", "في الحلقة الجاية"],
+  ["بالحلقة", "في الحلقة"],
 ];
 
 function normalizeEgyptianColloquial(rawText) {
@@ -2505,9 +2512,9 @@ function buildSmartEpisodeForRunner({
       voice: heroVoice,
     },
     {
-      title: `8. النهاية: رسالة ${shortHero} و${shortComp} لأبطال Noreen Kids`,
-      egyptianShort: `هيييه! حلينا اللغز ونجحت المهمة يا ${shortHero}! 🧩 تحدي الشطار: يا ترى إيه أهم حاجة اتعلمناها من حكاية ${cleanTopicForAdventure}؟ اكتبوا إجابتكم واسمكم في التعليقات عشان تكسبوا وسام الشطارة وتظهروا في لوحة شرف أبطال نورين كيدز في الحلقة الجاية! مع السلامة يا أبطال!`,
-      egyptianLong: `ودلوقتي يا أصحابنا الحلوين في عيلة نورين كيدز، وصلنا المشهد الثامن والتحدي الأخير في حلقة النهارده مع ${shortHero} و${shortComp}! 🧩 سؤال الشطار للأبطال: إيه أكتر موقف عجبكم في حلقة النهارده، وإزاي نقدر نكون نشطاء وشطار وأمناء في المدرسة والبيت بنفس الطريقة ومفيش كسل خالص؟ اكتبوا إجابتكم واسمكم في التعليقات تحت الفيديو علشان تكسبوا وسام الشطارة وتظهروا في لوحة الشرف بالحلقة الجاية! وما تنسوش تشتركوا في القناة وتعملوا لايك، بنحبكم أوي ومع السلامة يا أبطال!`,
+      title: `8. المشهد الثامن والتحدي الأخير: رسالة ${shortHero} و${shortComp} لأبطال Noreen Kids`,
+      egyptianShort: `هيييه! حلينا اللغز ونجحت المهمة يا ${shortHero}! 🧩 تحدي الشطار: يا ترى إيه أهم حاجة اتعلمناها من حكاية ${cleanTopicForAdventure}؟ اكتبوا إجابتكم واسمكم في التعليقات علشان تكسبوا وسام الشطارة وتظهروا في لوحة شرف أبطال نورين كيدز في الحلقة الجاية! مع السلامة يا أبطال!`,
+      egyptianLong: `ودلوقتي يا أصحابنا الحلوين في عيلة نورين كيدز، وصلنا المشهد الثامن والتحدي الأخير في حلقة النهارده مع ${shortHero} و${shortComp}! 🧩 سؤال الشطار للأبطال: إيه أكتر موقف عجبكم في حكاية النهارده، وإزاي نقدر نكون شطار ونشيطين وأمينين في المدرسة والبيت بنفس الطريقة ومفيش كسل خالص؟ اكتبوا إجابتكم واسمكم في التعليقات تحت الفيديو علشان تظهروا في لوحة الشرف في الحلقة الجاية! وما تنسوش تشتركوا في القناة وتعملوا لايك، بنحبكم أوي ومع السلامة يا أبطال!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
@@ -2591,7 +2598,7 @@ ${chaptersLines.join("\n")}
 ✨ لو عجبتكم الحدوتة يا أبطال، متنسوش تشتركوا في قناة Noreen Kids وتفعلوا جرس التنبيهات (🔔) وتضغطوا لايك (👍) علشان تعيشوا معانا مغامرة جديدة كل يوم!
 وجودكم في عيلتنا السحرية بينور عالمنا 💖🎬
 
-#Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #رسوم_متحركة #قصص_أطفال_قبل_النوم #حواديت_مصرية #أفلام_كرتون #تعليم_الأطفال #KidsAnimation #3DCartoon #ArabicKidsCartoon #BedtimeStoriesForKids #PixarStyle3D #KidsLearning #TrendingKids`;
+#أبطال_نورين_كيدز #تحدي_الشطار #Noreen_Kids #حواديت_أطفال #كرتون_أطفال_3D #رسوم_متحركة #قصص_أطفال_قبل_النوم #حواديت_مصرية #أفلام_كرتون #تعليم_الأطفال #KidsAnimation #3DCartoon #ArabicKidsCartoon #BedtimeStoriesForKids #PixarStyle3D #KidsLearning #TrendingKids`;
 
   return {
     id: `ep-gh-${isShort ? "short" : "long"}-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
@@ -2612,6 +2619,8 @@ ${chaptersLines.join("\n")}
       videoTitleEn: `Noreen Kids: 3D Adventure of ${titleShortHero} & ${titleShortComp}`,
       descriptionAr,
       tags: [
+        "أبطال نورين كيدز",
+        "تحدي الشطار",
         "Noreen Kids",
         "نورين كيدز",
         "أفلام كرتون 3D للأطفال",
@@ -3272,11 +3281,16 @@ function resolveHeroPersonaForReply(postTitle = "", heroNameHint = "") {
   return CHARACTER_HERO_PERSONAS[0];
 }
 
-async function generateSmartCommentReply({ authorName, commentText, platform = "YouTube", postTitle = "", heroNameHint = "" }) {
+async function generateSmartCommentReply({ authorName, commentText, platform = "YouTube", postTitle = "", heroNameHint = "", geminiApiKey = "" }) {
   const cleanAuthor = String(authorName || "صديقنا الغالي").replace(/[^\p{L}\p{N}\s_.-]/gu, "").trim().slice(0, 35) || "صديقنا الغالي";
   const cleanComment = String(commentText || "").trim().slice(0, 700);
   const persona = resolveHeroPersonaForReply(postTitle, heroNameHint);
-  const key = String(process.env.GEMINI_API_KEY || "").trim();
+  const key = String(geminiApiKey || process.env.GEMINI_API_KEY || "").trim();
+
+  // Strict Medal & Reply Intent Classification:
+  // Medals are strictly reserved for actual answers to puzzles/challenges/episodes.
+  // Regular greetings, praise ("Good", "Nice", "جميل", "شكرا", etc.) NEVER receive a medal!
+  const isAnswerOrChallenge = /(حل|إجابة|اجابة|عرفت|الفرق|فروقات|الفروقات|لقيت|طلعت|الجواب|هو|هي|الأول|التاني|التالت|الأولى|الثانية|الثالثة|رقم|عشان|لأن|الدرس|اتعلمنا|الموقف|السبب|الصح)/i.test(cleanComment);
 
   if (key) {
     try {
@@ -3300,7 +3314,10 @@ async function generateSmartCommentReply({ authorName, commentText, platform = "
 2. نادِ المتابع باسمه ("${cleanAuthor}") وشجعه بحرارة وبالمشاعر المتوافقة مع نبرة البطل.
 3. التزم تماماً بنبرة البطل (${persona.toneName}).
 4. طول الرد: سطر إلى سطرين كحد أقصى (سهل وممتع للأطفال والماميز).
-5. إذا تضمن التعليق إجابة أو اسم طفل، اهدِه وسام الشطارة والذكاء الرقمي 🏅 بالاسم تكريماً لتفوقه من البطل ومرافقه!
+${isAnswerOrChallenge
+  ? `5. التعليق يتضمن حلاً أو إجابة على سؤال التحدي: اشكره بحرارة واهدِه وسام الشطارة والذكاء الرقمي 🏅 بالاسم تكريماً لتفوقه وتركيزه من ${persona.heroName} و${persona.compName}.`
+  : `5. التعليق مجرد تحية أو إعجاب عام أو كلمة تشجيع: رحب به بحفاوة واشكره على المتابعة، وممنوع نهائياً ذكر أي وسام (الوسام حصري فقط لمن يحل الفوازير والتحديات).`
+}
 6. ممنوع طلب بيانات شخصية، ممنوع معلومات خطرة، ولا تذكر أنك ذكاء اصطناعي إطلاقاً.
 7. اختم الرد بتوقيع خفيف لطيف من البطل ومرافقه.`;
 
@@ -3309,7 +3326,12 @@ async function generateSmartCommentReply({ authorName, commentText, platform = "
       if (out.length >= 10 && out.length <= 450) return out;
     } catch {}
   }
-  return `يا أهلاً بيك يا ${cleanAuthor}! 🌟💖 مبروك وسام الشطارة والذكاء الرقمي من ${persona.heroName} و${persona.compName}! 🏅 ${persona.signature} خليك دايماً شاطر ومنور عالم نورين كيدز السحري!`;
+
+  // Diverse Egyptian colloquial fallbacks (NO medals for general comments!)
+  if (isAnswerOrChallenge) {
+    return `يا أهلاً بيك يا ${cleanAuthor}! 🌟💖 مبروك وسام الشطارة والذكاء الرقمي من ${persona.heroName} و${persona.compName}! 🏅 ${persona.signature} إجابة شاطرة ومنورة عالم نورين كيدز!`;
+  }
+  return `أهلاً بيك وبنورك يا ${cleanAuthor}! 🌟💖 ${persona.heroName} و${persona.compName} فرحانين بتعليقك الجميل وبيقولوا لك منور دايماً عيلتنا السحرية في نورين كيدز! 🎬✨`;
 }
 
 async function scanAndAutoReplyYouTubeComments({ accessToken, geminiApiKey, schedule }) {
@@ -3401,6 +3423,7 @@ async function scanAndAutoReplyYouTubeComments({ accessToken, geminiApiKey, sche
           commentText: top?.snippet?.textOriginal || "",
           platform: "YouTube",
           postTitle: specificVideoTitle,
+          geminiApiKey,
         });
 
         const rep = await fetch("https://www.googleapis.com/youtube/v3/comments?part=snippet", {
@@ -3458,7 +3481,8 @@ async function postFacebookFirstComment({ rawPageAccessToken, pageId, videoId, p
   for (let attempt = 0; attempt < 3; attempt++) {
     for (const targetId of targetIds) {
       try {
-        const res = await fetch(`https://graph.facebook.com/v21.0/${encodeURIComponent(targetId)}/comments`, {
+        const videoId = targetId;
+        const res = await fetch(`https://graph.facebook.com/v21.0/${encodeURIComponent(videoId)}/comments`, {
           method: "POST",
           headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
           body: JSON.stringify({ message: String(message).trim() }),
@@ -3488,6 +3512,7 @@ async function scanAndAutoReplyFacebookVideoComments({ rawPageAccessToken, pageI
     let scannedComments = 0;
     let scannedVideos = 0;
     // Query id, title, description, and message for accurate per-video hero identification
+    // /videos?fields=id,message,created_time&limit=50
     let pageUrl = `https://graph.facebook.com/v21.0/${encodeURIComponent(pageId)}/videos?fields=id,title,description,message,created_time&limit=50`;
     let videoPages = 0;
 
@@ -3913,6 +3938,8 @@ async function publishDailyInteractive3DPhotoPostForRunner({
     "فزورة الأبطال الشطار",
     "لوحة شرف أبطال Noreen Kids",
   ];
+  const interactiveThemes = [];
+  const availableThemes = interactiveThemes.filter((t) => !previousInteractiveKeys.has(t));
   const getInteractiveThemeTitle = (prefix, hero, comp) =>
     `${prefix} مع ${hero} و${comp}`;
   const hasUnusedInteractiveTheme = (hero, comp) =>
