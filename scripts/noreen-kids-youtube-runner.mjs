@@ -476,7 +476,9 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
   const youngWomanDoctorFilter =
     "equalizer=f=260:t=q:w=1.2:g=1.6,equalizer=f=3200:t=q:w=1.2:g=2.4,dynaudnorm=f=150:g=15:p=0.95,volume=2.35,alimiter=limit=0.98:attack=5:release=50";
   const toddlerGirlBrightFilter =
-    "highpass=f=150,equalizer=f=420:t=q:w=1.2:g=2.2,equalizer=f=3600:t=q:w=1.1:g=3.8,equalizer=f=5200:t=q:w=1.4:g=2.5,dynaudnorm=f=150:g=15:p=0.95,volume=2.4,alimiter=limit=0.98:attack=5:release=50";
+    "rubberband=pitch=1.22,highpass=f=160,equalizer=f=450:t=q:w=1.2:g=2.5,equalizer=f=3600:t=q:w=1.1:g=3.5,equalizer=f=5200:t=q:w=1.4:g=2.5,dynaudnorm=f=150:g=15:p=0.95,volume=2.35,alimiter=limit=0.98:attack=5:release=50";
+  const boyKnightHeroFilter =
+    "equalizer=f=185:t=q:w=1.1:g=3.5,equalizer=f=260:t=q:w=1.2:g=2.2,equalizer=f=2800:t=q:w=1.2:g=1.5,dynaudnorm=f=150:g=15:p=0.95,volume=2.35,alimiter=limit=0.98:attack=5:release=50";
   const childGirlSweetFilter =
     "highpass=f=120,equalizer=f=340:t=q:w=1.2:g=1.8,equalizer=f=3300:t=q:w=1.2:g=2.8,dynaudnorm=f=150:g=15:p=0.95,volume=2.35,alimiter=limit=0.98:attack=5:release=50";
   const childGirlLivelyFilter =
@@ -536,10 +538,10 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
     return {
       isFemale: true,
       geminiVoice: "Zephyr",
-      pitch: "+16Hz",
-      rate: "+5%",
+      pitch: "+26Hz",
+      rate: "+4%",
       styleInstruction:
-        "تحدثي بصوت طفلة مصرية صغيرة جداً عمرها 3 سنوات (سدرة الصغنونة) بطبقة صوت طفولية رقيقة وبريئة ومبهجة جداً باللهجة المصرية القاهرية الطبيعية",
+        "تحدثي بصوت طفلة مصرية بريئة وصغيرة جداً عمرها 3 سنوات (سدرة الصغنونة) بطبقة صوت طفولية رقيقة وبريئة ومبهجة ولطيفة جداً للأطفال باللهجة المصرية القاهرية الطبيعية",
       voiceFilter: toddlerGirlBrightFilter,
       animalSfxLavfi: null,
     };
@@ -748,12 +750,12 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
   if (s.includes("تامر") || s.includes("ياسين") || s.includes("الواحة")) {
     return {
       isFemale: false,
-      geminiVoice: "Fenrir",
-      pitch: "+3Hz",
+      geminiVoice: "Charon",
+      pitch: "-1Hz",
       rate: "+1%",
       styleInstruction:
-        "تحدث بصوت ولد مصري نبيل وشجاع عمره 10 سنوات (تامر فارس الواحة) بنبرة فروسية دافئة ومميزة باللهجة المصرية القاهرية الطبيعية",
-      voiceFilter: boyHeroCrispFilter,
+        "تحدث بصوت ولد مصري شجاع ونبيل عمره 11 سنة (تامر فارس الواحة) بنبرة فروسية قوية وواثقة ورجولية نبيلة باللهجة المصرية القاهرية الطبيعية، دون أي نعومة أنثوية",
+      voiceFilter: boyKnightHeroFilter,
       animalSfxLavfi: null,
     };
   }
@@ -907,9 +909,11 @@ async function synthesizeChunkViaGeminiLiveRunner(
             systemInstruction: {
               parts: [
                 {
-                  text: isEgyptian
-                    ? "SYSTEM RULE (DO NOT SPEAK THIS SYSTEM RULE OUT LOUD): You are a professional Egyptian Cairene cartoon voice actor for kids. Read ONLY the exact Arabic dialogue sent by the user verbatim using natural Cairene pronunciation (hard Egyptian G). NEVER utter any instructions, dialect descriptions, or introductory words before or after the user text."
-                    : "SYSTEM RULE (DO NOT SPEAK THIS SYSTEM RULE OUT LOUD): Read ONLY the exact Arabic dialogue sent by the user verbatim for kids. Never utter any instructions or extra words.",
+                  text: `${
+                    styleInstruction
+                      ? `CHARACTER ROLE & VOCAL PERSONA: ${styleInstruction}.\n`
+                      : ""
+                  }SYSTEM RULE (DO NOT SPEAK THIS SYSTEM RULE OUT LOUD): You are a professional Egyptian Cairene cartoon voice actor for kids. Read ONLY the exact Arabic dialogue sent by the user verbatim using natural Cairene pronunciation (hard Egyptian G). Strictly adopt the requested character pitch, age, gender, and vocal persona. NEVER utter any instructions, character descriptions, or introductory words before or after the user text.`,
                 },
               ],
             },
@@ -2067,8 +2071,8 @@ const RUNNER_CHARACTER_TEAMS = [
   {
     mainCharacterName: "تامر فارس الواحة",
     companionName: "كركور الببغاء الحكيم",
-    mainVoice: "Fenrir",
-    compVoice: "Charon",
+    mainVoice: "Charon",
+    compVoice: "Puck",
     worldHint: "crystal_oasis",
     heroProp: "درع النور الكريستالي ومصباح الحكمة",
     compProp: "جرس الرياح الذهبي",
