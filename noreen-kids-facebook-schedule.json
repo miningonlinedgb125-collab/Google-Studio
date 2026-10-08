@@ -48,6 +48,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122113771569484976",
+      "photoId": "122113771545484976",
+      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع شوشو ومرجان",
+      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع شوشو ومرجان",
+      "caption": "💖 تحدي عائلي ممتع لكل أمهات وأطفال Noreen Kids! 💖\nشوشو ومرجان بيسألوا: مين يقدر يكتشف 3 فروقات ذكية بين الصورة [ أ ] والصورة [ ب ] في أقل من دقيقة؟ ⏱️🤔\n\n👇 شاركونا الحل في التعليقات مع اسم طفلكم الشاطر\nعشان شوشو ومرجان يردوا عليه ويقولوا له أحلى كلام تشجيع في الحلقة الجديدة! 🌟🎬\n🔔 وتابعوا صفحتنا لمتابعة باقي حلقات ومفاجآت الأسبوع! 👍✨\n\n#نورين_كيدز #Noreen_Kids #تحدي_اليوم #حواديت_قبل_النوم #تربية_إيجابية #أمهات_مصر",
+      "heroName": "شوشو",
+      "companionName": "مرجان",
+      "publishedAtCairo": "2026-10-08 · 18:23 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122113771569484976",
+      "postKind": "manual"
+    },
+    {
       "postId": "1330185823512542_122113759287484976",
       "photoId": "122113759233484976",
       "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع ذياد والعصفورة الفرفوشة",
@@ -2474,7 +2486,7 @@
       "fingerprint": "8711d85c08c6"
     }
   ],
-  "lastAutoCommentScanAtCairo": "2026-10-08 · 17:42 بتوقيت مصر",
+  "lastAutoCommentScanAtCairo": "2026-10-08 · 18:23 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-08",
   "lastFacebookCloudRunReport": {
     "id": "gh-run-37645647996",
@@ -2531,6 +2543,6 @@
     "reportedAtIso": "2026-10-07T16:11:56.368Z"
   },
   "heroFairRotationIndex": 11,
-  "interactiveHeroRotationIndex": 4,
+  "interactiveHeroRotationIndex": 5,
   "heroRoleSwapCycle": false
 }
