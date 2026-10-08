@@ -37,6 +37,16 @@
     {
       "topic": "حكاية الدب باندا الذي تعلّم آداب المائدة والأكل باليد",
       "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا"
+    },
+    {
+      "topic": "الضمادة السحرية وحكاية التغلب على الخوف من الحقنة",
+      "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "حكاية الدب باندا الذي تعلّم آداب المائدة والأكل باليد",
+      "mainCharacterName": "تيتة",
       "companionName": "الدب باندا",
       "timestampIso": "2026-10-08T18:34:42.938Z"
     },
@@ -197,26 +207,6 @@
       "topic": "لعبة الأشكال والألوان المبهجة مع سدرة الصغنونة والفراشة",
       "mainCharacterName": "سدرة الصغنونة",
       "companionName": "الفراشة الملونة"
-    },
-    {
-      "topic": "شجاعة ذياد والعصفورة الفرفوشة في إصلاح جسر القرية",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة"
-    },
-    {
-      "topic": "الكتاب اللي بيطير بين النجوم وسر الحفاظ على",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف"
-    },
-    {
-      "topic": "مغامرة الغواصة الذهبية لإنقاذ الحوت الصغير في مملكة",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح"
-    },
-    {
-      "topic": "كيف نرتب وقتنا وألعابنا بدقة وحكمة مع المحاسب",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
     }
   ],
   "scheduledHistory": [
@@ -2563,16 +2553,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٨‏/١٠‏/٢٠٢٦، ٩:٤٨:٢٨ م",
   "lastCloudRunReport": {
-    "id": "gh-run-37792143202",
+    "id": "gh-run-37825178592",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-08 (17:42 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1791469538659-x4og",
-    "longEpisodeId": "ep-gh-long-1791469555994-7hwu",
-    "shortEpisodeTitle": "Noreen Kids: تنظيم حقيبة المدرسة في المساء والاستيقاظ بنشاط وسرور | مغامرات أم ملك والبطريق المرح",
-    "longEpisodeTitle": "Noreen Kids: شهامة ذياد وأمانته في إرجاع المحفظة المفقودة لصاحبها | مغامرات ذياد والعصفورة الفرفوشة",
-    "shortTitle": "Noreen Kids: تنظيم حقيبة المدرسة في المساء والاستيقاظ بنشاط وسرور | مغامرات أم ملك والبطريق المرح",
-    "longTitle": "Noreen Kids: شهامة ذياد وأمانته في إرجاع المحفظة المفقودة لصاحبها | مغامرات ذياد والعصفورة الفرفوشة",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-08 (21:48 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1791484471973-khss",
+    "longEpisodeId": "ep-gh-long-1791484482938-6sf8",
+    "shortEpisodeTitle": "Noreen Kids: حكاية الدب باندا الذي تعلّم آداب المائدة والأكل باليد | مغامرات تيتة والدب باندا",
+    "longEpisodeTitle": "Noreen Kids: الضمادة السحرية وحكاية التغلب على الخوف من الحقنة | مغامرات الطبيبة نورين وأرنوب",
+    "shortTitle": "Noreen Kids: حكاية الدب باندا الذي تعلّم آداب المائدة والأكل باليد | مغامرات تيتة والدب باندا",
+    "longTitle": "Noreen Kids: الضمادة السحرية وحكاية التغلب على الخوف من الحقنة | مغامرات الطبيبة نورين وأرنوب",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2581,14 +2571,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "AzaJv6W68QI",
-    "youtubeLongVideoId": "o7-jgoZeGPM",
-    "facebookShortVideoId": "2486255438527304",
-    "facebookLongVideoId": "1643556020458277",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2486255438527304",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1643556020458277",
-    "facebookShortTitle": "Noreen Kids | تنظيم حقيبة المدرسة في المساء والاستيقاظ بنشاط وسرور - مغامرة أم ملك والبطريق المرح",
-    "facebookLongTitle": "Noreen Kids | شهامة ذياد وأمانته في إرجاع المحفظة المفقودة لصاحبها - مغامرة ذياد والعصفورة الفرفوشة",
+    "youtubeShortVideoId": "gUVKKwd2MK4",
+    "youtubeLongVideoId": "7CTBDdrLkF8",
+    "facebookShortVideoId": "2335635417191666",
+    "facebookLongVideoId": "4390428041206862",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2335635417191666",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/4390428041206862",
+    "facebookShortTitle": "Noreen Kids | حكاية الدب باندا الذي تعلّم آداب المائدة والأكل باليد - مغامرة تيتة والدب باندا",
+    "facebookLongTitle": "Noreen Kids | الضمادة السحرية وحكاية التغلب على الخوف من الحقنة - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2603,9 +2593,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 339,
-      "fileSizeBytes": 36123443,
-      "inspectedAt": "17:42"
+      "durationSec": 317,
+      "fileSizeBytes": 31960596,
+      "inspectedAt": "21:48"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2614,7 +2604,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-08T14:42:53.187Z"
+    "reportedAtIso": "2026-10-08T18:48:31.991Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880"
