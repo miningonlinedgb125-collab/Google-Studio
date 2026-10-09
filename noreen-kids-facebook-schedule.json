@@ -2415,6 +2415,16 @@
     {
       "topic": "إنقاذ نجم البحر المنور من بين الصخور المرجانية بالرفق",
       "mainCharacterName": "شوشو القبطان الصغير",
+      "companionName": "مرجان الدلفين المرح"
+    },
+    {
+      "topic": "بدلة جنى الذكية وسر العوم في فضاء النجوم",
+      "mainCharacterName": "جنى رائدة الفضاء",
+      "companionName": "بلبل الروبوت اللطيف"
+    },
+    {
+      "topic": "إنقاذ نجم البحر المنور من بين الصخور المرجانية بالرفق",
+      "mainCharacterName": "شوشو القبطان الصغير",
       "companionName": "مرجان الدلفين المرح",
       "timestampIso": "2026-10-09T16:47:18.567Z"
     },
@@ -2577,53 +2587,21 @@
       "topic": "لغز آثار الأقدام الصغيرة في جبل الثلج ومساعدة",
       "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي"
-    },
-    {
-      "topic": "بناء مسار القطار المغناطيسي الصغير لنقل ألعاب الأطفال",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-10-06T07:03:31.216Z"
-    },
-    {
-      "topic": "لغز آثار الأقدام الصغيرة في جبل الثلج ومساعدة",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "timestampIso": "2026-10-06T07:03:31.216Z"
-    },
-    {
-      "topic": "مسابقة القراءة الممتعة ونصائح المعلمة أم ملك الحنونة",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح"
-    },
-    {
-      "topic": "سر النوم البدري وشرب اللبن الدافي علشان نكبر بصحة ونشاط",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "فطيرة التفاح الدافية مع تيتة والدب باندا وقيمة",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
-    },
-    {
-      "topic": "لعبة الأشكال والألوان المبهجة مع سدرة الصغنونة والفراشة",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-08 · 21:48 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-09",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-37801403269",
+    "id": "gh-run-37961208861",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-08 (19:03 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1791473558173-ejbc",
-    "longEpisodeId": "ep-gh-long-1791473558669-i23k",
-    "shortEpisodeTitle": "Noreen Kids: لعبة الميزان العادل وتعلّم أهمية الصدق في البيع | مغامرات أستاذ شريف والصقر الذكي",
-    "longEpisodeTitle": "Noreen Kids: حدوتة النحلة النشيطة والدرس الذي تعلمه الفأر المشاكس | مغامرات جدو والفأر المشاكس",
-    "shortTitle": "Noreen Kids: لعبة الميزان العادل وتعلّم أهمية الصدق في البيع | مغامرات أستاذ شريف والصقر الذكي",
-    "longTitle": "Noreen Kids: حدوتة النحلة النشيطة والدرس الذي تعلمه الفأر المشاكس | مغامرات جدو والفأر المشاكس",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-09 (20:00 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1791564327651-a6t4",
+    "longEpisodeId": "ep-gh-long-1791564438567-b3bq",
+    "shortEpisodeTitle": "Noreen Kids: إنقاذ نجم البحر المنور من بين الصخور المرجانية بالرفق | مغامرات شوشو ومرجان",
+    "longEpisodeTitle": "Noreen Kids: بدلة جنى الذكية وسر العوم في فضاء النجوم | مغامرات جنى وبلبل",
+    "shortTitle": "Noreen Kids: إنقاذ نجم البحر المنور من بين الصخور المرجانية بالرفق | مغامرات شوشو ومرجان",
+    "longTitle": "Noreen Kids: بدلة جنى الذكية وسر العوم في فضاء النجوم | مغامرات جنى وبلبل",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2632,14 +2610,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "h718R1CUdyY",
-    "youtubeLongVideoId": "i0CliHwgk3g",
-    "facebookShortVideoId": "1410815590606042",
-    "facebookLongVideoId": "2366337240771391",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1410815590606042",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2366337240771391",
-    "facebookShortTitle": "Noreen Kids | لعبة الميزان العادل وتعلّم أهمية الصدق في البيع - مغامرة أستاذ شريف والصقر الذكي",
-    "facebookLongTitle": "Noreen Kids | حدوتة النحلة النشيطة والدرس الذي تعلمه الفأر المشاكس - مغامرة جدو والفأر المشاكس",
+    "youtubeShortVideoId": "MaYub3NFZRA",
+    "youtubeLongVideoId": "GJN6wY802G0",
+    "facebookShortVideoId": "1457388612973624",
+    "facebookLongVideoId": "1234862465527358",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1457388612973624",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1234862465527358",
+    "facebookShortTitle": "Noreen Kids | إنقاذ نجم البحر المنور من بين الصخور المرجانية بالرفق - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
+    "facebookLongTitle": "Noreen Kids | بدلة جنى الذكية وسر العوم في فضاء النجوم - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2654,9 +2632,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 351,
-      "fileSizeBytes": 41544581,
-      "inspectedAt": "19:03"
+      "durationSec": 400,
+      "fileSizeBytes": 48832184,
+      "inspectedAt": "20:00"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2665,7 +2643,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-08T16:03:58.280Z"
+    "reportedAtIso": "2026-10-09T17:00:30.044Z"
   },
   "heroFairRotationIndex": 5,
   "interactiveHeroRotationIndex": 5,
