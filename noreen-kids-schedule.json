@@ -37,6 +37,16 @@
     {
       "topic": "إنقاذ فراشة النور النادرة في حديقة الزهور العملاقة",
       "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي"
+    },
+    {
+      "topic": "اختراع طاحونة الهواء الملونة لتوليد الكهرباء",
+      "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "إنقاذ فراشة النور النادرة في حديقة الزهور العملاقة",
+      "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي",
       "timestampIso": "2026-10-09T16:21:42.923Z"
     },
@@ -199,26 +209,6 @@
       "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي",
       "timestampIso": "2026-10-06T07:03:31.216Z"
-    },
-    {
-      "topic": "مسابقة القراءة الممتعة ونصائح المعلمة أم ملك الحنونة",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح"
-    },
-    {
-      "topic": "سر النوم البدري وشرب اللبن الدافي علشان نكبر بصحة ونشاط",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "فطيرة التفاح الدافية مع تيتة والدب باندا وقيمة",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
-    },
-    {
-      "topic": "لعبة الأشكال والألوان المبهجة مع سدرة الصغنونة والفراشة",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة"
     }
   ],
   "scheduledHistory": [
@@ -2600,16 +2590,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٩‏/١٠‏/٢٠٢٦، ٧:٤٩:٢٣ م",
   "lastCloudRunReport": {
-    "id": "gh-run-37825178592",
+    "id": "gh-cloud-2026-10-09",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-08 (21:48 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1791484471973-khss",
-    "longEpisodeId": "ep-gh-long-1791484482938-6sf8",
-    "shortEpisodeTitle": "Noreen Kids: حكاية الدب باندا الذي تعلّم آداب المائدة والأكل باليد | مغامرات تيتة والدب باندا",
-    "longEpisodeTitle": "Noreen Kids: الضمادة السحرية وحكاية التغلب على الخوف من الحقنة | مغامرات الطبيبة نورين وأرنوب",
-    "shortTitle": "Noreen Kids: حكاية الدب باندا الذي تعلّم آداب المائدة والأكل باليد | مغامرات تيتة والدب باندا",
-    "longTitle": "Noreen Kids: الضمادة السحرية وحكاية التغلب على الخوف من الحقنة | مغامرات الطبيبة نورين وأرنوب",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-09 (19:49 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1791562874442-yypq",
+    "longEpisodeId": "ep-gh-long-1791562902923-h7y7",
+    "shortEpisodeTitle": "Noreen Kids: إنقاذ فراشة النور النادرة في حديقة الزهور العملاقة | مغامرات عمرو وزعتر",
+    "longEpisodeTitle": "Noreen Kids: اختراع طاحونة الهواء الملونة لتوليد الكهرباء | مغامرات المهندسة نوران والنمر الفرفوش",
+    "shortTitle": "Noreen Kids: إنقاذ فراشة النور النادرة في حديقة الزهور العملاقة | مغامرات عمرو وزعتر",
+    "longTitle": "Noreen Kids: اختراع طاحونة الهواء الملونة لتوليد الكهرباء | مغامرات المهندسة نوران والنمر الفرفوش",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2618,14 +2608,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "gUVKKwd2MK4",
-    "youtubeLongVideoId": "7CTBDdrLkF8",
-    "facebookShortVideoId": "2335635417191666",
-    "facebookLongVideoId": "4390428041206862",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2335635417191666",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/4390428041206862",
-    "facebookShortTitle": "Noreen Kids | حكاية الدب باندا الذي تعلّم آداب المائدة والأكل باليد - مغامرة تيتة والدب باندا",
-    "facebookLongTitle": "Noreen Kids | الضمادة السحرية وحكاية التغلب على الخوف من الحقنة - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
+    "youtubeShortVideoId": "pRjD-QBw38A",
+    "youtubeLongVideoId": "RAs00hm-pM4",
+    "facebookShortVideoId": "2934886206875406",
+    "facebookLongVideoId": "1135017408950822",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2934886206875406",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1135017408950822",
+    "facebookShortTitle": "Noreen Kids | إنقاذ فراشة النور النادرة في حديقة الزهور العملاقة - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
+    "facebookLongTitle": "Noreen Kids | اختراع طاحونة الهواء الملونة لتوليد الكهرباء - مغامرة المهندسة نوران والنمر الفرفوش",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2640,9 +2630,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 317,
-      "fileSizeBytes": 31960596,
-      "inspectedAt": "21:48"
+      "durationSec": 375,
+      "fileSizeBytes": 42215670,
+      "inspectedAt": "19:49"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2651,7 +2641,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-08T18:48:31.991Z"
+    "reportedAtIso": "2026-10-09T16:49:26.527Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880"
