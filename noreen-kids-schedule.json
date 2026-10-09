@@ -228,14 +228,15 @@
       "id": "gh-run-37888843331",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-09 (08:34 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-09 (08:37 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1791523862553-m097",
       "longEpisodeId": "ep-gh-long-1791523862656-7crv",
       "shortEpisodeTitle": "Noreen Kids: سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر | مغامرات شوشو ومرجان",
-      "longEpisodeTitle": "لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة",
+      "longEpisodeTitle": "Noreen Kids: لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة | مغامرات جنى وبلبل",
       "shortTitle": "Noreen Kids: سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر | مغامرات شوشو ومرجان",
-      "longTitle": "لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة",
+      "longTitle": "Noreen Kids: لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة | مغامرات جنى وبلبل",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -243,9 +244,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "54XoeEcpBdI",
+      "youtubeLongVideoId": "BcVLJYgBKc8",
       "facebookShortVideoId": "1496751329171767",
+      "facebookLongVideoId": "2048563065798239",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1496751329171767",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2048563065798239",
       "facebookShortTitle": "Noreen Kids | سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
+      "facebookLongTitle": "Noreen Kids | لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -253,16 +258,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 78,
-        "fileSizeBytes": 9646899,
-        "inspectedAt": "08:34"
+        "durationSec": 359,
+        "fileSizeBytes": 42792387,
+        "inspectedAt": "08:37"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2158,7 +2163,7 @@
         "speakerName": "جنى رائدة الفضاء",
         "voiceName": "Zephyr",
         "dialect": "egyptian",
-        "dialogueArabic": "جدع يا بلبل والله، تسلم إيدك وكويس إنك نبهتني بدري أوي أوي قبل ما الأمور تتعقد! بصوا كده يا أصحابي الحلوين، الشطار في عيلة نورين كيدز عمرهم ما بيخافوا ولا يتلخبطوا، دايما بنهدا ونرتب أفكارنا واحدة واحدة بالراحة ومن غير أي خوف خالص! الحكاية دي عايزة مننا أمانة وصبر وجدعنة علشان نرجع كل حاجة زي ما كانت وأحسن كمان! أنا هستخدم خوذة الفضاء المنورة وجهاز الجاذبية دلوقتي حالا علشان نعمل أول خطوة صح في المكان، يلا شجعونا وقولوا يا رب، وإيدينا في إيد بعض وهنعمل كل حاجة صح ومضبوطة دايما!",
+        "dialogueArabic": "جدع يا بلبل والله، تسلم إيدك وكويس إنك نبهتني بدري أوي أوي أوي أوي قبل ما الأمور تتعقد! بصوا كده يا أصحابي الحلوين، الشطار في عيلة نورين كيدز عمرهم ما بيخافوا ولا يتلخبطوا، دايما بنهدا ونرتب أفكارنا واحدة واحدة بالراحة ومن غير أي خوف خالص! الحكاية دي عايزة مننا أمانة وصبر وجدعنة علشان نرجع كل حاجة زي ما كانت وأحسن كمان! أنا هستخدم خوذة الفضاء المنورة وجهاز الجاذبية دلوقتي حالا علشان نعمل أول خطوة صح في المكان، يلا شجعونا وقولوا يا رب، وإيدينا في إيد بعض وهنعمل كل حاجة صح ومضبوطة دايما!",
         "durationSec": 39
       },
       {
@@ -2596,7 +2601,7 @@
   "firstCommentEnabled": true,
   "autoCommentResponderEnabled": true,
   "facebookAutoCommentResponderEnabled": true,
-  "lastAutoCommentScanAtCairo": "٩‏/١٠‏/٢٠٢٦، ٨:٣٤:٠٢ ص",
+  "lastAutoCommentScanAtCairo": "٩‏/١٠‏/٢٠٢٦، ٨:٣٧:٢٥ ص",
   "lastCloudRunReport": {
     "id": "gh-run-37825178592",
     "uploadMode": "daily_schedule",
@@ -2654,7 +2659,7 @@
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880"
   ],
-  "lastFacebookAutoCommentScanAtCairo": "٩‏/١٠‏/٢٠٢٦، ٨:٣٤:٠١ ص",
+  "lastFacebookAutoCommentScanAtCairo": "٩‏/١٠‏/٢٠٢٦، ٨:٣٧:٢٤ ص",
   "heroFairRotationIndex": 5,
   "interactiveHeroRotationIndex": 1,
   "heroRoleSwapCycle": true
