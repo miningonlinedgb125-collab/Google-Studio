@@ -37,6 +37,16 @@
     {
       "topic": "سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر",
       "mainCharacterName": "شوشو القبطان الصغير",
+      "companionName": "مرجان الدلفين المرح"
+    },
+    {
+      "topic": "لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة",
+      "mainCharacterName": "جنى رائدة الفضاء",
+      "companionName": "بلبل الروبوت اللطيف"
+    },
+    {
+      "topic": "سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر",
+      "mainCharacterName": "شوشو القبطان الصغير",
       "companionName": "مرجان الدلفين المرح",
       "timestampIso": "2026-10-09T05:31:02.656Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "شوشو القبطان الصغير",
       "companionName": "مرجان الدلفين المرح",
       "timestampIso": "2026-10-06T15:31:35.121Z"
-    },
-    {
-      "topic": "بناء مسار القطار المغناطيسي الصغير لنقل ألعاب الأطفال",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "لغز آثار الأقدام الصغيرة في جبل الثلج ومساعدة",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي"
-    },
-    {
-      "topic": "بناء مسار القطار المغناطيسي الصغير لنقل ألعاب الأطفال",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-10-06T07:03:31.216Z"
-    },
-    {
-      "topic": "لغز آثار الأقدام الصغيرة في جبل الثلج ومساعدة",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "timestampIso": "2026-10-06T07:03:31.216Z"
     }
   ],
   "scheduledHistory": [
@@ -2603,16 +2591,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٩‏/١٠‏/٢٠٢٦، ٨:٣٧:٢٥ ص",
   "lastCloudRunReport": {
-    "id": "gh-run-37825178592",
+    "id": "gh-run-37888843331",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-08 (21:48 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1791484471973-khss",
-    "longEpisodeId": "ep-gh-long-1791484482938-6sf8",
-    "shortEpisodeTitle": "Noreen Kids: حكاية الدب باندا الذي تعلّم آداب المائدة والأكل باليد | مغامرات تيتة والدب باندا",
-    "longEpisodeTitle": "Noreen Kids: الضمادة السحرية وحكاية التغلب على الخوف من الحقنة | مغامرات الطبيبة نورين وأرنوب",
-    "shortTitle": "Noreen Kids: حكاية الدب باندا الذي تعلّم آداب المائدة والأكل باليد | مغامرات تيتة والدب باندا",
-    "longTitle": "Noreen Kids: الضمادة السحرية وحكاية التغلب على الخوف من الحقنة | مغامرات الطبيبة نورين وأرنوب",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-09 (08:37 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1791523862553-m097",
+    "longEpisodeId": "ep-gh-long-1791523862656-7crv",
+    "shortEpisodeTitle": "Noreen Kids: سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر | مغامرات شوشو ومرجان",
+    "longEpisodeTitle": "Noreen Kids: لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة | مغامرات جنى وبلبل",
+    "shortTitle": "Noreen Kids: سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر | مغامرات شوشو ومرجان",
+    "longTitle": "Noreen Kids: لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة | مغامرات جنى وبلبل",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2621,14 +2609,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "gUVKKwd2MK4",
-    "youtubeLongVideoId": "7CTBDdrLkF8",
-    "facebookShortVideoId": "2335635417191666",
-    "facebookLongVideoId": "4390428041206862",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2335635417191666",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/4390428041206862",
-    "facebookShortTitle": "Noreen Kids | حكاية الدب باندا الذي تعلّم آداب المائدة والأكل باليد - مغامرة تيتة والدب باندا",
-    "facebookLongTitle": "Noreen Kids | الضمادة السحرية وحكاية التغلب على الخوف من الحقنة - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
+    "youtubeShortVideoId": "54XoeEcpBdI",
+    "youtubeLongVideoId": "BcVLJYgBKc8",
+    "facebookShortVideoId": "1496751329171767",
+    "facebookLongVideoId": "2048563065798239",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1496751329171767",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2048563065798239",
+    "facebookShortTitle": "Noreen Kids | سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
+    "facebookLongTitle": "Noreen Kids | لغز الكوكب البنفسجي المفقود في مرصد المكتبة الطائرة - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2643,9 +2631,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 317,
-      "fileSizeBytes": 31960596,
-      "inspectedAt": "21:48"
+      "durationSec": 359,
+      "fileSizeBytes": 42792387,
+      "inspectedAt": "08:37"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2654,7 +2642,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-08T18:48:31.991Z"
+    "reportedAtIso": "2026-10-09T05:37:29.117Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880"
