@@ -226,14 +226,15 @@
       "id": "gh-cloud-2026-10-09",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-09 (19:37 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-09 (19:49 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1791562874442-yypq",
       "longEpisodeId": "ep-gh-long-1791562902923-h7y7",
       "shortEpisodeTitle": "Noreen Kids: إنقاذ فراشة النور النادرة في حديقة الزهور العملاقة | مغامرات عمرو وزعتر",
-      "longEpisodeTitle": "اختراع طاحونة الهواء الملونة لتوليد الكهرباء",
+      "longEpisodeTitle": "Noreen Kids: اختراع طاحونة الهواء الملونة لتوليد الكهرباء | مغامرات المهندسة نوران والنمر الفرفوش",
       "shortTitle": "Noreen Kids: إنقاذ فراشة النور النادرة في حديقة الزهور العملاقة | مغامرات عمرو وزعتر",
-      "longTitle": "اختراع طاحونة الهواء الملونة لتوليد الكهرباء",
+      "longTitle": "Noreen Kids: اختراع طاحونة الهواء الملونة لتوليد الكهرباء | مغامرات المهندسة نوران والنمر الفرفوش",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -241,9 +242,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "pRjD-QBw38A",
+      "youtubeLongVideoId": "RAs00hm-pM4",
       "facebookShortVideoId": "2934886206875406",
+      "facebookLongVideoId": "1135017408950822",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2934886206875406",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1135017408950822",
       "facebookShortTitle": "Noreen Kids | إنقاذ فراشة النور النادرة في حديقة الزهور العملاقة - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
+      "facebookLongTitle": "Noreen Kids | اختراع طاحونة الهواء الملونة لتوليد الكهرباء - مغامرة المهندسة نوران والنمر الفرفوش",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -251,16 +256,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 78,
-        "fileSizeBytes": 9542042,
-        "inspectedAt": "19:37"
+        "durationSec": 375,
+        "fileSizeBytes": 42215670,
+        "inspectedAt": "19:49"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2143,7 +2148,7 @@
         "speakerName": "المهندسة نوران",
         "voiceName": "Kore",
         "dialect": "egyptian",
-        "dialogueArabic": "جدع يا النمر الفرفوش والله، تسلم إيدك وكويس إنك نبهتني بدري أوي أوي قبل ما الأمور تتعقد! بصوا كده يا أصحابي الحلوين، الشطار في عيلة نورين كيدز عمرهم ما بيخافوا ولا يتلخبطوا، دايما بنهدا ونرتب أفكارنا واحدة واحدة بالراحة ومن غير أي خوف خالص! الحكاية دي عايزة مننا أمانة وصبر وجدعنة علشان نرجع كل حاجة زي ما كانت وأحسن كمان! أنا هستخدم المفتاح السحري المنور والمخطط الهولوجرامي دلوقتي حالا علشان نعمل أول خطوة صح في المكان، يلا شجعونا وقولوا يا رب، وإيدينا في إيد بعض وهنعمل كل حاجة صح ومضبوطة دايما!",
+        "dialogueArabic": "جدع يا النمر الفرفوش والله، تسلم إيدك وكويس إنك نبهتني بدري أوي أوي أوي أوي قبل ما الأمور تتعقد! بصوا كده يا أصحابي الحلوين، الشطار في عيلة نورين كيدز عمرهم ما بيخافوا ولا يتلخبطوا، دايما بنهدا ونرتب أفكارنا واحدة واحدة بالراحة ومن غير أي خوف خالص! الحكاية دي عايزة مننا أمانة وصبر وجدعنة علشان نرجع كل حاجة زي ما كانت وأحسن كمان! أنا هستخدم المفتاح السحري المنور والمخطط الهولوجرامي دلوقتي حالا علشان نعمل أول خطوة صح في المكان، يلا شجعونا وقولوا يا رب، وإيدينا في إيد بعض وهنعمل كل حاجة صح ومضبوطة دايما!",
         "durationSec": 39
       },
       {
@@ -2593,7 +2598,7 @@
   "firstCommentEnabled": true,
   "autoCommentResponderEnabled": true,
   "facebookAutoCommentResponderEnabled": true,
-  "lastAutoCommentScanAtCairo": "٩‏/١٠‏/٢٠٢٦، ٧:٣٧:٥٠ م",
+  "lastAutoCommentScanAtCairo": "٩‏/١٠‏/٢٠٢٦، ٧:٤٩:٢٣ م",
   "lastCloudRunReport": {
     "id": "gh-run-37825178592",
     "uploadMode": "daily_schedule",
@@ -2651,7 +2656,7 @@
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880"
   ],
-  "lastFacebookAutoCommentScanAtCairo": "٩‏/١٠‏/٢٠٢٦، ٧:٣٠:٤١ م",
+  "lastFacebookAutoCommentScanAtCairo": "٩‏/١٠‏/٢٠٢٦، ٧:٤٩:٢٢ م",
   "heroFairRotationIndex": 3,
   "interactiveHeroRotationIndex": 1,
   "heroRoleSwapCycle": true
