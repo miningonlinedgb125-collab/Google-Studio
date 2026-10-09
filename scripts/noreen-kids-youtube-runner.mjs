@@ -1170,7 +1170,7 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
     }
   }
 
-  // 1) PRIMARY ENGINE: Gemini Native Audio TTS (`gemini-3.8-flash-lite-tts` & `gemini-3.8-flash-tts`)
+  // 1) PRIMARY ENGINE: Gemini Live Native Audio (`gemini-3.8-live` & `gemini-2.5-flash-native-audio-preview-12-2025`)
   const apiKey = (process.env.GEMINI_API_KEY || "").trim();
   if (apiKey) {
     try {
@@ -1178,10 +1178,57 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
         apiKey,
         httpOptions: { headers: { "User-Agent": "aistudio-build" } },
       });
-      const liveWavPath = path.join(tmpDir, `gemini_tts_${sceneIndex}.wav`);
-      const pureDialogueForTts = stripLeakedVoiceInstructionsRunner(dialogue);
-      const ttsModels = ["gemini-3.8-flash-lite-tts", "gemini-3.8-flash-tts"];
+      const isEgyptian = dialect !== "fusha";
+      const liveWavPath = path.join(tmpDir, `gemini_live_${sceneIndex}.wav`);
+      const liveModels = ["gemini-3.8-live", "gemini-2.5-flash-native-audio-preview-12-2025"];
 
+      for (const liveModel of liveModels) {
+        try {
+          const segments = splitArabicTextForGeminiLive(dialogue, 340);
+          const pcmParts = [];
+          const pauseBuf = Buffer.alloc(8640, 0);
+          let allSegmentsOk = segments.length > 0;
+
+          for (let sIdx = 0; sIdx < segments.length; sIdx++) {
+            const segPcm = await synthesizeChunkViaGeminiLiveRunner(
+              ai,
+              liveModel,
+              segments[sIdx],
+              geminiVoice,
+              styleInstruction,
+              isEgyptian
+            );
+            if (!segPcm || segPcm.length <= 1000) {
+              allSegmentsOk = false;
+              break;
+            }
+            pcmParts.push(segPcm);
+            if (sIdx < segments.length - 1) pcmParts.push(pauseBuf);
+          }
+
+          if (allSegmentsOk && pcmParts.length > 0) {
+            const wavBuf = ensureWavBuffer(Buffer.concat(pcmParts));
+            fs.writeFileSync(liveWavPath, wavBuf);
+            const finalPath = await applyRunnerCharacterTimbreAndCompanionSfx(
+              liveWavPath,
+              vp,
+              sceneIndex,
+              tmpDir
+            );
+            const durSec = await measureAudioDurationSec(finalPath, 14);
+            console.log(
+              `   🎤 [Gemini Live Native Audio] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر ${liveModel} بنبرة مصرية قاهرية طبيعية 100%!`
+            );
+            return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
+          }
+        } catch (liveErr) {
+          // If Live connection fails, try next live model or fallback
+        }
+      }
+
+      // 1b) Secondary Gemini Native Audio TTS (`gemini-3.8-flash-lite-tts` / `gemini-3.8-flash-tts`)
+      const ttsModels = ["gemini-3.8-flash-lite-tts", "gemini-3.8-flash-tts"];
+      const pureDialogueForTts = stripLeakedVoiceInstructionsRunner(dialogue);
       for (const ttsModel of ttsModels) {
         try {
           const gemRes = await ai.models.generateContent({
@@ -1189,17 +1236,17 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
             contents: [
               {
                 role: "user",
-                parts: [
-                  {
-                    text: pureDialogueForTts,
-                    speechMetadata: {
-                      style: "Natural colloquial Egyptian Arabic cartoon voice for children, cheerful, lively and warm",
-                    },
-                  },
-                ],
+                parts: [{ text: pureDialogueForTts }],
               },
             ],
             config: {
+              systemInstruction: {
+                parts: [
+                  {
+                    text: "You are a professional Egyptian cartoon voice actor for children speaking in natural colloquial Egyptian Cairene Arabic.",
+                  },
+                ],
+              },
               responseModalities: [Modality.AUDIO],
               speechConfig: {
                 voiceConfig: {
@@ -1221,7 +1268,9 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
                 tmpDir
               );
               const durSec = await measureAudioDurationSec(finalPath, 14);
-              console.log(`   🎤 [Gemini Live Native Audio] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر ${ttsModel} بنبرة مصرية طبيعية!`);
+              console.log(
+                `   🎤 [Gemini Native Audio TTS] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر ${ttsModel} بنبرة مصرية طبيعية!`
+              );
               return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
             }
           }
