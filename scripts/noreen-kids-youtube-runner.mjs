@@ -394,6 +394,57 @@ function prepareTextForNaturalEgyptianTts(rawText) {
   return text.replace(/\s+/g, " ").trim();
 }
 
+function phoneticEgyptianForEdgeTts(text) {
+  let res = String(text || "").replace(/[\u064B-\u065F\u0670]/g, "").trim();
+  const phoneticReplacements = [
+    [/\bدلوقتي\b/g, "دلوأتي"],
+    [/\bودلوقتي\b/g, "ودلوأتي"],
+    [/\bلقينا\b/g, "لئينا"],
+    [/\bولقينا\b/g, "ولئينا"],
+    [/\bلقيت\b/g, "لئيت"],
+    [/\bولقيت\b/g, "ولئيت"],
+    [/\bبقى\b/g, "بأه"],
+    [/\bوبقى\b/g, "وبأه"],
+    [/\bفوق\b/g, "فوء"],
+    [/\bوفوق\b/g, "وفوء"],
+    [/\bوقفنا\b/g, "وئفنا"],
+    [/\bووقفنا\b/g, "ووئفنا"],
+    [/\bطريقنا\b/g, "طريئنا"],
+    [/\bطريق\b/g, "طريء"],
+    [/\bقدرنا\b/g, "ئدرنا"],
+    [/\bوقدرنا\b/g, "وئدرنا"],
+    [/\bأقرب\b/g, "أئرب"],
+    [/\bقريب\b/g, "أريب"],
+    [/\bدقيقة\b/g, "دئيئة"],
+    [/\bدقايق\b/g, "دئايق"],
+    [/\bتصدق\b/g, "تصدأ"],
+    [/\bوتصدق\b/g, "وتصدأ"],
+    [/\bحقيقي\b/g, "حئيئي"],
+    [/\bحقيقة\b/g, "حئيئة"],
+    [/\bنقول\b/g, "نؤول"],
+    [/\bونقول\b/g, "ونؤول"],
+    [/\bيقول\b/g, "يؤول"],
+    [/\bويقول\b/g, "ويؤول"],
+    [/\bتقول\b/g, "تؤول"],
+    [/\bوتقول\b/g, "وتؤول"],
+    [/\bقلت\b/g, "ألت"],
+    [/\bوقلت\b/g, "وألت"],
+    [/\bقوي\b/g, "أوي"],
+    [/\bبص كده\b/g, "بص كدا"],
+    [/\bكده\b/g, "كدا"],
+    [/\bيا ترى\b/g, "يا تري"],
+    [/\bهؤلاء\b/g, "دول"],
+    [/\bهذا\b/g, "ده"],
+    [/\bهذه\b/g, "دي"],
+    [/\bأيضاً\b/g, "كمان"],
+    [/\bأيضا\b/g, "كمان"],
+  ];
+  for (const [re, rep] of phoneticReplacements) {
+    res = res.replace(re, rep);
+  }
+  return res.replace(/\s+/g, " ").trim();
+}
+
 function runPreTtsEgyptianValidationLayer(rawText, sceneIndex = 0, totalScenes = 4) {
   const original = String(rawText || "").trim();
   const detectedNonEgyptianWords = [];
@@ -1003,8 +1054,21 @@ async function synthesizeChunkViaGeminiLiveRunner(
   const chunks = [];
   try {
     await new Promise(async (resolve, reject) => {
-      const timeout = setTimeout(() => reject(new Error("Gemini Live Audio timeout")), 22000);
+      let isDone = false;
+      const timeout = setTimeout(() => finish(new Error("Gemini Live Audio timeout")), 14000);
       let sessionRef = null;
+
+      const finish = (err) => {
+        if (isDone) return;
+        isDone = true;
+        clearTimeout(timeout);
+        try {
+          sessionRef?.close();
+        } catch {}
+        if (err) reject(err);
+        else resolve();
+      };
+
       try {
         sessionRef = await ai.live.connect({
           model: liveModel,
@@ -1036,19 +1100,25 @@ async function synthesizeChunkViaGeminiLiveRunner(
                 }
               }
               if (msg?.serverContent?.turnComplete) {
-                clearTimeout(timeout);
-                try {
-                  sessionRef?.close();
-                } catch {}
-                resolve();
+                finish();
               }
             },
             onerror: (err) => {
-              clearTimeout(timeout);
-              try {
-                sessionRef?.close();
-              } catch {}
-              reject(err);
+              finish(err);
+            },
+            onclose: (closeEvt) => {
+              const reason = String(closeEvt?.reason || "");
+              const isQuota =
+                closeEvt?.code === 1011 ||
+                reason.toLowerCase().includes("quota") ||
+                reason.toLowerCase().includes("exceeded");
+              if (isQuota) {
+                finish(new Error(`QUOTA_EXCEEDED: ${reason || "code 1011"}`));
+              } else if (chunks.length > 0) {
+                finish();
+              } else {
+                finish(new Error(`Live session closed prematurely (${closeEvt?.code || "unknown"})`));
+              }
             },
           },
         });
@@ -1067,16 +1137,15 @@ async function synthesizeChunkViaGeminiLiveRunner(
           turnComplete: true,
         });
       } catch (e) {
-        clearTimeout(timeout);
-        try {
-          sessionRef?.close();
-        } catch {}
-        reject(e);
+        finish(e);
       }
     });
     const combined = Buffer.concat(chunks);
     return combined.length > 1000 ? combined : null;
-  } catch {
+  } catch (err) {
+    if (String(err?.message || "").includes("QUOTA_EXCEEDED")) {
+      throw err;
+    }
     return null;
   }
 }
@@ -1170,7 +1239,7 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
     }
   }
 
-  // 1) PRIMARY ENGINE: Gemini Live Native Audio (`gemini-3.8-live` & `gemini-2.5-flash-native-audio-preview-12-2025`)
+  // 1) PRIMARY ENGINE: Gemini Live Native Audio (`gemini-2.5-flash-native-audio-preview-12-2025`)
   const apiKey = (process.env.GEMINI_API_KEY || "").trim();
   if (apiKey) {
     try {
@@ -1180,116 +1249,79 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
       });
       const isEgyptian = dialect !== "fusha";
       const liveWavPath = path.join(tmpDir, `gemini_live_${sceneIndex}.wav`);
-      const liveModels = ["gemini-3.8-live", "gemini-2.5-flash-native-audio-preview-12-2025"];
+      const liveModel = "gemini-2.5-flash-native-audio-preview-12-2025";
 
-      for (const liveModel of liveModels) {
-        try {
-          const segments = splitArabicTextForGeminiLive(dialogue, 340);
-          const pcmParts = [];
-          const pauseBuf = Buffer.alloc(8640, 0);
-          let allSegmentsOk = segments.length > 0;
+      try {
+        const segments = splitArabicTextForGeminiLive(dialogue, 220);
+        const pcmParts = [];
+        const pauseBuf = Buffer.alloc(8640, 0);
+        let allSegmentsOk = segments.length > 0;
 
-          for (let sIdx = 0; sIdx < segments.length; sIdx++) {
-            const segPcm = await synthesizeChunkViaGeminiLiveRunner(
-              ai,
-              liveModel,
-              segments[sIdx],
-              geminiVoice,
-              styleInstruction,
-              isEgyptian
-            );
-            if (!segPcm || segPcm.length <= 1000) {
-              allSegmentsOk = false;
+        for (let sIdx = 0; sIdx < segments.length; sIdx++) {
+          let segPcm = null;
+          for (let retry = 0; retry < 2; retry++) {
+            try {
+              segPcm = await synthesizeChunkViaGeminiLiveRunner(
+                ai,
+                liveModel,
+                segments[sIdx],
+                geminiVoice,
+                styleInstruction,
+                isEgyptian
+              );
+              if (segPcm && segPcm.length > 1000) break;
+            } catch (segErr) {
+              const errMsg = String(segErr?.message || "");
+              if (errMsg.includes("QUOTA_EXCEEDED") && retry === 0) {
+                console.log(
+                  `   ⏳ [Gemini Live Quota Backoff] انتظار 3.5 ثوانٍ لتجديد كوتا الدقيقة ثم إعادة المحاولة...`
+                );
+                await sleep(3500);
+                continue;
+              }
               break;
             }
-            pcmParts.push(segPcm);
-            if (sIdx < segments.length - 1) pcmParts.push(pauseBuf);
           }
 
-          if (allSegmentsOk && pcmParts.length > 0) {
-            const wavBuf = ensureWavBuffer(Buffer.concat(pcmParts));
-            fs.writeFileSync(liveWavPath, wavBuf);
-            const finalPath = await applyRunnerCharacterTimbreAndCompanionSfx(
-              liveWavPath,
-              vp,
-              sceneIndex,
-              tmpDir
-            );
-            const durSec = await measureAudioDurationSec(finalPath, 14);
-            console.log(
-              `   🎤 [Gemini Live Native Audio] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر ${liveModel} بنبرة مصرية قاهرية طبيعية 100%!`
-            );
-            return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
+          if (!segPcm || segPcm.length <= 1000) {
+            allSegmentsOk = false;
+            break;
           }
-        } catch (liveErr) {
-          // If Live connection fails, try next live model or fallback
+          pcmParts.push(segPcm);
+          if (sIdx < segments.length - 1) pcmParts.push(pauseBuf);
         }
-      }
 
-      // 1b) Secondary Gemini Native Audio TTS (`gemini-3.8-flash-lite-tts` / `gemini-3.8-flash-tts`)
-      const ttsModels = ["gemini-3.8-flash-lite-tts", "gemini-3.8-flash-tts"];
-      const pureDialogueForTts = stripLeakedVoiceInstructionsRunner(dialogue);
-      for (const ttsModel of ttsModels) {
-        try {
-          const gemRes = await ai.models.generateContent({
-            model: ttsModel,
-            contents: [
-              {
-                role: "user",
-                parts: [{ text: pureDialogueForTts }],
-              },
-            ],
-            config: {
-              systemInstruction: {
-                parts: [
-                  {
-                    text: "You are a professional Egyptian cartoon voice actor for children speaking in natural colloquial Egyptian Cairene Arabic.",
-                  },
-                ],
-              },
-              responseModalities: [Modality.AUDIO],
-              speechConfig: {
-                voiceConfig: {
-                  prebuiltVoiceConfig: { voiceName: geminiVoice },
-                },
-              },
-            },
-          });
-          const b64 = gemRes.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
-          if (b64) {
-            const rawPcm = Buffer.from(b64, "base64");
-            if (rawPcm.length > 1000) {
-              const wavBuf = ensureWavBuffer(rawPcm);
-              fs.writeFileSync(liveWavPath, wavBuf);
-              const finalPath = await applyRunnerCharacterTimbreAndCompanionSfx(
-                liveWavPath,
-                vp,
-                sceneIndex,
-                tmpDir
-              );
-              const durSec = await measureAudioDurationSec(finalPath, 14);
-              console.log(
-                `   🎤 [Gemini Native Audio TTS] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر ${ttsModel} بنبرة مصرية طبيعية!`
-              );
-              return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
-            }
-          }
-        } catch (ttsErr) {
-          // If quota exhausted (429) or model temporarily unavailable, continue loop
+        if (allSegmentsOk && pcmParts.length > 0) {
+          const wavBuf = ensureWavBuffer(Buffer.concat(pcmParts));
+          fs.writeFileSync(liveWavPath, wavBuf);
+          const finalPath = await applyRunnerCharacterTimbreAndCompanionSfx(
+            liveWavPath,
+            vp,
+            sceneIndex,
+            tmpDir
+          );
+          const durSec = await measureAudioDurationSec(finalPath, 14);
+          console.log(
+            `   🎤 [Gemini Live Native Audio] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر ${liveModel} بنبرة مصرية قاهرية طبيعية 100%!`
+          );
+          return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
         }
+      } catch (liveErr) {
+        // If Live connection fails, proceed to resilient Egyptian phonetic fallback
       }
     } catch {}
   }
 
-  // 2) Emergency Fallback: MsEdgeTTS
+  // 2) Emergency Fallback: MsEdgeTTS with Phonetic Egyptian Dialect Enforcement
   const mp3Path = path.join(tmpDir, `edge_${sceneIndex}.mp3`);
+  const ttsDialogue = dialect === "egyptian" ? phoneticEgyptianForEdgeTts(dialogue) : dialogue;
 
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
       const tts = new MsEdgeTTS();
       await tts.setMetadata(edgeVoice, OUTPUT_FORMAT.AUDIO_24KHZ_96KBITRATE_MONO_MP3);
-      const { audioStream } = tts.toStream(dialogue, {
-        rate: vp.rate || "+2%",
+      const { audioStream } = tts.toStream(ttsDialogue, {
+        rate: vp.rate || "+3%",
         pitch: vp.pitch || (isFemale ? "+5Hz" : "+3Hz"),
       });
       const chunks = [];
@@ -1308,6 +1340,9 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
           tmpDir
         );
         const durSec = await measureAudioDurationSec(finalPath, 14);
+        console.log(
+          `   📢 [Phonetic Egyptian EdgeTTS Fallback] المشهد ${sceneIndex + 1}: تم توليد الصوت باللهجة المصرية العامية بنجاح!`
+        );
         return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
       }
     } catch (e) {
@@ -1551,6 +1586,9 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       dialogueArabic: sceneDialogue || scenes[i]?.dialogueArabic,
     };
     const synth = await synthesizeRawSpeechOnly(sc, i, scenes.length, tmpDir, dialect);
+    if (i < scenes.length - 1) {
+      await sleep(1200);
+    }
     const minSceneFloor = isShort ? 15 : 37;
     const naturalDur = Math.max(minSceneFloor, Math.ceil(synth.voiceDurSec + 1.0));
     preparedScenes.push({
@@ -3393,6 +3431,92 @@ const CHARACTER_HERO_PERSONAS = [
   },
 ];
 
+function formatHumanFriendlyAuthorName(rawName) {
+  let name = String(rawName || "").replace(/^@/, "").trim();
+  name = name.replace(/\d+$/g, "").replace(/[._-]+$/g, "").trim();
+
+  const lower = name.toLowerCase();
+  if (lower.startsWith("sherif") || lower.startsWith("shereef")) return "شريف";
+  if (lower.startsWith("ahmed") || lower.startsWith("ahmad")) return "أحمد";
+  if (lower.startsWith("mohamed") || lower.startsWith("muhammad") || lower.startsWith("mido")) return "محمد";
+  if (lower.startsWith("mahmoud")) return "محمود";
+  if (lower.startsWith("tarek") || lower.startsWith("tareq")) return "طارق";
+  if (lower.startsWith("youssef") || lower.startsWith("yousef")) return "يوسف";
+  if (lower.startsWith("nour") || lower.startsWith("noureen") || lower.startsWith("noreen")) return "نورين";
+  if (lower.startsWith("sara") || lower.startsWith("sarah")) return "سارة";
+  if (lower.startsWith("mariam") || lower.startsWith("maryam")) return "مريم";
+  if (lower.startsWith("karim") || lower.startsWith("kareem")) return "كريم";
+  if (lower.startsWith("omar") || lower.startsWith("omer")) return "عمر";
+  if (lower.startsWith("ali")) return "علي";
+  if (lower.startsWith("hassan") || lower.startsWith("hasan")) return "حسن";
+  if (lower.startsWith("hossam")) return "حسام";
+  if (lower.startsWith("mostafa") || lower.startsWith("mustafa")) return "مصطفى";
+  if (lower.startsWith("amr")) return "عمرو";
+  if (lower.startsWith("ziad") || lower.startsWith("zeyad")) return "زياد";
+  if (lower.startsWith("tamer")) return "تامر";
+  if (lower.startsWith("farida")) return "فريدة";
+  if (lower.startsWith("jana")) return "جنى";
+  if (lower.startsWith("malak")) return "ملك";
+  if (lower.startsWith("salma")) return "سلمى";
+  if (lower.startsWith("nora") || lower.startsWith("nouran")) return "نوران";
+
+  if (/[\u0600-\u06FF]/.test(name)) {
+    const parts = name.split(/\s+/).filter(Boolean);
+    if (parts.length > 0 && parts[0].length >= 2) {
+      if (
+        (parts[0] === "أم" ||
+          parts[0] === "ام" ||
+          parts[0] === "أبو" ||
+          parts[0] === "ابو" ||
+          parts[0] === "ماما" ||
+          parts[0] === "بابا" ||
+          parts[0] === "طنط" ||
+          parts[0] === "دكتورة" ||
+          parts[0] === "دكتور") &&
+        parts[1]
+      ) {
+        return `${parts[0]} ${parts[1]}`;
+      }
+      return parts[0];
+    }
+  }
+
+  const parts = name.split(/[\s._-]+/).filter(Boolean);
+  if (parts.length > 0 && parts[0].length >= 2) {
+    return parts[0].charAt(0).toUpperCase() + parts[0].slice(1).toLowerCase();
+  }
+
+  return "صديقنا الغالي";
+}
+
+function classifyCommentIntent(commentText) {
+  const text = String(commentText || "").trim();
+  const clean = text.replace(/[\uFE0F\u200D]/g, "");
+
+  const isOnlyEmojisOrHearts = /^[\p{Emoji}\s❤💖💕💓💗💙💚💛💜🧡🤎🖤🤍💌✨⭐🌟🎉🥳👏👍]+$/u.test(clean);
+  if (isOnlyEmojisOrHearts || clean.length <= 4) {
+    return "HEART_EMOJI";
+  }
+
+  const isAnswer =
+    /(الفرق|فروقات|الفروقات|لقيت|طلعت|الجواب|هو|هي|الأول|التاني|التالت|الأولى|الثانية|الثالثة|رقم\s*\d|عشان|لأن|الدرس|اتعلمنا|عرفت الحل|الحل هو|حل الفزورة)/i.test(
+      text
+    );
+  if (isAnswer) {
+    return "PUZZLE_ANSWER";
+  }
+
+  const mentionsCharacter =
+    /(بطروق|بطروقه|ام ملوكة|أم ملك|أم ملوكه|جدو|الفأر|فلفول|نورين|أرنوب|ارنوب|تامر|كركور|كارمن|سمسم|سدرة|الفراشة|ذياد|العصفورة|شريف|الصقر|ملك|لوليتا|تيتة|باندا|نوران|حكيمة|مرجان|شوشو|يوسف|بيبو|مريم|مشمشة)/i.test(
+      text
+    );
+  if (mentionsCharacter) {
+    return "CHARACTER_PRAISE";
+  }
+
+  return "GENERAL_GREETING";
+}
+
 function resolveHeroPersonaForReply(postTitle = "", heroNameHint = "") {
   const combined = `${postTitle} ${heroNameHint}`;
   for (const persona of CHARACTER_HERO_PERSONAS) {
@@ -3407,19 +3531,26 @@ function resolveHeroPersonaForReply(postTitle = "", heroNameHint = "") {
 }
 
 async function generateSmartCommentReply({ authorName, commentText, platform = "YouTube", postTitle = "", heroNameHint = "", geminiApiKey = "" }) {
-  const cleanAuthor = String(authorName || "صديقنا الغالي").replace(/[^\p{L}\p{N}\s_.-]/gu, "").trim().slice(0, 35) || "صديقنا الغالي";
+  const cleanAuthor = formatHumanFriendlyAuthorName(authorName);
   const cleanComment = String(commentText || "").trim().slice(0, 700);
   const persona = resolveHeroPersonaForReply(postTitle, heroNameHint);
   const key = String(geminiApiKey || process.env.GEMINI_API_KEY || "").trim();
-
-  // Strict Medal & Reply Intent Classification:
-  // Medals are strictly reserved for actual answers to puzzles/challenges/episodes.
-  // Regular greetings, praise ("Good", "Nice", "جميل", "شكرا", etc.) NEVER receive a medal!
-  const isAnswerOrChallenge = /(حل|إجابة|اجابة|عرفت|الفرق|فروقات|الفروقات|لقيت|طلعت|الجواب|هو|هي|الأول|التاني|التالت|الأولى|الثانية|الثالثة|رقم|عشان|لأن|الدرس|اتعلمنا|الموقف|السبب|الصح)/i.test(cleanComment);
+  const intent = classifyCommentIntent(cleanComment);
 
   if (key) {
     try {
       const ai = new GoogleGenAI({ apiKey: key });
+      let specificIntentGuideline = "";
+      if (intent === "HEART_EMOJI") {
+        specificIntentGuideline = `المتابع أرسل قلوباً أو إيموجي حب (${cleanComment}): بادله المحبة والامتنان بدفء شديد وبلهجة مصرية قاهرية أصيلة ولطيفة. ممنوع نهائياً ذكر أي وسام.`;
+      } else if (intent === "CHARACTER_PRAISE") {
+        specificIntentGuideline = `المتابع مدح الشخصية أو رفيقها بالاسم في تعليقه ("${cleanComment}"): اجعل ${persona.heroName} أو ${persona.compName} يشكره بحفاوة ويدعو له بلطف وروح كرتونية مبهجة للأطفال. ممنوع ذكر أي وسام.`;
+      } else if (intent === "PUZZLE_ANSWER") {
+        specificIntentGuideline = `المتابع قدم حلاً أو إجابة على لغز/تحدي الحلقة: اشكره واهدِه وسام الشطارة والذكاء 🏅 بالاسم تقديراً لنباهته.`;
+      } else {
+        specificIntentGuideline = `المتابع أرسل تحية أو إعجاب عام: رحب به بحفاوة وشجعه على متابعة مغامرة بكرة. ممنوع نهائياً ذكر أي وسام.`;
+      }
+
       const prompt = `أنت تتحدث باسم قناة وصفحة "نورين كيدز" للأطفال، وتتقمص شخصية ونبرة البطل المحبوب "${persona.heroName}" ورفيقه "${persona.compName}".
 المطلوب: كتابة رد دافئ وتفاعلي ومبهج باللهجة المصرية القاهرية الأصيلة على تعليق المتابع/الطفل على ${platform}.
 
@@ -3430,21 +3561,20 @@ async function generateSmartCommentReply({ authorName, commentText, platform = "
 - توجيهات الأسلوب: ${persona.stylePrompt}
 
 بيانات التعليق:
-- اسم المتابع: "${cleanAuthor}"
+- اسم المتابع المنادى به: "${cleanAuthor}"
 - تعليق المتابع: "${cleanComment}"
 - عنوان الحلقة/المنشور: "${String(postTitle || "مغامرة نورين كيدز").slice(0, 180)}"
 
+التوجيه الخاص بنوع التعليق:
+${specificIntentGuideline}
+
 قواعد الصياغة الإلزامية:
-1. الرد يمثل رسالة خاصة من ${persona.heroName} و${persona.compName} للطفل/المتابع عبر حساب القناة الرسمي.
-2. نادِ المتابع باسمه ("${cleanAuthor}") وشجعه بحرارة وبالمشاعر المتوافقة مع نبرة البطل.
-3. التزم تماماً بنبرة البطل (${persona.toneName}).
-4. طول الرد: سطر إلى سطرين كحد أقصى (سهل وممتع للأطفال والماميز).
-${isAnswerOrChallenge
-  ? `5. التعليق يتضمن حلاً أو إجابة على سؤال التحدي: اشكره بحرارة واهدِه وسام الشطارة والذكاء الرقمي 🏅 بالاسم تكريماً لتفوقه وتركيزه من ${persona.heroName} و${persona.compName}.`
-  : `5. التعليق مجرد تحية أو إعجاب عام أو كلمة تشجيع: رحب به بحفاوة واشكره على المتابعة، وممنوع نهائياً ذكر أي وسام (الوسام حصري فقط لمن يحل الفوازير والتحديات).`
-}
-6. ممنوع طلب بيانات شخصية، ممنوع معلومات خطرة، ولا تذكر أنك ذكاء اصطناعي إطلاقاً.
-7. اختم الرد بتوقيع خفيف لطيف من البطل ومرافقه.`;
+1. الرد يمثل رسالة خاصة ومباشرة من ${persona.heroName} و${persona.compName} للطفل/المتابع.
+2. خاطب المتابع باسمه الإنساني الدافئ ("${cleanAuthor}") بدون أي أرقام أو رموز.
+3. التزم تماماً بنبرة البطل (${persona.toneName}) واللهجة المصرية العامية الطبيعية.
+4. طول الرد: سطر إلى سطر ونصف كحد أقصى (سريع وخفيف ولطيف).
+5. ممنوع طلب بيانات شخصية، ولا تذكر أنك ذكاء اصطناعي إطلاقاً.
+6. اختم الرد بتوقيع خفيف لطيف من البطل ومرافقه.`;
 
       const resp = await ai.models.generateContent({ model: "gemini-3.8-flash", contents: prompt });
       const out = String(resp?.text || "").trim();
@@ -3452,11 +3582,47 @@ ${isAnswerOrChallenge
     } catch {}
   }
 
-  // Diverse Egyptian colloquial fallbacks (NO medals for general comments!)
-  if (isAnswerOrChallenge) {
-    return `يا أهلاً بيك يا ${cleanAuthor}! 🌟💖 مبروك وسام الشطارة والذكاء الرقمي من ${persona.heroName} و${persona.compName}! 🏅 ${persona.signature} إجابة شاطرة ومنورة عالم نورين كيدز!`;
+  // Highly Diverse Egyptian Colloquial Fallbacks (Zero repetition for same follower across multiple videos)
+  const randPick = (arr) => arr[Math.floor(Math.random() * arr.length) % arr.length];
+
+  if (intent === "HEART_EMOJI") {
+    const heartReplies = [
+      `تسلم وتسلم قلوبك الجميلة يا ${cleanAuthor}! ❤️💖 بنحبك أوي ومنورنا دايماً في عيلة نورين كيدز! ✨`,
+      `أحلى قلوب من أحلى ${cleanAuthor} في الدنيا! 🌟💖 ${persona.heroName} و${persona.compName} باعتين لك حضن كبير وفرحانين بيك!`,
+      `تسلم إيدك ويسعد قلبك يا ${cleanAuthor} يا سكر! 💕✨ قلوبك نورت مكاننا وفرحت كل أبطال نورين كيدز!`,
+      `منورنا دايماً بقلبك الطيب يا ${cleanAuthor}! 🌸❤️ استنانا في مغامرة بكرة الجديدة هتعجبك أوي!`,
+      `أغلى تحية وحب كبير من ${persona.heroName} و${persona.compName} لـ ${cleanAuthor}! 💖🎉 نورتنا يا غالي!`,
+    ];
+    return randPick(heartReplies);
   }
-  return `أهلاً بيك وبنورك يا ${cleanAuthor}! 🌟💖 ${persona.heroName} و${persona.compName} فرحانين بتعليقك الجميل وبيقولوا لك منور دايماً عيلتنا السحرية في نورين كيدز! 🎬✨`;
+
+  if (intent === "CHARACTER_PRAISE") {
+    const praiseReplies = [
+      `بنورك ونور عيونك يا ${cleanAuthor} يا سكر! 🌟✨ ${persona.heroName} و${persona.compName} فرحانين بكلامك جداً وبيقولولك ربنا يسعد قلبك الطيب دايماً!`,
+      `يا أهلاً بيك يا ${cleanAuthor} يا غالي! 💖 ${persona.heroName} بيعمل لك باي باي وفرحان بيك، و${persona.compName} بيضحك من قلبه ومنور بوجودك معانا!`,
+      `تسلم يا ${cleanAuthor} يا صاحب الذوق العالي! 👏✨ كلامك الحلو بيفرح أبطالنا ويشجعهم يقدموا أحلى مغامرات 3D مخصوص عشانك!`,
+      `حبيبنا يا ${cleanAuthor}! 🌸💕 ${persona.signature} خليك دايماً متابعنا ومنور عيلتنا!`,
+      `يا مية هلا بـ ${cleanAuthor}! 🎈✨ أبطال نورين كيدز كلهم بيحيوك وبيقولولك شكراً على كلامك العسل ده! 💖`,
+    ];
+    return randPick(praiseReplies);
+  }
+
+  if (intent === "PUZZLE_ANSWER") {
+    const answerReplies = [
+      `يا عبقري يا ${cleanAuthor}! 🏅🌟 مبروك عليك وسام الشطارة والتركيز العالي من ${persona.heroName} و${persona.compName}! شطارتك وسرعة بديهتك نورت التحدي!`,
+      `إجابة عبقرية ومظبوطة مية في المية يا ${cleanAuthor}! 🏆✨ وسام بطل الملاحظة من ${persona.heroName} و${persona.compName} رايح لك مخصوص بالاسم! 🏅`,
+      `شاطر شاطر يا ${cleanAuthor}! 🌟🏅 تركيزك ده يستاهل أحلى وسام وتكريم من عيلة نورين كيدز كلها! برافو عليك!`,
+    ];
+    return randPick(answerReplies);
+  }
+
+  const generalReplies = [
+    `نورتنا وشرفتنا يا ${cleanAuthor} يا غالي! 🌟💖 كلامك الطيب بيفرح قلوبنا ويخلي عيلتنا تكبر بيك يوم بعد يوم! 🎬✨`,
+    `يا مية أهلاً بـ ${cleanAuthor} في عالم نورين كيدز السحري! 🎉✨ أبطالنا فرحانين بوجودك دايماً، تفتكر مغامرة بكرة هيكون فيها إيه؟ 🤔💖`,
+    `أحلى وأجمل مسا على أحلى ${cleanAuthor}! 🌸👏 دايماً منورنا بكلامك الجميل ووجودك وسطنا بيسعدنا جداً! ❤️`,
+    `أهلاً بيك وبنورك يا ${cleanAuthor}! 🌟💖 ${persona.heroName} و${persona.compName} فرحانين بتعليقك وبيقولوا لك منور دايماً عيلتنا في نورين كيدز! 🎬✨`,
+  ];
+  return randPick(generalReplies);
 }
 
 async function scanAndAutoReplyYouTubeComments({ accessToken, geminiApiKey, schedule }) {
@@ -3744,10 +3910,9 @@ async function buildSmartHeroReplyForFacebookCommentRunner({
   heroName = "",
   companionName = "",
 }) {
-  const cleanAuthor = String(authorName || "صديقنا الغالي")
-    .replace(/[^\p{L}\p{N}\s_.-]/gu, "")
-    .trim()
-    .slice(0, 35);
+  const cleanAuthor = formatHumanFriendlyAuthorName(authorName);
+  const cleanComment = String(commentText || "").trim();
+  const intent = classifyCommentIntent(cleanComment);
 
   const detected = (!heroName || heroName === "أبطال نورين كيدز")
     ? detectHeroTeamForFacebookPost(postTitle, postDescription)
@@ -3765,15 +3930,29 @@ async function buildSmartHeroReplyForFacebookCommentRunner({
   if (geminiKey) {
     try {
       const ai = new GoogleGenAI({ apiKey: geminiKey });
+      let specificIntentGuideline = "";
+      if (intent === "HEART_EMOJI") {
+        specificIntentGuideline = `المتابع أرسل قلوباً أو إيموجي حب (${cleanComment}): بادله المحبة والامتنان بدفء شديد وبلهجة مصرية قاهرية أصيلة ولطيفة باسم (${targetHero}). ممنوع نهائياً ذكر أي وسام.`;
+      } else if (intent === "CHARACTER_PRAISE") {
+        specificIntentGuideline = `المتابع مدح الشخصية أو رفيقها في تعليقه ("${cleanComment}"): اجعل ${targetHero} يشكره بحفاوة ويدعو له بلطف وروح كرتونية مبهجة للأطفال. ممنوع ذكر أي وسام.`;
+      } else if (intent === "PUZZLE_ANSWER") {
+        specificIntentGuideline = `المتابع قدم حلاً أو إجابة على لغز/تحدي الحلقة: اشكره واهدِه وسام الشطارة والذكاء 🏅 بالاسم تقديراً لنباهته.`;
+      } else {
+        specificIntentGuideline = `المتابع أرسل تحية أو إعجاب عام: رحب به بحفاوة وشجعه على متابعة مغامرة بكرة. ممنوع نهائياً ذكر أي وسام.`;
+      }
+
       const prompt = `أنت تمثل صفحة "Noreen Kids" (نورين كيدز) الكرتونية 3D للأطفال على فيسبوك.
-المتابع "${cleanAuthor}" كتب هذا التعليق على فيديو/منشور بعنوان "${postTitle || "مغامرة كرتون نورين كيدز"}":
-"${commentText}"
+المتابع المنادى به "${cleanAuthor}" كتب هذا التعليق على فيديو/منشور بعنوان "${postTitle || "مغامرة كرتون نورين كيدز"}":
+"${cleanComment}"
+
+التوجيه الخاص بنوع التعليق:
+${specificIntentGuideline}
 
 قواعد الرد الإلزامية:
 1. أنت ترد حصرياً بصوت وروح بطل هذا الفيديو فقط: "${heroIntro}".
 2. ممنوع منعاً باتاً ذكر أي أبطال أو شخصيات أخرى ليس لها علاقة بهذا الفيديو إطلاقاً!
-3. اكتب رداً واحداً دافئاً وقصيراً ومبهجاً جداً باللهجة المصرية اللطيفة للأطفال (سطر إلى سطرين كحد أقصى).
-4. خاطب المتابع (${cleanAuthor}) أو اسم طفله إن وُجد في التعليق بحب وتشجيع دافئ باسم (${targetHero}).
+3. اكتب رداً واحداً دافئاً وقصيراً ومبهجاً جداً باللهجة المصرية العامية اللطيفة للأطفال (سطر إلى سطر ونصف كحد أقصى).
+4. خاطب المتابع باسمه الإنساني الدافئ (${cleanAuthor}) بحب وتشجيع باسم (${targetHero}).
 5. اختم بسؤال تفاعلي لطيف أو دعوة حماسية لحلقة بكرة.`;
 
       const resp = await ai.models.generateContent({
@@ -3785,6 +3964,34 @@ async function buildSmartHeroReplyForFacebookCommentRunner({
         return text;
       }
     } catch {}
+  }
+
+  const randPick = (arr) => arr[Math.floor(Math.random() * arr.length) % arr.length];
+
+  if (intent === "HEART_EMOJI") {
+    const heartReplies = [
+      `تسلم وتسلم قلوبك الحلوة يا ${cleanAuthor}! ❤️💖 ${targetHero} و${targetCompanion} بيبعتولك حب كبير ومنورنا دايماً في نورين كيدز! ✨`,
+      `أحلى قلوب من أحلى ${cleanAuthor} في الدنيا! 🌟💖 ${targetHero} فرحان جداً بيك وبيقولك بنحبك أوي!`,
+      `قلوبك نورت صفحتنا يا ${cleanAuthor} يا عسل! 💕✨ استنانا في مغامرة بكرة الجديدة هتفرحك أوي! 🎬❤️`,
+    ];
+    return randPick(heartReplies);
+  }
+
+  if (intent === "CHARACTER_PRAISE") {
+    const praiseReplies = [
+      `بنورك ونور عيونك يا ${cleanAuthor} يا سكر! 🌟✨ ${targetHero} و${targetCompanion} فرحانين بكلامك جداً وبيقولولك ربنا يسعد قلبك الطيب دايماً!`,
+      `تسلم يا ${cleanAuthor} يا صاحب الذوق العالي! 👏✨ كلامك الحلو بيفرح ${targetHero} ويشجعه يقدم أحلى مغامرات 3D مخصوص عشانك!`,
+      `يا أهلاً بيك يا ${cleanAuthor} يا غالي! 💖 ${targetHero} بيعمل لك باي باي وفرحان بيك ومنور دايماً عيلتنا في نورين كيدز! 🎬✨`,
+    ];
+    return randPick(praiseReplies);
+  }
+
+  if (intent === "PUZZLE_ANSWER") {
+    const answerReplies = [
+      `يا عبقري يا ${cleanAuthor}! 🏅🌟 مبروك عليك وسام الشطارة والتركيز العالي من ${targetHero} و${targetCompanion}! شطارتك نورت التحدي!`,
+      `إجابة ممتازة ومظبوطة مية في المية يا ${cleanAuthor}! 🏆✨ وسام بطل الملاحظة من ${targetHero} رايح لك مخصوص بالاسم! 🏅`,
+    ];
+    return randPick(answerReplies);
   }
 
   const warmReplies = isGeneric
@@ -3799,7 +4006,7 @@ async function buildSmartHeroReplyForFacebookCommentRunner({
         `أحلى وأجمل تحية من ${targetHero} و${targetCompanion} لـ ${cleanAuthor}! 🌟👏 تعليقكم بيفرح قلوبنا ويشجعنا نقدملكم كل جديد وممتع كل يوم! 🔔❤️`,
       ];
 
-  return warmReplies[Math.floor(Math.random() * warmReplies.length) % warmReplies.length];
+  return randPick(warmReplies);
 }
 
 function generateDynamicPuzzleConfig(seed = Date.now()) {
