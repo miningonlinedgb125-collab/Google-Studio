@@ -45,7 +45,7 @@ jobs:
           else
             echo "✅ FFmpeg & ffprobe pre-installed: $(ffmpeg -version | head -n 1)"
           fi
-          npm install --no-save @google/genai msedge-tts
+          npm install --no-save --legacy-peer-deps @google/genai msedge-tts
 
       - name: 4. Run Pre-Upload Short Pipeline Unit Test Gate (Duration 60-80s, Egyptian Dialogue, Zero External Images)
         run: |
