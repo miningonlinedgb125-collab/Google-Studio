@@ -1249,7 +1249,7 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
       });
       const isEgyptian = dialect !== "fusha";
       const liveWavPath = path.join(tmpDir, `gemini_live_${sceneIndex}.wav`);
-      const liveModels = ["gemini-2.5-flash-native-audio-preview-12-2025", "gemini-3.8-live"];
+      const liveModels = ["gemini-2.5-flash-native-audio-preview-12-2025"];
 
       for (const liveModel of liveModels) {
         try {
@@ -1306,8 +1306,17 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
               tmpDir
             );
             const durSec = await measureAudioDurationSec(finalPath, 14);
+            const cleanWordCount = dialogue.split(/\s+/).filter(Boolean).length;
+            const minExpectedSec = Math.max(3.5, Math.min(14.0, cleanWordCount * 0.18));
+            if (durSec < minExpectedSec) {
+              console.warn(
+                `   ⚠️ [Audio Integrity Gate] المشهد ${sceneIndex + 1}: الصوت المولّد عبر ${liveModel} قصير ومبتور (${durSec.toFixed(1)}s لـ ${cleanWordCount} كلمة)، تم رفض المقطع والتحويل الفوري لمحرك Gemini Native Audio TTS!`
+              );
+              allSegmentsOk = false;
+              break;
+            }
             console.log(
-              `   🎤 [Gemini Live Native Audio] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر ${liveModel} بنبرة مصرية قاهرية طبيعية 100%!`
+              `   🎤 [Gemini Live Native Audio] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر ${liveModel} بنبرة مصرية قاهرية طبيعية 100%! (${durSec.toFixed(1)}s)`
             );
             return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
           }
@@ -1352,10 +1361,14 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
                   tmpDir
                 );
                 const durSec = await measureAudioDurationSec(finalPath, 14);
-                console.log(
-                  `   🎤 [Gemini Native Audio TTS] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر ${ttsModel} بنبرة مصرية قاهرية طبيعية 100%!`
-                );
-                return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
+                const cleanWordCount = dialogue.split(/\s+/).filter(Boolean).length;
+                const minExpectedSec = Math.max(3.5, Math.min(14.0, cleanWordCount * 0.18));
+                if (durSec >= minExpectedSec) {
+                  console.log(
+                    `   🎤 [Gemini Native Audio TTS] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر ${ttsModel} بنبرة مصرية قاهرية طبيعية 100%! (${durSec.toFixed(1)}s)`
+                  );
+                  return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
+                }
               }
             }
           } catch (ttsErr) {
@@ -1646,8 +1659,8 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     if (i < scenes.length - 1) {
       await sleep(1200);
     }
-    const minSceneFloor = isShort ? 15 : 37;
-    const naturalDur = Math.max(minSceneFloor, Math.ceil(synth.voiceDurSec + 1.0));
+    const minSceneFloor = isShort ? 14 : 28;
+    const naturalDur = Math.max(minSceneFloor, Math.ceil(synth.voiceDurSec + 0.65));
     preparedScenes.push({
       scene: sc,
       audioPath: synth.audioPath,
@@ -1664,9 +1677,15 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
   if (totalDur < minTotalSec) {
     let deficit = minTotalSec - totalDur;
     let idx = 0;
-    while (deficit > 0) {
-      preparedScenes[idx % preparedScenes.length].durationSec += 1;
-      deficit--;
+    let guard = 0;
+    while (deficit > 0 && guard < 250) {
+      guard++;
+      const s = preparedScenes[idx % preparedScenes.length];
+      const maxAllowed = Math.ceil(s.voiceDurSec + 1.25);
+      if (s.durationSec < maxAllowed) {
+        s.durationSec += 1;
+        deficit--;
+      }
       idx++;
     }
   } else if (totalDur > maxTotalSec) {
@@ -2937,19 +2956,42 @@ async function generateFreshAiEpisodeForRunner({
         .slice(0, 20)
         .map((t) => `- ${t}`)
         .join("\n");
-      const prompt = `أنت المخرج الإبداعي والمؤلف لقناة الأطفال ثلاثية الأبعاد "Noreen Kids".
-قم بابتكار وتوليد حلقة كرتون 3D كاملة جديدة كلياً ومبتكرة (${
+      const prompt = `أنت المخرج الإبداعي والمؤلف المتميز لقناة الأطفال كرتون ثلاثي الأبعاد "Noreen Kids".
+قم بابتكار وتأليف حلقة كرتونية شيقة ومحبوكة درامياً بعناية (${
         isShort
-          ? "فيديو قصير YouTube Shorts مدته 68 ثانية من 4 مشاهد مترابطة، كل مشهد 22 إلى 28 كلمة"
-          : "فيلم كرتون طويل مدته 312 ثانية من 8 مشاهد مترابطة، كل مشهد 85 إلى 95 كلمة بالحوار العامي المصري القاهري المتصل الممتع دون أي صمت"
-      }) باللهجة المصرية القاهرية الطبيعية بنسبة 100% للأطفال في كل المشاهد بدون أي تشكيل فصحى.
+          ? "فيديو قصير YouTube Shorts من 4 مشاهد مترابطة بحبكة سريعة وقوية، كل مشهد 25 إلى 32 كلمة"
+          : "حلقة كرتون طويلة كاملة من 8 مشاهد متسلسلة بحبكة درامية واضحة وعميقة للأطفال، كل مشهد 95 إلى 110 كلمات بالحوار المصري القاهري المتصل الممتع دون أي صمت"
+      }) باللهجة المصرية القاهرية الطبيعية للأطفال بنسبة 100% بدون أي تشكيل فصحى.
+
 البطل الرئيسي: "${team.mainCharacterName}" (الأداة: ${team.heroProp}).
 المرافق: "${team.companionName}" (الأداة: ${team.compProp}).
-فكرة القصة ومجالها: ابتكر مغامرة ممتعة وقيمة تربوية أصيلة مستوحاة من: "${topic}".
-قواعد صارمة للهجة المصرية في كامل الحلقة بدون أي استثناء:
-1. ممنوع نهائياً أي ألفاظ فصحى أو تراكيب مسرحية جافة (مثل: لقد، يجب أن، علينا، دعونا، ما الذي، تلك، ذلك، تطور عجيب، لغز علمي، الحدث، ونجمع الخيوط). الحوار في كامل مشاهد الحلقة الثمانية يجب أن يكون عامي مصري دافئ وعفوي ومرح للأطفال (يا خبر، بص شوف، يا ترى إيه الحكاية، يلا بينا سوا، إيه اللخبطة دي، ولا يهمك إحنا شطار وهنحلها، فكرة تجنن).
+الموضوع والدرس: مغامرة أصيلة وممتعة مستوحاة من: "${topic}".
+
+قواعد الحبكة الدرامية وبناء القصة (مهم جداً وممنوع العبارات المبهمة أو الكلمات المرصوصة دون معنى):
+يجب أن يفهم الطفل والمشاهد بوضوح تام: ما هي المشكلة المحددة؟ ماذا حدث؟ كيف تم الحل؟ وما هو المغزى؟
+${
+  isShort
+    ? `توزيع حبكة المشاهد الأربعة:
+- المشهد 1: افتتاحية وموقف ممتع مع البطل والمرافق، يظهر فيه هدف محدد أو تحدٍ ملموس يحتاج للحل.
+- المشهد 2: اكتشاف المشكلة الحقيقية بالتفصيل والمشاعر الناتجة عنها وأثرها على الأصدقاء.
+- المشهد 3: التعاون واستخدام الفكرة الذكية وحل المشكلة عملياً خطوة بخطوة بالجدعنة والنشاط.
+- المشهد 4: الفرحة بالنجاح وخاتمة دافئة توضح العبرة للطفل وسؤال تفاعلي شيق للاشتراك في القناة بالتعليقات.`
+    : `توزيع حبكة المشاهد الثمانية بالتسلسل الدرامي الإلزامي:
+- المشهد 1 (الهدف والانطلاق): البطل في يومه العادي مع صديقه، تحديد هدف واضح أو مهمة يومية ملموسة يحبها الأطفال.
+- المشهد 2 (المشكلة الحقيقية والحدث الملموس): حدوث موقف محدد وواضح جداً (مثل: خلاف حول المشاركة في لعبة، كسر أداة بسبب التسرع، إهمال في ترتيب الواجب، خوف من تجربة شيء جديد، تنمر، أو حيوان صغير محتاج مساعدة) وتوضيح تفاصيل ما حدث بدقة وليس بكلمات عامة.
+- المشهد 3 (المحاولة الأولى الخاطئة): المرافق أو الأصدقاء يحاولون التصرف بعصبية أو استعجال أو تصرف غير مناسب، مما يبين للأطفال أن هذه الطريقة لا تنفع.
+- المشهد 4 (نقطة التحول والحكمة): البطل يتدخل بهدوء ويوضح الفكرة الأخلاقية الحكيمة (الاعتذار، الصبر، المشاركة، الأمانة، الكلام الطيب، الاستماع للغير).
+- المشهد 5 (الخطة والتنفيذ المشترك): البطل والمرافق يستعينان بأدواتهما ويتعاونان خطوة بخطوة لتنفيذ الحل الصحيح ببهجة وتشجيع.
+- المشهد 6 (الانتصار وزوال المشكلة): حل المشكلة بالكامل، ورؤية النتيجة الطيبة بعيون الأبطال والأصدقاء وسعادتهم بالصلح والإنجاز.
+- المشهد 7 (العبرة الحياتية للطفل): رسالة تربوية مباشرة ومحبوبة تشرح للطفل كيف يطبق هذا الموقف في البيت مع إخوته وفي المدرسة مع أصحابه.
+- المشهد 8 (الخاتمة والسؤال التفاعلي): ختام مبهج ومحب، مع طرح سؤال ذكي ودقيق عن تفاصيل ما حدث في القصة لدعوة الأطفال لكتابة أسمائهم وإجاباتهم في التعليقات.`
+}
+
+قواعد صارمة للهجة المصرية في كامل الحلقة:
+1. ممنوع نهائياً أي ألفاظ فصحى أو تراكيب مسرحية جافة (مثل: لقد، يجب أن، علينا، دعونا، ما الذي، تلك، ذلك، الحدث، نجمع الخيوط). الحوار في كامل المشاهد يجب أن يكون عامي مصري قاهري أصيل ودافئ وعفوي وممتع للأطفال (يا خبر، بص شوف، يا ترى إيه الحكاية، يلا بينا سوا، متقلقش خالص إحنا شطار وهنحلها، فكرة تجنن، إيه الجمال ده).
 2. في المشهد الثامن، لا تكرر أبداً كلمة "مغامرة" مرتين متتاليتين، واجعل المشهد ختاماً مشجعاً وسؤالاً تفاعلياً للأبطال في التعليقات.
-3. مهم جداً: طول كل مشهد في الفيلم الطويل يجب أن يكون بدقة 85 إلى 95 كلمة حتى يملأ التعليق الصوتي مدة المشهد بالكامل ولا يترك لحظات سكوت بين المشاهد.
+3. مهم جداً: طول كل مشهد في الفيلم الطويل يجب أن يكون 95 إلى 110 كلمات حتى يملأ التعليق الصوتي مدة المشهد بالكامل دون أي صمت أو فجوات.
+
 مهم جداً: تجنب تماماً أي تشابه أو تكرار مع هذه العناوين التي تم نشرها سابقاً:
 ${recentTitlesList}
 
@@ -2958,7 +3000,7 @@ ${recentTitlesList}
   "title": "عنوان القصة الجديد والمشوق بحيث يكون كامل المعنى وبطول 35 إلى 50 حرفاً دون أن ينقطع المعنى وبدون كلمة Noreen Kids وبدون هاشتاج",
   "moralLesson": "الدرس المستفاد من الحلقة",
   "scenes": [
-    { "sceneNumber": 1, "title": "عنوان المشهد", "dialogueArabic": "الحوار الكامل باللهجة المصرية القاهرية الغنية (85 إلى 95 كلمة)" }
+    { "sceneNumber": 1, "title": "عنوان المشهد", "dialogueArabic": "الحوار الكامل باللهجة المصرية القاهرية الغنية (المشهد الطويل: 95 إلى 110 كلمات)" }
   ]
 }`;
       const response = await ai.models.generateContent({
@@ -4374,9 +4416,19 @@ async function publishDailyInteractive3DPhotoPostForRunner({
   // Select team: prioritize specificHeroName if pre-video trigger, otherwise use Fair Rotation
   let pick = null;
   if (specificHeroName) {
-    pick = RUNNER_CHARACTER_TEAMS.find((team) =>
-      team.mainCharacterName.includes(specificHeroName) ||
-      specificHeroName.includes(team.mainCharacterName)
+    const cleanSpecHero = String(specificHeroName).trim();
+    const cleanSpecComp = String(specificCompanionName || "").trim();
+    pick = RUNNER_CHARACTER_TEAMS.find(
+      (team) =>
+        team.mainCharacterName === cleanSpecHero &&
+        (!cleanSpecComp || team.companionName === cleanSpecComp)
+    ) || RUNNER_CHARACTER_TEAMS.find(
+      (team) => team.mainCharacterName === cleanSpecHero
+    ) || RUNNER_CHARACTER_TEAMS.find(
+      (team) =>
+        cleanSpecHero === "أم ملك"
+          ? team.mainCharacterName.includes("أم ملك")
+          : team.mainCharacterName.startsWith(cleanSpecHero)
     );
   }
   const interactiveRotIdx = Number(fbSchedule?.interactiveHeroRotationIndex ?? 0);
