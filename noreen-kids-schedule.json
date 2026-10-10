@@ -228,14 +228,15 @@
       "id": "gh-run-38086814010",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-11 (00:22 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-11 (00:39 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1791666917473-2k96",
       "longEpisodeId": "ep-gh-long-1791666974753-jz02",
       "shortEpisodeTitle": "Noreen Kids: تعاون ذياد والعصفورة النشيطة لمساعدة جيران الواحة | مغامرات ذياد والعصفورة الفرفوشة",
-      "longEpisodeTitle": "درس المعلمة أم ملك والبطريق المرح عن آداب الحوار",
+      "longEpisodeTitle": "Noreen Kids: درس المعلمة أم ملك والبطريق المرح عن آداب الحوار | مغامرات أم ملك والبطريق المرح",
       "shortTitle": "Noreen Kids: تعاون ذياد والعصفورة النشيطة لمساعدة جيران الواحة | مغامرات ذياد والعصفورة الفرفوشة",
-      "longTitle": "درس المعلمة أم ملك والبطريق المرح عن آداب الحوار",
+      "longTitle": "Noreen Kids: درس المعلمة أم ملك والبطريق المرح عن آداب الحوار | مغامرات أم ملك والبطريق المرح",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -243,9 +244,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "KDy3V1Ca6aY",
+      "youtubeLongVideoId": "n7i-nEmpNuU",
       "facebookShortVideoId": "2143035646588140",
+      "facebookLongVideoId": "1466746048655761",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2143035646588140",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1466746048655761",
       "facebookShortTitle": "Noreen Kids | تعاون ذياد والعصفورة النشيطة لمساعدة جيران الواحة - مغامرة ذياد والعصفورة الفرفوشة",
+      "facebookLongTitle": "Noreen Kids | درس المعلمة أم ملك والبطريق المرح عن آداب الحوار - مغامرة أم ملك والبطريق المرح",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -253,16 +258,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 76,
-        "fileSizeBytes": 9206497,
-        "inspectedAt": "00:22"
+        "durationSec": 308,
+        "fileSizeBytes": 32484884,
+        "inspectedAt": "00:39"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2174,7 +2179,7 @@
         "speakerName": "أم ملك",
         "voiceName": "Kore",
         "dialect": "egyptian",
-        "dialogueArabic": "جدع يا البطريق المرح والله، تسلم إيدك وكويس إنك نبهتني بدري أوي أوي قبل ما الأمور تتعقد! بصوا كده يا أصحابي الحلوين، الشطار في عيلة نورين كيدز عمرهم ما بيخافوا ولا يتلخبطوا، دايما بنهدا ونرتب أفكارنا واحدة واحدة بالراحة ومن غير أي خوف خالص! الحكاية دي عايزة مننا أمانة وصبر وجدعنة علشان نرجع كل حاجة زي ما كانت وأحسن كمان! أنا هستخدم كتاب الحكايات الذهبي والسبورة التفاعلية المنورة دلوقتي حالا علشان نعمل أول خطوة صح في المكان، يلا شجعونا وقولوا يا رب، وإيدينا في إيد بعض وهنعمل كل حاجة صح ومضبوطة دايما!",
+        "dialogueArabic": "جدع يا البطريق المرح والله، تسلم إيدك وكويس إنك نبهتني بدري أوي أوي أوي أوي قبل ما الأمور تتعقد! بصوا كده يا أصحابي الحلوين، الشطار في عيلة نورين كيدز عمرهم ما بيخافوا ولا يتلخبطوا، دايما بنهدا ونرتب أفكارنا واحدة واحدة بالراحة ومن غير أي خوف خالص! الحكاية دي عايزة مننا أمانة وصبر وجدعنة علشان نرجع كل حاجة زي ما كانت وأحسن كمان! أنا هستخدم كتاب الحكايات الذهبي والسبورة التفاعلية المنورة دلوقتي حالا علشان نعمل أول خطوة صح في المكان، يلا شجعونا وقولوا يا رب، وإيدينا في إيد بعض وهنعمل كل حاجة صح ومضبوطة دايما!",
         "durationSec": 39
       },
       {
@@ -2633,7 +2638,7 @@
   "firstCommentEnabled": true,
   "autoCommentResponderEnabled": true,
   "facebookAutoCommentResponderEnabled": true,
-  "lastAutoCommentScanAtCairo": "١١‏/١٠‏/٢٠٢٦، ١٢:٢٢:٥٦ ص",
+  "lastAutoCommentScanAtCairo": "١١‏/١٠‏/٢٠٢٦، ١٢:٣٩:٠٠ ص",
   "lastCloudRunReport": {
     "id": "gh-run-38027566167",
     "uploadMode": "daily_schedule",
@@ -2691,7 +2696,7 @@
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880"
   ],
-  "lastFacebookAutoCommentScanAtCairo": "١١‏/١٠‏/٢٠٢٦، ١٢:٢٠:٢٥ ص",
+  "lastFacebookAutoCommentScanAtCairo": "١١‏/١٠‏/٢٠٢٦، ١٢:٣٨:٥٩ ص",
   "heroFairRotationIndex": 11,
   "interactiveHeroRotationIndex": 1,
   "heroRoleSwapCycle": true
