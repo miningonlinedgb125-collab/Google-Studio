@@ -37,6 +37,16 @@
     {
       "topic": "تامر وكركور وسر خيمة التسامح في واحة النخيل",
       "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم"
+    },
+    {
+      "topic": "تدوير المخلفات الورقية وابتكار أجمل كراسات الرسم الملونة",
+      "mainCharacterName": "كارمن المخترعة الصغيرة",
+      "companionName": "سمسم السنجاب الطائر"
+    },
+    {
+      "topic": "تامر وكركور وسر خيمة التسامح في واحة النخيل",
+      "mainCharacterName": "تامر فارس الواحة",
       "companionName": "كركور الببغاء الحكيم",
       "timestampIso": "2026-10-10T05:30:01.315Z"
     },
@@ -199,28 +209,6 @@
       "topic": "مغامرة الغواصة الذهبية لإنقاذ الحوت الصغير في مملكة المرجان",
       "mainCharacterName": "شوشو القبطان الصغير",
       "companionName": "مرجان الدلفين المرح"
-    },
-    {
-      "topic": "تجميع شظايا قمر الكريستال وإنارة سماء المجرة من جديد",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف",
-      "timestampIso": "2026-10-06T15:31:35.121Z"
-    },
-    {
-      "topic": "مغامرة الغواصة الذهبية لإنقاذ الحوت الصغير في مملكة المرجان",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح",
-      "timestampIso": "2026-10-06T15:31:35.121Z"
-    },
-    {
-      "topic": "بناء مسار القطار المغناطيسي الصغير لنقل ألعاب الأطفال",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "لغز آثار الأقدام الصغيرة في جبل الثلج ومساعدة",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي"
     }
   ],
   "scheduledHistory": [
@@ -2622,16 +2610,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "١٠‏/١٠‏/٢٠٢٦، ٨:٤٢:٣٨ ص",
   "lastCloudRunReport": {
-    "id": "gh-run-37825178592",
+    "id": "gh-run-38027566167",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-08 (21:48 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1791484471973-khss",
-    "longEpisodeId": "ep-gh-long-1791484482938-6sf8",
-    "shortEpisodeTitle": "Noreen Kids: حكاية الدب باندا الذي تعلّم آداب المائدة والأكل باليد | مغامرات تيتة والدب باندا",
-    "longEpisodeTitle": "Noreen Kids: الضمادة السحرية وحكاية التغلب على الخوف من الحقنة | مغامرات الطبيبة نورين وأرنوب",
-    "shortTitle": "Noreen Kids: حكاية الدب باندا الذي تعلّم آداب المائدة والأكل باليد | مغامرات تيتة والدب باندا",
-    "longTitle": "Noreen Kids: الضمادة السحرية وحكاية التغلب على الخوف من الحقنة | مغامرات الطبيبة نورين وأرنوب",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-10 (08:42 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1791610199981-s428",
+    "longEpisodeId": "ep-gh-long-1791610201315-xgq2",
+    "shortEpisodeTitle": "Noreen Kids: تامر وكركور وسر خيمة التسامح في واحة النخيل | مغامرات تامر وكركور",
+    "longEpisodeTitle": "Noreen Kids: تدوير المخلفات الورقية وابتكار أجمل كراسات الرسم الملونة | مغامرات كارمن وسمسم",
+    "shortTitle": "Noreen Kids: تامر وكركور وسر خيمة التسامح في واحة النخيل | مغامرات تامر وكركور",
+    "longTitle": "Noreen Kids: تدوير المخلفات الورقية وابتكار أجمل كراسات الرسم الملونة | مغامرات كارمن وسمسم",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2640,14 +2628,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "gUVKKwd2MK4",
-    "youtubeLongVideoId": "7CTBDdrLkF8",
-    "facebookShortVideoId": "2335635417191666",
-    "facebookLongVideoId": "4390428041206862",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2335635417191666",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/4390428041206862",
-    "facebookShortTitle": "Noreen Kids | حكاية الدب باندا الذي تعلّم آداب المائدة والأكل باليد - مغامرة تيتة والدب باندا",
-    "facebookLongTitle": "Noreen Kids | الضمادة السحرية وحكاية التغلب على الخوف من الحقنة - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
+    "youtubeShortVideoId": "CIeBAbuAdoI",
+    "youtubeLongVideoId": "rVqVOHoRCaM",
+    "facebookShortVideoId": "1625087292556310",
+    "facebookLongVideoId": "28177246681977043",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1625087292556310",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/28177246681977043",
+    "facebookShortTitle": "Noreen Kids | تامر وكركور وسر خيمة التسامح في واحة النخيل - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
+    "facebookLongTitle": "Noreen Kids | تدوير المخلفات الورقية وابتكار أجمل كراسات الرسم الملونة - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الط",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2662,9 +2650,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 317,
-      "fileSizeBytes": 31960596,
-      "inspectedAt": "21:48"
+      "durationSec": 346,
+      "fileSizeBytes": 45917143,
+      "inspectedAt": "08:42"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2673,7 +2661,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-08T18:48:31.991Z"
+    "reportedAtIso": "2026-10-10T05:42:41.536Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880"
