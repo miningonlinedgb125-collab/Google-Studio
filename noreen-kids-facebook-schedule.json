@@ -2472,6 +2472,16 @@
     {
       "topic": "سدرة والفراشة وسر لعبة الاستغماية في المزرعة",
       "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "ملك ولوليتا وسر شنطة الإسعاف وأرقام النجدة",
+      "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "سدرة والفراشة وسر لعبة الاستغماية في المزرعة",
+      "mainCharacterName": "سدرة الصغنونة",
       "companionName": "الفراشة الملونة",
       "timestampIso": "2026-10-10T15:29:07.403Z"
     },
@@ -2634,43 +2644,21 @@
       "topic": "خيمة التسامح والصلح بين الأصدقاء في واحة النخيل",
       "mainCharacterName": "تامر فارس الواحة",
       "companionName": "كركور الببغاء الحكيم"
-    },
-    {
-      "topic": "اختراع آلة جمع الثمار الذكية لمساعدة حيوانات البستان",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر",
-      "timestampIso": "2026-10-07T05:31:01.075Z"
-    },
-    {
-      "topic": "خيمة التسامح والصلح بين الأصدقاء في واحة النخيل",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم",
-      "timestampIso": "2026-10-07T05:31:01.075Z"
-    },
-    {
-      "topic": "تجميع شظايا قمر الكريستال وإنارة سماء المجرة من جديد",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف"
-    },
-    {
-      "topic": "مغامرة الغواصة الذهبية لإنقاذ الحوت الصغير في مملكة المرجان",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-10 · 08:42 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-10",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-37961208861",
+    "id": "gh-run-38063590504",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-09 (20:00 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1791564327651-a6t4",
-    "longEpisodeId": "ep-gh-long-1791564438567-b3bq",
-    "shortEpisodeTitle": "Noreen Kids: إنقاذ نجم البحر المنور من بين الصخور المرجانية بالرفق | مغامرات شوشو ومرجان",
-    "longEpisodeTitle": "Noreen Kids: بدلة جنى الذكية وسر العوم في فضاء النجوم | مغامرات جنى وبلبل",
-    "shortTitle": "Noreen Kids: إنقاذ نجم البحر المنور من بين الصخور المرجانية بالرفق | مغامرات شوشو ومرجان",
-    "longTitle": "Noreen Kids: بدلة جنى الذكية وسر العوم في فضاء النجوم | مغامرات جنى وبلبل",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-10 (18:43 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1791646106740-5o94",
+    "longEpisodeId": "ep-gh-long-1791646147403-ojuv",
+    "shortEpisodeTitle": "Noreen Kids: سدرة والفراشة وسر لعبة الاستغماية في المزرعة | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "longEpisodeTitle": "Noreen Kids: ملك ولوليتا وسر شنطة الإسعاف وأرقام النجدة | مغامرات الطبيبة ملك والقطة لوليتا",
+    "shortTitle": "Noreen Kids: سدرة والفراشة وسر لعبة الاستغماية في المزرعة | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "longTitle": "Noreen Kids: ملك ولوليتا وسر شنطة الإسعاف وأرقام النجدة | مغامرات الطبيبة ملك والقطة لوليتا",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2679,14 +2667,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "MaYub3NFZRA",
-    "youtubeLongVideoId": "GJN6wY802G0",
-    "facebookShortVideoId": "1457388612973624",
-    "facebookLongVideoId": "1234862465527358",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1457388612973624",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1234862465527358",
-    "facebookShortTitle": "Noreen Kids | إنقاذ نجم البحر المنور من بين الصخور المرجانية بالرفق - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
-    "facebookLongTitle": "Noreen Kids | بدلة جنى الذكية وسر العوم في فضاء النجوم - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
+    "youtubeShortVideoId": "Rz76nnKIEAI",
+    "youtubeLongVideoId": "RV3tyzcxtFY",
+    "facebookShortVideoId": "2293109101488946",
+    "facebookLongVideoId": "1165594399747379",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2293109101488946",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1165594399747379",
+    "facebookShortTitle": "Noreen Kids | سدرة والفراشة وسر لعبة الاستغماية في المزرعة - مغامرة سدرة الصغنونة والفراشة الملونة",
+    "facebookLongTitle": "Noreen Kids | ملك ولوليتا وسر شنطة الإسعاف وأرقام النجدة - مغامرة ملك والقطة لوليتا",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2701,9 +2689,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 400,
-      "fileSizeBytes": 48832184,
-      "inspectedAt": "20:00"
+      "durationSec": 391,
+      "fileSizeBytes": 39782973,
+      "inspectedAt": "18:43"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2712,7 +2700,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-09T17:00:30.044Z"
+    "reportedAtIso": "2026-10-10T15:43:52.171Z"
   },
   "heroFairRotationIndex": 9,
   "interactiveHeroRotationIndex": 5,
