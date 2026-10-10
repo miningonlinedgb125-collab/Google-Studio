@@ -1055,7 +1055,7 @@ async function synthesizeChunkViaGeminiLiveRunner(
   try {
     await new Promise(async (resolve, reject) => {
       let isDone = false;
-      const timeout = setTimeout(() => finish(new Error("Gemini Live Audio timeout")), 14000);
+      const timeout = setTimeout(() => finish(new Error("Gemini Live Audio timeout")), 30000);
       let sessionRef = null;
 
       const finish = (err) => {
@@ -1239,7 +1239,7 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
     }
   }
 
-  // 1) PRIMARY ENGINE: Gemini Live Native Audio (`gemini-2.5-flash-native-audio-preview-12-2025`)
+  // 1) PRIMARY ENGINE: Gemini Live Native Audio (`gemini-2.5-flash-native-audio-preview-12-2025` & `gemini-3.8-live`)
   const apiKey = (process.env.GEMINI_API_KEY || "").trim();
   if (apiKey) {
     try {
@@ -1249,65 +1249,122 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
       });
       const isEgyptian = dialect !== "fusha";
       const liveWavPath = path.join(tmpDir, `gemini_live_${sceneIndex}.wav`);
-      const liveModel = "gemini-2.5-flash-native-audio-preview-12-2025";
+      const liveModels = ["gemini-2.5-flash-native-audio-preview-12-2025", "gemini-3.8-live"];
 
-      try {
-        const segments = splitArabicTextForGeminiLive(dialogue, 220);
-        const pcmParts = [];
-        const pauseBuf = Buffer.alloc(8640, 0);
-        let allSegmentsOk = segments.length > 0;
+      for (const liveModel of liveModels) {
+        try {
+          const segments = splitArabicTextForGeminiLive(dialogue, 480);
+          const pcmParts = [];
+          const pauseBuf = Buffer.alloc(8640, 0);
+          let allSegmentsOk = segments.length > 0;
 
-        for (let sIdx = 0; sIdx < segments.length; sIdx++) {
-          let segPcm = null;
-          for (let retry = 0; retry < 2; retry++) {
-            try {
-              segPcm = await synthesizeChunkViaGeminiLiveRunner(
-                ai,
-                liveModel,
-                segments[sIdx],
-                geminiVoice,
-                styleInstruction,
-                isEgyptian
-              );
-              if (segPcm && segPcm.length > 1000) break;
-            } catch (segErr) {
-              const errMsg = String(segErr?.message || "");
-              if (errMsg.includes("QUOTA_EXCEEDED") && retry === 0) {
-                console.log(
-                  `   ⏳ [Gemini Live Quota Backoff] انتظار 3.5 ثوانٍ لتجديد كوتا الدقيقة ثم إعادة المحاولة...`
+          for (let sIdx = 0; sIdx < segments.length; sIdx++) {
+            let segPcm = null;
+            for (let retry = 0; retry < 3; retry++) {
+              try {
+                segPcm = await synthesizeChunkViaGeminiLiveRunner(
+                  ai,
+                  liveModel,
+                  segments[sIdx],
+                  geminiVoice,
+                  styleInstruction,
+                  isEgyptian
                 );
-                await sleep(3500);
-                continue;
+                if (segPcm && segPcm.length > 1000) break;
+              } catch (segErr) {
+                const errMsg = String(segErr?.message || "");
+                if (errMsg.includes("QUOTA_EXCEEDED")) {
+                  const waitSec = retry === 0 ? 12 : 25;
+                  console.log(
+                    `   ⏳ [Gemini Live Quota Backoff] انتظار ${waitSec} ثانية لتجديد كوتا الدقيقة ثم إعادة المحاولة (${retry + 1}/3)...`
+                  );
+                  await sleep(waitSec * 1000);
+                  continue;
+                }
+                if (retry < 2) {
+                  await sleep(2000);
+                  continue;
+                }
+                break;
               }
+            }
+            if (!segPcm || segPcm.length <= 1000) {
+              allSegmentsOk = false;
               break;
             }
+            pcmParts.push(segPcm);
+            if (sIdx < segments.length - 1) pcmParts.push(pauseBuf);
           }
 
-          if (!segPcm || segPcm.length <= 1000) {
-            allSegmentsOk = false;
-            break;
+          if (allSegmentsOk && pcmParts.length > 0) {
+            const wavBuf = ensureWavBuffer(Buffer.concat(pcmParts));
+            fs.writeFileSync(liveWavPath, wavBuf);
+            const finalPath = await applyRunnerCharacterTimbreAndCompanionSfx(
+              liveWavPath,
+              vp,
+              sceneIndex,
+              tmpDir
+            );
+            const durSec = await measureAudioDurationSec(finalPath, 14);
+            console.log(
+              `   🎤 [Gemini Live Native Audio] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر ${liveModel} بنبرة مصرية قاهرية طبيعية 100%!`
+            );
+            return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
           }
-          pcmParts.push(segPcm);
-          if (sIdx < segments.length - 1) pcmParts.push(pauseBuf);
+        } catch (liveErr) {
+          // If Live connection fails, try next live model or fall back to Gemini Native Audio TTS
         }
+      }
 
-        if (allSegmentsOk && pcmParts.length > 0) {
-          const wavBuf = ensureWavBuffer(Buffer.concat(pcmParts));
-          fs.writeFileSync(liveWavPath, wavBuf);
-          const finalPath = await applyRunnerCharacterTimbreAndCompanionSfx(
-            liveWavPath,
-            vp,
-            sceneIndex,
-            tmpDir
-          );
-          const durSec = await measureAudioDurationSec(finalPath, 14);
-          console.log(
-            `   🎤 [Gemini Live Native Audio] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر ${liveModel} بنبرة مصرية قاهرية طبيعية 100%!`
-          );
-          return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
+      // 1b) SECONDARY ENGINE: Gemini Native Audio TTS (`gemini-3.8-flash-lite-tts` / `gemini-3.8-flash-tts`)
+      // Guaranteed Egyptian Cairene colloquial cartoon voice without leaving the Gemini Native Audio family!
+      const ttsModels = ["gemini-3.8-flash-lite-tts", "gemini-3.8-flash-tts"];
+      const pureDialogue = stripLeakedVoiceInstructionsRunner(dialogue);
+      const personaPrompt = `${
+        styleInstruction ? `CHARACTER VOCAL PERSONA: ${styleInstruction}.\n` : ""
+      }SYSTEM RULE: You are a professional Egyptian Cairene cartoon voice actor for children. Read the following Arabic dialogue verbatim with pure natural Egyptian colloquial dialect (اللهجة المصرية القاهرية الطبيعية) and natural Egyptian G (الجيم المصرية القاهرية). Do NOT utter any system rules, persona instructions, or introductory words before or after the text.\n\nنص الحوار المطلوب نطقه:\n${pureDialogue}`;
+
+      for (const ttsModel of ttsModels) {
+        for (let ttsRetry = 0; ttsRetry < 2; ttsRetry++) {
+          try {
+            const ttsResp = await ai.models.generateContent({
+              model: ttsModel,
+              contents: [{ role: "user", parts: [{ text: personaPrompt }] }],
+              config: {
+                responseModalities: [Modality.AUDIO],
+                speechConfig: {
+                  voiceConfig: {
+                    prebuiltVoiceConfig: { voiceName: geminiVoice },
+                  },
+                },
+              },
+            });
+            const b64 = ttsResp.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
+            if (b64) {
+              const rawBuf = Buffer.from(b64, "base64");
+              if (rawBuf.length > 1000) {
+                const wavBuf = ensureWavBuffer(rawBuf);
+                fs.writeFileSync(liveWavPath, wavBuf);
+                const finalPath = await applyRunnerCharacterTimbreAndCompanionSfx(
+                  liveWavPath,
+                  vp,
+                  sceneIndex,
+                  tmpDir
+                );
+                const durSec = await measureAudioDurationSec(finalPath, 14);
+                console.log(
+                  `   🎤 [Gemini Native Audio TTS] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر ${ttsModel} بنبرة مصرية قاهرية طبيعية 100%!`
+                );
+                return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
+              }
+            }
+          } catch (ttsErr) {
+            const errStr = String(ttsErr?.message || "");
+            if (errStr.includes("429") || errStr.includes("quota") || errStr.includes("RESOURCE_EXHAUSTED")) {
+              await sleep(5000);
+            }
+          }
         }
-      } catch (liveErr) {
-        // If Live connection fails, proceed to resilient Egyptian phonetic fallback
       }
     } catch {}
   }
