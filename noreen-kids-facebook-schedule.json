@@ -2508,6 +2508,16 @@
     {
       "topic": "تعاون ذياد والعصفورة النشيطة لمساعدة جيران الواحة",
       "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة"
+    },
+    {
+      "topic": "درس المعلمة أم ملك والبطريق المرح عن آداب الحوار",
+      "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح"
+    },
+    {
+      "topic": "تعاون ذياد والعصفورة النشيطة لمساعدة جيران الواحة",
+      "mainCharacterName": "ذياد",
       "companionName": "العصفورة الفرفوشة",
       "timestampIso": "2026-10-10T21:16:14.753Z"
     },
@@ -2670,43 +2680,21 @@
       "topic": "مغامرة المكعبات السحرية وبناء أعلى برج ملون",
       "mainCharacterName": "سدرة الصغنونة",
       "companionName": "الفراشة الملونة"
-    },
-    {
-      "topic": "مهمة إنقاذ القنفذ الصغير الذي علق في سياج الحديقة",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "timestampIso": "2026-10-07T15:45:24.921Z"
-    },
-    {
-      "topic": "مغامرة المكعبات السحرية وبناء أعلى برج ملون",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "timestampIso": "2026-10-07T15:45:24.921Z"
-    },
-    {
-      "topic": "اختراع آلة جمع الثمار الذكية لمساعدة حيوانات البستان",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر"
-    },
-    {
-      "topic": "خيمة التسامح والصلح بين الأصدقاء في واحة النخيل",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-10 · 18:43 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-38063590504",
+    "id": "gh-run-38086814010",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-10 (18:43 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1791646106740-5o94",
-    "longEpisodeId": "ep-gh-long-1791646147403-ojuv",
-    "shortEpisodeTitle": "Noreen Kids: سدرة والفراشة وسر لعبة الاستغماية في المزرعة | مغامرات سدرة الصغنونة والفراشة الملونة",
-    "longEpisodeTitle": "Noreen Kids: ملك ولوليتا وسر شنطة الإسعاف وأرقام النجدة | مغامرات الطبيبة ملك والقطة لوليتا",
-    "shortTitle": "Noreen Kids: سدرة والفراشة وسر لعبة الاستغماية في المزرعة | مغامرات سدرة الصغنونة والفراشة الملونة",
-    "longTitle": "Noreen Kids: ملك ولوليتا وسر شنطة الإسعاف وأرقام النجدة | مغامرات الطبيبة ملك والقطة لوليتا",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-11 (00:39 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1791666917473-2k96",
+    "longEpisodeId": "ep-gh-long-1791666974753-jz02",
+    "shortEpisodeTitle": "Noreen Kids: تعاون ذياد والعصفورة النشيطة لمساعدة جيران الواحة | مغامرات ذياد والعصفورة الفرفوشة",
+    "longEpisodeTitle": "Noreen Kids: درس المعلمة أم ملك والبطريق المرح عن آداب الحوار | مغامرات أم ملك والبطريق المرح",
+    "shortTitle": "Noreen Kids: تعاون ذياد والعصفورة النشيطة لمساعدة جيران الواحة | مغامرات ذياد والعصفورة الفرفوشة",
+    "longTitle": "Noreen Kids: درس المعلمة أم ملك والبطريق المرح عن آداب الحوار | مغامرات أم ملك والبطريق المرح",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2715,14 +2703,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "Rz76nnKIEAI",
-    "youtubeLongVideoId": "RV3tyzcxtFY",
-    "facebookShortVideoId": "2293109101488946",
-    "facebookLongVideoId": "1165594399747379",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2293109101488946",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1165594399747379",
-    "facebookShortTitle": "Noreen Kids | سدرة والفراشة وسر لعبة الاستغماية في المزرعة - مغامرة سدرة الصغنونة والفراشة الملونة",
-    "facebookLongTitle": "Noreen Kids | ملك ولوليتا وسر شنطة الإسعاف وأرقام النجدة - مغامرة ملك والقطة لوليتا",
+    "youtubeShortVideoId": "KDy3V1Ca6aY",
+    "youtubeLongVideoId": "n7i-nEmpNuU",
+    "facebookShortVideoId": "2143035646588140",
+    "facebookLongVideoId": "1466746048655761",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2143035646588140",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1466746048655761",
+    "facebookShortTitle": "Noreen Kids | تعاون ذياد والعصفورة النشيطة لمساعدة جيران الواحة - مغامرة ذياد والعصفورة الفرفوشة",
+    "facebookLongTitle": "Noreen Kids | درس المعلمة أم ملك والبطريق المرح عن آداب الحوار - مغامرة أم ملك والبطريق المرح",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2737,9 +2725,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 391,
-      "fileSizeBytes": 39782973,
-      "inspectedAt": "18:43"
+      "durationSec": 308,
+      "fileSizeBytes": 32484884,
+      "inspectedAt": "00:39"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2748,7 +2736,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-10T15:43:52.171Z"
+    "reportedAtIso": "2026-10-10T21:39:03.095Z"
   },
   "heroFairRotationIndex": 11,
   "interactiveHeroRotationIndex": 5,
