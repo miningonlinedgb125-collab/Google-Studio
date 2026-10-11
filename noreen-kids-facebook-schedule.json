@@ -2526,6 +2526,16 @@
     {
       "topic": "إصلاح نافورة الموسيقى الكريستالية بالتفكير",
       "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "الطبيبة نورين وإنقاذ السلحفاة وسر النظافة",
+      "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "إصلاح نافورة الموسيقى الكريستالية بالتفكير",
+      "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش",
       "timestampIso": "2026-10-11T15:29:10.180Z"
     },
@@ -2690,43 +2700,21 @@
       "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-10-08T18:34:42.938Z"
-    },
-    {
-      "topic": "لعبة الميزان العادل وتعلّم أهمية الصدق في البيع",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "حدوتة النحلة النشيطة والدرس الذي تعلمه الفأر المشاكس",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "لعبة الميزان العادل وتعلّم أهمية الصدق في البيع",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-10-08T15:32:38.669Z"
-    },
-    {
-      "topic": "حدوتة النحلة النشيطة والدرس الذي تعلمه الفأر المشاكس",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-10-08T15:32:38.669Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-11 · 09:49 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-38086814010",
+    "id": "gh-run-38151294081",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-11 (00:39 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1791666917473-2k96",
-    "longEpisodeId": "ep-gh-long-1791666974753-jz02",
-    "shortEpisodeTitle": "Noreen Kids: تعاون ذياد والعصفورة النشيطة لمساعدة جيران الواحة | مغامرات ذياد والعصفورة الفرفوشة",
-    "longEpisodeTitle": "Noreen Kids: درس المعلمة أم ملك والبطريق المرح عن آداب الحوار | مغامرات أم ملك والبطريق المرح",
-    "shortTitle": "Noreen Kids: تعاون ذياد والعصفورة النشيطة لمساعدة جيران الواحة | مغامرات ذياد والعصفورة الفرفوشة",
-    "longTitle": "Noreen Kids: درس المعلمة أم ملك والبطريق المرح عن آداب الحوار | مغامرات أم ملك والبطريق المرح",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-11 (18:44 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1791732491946-d6ve",
+    "longEpisodeId": "ep-gh-long-1791732550180-jmu6",
+    "shortEpisodeTitle": "Noreen Kids: إصلاح نافورة الموسيقى الكريستالية بالتفكير | مغامرات المهندسة نوران والنمر الفرفوش",
+    "longEpisodeTitle": "Noreen Kids: الطبيبة نورين وإنقاذ السلحفاة وسر النظافة | مغامرات الطبيبة نورين وأرنوب",
+    "shortTitle": "Noreen Kids: إصلاح نافورة الموسيقى الكريستالية بالتفكير | مغامرات المهندسة نوران والنمر الفرفوش",
+    "longTitle": "Noreen Kids: الطبيبة نورين وإنقاذ السلحفاة وسر النظافة | مغامرات الطبيبة نورين وأرنوب",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2735,14 +2723,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "KDy3V1Ca6aY",
-    "youtubeLongVideoId": "n7i-nEmpNuU",
-    "facebookShortVideoId": "2143035646588140",
-    "facebookLongVideoId": "1466746048655761",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2143035646588140",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1466746048655761",
-    "facebookShortTitle": "Noreen Kids | تعاون ذياد والعصفورة النشيطة لمساعدة جيران الواحة - مغامرة ذياد والعصفورة الفرفوشة",
-    "facebookLongTitle": "Noreen Kids | درس المعلمة أم ملك والبطريق المرح عن آداب الحوار - مغامرة أم ملك والبطريق المرح",
+    "youtubeShortVideoId": "wVSGy1lGeVw",
+    "youtubeLongVideoId": "DLUDNhk1ens",
+    "facebookShortVideoId": "4211874048950137",
+    "facebookLongVideoId": "1730026154728032",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/4211874048950137",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1730026154728032",
+    "facebookShortTitle": "Noreen Kids | إصلاح نافورة الموسيقى الكريستالية بالتفكير - مغامرة المهندسة نوران والنمر الفرفوش",
+    "facebookLongTitle": "Noreen Kids | الطبيبة نورين وإنقاذ السلحفاة وسر النظافة - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2757,9 +2745,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 308,
-      "fileSizeBytes": 32484884,
-      "inspectedAt": "00:39"
+      "durationSec": 305,
+      "fileSizeBytes": 33155973,
+      "inspectedAt": "18:44"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2768,7 +2756,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-10T21:39:03.095Z"
+    "reportedAtIso": "2026-10-11T15:44:20.760Z"
   },
   "heroFairRotationIndex": 2,
   "interactiveHeroRotationIndex": 5,
