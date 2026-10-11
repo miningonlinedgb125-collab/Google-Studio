@@ -2525,6 +2525,16 @@
     {
       "topic": "الطبيبة نورين وسر صندوق الألعاب في غابة النور",
       "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "تيتة والدب باندا وسر سلة الفواكه المنورة",
+      "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا"
+    },
+    {
+      "topic": "الطبيبة نورين وسر صندوق الألعاب في غابة النور",
+      "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-10-11T06:36:39.464Z"
     },
@@ -2689,38 +2699,6 @@
       "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس",
       "timestampIso": "2026-10-08T15:32:38.669Z"
-    },
-    {
-      "topic": "تنظيم حقيبة المدرسة في المساء والاستيقاظ بنشاط وسرور",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح"
-    },
-    {
-      "topic": "شهامة ذياد وأمانته في إرجاع المحفظة المفقودة لصاحبها",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة"
-    },
-    {
-      "topic": "تنظيم حقيبة المدرسة في المساء والاستيقاظ بنشاط وسرور",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "timestampIso": "2026-10-08T14:25:55.994Z"
-    },
-    {
-      "topic": "شهامة ذياد وأمانته في إرجاع المحفظة المفقودة لصاحبها",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة",
-      "timestampIso": "2026-10-08T14:25:55.994Z"
-    },
-    {
-      "topic": "مهمة إنقاذ القنفذ الصغير الذي علق في سياج الحديقة",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا"
-    },
-    {
-      "topic": "مغامرة المكعبات السحرية وبناء أعلى برج ملون",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-11 · 00:39 بتوقيت مصر",
