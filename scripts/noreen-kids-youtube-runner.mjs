@@ -1659,8 +1659,10 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     if (i < scenes.length - 1) {
       await sleep(1200);
     }
-    const minSceneFloor = isShort ? 14 : 28;
-    const naturalDur = Math.max(minSceneFloor, Math.ceil(synth.voiceDurSec + 0.65));
+    const minSceneFloor = isShort
+      ? Math.max(9, Math.ceil(synth.voiceDurSec + 0.65))
+      : Math.max(26, Math.ceil(synth.voiceDurSec + 0.65));
+    const naturalDur = minSceneFloor;
     preparedScenes.push({
       scene: sc,
       audioPath: synth.audioPath,
@@ -1669,23 +1671,17 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     });
   }
 
-  // Enforce total duration bounds: Short strictly [60..80s] (target >= 64s), Long strictly [300..600s] (target >= 308s)
-  const minTotalSec = isShort ? 64 : 308;
+  // Enforce total duration bounds: Short strictly [60..80s] (target >= 64s), Long strictly [300..600s] (target >= 305s)
+  const minTotalSec = isShort ? 64 : 305;
   const maxTotalSec = isShort ? 79 : 590;
   let totalDur = preparedScenes.reduce((acc, s) => acc + s.durationSec, 0);
 
   if (totalDur < minTotalSec) {
     let deficit = minTotalSec - totalDur;
     let idx = 0;
-    let guard = 0;
-    while (deficit > 0 && guard < 250) {
-      guard++;
-      const s = preparedScenes[idx % preparedScenes.length];
-      const maxAllowed = Math.ceil(s.voiceDurSec + 1.25);
-      if (s.durationSec < maxAllowed) {
-        s.durationSec += 1;
-        deficit--;
-      }
+    while (deficit > 0) {
+      preparedScenes[idx % preparedScenes.length].durationSec += 1;
+      deficit--;
       idx++;
     }
   } else if (totalDur > maxTotalSec) {
@@ -2959,8 +2955,8 @@ async function generateFreshAiEpisodeForRunner({
       const prompt = `أنت المخرج الإبداعي والمؤلف المتميز لقناة الأطفال كرتون ثلاثي الأبعاد "Noreen Kids".
 قم بابتكار وتأليف حلقة كرتونية شيقة ومحبوكة درامياً بعناية (${
         isShort
-          ? "فيديو قصير YouTube Shorts من 4 مشاهد مترابطة بحبكة سريعة وقوية، كل مشهد 25 إلى 32 كلمة"
-          : "حلقة كرتون طويلة كاملة من 8 مشاهد متسلسلة بحبكة درامية واضحة وعميقة للأطفال، كل مشهد 95 إلى 110 كلمات بالحوار المصري القاهري المتصل الممتع دون أي صمت"
+          ? "فيديو قصير YouTube Shorts من 4 مشاهد مترابطة بحبكة سريعة وقوية، كل مشهد 38 إلى 46 كلمة بالحوار الكرتوني الممتع"
+          : "حلقة كرتون طويلة كاملة من 8 مشاهد متسلسلة بحبكة درامية واضحة وعميقة للأطفال، كل مشهد 115 إلى 130 كلمة بالحوار المصري القاهري المتصل الممتع دون أي صمت أو انقطاع"
       }) باللهجة المصرية القاهرية الطبيعية للأطفال بنسبة 100% بدون أي تشكيل فصحى.
 
 البطل الرئيسي: "${team.mainCharacterName}" (الأداة: ${team.heroProp}).
@@ -2990,7 +2986,7 @@ ${
 قواعد صارمة للهجة المصرية في كامل الحلقة:
 1. ممنوع نهائياً أي ألفاظ فصحى أو تراكيب مسرحية جافة (مثل: لقد، يجب أن، علينا، دعونا، ما الذي، تلك، ذلك، الحدث، نجمع الخيوط). الحوار في كامل المشاهد يجب أن يكون عامي مصري قاهري أصيل ودافئ وعفوي وممتع للأطفال (يا خبر، بص شوف، يا ترى إيه الحكاية، يلا بينا سوا، متقلقش خالص إحنا شطار وهنحلها، فكرة تجنن، إيه الجمال ده).
 2. في المشهد الثامن، لا تكرر أبداً كلمة "مغامرة" مرتين متتاليتين، واجعل المشهد ختاماً مشجعاً وسؤالاً تفاعلياً للأبطال في التعليقات.
-3. مهم جداً: طول كل مشهد في الفيلم الطويل يجب أن يكون 95 إلى 110 كلمات حتى يملأ التعليق الصوتي مدة المشهد بالكامل دون أي صمت أو فجوات.
+3. مهم جداً: طول كل مشهد في الفيلم الطويل يجب أن يكون بدقة 115 إلى 130 كلمة، وفي الفيديو القصير 38 إلى 46 كلمة، حتى يملأ التعليق الصوتي مدة المشهد بالكامل ولا يترك أي لحظات سكوت بين المشاهد.
 
 مهم جداً: تجنب تماماً أي تشابه أو تكرار مع هذه العناوين التي تم نشرها سابقاً:
 ${recentTitlesList}
@@ -3000,7 +2996,7 @@ ${recentTitlesList}
   "title": "عنوان القصة الجديد والمشوق بحيث يكون كامل المعنى وبطول 35 إلى 50 حرفاً دون أن ينقطع المعنى وبدون كلمة Noreen Kids وبدون هاشتاج",
   "moralLesson": "الدرس المستفاد من الحلقة",
   "scenes": [
-    { "sceneNumber": 1, "title": "عنوان المشهد", "dialogueArabic": "الحوار الكامل باللهجة المصرية القاهرية الغنية (المشهد الطويل: 95 إلى 110 كلمات)" }
+    { "sceneNumber": 1, "title": "عنوان المشهد", "dialogueArabic": "الحوار الكامل باللهجة المصرية القاهرية الغنية (المشهد الطويل: 115 إلى 130 كلمة، المشهد القصير: 38 إلى 46 كلمة)" }
   ]
 }`;
       const response = await ai.models.generateContent({
