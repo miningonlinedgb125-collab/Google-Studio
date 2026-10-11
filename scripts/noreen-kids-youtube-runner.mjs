@@ -4959,77 +4959,7 @@ async function scanAndAutoReplyFacebookCommentsForRunner({
 }
 
 
-async function autoRepairDanglingUploadedTitles({
-  accessToken,
-  facebookToken,
-  pageId,
-}) {
-  try {
-    const targets = [
-      {
-        ytId: "o7-jgoZeGPM",
-        fbId: "1643556020458277",
-        cleanYtTitle: "Noreen Kids: شهامة ذياد وأمانته في إرجاع المحفظة المفقودة لصاحبها | مغامرات ذياد والعصفورة الفرفوشة",
-        cleanFbTitle: "Noreen Kids | شهامة ذياد وأمانته في إرجاع المحفظة المفقودة لصاحبها - مغامرة ذياد والعصفورة الفرفوشة",
-      },
-    ];
 
-    for (const t of targets) {
-      if (accessToken && t.ytId) {
-        try {
-          const getRes = await fetch(
-            `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${t.ytId}`,
-            { headers: { Authorization: `Bearer ${accessToken}` } }
-          );
-          const getData = await getRes.json().catch(() => ({}));
-          const item = getData?.items?.[0];
-          if (item?.snippet?.title && item.snippet.title.includes("ورفض")) {
-            item.snippet.title = t.cleanYtTitle;
-            const putRes = await fetch(
-              "https://www.googleapis.com/youtube/v3/videos?part=snippet",
-              {
-                method: "PUT",
-                headers: {
-                  Authorization: `Bearer ${accessToken}`,
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  id: t.ytId,
-                  snippet: item.snippet,
-                }),
-              }
-            );
-            if (putRes.ok) {
-              console.log(`✅ [Auto-Repair Title] Updated YouTube video ${t.ytId} title to: "${t.cleanYtTitle}"`);
-            }
-          }
-        } catch (e) {
-          console.warn("   [Title Repair Warning] Could not update YouTube title:", e?.message || e);
-        }
-      }
-
-      if (facebookToken && pageId && t.fbId) {
-        try {
-          const fbUrl = `https://graph.facebook.com/v21.0/${t.fbId}`;
-          const postRes = await fetch(fbUrl, {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${facebookToken}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ title: t.cleanFbTitle }),
-          });
-          const postData = await postRes.json().catch(() => ({}));
-          if (postRes.ok && postData?.success !== false) {
-            console.log(`✅ [Auto-Repair Title] Updated Facebook video ${t.fbId} title to: "${t.cleanFbTitle}"`);
-          }
-        } catch (e) {
-          console.warn("   [Title Repair Warning] Could not update Facebook title:", e?.message || e);
-        }
-      }
-    }
-  } catch {}
-}
 
 async function main() {
   const publishTarget = String(process.env.PUBLISH_TARGET || "unified").toLowerCase();
@@ -5358,15 +5288,6 @@ async function main() {
       "❌ خطأ: لا تتوفر مفاتيح رفع ليوتيوب أو فيسبوك! يرجى حفظ المفاتيح في لوحة التحكم ومزامنة GitHub Actions."
     );
     process.exit(1);
-  }
-
-  // Live Auto-Repair: ensure any recently uploaded videos with truncated titles are updated
-  if (accessToken || facebookPageAccessToken) {
-    await autoRepairDanglingUploadedTitles({
-      accessToken,
-      facebookToken: facebookPageAccessToken,
-      pageId: facebookPageId,
-    });
   }
 
   // Collect all previously generated/uploaded episodes & live YouTube channel videos
