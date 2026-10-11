@@ -1307,10 +1307,11 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
             );
             const durSec = await measureAudioDurationSec(finalPath, 14);
             const cleanWordCount = dialogue.split(/\s+/).filter(Boolean).length;
-            const minExpectedSec = Math.max(3.5, Math.min(14.0, cleanWordCount * 0.18));
+            // Realistic cartoon speech speed is ~2.8 to 3.2 words/sec. Any audio faster than ~3.8 words/sec is incomplete/truncated.
+            const minExpectedSec = Math.max(3.5, cleanWordCount * 0.25);
             if (durSec < minExpectedSec) {
               console.warn(
-                `   ⚠️ [Audio Integrity Gate] المشهد ${sceneIndex + 1}: الصوت المولّد عبر ${liveModel} قصير ومبتور (${durSec.toFixed(1)}s لـ ${cleanWordCount} كلمة)، تم رفض المقطع والتحويل الفوري لمحرك Gemini Native Audio TTS!`
+                `   ⚠️ [Audio Integrity Gate] المشهد ${sceneIndex + 1}: الصوت المولّد عبر ${liveModel} قصير ومبتور (${durSec.toFixed(1)}s لـ ${cleanWordCount} كلمة - المطلوب على الأقل ${minExpectedSec.toFixed(1)}s)، تم رفض المقطع والتحويل الفوري لمحرك Gemini Native Audio TTS المكتمل!`
               );
               allSegmentsOk = false;
               break;
@@ -1362,7 +1363,7 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
                 );
                 const durSec = await measureAudioDurationSec(finalPath, 14);
                 const cleanWordCount = dialogue.split(/\s+/).filter(Boolean).length;
-                const minExpectedSec = Math.max(3.5, Math.min(14.0, cleanWordCount * 0.18));
+                const minExpectedSec = Math.max(3.5, cleanWordCount * 0.20);
                 if (durSec >= minExpectedSec) {
                   console.log(
                     `   🎤 [Gemini Native Audio TTS] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر ${ttsModel} بنبرة مصرية قاهرية طبيعية 100%! (${durSec.toFixed(1)}s)`
@@ -2786,6 +2787,8 @@ function buildSmartEpisodeForRunner({
       selectedTemplates.length
     ).validatedText;
     const isHeroTurn = idx % 2 === 0;
+    const assignedSpeaker = isHeroTurn ? effectiveMainName : effectiveCompName;
+    const assignedVoice = isHeroTurn ? heroVoice : compVoice;
     return {
       id: `${isShort ? "sc-sh" : "sc-lg"}-${idx + 1}`,
       sceneNumber: idx + 1,
@@ -2794,8 +2797,8 @@ function buildSmartEpisodeForRunner({
       cameraMotion: camCycle[idx % camCycle.length],
       lightingMood: lightCycle[idx % lightCycle.length],
       particleEffect: particleCycle[idx % particleCycle.length],
-      speakerName: isHeroTurn ? effectiveMainName : effectiveCompName,
-      voiceName: isHeroTurn ? heroVoice : compVoice,
+      speakerName: assignedSpeaker,
+      voiceName: assignedVoice,
       dialect: dialectMode,
       dialogueArabic: validated,
       durationSec: perSceneSec,
@@ -2963,25 +2966,26 @@ async function generateFreshAiEpisodeForRunner({
 المرافق: "${team.companionName}" (الأداة: ${team.compProp}).
 الموضوع والدرس: مغامرة أصيلة وممتعة مستوحاة من: "${topic}".
 
-قواعد الحبكة الدرامية وبناء القصة (مهم جداً وممنوع العبارات المبهمة أو الكلمات المرصوصة دون معنى):
-يجب أن يفهم الطفل والمشاهد بوضوح تام: ما هي المشكلة المحددة؟ ماذا حدث؟ كيف تم الحل؟ وما هو المغزى؟
+قواعد كتابة الحوار والسيناريو الكرتوني الصارمة (Direct Character-to-Character Dialogue Only):
+1. ممنوع منعاً باتاً أسلوب الراوي أو سرد قصة الغائب (ممنوع نهائياً: "قال أرنوب"، "حطيت إيدي على كتفه"، "جري مسك فوطة"، "سوسو هزت راسها")!
+2. الحوار في كل مشهد هو كلام تمثيلي كرتوني مباشر صادر من فم الشخصية المتحدثة فقط وتخاطب به صديقها وجهاً لوجه بضمير المتكلم ("أنا"، "إحنا") وتناديه باسمه ("يا ${team.companionName}" أو "يا ${team.mainCharacterName}").
+3. توزيع المتحدثين الإلزامي بين المشاهد (كل مشهد له متحدثه المستقل ولا يتكلم بلسان شخص آخر أبداً):
 ${
   isShort
-    ? `توزيع حبكة المشاهد الأربعة:
-- المشهد 1: افتتاحية وموقف ممتع مع البطل والمرافق، يظهر فيه هدف محدد أو تحدٍ ملموس يحتاج للحل.
-- المشهد 2: اكتشاف المشكلة الحقيقية بالتفصيل والمشاعر الناتجة عنها وأثرها على الأصدقاء.
-- المشهد 3: التعاون واستخدام الفكرة الذكية وحل المشكلة عملياً خطوة بخطوة بالجدعنة والنشاط.
-- المشهد 4: الفرحة بالنجاح وخاتمة دافئة توضح العبرة للطفل وسؤال تفاعلي شيق للاشتراك في القناة بالتعليقات.`
-    : `توزيع حبكة المشاهد الثمانية بالتسلسل الدرامي الإلزامي:
-- المشهد 1 (الهدف والانطلاق): البطل في يومه العادي مع صديقه، تحديد هدف واضح أو مهمة يومية ملموسة يحبها الأطفال.
-- المشهد 2 (المشكلة الحقيقية والحدث الملموس): حدوث موقف محدد وواضح جداً (مثل: خلاف حول المشاركة في لعبة، كسر أداة بسبب التسرع، إهمال في ترتيب الواجب، خوف من تجربة شيء جديد، تنمر، أو حيوان صغير محتاج مساعدة) وتوضيح تفاصيل ما حدث بدقة وليس بكلمات عامة.
-- المشهد 3 (المحاولة الأولى الخاطئة): المرافق أو الأصدقاء يحاولون التصرف بعصبية أو استعجال أو تصرف غير مناسب، مما يبين للأطفال أن هذه الطريقة لا تنفع.
-- المشهد 4 (نقطة التحول والحكمة): البطل يتدخل بهدوء ويوضح الفكرة الأخلاقية الحكيمة (الاعتذار، الصبر، المشاركة، الأمانة، الكلام الطيب، الاستماع للغير).
-- المشهد 5 (الخطة والتنفيذ المشترك): البطل والمرافق يستعينان بأدواتهما ويتعاونان خطوة بخطوة لتنفيذ الحل الصحيح ببهجة وتشجيع.
-- المشهد 6 (الانتصار وزوال المشكلة): حل المشكلة بالكامل، ورؤية النتيجة الطيبة بعيون الأبطال والأصدقاء وسعادتهم بالصلح والإنجاز.
-- المشهد 7 (العبرة الحياتية للطفل): رسالة تربوية مباشرة ومحبوبة تشرح للطفل كيف يطبق هذا الموقف في البيت مع إخوته وفي المدرسة مع أصحابه.
-- المشهد 8 (الخاتمة والسؤال التفاعلي): ختام مبهج ومحب، مع طرح سؤال ذكي ودقيق عن تفاصيل ما حدث في القصة لدعوة الأطفال لكتابة أسمائهم وإجاباتهم في التعليقات.`
+    ? `- المشهد 1: المتحدث هو "${team.mainCharacterName}" (يخاطب "${team.companionName}" بحماس ويحدد الهدف).
+- المشهد 2: المتحدث هو "${team.companionName}" (يرد مباشرة على "${team.mainCharacterName}" بأسلوبه الكرتوني ويصف المشكلة).
+- المشهد 3: المتحدث هو "${team.mainCharacterName}" (يوجه صديقه للحل الذكي والتعاون المشترك).
+- المشهد 4: المتحدث هو "${team.companionName}" (يحتفل بنجاح الفكرة ويطرح سؤال التحدي للأطفال).`
+    : `- المشهد 1: المتحدث هو "${team.mainCharacterName}" (يخاطب "${team.companionName}" بحماس ويبدأ المهمة).
+- المشهد 2: المتحدث هو "${team.companionName}" (يرد كشخصية مستقلة على "${team.mainCharacterName}" ويصف ما رآه وشعوره تجاه الموقف).
+- المشهد 3: المتحدث هو "${team.mainCharacterName}" (ينبه "${team.companionName}" بهدوء ويرفض التصرف الخاطئ أو المتسرع ويوضح له السبب).
+- المشهد 4: المتحدث هو "${team.companionName}" (يعترف بتسرعه بحواره الخاص ويؤكد لـ "${team.mainCharacterName}" أنه سيتعاون معه بنظام).
+- المشهد 5: المتحدث هو "${team.mainCharacterName}" (يبدأ الخطوات العملية بالتعاون المشترك مستخدماً أداته).
+- المشهد 6: المتحدث هو "${team.companionName}" (يحتفل بالنتيجة وفرحة الجميع بأسلوبه وشخصيته الكرتونية المرحة).
+- المشهد 7: المتحدث هو "${team.mainCharacterName}" (يلخص العبرة الحياتية للأطفال وكيف يطبقونها في المدرسة والبيت).
+- المشهد 8: المتحدث هو "${team.companionName}" (يختم بحب مع سؤال التحدي التفاعلي للأطفال في التعليقات).`
 }
+4. يجب أن يفهم الطفل والمشاهد بوضوح تام: ما هي المشكلة المحددة؟ ماذا حدث؟ كيف تم الحل؟ وما هو المغزى؟
 
 قواعد صارمة للهجة المصرية في كامل الحلقة:
 1. ممنوع نهائياً أي ألفاظ فصحى أو تراكيب مسرحية جافة (مثل: لقد، يجب أن، علينا، دعونا، ما الذي، تلك، ذلك، الحدث، نجمع الخيوط). الحوار في كامل المشاهد يجب أن يكون عامي مصري قاهري أصيل ودافئ وعفوي وممتع للأطفال (يا خبر، بص شوف، يا ترى إيه الحكاية، يلا بينا سوا، متقلقش خالص إحنا شطار وهنحلها، فكرة تجنن، إيه الجمال ده).
@@ -2996,7 +3000,7 @@ ${recentTitlesList}
   "title": "عنوان القصة الجديد والمشوق بحيث يكون كامل المعنى وبطول 35 إلى 50 حرفاً دون أن ينقطع المعنى وبدون كلمة Noreen Kids وبدون هاشتاج",
   "moralLesson": "الدرس المستفاد من الحلقة",
   "scenes": [
-    { "sceneNumber": 1, "title": "عنوان المشهد", "dialogueArabic": "الحوار الكامل باللهجة المصرية القاهرية الغنية (المشهد الطويل: 115 إلى 130 كلمة، المشهد القصير: 38 إلى 46 كلمة)" }
+    { "sceneNumber": 1, "speakerName": "${team.mainCharacterName}", "title": "عنوان المشهد", "dialogueArabic": "الحوار الكرتوني المباشر الصادر من فم هذه الشخصية فقط دون أي راوي (المشهد الطويل: 115 إلى 130 كلمة، المشهد القصير: 38 إلى 46 كلمة)" }
   ]
 }`;
       const response = await ai.models.generateContent({
@@ -5668,8 +5672,8 @@ async function main() {
           fbSchedule,
           specificHeroName: heroToChallenge,
           specificCompanionName: compToChallenge,
-          forcePublish: false,
-          postKind: "scheduled",
+          forcePublish: true,
+          postKind: "video_challenge",
         });
         if (prePostRes?.published) {
           publishedPreVideoHeroNames.add(heroToChallenge);
