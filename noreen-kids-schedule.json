@@ -37,6 +37,16 @@
     {
       "topic": "إصلاح نافورة الموسيقى الكريستالية بالتفكير",
       "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "الطبيبة نورين وإنقاذ السلحفاة وسر النظافة",
+      "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "إصلاح نافورة الموسيقى الكريستالية بالتفكير",
+      "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش",
       "timestampIso": "2026-10-11T15:29:10.180Z"
     },
@@ -201,28 +211,6 @@
       "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-10-08T18:34:42.938Z"
-    },
-    {
-      "topic": "لعبة الميزان العادل وتعلّم أهمية الصدق في البيع",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "حدوتة النحلة النشيطة والدرس الذي تعلمه الفأر المشاكس",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "لعبة الميزان العادل وتعلّم أهمية الصدق في البيع",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-10-08T15:32:38.669Z"
-    },
-    {
-      "topic": "حدوتة النحلة النشيطة والدرس الذي تعلمه الفأر المشاكس",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-10-08T15:32:38.669Z"
     }
   ],
   "scheduledHistory": [
