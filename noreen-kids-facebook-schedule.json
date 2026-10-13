@@ -2597,6 +2597,16 @@
     {
       "topic": "لغز القلعة القديمة وفك شفرة بوابات الشجاعة بالكلمة الطيبة",
       "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم"
+    },
+    {
+      "topic": "ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام",
+      "mainCharacterName": "كارمن المخترعة الصغيرة",
+      "companionName": "سمسم السنجاب الطائر"
+    },
+    {
+      "topic": "لغز القلعة القديمة وفك شفرة بوابات الشجاعة بالكلمة الطيبة",
+      "mainCharacterName": "تامر فارس الواحة",
       "companionName": "كركور الببغاء الحكيم",
       "timestampIso": "2026-10-13T18:20:21.433Z"
     },
@@ -2759,54 +2769,37 @@
       "topic": "تدوير المخلفات الورقية وابتكار أجمل كراسات الرسم الملونة",
       "mainCharacterName": "كارمن المخترعة الصغيرة",
       "companionName": "سمسم السنجاب الطائر"
-    },
-    {
-      "topic": "تامر وكركور وسر خيمة التسامح في واحة النخيل",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم",
-      "timestampIso": "2026-10-10T05:30:01.315Z"
-    },
-    {
-      "topic": "تدوير المخلفات الورقية وابتكار أجمل كراسات الرسم الملونة",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر",
-      "timestampIso": "2026-10-10T05:30:01.315Z"
-    },
-    {
-      "topic": "إنقاذ نجم البحر المنور من بين الصخور المرجانية بالرفق",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح"
-    },
-    {
-      "topic": "بدلة جنى الذكية وسر العوم في فضاء النجوم",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-13 · 17:02 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-38408431886",
-    "uploadMode": "manual_instant",
+    "id": "gh-run-38445514444",
+    "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-13 (17:02 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1791899641727-auv2",
-    "longEpisodeId": "ep-gh-long-1791899691649-zecq",
-    "shortEpisodeTitle": "Noreen Kids: اختراع عجلة الفخار الآلية لصنع أواني الزهور الجميلة | مغامرات كارمن وسمسم",
-    "longEpisodeTitle": "سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر",
-    "shortTitle": "Noreen Kids: اختراع عجلة الفخار الآلية لصنع أواني الزهور الجميلة | مغامرات كارمن وسمسم",
-    "longTitle": "سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-13 (21:33 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1791915571358-kpga",
+    "longEpisodeId": "ep-gh-long-1791915621433-k61y",
+    "shortEpisodeTitle": "Noreen Kids: لغز القلعة القديمة وفك شفرة بوابات الشجاعة بالكلمة الطيبة | مغامرات تامر وكركور",
+    "longEpisodeTitle": "Noreen Kids: ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام | مغامرات كارمن وسمسم",
+    "shortTitle": "Noreen Kids: لغز القلعة القديمة وفك شفرة بوابات الشجاعة بالكلمة الطيبة | مغامرات تامر وكركور",
+    "longTitle": "Noreen Kids: ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام | مغامرات كارمن وسمسم",
     "shortPlaylistId": "PLPwfeXzB3ozU",
+    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "YQ_6jemKAHs",
-    "facebookShortVideoId": "2457007138204230",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2457007138204230",
-    "facebookShortTitle": "Noreen Kids | اختراع عجلة الفخار الآلية لصنع أواني الزهور الجميلة - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
+    "youtubeShortVideoId": "fqGwKlvHd4M",
+    "youtubeLongVideoId": "Hr-SHYD0x_c",
+    "facebookShortVideoId": "1127431276471351",
+    "facebookLongVideoId": "1114017074675085",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1127431276471351",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1114017074675085",
+    "facebookShortTitle": "Noreen Kids | لغز القلعة القديمة وفك شفرة بوابات الشجاعة بالكلمة الطيبة - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
+    "facebookLongTitle": "Noreen Kids | ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الط",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2814,16 +2807,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 720,
-      "height": 1280,
+      "width": 1280,
+      "height": 720,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 78,
-      "fileSizeBytes": 10957619,
-      "inspectedAt": "17:02"
+      "durationSec": 305,
+      "fileSizeBytes": 40359690,
+      "inspectedAt": "21:33"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2832,7 +2825,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-13T14:02:25.770Z"
+    "reportedAtIso": "2026-10-13T18:33:48.555Z"
   },
   "heroFairRotationIndex": 7,
   "interactiveHeroRotationIndex": 5,
