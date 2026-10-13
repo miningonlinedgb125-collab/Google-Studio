@@ -1652,7 +1652,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
         dialect === "fusha"
           ? `أَهْلاً وَسَهْلاً بِكُلِّ أَعْضَاءِ وَأَبْطَالِ عَائِلَةِ قَنَاةِ نُورِين كِيدْز الْغَالِين! أَنَا ${spk} وَمَعِي رَفِيقِي ${prt}!`
           : isShort
-          ? `أهلاً وسهلاً بكل أعضاء وعيلة قناة نورين كيدز الغاليين! ازيكم يا أحلى أبطال؟ أنا ${spk} ومعايا ${prt}، منورين عالمنا السحري النهارده!`
+          ? `أهلاً بيكم يا أبطال عيلة نورين كيدز! أنا ${spk} ومعايا ${prt}!`
           : `أهلاً وسهلاً بكل أعضاء وعيلة قناة نورين كيدز الغاليين في كل مكان! ازيكم يا أشطر وأجمل أبطال؟ وحشتونا أوي! أنا ${spk} ومعايا رفيق المغامرة ${prt}، منورين عالمنا السحري النهارده!`;
       sceneDialogue = stripped ? `${greetPrefix} ${stripped}` : greetPrefix;
     }
@@ -1677,11 +1677,10 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     });
   }
 
-  // Enforce total duration bounds: Short strictly [60..80s] (target >= 64s), Long strictly [300..600s] (target >= 305s)
+  // Enforce total duration bounds: Short strictly [60..80s] (target 65..78s), Long strictly [300..600s] (target >= 305s)
   const minTotalSec = isShort ? 64 : 305;
-  const maxTotalSec = isShort ? 79 : 590;
+  const maxTotalSec = isShort ? 78 : 590;
   let totalDur = preparedScenes.reduce((acc, s) => acc + s.durationSec, 0);
-
   if (totalDur < minTotalSec) {
     let deficit = minTotalSec - totalDur;
     let idx = 0;
@@ -1693,25 +1692,21 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
   } else if (totalDur > maxTotalSec) {
     let excess = totalDur - maxTotalSec;
     for (let i = preparedScenes.length - 1; i >= 0 && excess > 0; i--) {
-      const minAllowed = Math.ceil(preparedScenes[i].voiceDurSec + 1.1);
+      const minAllowed = Math.ceil(preparedScenes[i].voiceDurSec + 0.7);
       const reducible = Math.max(0, preparedScenes[i].durationSec - minAllowed);
       const cut = Math.min(excess, reducible);
       preparedScenes[i].durationSec -= cut;
       excess -= cut;
     }
-    let currentSum = preparedScenes.reduce((acc, s) => acc + s.durationSec, 0);
-    let cursor = 0;
-    while (isShort && currentSum > 78 && cursor < 300) {
-      const idx = cursor % preparedScenes.length;
-      if (preparedScenes[idx].durationSec > 14) {
-        preparedScenes[idx].durationSec -= 1;
-        currentSum -= 1;
-      }
-      cursor++;
+  }
+  // Guarantee absolute invariant: Every scene duration MUST accommodate full speech
+  for (const s of preparedScenes) {
+    if (s.durationSec < s.voiceDurSec + 0.5) {
+      s.durationSec = Math.ceil(s.voiceDurSec + 0.7);
     }
   }
 
-  const overscanW = Math.round(W * 1.14);
+    const overscanW = Math.round(W * 1.14);
   const overscanH = Math.round(H * 1.14);
   const panRangeX = Math.max(8, overscanW - W);
   const panRangeY = Math.max(8, overscanH - H);
@@ -1764,12 +1759,13 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       }" | Voice=${item.voiceDurSec.toFixed(1)}s | Scene=${dur}s (YouTube Fast-Processing Closed-GOP H.264 + Story VFX + Continuous PCM)...`
     );
 
-    const maxAllowedSpeech = Math.max(4, dur - 1.1);
+    // Ensure audio finishes with at least 0.5s breathing room before scene ends
+    const maxAllowedSpeech = Math.max(4, dur - 0.55);
     const gentleTempo =
       item.voiceDurSec > maxAllowedSpeech
-        ? Math.min(1.40, Math.max(1.01, Number((item.voiceDurSec / maxAllowedSpeech).toFixed(3))))
+        ? Math.min(1.25, Math.max(1.02, Number(((item.voiceDurSec + 0.1) / maxAllowedSpeech).toFixed(3))))
         : 1.0;
-    const tempoChain = gentleTempo > 1.005 ? `,atempo=${gentleTempo}` : "";
+    const tempoChain = gentleTempo > 1.01 ? `,atempo=${gentleTempo}` : "";
 
     const mixedWav = path.join(tmpDir, `scene_mixed_${i}.wav`);
     await execFileAsync("ffmpeg", [
@@ -1947,6 +1943,29 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
   );
 
   const finalMp4 = path.join(tmpDir, `noreen_kids_${videoFormat}.mp4`);
+  const vEncoderArgs = isShort
+    ? [
+        "-c:v", "libx264",
+        "-preset", "veryfast",
+        "-profile:v", "high",
+        "-level:v", "4.1",
+        "-crf", "20",
+        "-pix_fmt", "yuv420p",
+        "-g", "60",
+        "-keyint_min", "60",
+        "-sc_threshold", "0",
+        "-flags", "+cgop",
+        "-colorspace", "bt709",
+        "-color_primaries", "bt709",
+        "-color_trc", "bt709",
+      ]
+    : [
+        "-c:v", "copy",
+        "-colorspace", "bt709",
+        "-color_primaries", "bt709",
+        "-color_trc", "bt709",
+      ];
+
   await execFileAsync("ffmpeg", [
     "-y",
     "-f",
@@ -1967,14 +1986,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     "0:v:0",
     "-map",
     "1:a:0",
-    "-c:v",
-    "copy",
-    "-colorspace",
-    "bt709",
-    "-color_primaries",
-    "bt709",
-    "-color_trc",
-    "bt709",
+    ...vEncoderArgs,
     "-c:a",
     "aac",
     "-profile:a",
@@ -2761,8 +2773,9 @@ function buildSmartEpisodeForRunner({
     },
   ];
 
+  // Short video: Coherent 4-scene narrative arc (1: Introduction & Discovery, 2: Encountering the Challenge, 3: Practical Solution & Success, 4: Celebration & Interactive Challenge)
   const selectedTemplates = isShort
-    ? [sceneTemplates[0], sceneTemplates[1], sceneTemplates[4], sceneTemplates[7]]
+    ? [sceneTemplates[0], sceneTemplates[1], sceneTemplates[5], sceneTemplates[7]]
     : sceneTemplates.slice(0, count);
   const minWordsPerScene = isShort ? 15 : 40;
   const scenes = selectedTemplates.map((tpl, idx) => {
@@ -3137,8 +3150,9 @@ ${recentTitlesList}
       let lastErr = null;
       for (let attempt = 1; attempt <= 5; attempt++) {
         try {
+          const targetModel = attempt === 1 ? "gemini-3.8-flash" : attempt === 2 ? "gemini-3.5-flash" : attempt === 3 ? "gemini-3.7-flash" : "gemini-3.5-flash";
           const response = await ai.models.generateContent({
-            model: "gemini-3.8-flash",
+            model: targetModel,
             contents: prompt,
             config: {
               responseMimeType: "application/json",
@@ -3570,12 +3584,11 @@ async function attachFacebookVideoToPlaylist({
 
     // 1) Fetch existing video playlists for the page
     const listRes = await fetch(
-      `https://graph.facebook.com/v21.0/${encodeURIComponent(pageId)}/video_lists?fields=id,title,description&limit=50`,
+      `https://graph.facebook.com/v21.0/${encodeURIComponent(pageId)}/video_lists?fields=id,title,description&limit=100&access_token=${encodeURIComponent(activeToken)}`,
       { headers: { Authorization: `Bearer ${activeToken}` } }
     );
     const listData = await listRes.json().catch(() => ({}));
     let matchedListId = null;
-
     if (Array.isArray(listData?.data)) {
       const found = listData.data.find(
         (pl) =>
@@ -3586,23 +3599,25 @@ async function attachFacebookVideoToPlaylist({
       if (found?.id) matchedListId = found.id;
     }
 
-    // 2) If not found, attempt to create playlist
+    // 2) If not found, attempt to create playlist via form-urlencoded
     if (!matchedListId) {
       try {
+        const createParams = new URLSearchParams({
+          title: targetPlaylistName,
+          description: isShort
+            ? "Noreen Kids 3D Cartoons - Fun Shorts & Reels"
+            : "Noreen Kids 3D Cartoons - Full Episodes & Adventures",
+          access_token: activeToken,
+        });
         const createRes = await fetch(
           `https://graph.facebook.com/v21.0/${encodeURIComponent(pageId)}/video_lists`,
           {
             method: "POST",
             headers: {
               Authorization: `Bearer ${activeToken}`,
-              "Content-Type": "application/json",
+              "Content-Type": "application/x-www-form-urlencoded",
             },
-            body: JSON.stringify({
-              title: targetPlaylistName,
-              description: isShort
-                ? "Noreen Kids 3D Cartoons - Fun Shorts & Reels"
-                : "Noreen Kids 3D Cartoons - Full Episodes & Adventures",
-            }),
+            body: createParams.toString(),
           }
         );
         const createData = await createRes.json().catch(() => ({}));
@@ -3610,21 +3625,25 @@ async function attachFacebookVideoToPlaylist({
       } catch {}
     }
 
-    // 3) If playlist ID available, add video
+    // 3) If playlist ID available, add video via URL-encoded form
     if (matchedListId) {
+      const addParams = new URLSearchParams({
+        video_id: videoId,
+        access_token: activeToken,
+      });
       const addRes = await fetch(
         `https://graph.facebook.com/v21.0/${encodeURIComponent(matchedListId)}/videos`,
         {
           method: "POST",
           headers: {
             Authorization: `Bearer ${activeToken}`,
-            "Content-Type": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
           },
-          body: JSON.stringify({ video_id: videoId }),
+          body: addParams.toString(),
         }
       );
       const addData = await addRes.json().catch(() => ({}));
-      if (addRes.ok && addData?.success !== false) {
+      if (addRes.ok && (addData?.success === true || addData?.id || !addData?.error)) {
         console.log(`📂 Facebook Playlist (${targetPlaylistName}): Added ✓ (List ID: ${matchedListId})`);
         return { success: true, playlistId: matchedListId, playlistName: targetPlaylistName };
       }
@@ -3641,9 +3660,6 @@ async function attachFacebookVideoToPlaylist({
   }
 }
 
-/**
- * Restored engagement layer: story-specific first challenge comments and smart replies.
- */
 function buildInteractiveChallengeMessage(episode, platform = "youtube") {
   const hero = String(episode?.mainCharacterName || "أبطال نورين كيدز").trim();
   const comp = String(episode?.companionName || "أصحابنا الشطار").trim();
