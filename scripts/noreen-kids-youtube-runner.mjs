@@ -1027,18 +1027,22 @@ function resolveGeminiVoiceForSpeaker(speakerName = "", isFemale = true) {
 }
 
 function stripLeakedVoiceInstructionsRunner(raw) {
-  return String(raw || "")
-    .replace(/توجيه الأداء الصوتي للشخصية\s*:\s*\([^)]*\)\.?\s*/g, "")
-    .replace(/توجيه اللهجة\s*:\s*[^.\n]*\.?\s*/g, "")
-    .replace(/انطق هذا النص فقط[^:\n]*:\s*/g, "")
-    .replace(/انطق النص التالي فقط[^:\n]*:\s*/g, "")
-    .replace(/اقرأ النص التالي[^:\n]*:\s*/g, "")
-    .replace(/أنت مؤدي صوتي مصري قاهري محترف[^.\n]*\.?\s*/g, "")
-    .replace(/تحدث(?:ي)? بصوت[^.\n]*(?:باللهجة المصرية القاهرية الطبيعية|للأطفال|القاهرية)[^.\n]*\.?\s*/g, "")
-    .replace(/[\(\[]\s*(?:باللهجة|لهجة|يتحدث|تتحدث)[^)\]]*[\)\]]\s*/g, "")
-    .replace(/(?:تحدث|تحدثي|يتحدث|تتحدث)\s+بالل(?:هجة|غة)\s+(?:العربية\s+)?(?:المصرية\s+)?القاهرية[^.\n،]*[.\n،]?\s*/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
+  let s = String(raw || "");
+  s = s.replace(/CHARACTER\s+(?:VOCAL\s+)?PERSONA\s*:[^.\n]*\.?\s*/gi, "");
+  s = s.replace(/CHARACTER\s+ROLE\s*(?:&|and)\s*VOCAL\s+PERSONA\s*:[^.\n]*\.?\s*/gi, "");
+  s = s.replace(/SYSTEM\s+RULE\s*(?:\([^)]*\)|:[^.\n]*\.?|[^\n]*\n?)/gi, "");
+  s = s.replace(/توجيه الأداء الصوتي للشخصية\s*:\s*\([^)]*\)\.?\s*/gi, "");
+  s = s.replace(/توجيه اللهجة\s*:\s*[^.\n]*\.?\s*/gi, "");
+  s = s.replace(/انطق هذا النص فقط[^:\n]*:\s*/gi, "");
+  s = s.replace(/انطق النص التالي فقط[^:\n]*:\s*/gi, "");
+  s = s.replace(/اقرأ النص التالي[^:\n]*:\s*/gi, "");
+  s = s.replace(/نص الحوار المطلوب نطقه\s*:\s*/gi, "");
+  s = s.replace(/أنت مؤدي صوتي مصري قاهري محترف[^.\n]*\.?\s*/gi, "");
+  s = s.replace(/[\(\[]\s*(?:تحدث|تحدثي|تكلم|تكلمي|ينطق|تنطق|نطق|باللهجة|لهجة|صوت|نبرة)[^)\]]*[\)\]]\s*/gui, " ");
+  s = s.replace(/(?:^|\s)(?:تحدث|تحدثي|تكلم|تكلمي|ينطق|تنطق|نطق)\s+بصوت\s+[\s\S]*?(?:[.!?؛،:\n]|(?=\s*(?:ودلوقتي|يا\s+|يا خبر|ازيكم|أهلاً|أهلا|بصوا|بص|يلا|شايف|شايفين|إحنا|أنا))|$)\s*/gui, " ");
+  s = s.replace(/(?:^|\s)نبرة\s+كرتونية\s+[^.!?؛،:\n]+[.!?؛،:\n]?\s*/gui, " ");
+  s = s.replace(/(?:^|\s)(?:تحدث|تحدثي|يتحدث|تتحدث|نبرة)\s+بالل(?:هجة|غة)\s+(?:العربية\s+)?(?:المصرية\s+)?القاهرية[^.!?؛،:\n]*[.!?؛،:\n]?\s*/gui, " ");
+  return s.replace(/\s+/g, " ").trim();
 }
 
 async function synthesizeChunkViaGeminiLiveRunner(
@@ -1082,11 +1086,7 @@ async function synthesizeChunkViaGeminiLiveRunner(
             systemInstruction: {
               parts: [
                 {
-                  text: `${
-                    styleInstruction
-                      ? `CHARACTER ROLE & VOCAL PERSONA: ${styleInstruction}.\n`
-                      : ""
-                  }SYSTEM RULE (DO NOT SPEAK THIS SYSTEM RULE OUT LOUD): You are a professional Egyptian Cairene cartoon voice actor for kids. Read ONLY the exact Arabic dialogue sent by the user verbatim using natural Cairene pronunciation (hard Egyptian G). Strictly adopt the requested character pitch, age, gender, and vocal persona. NEVER utter any instructions, character descriptions, or introductory words before or after the user text.`,
+                  text: "SYSTEM RULE: You are a professional Egyptian Cairene cartoon voice actor for children. Read ONLY the exact Arabic dialogue sent by the user verbatim using natural Cairene pronunciation (hard Egyptian G). Strictly adopt an expressive cartoon delivery. NEVER utter any instructions, character descriptions, meta words, or introductory phrases before, during, or after speaking." ,
                 },
               ],
             },
@@ -1223,7 +1223,7 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
   let dialogue = rawText.replace(/[\u064B-\u065F\u0670]/g, "");
   if (dialect === "egyptian") {
     const preTtsReport = runPreTtsEgyptianValidationLayer(rawText, sceneIndex, totalScenes);
-    dialogue = prepareTextForNaturalEgyptianTts(preTtsReport.validatedText);
+    dialogue = stripLeakedVoiceInstructionsRunner(prepareTextForNaturalEgyptianTts(preTtsReport.validatedText));
     if (preTtsReport.detectedNonEgyptianWords.length > 0) {
       console.log(
         `   [Pre-TTS Validation Layer] المشهد ${sceneIndex + 1}: تم اكتشاف واستبدال ${
@@ -1330,17 +1330,22 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
       // Guaranteed Egyptian Cairene colloquial cartoon voice without leaving the Gemini Native Audio family!
       const ttsModels = ["gemini-3.8-flash-lite-tts", "gemini-3.8-flash-tts"];
       const pureDialogue = stripLeakedVoiceInstructionsRunner(dialogue);
-      const personaPrompt = `${
-        styleInstruction ? `CHARACTER VOCAL PERSONA: ${styleInstruction}.\n` : ""
-      }SYSTEM RULE: You are a professional Egyptian Cairene cartoon voice actor for children. Read the following Arabic dialogue verbatim with pure natural Egyptian colloquial dialect (اللهجة المصرية القاهرية الطبيعية) and natural Egyptian G (الجيم المصرية القاهرية). Do NOT utter any system rules, persona instructions, or introductory words before or after the text.\n\nنص الحوار المطلوب نطقه:\n${pureDialogue}`;
 
       for (const ttsModel of ttsModels) {
         for (let ttsRetry = 0; ttsRetry < 2; ttsRetry++) {
           try {
+            // Strictly pureDialogue ONLY in user contents: prevents TTS from uttering persona instructions
             const ttsResp = await ai.models.generateContent({
               model: ttsModel,
-              contents: [{ role: "user", parts: [{ text: personaPrompt }] }],
+              contents: [{ role: "user", parts: [{ text: pureDialogue }] }],
               config: {
+                systemInstruction: {
+                  parts: [
+                    {
+                      text: "You are a professional Egyptian Cairene cartoon voice actor for children. Speak ONLY the exact Arabic dialogue sent by the user verbatim with pure natural Egyptian colloquial dialect (اللهجة المصرية القاهرية الطبيعية). Strictly NEVER utter any persona descriptions, instructions, or meta words before or after the dialogue.",
+                    },
+                  ],
+                },
                 responseModalities: [Modality.AUDIO],
                 speechConfig: {
                   voiceConfig: {
@@ -1635,7 +1640,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     const isHeroTurn = i % 2 === 0;
     const spk = isHeroTurn ? heroName : companionName;
     const prt = isHeroTurn ? companionName : heroName;
-    let sceneDialogue = String(scenes[i]?.dialogueArabic || "").trim();
+    let sceneDialogue = stripLeakedVoiceInstructionsRunner(String(scenes[i]?.dialogueArabic || "").trim());
     if (i === 0 && !/أعضاء.*نورين كيدز|عيلة.*نورين كيدز/.test(sceneDialogue.slice(0, 140))) {
       const stripped = sceneDialogue
         .replace(
@@ -2700,65 +2705,64 @@ function buildSmartEpisodeForRunner({
   const sceneTemplates = [
     {
       title: `1. البداية: انطلاق ${shortHero} و${shortComp}`,
-      egyptianShort: `ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بص كده معانا يا ${shortComp}، النهارده عندنا حكاية جميلة أوي وسكر عن ${egyptianTopic}! أنا جهزت ${heroProp} علشان نبدأ رحلتنا ونشوف ايه السر اللي مستنينا هناك!`,
-      egyptianLong: `يا خبر يا أبطال وعيلة نورين كيدز! بصوا بسرعة معايا النهارده، ازيكم يا أحلى أصحاب وشطار في الدنيا كلها! بص كده معايا يا ${shortComp}، النهارده ميعادنا مع حكاية عسل وسكر أوي عن ${shortTopicMention}! أنا جهزت معايا ${heroProp} علشان نكتشف كل حاجة خطوة بخطوة بالراحة، وصاحبي الجدع ${shortComp} محضر ${compProp} علشان يساعدنا ونكون إيد واحدة في كل خطوة ومفيش كسل خالص! شايفين النور والبهجة اللي حوالينا في المكان ده؟ يلا بينا نقرب خطوة بخطوة ونفتح عينينا كويس ونبدأ الحكاية سوا بكل فرحة ونشاط يا أبطال!`,
+      egyptianShort: `يا خبر يا أبطال وعيلة نورين كيدز! بصوا بسرعة معايا النهارده، ازيكم يا أحلى أصحاب! بص كده يا ${shortComp}، النهارده عندنا حكاية جميلة أوي عن ${shortTopicMention}! أنا جهزت ${heroProp} وإنت معاك ${compProp}، يلا بينا نبدأ رحلتنا سوا بكل شجاعة وفرحة!`,
+      egyptianLong: `يا خبر يا أبطال وعيلة نورين كيدز! بصوا بسرعة معايا النهارده، ازيكم يا أحلى أصحاب في الدنيا كلها! بص معايا يا ${shortComp}، النهارده عندنا مهمة بطولية ومغامرة جميلة أوي عن ${shortTopicMention}! أنا مجهز معايا ${heroProp} علشان نستكشف كل حاجة خطوة بخطوة، وإنت معاك ${compProp} علشان نكون إيد واحدة وعندنا طاقة وهمة عالية أوي! شايفين النور والبهجة اللي حوالينا في المكان ده؟ يلا بينا نفتح عينينا كويس ونبدأ المغامرة سوا بكل شجاعة وفرحة ونشاط يا أبطال!`,
       speaker: effectiveMainName,
       voice: heroVoice,
     },
     {
-      title: `2. التطور: ملاحظة اللخبطة مع ${shortComp}`,
-      egyptianShort: `يا خبر يا ${shortHero}! أنا فتحت ${compProp} وبصيت على المكان، ولقيت إن فيه لخبطة ومشكلة في ${egyptianTopic} محتاجة مننا شطارة وفكرة ذكية وتعاون سريع علشان نحلها ونفرح كل أصحابنا!`,
-      egyptianLong: `يا خبر أبيض يا ${shortHero}! بص شوف معايا كده بسرعة يا صاحبي! أنا طلعت ${compProp} وببص حواليا، لقيت حاجة ملخبطة خالص ومحتاجة مننا وقفة حلوة وتفكير بالراحة على مهلنا! شفت ايه اللي حصل هنا في المكان؟ كل حاجة كانت زي الفل وماشية تمام، وفجأة حصلت اللخبطة دي وعايزة مننا شطارة ونباهة علشان نعمل الصح ومحدش يزعل أبداً! يا ترى ايه الحكاية يا أصحابنا الشطار؟ يلا نفكر بالراحة من غير ما نستعجل خالص، ونقرب خطوة بخطوة علشان نفهم ايه الحكاية ونساعد بعض بحب وجدعنة يا أبطال!`,
+      title: `2. التطور: ملاحظة المشكلة مع ${shortComp}`,
+      egyptianShort: `يا خبر أبيض يا ${shortHero}! بص شوف معايا هناك، فيه مشكلة ومحتاجة مننا فكرة ذكية ومساعدة سريعة في ${shortTopicMention}! لازم نتصرف بهدوء وتعاون علشان نساعد الكل، وأنا جهزت ${compProp} ومستعد لخطتك الذكية!`,
+      egyptianLong: `يا خبر أبيض يا ${shortHero}! بص شوف معايا هناك بسرعة يا صاحبي! شفت المشكلة اللي حصلت في ${shortTopicMention}؟ الموضوع ده محتاج مننا وقفة سريعة وتفكير هادي علشان نساعد الكل ونحل التحدي ده صح! لو استنينا المشكلة هتكبر وممكن حد يزعل، وإحنا أبطال نورين كيدز دايماً بنكون جاهزين للمساعدة بقلب طيب وهمة عالية! يا ترى هنعمل إيه يا بطل؟ يلا نفكر سوا بالراحة ومن غير استعجال خالص علشان نوصل لأحسن حل يفرح كل حبايبنا وأصحابنا!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
     {
-      title: "3. الحدث المفاجئ: ظهور اللخبطة والتفكير الهادي",
+      title: "3. الحدث المفاجئ: التفكير الهادي ورفض التسرع",
       egyptianShort: `عندك حق يا ${shortComp} يا جدع! يلا بينا نستخدم ${heroProp} ونتصرف بذكاء وهدوء، علشان لما بنكون إيد واحدة وبنتعاون بأمانة، بنلاقي الحل الصح لكل مشكلة ومفيش حاجة تصعب علينا أبداً!`,
-      egyptianLong: `جدع يا ${shortComp} والله، تسلم إيدك وكويس إنك نبهتني بدري قبل ما الأمور تتعقد! بصوا كده يا أصحابي الحلوين، الشطار في عيلة نورين كيدز عمرهم ما بيخافوا ولا يتلخبطوا، دايماً بنهدا ونرتب أفكارنا واحدة واحدة بالراحة ومن غير أي خوف خالص! الحكاية دي عايزة مننا أمانة وصبر وجدعنة علشان نرجع كل حاجة زي ما كانت وأحسن كمان! أنا هستخدم ${heroProp} دلوقتي حالا علشان نعمل أول خطوة صح في المكان، يلا شجعونا وقولوا يا رب، وإيدينا في إيد بعض وهنعمل كل حاجة صح ومضبوطة دايماً!`,
+      egyptianLong: `كلامك مضبوط مية في المية يا ${shortComp} يا جدع، وأنا فخور بيك علشان نبهتني بسرعة! بصوا كده يا أصحابي الحلوين، الشطار لما بتقابلهم أي مشكلة بيهدوا الأول ويفكروا بعقلهم وما يتسرعوش أبداً في أي تصرف غلط! التسرع ممكن يبوظ كل حاجة، لكن الصبر والترتيب والأمانة هما اللي بينجحوا أي خطة! أنا هستخدم ${heroProp} دلوقتي علشان نفحص الموقف بدقة ونشوف أول خطوة صح، يلا شجعونا وقولوا يا رب، وإيدينا في إيد بعض وهنعمل كل حاجة تمام!`,
       speaker: effectiveMainName,
       voice: heroVoice,
     },
     {
-      title: "4. المشكلة: معرفة سر اللخبطة بالظبط",
+      title: "4. الخطة الذكية: تجهيز الأدوات وتنظيم العمل",
       egyptianShort: `بص يا ${shortHero}! إحنا عرفنا السبب خلاص وفهمنا اللغز كله، يلا بينا نعمل الحل المظبوط سوا ونفرح كل أصحابنا!`,
-      egyptianLong: `أيوة كده يا ${shortHero}، كلامك زي السكر ومضبوط مية في المية يا بطل! أنا قربت بـ ${compProp} وفهمت السر كله دلوقتي وعرفت ايه اللي كان ملخبط الدنيا هنا! الشطارة مش بالنوم والكسل وتضييع الوقت، الشطارة بالنشاط والحركة والجدعنة ومساعدة كل أصحابنا بحب وطيبة قلب! شفتوا يا أصحابنا الحلوين إزاي لما بنتحرك ونشتغل بهمة وفرحة بنعرف نوصل للحل على طول؟ يلا بينا نمد إيدينا لبعض ونبدأ نصلح اللخبطة دي فوراً، علشان الفرحة ترجع وتملأ قلوب كل حبايبنا وأصحابنا الشطار اللي مستنيين فرحتنا سوا!`,
+      egyptianLong: `الله عليك يا ${shortHero}، تسلم أفكارك الذكية يا بطل! أنا فتحت ${compProp} دلوقتي وفهمت السر كله وعرفت الخطوة المظبوطة اللي لازم نعملها فوراً! الشطارة إننا ننظم شغلنا ونساعد بعض بحب وإخلاص، وأنا جهزت كل حاجة علشان أبدأ معاك خطوة بخطوة! شفتوا يا أصحابنا إزاي لما بنتعاون وبنسمع كلام بعض كل خطوة بتبقى واضحة وسهلة؟ يلا بينا نشمر ونبدأ في الحل العملي علشان الفرحة ترجع تملأ المكان كله من جديد!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
     {
-      title: "5. التصرف: نشمر ونشتغل إيد واحدة",
-      egyptianShort: `يا سلام على الشطارة يا ${shortComp}! بالجدعنة والتعاون قدرنا ننجح ونحل أصعب مشكلة في ثانية واحدة!`,
-      egyptianLong: `يلا بينا يا ${shortComp} يا جدع، إيدي في إيدك ومفيش ولا ثانية نضيعها في الكسل خالص! أنا جهزت ${heroProp} علشان نظبط الشغل ونبدأ صح على مية بيضا، وإنت ساعدني بـ ${compProp} علشان نكمل الحكاية سوا في ثانية واحدة ونخلي كل ركن يرجع ينور ويفرح من جديد! شايفين يا أصحابنا الشطار إزاي لما بنتحرك بنشاط وحب ومودة، أصعب حاجة بتبقى سهلة وممتعة وبتتحل في ثانية؟ الجدعنة والصبر هما أحلى حاجة في الدنيا بتخلينا ننجح ونفرح كل اللي حوالينا، يلا نكمل لآخر خطوة بهمة وفرحة وشطارة يا أبطال!`,
+      title: "5. التصرف العملي: العمل المشترك وتجاوز العقبة",
+      egyptianShort: `يلا بينا يا ${shortComp} يا جدع! أنا جهزت ${heroProp} وبدأت أول خطوة صح، ودلوقتي دورك تساعدني بـ ${compProp} علشان نكمل الحل العملي الملموس في ${shortTopicMention} ونتغلب على المشكلة سوا في ثانية واحدة! شايفين يا أصحابنا الشطار، لما بنتعاون وبنكون إيد واحدة مفيش حاجة تصعب علينا أبداً وكل حاجة بتتحل بنجاح وفرحة!`, 
+      egyptianLong: `يلا بينا يا ${shortComp} يا أجدع صاحب في الدنيا، إيدي في إيدك ومفيش ثانية نضيعها! أنا بدأت أتحرك بـ ${heroProp} وثبتنا أول جزء صح، ودلوقتي دورك تساعدني بـ ${compProp} علشان نكمل الباقي ونتغلب على العقبة دي بنجاح! شايفين يا أصحابنا الشطار إزاي لما بنجتهد ونشتغل إيد واحدة بنشاط ومحبة، أصعب حاجة بتتحل وبتبقى سهلة وممتعة؟ الجدعنة والأمانة هما أحلى حاجة بتخلينا ننجح ونفرح كل اللي حوالينا، يلا نكمل لآخر خطوة بهمة وفرحة!`,
       speaker: effectiveMainName,
       voice: heroVoice,
     },
     {
-      title: "6. الحل الذكي: نجاح الفكرة وفرحة الأبطال",
-      egyptianShort: `بص يا ${shortHero}! الفكرة طلعت حكاية ونجحت، وكل أصحابنا فرحانين والضحكة منورة وشوشهم الجميلة!`,
-      egyptianLong: `الله يا سلام سلم! الفكرة طلعت حكاية ونجحت مية في المية يا ${shortHero}! بصوا كده وشوفوا يا كل أصحابنا الشطار وعيلة نورين كيدز في كل مكان! أول ما حطينا إيدينا في إيد بعض وسيبنا الكسل وتصرفنا بأمانة وجدعنة ومحبة، رجعت الأنوار تلمع وزادت الضحكة والبهجة في المكان كله من تاني! دي من أسعد اللحظات في حكايتنا النهارده، لما بنشوف الشطارة والنشاط بيجيبوا نتيجة حلوة تفرح القلب، وبقت كل خطوة بتفرحنا وتثبت إننا شطار لما اشتغلنا سوا بقلب صافي وأمانة ومحبة!`,
+      title: "6. الحل الذكي: نجاح الفكرة وفرحة الجميع",
+      egyptianShort: `الله يا سلام سلم! بالتعاون والجدعنة وبـ ${heroProp} و${compProp} الفكرة نجحت مية في المية يا ${shortHero}! اتحلت المشكلة ورجعت الضحكة منورة المكان كله والكل فرحان بشطارتنا سوا!`,
+      egyptianLong: `الله أكبر يا سلام سلم! الفكرة طلعت حكاية ونجحت مية في المية يا ${shortHero}! بصوا كده وشوفوا يا كل أصحابنا وعيلتنا في كل مكان! أول ما حطينا إيدينا في إيد بعض وتصرفنا بذكاء وأمانة، اتحلت المشكلة كلها ورجعت الضحكة والبهجة تنور وشوش كل أصحابنا من تاني! دي من أسعد اللحظات في حكايتنا النهارده، لما بنشوف تعبنا وشطارتنا بتجيب نتيجة حلوة تفرح القلب، وإثبات حقيقي إننا أبطال لما اشتغلنا سوا بقلب صافي ومحبة!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
     {
       title: "7. الاحتفال بالنجاح: الدرس المستفاد وفرحة عيلتنا",
       egyptianShort: `يا سلام على الفرحة الكبيرة! دلوقتي كل واحد فينا عرف قيمة الصدق والأمانة والتعاون ومساعدة أصحابنا!`,
-      egyptianLong: `بجد يا ${shortComp} دي كانت حكاية ولا أروع، وعمرنا ما هننساها أبداً من كتر الحلاوة والجمال! بدأنا المشوار بفكرة ذكية، ولما قابلتنا المشكلة الصعبة ما سبناش بعض خالص وفضلنا إيد واحدة، وفكرنا وتصرفنا بشجاعة ونشاط لحد ما وصلنا للنجاح الجميل ده وفرحنا كل أصحابنا! اتعلمنا النهارده سوا يا أصحابي إن النشاط والأمانة ومساعدة أصحابنا هما سر الفرحة الحقيقي اللي بيفرح القلوب كلها، شكراً يا ${shortComp} يا أجدع صاحب وشكراً لكل أصحابنا الأبطال اللي بيشجعونا دايماً في كل مغامرة!`,
+      egyptianLong: `بجد دي كانت مغامرة ولا أروع يا ${shortComp}، ومش هننساها أبداً من كتر الحلاوة والجمال! شفتوا بقى يا أصحابي الحلوين إيه سر النجاح الكبير ده؟ اتعلمنا النهارده سوا إن الأمانة والنشاط ومساعدة غيرنا هما سر السعادة الحقيقي في الدنيا! ولازم نطبق ده كل يوم في بيوتنا وفي المدرسة ومع كل أصحابنا وجيرانا، ونكون دايماً قدوة في الخير والجدعنة! شكراً يا ${shortComp} يا أجدع صاحب وشكراً لكل أصحابنا الأبطال اللي بيشجعونا دايماً في كل مغامرة!`,
       speaker: effectiveMainName,
       voice: heroVoice,
     },
     {
       title: `8. المشهد الثامن والتحدي الأخير: رسالة ${shortHero} و${shortComp} لأبطال Noreen Kids`,
-      egyptianShort: `هيييه! حلينا اللغز ونجحت المهمة يا ${shortHero}! 🧩 تحدي الشطار: يا ترى إيه أهم حاجة اتعلمناها من حكاية ${cleanTopicForAdventure}؟ اكتبوا إجابتكم واسمكم في التعليقات علشان تكسبوا وسام الشطارة وتظهروا في لوحة شرف أبطال نورين كيدز في الحلقة الجاية! مع السلامة يا أبطال!`,
-      egyptianLong: `ودلوقتي يا أصحابنا الحلوين في عيلة نورين كيدز، وصلنا المشهد الثامن والتحدي الأخير في حلقة النهارده مع ${shortHero} و${shortComp}! 🧩 سؤال الشطار للأبطال: إيه أكتر موقف عجبكم في حكاية النهارده، وإزاي نقدر نكون شطار ونشيطين وأمينين في المدرسة والبيت بنفس الطريقة ومفيش كسل خالص؟ اكتبوا إجابتكم واسمكم في التعليقات تحت الفيديو علشان تظهروا في لوحة الشرف في الحلقة الجاية! وما تنسوش تشتركوا في القناة وتعملوا لايك، بنحبكم أوي ومع السلامة يا أبطال!`,
+      egyptianShort: `هيييه! نجحت المهمة يا ${shortHero}! 🧩 تحدي الشطار: يا ترى إيه أهم حاجة اتعلمناها من حكاية ${cleanTopicForAdventure}؟ اكتبوا إجابتكم واسمكم في التعليقات علشان تكسبوا وسام الشطارة وتظهروا في لوحة الشرف! وما تنسوش تشتركوا في القناة وتعملوا لايك، مع السلامة يا أبطال!`,
+      egyptianLong: `ودلوقتي يا أصحابنا الحلوين في عيلة نورين كيدز، وصلنا المشهد الثامن والتحدي الأخير في حلقة النهارده مع ${shortHero} و${shortComp}! 🧩 سؤال الشطار للأبطال: إيه أهم درس اتعلمتوه من حكاية النهارده، وإزاي تقدروا تكونوا شطار وأمناء في المدرسة والبيت مع أصحابكم؟ اكتبوا إجابتكم واسمكم في التعليقات تحت الفيديو علشان تظهروا في لوحة الشرف في الحلقة الجاية! وما تنسوش تشتركوا في القناة وتعملوا لايك، بنحبكم أوي ومع السلامة يا أبطال!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
   ];
 
-    // Short 4-scene narrative arc: [0: Beginning/Setup, 1: Problem/Stakes, 5: Smart Solution, 7: Final Challenge & Moral]
   const selectedTemplates = isShort
-    ? [sceneTemplates[0], sceneTemplates[1], sceneTemplates[5], sceneTemplates[7]]
+    ? [sceneTemplates[0], sceneTemplates[1], sceneTemplates[4], sceneTemplates[7]]
     : sceneTemplates.slice(0, count);
   const minWordsPerScene = isShort ? 15 : 40;
   const scenes = selectedTemplates.map((tpl, idx) => {
@@ -3129,29 +3133,65 @@ ${recentTitlesList}
     { "sceneNumber": 1, "speakerName": "${team.mainCharacterName}", "title": "عنوان المشهد", "dialogueArabic": "الحوار الكرتوني المباشر الصادر من فم هذه الشخصية فقط دون أي راوي (المشهد الطويل: 90 إلى 115 كلمة، المشهد القصير: 36 إلى 44 كلمة)" }
   ]
 }`;
-      const response = await ai.models.generateContent({
-        model: "gemini-3.8-flash",
-        contents: prompt,
-        config: {
-          responseMimeType: "application/json",
-        },
-      });
-      const rawText = String(response?.text || "").trim();
-      if (rawText) {
-        const parsed = JSON.parse(rawText);
-        if (parsed && Array.isArray(parsed.scenes) && parsed.scenes.length >= scCount) {
-          return buildSmartEpisodeForRunner({
-            team,
-            topic,
-            videoFormat,
-            dialect,
-            dailyTime,
-            aiScenes: parsed.scenes,
-            aiTitle: parsed.title,
-            aiMoralLesson: parsed.moralLesson,
+      let parsed = null;
+      let lastErr = null;
+      for (let attempt = 1; attempt <= 5; attempt++) {
+        try {
+          const response = await ai.models.generateContent({
+            model: "gemini-3.8-flash",
+            contents: prompt,
+            config: {
+              responseMimeType: "application/json",
+            },
           });
+          const rawText = String(response?.text || "").trim();
+          if (rawText) {
+            const p = JSON.parse(rawText);
+            if (p && Array.isArray(p.scenes) && p.scenes.length >= scCount) {
+              parsed = p;
+              break;
+            }
+          }
+        } catch (err) {
+          lastErr = err;
+          const errMsg = err instanceof Error ? err.message : String(err);
+          const errStatus = Number(err?.status || err?.error?.code || err?.code || 0);
+          const isRetryable =
+            errStatus === 503 ||
+            errStatus === 429 ||
+            errMsg.includes("503") ||
+            errMsg.includes("UNAVAILABLE") ||
+            errMsg.includes("high demand") ||
+            errMsg.includes("ResourceExhausted") ||
+            errMsg.includes("RESOURCE_EXHAUSTED") ||
+            errMsg.includes("429") ||
+            errMsg.includes("ECONNRESET") ||
+            errMsg.includes("ETIMEDOUT") ||
+            errMsg.includes("fetch failed");
+          if (attempt < 5 && isRetryable) {
+            const waitMs = 3000 * Math.pow(2, attempt - 1);
+            console.warn(
+              `   ⏳ [AI Story Retry] Gemini 503/Busy (محاولة ${attempt}/5) لـ ${team.mainCharacterName}. انتظار ${waitMs / 1000} ثانية وإعادة المحاولة...`
+            );
+            await sleep(waitMs);
+          } else {
+            break;
+          }
         }
       }
+      if (parsed) {
+        return buildSmartEpisodeForRunner({
+          team,
+          topic,
+          videoFormat,
+          dialect,
+          dailyTime,
+          aiScenes: parsed.scenes,
+          aiTitle: parsed.title,
+          aiMoralLesson: parsed.moralLesson,
+        });
+      }
+      if (lastErr) throw lastErr;
     } catch (e) {
       console.warn(
         `   [AI Story Info] Using domain-matched smart episode builder for ${team.mainCharacterName}: ${
