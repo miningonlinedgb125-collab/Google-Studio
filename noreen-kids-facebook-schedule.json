@@ -23,7 +23,7 @@
   "dailyInteractivePhotoStudioTimeCairo": "16:15",
   "dailyInteractivePhotoGitHubActionsEnabled": true,
   "dailyInteractivePhotoGitHubTimeCairo": "16:15",
-  "lastInteractivePhotoDateKey": "2026-10-13",
+  "lastInteractivePhotoDateKey": "2026-10-14",
   "repliedCommentIds": [
     "122108050131484976_1437940118283880",
     "122108050131484976_2061911864449592"
@@ -47,6 +47,18 @@
     }
   ],
   "interactivePhotoPostsLog": [
+    {
+      "postId": "1330185823512542_122116125459484976",
+      "photoId": "122116125435484976",
+      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع دكتورة ملك والقطة لوليتا",
+      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع دكتورة ملك والقطة لوليتا",
+      "caption": "🕵️‍♂️ مغامرة البحث عن الفروقات مع دكتورة ملك والقطة لوليتا! 🕵️‍♂️\nيا ترى عيون أبطالنا الحلوين هتقدر تلاحظ الـ 3 اختلافات بين الصورة [ أ ] والصورة [ ب ]؟ 👀🎈\nالتحدي محتاج تركيز عالي وشطارة حقيقية! مين جاهز يورينا شطارته؟ 💪✨\n\n1️⃣ اكتبوا لنا الفروقات التلاتة تحت الصورة 👇\n2️⃣ واكتبوا اسم البطل أو البطلة الصغيرة عشان نعلن اسمه بين أشطر أصدقائنا في الحلقة الجاية! 🎬👏\n3️⃣ لايك ومتابعة للصفحة 🔔 لتحديات يومية مسلية وهادفة مع نورين كيدز! ❤️\n\n#نورين_كيدز #Noreen_Kids #كرتون_أطفال #مغامرات_3D #ذكاء_الطفل #أمهات_مصر",
+      "heroName": "دكتورة ملك",
+      "companionName": "القطة لوليتا",
+      "publishedAtCairo": "2026-10-14 · 00:15 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122116125459484976",
+      "postKind": "video_challenge"
+    },
     {
       "postId": "1330185823512542_122116122705484976",
       "photoId": "122116122681484976",
@@ -511,16 +523,6 @@
       "publishedAtCairo": "2026-10-03 · 04:59 بتوقيت مصر",
       "publishedAtIso": "2026-10-03T01:59:20.960Z",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122110793733484976"
-    },
-    {
-      "postId": "1330185823512542_122110269783484976",
-      "photoId": "122110269729484976",
-      "themeTitle": "تحدي الملاحظة الذكية مع كارمن وسمسم",
-      "caption": "🌟 تحدي أبطال Noreen Kids اليومي للشطار! 🌟\nبصوا كويس في الصورة مع كارمن وسمسم.. 🤔✨\nلو هنسافر النهاردة في مغامرة جديدة: تفتكروا كارمن هيستخدم أنهي أداة ذكية علشان يساعد سمسم؟\n\n1️⃣ اكتبوا إجابتكم في التعليقات 👇\n2️⃣ اكتبوا اسم طفلكم الجميل عشان كارمن وسمسم يحيوه بالاسم في حلقة بكرة! 🎬💖\n3️⃣ متنسوش متابعة صفحة Noreen Kids 🔔👍 ومشاركة البوست مع كل الأمهات!\n\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_قبل_النوم #كرتون_أطفال_3D #تربية_إيجابية #أمهات_مصر",
-      "heroName": "كارمن",
-      "companionName": "سمسم",
-      "publishedAtCairo": "2026-10-02 · 06:22 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122110269783484976"
     }
   ],
   "facebook": {
@@ -784,14 +786,15 @@
       "id": "gh-run-38464618020",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-14 (00:06 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-14 (00:16 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1791924653839-1scq",
       "longEpisodeId": "ep-gh-long-1791924726409-ovco",
       "shortEpisodeTitle": "Noreen Kids: مشاركة قطعة الحلوى والألعاب مع الأخت والأخ | مغامرات سدرة الصغنونة والفراشة الملونة",
-      "longEpisodeTitle": "حكاية الدواء اللذيذ بنكهة الفراولة والشفاء العاجل",
+      "longEpisodeTitle": "Noreen Kids: حكاية الدواء اللذيذ بنكهة الفراولة والشفاء العاجل | مغامرات الطبيبة ملك والقطة لوليتا",
       "shortTitle": "Noreen Kids: مشاركة قطعة الحلوى والألعاب مع الأخت والأخ | مغامرات سدرة الصغنونة والفراشة الملونة",
-      "longTitle": "حكاية الدواء اللذيذ بنكهة الفراولة والشفاء العاجل",
+      "longTitle": "Noreen Kids: حكاية الدواء اللذيذ بنكهة الفراولة والشفاء العاجل | مغامرات الطبيبة ملك والقطة لوليتا",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -799,9 +802,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "3CBeVlkiZUs",
+      "youtubeLongVideoId": "yBqn_DXR_Jc",
       "facebookShortVideoId": "1284629527122479",
+      "facebookLongVideoId": "2319057712298329",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1284629527122479",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2319057712298329",
       "facebookShortTitle": "Noreen Kids | مشاركة قطعة الحلوى والألعاب مع الأخت والأخ - مغامرة سدرة الصغنونة والفراشة الملونة",
+      "facebookLongTitle": "Noreen Kids | حكاية الدواء اللذيذ بنكهة الفراولة والشفاء العاجل - مغامرة ملك والقطة لوليتا",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -809,16 +816,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 70,
-        "fileSizeBytes": 9017754,
-        "inspectedAt": "00:06"
+        "durationSec": 316,
+        "fileSizeBytes": 31992054,
+        "inspectedAt": "00:16"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
