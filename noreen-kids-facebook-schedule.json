@@ -2571,6 +2571,16 @@
     {
       "topic": "اختراع عجلة الفخار الآلية لصنع أواني الزهور الجميلة",
       "mainCharacterName": "كارمن المخترعة الصغيرة",
+      "companionName": "سمسم السنجاب الطائر"
+    },
+    {
+      "topic": "سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر",
+      "mainCharacterName": "شوشو القبطان الصغير",
+      "companionName": "مرجان الدلفين المرح"
+    },
+    {
+      "topic": "اختراع عجلة الفخار الآلية لصنع أواني الزهور الجميلة",
+      "mainCharacterName": "كارمن المخترعة الصغيرة",
       "companionName": "سمسم السنجاب الطائر",
       "timestampIso": "2026-10-13T13:54:51.649Z"
     },
@@ -2733,61 +2743,32 @@
       "topic": "بدلة جنى الذكية وسر العوم في فضاء النجوم",
       "mainCharacterName": "جنى رائدة الفضاء",
       "companionName": "بلبل الروبوت اللطيف"
-    },
-    {
-      "topic": "إنقاذ نجم البحر المنور من بين الصخور المرجانية بالرفق",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح",
-      "timestampIso": "2026-10-09T16:47:18.567Z"
-    },
-    {
-      "topic": "بدلة جنى الذكية وسر العوم في فضاء النجوم",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف",
-      "timestampIso": "2026-10-09T16:47:18.567Z"
-    },
-    {
-      "topic": "إنقاذ فراشة النور النادرة في حديقة الزهور العملاقة",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "timestampIso": "2026-10-09T16:21:42.923Z"
-    },
-    {
-      "topic": "اختراع طاحونة الهواء الملونة لتوليد الكهرباء",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-10-09T16:21:42.923Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-13 · 08:58 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-38151294081",
-    "uploadMode": "daily_schedule",
+    "id": "gh-run-38408431886",
+    "uploadMode": "manual_instant",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-11 (18:44 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1791732491946-d6ve",
-    "longEpisodeId": "ep-gh-long-1791732550180-jmu6",
-    "shortEpisodeTitle": "Noreen Kids: إصلاح نافورة الموسيقى الكريستالية بالتفكير | مغامرات المهندسة نوران والنمر الفرفوش",
-    "longEpisodeTitle": "Noreen Kids: الطبيبة نورين وإنقاذ السلحفاة وسر النظافة | مغامرات الطبيبة نورين وأرنوب",
-    "shortTitle": "Noreen Kids: إصلاح نافورة الموسيقى الكريستالية بالتفكير | مغامرات المهندسة نوران والنمر الفرفوش",
-    "longTitle": "Noreen Kids: الطبيبة نورين وإنقاذ السلحفاة وسر النظافة | مغامرات الطبيبة نورين وأرنوب",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-13 (17:02 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1791899641727-auv2",
+    "longEpisodeId": "ep-gh-long-1791899691649-zecq",
+    "shortEpisodeTitle": "Noreen Kids: اختراع عجلة الفخار الآلية لصنع أواني الزهور الجميلة | مغامرات كارمن وسمسم",
+    "longEpisodeTitle": "سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر",
+    "shortTitle": "Noreen Kids: اختراع عجلة الفخار الآلية لصنع أواني الزهور الجميلة | مغامرات كارمن وسمسم",
+    "longTitle": "سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر",
     "shortPlaylistId": "PLPwfeXzB3ozU",
-    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "wVSGy1lGeVw",
-    "youtubeLongVideoId": "DLUDNhk1ens",
-    "facebookShortVideoId": "4211874048950137",
-    "facebookLongVideoId": "1730026154728032",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/4211874048950137",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1730026154728032",
-    "facebookShortTitle": "Noreen Kids | إصلاح نافورة الموسيقى الكريستالية بالتفكير - مغامرة المهندسة نوران والنمر الفرفوش",
-    "facebookLongTitle": "Noreen Kids | الطبيبة نورين وإنقاذ السلحفاة وسر النظافة - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
+    "youtubeShortVideoId": "YQ_6jemKAHs",
+    "facebookShortVideoId": "2457007138204230",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2457007138204230",
+    "facebookShortTitle": "Noreen Kids | اختراع عجلة الفخار الآلية لصنع أواني الزهور الجميلة - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2795,16 +2776,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 1280,
-      "height": 720,
+      "width": 720,
+      "height": 1280,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 305,
-      "fileSizeBytes": 33155973,
-      "inspectedAt": "18:44"
+      "durationSec": 78,
+      "fileSizeBytes": 10957619,
+      "inspectedAt": "17:02"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2813,7 +2794,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-11T15:44:20.760Z"
+    "reportedAtIso": "2026-10-13T14:02:25.770Z"
   },
   "heroFairRotationIndex": 5,
   "interactiveHeroRotationIndex": 5,
