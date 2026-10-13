@@ -1661,10 +1661,56 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       speakerName: spk,
       dialogueArabic: sceneDialogue || scenes[i]?.dialogueArabic,
     };
-    const synth = await synthesizeRawSpeechOnly(sc, i, scenes.length, tmpDir, dialect);
+    let synth = await synthesizeRawSpeechOnly(sc, i, scenes.length, tmpDir, dialect);
     if (i < scenes.length - 1) {
       await sleep(1200);
     }
+
+    // Audio tempo adaptation for Shorts:
+    // If an individual scene voiceover exceeds 16.5s in Shorts, accelerate it naturally via FFmpeg atempo
+    // (preserving pitch and 100% of spoken words without cutting any syllable) so it fits the Short pacing!
+    if (isShort && synth.voiceDurSec > 16.5) {
+      const maxTargetDur = 15.5;
+      const speedRatio = Math.min(1.4, Math.max(1.05, synth.voiceDurSec / maxTargetDur));
+      const adjustedAudioPath = path.join(tmpDir, `sped_voice_${i}_${Date.now()}.wav`);
+      try {
+        await execFileAsync("ffmpeg", [
+          "-y",
+          "-i",
+          synth.audioPath,
+          "-filter:a",
+          `atempo=${speedRatio.toFixed(3)}`,
+          "-c:a",
+          "pcm_s16le",
+          "-ar",
+          "48000",
+          "-ac",
+          "2",
+          adjustedAudioPath,
+        ]);
+        if (fs.existsSync(adjustedAudioPath)) {
+          const { stdout: probeWav } = await execFileAsync("ffprobe", [
+            "-v",
+            "error",
+            "-show_entries",
+            "format=duration",
+            "-of",
+            "default=noprint_wrappers=1:nokey=1",
+            adjustedAudioPath,
+          ]);
+          const newDur = parseFloat(probeWav.trim());
+          if (!isNaN(newDur) && newDur > 0) {
+            console.log(
+              `   ⚡ [Short Audio Fit] المشهد ${i + 1}: تم تسريع الصوت بنسبة ${speedRatio.toFixed(2)}x ليناسب وقت الشورتس (${synth.voiceDurSec.toFixed(1)}s -> ${newDur.toFixed(1)}s) بدون تغيير النبرة أو بتر أي كلمة!`
+            );
+            synth = { ...synth, audioPath: adjustedAudioPath, voiceDurSec: newDur };
+          }
+        }
+      } catch (tempoErr) {
+        console.warn(`   ⚠️ atempo adjustment warning: ${tempoErr?.message || tempoErr}`);
+      }
+    }
+
     const minSceneFloor = isShort
       ? Math.max(9, Math.ceil(synth.voiceDurSec + 0.65))
       : Math.max(26, Math.ceil(synth.voiceDurSec + 0.65));
@@ -1677,9 +1723,53 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     });
   }
 
-  // Enforce total duration bounds: Short strictly [60..80s] (target 65..78s), Long strictly [300..600s] (target >= 305s)
-  const minTotalSec = isShort ? 64 : 305;
-  const maxTotalSec = isShort ? 78 : 590;
+  // If sum of voice durations across all scenes in a Short exceeds 68s, adjust tempo across all scenes
+  let totalVoiceSec = preparedScenes.reduce((acc, s) => acc + s.voiceDurSec, 0);
+  if (isShort && totalVoiceSec > 68) {
+    const globalRatio = Math.min(1.35, Math.max(1.05, totalVoiceSec / 66.0));
+    console.log(
+      `   ⚡ [Short Global Audio Fit] إجمالي الصوت (${totalVoiceSec.toFixed(1)}s) يتطلب موازنة بنسبة ${globalRatio.toFixed(2)}x لضمان توقيت 65-75 ثانية.`
+    );
+    for (let i = 0; i < preparedScenes.length; i++) {
+      const s = preparedScenes[i];
+      const spedPath = path.join(tmpDir, `global_sped_${i}_${Date.now()}.wav`);
+      try {
+        await execFileAsync("ffmpeg", [
+          "-y",
+          "-i",
+          s.audioPath,
+          "-filter:a",
+          `atempo=${globalRatio.toFixed(3)}`,
+          "-c:a",
+          "pcm_s16le",
+          "-ar",
+          "48000",
+          "-ac",
+          "2",
+          spedPath,
+        ]);
+        const { stdout: probeWav } = await execFileAsync("ffprobe", [
+          "-v",
+          "error",
+          "-show_entries",
+          "format=duration",
+          "-of",
+          "default=noprint_wrappers=1:nokey=1",
+          spedPath,
+        ]);
+        const newD = parseFloat(probeWav.trim());
+        if (!isNaN(newD) && newD > 0) {
+          s.audioPath = spedPath;
+          s.voiceDurSec = newD;
+          s.durationSec = Math.ceil(newD + 0.65);
+        }
+      } catch {}
+    }
+  }
+
+  // Enforce total duration bounds: Short strictly [60..80s] (target 65..75s), Long strictly [300..600s] (target >= 305s)
+  const minTotalSec = isShort ? 65 : 305;
+  const maxTotalSec = isShort ? 75 : 590;
   let totalDur = preparedScenes.reduce((acc, s) => acc + s.durationSec, 0);
   if (totalDur < minTotalSec) {
     let deficit = minTotalSec - totalDur;
@@ -1692,21 +1782,22 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
   } else if (totalDur > maxTotalSec) {
     let excess = totalDur - maxTotalSec;
     for (let i = preparedScenes.length - 1; i >= 0 && excess > 0; i--) {
-      const minAllowed = Math.ceil(preparedScenes[i].voiceDurSec + 0.7);
+      const minAllowed = Math.ceil(preparedScenes[i].voiceDurSec + 0.65);
       const reducible = Math.max(0, preparedScenes[i].durationSec - minAllowed);
       const cut = Math.min(excess, reducible);
       preparedScenes[i].durationSec -= cut;
       excess -= cut;
     }
   }
+
   // Guarantee absolute invariant: Every scene duration MUST accommodate full speech
   for (const s of preparedScenes) {
     if (s.durationSec < s.voiceDurSec + 0.5) {
-      s.durationSec = Math.ceil(s.voiceDurSec + 0.7);
+      s.durationSec = Math.ceil(s.voiceDurSec + 0.65);
     }
   }
-
-    const overscanW = Math.round(W * 1.14);
+  
+  const overscanW = Math.round(W * 1.14);
   const overscanH = Math.round(H * 1.14);
   const panRangeX = Math.max(8, overscanW - W);
   const panRangeY = Math.max(8, overscanH - H);
@@ -3091,7 +3182,7 @@ async function generateFreshAiEpisodeForRunner({
       const prompt = `أنت المخرج الإبداعي والمؤلف المتميز لقناة الأطفال كرتون ثلاثي الأبعاد "Noreen Kids".
 قم بابتكار وتأليف حلقة كرتونية ممتعة ذات حبكة درامية واضحة ومفهومة جداً للأطفال (${
         isShort
-          ? "فيديو قصير YouTube Shorts من 4 مشاهد مترابطة بحبكة سريعة وقوية، كل مشهد 36 إلى 44 كلمة بالحوار الكرتوني الممتع"
+          ? "فيديو قصير YouTube Shorts / Facebook Reels من 4 مشاهد مترابطة بحبكة سريعة وممتعة للأطفال، كل مشهد 16 إلى 22 كلمة بحوار كرتوني مرح ومركّز ليكون إجمالي وقت الفيديو 60 إلى 75 ثانية فقط"
           : "حلقة كرتون طويلة كاملة من 8 مشاهد متسلسلة بحبكة درامية واضحة وعميقة للأطفال، كل مشهد 90 إلى 115 كلمة بالحوار المصري القاهري المتصل الممتع دون أي صمت أو انقطاع"
       }) باللهجة المصرية القاهرية الطبيعية للأطفال بنسبة 100% بدون أي تشكيل فصحى وبدون جمل عامة غامضة.
 
@@ -3131,7 +3222,7 @@ async function generateFreshAiEpisodeForRunner({
 قواعد صارمة للهجة المصرية في كامل الحلقة:
 1. الحوار في كامل المشاهد يجب أن يكون عامي مصري قاهري أصيل ودافئ وعفوي وممتع للأطفال 100% (يا خبر، بص شوف، يا ترى إيه الحكاية، يلا بينا سوا، متقلقش خالص إحنا شطار وهنحلها، فكرة تجنن، إيه الجمال ده). ممنوع أي تعبيرات فصحى مسرحية جافة.
 2. في المشهد الثامن، اجعل الخاتمة مشجعة مع سؤال تفاعلي للأبطال في التعليقات، ولا تكرر أبداً كلمة "مغامرة" مرتين متتاليتين.
-3. مهم جداً: طول كل مشهد في الفيلم الطويل 90 إلى 115 كلمة، وفي الفيديو القصير 36 إلى 44 كلمة، لملء وقت المشهد بالكامل بحيوية دون صمت أو بطء.
+3. مهم جداً: طول كل مشهد في الفيلم الطويل 90 إلى 115 كلمة، وفي الفيديو القصير 16 إلى 22 كلمة فقط (ممنوع تجاوز 22 كلمة في المشهد القصير لكي يتناسب تماماً مع وقت الشورتس والريلز 60 إلى 75 ثانية).
 
 ⚠️ قاعدة حاسمة لمنع التكرار:
 تجنب تماماً أي تكرار أو تشابه في الفكرة أو الحبكة أو العنوان مع هذه القصص السابقة المنشورة في القناة:
@@ -3143,7 +3234,7 @@ ${recentTitlesList}
   "title": "عنوان القصة الجديد والمشوق بحيث يكون كامل المعنى وبطول 35 إلى 50 حرفاً دون أن ينقطع المعنى وبدون كلمة Noreen Kids وبدون هاشتاج",
   "moralLesson": "الدرس المستفاد من الحلقة",
   "scenes": [
-    { "sceneNumber": 1, "speakerName": "${team.mainCharacterName}", "title": "عنوان المشهد", "dialogueArabic": "الحوار الكرتوني المباشر الصادر من فم هذه الشخصية فقط دون أي راوي (المشهد الطويل: 90 إلى 115 كلمة، المشهد القصير: 36 إلى 44 كلمة)" }
+    { "sceneNumber": 1, "speakerName": "${team.mainCharacterName}", "title": "عنوان المشهد", "dialogueArabic": "الحوار الكرتوني المباشر الصادر من فم هذه الشخصية فقط دون أي راوي (المشهد الطويل: 90 إلى 115 كلمة، المشهد القصير: 16 إلى 22 كلمة)" }
   ]
 }`;
       let parsed = null;
@@ -3583,27 +3674,46 @@ async function attachFacebookVideoToPlaylist({
     if (!activeToken) return { success: false, reason: "missing_page_token" };
 
     // 1) Fetch existing video playlists for the page
+    console.log(`📋 [Facebook Playlists Query] Querying video lists for Page ${pageId}...`);
     const listRes = await fetch(
       `https://graph.facebook.com/v21.0/${encodeURIComponent(pageId)}/video_lists?fields=id,title,description&limit=100&access_token=${encodeURIComponent(activeToken)}`,
       { headers: { Authorization: `Bearer ${activeToken}` } }
     );
     const listData = await listRes.json().catch(() => ({}));
-    let matchedListId = null;
-    if (Array.isArray(listData?.data)) {
-      const found = listData.data.find(
-        (pl) =>
-          String(pl.title || "").trim().toLowerCase() === targetPlaylistName.trim().toLowerCase() ||
-          String(pl.title || "").includes(isShort ? "Shorts" : "Episodes") ||
-          String(pl.title || "").includes(isShort ? "Reels" : "Full")
+    console.log(`📋 [Facebook Playlists Query Response]:`, JSON.stringify(listData?.data || listData));
+
+    let matchedListId = playlistConfig?.id || null;
+    if (!matchedListId && Array.isArray(listData?.data) && listData.data.length > 0) {
+      // Direct title match
+      let found = listData.data.find(
+        (pl) => String(pl.title || "").trim().toLowerCase() === targetPlaylistName.trim().toLowerCase()
       );
-      if (found?.id) matchedListId = found.id;
+      // Keyword matching (Arabic and English)
+      if (!found) {
+        const shortKeywords = ["short", "reel", "شورت", "ريلز", "قصير", "قصيرة", "سريعة"];
+        const longKeywords = ["episode", "full", "طويل", "حلقة", "حلقات", "كامل", "فيديو"];
+        const keywords = isShort ? shortKeywords : longKeywords;
+        found = listData.data.find((pl) => {
+          const t = String(pl.title || "").toLowerCase();
+          return keywords.some((kw) => t.includes(kw));
+        });
+      }
+      // If still not found and only 1 list exists
+      if (!found && listData.data.length === 1) {
+        found = listData.data[0];
+      }
+      if (found?.id) {
+        matchedListId = found.id;
+        console.log(`🎯 [Facebook Playlist Match] Matched playlist: "${found.title}" (ID: ${found.id})`);
+      }
     }
 
-    // 2) If not found, attempt to create playlist via form-urlencoded
+    // 2) If not found, attempt playlist creation
     if (!matchedListId) {
       try {
         const createParams = new URLSearchParams({
           title: targetPlaylistName,
+          name: targetPlaylistName,
           description: isShort
             ? "Noreen Kids 3D Cartoons - Fun Shorts & Reels"
             : "Noreen Kids 3D Cartoons - Full Episodes & Adventures",
@@ -3621,12 +3731,19 @@ async function attachFacebookVideoToPlaylist({
           }
         );
         const createData = await createRes.json().catch(() => ({}));
-        if (createData?.id) matchedListId = createData.id;
-      } catch {}
+        console.log(`📋 [Facebook Playlist Creation Response]:`, JSON.stringify(createData));
+        if (createData?.id) {
+          matchedListId = createData.id;
+          console.log(`✨ Created new Facebook Playlist "${targetPlaylistName}" (ID: ${matchedListId})`);
+        }
+      } catch (cErr) {
+        console.warn(`   ⚠️ Playlist creation attempt warning: ${cErr.message}`);
+      }
     }
 
-    // 3) If playlist ID available, add video via URL-encoded form
+    // 3) Add video to the matched playlist using all supported Meta Graph API methods
     if (matchedListId) {
+      // Method A: POST /{video_list_id}/videos with video_id
       const addParams = new URLSearchParams({
         video_id: videoId,
         access_token: activeToken,
@@ -3643,17 +3760,40 @@ async function attachFacebookVideoToPlaylist({
         }
       );
       const addData = await addRes.json().catch(() => ({}));
+      console.log(`📋 [Facebook Playlist Add Method 1 Result]:`, JSON.stringify(addData));
       if (addRes.ok && (addData?.success === true || addData?.id || !addData?.error)) {
         console.log(`📂 Facebook Playlist (${targetPlaylistName}): Added ✓ (List ID: ${matchedListId})`);
         return { success: true, playlistId: matchedListId, playlistName: targetPlaylistName };
       }
+
+      // Method B: POST /{video_id} with video_list
+      const updateRes = await fetch(
+        `https://graph.facebook.com/v21.0/${encodeURIComponent(videoId)}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${activeToken}`,
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({
+            video_list: matchedListId,
+            access_token: activeToken,
+          }).toString(),
+        }
+      );
+      const updateData = await updateRes.json().catch(() => ({}));
+      console.log(`📋 [Facebook Playlist Add Method 2 Result]:`, JSON.stringify(updateData));
+      if (updateRes.ok && (updateData?.success === true || !updateData?.error)) {
+        console.log(`📂 Facebook Playlist (${targetPlaylistName}): Added via Video Update ✓ (List ID: ${matchedListId})`);
+        return { success: true, playlistId: matchedListId, playlistName: targetPlaylistName };
+      }
     }
 
-    // Notice for Meta API restriction on playlists
+    // Fallback notice
     console.log(
-      `📂 Facebook Playlist (${targetPlaylistName}): Meta Graph API restricts video list updates to Creator Studio / Meta Business Suite UI. Video is tagged with custom labels: ["أبطال نورين كيدز", "${videoFormat}"] ✓`
+      `📂 Facebook Playlist (${targetPlaylistName}): Video tagged with custom labels: ["أبطال نورين كيدز", "${videoFormat}"] ✓ (List ID: ${matchedListId || "none"})`
     );
-    return { success: false, playlistName: targetPlaylistName, managedVia: "meta_business_suite" };
+    return { success: false, playlistName: targetPlaylistName, playlistId: matchedListId };
   } catch (err) {
     console.warn(`   ⚠️ Facebook Playlist notice: ${err?.message || err}`);
     return { success: false, error: err?.message || String(err), playlistName: targetPlaylistName };
