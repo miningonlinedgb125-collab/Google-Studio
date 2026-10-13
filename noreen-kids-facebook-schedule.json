@@ -48,6 +48,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122116089675484976",
+      "photoId": "122116089651484976",
+      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع كارمن وسمسم",
+      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع كارمن وسمسم",
+      "caption": "💖 تحدي عائلي ممتع لكل أمهات وأطفال Noreen Kids! 💖\nكارمن وسمسم بيسألوا: مين يقدر يكتشف 3 فروقات ذكية بين الصورة [ أ ] والصورة [ ب ] في أقل من دقيقة؟ ⏱️🤔\n\n👇 شاركونا الحل في التعليقات مع اسم طفلكم الشاطر\nعشان كارمن وسمسم يردوا عليه ويقولوا له أحلى كلام تشجيع في الحلقة الجديدة! 🌟🎬\n🔔 وتابعوا صفحتنا لمتابعة باقي حلقات ومفاجآت الأسبوع! 👍✨\n\n#نورين_كيدز #Noreen_Kids #تحدي_اليوم #حواديت_قبل_النوم #تربية_إيجابية #أمهات_مصر",
+      "heroName": "كارمن",
+      "companionName": "سمسم",
+      "publishedAtCairo": "2026-10-13 · 21:32 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122116089675484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122116086495484976",
       "photoId": "122116086471484976",
       "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع تامر وكركور",
@@ -507,16 +519,6 @@
       "companionName": "الفأر المشاكس",
       "publishedAtCairo": "2026-10-02 · 05:53 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122110260753484976"
-    },
-    {
-      "postId": "1330185823512542_122110254357484976",
-      "photoId": "122110254327484976",
-      "themeTitle": "لوحة شرف أبطال Noreen Kids مع جدو والفأر المشاكس",
-      "caption": "💖 تحية خاصة من جدو والفأر المشاكس لكل أصحابنا الحلوين! 💖\nمين من أطفالنا الشطار غسل سنانه وسمع كلام ماما وبابا النهاردة؟ 🌟👏\n\n👇 كل أم تكتب اسم بطلها أو بطلتها في التعليقات تحت الصورة دي عشان جدو والفأر المشاكس يبعتولهم شهادة شطارة وتحية خاصة بالاسم! 🏆✨\nومتنسوش متابعة صفحة Noreen Kids 🔔👍 ومشاركة المنشور مع أصحابكم!\n\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_قبل_النوم #كرتون_أطفال_3D #تربية_إيجابية #أمهات_مصر",
-      "heroName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "publishedAtCairo": "2026-10-02 · 05:32 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122110254357484976"
     }
   ],
   "facebook": {
@@ -780,14 +782,15 @@
       "id": "gh-run-38445514444",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-13 (21:25 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-13 (21:33 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1791915571358-kpga",
       "longEpisodeId": "ep-gh-long-1791915621433-k61y",
       "shortEpisodeTitle": "Noreen Kids: لغز القلعة القديمة وفك شفرة بوابات الشجاعة بالكلمة الطيبة | مغامرات تامر وكركور",
-      "longEpisodeTitle": "ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام",
+      "longEpisodeTitle": "Noreen Kids: ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام | مغامرات كارمن وسمسم",
       "shortTitle": "Noreen Kids: لغز القلعة القديمة وفك شفرة بوابات الشجاعة بالكلمة الطيبة | مغامرات تامر وكركور",
-      "longTitle": "ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام",
+      "longTitle": "Noreen Kids: ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام | مغامرات كارمن وسمسم",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -795,9 +798,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "fqGwKlvHd4M",
+      "youtubeLongVideoId": "Hr-SHYD0x_c",
       "facebookShortVideoId": "1127431276471351",
+      "facebookLongVideoId": "1114017074675085",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1127431276471351",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1114017074675085",
       "facebookShortTitle": "Noreen Kids | لغز القلعة القديمة وفك شفرة بوابات الشجاعة بالكلمة الطيبة - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
+      "facebookLongTitle": "Noreen Kids | ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الط",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -805,16 +812,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 70,
-        "fileSizeBytes": 12215910,
-        "inspectedAt": "21:25"
+        "durationSec": 305,
+        "fileSizeBytes": 40359690,
+        "inspectedAt": "21:33"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
