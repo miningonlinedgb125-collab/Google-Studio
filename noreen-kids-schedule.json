@@ -37,6 +37,16 @@
     {
       "topic": "جنى وبلبل وسر ألحان كويكبات الفضاء المبهجة",
       "mainCharacterName": "جنى رائدة الفضاء",
+      "companionName": "بلبل الروبوت اللطيف"
+    },
+    {
+      "topic": "عمرو وزعتر وسر مزمار الراعي في كهف الصدى",
+      "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي"
+    },
+    {
+      "topic": "جنى وبلبل وسر ألحان كويكبات الفضاء المبهجة",
+      "mainCharacterName": "جنى رائدة الفضاء",
       "companionName": "بلبل الروبوت اللطيف",
       "timestampIso": "2026-10-13T05:36:04.384Z"
     },
@@ -201,28 +211,6 @@
       "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش",
       "timestampIso": "2026-10-09T16:21:42.923Z"
-    },
-    {
-      "topic": "حكاية الدب باندا الذي تعلّم آداب المائدة والأكل باليد",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
-    },
-    {
-      "topic": "الضمادة السحرية وحكاية التغلب على الخوف من الحقنة",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "حكاية الدب باندا الذي تعلّم آداب المائدة والأكل باليد",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "timestampIso": "2026-10-08T18:34:42.938Z"
-    },
-    {
-      "topic": "الضمادة السحرية وحكاية التغلب على الخوف من الحقنة",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-10-08T18:34:42.938Z"
     }
   ],
   "scheduledHistory": [
@@ -2632,16 +2620,17 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "١٣‏/١٠‏/٢٠٢٦، ٨:٥٧:٥٦ ص",
   "lastCloudRunReport": {
-    "id": "gh-run-38118435873",
-    "uploadMode": "manual_instant",
+    "id": "gh-run-38351839951",
+    "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-11 (09:49 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1791700499786-txq0",
-    "longEpisodeId": "ep-gh-long-1791700599464-q9vb",
-    "shortEpisodeTitle": "الطبيبة نورين وسر صندوق الألعاب في غابة النور",
-    "longEpisodeTitle": "Noreen Kids: تيتة والدب باندا وسر سلة الفواكه المنورة | مغامرات تيتة والدب باندا",
-    "shortTitle": "الطبيبة نورين وسر صندوق الألعاب في غابة النور",
-    "longTitle": "Noreen Kids: تيتة والدب باندا وسر سلة الفواكه المنورة | مغامرات تيتة والدب باندا",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-13 (08:57 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1791869650467-0xwr",
+    "longEpisodeId": "ep-gh-long-1791869764384-r4fx",
+    "shortEpisodeTitle": "Noreen Kids: جنى وبلبل وسر ألحان كويكبات الفضاء المبهجة | مغامرات جنى وبلبل",
+    "longEpisodeTitle": "Noreen Kids: عمرو وزعتر وسر مزمار الراعي في كهف الصدى | مغامرات عمرو وزعتر",
+    "shortTitle": "Noreen Kids: جنى وبلبل وسر ألحان كويكبات الفضاء المبهجة | مغامرات جنى وبلبل",
+    "longTitle": "Noreen Kids: عمرو وزعتر وسر مزمار الراعي في كهف الصدى | مغامرات عمرو وزعتر",
+    "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
@@ -2649,10 +2638,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeLongVideoId": "IEhCr9PeiFo",
-    "facebookLongVideoId": "1592042399326366",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1592042399326366",
-    "facebookLongTitle": "Noreen Kids | تيتة والدب باندا وسر سلة الفواكه المنورة - مغامرة تيتة والدب باندا",
+    "youtubeShortVideoId": "mBxxjZ5-YaU",
+    "youtubeLongVideoId": "SwWItiKe2ts",
+    "facebookShortVideoId": "1566705644784757",
+    "facebookLongVideoId": "1083744307987801",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1566705644784757",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1083744307987801",
+    "facebookShortTitle": "Noreen Kids | جنى وبلبل وسر ألحان كويكبات الفضاء المبهجة - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
+    "facebookLongTitle": "Noreen Kids | عمرو وزعتر وسر مزمار الراعي في كهف الصدى - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2667,9 +2660,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 333,
-      "fileSizeBytes": 38881198,
-      "inspectedAt": "09:49"
+      "durationSec": 539,
+      "fileSizeBytes": 55910072,
+      "inspectedAt": "08:57"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2678,7 +2671,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-11T06:49:49.414Z"
+    "reportedAtIso": "2026-10-13T05:57:59.679Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880"
