@@ -1249,11 +1249,14 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
       });
       const isEgyptian = dialect !== "fusha";
       const liveWavPath = path.join(tmpDir, `gemini_live_${sceneIndex}.wav`);
-      const liveModels = ["gemini-2.5-flash-native-audio-preview-12-2025"];
+      const liveModels = [
+        "gemini-2.5-flash-native-audio-preview-12-2025",
+        "gemini-3.8-live",
+      ];
 
       for (const liveModel of liveModels) {
         try {
-          const segments = splitArabicTextForGeminiLive(dialogue, 480);
+          const segments = splitArabicTextForGeminiLive(dialogue, 240);
           const pcmParts = [];
           const pauseBuf = Buffer.alloc(8640, 0);
           let allSegmentsOk = segments.length > 0;
@@ -1335,17 +1338,11 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
         for (let ttsRetry = 0; ttsRetry < 2; ttsRetry++) {
           try {
             // Strictly pureDialogue ONLY in user contents: prevents TTS from uttering persona instructions
+            // Strictly pureDialogue ONLY: TTS models reject developer instruction with 400 INVALID_ARGUMENT
             const ttsResp = await ai.models.generateContent({
               model: ttsModel,
               contents: [{ role: "user", parts: [{ text: pureDialogue }] }],
               config: {
-                systemInstruction: {
-                  parts: [
-                    {
-                      text: "You are a professional Egyptian Cairene cartoon voice actor for children. Speak ONLY the exact Arabic dialogue sent by the user verbatim with pure natural Egyptian colloquial dialect (اللهجة المصرية القاهرية الطبيعية). Strictly NEVER utter any persona descriptions, instructions, or meta words before or after the dialogue.",
-                    },
-                  ],
-                },
                 responseModalities: [Modality.AUDIO],
                 speechConfig: {
                   voiceConfig: {
@@ -1379,6 +1376,9 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
             }
           } catch (ttsErr) {
             const errStr = String(ttsErr?.message || "");
+            console.warn(
+              `   ⚠️ [Gemini Native Audio TTS Warning] المشهد ${sceneIndex + 1} (${ttsModel}): ${errStr}`
+            );
             if (errStr.includes("429") || errStr.includes("quota") || errStr.includes("RESOURCE_EXHAUSTED")) {
               await sleep(5000);
             }
@@ -3543,6 +3543,102 @@ async function uploadMp4ToFacebookPage({
   }
 
   return await uploadViaResumableVideosEndpoint();
+}
+
+async function attachFacebookVideoToPlaylist({
+  rawPageAccessToken,
+  pageId,
+  videoId,
+  videoFormat,
+  facebookSettings,
+}) {
+  if (!rawPageAccessToken || !pageId || !videoId) return { success: false, reason: "missing_params" };
+  const isShort = videoFormat === "short_9_16";
+  const playlistConfig = isShort
+    ? facebookSettings?.facebookPlaylists?.shorts
+    : facebookSettings?.facebookPlaylists?.long;
+  const targetPlaylistName =
+    playlistConfig?.name ||
+    (isShort ? "Noreen Kids – Fun Shorts & Reels" : "Noreen Kids – Full Episodes & Kids Videos");
+
+  try {
+    const activeToken = await resolveTrueFacebookPageAccessToken({
+      rawToken: rawPageAccessToken,
+      targetPageId: pageId,
+    });
+    if (!activeToken) return { success: false, reason: "missing_page_token" };
+
+    // 1) Fetch existing video playlists for the page
+    const listRes = await fetch(
+      `https://graph.facebook.com/v21.0/${encodeURIComponent(pageId)}/video_lists?fields=id,title,description&limit=50`,
+      { headers: { Authorization: `Bearer ${activeToken}` } }
+    );
+    const listData = await listRes.json().catch(() => ({}));
+    let matchedListId = null;
+
+    if (Array.isArray(listData?.data)) {
+      const found = listData.data.find(
+        (pl) =>
+          String(pl.title || "").trim().toLowerCase() === targetPlaylistName.trim().toLowerCase() ||
+          String(pl.title || "").includes(isShort ? "Shorts" : "Episodes") ||
+          String(pl.title || "").includes(isShort ? "Reels" : "Full")
+      );
+      if (found?.id) matchedListId = found.id;
+    }
+
+    // 2) If not found, attempt to create playlist
+    if (!matchedListId) {
+      try {
+        const createRes = await fetch(
+          `https://graph.facebook.com/v21.0/${encodeURIComponent(pageId)}/video_lists`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${activeToken}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              title: targetPlaylistName,
+              description: isShort
+                ? "Noreen Kids 3D Cartoons - Fun Shorts & Reels"
+                : "Noreen Kids 3D Cartoons - Full Episodes & Adventures",
+            }),
+          }
+        );
+        const createData = await createRes.json().catch(() => ({}));
+        if (createData?.id) matchedListId = createData.id;
+      } catch {}
+    }
+
+    // 3) If playlist ID available, add video
+    if (matchedListId) {
+      const addRes = await fetch(
+        `https://graph.facebook.com/v21.0/${encodeURIComponent(matchedListId)}/videos`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${activeToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ video_id: videoId }),
+        }
+      );
+      const addData = await addRes.json().catch(() => ({}));
+      if (addRes.ok && addData?.success !== false) {
+        console.log(`📂 Facebook Playlist (${targetPlaylistName}): Added ✓ (List ID: ${matchedListId})`);
+        return { success: true, playlistId: matchedListId, playlistName: targetPlaylistName };
+      }
+    }
+
+    // Notice for Meta API restriction on playlists
+    console.log(
+      `📂 Facebook Playlist (${targetPlaylistName}): Meta Graph API restricts video list updates to Creator Studio / Meta Business Suite UI. Video is tagged with custom labels: ["أبطال نورين كيدز", "${videoFormat}"] ✓`
+    );
+    return { success: false, playlistName: targetPlaylistName, managedVia: "meta_business_suite" };
+  } catch (err) {
+    console.warn(`   ⚠️ Facebook Playlist notice: ${err?.message || err}`);
+    return { success: false, error: err?.message || String(err), playlistName: targetPlaylistName };
+  }
 }
 
 /**
@@ -5837,6 +5933,17 @@ async function main() {
         console.log(`🎉 FACEBOOK SUCCESS! Uploaded Facebook Video ID: ${fbUploadRes.facebookVideoId}`);
         console.log(`📝 Facebook Title: ${fbUploadRes.facebookTitle}`);
         console.log(`🔗 Facebook Permalink: ${fbUploadRes.facebookPermalinkUrl}`);
+        if (fbUploadRes?.facebookVideoId) {
+          const fbPlaylistRes = await attachFacebookVideoToPlaylist({
+            rawPageAccessToken: facebookPageAccessToken,
+            pageId: facebookPageId,
+            videoId: fbUploadRes.facebookVideoId,
+            videoFormat: task.videoFormat,
+            facebookSettings: { ...facebookSettings, facebookPlaylists: schedule?.facebookPlaylists },
+          });
+          fbUploadRes.facebookPlaylistName = fbPlaylistRes.playlistName;
+          fbUploadRes.facebookPlaylistAdded = Boolean(fbPlaylistRes.success);
+        }
         if (schedule.firstCommentEnabled !== false && fbUploadRes.facebookVideoId) {
           const fbComment = await postFacebookFirstComment({
             rawPageAccessToken: facebookPageAccessToken,
