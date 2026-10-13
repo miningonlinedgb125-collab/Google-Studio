@@ -2613,6 +2613,16 @@
     {
       "topic": "مشاركة قطعة الحلوى والألعاب مع الأخت والأخ",
       "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "حكاية الدواء اللذيذ بنكهة الفراولة والشفاء العاجل",
+      "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "مشاركة قطعة الحلوى والألعاب مع الأخت والأخ",
+      "mainCharacterName": "سدرة الصغنونة",
       "companionName": "الفراشة الملونة",
       "timestampIso": "2026-10-13T20:52:06.409Z"
     },
@@ -2775,43 +2785,21 @@
       "topic": "ملك ولوليتا وسر شنطة الإسعاف وأرقام النجدة",
       "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا"
-    },
-    {
-      "topic": "سدرة والفراشة وسر لعبة الاستغماية في المزرعة",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "timestampIso": "2026-10-10T15:29:07.403Z"
-    },
-    {
-      "topic": "ملك ولوليتا وسر شنطة الإسعاف وأرقام النجدة",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "timestampIso": "2026-10-10T15:29:07.403Z"
-    },
-    {
-      "topic": "تامر وكركور وسر خيمة التسامح في واحة النخيل",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم"
-    },
-    {
-      "topic": "تدوير المخلفات الورقية وابتكار أجمل كراسات الرسم الملونة",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-13 · 21:33 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-38445514444",
+    "id": "gh-run-38464618020",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-13 (21:33 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1791915571358-kpga",
-    "longEpisodeId": "ep-gh-long-1791915621433-k61y",
-    "shortEpisodeTitle": "Noreen Kids: لغز القلعة القديمة وفك شفرة بوابات الشجاعة بالكلمة الطيبة | مغامرات تامر وكركور",
-    "longEpisodeTitle": "Noreen Kids: ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام | مغامرات كارمن وسمسم",
-    "shortTitle": "Noreen Kids: لغز القلعة القديمة وفك شفرة بوابات الشجاعة بالكلمة الطيبة | مغامرات تامر وكركور",
-    "longTitle": "Noreen Kids: ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام | مغامرات كارمن وسمسم",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-14 (00:16 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1791924653839-1scq",
+    "longEpisodeId": "ep-gh-long-1791924726409-ovco",
+    "shortEpisodeTitle": "Noreen Kids: مشاركة قطعة الحلوى والألعاب مع الأخت والأخ | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "longEpisodeTitle": "Noreen Kids: حكاية الدواء اللذيذ بنكهة الفراولة والشفاء العاجل | مغامرات الطبيبة ملك والقطة لوليتا",
+    "shortTitle": "Noreen Kids: مشاركة قطعة الحلوى والألعاب مع الأخت والأخ | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "longTitle": "Noreen Kids: حكاية الدواء اللذيذ بنكهة الفراولة والشفاء العاجل | مغامرات الطبيبة ملك والقطة لوليتا",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2820,14 +2808,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "fqGwKlvHd4M",
-    "youtubeLongVideoId": "Hr-SHYD0x_c",
-    "facebookShortVideoId": "1127431276471351",
-    "facebookLongVideoId": "1114017074675085",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1127431276471351",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1114017074675085",
-    "facebookShortTitle": "Noreen Kids | لغز القلعة القديمة وفك شفرة بوابات الشجاعة بالكلمة الطيبة - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
-    "facebookLongTitle": "Noreen Kids | ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الط",
+    "youtubeShortVideoId": "3CBeVlkiZUs",
+    "youtubeLongVideoId": "yBqn_DXR_Jc",
+    "facebookShortVideoId": "1284629527122479",
+    "facebookLongVideoId": "2319057712298329",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1284629527122479",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2319057712298329",
+    "facebookShortTitle": "Noreen Kids | مشاركة قطعة الحلوى والألعاب مع الأخت والأخ - مغامرة سدرة الصغنونة والفراشة الملونة",
+    "facebookLongTitle": "Noreen Kids | حكاية الدواء اللذيذ بنكهة الفراولة والشفاء العاجل - مغامرة ملك والقطة لوليتا",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2842,9 +2830,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 305,
-      "fileSizeBytes": 40359690,
-      "inspectedAt": "21:33"
+      "durationSec": 316,
+      "fileSizeBytes": 31992054,
+      "inspectedAt": "00:16"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2853,7 +2841,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-13T18:33:48.555Z"
+    "reportedAtIso": "2026-10-13T21:16:20.471Z"
   },
   "heroFairRotationIndex": 9,
   "interactiveHeroRotationIndex": 5,
