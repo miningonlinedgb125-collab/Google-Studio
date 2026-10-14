@@ -1707,8 +1707,8 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
 
   // Guarantee absolute invariant: Every scene duration MUST accommodate full speech plus peaceful pause
   for (const s of preparedScenes) {
-    if (s.durationSec < s.voiceDurSec + 1.0) {
-      s.durationSec = Math.ceil(s.voiceDurSec + 1.2);
+    if (s.durationSec < s.voiceDurSec + 1.2) {
+      s.durationSec = Math.ceil(s.voiceDurSec + 1.8);
     }
   }
   
@@ -3647,33 +3647,58 @@ async function attachFacebookVideoToPlaylist({
       }
     }
 
-    // 2) If not found, attempt playlist creation
+    // 2) If not found, attempt playlist creation with video_ids (Meta Graph API requirement)
     if (!matchedListId) {
       try {
-        const createParams = new URLSearchParams({
-          title: targetPlaylistName,
-          name: targetPlaylistName,
-          description: isShort
-            ? "Noreen Kids 3D Cartoons - Fun Shorts & Reels"
-            : "Noreen Kids 3D Cartoons - Full Episodes & Adventures",
-          access_token: activeToken,
-        });
-        const createRes = await fetch(
+        console.log(`📋 [Facebook Playlist Creation] Creating playlist "${targetPlaylistName}" with video ${videoId}...`);
+        let createRes = await fetch(
           `https://graph.facebook.com/v21.0/${encodeURIComponent(pageId)}/video_lists`,
           {
             method: "POST",
             headers: {
               Authorization: `Bearer ${activeToken}`,
-              "Content-Type": "application/x-www-form-urlencoded",
+              "Content-Type": "application/json",
             },
-            body: createParams.toString(),
+            body: JSON.stringify({
+              title: targetPlaylistName,
+              description: isShort
+                ? "Noreen Kids 3D Cartoons - Fun Shorts & Reels"
+                : "Noreen Kids 3D Cartoons - Full Episodes & Adventures",
+              video_ids: [String(videoId).trim()],
+              access_token: activeToken,
+            }),
           }
         );
-        const createData = await createRes.json().catch(() => ({}));
+        let createData = await createRes.json().catch(() => ({}));
+        if (!createData?.id) {
+          // Fallback via URLSearchParams with video_ids parameter
+          const createParams = new URLSearchParams({
+            title: targetPlaylistName,
+            name: targetPlaylistName,
+            description: isShort
+              ? "Noreen Kids 3D Cartoons - Fun Shorts & Reels"
+              : "Noreen Kids 3D Cartoons - Full Episodes & Adventures",
+            video_ids: JSON.stringify([String(videoId).trim()]),
+            access_token: activeToken,
+          });
+          const altRes = await fetch(
+            `https://graph.facebook.com/v21.0/${encodeURIComponent(pageId)}/video_lists`,
+            {
+              method: "POST",
+              headers: {
+                Authorization: `Bearer ${activeToken}`,
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+              body: createParams.toString(),
+            }
+          );
+          createData = await altRes.json().catch(() => ({}));
+        }
         console.log(`📋 [Facebook Playlist Creation Response]:`, JSON.stringify(createData));
         if (createData?.id) {
           matchedListId = createData.id;
-          console.log(`✨ Created new Facebook Playlist "${targetPlaylistName}" (ID: ${matchedListId})`);
+          console.log(`✨ Created new Facebook Playlist "${targetPlaylistName}" (ID: ${matchedListId}) with video ${videoId} added!`);
+          return { success: true, playlistId: matchedListId, playlistName: targetPlaylistName };
         }
       } catch (cErr) {
         console.warn(`   ⚠️ Playlist creation attempt warning: ${cErr.message}`);
@@ -3682,9 +3707,32 @@ async function attachFacebookVideoToPlaylist({
 
     // 3) Add video to the matched playlist using all supported Meta Graph API methods
     if (matchedListId) {
-      // Method A: POST /{video_list_id}/videos with video_id
+      // Method A1: POST /{video_list_id}/videos with JSON video_id
+      try {
+        const addJsonRes = await fetch(
+          `https://graph.facebook.com/v21.0/${encodeURIComponent(matchedListId)}/videos`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${activeToken}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              video_id: String(videoId).trim(),
+              access_token: activeToken,
+            }),
+          }
+        );
+        const addJsonData = await addJsonRes.json().catch(() => ({}));
+        if (addJsonRes.ok && (addJsonData?.success === true || addJsonData?.id || !addJsonData?.error)) {
+          console.log(`📂 Facebook Playlist (${targetPlaylistName}): Added via JSON ✓ (List ID: ${matchedListId})`);
+          return { success: true, playlistId: matchedListId, playlistName: targetPlaylistName };
+        }
+      } catch {}
+
+      // Method A2: POST /{video_list_id}/videos with form-urlencoded video_id
       const addParams = new URLSearchParams({
-        video_id: videoId,
+        video_id: String(videoId).trim(),
         access_token: activeToken,
       });
       const addRes = await fetch(
