@@ -48,6 +48,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122116319223484976",
+      "photoId": "122116319193484976",
+      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع دكتورة ملك والقطة لوليتا",
+      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع دكتورة ملك والقطة لوليتا",
+      "caption": "يا مامي جهزي بطلك الصغير.. وقت التحدي والتركيز جه مع \"دكتورة ملك\" وصديقتها الشقية \"القطة لوليتا\"! 🩺🐱✨\n\n🔍 **يلا يا شطار:** ركزوا كويس أوي بين الصورة [ أ ] والصورة [ ب ].. مين صاحب أقوى قوة ملاحظة هيعرف يطلع الـ 3 فروقات المستخبية؟ 👀🎯\n💬 **شاركونا الحل:** اكتبوا الفروقات التلاتة مع اسم طفلكم الشاطر في التعليقات، ودكتورة ملك والقطة لوليتا هيحيوه بالاسم ويبعتوله بوسة كبيرة في حلقة بكرة! 👧👦🎉\n🔔 **ماتنسوش:** اعملوا شير للبوست عشان تشاركوا التحدي مع أصحابكم، وتابعوا الصفحة وفعلوا الجرس 🔔 عشان توصلكم كل ألعابنا ومغامراتنا أول بأول! ❤️\n\n🔍 عايزين فوازير وتحديات أكتر؟ اضغطوا على تصنيف [تحدي الشطار] أو [أبطال نورين كيدز] أعلى البوست لمتابعة كل الألعاب السابقة مع أطفالكم! 🕵️‍♂️✨\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #فروقات_بين_الصورتين #أمهات_مصر",
+      "heroName": "دكتورة ملك",
+      "companionName": "القطة لوليتا",
+      "publishedAtCairo": "2026-10-14 · 13:33 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122116319223484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122116314975484976",
       "photoId": "122116314951484976",
       "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع ذياد والعصفورة الفرفوشة",
@@ -511,18 +523,6 @@
       "companionName": "سمسم",
       "publishedAtCairo": "2026-10-04 · 08:02 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122111393445484976"
-    },
-    {
-      "postId": "1330185823512542_122111078007484976",
-      "photoId": "122111077983484976",
-      "themeTitle": "فزورة الأبطال الشطار مع أستاذ شريف والصقر الذكي",
-      "title": "فزورة الأبطال الشطار مع أستاذ شريف والصقر الذكي",
-      "caption": "🎉 فزورة النهاردة من عالم Noreen Kids ثلاثي الأبعاد! 🎉\nبطلنا المحبوب \"أستاذ شريف\" وصديقنا الشقي \"الصقر الذكي\" بيجهزوا لمفاجأة كبيرة النهاردة! 🌟🎬\nسؤال للشطار الحلوين: إيه أكتر صفة جميلة بتحبوها في أستاذ شريف والصقر الذكي؟\n(الشجاعة 💪 - التعاون 🤝 - الذكاء 🧠 - خفة الدم 😄)؟\n\n👇 شاركونا في التعليقات واكتبوا اسم طفلكم عشان نرحب بيه بالاسم في عيلة نورين كيدز، واضغطوا متابعة للصفحة 🔔👍 عشان متفوتكمش حكاية النهاردة!\n\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_أطفال #كرتون_مصري #تربية_إيجابية #أمهات_مصر",
-      "heroName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "publishedAtCairo": "2026-10-03 · 17:45 بتوقيت مصر",
-      "publishedAtIso": "2026-10-03T14:45:53.773Z",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122111078007484976"
     }
   ],
   "facebook": {
@@ -646,8 +646,8 @@
     "videoFormat": "long_16_9",
     "dialect": "egyptian",
     "estimatedDurationSec": 312,
-    "mainCharacterName": "أم ملك",
-    "companionName": "البطريق المرح",
+    "mainCharacterName": "ملك",
+    "companionName": "القطة لوليتا",
     "scenes": [
       {
         "id": "sc-lg-1",
@@ -786,14 +786,15 @@
       "id": "gh-run-38547769109",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-14 (13:21 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-14 (13:36 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1791972999191-unlp",
       "longEpisodeId": "ep-gh-long-1791973065885-8v37",
       "shortEpisodeTitle": "Noreen Kids: إضاءة ممر الحي المظلم لمساعدة الجيران | مغامرات ذياد والعصفورة الفرفوشة",
-      "longEpisodeTitle": "الاعتذار الصادق وإصلاح قلعة الصلصال الملونة",
+      "longEpisodeTitle": "Noreen Kids: الاعتذار الصادق وإصلاح قلعة الصلصال الملونة | مغامرات أم ملك والبطريق المرح",
       "shortTitle": "Noreen Kids: إضاءة ممر الحي المظلم لمساعدة الجيران | مغامرات ذياد والعصفورة الفرفوشة",
-      "longTitle": "الاعتذار الصادق وإصلاح قلعة الصلصال الملونة",
+      "longTitle": "Noreen Kids: الاعتذار الصادق وإصلاح قلعة الصلصال الملونة | مغامرات أم ملك والبطريق المرح",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -801,9 +802,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "mt62IpYVqgA",
+      "youtubeLongVideoId": "iomWMcWk2TE",
       "facebookShortVideoId": "1620799369428910",
+      "facebookLongVideoId": "2647744158995676",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1620799369428910",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2647744158995676",
       "facebookShortTitle": "Noreen Kids | إضاءة ممر الحي المظلم لمساعدة الجيران - مغامرة ذياد والعصفورة الفرفوشة",
+      "facebookLongTitle": "Noreen Kids | الاعتذار الصادق وإصلاح قلعة الصلصال الملونة - مغامرة ملك والقطة لوليتا",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -811,16 +816,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 65,
-        "fileSizeBytes": 9856614,
-        "inspectedAt": "13:21"
+        "durationSec": 353,
+        "fileSizeBytes": 36039557,
+        "inspectedAt": "13:36"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
