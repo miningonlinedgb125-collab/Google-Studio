@@ -37,6 +37,16 @@
     {
       "topic": "طبيبة الغابة السحرية وعلاج جناح العصفور",
       "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "وصفة تيتة السحرية لعلاج زكام سنجوب المشاغب",
+      "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا"
+    },
+    {
+      "topic": "طبيبة الغابة السحرية وعلاج جناح العصفور",
+      "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-10-14T22:12:53.063Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-10-11T15:29:10.180Z"
-    },
-    {
-      "topic": "الطبيبة نورين وسر صندوق الألعاب في غابة النور",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "تيتة والدب باندا وسر سلة الفواكه المنورة",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
-    },
-    {
-      "topic": "الطبيبة نورين وسر صندوق الألعاب في غابة النور",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-10-11T06:36:39.464Z"
-    },
-    {
-      "topic": "تيتة والدب باندا وسر سلة الفواكه المنورة",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "timestampIso": "2026-10-11T06:36:39.464Z"
     }
   ],
   "scheduledHistory": [
@@ -228,7 +216,7 @@
       "id": "gh-run-38645773218",
       "uploadMode": "manual_instant",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-15 (01:25 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-15 (01:26 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1792015940573-n8v6",
       "longEpisodeId": "ep-gh-long-1792015973063-fwbt",
       "shortEpisodeTitle": "Noreen Kids: طبيبة الغابة السحرية وعلاج جناح العصفور | مغامرات الطبيبة نورين وأرنوب",
@@ -267,7 +255,7 @@
         "fastStartMoovFirst": true,
         "durationSec": 357,
         "fileSizeBytes": 41429238,
-        "inspectedAt": "01:25"
+        "inspectedAt": "01:26"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2678,16 +2666,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "١٥‏/١٠‏/٢٠٢٦، ١:٢٥:٥٧ ص",
   "lastCloudRunReport": {
-    "id": "gh-run-38547769109",
-    "uploadMode": "daily_schedule",
+    "id": "gh-run-38645773218",
+    "uploadMode": "manual_instant",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-14 (13:36 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1791972999191-unlp",
-    "longEpisodeId": "ep-gh-long-1791973065885-8v37",
-    "shortEpisodeTitle": "Noreen Kids: إضاءة ممر الحي المظلم لمساعدة الجيران | مغامرات ذياد والعصفورة الفرفوشة",
-    "longEpisodeTitle": "Noreen Kids: الاعتذار الصادق وإصلاح قلعة الصلصال الملونة | مغامرات أم ملك والبطريق المرح",
-    "shortTitle": "Noreen Kids: إضاءة ممر الحي المظلم لمساعدة الجيران | مغامرات ذياد والعصفورة الفرفوشة",
-    "longTitle": "Noreen Kids: الاعتذار الصادق وإصلاح قلعة الصلصال الملونة | مغامرات أم ملك والبطريق المرح",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-15 (01:26 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792015940573-n8v6",
+    "longEpisodeId": "ep-gh-long-1792015973063-fwbt",
+    "shortEpisodeTitle": "Noreen Kids: طبيبة الغابة السحرية وعلاج جناح العصفور | مغامرات الطبيبة نورين وأرنوب",
+    "longEpisodeTitle": "Noreen Kids: وصفة تيتة السحرية لعلاج زكام سنجوب المشاغب | مغامرات تيتة والدب باندا",
+    "shortTitle": "Noreen Kids: طبيبة الغابة السحرية وعلاج جناح العصفور | مغامرات الطبيبة نورين وأرنوب",
+    "longTitle": "Noreen Kids: وصفة تيتة السحرية لعلاج زكام سنجوب المشاغب | مغامرات تيتة والدب باندا",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2696,14 +2684,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "mt62IpYVqgA",
-    "youtubeLongVideoId": "iomWMcWk2TE",
-    "facebookShortVideoId": "1620799369428910",
-    "facebookLongVideoId": "2647744158995676",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1620799369428910",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2647744158995676",
-    "facebookShortTitle": "Noreen Kids | إضاءة ممر الحي المظلم لمساعدة الجيران - مغامرة ذياد والعصفورة الفرفوشة",
-    "facebookLongTitle": "Noreen Kids | الاعتذار الصادق وإصلاح قلعة الصلصال الملونة - مغامرة ملك والقطة لوليتا",
+    "youtubeShortVideoId": "MNW-yCU5Okw",
+    "youtubeLongVideoId": "_c51lKf_6jw",
+    "facebookShortVideoId": "1113729901240351",
+    "facebookLongVideoId": "1637411777892275",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1113729901240351",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1637411777892275",
+    "facebookShortTitle": "Noreen Kids | طبيبة الغابة السحرية وعلاج جناح العصفور - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
+    "facebookLongTitle": "Noreen Kids | وصفة تيتة السحرية لعلاج زكام سنجوب المشاغب - مغامرة تيتة والدب باندا",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2718,9 +2706,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 353,
-      "fileSizeBytes": 36039557,
-      "inspectedAt": "13:36"
+      "durationSec": 357,
+      "fileSizeBytes": 41429238,
+      "inspectedAt": "01:26"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2729,7 +2717,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-14T10:36:39.812Z"
+    "reportedAtIso": "2026-10-14T22:26:00.291Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880"
