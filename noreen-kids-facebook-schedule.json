@@ -789,7 +789,7 @@
       "id": "gh-run-38645773218",
       "uploadMode": "manual_instant",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-15 (01:25 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-15 (01:26 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1792015940573-n8v6",
       "longEpisodeId": "ep-gh-long-1792015973063-fwbt",
       "shortEpisodeTitle": "Noreen Kids: طبيبة الغابة السحرية وعلاج جناح العصفور | مغامرات الطبيبة نورين وأرنوب",
@@ -828,7 +828,7 @@
         "fastStartMoovFirst": true,
         "durationSec": 357,
         "fileSizeBytes": 41429238,
-        "inspectedAt": "01:25"
+        "inspectedAt": "01:26"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2633,6 +2633,16 @@
     {
       "topic": "طبيبة الغابة السحرية وعلاج جناح العصفور",
       "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "وصفة تيتة السحرية لعلاج زكام سنجوب المشاغب",
+      "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا"
+    },
+    {
+      "topic": "طبيبة الغابة السحرية وعلاج جناح العصفور",
+      "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-10-14T22:12:53.063Z"
     },
@@ -2795,28 +2805,6 @@
       "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-10-11T15:29:10.180Z"
-    },
-    {
-      "topic": "الطبيبة نورين وسر صندوق الألعاب في غابة النور",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "تيتة والدب باندا وسر سلة الفواكه المنورة",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
-    },
-    {
-      "topic": "الطبيبة نورين وسر صندوق الألعاب في غابة النور",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-10-11T06:36:39.464Z"
-    },
-    {
-      "topic": "تيتة والدب باندا وسر سلة الفواكه المنورة",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "timestampIso": "2026-10-11T06:36:39.464Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-14 · 22:43 بتوقيت مصر",
