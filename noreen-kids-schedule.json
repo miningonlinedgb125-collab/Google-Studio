@@ -37,6 +37,16 @@
     {
       "topic": "جدو الحكيم وحل خلاف كرة القدم بين أصحاب الحارة",
       "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "سباق الصقر الذكي وحساب مسافات خريطة الوادي",
+      "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "جدو الحكيم وحل خلاف كرة القدم بين أصحاب الحارة",
+      "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس",
       "timestampIso": "2026-10-14T19:27:04.927Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "تيتة",
       "companionName": "الدب باندا",
       "timestampIso": "2026-10-11T06:36:39.464Z"
-    },
-    {
-      "topic": "جدو والفأر المشاكس وسر دفء ليلة الحكايات",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-10-11T05:33:09.434Z"
-    },
-    {
-      "topic": "أستاذ شريف والصقر الذكي في ميزانية الحفلة",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-10-11T05:33:09.434Z"
-    },
-    {
-      "topic": "تعاون ذياد والعصفورة النشيطة لمساعدة جيران الواحة",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة"
-    },
-    {
-      "topic": "درس المعلمة أم ملك والبطريق المرح عن آداب الحوار",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح"
     }
   ],
   "scheduledHistory": [
