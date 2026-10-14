@@ -1667,53 +1667,10 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     }
 
     // Audio tempo adaptation for Shorts:
-    // If an individual scene voiceover exceeds 16.5s in Shorts, accelerate it naturally via FFmpeg atempo
-    // (preserving pitch and 100% of spoken words without cutting any syllable) so it fits the Short pacing!
-    if (isShort && synth.voiceDurSec > 16.5) {
-      const maxTargetDur = 15.5;
-      const speedRatio = Math.min(1.4, Math.max(1.05, synth.voiceDurSec / maxTargetDur));
-      const adjustedAudioPath = path.join(tmpDir, `sped_voice_${i}_${Date.now()}.wav`);
-      try {
-        await execFileAsync("ffmpeg", [
-          "-y",
-          "-i",
-          synth.audioPath,
-          "-filter:a",
-          `atempo=${speedRatio.toFixed(3)}`,
-          "-c:a",
-          "pcm_s16le",
-          "-ar",
-          "48000",
-          "-ac",
-          "2",
-          adjustedAudioPath,
-        ]);
-        if (fs.existsSync(adjustedAudioPath)) {
-          const { stdout: probeWav } = await execFileAsync("ffprobe", [
-            "-v",
-            "error",
-            "-show_entries",
-            "format=duration",
-            "-of",
-            "default=noprint_wrappers=1:nokey=1",
-            adjustedAudioPath,
-          ]);
-          const newDur = parseFloat(probeWav.trim());
-          if (!isNaN(newDur) && newDur > 0) {
-            console.log(
-              `   ⚡ [Short Audio Fit] المشهد ${i + 1}: تم تسريع الصوت بنسبة ${speedRatio.toFixed(2)}x ليناسب وقت الشورتس (${synth.voiceDurSec.toFixed(1)}s -> ${newDur.toFixed(1)}s) بدون تغيير النبرة أو بتر أي كلمة!`
-            );
-            synth = { ...synth, audioPath: adjustedAudioPath, voiceDurSec: newDur };
-          }
-        }
-      } catch (tempoErr) {
-        console.warn(`   ⚠️ atempo adjustment warning: ${tempoErr?.message || tempoErr}`);
-      }
-    }
-
+    // Maintain 100% natural 1.0x voice speed with ample breathing room (Zero Truncation)
     const minSceneFloor = isShort
-      ? Math.max(9, Math.ceil(synth.voiceDurSec + 0.65))
-      : Math.max(26, Math.ceil(synth.voiceDurSec + 0.65));
+      ? Math.max(14, Math.ceil(synth.voiceDurSec + 1.2))
+      : Math.max(26, Math.ceil(synth.voiceDurSec + 1.2));
     const naturalDur = minSceneFloor;
     preparedScenes.push({
       scene: sc,
@@ -1723,49 +1680,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     });
   }
 
-  // If sum of voice durations across all scenes in a Short exceeds 68s, adjust tempo across all scenes
-  let totalVoiceSec = preparedScenes.reduce((acc, s) => acc + s.voiceDurSec, 0);
-  if (isShort && totalVoiceSec > 68) {
-    const globalRatio = Math.min(1.35, Math.max(1.05, totalVoiceSec / 66.0));
-    console.log(
-      `   ⚡ [Short Global Audio Fit] إجمالي الصوت (${totalVoiceSec.toFixed(1)}s) يتطلب موازنة بنسبة ${globalRatio.toFixed(2)}x لضمان توقيت 65-75 ثانية.`
-    );
-    for (let i = 0; i < preparedScenes.length; i++) {
-      const s = preparedScenes[i];
-      const spedPath = path.join(tmpDir, `global_sped_${i}_${Date.now()}.wav`);
-      try {
-        await execFileAsync("ffmpeg", [
-          "-y",
-          "-i",
-          s.audioPath,
-          "-filter:a",
-          `atempo=${globalRatio.toFixed(3)}`,
-          "-c:a",
-          "pcm_s16le",
-          "-ar",
-          "48000",
-          "-ac",
-          "2",
-          spedPath,
-        ]);
-        const { stdout: probeWav } = await execFileAsync("ffprobe", [
-          "-v",
-          "error",
-          "-show_entries",
-          "format=duration",
-          "-of",
-          "default=noprint_wrappers=1:nokey=1",
-          spedPath,
-        ]);
-        const newD = parseFloat(probeWav.trim());
-        if (!isNaN(newD) && newD > 0) {
-          s.audioPath = spedPath;
-          s.voiceDurSec = newD;
-          s.durationSec = Math.ceil(newD + 0.65);
-        }
-      } catch {}
-    }
-  }
+  // Natural pacing preserved: each scene plays at authentic 1.0x human speaking speed
 
   // Enforce total duration bounds: Short strictly [60..80s] (target 65..75s), Long strictly [300..600s] (target >= 305s)
   const minTotalSec = isShort ? 65 : 305;
@@ -1790,10 +1705,10 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     }
   }
 
-  // Guarantee absolute invariant: Every scene duration MUST accommodate full speech
+  // Guarantee absolute invariant: Every scene duration MUST accommodate full speech plus peaceful pause
   for (const s of preparedScenes) {
-    if (s.durationSec < s.voiceDurSec + 0.5) {
-      s.durationSec = Math.ceil(s.voiceDurSec + 0.65);
+    if (s.durationSec < s.voiceDurSec + 1.0) {
+      s.durationSec = Math.ceil(s.voiceDurSec + 1.2);
     }
   }
   
@@ -1850,13 +1765,9 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       }" | Voice=${item.voiceDurSec.toFixed(1)}s | Scene=${dur}s (YouTube Fast-Processing Closed-GOP H.264 + Story VFX + Continuous PCM)...`
     );
 
-    // Ensure audio finishes with at least 0.5s breathing room before scene ends
-    const maxAllowedSpeech = Math.max(4, dur - 0.55);
-    const gentleTempo =
-      item.voiceDurSec > maxAllowedSpeech
-        ? Math.min(1.25, Math.max(1.02, Number(((item.voiceDurSec + 0.1) / maxAllowedSpeech).toFixed(3))))
-        : 1.0;
-    const tempoChain = gentleTempo > 1.01 ? `,atempo=${gentleTempo}` : "";
+    // Ensure audio finishes naturally with ample breathing room (strictly 1.0x natural tempo)
+    const gentleTempo = 1.0;
+    const tempoChain = "";
 
     const mixedWav = path.join(tmpDir, `scene_mixed_${i}.wav`);
     await execFileAsync("ffmpeg", [
@@ -2598,6 +2509,23 @@ function resolveCanonicalTeamForRunner(
   const mainClean = String(existingMainChar || "").trim();
   const compClean = String(existingCompChar || "").trim();
 
+  // 0) Strict Preservation of Existing Assigned Characters (with exact disambiguation)
+  if (mainClean || compClean) {
+    // Check "أم ملك" first before "ملك" to prevent substring collision!
+    if (/أم ملك|ام ملك/.test(mainClean) || /بطريق/.test(compClean)) {
+      return RUNNER_CHARACTER_TEAMS[9]; // أم ملك والبطريق
+    }
+    if (/لوليتا/.test(compClean) || (mainClean === "ملك" || mainClean === "دكتورة ملك" || mainClean === "الطبيبة ملك")) {
+      return RUNNER_CHARACTER_TEAMS[7]; // ملك ولوليتا
+    }
+    const exact = RUNNER_CHARACTER_TEAMS.find(
+      (tm) =>
+        (mainClean && tm.mainCharacterName === mainClean) ||
+        (compClean && tm.companionName === compClean)
+    );
+    if (exact) return exact;
+  }
+
   // 1) Exact or high-overlap match against any team's official stories array
   if (t) {
     for (const team of RUNNER_CHARACTER_TEAMS) {
@@ -2632,15 +2560,15 @@ function resolveCanonicalTeamForRunner(
     if (/تامر فارس|تامر|كركور/.test(t)) return RUNNER_CHARACTER_TEAMS[6];
   }
 
-  // 3) If the episode already has a valid assigned team hero, strictly preserve it!
+  // 3) Partial character match fallback (safely disambiguated)
   if (mainClean) {
-    const byExisting = RUNNER_CHARACTER_TEAMS.find(
-      (tm) =>
+    const byExisting = RUNNER_CHARACTER_TEAMS.find((tm) => {
+      if (tm.mainCharacterName === "ملك" && /أم ملك|ام ملك/.test(mainClean)) return false;
+      return (
         tm.mainCharacterName === mainClean ||
-        mainClean.includes(tm.mainCharacterName) ||
-        tm.mainCharacterName.includes(mainClean) ||
-        (compClean && tm.companionName === compClean)
-    );
+        (mainClean.length >= 4 && tm.mainCharacterName.includes(mainClean))
+      );
+    });
     if (byExisting) return byExisting;
   }
 
@@ -2802,7 +2730,6 @@ function buildSmartEpisodeForRunner({
 
   const shortTopicMention = cleanTopicForAdventure
     .replace(/^حكاية\s+|^قصة\s+|^حدوتة\s+|^مغامرة\s+/g, "")
-    .slice(0, 32)
     .trim() || cleanTopicForAdventure;
 
   const sceneTemplates = [
@@ -2868,7 +2795,7 @@ function buildSmartEpisodeForRunner({
   const selectedTemplates = isShort
     ? [sceneTemplates[0], sceneTemplates[1], sceneTemplates[5], sceneTemplates[7]]
     : sceneTemplates.slice(0, count);
-  const minWordsPerScene = isShort ? 15 : 40;
+  const minWordsPerScene = isShort ? 12 : 35;
   const scenes = selectedTemplates.map((tpl, idx) => {
     const aiSc = Array.isArray(aiScenes) ? aiScenes[idx] : null;
     const rawAiText = String(aiSc?.dialogueArabic || "").trim();
@@ -3222,7 +3149,7 @@ async function generateFreshAiEpisodeForRunner({
 قواعد صارمة للهجة المصرية في كامل الحلقة:
 1. الحوار في كامل المشاهد يجب أن يكون عامي مصري قاهري أصيل ودافئ وعفوي وممتع للأطفال 100% (يا خبر، بص شوف، يا ترى إيه الحكاية، يلا بينا سوا، متقلقش خالص إحنا شطار وهنحلها، فكرة تجنن، إيه الجمال ده). ممنوع أي تعبيرات فصحى مسرحية جافة.
 2. في المشهد الثامن، اجعل الخاتمة مشجعة مع سؤال تفاعلي للأبطال في التعليقات، ولا تكرر أبداً كلمة "مغامرة" مرتين متتاليتين.
-3. مهم جداً: طول كل مشهد في الفيلم الطويل 90 إلى 115 كلمة، وفي الفيديو القصير 16 إلى 22 كلمة فقط (ممنوع تجاوز 22 كلمة في المشهد القصير لكي يتناسب تماماً مع وقت الشورتس والريلز 60 إلى 75 ثانية).
+3. مهم جداً: طول كل مشهد في الفيلم الطويل 75 إلى 95 كلمة، وفي الفيديو القصير 14 إلى 18 كلمة فقط (ممنوع تجاوز 18 كلمة في المشهد القصير لكي يتناسب تماماً مع وقت الشورتس والريلز 55 إلى 65 ثانية بنبرة صوت مصرية طبيعية 100% بدون أي تسريع).
 
 ⚠️ قاعدة حاسمة لمنع التكرار:
 تجنب تماماً أي تكرار أو تشابه في الفكرة أو الحبكة أو العنوان مع هذه القصص السابقة المنشورة في القناة:
@@ -3241,7 +3168,7 @@ ${recentTitlesList}
       let lastErr = null;
       for (let attempt = 1; attempt <= 5; attempt++) {
         try {
-          const targetModel = attempt === 1 ? "gemini-3.8-flash" : attempt === 2 ? "gemini-3.5-flash" : attempt === 3 ? "gemini-3.7-flash" : "gemini-3.5-flash";
+          const targetModel = attempt <= 3 ? "gemini-3.8-flash" : "gemini-3.8-flash-lite";
           const response = await ai.models.generateContent({
             model: targetModel,
             contents: prompt,
@@ -3675,11 +3602,23 @@ async function attachFacebookVideoToPlaylist({
 
     // 1) Fetch existing video playlists for the page
     console.log(`📋 [Facebook Playlists Query] Querying video lists for Page ${pageId}...`);
-    const listRes = await fetch(
+    let listRes = await fetch(
       `https://graph.facebook.com/v21.0/${encodeURIComponent(pageId)}/video_lists?fields=id,title,description&limit=100&access_token=${encodeURIComponent(activeToken)}`,
       { headers: { Authorization: `Bearer ${activeToken}` } }
     );
-    const listData = await listRes.json().catch(() => ({}));
+    let listData = await listRes.json().catch(() => ({}));
+    if (!Array.isArray(listData?.data) || listData.data.length === 0) {
+      try {
+        const altRes = await fetch(
+          `https://graph.facebook.com/v21.0/${encodeURIComponent(pageId)}?fields=video_lists{id,title,description}&access_token=${encodeURIComponent(activeToken)}`,
+          { headers: { Authorization: `Bearer ${activeToken}` } }
+        );
+        const altData = await altRes.json().catch(() => ({}));
+        if (Array.isArray(altData?.video_lists?.data)) {
+          listData = { data: altData.video_lists.data };
+        }
+      } catch {}
+    }
     console.log(`📋 [Facebook Playlists Query Response]:`, JSON.stringify(listData?.data || listData));
 
     let matchedListId = playlistConfig?.id || null;

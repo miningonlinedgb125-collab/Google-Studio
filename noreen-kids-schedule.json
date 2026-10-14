@@ -41,8 +41,8 @@
     },
     {
       "topic": "الاعتذار الصادق وإصلاح قلعة الصلصال الملونة",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا"
+      "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح"
     },
     {
       "topic": "إضاءة ممر الحي المظلم لمساعدة الجيران",
@@ -238,7 +238,7 @@
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1620799369428910",
       "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2647744158995676",
       "facebookShortTitle": "Noreen Kids | إضاءة ممر الحي المظلم لمساعدة الجيران - مغامرة ذياد والعصفورة الفرفوشة",
-      "facebookLongTitle": "Noreen Kids | الاعتذار الصادق وإصلاح قلعة الصلصال الملونة - مغامرة ملك والقطة لوليتا",
+      "facebookLongTitle": "Noreen Kids | الاعتذار الصادق وإصلاح قلعة الصلصال الملونة - مغامرة أم ملك والبطريق المرح",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -2152,8 +2152,8 @@
     "videoFormat": "long_16_9",
     "dialect": "egyptian",
     "estimatedDurationSec": 312,
-    "mainCharacterName": "ملك",
-    "companionName": "القطة لوليتا",
+    "mainCharacterName": "أم ملك",
+    "companionName": "البطريق المرح",
     "scenes": [
       {
         "id": "sc-lg-1",
