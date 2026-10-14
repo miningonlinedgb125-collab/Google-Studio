@@ -2625,6 +2625,16 @@
     {
       "topic": "إضاءة ممر الحي المظلم لمساعدة الجيران",
       "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة"
+    },
+    {
+      "topic": "الاعتذار الصادق وإصلاح قلعة الصلصال الملونة",
+      "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "إضاءة ممر الحي المظلم لمساعدة الجيران",
+      "mainCharacterName": "ذياد",
       "companionName": "العصفورة الفرفوشة",
       "timestampIso": "2026-10-14T10:17:45.885Z"
     },
@@ -2787,28 +2797,6 @@
       "topic": "درس المعلمة أم ملك والبطريق المرح عن آداب الحوار",
       "mainCharacterName": "أم ملك",
       "companionName": "البطريق المرح"
-    },
-    {
-      "topic": "تعاون ذياد والعصفورة النشيطة لمساعدة جيران الواحة",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة",
-      "timestampIso": "2026-10-10T21:16:14.753Z"
-    },
-    {
-      "topic": "درس المعلمة أم ملك والبطريق المرح عن آداب الحوار",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "timestampIso": "2026-10-10T21:16:14.753Z"
-    },
-    {
-      "topic": "سدرة والفراشة وسر لعبة الاستغماية في المزرعة",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة"
-    },
-    {
-      "topic": "ملك ولوليتا وسر شنطة الإسعاف وأرقام النجدة",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-14 · 00:16 بتوقيت مصر",
