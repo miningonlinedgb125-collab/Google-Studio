@@ -2632,6 +2632,16 @@
     {
       "topic": "جدو الحكيم وحل خلاف كرة القدم بين أصحاب الحارة",
       "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "سباق الصقر الذكي وحساب مسافات خريطة الوادي",
+      "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "جدو الحكيم وحل خلاف كرة القدم بين أصحاب الحارة",
+      "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس",
       "timestampIso": "2026-10-14T19:27:04.927Z"
     },
@@ -2794,43 +2804,21 @@
       "mainCharacterName": "تيتة",
       "companionName": "الدب باندا",
       "timestampIso": "2026-10-11T06:36:39.464Z"
-    },
-    {
-      "topic": "جدو والفأر المشاكس وسر دفء ليلة الحكايات",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-10-11T05:33:09.434Z"
-    },
-    {
-      "topic": "أستاذ شريف والصقر الذكي في ميزانية الحفلة",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-10-11T05:33:09.434Z"
-    },
-    {
-      "topic": "تعاون ذياد والعصفورة النشيطة لمساعدة جيران الواحة",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة"
-    },
-    {
-      "topic": "درس المعلمة أم ملك والبطريق المرح عن آداب الحوار",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-14 · 13:36 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-38464618020",
+    "id": "gh-run-38622944283",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-14 (00:16 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1791924653839-1scq",
-    "longEpisodeId": "ep-gh-long-1791924726409-ovco",
-    "shortEpisodeTitle": "Noreen Kids: مشاركة قطعة الحلوى والألعاب مع الأخت والأخ | مغامرات سدرة الصغنونة والفراشة الملونة",
-    "longEpisodeTitle": "Noreen Kids: حكاية الدواء اللذيذ بنكهة الفراولة والشفاء العاجل | مغامرات الطبيبة ملك والقطة لوليتا",
-    "shortTitle": "Noreen Kids: مشاركة قطعة الحلوى والألعاب مع الأخت والأخ | مغامرات سدرة الصغنونة والفراشة الملونة",
-    "longTitle": "Noreen Kids: حكاية الدواء اللذيذ بنكهة الفراولة والشفاء العاجل | مغامرات الطبيبة ملك والقطة لوليتا",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-14 (22:43 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792005926419-c2ha",
+    "longEpisodeId": "ep-gh-long-1792006024927-hhmg",
+    "shortEpisodeTitle": "Noreen Kids: جدو الحكيم وحل خلاف كرة القدم بين أصحاب الحارة | مغامرات جدو والفأر المشاكس",
+    "longEpisodeTitle": "Noreen Kids: سباق الصقر الذكي وحساب مسافات خريطة الوادي | مغامرات أستاذ شريف والصقر الذكي",
+    "shortTitle": "Noreen Kids: جدو الحكيم وحل خلاف كرة القدم بين أصحاب الحارة | مغامرات جدو والفأر المشاكس",
+    "longTitle": "Noreen Kids: سباق الصقر الذكي وحساب مسافات خريطة الوادي | مغامرات أستاذ شريف والصقر الذكي",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2839,14 +2827,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "3CBeVlkiZUs",
-    "youtubeLongVideoId": "yBqn_DXR_Jc",
-    "facebookShortVideoId": "1284629527122479",
-    "facebookLongVideoId": "2319057712298329",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1284629527122479",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2319057712298329",
-    "facebookShortTitle": "Noreen Kids | مشاركة قطعة الحلوى والألعاب مع الأخت والأخ - مغامرة سدرة الصغنونة والفراشة الملونة",
-    "facebookLongTitle": "Noreen Kids | حكاية الدواء اللذيذ بنكهة الفراولة والشفاء العاجل - مغامرة ملك والقطة لوليتا",
+    "youtubeShortVideoId": "Bt_yhH02xlc",
+    "youtubeLongVideoId": "GpeNuwusNyk",
+    "facebookShortVideoId": "1626382582211662",
+    "facebookLongVideoId": "3030755140590710",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1626382582211662",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/3030755140590710",
+    "facebookShortTitle": "Noreen Kids | جدو الحكيم وحل خلاف كرة القدم بين أصحاب الحارة - مغامرة جدو والفأر المشاكس",
+    "facebookLongTitle": "Noreen Kids | سباق الصقر الذكي وحساب مسافات خريطة الوادي - مغامرة أستاذ شريف والصقر الذكي",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2861,9 +2849,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 316,
-      "fileSizeBytes": 31992054,
-      "inspectedAt": "00:16"
+      "durationSec": 366,
+      "fileSizeBytes": 40600863,
+      "inspectedAt": "22:43"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2872,7 +2860,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-13T21:16:20.471Z"
+    "reportedAtIso": "2026-10-14T19:43:42.588Z"
   },
   "heroFairRotationIndex": 13,
   "interactiveHeroRotationIndex": 5,
