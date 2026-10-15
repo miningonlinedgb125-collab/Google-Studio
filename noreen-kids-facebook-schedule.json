@@ -48,6 +48,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122116698423484976",
+      "photoId": "122116698399484976",
+      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع عمرو وزعتر",
+      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع عمرو وزعتر",
+      "caption": "🎉 فزورة قوة التركيز وسرعة البديهة من عالم Noreen Kids! 🎉\nبطلنا المحبوب \"عمرو\" وصديقنا الشقي \"زعتر\" بيجهزوا لمفاجأة وعايزين مساعدة أذكى الأبطال! 🕵️‍♀️💡\nبصوا كويس على الصورتين [ أ ] و [ ب ].. فيه 3 اختلافات ذكية مستخبية! يا ترى عيونكم الحلوة هتطلعهم؟ 👀✨\n\n👇 اكتبوا لنا الفروقات الـ 3 في تعليق مع اسم طفلكم الجميل علشان نرحب بيه في حلقة النهاردة! 💖🎬\n🔔 واضغطوا متابعة للصفحة ولايك للبوست عشان متفوتكمش حكاياتنا اليومية! 👍🌟\n\n#نورين_كيدز #Noreen_Kids #فزورة_اليوم #كرتون_مصري #أطفال_أذكياء #تربية_إيجابية #أمهات_مصر",
+      "heroName": "عمرو",
+      "companionName": "زعتر",
+      "publishedAtCairo": "2026-10-15 · 13:09 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122116698423484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122116691841484976",
       "photoId": "122116691811484976",
       "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع المهندسة نوران والنمر الفرفوش",
@@ -514,18 +526,6 @@
       "publishedAtCairo": "2026-10-06 · 18:47 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122112675201484976",
       "postKind": "scheduled"
-    },
-    {
-      "postId": "1330185823512542_122112671385484976",
-      "photoId": "122112671361484976",
-      "themeTitle": "فزورة الأبطال الشطار مع جنى وبلبل",
-      "title": "فزورة الأبطال الشطار مع جنى وبلبل",
-      "caption": "🎉 فزورة النهاردة من عالم Noreen Kids ثلاثي الأبعاد! 🎉\nبطلنا المحبوب \"جنى\" وصديقنا الشقي \"بلبل\" بيجهزوا لمفاجأة كبيرة النهاردة! 🌟🎬\nسؤال للشطار الحلوين: إيه أكتر صفة جميلة بتحبوها في جنى وبلبل؟\n(الشجاعة 💪 - التعاون 🤝 - الذكاء 🧠 - خفة الدم 😄)؟\n\n👇 شاركونا في التعليقات واكتبوا اسم طفلكم عشان نرحب بيه بالاسم في عيلة نورين كيدز، واضغطوا متابعة للصفحة 🔔👍 عشان متفوتكمش حكاية النهاردة!\n\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_أطفال #كرتون_مصري #تربية_إيجابية #أمهات_مصر",
-      "heroName": "جنى",
-      "companionName": "بلبل",
-      "publishedAtCairo": "2026-10-06 · 18:35 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122112671385484976",
-      "postKind": "scheduled"
     }
   ],
   "facebook": {
@@ -789,14 +789,15 @@
       "id": "gh-run-38716235426",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-15 (12:58 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-15 (13:10 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1792058081006-j6n8",
       "longEpisodeId": "ep-gh-long-1792058133746-2dvi",
       "shortEpisodeTitle": "Noreen Kids: تصميم القلعة البلورية وحمايتها من عاصفة الواحة | مغامرات المهندسة نوران والنمر الفرفوش",
-      "longEpisodeTitle": "قارب البردي وسر جزيرة الزهور المضيئة",
+      "longEpisodeTitle": "Noreen Kids: قارب البردي وسر جزيرة الزهور المضيئة | مغامرات عمرو وزعتر",
       "shortTitle": "Noreen Kids: تصميم القلعة البلورية وحمايتها من عاصفة الواحة | مغامرات المهندسة نوران والنمر الفرفوش",
-      "longTitle": "قارب البردي وسر جزيرة الزهور المضيئة",
+      "longTitle": "Noreen Kids: قارب البردي وسر جزيرة الزهور المضيئة | مغامرات عمرو وزعتر",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -804,9 +805,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "ogtnGpk9tQc",
+      "youtubeLongVideoId": "dhY1fiCJ2Hs",
       "facebookShortVideoId": "957667686929353",
+      "facebookLongVideoId": "1124749323468124",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/957667686929353",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1124749323468124",
       "facebookShortTitle": "Noreen Kids | تصميم القلعة البلورية وحمايتها من عاصفة الواحة - مغامرة المهندسة نوران والنمر الفرفوش",
+      "facebookLongTitle": "Noreen Kids | قارب البردي وسر جزيرة الزهور المضيئة - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -814,16 +819,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 67,
-        "fileSizeBytes": 9898557,
-        "inspectedAt": "12:58"
+        "durationSec": 345,
+        "fileSizeBytes": 37140562,
+        "inspectedAt": "13:10"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
