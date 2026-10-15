@@ -37,6 +37,16 @@
     {
       "topic": "تصميم القلعة البلورية وحمايتها من عاصفة الواحة",
       "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "قارب البردي وسر جزيرة الزهور المضيئة",
+      "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي"
+    },
+    {
+      "topic": "تصميم القلعة البلورية وحمايتها من عاصفة الواحة",
+      "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش",
       "timestampIso": "2026-10-15T09:55:33.746Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي",
       "timestampIso": "2026-10-13T05:36:04.384Z"
-    },
-    {
-      "topic": "إصلاح نافورة الموسيقى الكريستالية بالتفكير",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "الطبيبة نورين وإنقاذ السلحفاة وسر النظافة",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "إصلاح نافورة الموسيقى الكريستالية بالتفكير",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-10-11T15:29:10.180Z"
-    },
-    {
-      "topic": "الطبيبة نورين وإنقاذ السلحفاة وسر النظافة",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-10-11T15:29:10.180Z"
     }
   ],
   "scheduledHistory": [
@@ -2678,16 +2666,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "١٥‏/١٠‏/٢٠٢٦، ١:١٠:٠٨ م",
   "lastCloudRunReport": {
-    "id": "gh-run-38645773218",
-    "uploadMode": "manual_instant",
+    "id": "gh-run-38716235426",
+    "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-15 (01:26 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792015940573-n8v6",
-    "longEpisodeId": "ep-gh-long-1792015973063-fwbt",
-    "shortEpisodeTitle": "Noreen Kids: طبيبة الغابة السحرية وعلاج جناح العصفور | مغامرات الطبيبة نورين وأرنوب",
-    "longEpisodeTitle": "Noreen Kids: وصفة تيتة السحرية لعلاج زكام سنجوب المشاغب | مغامرات تيتة والدب باندا",
-    "shortTitle": "Noreen Kids: طبيبة الغابة السحرية وعلاج جناح العصفور | مغامرات الطبيبة نورين وأرنوب",
-    "longTitle": "Noreen Kids: وصفة تيتة السحرية لعلاج زكام سنجوب المشاغب | مغامرات تيتة والدب باندا",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-15 (13:10 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792058081006-j6n8",
+    "longEpisodeId": "ep-gh-long-1792058133746-2dvi",
+    "shortEpisodeTitle": "Noreen Kids: تصميم القلعة البلورية وحمايتها من عاصفة الواحة | مغامرات المهندسة نوران والنمر الفرفوش",
+    "longEpisodeTitle": "Noreen Kids: قارب البردي وسر جزيرة الزهور المضيئة | مغامرات عمرو وزعتر",
+    "shortTitle": "Noreen Kids: تصميم القلعة البلورية وحمايتها من عاصفة الواحة | مغامرات المهندسة نوران والنمر الفرفوش",
+    "longTitle": "Noreen Kids: قارب البردي وسر جزيرة الزهور المضيئة | مغامرات عمرو وزعتر",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2696,14 +2684,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "MNW-yCU5Okw",
-    "youtubeLongVideoId": "_c51lKf_6jw",
-    "facebookShortVideoId": "1113729901240351",
-    "facebookLongVideoId": "1637411777892275",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1113729901240351",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1637411777892275",
-    "facebookShortTitle": "Noreen Kids | طبيبة الغابة السحرية وعلاج جناح العصفور - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
-    "facebookLongTitle": "Noreen Kids | وصفة تيتة السحرية لعلاج زكام سنجوب المشاغب - مغامرة تيتة والدب باندا",
+    "youtubeShortVideoId": "ogtnGpk9tQc",
+    "youtubeLongVideoId": "dhY1fiCJ2Hs",
+    "facebookShortVideoId": "957667686929353",
+    "facebookLongVideoId": "1124749323468124",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/957667686929353",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1124749323468124",
+    "facebookShortTitle": "Noreen Kids | تصميم القلعة البلورية وحمايتها من عاصفة الواحة - مغامرة المهندسة نوران والنمر الفرفوش",
+    "facebookLongTitle": "Noreen Kids | قارب البردي وسر جزيرة الزهور المضيئة - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2718,9 +2706,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 357,
-      "fileSizeBytes": 41429238,
-      "inspectedAt": "01:26"
+      "durationSec": 345,
+      "fileSizeBytes": 37140562,
+      "inspectedAt": "13:10"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2729,7 +2717,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-14T22:26:00.291Z"
+    "reportedAtIso": "2026-10-15T10:10:11.745Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880"
