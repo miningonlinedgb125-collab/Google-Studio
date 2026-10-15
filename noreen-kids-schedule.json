@@ -2725,15 +2725,5 @@
   "lastFacebookAutoCommentScanAtCairo": "١٥‏/١٠‏/٢٠٢٦، ١:١٠:٠٧ م",
   "heroFairRotationIndex": 3,
   "interactiveHeroRotationIndex": 1,
-  "heroRoleSwapCycle": false,
-  "facebookPlaylists": {
-    "shorts": {
-      "name": "Noreen Kids – Fun Shorts & Reels",
-      "type": "reels_and_shorts"
-    },
-    "long": {
-      "name": "Noreen Kids – Full Episodes & Kids Videos",
-      "type": "full_episodes"
-    }
-  }
+  "heroRoleSwapCycle": false
 }

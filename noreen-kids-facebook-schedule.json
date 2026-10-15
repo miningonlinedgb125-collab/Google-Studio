@@ -2865,15 +2865,5 @@
   },
   "heroFairRotationIndex": 3,
   "interactiveHeroRotationIndex": 5,
-  "heroRoleSwapCycle": false,
-  "facebookPlaylists": {
-    "shorts": {
-      "name": "Noreen Kids – Fun Shorts & Reels",
-      "type": "reels_and_shorts"
-    },
-    "long": {
-      "name": "Noreen Kids – Full Episodes & Kids Videos",
-      "type": "full_episodes"
-    }
-  }
+  "heroRoleSwapCycle": false
 }
