@@ -4303,25 +4303,28 @@ ${specificIntentGuideline}
   return randPick(warmReplies);
 }
 
+const INTERACTIVE_PUZZLE_MODES = [
+  "odd_one_out",     // تحدي الصورة المختلفة من [ 1 - 4 ]
+  "count_items",     // تحدي سرعة الملاحظة والعد (كم نجمة ذهبية)
+  "which_path",      // تحدي المتاهة الذكية (أي مسار 1 أو 2 أو 3 يوصل البطل لصديقه)
+  "spot_difference", // تحدي الفروقات المتطورة بين الصورتين [ أ ] و [ ب ]
+];
+
 function generateDynamicPuzzleConfig(seed = Date.now()) {
   const safeNum = Math.abs(Number(seed) || Date.now());
-
-  // Truly dynamic coordinate generator: picks 3 distinct zones from 6 varied areas
   const zoneCoordsA = [
-    { x: 120 + ((safeNum * 17) % 180), y: 110 + ((safeNum * 13) % 60) }, // Top-left
-    { x: 420 + ((safeNum * 19) % 160), y: 110 + ((safeNum * 23) % 60) }, // Top-right
-    { x: 100 + ((safeNum * 31) % 180), y: 260 + ((safeNum * 29) % 120) }, // Mid-left
-    { x: 440 + ((safeNum * 37) % 150), y: 260 + ((safeNum * 41) % 120) }, // Mid-right
-    { x: 140 + ((safeNum * 43) % 160), y: 520 + ((safeNum * 47) % 100) }, // Lower-left
-    { x: 420 + ((safeNum * 53) % 160), y: 520 + ((safeNum * 59) % 100) }, // Lower-right
+    { x: 120 + ((safeNum * 17) % 180), y: 110 + ((safeNum * 13) % 60) },
+    { x: 420 + ((safeNum * 19) % 160), y: 110 + ((safeNum * 23) % 60) },
+    { x: 100 + ((safeNum * 31) % 180), y: 260 + ((safeNum * 29) % 120) },
+    { x: 440 + ((safeNum * 37) % 150), y: 260 + ((safeNum * 41) % 120) },
+    { x: 140 + ((safeNum * 43) % 160), y: 520 + ((safeNum * 47) % 100) },
+    { x: 420 + ((safeNum * 53) % 160), y: 520 + ((safeNum * 59) % 100) },
   ];
-
   const pickedZoneIdxs = [
     safeNum % 2,
     2 + ((safeNum >> 2) % 2),
     4 + ((safeNum >> 4) % 2),
   ];
-
   const iconPairs = [
     { a: { icon: "⭐", bg: "#fbbf24", stroke: "#fef08a", name: "نجمة ذهبية" }, b: { icon: "💖", bg: "#ec4899", stroke: "#fbcfe8", name: "قلب وردي" } },
     { a: { icon: "👑", bg: "#f59e0b", stroke: "#fef08a", name: "تاج ذهبي" }, b: { icon: "🎈", bg: "#ef4444", stroke: "#fecaca", name: "بالونة حمراء" } },
@@ -4336,11 +4339,9 @@ function generateDynamicPuzzleConfig(seed = Date.now()) {
     { a: { icon: "🔍", bg: "#0ea5e9", stroke: "#bae6fd", name: "عدسة مكبرة" }, b: { icon: "🧭", bg: "#d97706", stroke: "#fef3c7", name: "بوصلة مغامرات" } },
     { a: { icon: "🍎", bg: "#dc2626", stroke: "#fca5a5", name: "تفاحة حمراء" }, b: { icon: "🍇", bg: "#7c3aed", stroke: "#ddd6fe", name: "عنقود عنب" } },
   ];
-
   const p1 = iconPairs[safeNum % iconPairs.length];
   const p2 = iconPairs[(safeNum + 3) % iconPairs.length];
   const p3 = iconPairs[(safeNum + 7) % iconPairs.length];
-
   const c1 = zoneCoordsA[pickedZoneIdxs[0]];
   const c2 = zoneCoordsA[pickedZoneIdxs[1]];
   const c3 = zoneCoordsA[pickedZoneIdxs[2]];
@@ -4353,7 +4354,8 @@ function generateDynamicPuzzleConfig(seed = Date.now()) {
   };
 }
 
-async function buildDynamicSpotTheDifferenceCaption({
+async function buildDynamicInteractiveChallengeCaption({
+  mode = "spot_difference",
   shortHero,
   shortComp,
   seed = Date.now(),
@@ -4362,16 +4364,27 @@ async function buildDynamicSpotTheDifferenceCaption({
   if (geminiKey) {
     try {
       const ai = new GoogleGenAI({ apiKey: geminiKey });
+      let specificChallengeDesc = "";
+      if (mode === "odd_one_out") {
+        specificChallengeDesc = `تحدي "الصورة المختلفة": معروض 4 صور مرقمة [ 1 ، 2 ، 3 ، 4 ] للبطل.. 3 صور متطابقة تماماً وصورة واحدة فقط مختلفة! ادعُ الأطفال لاكتشاف رقم الصورة المختلفة.`;
+      } else if (mode === "count_items") {
+        specificChallengeDesc = `تحدي "سرعة الملاحظة والعد": صورة كرتونية جميلة فيها نجوم ذهبية لامعة مستخبية.. ادعُ الأمهات والأطفال لعدّ النجوم بدقة وكتابة العدد.`;
+      } else if (mode === "which_path") {
+        specificChallengeDesc = `تحدي "المتاهة الذكية": البطل على اليمين والرفيق على الشمال وفيه 3 مسارات ملونة [ 1 ، 2 ، 3 ].. مسار واحد بس هو اللي هيوصل البطل لصديقه! ادعُهم لتتبع المسار واكتشاف رقمه.`;
+      } else {
+        specificChallengeDesc = `تحدي "قوة الملاحظة والفروقات": مقارنة الصورتين [ أ ] و [ ب ] واستخراج 3 اختلافات ذكية بينهما.`;
+      }
+
       const prompt = `أنت كاتب محتوى إبداعي لمنشورات صفحة "Noreen Kids" الرسمية للأطفال على فيسبوك.
-اكتب منشوراً تفاعلياً جديداً ومميزاً جداً باللهجة المصرية الدافئة والمبهجة للأمهات والأطفال لتحدي "قوة الملاحظة واستخراج 3 فروقات بين الصورة [ أ ] والصورة [ ب ]" مع بطلنا المحبوب "${shortHero}" وصديقه "${shortComp}".
+اكتب منشوراً تفاعلياً جديداً ومميزاً جداً باللهجة المصرية الدافئة والمبهجة للأمهات والأطفال لنوع التحدي التالي مع بطلنا المحبوب "${shortHero}" وصديقه "${shortComp}":
+${specificChallengeDesc}
 
 الشروط الإلزامية:
 1. المنشور باللهجة المصرية الودودة المناسبة للأسرة والأطفال.
-2. ادعُ الأطفال والأمهات لمقارنة الصورتين [ أ ] و [ ب ] والبحث عن الـ 3 فروقات الذكية.
-3. اطلب من المتابعين كتابة الفروقات وكتابة اسم طفلهم في التعليقات لكي يحييه ${shortHero} و${shortComp} بالاسم في حلقة بكرة.
+2. ادعُ الأطفال والأمهات للتفاعل والملاحظة الذكية مع السؤال المحدد.
+3. اطلب من المتابعين كتابة الإجابة واسم طفلهم في التعليقات لكي يحييه ${shortHero} و${shortComp} بالاسم في حلقة بكرة.
 4. حفزهم على متابعة الصفحة 🔔 ومشاركة المنشور.
-5. أضف سطر توجيهي للأمهات: "🔍 عايزين فوازير وتحديات أكتر؟ اضغطوا على تصنيف [تحدي الشطار] أو [أبطال نورين كيدز] أعلى البوست لمتابعة كل الألعاب السابقة مع أطفالكم! 🕵️‍♂️✨".
-6. أضف هاشتاجات رسمية للتصنيف (#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #فروقات_بين_الصورتين #أمهات_مصر).
+5. أضف هاشتاجات رسمية (#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر).
 6. طول المنشور مناسب وجذاب (من 4 إلى 6 أسطر مقسمة بنقاط وإيموجي). لا تذكر أي أبطال آخرين خارج ${shortHero} و${shortComp}.`;
 
       const resp = await ai.models.generateContent({
@@ -4385,67 +4398,78 @@ async function buildDynamicSpotTheDifferenceCaption({
     } catch {}
   }
 
-  const templates = [
-    `🔍 تحدي قوة الملاحظة والذكاء مع ${shortHero} و${shortComp}! 🌟
-أبطالنا الشطار وأمهاتنا الغاليين.. ركزوا كويس جداً وقارنوا بين الصورة [ أ ] والصورة [ ب ]! 🤔✨
-فيه 3 فروقات واضحة وممتعة جداً بين الصورتين.. مين أشطر بطل أو بطلة هيعرف يكتشفهم ويكتبهم؟ 🕵️‍♂️💖
+  const fallbackMap = {
+    odd_one_out: [
+      `🔍 تحدي قوة الملاحظة السريعة مع ${shortHero} و${shortComp}! 🌟
+أبطالنا الشطار وأمهاتنا الغاليين.. بصوا كويس جداً على الصور الـ 4 المرقمة [ 1 ، 2 ، 3 ، 4 ]! 👀✨
+فيه 3 صور متطابقين تماماً.. وصورة واحدة بس هي اللي مختلفة وفيها تفصيلة ذكية! 🕵️‍♂️💡
+مين أشطر بطل أو بطلة هيعرف يكتشف رقم الصورة المختلفة؟ 🤔
+1️⃣ اكتبوا رقم الصورة المختلفة في تعليق 👇
+2️⃣ واكتبوا اسم طفلكم الشاطر علشان ${shortHero} و${shortComp} يحيوه بالاسم ويبعتوله وسام الشطارة! 🏅🎬
+🔔 متنسوش متابعة صفحتنا Noreen Kids لتحديات يومية ممتعة! 👍💖
+#نورين_كيدز #Noreen_Kids #تحدي_الشطار #أبطال_نورين_كيدز #ذكاء_الأطفال #أمهات_مصر`,
 
+      `🎉 فزورة أذكياء نورين كيدز: مين هيطلع الصورة المختلفة؟ 🎉
+بطلنا المحبوب "${shortHero}" عمل تحدي جديد: 4 مربعات مرقمة قدامكم [ 1 - 4 ]! 🧐✨
+ثلاث صور توأم وزي بعض بالظبط.. بس فيه صورة واحدة عاملة نفسها زيهم وهي مختلفة! 👀
+👇 ركزوا واكتبوا لنا رقم الصورة المختلفة واسم بطلكم الصغير علشان نكرمه في حلقة بكرة! 🎬✨
+🔔 اضغطوا متابعة للصفحة ولايك للتحدي عشان متفوتكمش حكاياتنا اليومية! 👍❤️
+#نورين_كيدز #Noreen_Kids #تحدي_الملاحظة #كرتون_أطفال #أمهات_مصر`,
+    ],
+    count_items: [
+      `⭐ تحدي سرعة العد والتركيز مع ${shortHero} و${shortComp}! 🌟
+أبطالنا الشطار وأمهاتنا الحبايب.. النجوم الذهبية اللامعة انتشرت في عالم نورين كيدز! ✨
+ركزوا كويس جداً في الصورة وعدّوا: كم [نجمة ذهبية ⭐] موجودة قدامكم؟ 🧠🧐
+يا ترى 5 ولا 7 ولا 8؟ ورونا شطارة أبطالكم في الحساب وسرعة البديهة! 💪
+👇 اكتبوا عدد النجوم واسم طفلكم الجميل في التعليقات عشان ${shortHero} يهديه وسام العبقري الصغير! 🏆🎬
+🔔 متنسوش متابعة الصفحة لمغامرات وفوازير كل يوم! ❤️
+#نورين_كيدز #Noreen_Kids #تحدي_العد #ذكاء_الأطفال #كرتون_3D #أمهات_مصر`,
+
+      `✨ مين أسرع بطل هيعد كل النجوم الذهبية في الصورة؟ ✨
+${shortHero} و${shortComp} بيجهزوا لحكاية جديدة، والنجوم اللامعة بتنور طريقهم! 🌟
+يلا يا شطار يا حلوين.. عدّوا النجوم مع ماما واكتبوا لنا العدد المظبوط في تعليق! 👀🔢
+👇 اكتبوا الحل واسم البطل عشان نوجهله تحية خاصة بالاسم في الحلقة القادمة! 🎬💖
+🔔 شير للتحدي ومتابعة لصفحة Noreen Kids لمزيد من الألعاب المفيدة! 👍
+#نورين_كيدز #Noreen_Kids #فوازير_أطفال #تحدي_الشطار #أمهات_مصر`,
+    ],
+    which_path: [
+      `🧭 تحدي المتاهة الذكية مع ${shortHero} و${shortComp}! 🌟
+بطلنا "${shortHero}" عايز يوصل لصديقه "${shortComp}" بأسرع وقت، ومحتاج مساعدة أذكى أبطال! 🏃‍♂️💨
+قدامكم 3 مسارات ملونة:
+🔴 المسار رقم [ 1 ]
+🟢 المسار رقم [ 2 ]
+🔵 المسار رقم [ 3 ]
+يا ترى أنهي طريق فيهم هو اللي هيوصله للهدف من غير أي عوائق؟ 👀🔍
+👇 تتبعوا الخط بعيونكم واكتبوا رقم المسار الصح واسم طفلكم علشان ${shortHero} يشكره بنفسه! 🎬🏅
+🔔 متنسوش لايك ومتابعة لصفحة Noreen Kids لمغامرات جديدة كل يوم! 💖👍
+#نورين_كيدز #Noreen_Kids #متاهة_الأذكياء #تحدي_الشطار #أمهات_مصر`,
+
+      `🎉 ساعدوا ${shortHero} يوصل لـ ${shortComp} في المتاهة السحرية! 🎉
+تحدي تفاعلي شيق جداً بيقوي التركيز وحركة العين والتفكير المنطقي لأطفالنا الحلوين! 🧠✨
+امشوا مع المسارات [ 1 أو 2 أو 3 ] وشوفوا مين فيهم البطل الحقيقي اللي هيوصل للنهاية! 🧐
+👇 اكتبوا الحل واسم البطل الصغير في الكومنتات علشان نهنيه على تركيزه العالي! 🏆💖
+🔔 تابعوا صفحة نورين كيدز لكل جديد ومسلي! 👍
+#نورين_كيدز #Noreen_Kids #تحدي_المتاهة #كرتون_مصري #أمهات_مصر`,
+    ],
+    spot_difference: [
+      `🔍 تحدي قوة الملاحظة والذكاء مع ${shortHero} و${shortComp}! 🌟
+أبطالنا الشطار وأمهاتنا الغاليين.. ركزوا كويس جداً وقارنوا بين الصورة [ أ ] والصورة [ ب ]! 🤔✨
+فيه 3 فروقات واضحة وممتعة جداً بين الصورتين.. مين أشطر بطل أو بطلة هيعرف يكتشفهم؟ 🕵️‍♂️💖
 1️⃣ اكتبوا الفروقات الـ 3 اللي لاحظتوها في التعليقات 👇
 2️⃣ اكتبوا اسم طفلكم الشاطر عشان ${shortHero} و${shortComp} يحيوه بالاسم ويشجعوه في حلقة بكرة! 🎬✨
-3️⃣ متنسوش متابعة صفحة Noreen Kids 🔔👍 ومشاركة التحدي مع كل الأمهات وأصحابكم! 🏆🎉
+🔔 متنسوش متابعة صفحة Noreen Kids ومشاركة التحدي مع كل الأمهات! 🏆🎉
+#نورين_كيدز #Noreen_Kids #تحدي_الملاحظة #فروقات_بين_الصورتين #أمهات_مصر`,
 
-#نورين_كيدز #Noreen_Kids #تحدي_الملاحظة #فروقات_بين_الصورتين #كرتون_3D #قصص_أطفال #ذكاء_الأطفال #أمهات_مصر`,
-
-    `🎉 فزورة قوة التركيز وسرعة البديهة من عالم Noreen Kids! 🎉
-بطلنا المحبوب "${shortHero}" وصديقنا الشقي "${shortComp}" بيجهزوا لمفاجأة وعايزين مساعدة أذكى الأبطال! 🕵️‍♀️💡
+      `🎉 فزورة قوة التركيز وسرعة البديهة من عالم Noreen Kids! 🎉
 بصوا كويس على الصورتين [ أ ] و [ ب ].. فيه 3 اختلافات ذكية مستخبية! يا ترى عيونكم الحلوة هتطلعهم؟ 👀✨
-
 👇 اكتبوا لنا الفروقات الـ 3 في تعليق مع اسم طفلكم الجميل علشان نرحب بيه في حلقة النهاردة! 💖🎬
 🔔 واضغطوا متابعة للصفحة ولايك للبوست عشان متفوتكمش حكاياتنا اليومية! 👍🌟
+#نورين_كيدز #Noreen_Kids #فزورة_اليوم #كرتون_3D #أمهات_مصر`,
+    ],
+  };
 
-#نورين_كيدز #Noreen_Kids #فزورة_اليوم #كرتون_مصري #أطفال_أذكياء #تربية_إيجابية #أمهات_مصر`,
-
-    `🌟 مين أسرع عبقري هيطلع الـ 3 فروقات بين [ أ ] و [ ب ] مع ${shortHero} و${shortComp}؟ 🌟
-تحدي تفاعلي شيق لكل أبطالنا وأمهاتنا لتنمية التركيز وقوة الملاحظة قبل حلقة الكرتون الجديدة! 🧠✨
-
-👇 ركزوا في كل تفصيلة واكتبوا الفروقات الـ 3 في التعليقات..
-💖 واكتبوا اسم طفلكم الشاطر علشان ${shortHero} و${shortComp} يبعتوله شهادة شطارة وسلام خاص بالاسم! 🏆🎬
-🔔 متنسوش شير للتحدي ومتابعة الصفحة لمغامرات يومية جديدة! 🚀
-
-#نورين_كيدز #Noreen_Kids #قوة_الملاحظة #حكايات_أطفال #ذكاء_الأطفال #أمهات_مصر`,
-
-    `🕵️‍♂️ مغامرة البحث عن الفروقات مع ${shortHero} و${shortComp}! 🕵️‍♂️
-يا ترى عيون أبطالنا الحلوين هتقدر تلاحظ الـ 3 اختلافات بين الصورة [ أ ] والصورة [ ب ]؟ 👀🎈
-التحدي محتاج تركيز عالي وشطارة حقيقية! مين جاهز يورينا شطارته؟ 💪✨
-
-1️⃣ اكتبوا لنا الفروقات التلاتة تحت الصورة 👇
-2️⃣ واكتبوا اسم البطل أو البطلة الصغيرة عشان نعلن اسمه بين أشطر أصدقائنا في الحلقة الجاية! 🎬👏
-3️⃣ لايك ومتابعة للصفحة 🔔 لتحديات يومية مسلية وهادفة مع نورين كيدز! ❤️
-
-#نورين_كيدز #Noreen_Kids #كرتون_أطفال #مغامرات_3D #ذكاء_الطفل #أمهات_مصر`,
-
-    `💖 تحدي عائلي ممتع لكل أمهات وأطفال Noreen Kids! 💖
-${shortHero} و${shortComp} بيسألوا: مين يقدر يكتشف 3 فروقات ذكية بين الصورة [ أ ] والصورة [ ب ] في أقل من دقيقة؟ ⏱️🤔
-
-👇 شاركونا الحل في التعليقات مع اسم طفلكم الشاطر
-عشان ${shortHero} و${shortComp} يردوا عليه ويقولوا له أحلى كلام تشجيع في الحلقة الجديدة! 🌟🎬
-🔔 وتابعوا صفحتنا لمتابعة باقي حلقات ومفاجآت الأسبوع! 👍✨
-
-#نورين_كيدز #Noreen_Kids #تحدي_اليوم #حواديت_قبل_النوم #تربية_إيجابية #أمهات_مصر`,
-
-    `🏆 مسابقة شطار نورين كيدز الكبرى مع ${shortHero} و${shortComp}! 🏆
-الصورة [ أ ] شبه الصورة [ ب ] جداً، لكن فيه 3 تفاصيل ذكية مش موجودة غير في واحدة منهم بس! 🔍🧐
-مين فيكم بطل التركيز اللي هيعرف يجمعهم كلهم ويكتبهم صح؟ ✨
-
-👇 مستنيين إجاباتكم وأسامي أبطالنا الحلوين في الكومنتات!
-🎬 أسرع إجابات هتتثبت وهنوجهلها تحية باسم الطفل في مغامرتنا القادمة! 💖
-🔔 اضغطوا متابعة للصفحة ومشاركة علشان نكبر سوا كل يوم! 👍
-
-#نورين_كيدز #Noreen_Kids #تحدي_الفروقات #كرتون_أطفال_3D #أمهات_مصر`
-  ];
-
-  const pickIdx = Math.abs(Number(seed) || 0) % templates.length;
-  return templates[pickIdx];
+  const pool = fallbackMap[mode] || fallbackMap.spot_difference;
+  return pool[Math.abs(Number(seed) || 0) % pool.length];
 }
 
 async function publishDailyInteractive3DPhotoPostForRunner({
@@ -4649,133 +4673,306 @@ async function publishDailyInteractive3DPhotoPostForRunner({
     new Date().getDate() * 7 +
     new Date().getHours()
   );
-  const puzzleCfg = generateDynamicPuzzleConfig(dynamicSeed);
-  const puzzleCaption = await buildDynamicSpotTheDifferenceCaption({
-    shortHero,
-    shortComp,
-    seed: dynamicSeed,
-  });
-
-  const chosenTheme = {
-    themeTitle: `تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع ${shortHero} و${shortComp}`,
-    caption: puzzleCaption,
-  };
+  const currentMode = INTERACTIVE_PUZZLE_MODES[dynamicSeed % INTERACTIVE_PUZZLE_MODES.length];
+  console.log(`🎮 [Interactive Challenge Mode]: ${currentMode} (Seed: ${dynamicSeed})`);
 
   const heroImg = resolveCharacterAvatarPath(heroName, heroName);
   const compImg = resolveCharacterAvatarPath(compName, compName);
   const cardPath = path.join(tmpDir, `interactive_3d_card_${Date.now()}.jpg`);
   const svgPath = path.join(tmpDir, `interactive_puzzle_overlay_${Date.now()}.svg`);
 
-  // Render [ أ ] vs [ ب ] Visual Puzzle Card with dynamic differences & crisp SVG overlay
-  const puzzleSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
-    <defs>
-      <linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" stop-color="#0f172a"/>
-        <stop offset="50%" stop-color="#1e1b4b"/>
-        <stop offset="100%" stop-color="#0f172a"/>
-      </linearGradient>
-      <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-        <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000" flood-opacity="0.6"/>
-      </filter>
-    </defs>
+  let themeTitle = "";
+  let bannerText = "";
+  let firstCommentMsg = "";
 
-    <!-- Top Banner -->
-    <rect x="0" y="0" width="1280" height="74" fill="url(#headerGrad)"/>
-    <rect x="0" y="70" width="1280" height="4" fill="#f59e0b"/>
-    <text x="640" y="46" font-size="26" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#fef08a" text-anchor="middle" filter="url(#shadow)">
-      🔍 تحدي قوة الملاحظة: استخرج 3 فروقات بين [ أ ] و [ ب ] 🌟
-    </text>
+  if (currentMode === "odd_one_out") {
+    themeTitle = `تحدي الصورة المختلفة (من 1 إلى 4) مع ${shortHero} و${shortComp}`;
+    bannerText = `🔍 تحدي قوة الملاحظة: صورة واحدة فقط من [ 1 - 4 ] مختلفة عن الباقيين! مين هيكتشفها؟ 👀`;
+    const oddIdx = dynamicSeed % 4;
+    const hueShift = 100 + (dynamicSeed % 80);
 
-    <!-- Central Divider -->
-    <line x1="640" y1="74" x2="640" y2="720" stroke="#f59e0b" stroke-width="6"/>
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+      <defs>
+        <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <!-- Top Banner -->
+      <rect x="0" y="0" width="1280" height="74" fill="#0f172a"/>
+      <rect x="0" y="70" width="1280" height="4" fill="#f59e0b"/>
+      <text x="640" y="46" font-size="25" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#fef08a" text-anchor="middle" filter="url(#shadow)">
+        ${bannerText}
+      </text>
+      <!-- Dividing lines -->
+      <line x1="640" y1="74" x2="640" y2="720" stroke="#f59e0b" stroke-width="5"/>
+      <line x1="0" y1="397" x2="1280" y2="397" stroke="#f59e0b" stroke-width="5"/>
+      <!-- Outer Border -->
+      <rect x="0" y="0" width="1280" height="720" fill="none" stroke="#f59e0b" stroke-width="8"/>
+      <!-- Badges [ 1 ], [ 2 ], [ 3 ], [ 4 ] -->
+      <g filter="url(#shadow)">
+        <rect x="25" y="90" width="70" height="46" rx="10" fill="#dc2626" stroke="#fef08a" stroke-width="3"/>
+        <text x="60" y="123" font-size="26" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">[ 1 ]</text>
+      </g>
+      <g filter="url(#shadow)">
+        <rect x="665" y="90" width="70" height="46" rx="10" fill="#dc2626" stroke="#fef08a" stroke-width="3"/>
+        <text x="700" y="123" font-size="26" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">[ 2 ]</text>
+      </g>
+      <g filter="url(#shadow)">
+        <rect x="25" y="415" width="70" height="46" rx="10" fill="#dc2626" stroke="#fef08a" stroke-width="3"/>
+        <text x="60" y="448" font-size="26" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">[ 3 ]</text>
+      </g>
+      <g filter="url(#shadow)">
+        <rect x="665" y="415" width="70" height="46" rx="10" fill="#dc2626" stroke="#fef08a" stroke-width="3"/>
+        <text x="700" y="448" font-size="26" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">[ 4 ]</text>
+      </g>
+    </svg>`;
+    fs.writeFileSync(svgPath, svg);
 
-    <!-- Badge [ أ ] -->
-    <g filter="url(#shadow)">
-      <rect x="24" y="90" width="80" height="52" rx="12" fill="#d97706" stroke="#fef08a" stroke-width="3"/>
-      <text x="64" y="127" font-size="28" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">[ أ ]</text>
-    </g>
+    const panels = [0, 1, 2, 3].map((idx) => {
+      if (idx === oddIdx) {
+        return `[0:v]scale=640:323:force_original_aspect_ratio=increase,crop=640:323,hue=h=${hueShift}:s=1.3[p${idx}];`;
+      }
+      return `[0:v]scale=640:323:force_original_aspect_ratio=increase,crop=640:323[p${idx}];`;
+    }).join("");
 
-    <!-- Difference 1 on [ أ ] -->
-    <g filter="url(#shadow)">
-      <circle cx="${puzzleCfg.diff1.aCoord.x}" cy="${puzzleCfg.diff1.aCoord.y}" r="26" fill="${puzzleCfg.diff1.a.bg}" stroke="${puzzleCfg.diff1.a.stroke}" stroke-width="3"/>
-      <text x="${puzzleCfg.diff1.aCoord.x}" y="${puzzleCfg.diff1.aCoord.y + 10}" font-size="28" text-anchor="middle">${puzzleCfg.diff1.a.icon}</text>
-    </g>
+    const filterGraph = [
+      panels,
+      `[p0][p1]hstack=inputs=2[row1];`,
+      `[p2][p3]hstack=inputs=2[row2];`,
+      `[row1][row2]vstack=inputs=2[grid];`,
+      `color=c=0x00000000:s=1280x74:d=1,format=rgba[spacer];`,
+      `[spacer][grid]vstack=inputs=2[combined];`,
+      `[combined][1:v]overlay=0:0[outv]`
+    ].join("");
 
-    <!-- Difference 2 on [ أ ] -->
-    <g filter="url(#shadow)">
-      <circle cx="${puzzleCfg.diff2.aCoord.x}" cy="${puzzleCfg.diff2.aCoord.y}" r="22" fill="${puzzleCfg.diff2.a.bg}" stroke="${puzzleCfg.diff2.a.stroke}" stroke-width="3"/>
-      <text x="${puzzleCfg.diff2.aCoord.x}" y="${puzzleCfg.diff2.aCoord.y + 9}" font-size="24" text-anchor="middle">${puzzleCfg.diff2.a.icon}</text>
-    </g>
+    await execFileAsync("ffmpeg", [
+      "-y",
+      "-i", heroImg,
+      "-i", svgPath,
+      "-filter_complex", filterGraph,
+      "-map", "[outv]",
+      "-frames:v", "1",
+      "-q:v", "2",
+      cardPath,
+    ]);
 
-    <!-- Difference 3 on [ أ ] -->
-    <g filter="url(#shadow)">
-      <circle cx="${puzzleCfg.diff3.aCoord.x}" cy="${puzzleCfg.diff3.aCoord.y}" r="24" fill="${puzzleCfg.diff3.a.bg}" stroke="${puzzleCfg.diff3.a.stroke}" stroke-width="3"/>
-      <text x="${puzzleCfg.diff3.aCoord.x}" y="${puzzleCfg.diff3.aCoord.y + 10}" font-size="26" text-anchor="middle">${puzzleCfg.diff3.a.icon}</text>
-    </g>
+    firstCommentMsg = `🔍 مين أشطر بطل هيلاحظ الصورة المختلفة بسرعة؟ يا ترى رقم كام [ 1 أو 2 أو 3 أو 4 ]؟ 🤔\n👇 اكتبوا رقم الصورة واسم طفلكم الشاطر في تعليق، و${shortHero} هيرد عليه بالاسم ويشجعه! 🌟👏 #نورين_كيدز`;
 
-    <!-- Badge [ ب ] -->
-    <g filter="url(#shadow)">
-      <rect x="664" y="90" width="80" height="52" rx="12" fill="#0284c7" stroke="#bae6fd" stroke-width="3"/>
-      <text x="704" y="127" font-size="28" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">[ ب ]</text>
-    </g>
+  } else if (currentMode === "count_items") {
+    themeTitle = `تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع ${shortHero} و${shortComp}`;
+    bannerText = `⭐ تحدي سرعة الملاحظة: كم [نجمة ذهبية ⭐] موجودة في الصورة؟ عدّوا مع أطفالكم! 🧠`;
+    const starCount = 5 + (dynamicSeed % 5);
+    const allCoords = [
+      { x: 140, y: 160 }, { x: 320, y: 240 }, { x: 200, y: 480 }, { x: 420, y: 550 },
+      { x: 640, y: 200 }, { x: 860, y: 160 }, { x: 1080, y: 260 }, { x: 780, y: 460 },
+      { x: 1020, y: 540 }
+    ];
+    const pickedCoords = allCoords.slice(0, starCount);
+    const starsSvg = pickedCoords.map((c) => `
+      <g filter="url(#shadow)">
+        <circle cx="${c.x}" cy="${c.y}" r="28" fill="#fbbf24" stroke="#fef08a" stroke-width="4"/>
+        <text x="${c.x}" y="${c.y + 11}" font-size="30" text-anchor="middle">⭐</text>
+      </g>
+    `).join("");
 
-    <!-- Difference 1 on [ ب ] -->
-    <g filter="url(#shadow)">
-      <circle cx="${puzzleCfg.diff1.bCoord.x}" cy="${puzzleCfg.diff1.bCoord.y}" r="26" fill="${puzzleCfg.diff1.b.bg}" stroke="${puzzleCfg.diff1.b.stroke}" stroke-width="3"/>
-      <text x="${puzzleCfg.diff1.bCoord.x}" y="${puzzleCfg.diff1.bCoord.y + 10}" font-size="28" text-anchor="middle">${puzzleCfg.diff1.b.icon}</text>
-    </g>
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+      <defs>
+        <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <rect x="0" y="0" width="1280" height="74" fill="#0f172a"/>
+      <rect x="0" y="70" width="1280" height="4" fill="#f59e0b"/>
+      <text x="640" y="46" font-size="25" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#fef08a" text-anchor="middle" filter="url(#shadow)">
+        ${bannerText}
+      </text>
+      <rect x="0" y="0" width="1280" height="720" fill="none" stroke="#f59e0b" stroke-width="8"/>
+      ${starsSvg}
+    </svg>`;
+    fs.writeFileSync(svgPath, svg);
 
-    <!-- Difference 2 on [ ب ] -->
-    <g filter="url(#shadow)">
-      <circle cx="${puzzleCfg.diff2.bCoord.x}" cy="${puzzleCfg.diff2.bCoord.y}" r="22" fill="${puzzleCfg.diff2.b.bg}" stroke="${puzzleCfg.diff2.b.stroke}" stroke-width="3"/>
-      <text x="${puzzleCfg.diff2.bCoord.x}" y="${puzzleCfg.diff2.bCoord.y + 9}" font-size="24" text-anchor="middle">${puzzleCfg.diff2.b.icon}</text>
-    </g>
+    const filterGraph = [
+      `[0:v]scale=640:646:force_original_aspect_ratio=increase,crop=640:646[c];`,
+      `[1:v]scale=640:646:force_original_aspect_ratio=increase,crop=640:646[h];`,
+      `[c][h]hstack=inputs=2[duo];`,
+      `color=c=0x00000000:s=1280x74:d=1,format=rgba[spacer];`,
+      `[spacer][duo]vstack=inputs=2[combined];`,
+      `[combined][2:v]overlay=0:0[outv]`
+    ].join("");
 
-    <!-- Difference 3 on [ ب ] -->
-    <g filter="url(#shadow)">
-      <circle cx="${puzzleCfg.diff3.bCoord.x}" cy="${puzzleCfg.diff3.bCoord.y}" r="24" fill="${puzzleCfg.diff3.b.bg}" stroke="${puzzleCfg.diff3.b.stroke}" stroke-width="3"/>
-      <text x="${puzzleCfg.diff3.bCoord.x}" y="${puzzleCfg.diff3.bCoord.y + 10}" font-size="26" text-anchor="middle">${puzzleCfg.diff3.b.icon}</text>
-    </g>
+    await execFileAsync("ffmpeg", [
+      "-y",
+      "-i", compImg,
+      "-i", heroImg,
+      "-i", svgPath,
+      "-filter_complex", filterGraph,
+      "-map", "[outv]",
+      "-frames:v", "1",
+      "-q:v", "2",
+      cardPath,
+    ]);
 
-    <!-- Outer Border -->
-    <rect x="0" y="0" width="1280" height="720" fill="none" stroke="#f59e0b" stroke-width="8"/>
-  </svg>`;
-  fs.writeFileSync(svgPath, puzzleSvg);
+    firstCommentMsg = `⭐ تحدي سرعة الملاحظة والعد لأبطال نورين كيدز مع ${shortHero} و${shortComp}!\n👇 عدّوا النجوم الذهبية واكتبوا العدد واسم البطل في تعليق علشان ${shortHero} و${shortComp} يهدوه وسام الشطارة! 🏅✨ #نورين_كيدز`;
 
-  // STRICT FIX: Never flip companion horizontally to prevent reversed/mirrored Arabic text!
-  const compRightScale = `[0:v]scale=320:646:force_original_aspect_ratio=increase,crop=320:646[c_r];`;
+  } else if (currentMode === "which_path") {
+    themeTitle = `تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع ${shortHero} و${shortComp}`;
+    bannerText = `🧭 تحدي المتاهة الذكية: أي مسار [ 1 أو 2 أو 3 ] يوصل ${shortHero} لصديقه ${shortComp}؟ 🌟`;
+    const correctPath = 1 + (dynamicSeed % 3);
 
-  const filterGraph = [
-    `[0:v]scale=320:646:force_original_aspect_ratio=increase,crop=320:646[c_l];`,
-    `[1:v]scale=320:646:force_original_aspect_ratio=increase,crop=320:646[h_l];`,
-    `[c_l][h_l]hstack=inputs=2[panel_a];`,
-    compRightScale,
-    `[1:v]scale=320:646:force_original_aspect_ratio=increase,crop=320:646[h_r];`,
-    `[c_r][h_r]hstack=inputs=2[panel_b];`,
-    `[panel_a][panel_b]hstack=inputs=2[panels];`,
-    `color=c=0x00000000:s=1280x74:d=1,format=rgba[spacer];`,
-    `[spacer][panels]vstack=inputs=2[combined];`,
-    `[combined][2:v]overlay=0:0[outv]`
-  ].join("");
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+      <defs>
+        <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <rect x="0" y="0" width="1280" height="74" fill="#0f172a"/>
+      <rect x="0" y="70" width="1280" height="4" fill="#f59e0b"/>
+      <text x="640" y="46" font-size="25" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#fef08a" text-anchor="middle" filter="url(#shadow)">
+        ${bannerText}
+      </text>
+      <rect x="330" y="84" width="620" height="626" rx="20" fill="#0f172a" fill-opacity="0.9" stroke="#f59e0b" stroke-width="4"/>
+      <path d="M 340 200 C 450 150, 480 320, 600 240 C 700 180, 800 220, 930 200" fill="none" stroke="#ef4444" stroke-width="10" stroke-linecap="round"/>
+      <path d="M 340 380 C 480 480, 520 220, 650 380 C 760 500, 820 380, 930 380" fill="none" stroke="#10b981" stroke-width="10" stroke-linecap="round"/>
+      <path d="M 340 540 C 450 620, 520 400, 680 560 C 780 640, 840 520, 930 540" fill="none" stroke="#3b82f6" stroke-width="10" stroke-linecap="round"/>
+      <g filter="url(#shadow)"><circle cx="340" cy="200" r="26" fill="#ef4444" stroke="#ffffff" stroke-width="3"/><text x="340" y="210" font-size="24" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">1</text></g>
+      <g filter="url(#shadow)"><circle cx="340" cy="380" r="26" fill="#10b981" stroke="#ffffff" stroke-width="3"/><text x="340" y="390" font-size="24" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">2</text></g>
+      <g filter="url(#shadow)"><circle cx="340" cy="540" r="26" fill="#3b82f6" stroke="#ffffff" stroke-width="3"/><text x="340" y="550" font-size="24" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">3</text></g>
+      <g filter="url(#shadow)"><circle cx="930" cy="200" r="24" fill="#fbbf24" stroke="#ffffff" stroke-width="3"/><text x="930" y="210" font-size="22" text-anchor="middle">${correctPath === 1 ? "🎯" : "🍎"}</text></g>
+      <g filter="url(#shadow)"><circle cx="930" cy="380" r="28" fill="#10b981" stroke="#fef08a" stroke-width="4"/><text x="930" y="390" font-size="24" text-anchor="middle">${correctPath === 2 ? "🎯" : "⭐"}</text></g>
+      <g filter="url(#shadow)"><circle cx="930" cy="540" r="24" fill="#8b5cf6" stroke="#ffffff" stroke-width="3"/><text x="930" y="550" font-size="22" text-anchor="middle">${correctPath === 3 ? "🎯" : "🎈"}</text></g>
+      <rect x="0" y="0" width="1280" height="720" fill="none" stroke="#f59e0b" stroke-width="8"/>
+    </svg>`;
+    fs.writeFileSync(svgPath, svg);
 
-  await execFileAsync("ffmpeg", [
-    "-y",
-    "-i",
-    compImg,
-    "-i",
-    heroImg,
-    "-i",
-    svgPath,
-    "-filter_complex",
-    filterGraph,
-    "-map",
-    "[outv]",
-    "-frames:v",
-    "1",
-    "-q:v",
-    "2",
-    cardPath,
-  ]);
+    const filterGraph = [
+      `[0:v]scale=330:646:force_original_aspect_ratio=increase,crop=330:646[h];`,
+      `[1:v]scale=330:646:force_original_aspect_ratio=increase,crop=330:646[c];`,
+      `color=c=0x0f172a:s=620x646[mid];`,
+      `[h][mid][c]hstack=inputs=3[body];`,
+      `color=c=0x00000000:s=1280x74:d=1,format=rgba[spacer];`,
+      `[spacer][body]vstack=inputs=2[combined];`,
+      `[combined][2:v]overlay=0:0[outv]`
+    ].join("");
+
+    await execFileAsync("ffmpeg", [
+      "-y",
+      "-i", heroImg,
+      "-i", compImg,
+      "-i", svgPath,
+      "-filter_complex", filterGraph,
+      "-map", "[outv]",
+      "-frames:v", "1",
+      "-q:v", "2",
+      cardPath,
+    ]);
+
+    firstCommentMsg = `🧭 مين هيساعد ${shortHero} يوصل لـ ${shortComp}؟ يا ترى الطريق رقم 1 ولا 2 ولا 3؟ 🏃‍♂️💨\n👇 تتبعوا الخط وشاركوا برقم المسار الصح واسم بطلكم في تعليق علشان نوجهله تحية خاصة! 🎬💖 #نورين_كيدز`;
+
+  } else {
+    // Mode: spot_difference
+    themeTitle = `تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع ${shortHero} و${shortComp}`;
+    bannerText = `🔍 تحدي قوة الملاحظة: استخرج 3 فروقات بين [ أ ] و [ ب ] 🌟`;
+    const puzzleCfg = generateDynamicPuzzleConfig(dynamicSeed);
+
+    const puzzleSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+      <defs>
+        <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <!-- Top Banner -->
+      <rect x="0" y="0" width="1280" height="74" fill="#0f172a"/>
+      <rect x="0" y="70" width="1280" height="4" fill="#f59e0b"/>
+      <text x="640" y="46" font-size="26" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#fef08a" text-anchor="middle" filter="url(#shadow)">
+        ${bannerText}
+      </text>
+      <!-- Central Divider -->
+      <line x1="640" y1="74" x2="640" y2="720" stroke="#f59e0b" stroke-width="6"/>
+      <!-- Badge [ أ ] -->
+      <g filter="url(#shadow)">
+        <rect x="24" y="90" width="80" height="52" rx="12" fill="#d97706" stroke="#fef08a" stroke-width="3"/>
+        <text x="64" y="127" font-size="28" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">[ أ ]</text>
+      </g>
+      <!-- Difference 1 on [ أ ] -->
+      <g filter="url(#shadow)">
+        <circle cx="${puzzleCfg.diff1.aCoord.x}" cy="${puzzleCfg.diff1.aCoord.y}" r="26" fill="${puzzleCfg.diff1.a.bg}" stroke="${puzzleCfg.diff1.a.stroke}" stroke-width="3"/>
+        <text x="${puzzleCfg.diff1.aCoord.x}" y="${puzzleCfg.diff1.aCoord.y + 10}" font-size="28" text-anchor="middle">${puzzleCfg.diff1.a.icon}</text>
+      </g>
+      <!-- Difference 2 on [ أ ] -->
+      <g filter="url(#shadow)">
+        <circle cx="${puzzleCfg.diff2.aCoord.x}" cy="${puzzleCfg.diff2.aCoord.y}" r="22" fill="${puzzleCfg.diff2.a.bg}" stroke="${puzzleCfg.diff2.a.stroke}" stroke-width="3"/>
+        <text x="${puzzleCfg.diff2.aCoord.x}" y="${puzzleCfg.diff2.aCoord.y + 9}" font-size="24" text-anchor="middle">${puzzleCfg.diff2.a.icon}</text>
+      </g>
+      <!-- Difference 3 on [ أ ] -->
+      <g filter="url(#shadow)">
+        <circle cx="${puzzleCfg.diff3.aCoord.x}" cy="${puzzleCfg.diff3.aCoord.y}" r="24" fill="${puzzleCfg.diff3.a.bg}" stroke="${puzzleCfg.diff3.a.stroke}" stroke-width="3"/>
+        <text x="${puzzleCfg.diff3.aCoord.x}" y="${puzzleCfg.diff3.aCoord.y + 10}" font-size="26" text-anchor="middle">${puzzleCfg.diff3.a.icon}</text>
+      </g>
+      <!-- Badge [ ب ] -->
+      <g filter="url(#shadow)">
+        <rect x="664" y="90" width="80" height="52" rx="12" fill="#0284c7" stroke="#bae6fd" stroke-width="3"/>
+        <text x="704" y="127" font-size="28" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">[ ب ]</text>
+      </g>
+      <!-- Difference 1 on [ ب ] -->
+      <g filter="url(#shadow)">
+        <circle cx="${puzzleCfg.diff1.bCoord.x}" cy="${puzzleCfg.diff1.bCoord.y}" r="26" fill="${puzzleCfg.diff1.b.bg}" stroke="${puzzleCfg.diff1.b.stroke}" stroke-width="3"/>
+        <text x="${puzzleCfg.diff1.bCoord.x}" y="${puzzleCfg.diff1.bCoord.y + 10}" font-size="28" text-anchor="middle">${puzzleCfg.diff1.b.icon}</text>
+      </g>
+      <!-- Difference 2 on [ ب ] -->
+      <g filter="url(#shadow)">
+        <circle cx="${puzzleCfg.diff2.bCoord.x}" cy="${puzzleCfg.diff2.bCoord.y}" r="22" fill="${puzzleCfg.diff2.b.bg}" stroke="${puzzleCfg.diff2.b.stroke}" stroke-width="3"/>
+        <text x="${puzzleCfg.diff2.bCoord.x}" y="${puzzleCfg.diff2.bCoord.y + 9}" font-size="24" text-anchor="middle">${puzzleCfg.diff2.b.icon}</text>
+      </g>
+      <!-- Difference 3 on [ ب ] -->
+      <g filter="url(#shadow)">
+        <circle cx="${puzzleCfg.diff3.bCoord.x}" cy="${puzzleCfg.diff3.bCoord.y}" r="24" fill="${puzzleCfg.diff3.b.bg}" stroke="${puzzleCfg.diff3.b.stroke}" stroke-width="3"/>
+        <text x="${puzzleCfg.diff3.bCoord.x}" y="${puzzleCfg.diff3.bCoord.y + 10}" font-size="26" text-anchor="middle">${puzzleCfg.diff3.b.icon}</text>
+      </g>
+      <!-- Outer Border -->
+      <rect x="0" y="0" width="1280" height="720" fill="none" stroke="#f59e0b" stroke-width="8"/>
+    </svg>`;
+    fs.writeFileSync(svgPath, puzzleSvg);
+
+    const compRightScale = `[0:v]scale=320:646:force_original_aspect_ratio=increase,crop=320:646[c_r];`;
+    const filterGraph = [
+      `[0:v]scale=320:646:force_original_aspect_ratio=increase,crop=320:646[c_l];`,
+      `[1:v]scale=320:646:force_original_aspect_ratio=increase,crop=320:646[h_l];`,
+      `[c_l][h_l]hstack=inputs=2[panel_a];`,
+      compRightScale,
+      `[1:v]scale=320:646:force_original_aspect_ratio=increase,crop=320:646[h_r];`,
+      `[c_r][h_r]hstack=inputs=2[panel_b];`,
+      `[panel_a][panel_b]hstack=inputs=2[panels];`,
+      `color=c=0x00000000:s=1280x74:d=1,format=rgba[spacer];`,
+      `[spacer][panels]vstack=inputs=2[combined];`,
+      `[combined][2:v]overlay=0:0[outv]`
+    ].join("");
+
+    await execFileAsync("ffmpeg", [
+      "-y",
+      "-i", compImg,
+      "-i", heroImg,
+      "-i", svgPath,
+      "-filter_complex", filterGraph,
+      "-map", "[outv]",
+      "-frames:v", "1",
+      "-q:v", "2",
+      cardPath,
+    ]);
+
+    firstCommentMsg = `🔍 مين أول بطل شاطر هيكتشف الفروقات الـ 3 بين الصورة [ أ ] والصورة [ ب ]؟ 👀\n👇 اكتبوا إجابة أطفالكم الحلوين وأساميهم في تعليق، و${shortHero} و${shortComp} هيردوا عليهم باسمهم ويشجعوهم! 🌟👏 #نورين_كيدز`;
+  }
+
+  const puzzleCaption = await buildDynamicInteractiveChallengeCaption({
+    mode: currentMode,
+    shortHero,
+    shortComp,
+    seed: dynamicSeed,
+  });
+
+  const chosenTheme = {
+    themeTitle,
+    caption: puzzleCaption,
+  };
 
   const cardBuffer = fs.readFileSync(cardPath);
   const formData = new FormData();
@@ -4808,14 +5005,7 @@ async function publishDailyInteractive3DPhotoPostForRunner({
 
   // Immediately post the interactive first comment on the photo post
   try {
-    const dynamicCommentPool = [
-      `🔍 مين أول بطل شاطر هيكتشف الفروقات الـ 3 بين الصورة [ أ ] والصورة [ ب ]؟\n👇 اكتبوا إجابة أطفالكم الحلوين وأساميهم في تعليق، و${shortHero} و${shortComp} هيردوا عليهم باسمهم ويشجعوهم! 🌟👏 وتابعوا صفحة نورين كيدز لحكاية بكرة! 🔔👍`,
-      `🌟 ركزوا كويس في الصورة [ أ ] والصورة [ ب ] مع ${shortHero} و${shortComp}!\n👇 اكتبوا لنا اسم طفلكم الجميل والفروقات اللي شافها علشان ${shortHero} و${shortComp} يحيوه بالاسم في التعليقات ويبعتوله شهادة شطارة! 🎬💖 #نورين_كيدز`,
-      `🕵️‍♂️ تحدي أذكياء نورين كيدز مع ${shortHero} و${shortComp}!\n👇 مستنيين أسرع وأشطر إجابة من أبطالنا الصغار بالاسم علشان نثبت تعليق البطل الفائز! 🏆✨ متنسوش متابعة الصفحة 🔔👍`,
-      `💖 مين عنده قوة ملاحظة خارقة يقدر يكتشف الـ 3 فروقات بسرعة؟\n👇 اكتبوا لنا الحل واسم البطل في تعليق و${shortHero} هيرد عليه شخصياً ويشكره! 🎬✨ #نورين_كيدز`,
-      `🎉 تحدي اليوم محتاج تركيز عالي! بصوا كويس بين [ أ ] و [ ب ] 👀\n👇 اكتبوا الاختلافات في تعليق مع اسم طفلكم علشان نحتفل بيه في عيلة الشطار! 👏🌟`,
-    ];
-    const firstCommentMsg = dynamicCommentPool[dynamicSeed % dynamicCommentPool.length];
+    const finalCommentMsg = firstCommentMsg;
     await fetch(
       `https://graph.facebook.com/v21.0/${encodeURIComponent(postId)}/comments`,
       {
@@ -4824,7 +5014,7 @@ async function publishDailyInteractive3DPhotoPostForRunner({
           Authorization: `Bearer ${activeToken}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: firstCommentMsg }),
+        body: JSON.stringify({ message: finalCommentMsg }),
       }
     ).catch(() => {});
   } catch {}
