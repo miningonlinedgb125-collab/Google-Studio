@@ -37,6 +37,16 @@
     {
       "topic": "لغز إشارة كوكب الألوان وإنقاذ الكائن الصغير",
       "mainCharacterName": "جنى رائدة الفضاء",
+      "companionName": "بلبل الروبوت اللطيف"
+    },
+    {
+      "topic": "لغز كهف الشعاب المضيئة وسر الفانوس البحري للأعماق",
+      "mainCharacterName": "شوشو القبطان الصغير",
+      "companionName": "مرجان الدلفين المرح"
+    },
+    {
+      "topic": "لغز إشارة كوكب الألوان وإنقاذ الكائن الصغير",
+      "mainCharacterName": "جنى رائدة الفضاء",
       "companionName": "بلبل الروبوت اللطيف",
       "timestampIso": "2026-10-15T16:06:46.958Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "شوشو القبطان الصغير",
       "companionName": "مرجان الدلفين المرح",
       "timestampIso": "2026-10-13T13:54:51.649Z"
-    },
-    {
-      "topic": "جنى وبلبل وسر ألحان كويكبات الفضاء المبهجة",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف"
-    },
-    {
-      "topic": "عمرو وزعتر وسر مزمار الراعي في كهف الصدى",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي"
-    },
-    {
-      "topic": "جنى وبلبل وسر ألحان كويكبات الفضاء المبهجة",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف",
-      "timestampIso": "2026-10-13T05:36:04.384Z"
-    },
-    {
-      "topic": "عمرو وزعتر وسر مزمار الراعي في كهف الصدى",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "timestampIso": "2026-10-13T05:36:04.384Z"
     }
   ],
   "scheduledHistory": [
@@ -2685,32 +2673,27 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "١٥‏/١٠‏/٢٠٢٦، ٧:٠٩:٤٥ م",
   "lastCloudRunReport": {
-    "id": "gh-run-38716235426",
-    "uploadMode": "daily_schedule",
+    "id": "gh-run-38765530629",
+    "uploadMode": "manual_instant",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-15 (13:10 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792058081006-j6n8",
-    "longEpisodeId": "ep-gh-long-1792058133746-2dvi",
-    "shortEpisodeTitle": "Noreen Kids: تصميم القلعة البلورية وحمايتها من عاصفة الواحة | مغامرات المهندسة نوران والنمر الفرفوش",
-    "longEpisodeTitle": "Noreen Kids: قارب البردي وسر جزيرة الزهور المضيئة | مغامرات عمرو وزعتر",
-    "shortTitle": "Noreen Kids: تصميم القلعة البلورية وحمايتها من عاصفة الواحة | مغامرات المهندسة نوران والنمر الفرفوش",
-    "longTitle": "Noreen Kids: قارب البردي وسر جزيرة الزهور المضيئة | مغامرات عمرو وزعتر",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-15 (19:09 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792080382149-nf5r",
+    "longEpisodeId": "ep-gh-long-1792080406958-oxo8",
+    "shortEpisodeTitle": "Noreen Kids: لغز إشارة كوكب الألوان وإنقاذ الكائن الصغير | مغامرات جنى وبلبل",
+    "longEpisodeTitle": "لغز كهف الشعاب المضيئة وسر الفانوس البحري للأعماق",
+    "shortTitle": "Noreen Kids: لغز إشارة كوكب الألوان وإنقاذ الكائن الصغير | مغامرات جنى وبلبل",
+    "longTitle": "لغز كهف الشعاب المضيئة وسر الفانوس البحري للأعماق",
     "shortPlaylistId": "PLPwfeXzB3ozU",
-    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "ogtnGpk9tQc",
-    "youtubeLongVideoId": "dhY1fiCJ2Hs",
-    "facebookShortVideoId": "957667686929353",
-    "facebookLongVideoId": "1124749323468124",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/957667686929353",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1124749323468124",
-    "facebookShortTitle": "Noreen Kids | تصميم القلعة البلورية وحمايتها من عاصفة الواحة - مغامرة المهندسة نوران والنمر الفرفوش",
-    "facebookLongTitle": "Noreen Kids | قارب البردي وسر جزيرة الزهور المضيئة - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
+    "youtubeShortVideoId": "PL5v56fmHZI",
+    "facebookShortVideoId": "2184737112421859",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2184737112421859",
+    "facebookShortTitle": "Noreen Kids | لغز إشارة كوكب الألوان وإنقاذ الكائن الصغير - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2718,16 +2701,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 1280,
-      "height": 720,
+      "width": 720,
+      "height": 1280,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 345,
-      "fileSizeBytes": 37140562,
-      "inspectedAt": "13:10"
+      "durationSec": 65,
+      "fileSizeBytes": 10003415,
+      "inspectedAt": "19:09"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2736,7 +2719,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-15T10:10:11.745Z"
+    "reportedAtIso": "2026-10-15T16:09:49.604Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880"
