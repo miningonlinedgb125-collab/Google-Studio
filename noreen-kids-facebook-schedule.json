@@ -2652,6 +2652,16 @@
     {
       "topic": "حماية مرعى الأعشاب البحرية من دوامة التيار",
       "mainCharacterName": "شوشو القبطان الصغير",
+      "companionName": "مرجان الدلفين المرح"
+    },
+    {
+      "topic": "كارمن ومنطاد الشمس الطائر لرسائل المحبة",
+      "mainCharacterName": "كارمن المخترعة الصغيرة",
+      "companionName": "سمسم السنجاب الطائر"
+    },
+    {
+      "topic": "حماية مرعى الأعشاب البحرية من دوامة التيار",
+      "mainCharacterName": "شوشو القبطان الصغير",
       "companionName": "مرجان الدلفين المرح",
       "timestampIso": "2026-10-15T19:08:41.758Z"
     },
@@ -2814,43 +2824,21 @@
       "mainCharacterName": "كارمن المخترعة الصغيرة",
       "companionName": "سمسم السنجاب الطائر",
       "timestampIso": "2026-10-13T18:20:21.433Z"
-    },
-    {
-      "topic": "اختراع عجلة الفخار الآلية لصنع أواني الزهور الجميلة",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر"
-    },
-    {
-      "topic": "سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح"
-    },
-    {
-      "topic": "اختراع عجلة الفخار الآلية لصنع أواني الزهور الجميلة",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر",
-      "timestampIso": "2026-10-13T13:54:51.649Z"
-    },
-    {
-      "topic": "سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح",
-      "timestampIso": "2026-10-13T13:54:51.649Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-15 · 19:09 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-38622944283",
+    "id": "gh-run-38791128638",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-14 (22:43 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792005926419-c2ha",
-    "longEpisodeId": "ep-gh-long-1792006024927-hhmg",
-    "shortEpisodeTitle": "Noreen Kids: جدو الحكيم وحل خلاف كرة القدم بين أصحاب الحارة | مغامرات جدو والفأر المشاكس",
-    "longEpisodeTitle": "Noreen Kids: سباق الصقر الذكي وحساب مسافات خريطة الوادي | مغامرات أستاذ شريف والصقر الذكي",
-    "shortTitle": "Noreen Kids: جدو الحكيم وحل خلاف كرة القدم بين أصحاب الحارة | مغامرات جدو والفأر المشاكس",
-    "longTitle": "Noreen Kids: سباق الصقر الذكي وحساب مسافات خريطة الوادي | مغامرات أستاذ شريف والصقر الذكي",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-15 (22:23 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792091287045-62ed",
+    "longEpisodeId": "ep-gh-long-1792091321758-wdo4",
+    "shortEpisodeTitle": "Noreen Kids: حماية مرعى الأعشاب البحرية من دوامة التيار | مغامرات شوشو ومرجان",
+    "longEpisodeTitle": "Noreen Kids: كارمن ومنطاد الشمس الطائر لرسائل المحبة | مغامرات كارمن وسمسم",
+    "shortTitle": "Noreen Kids: حماية مرعى الأعشاب البحرية من دوامة التيار | مغامرات شوشو ومرجان",
+    "longTitle": "Noreen Kids: كارمن ومنطاد الشمس الطائر لرسائل المحبة | مغامرات كارمن وسمسم",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2859,14 +2847,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "Bt_yhH02xlc",
-    "youtubeLongVideoId": "GpeNuwusNyk",
-    "facebookShortVideoId": "1626382582211662",
-    "facebookLongVideoId": "3030755140590710",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1626382582211662",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/3030755140590710",
-    "facebookShortTitle": "Noreen Kids | جدو الحكيم وحل خلاف كرة القدم بين أصحاب الحارة - مغامرة جدو والفأر المشاكس",
-    "facebookLongTitle": "Noreen Kids | سباق الصقر الذكي وحساب مسافات خريطة الوادي - مغامرة أستاذ شريف والصقر الذكي",
+    "youtubeShortVideoId": "IPex8FMU2P4",
+    "youtubeLongVideoId": "iY6qwC9aAtw",
+    "facebookShortVideoId": "1096876526298325",
+    "facebookLongVideoId": "4710383579219365",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1096876526298325",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/4710383579219365",
+    "facebookShortTitle": "Noreen Kids | حماية مرعى الأعشاب البحرية من دوامة التيار - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
+    "facebookLongTitle": "Noreen Kids | كارمن ومنطاد الشمس الطائر لرسائل المحبة - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2881,9 +2869,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 366,
-      "fileSizeBytes": 40600863,
-      "inspectedAt": "22:43"
+      "durationSec": 357,
+      "fileSizeBytes": 47081062,
+      "inspectedAt": "22:23"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2892,7 +2880,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-14T19:43:42.588Z"
+    "reportedAtIso": "2026-10-15T19:23:03.655Z"
   },
   "heroFairRotationIndex": 6,
   "interactiveHeroRotationIndex": 5,
