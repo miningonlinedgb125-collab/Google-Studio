@@ -497,6 +497,8 @@ function validateAndAutoFixEgyptianDialect(rawText, sceneIndex = 0, totalScenes 
 }
 
 const CHAR_AVATAR_MAP = [
+  { keywords: ["تختوخ", "تختوخه"], relPath: "src/assets/images/char_takhtoukh_chubby_boy_1792069535801.jpg" },
+  { keywords: ["زقلط", "الكلب زقلط", "الكلب"], relPath: "src/assets/images/char_zaqlat_funny_dog_1792069553698.jpg" },
   { keywords: ["أم ملك", "ام ملك", "المعلمة"], relPath: "src/assets/images/char_om_malak_teacher_1790685841625.jpg" },
   { keywords: ["البطريق", "بطريق"], relPath: "src/assets/images/char_funny_penguin_1790685854532.jpg" },
   { keywords: ["ملك", "طبيبة طوارئ", "دكتورة ملك", "الطبيبة ملك"], relPath: "src/assets/images/char_malak_emergency_doctor_1790685772412.jpg" },
@@ -994,6 +996,31 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
       voiceFilter: cartoonBrightCompanionFilter,
       animalSfxLavfi:
         "aevalsrc='0.25*sin(2*PI*(520+360*mod(t*3.8,1))*t)*exp(-5.5*mod(t,0.26))':s=24000:d=0.82",
+    };
+  }
+  if (s.includes("تختوخ")) {
+    return {
+      isFemale: false,
+      geminiVoice: "Puck",
+      pitch: "-2Hz",
+      rate: "+2%",
+      styleInstruction:
+        "تحدث بصوت ولد مصري كوميدي ممتلئ القوام وخفيف الدم عمره 10 سنوات (تختوخ) بنبرة طفولية مرحة ودافئة ومضحكة جداً تضحك الأطفال وتسعدهم بضحكة بريئة وعفوية باللهجة المصرية القاهرية الأصيلة",
+      voiceFilter: boyHeroCrispFilter,
+      animalSfxLavfi: null,
+    };
+  }
+  if (s.includes("زقلط") || s.includes("كلب")) {
+    return {
+      isFemale: false,
+      geminiVoice: "Puck",
+      pitch: "+10Hz",
+      rate: "+5%",
+      styleInstruction:
+        "تحدث بصوت الكلب الكرتوني الكوميدي الشقي والوفي (زقلط) بنبرة كرتونية شقية ومتحمسة وسريعة تضحك الأطفال مع لهفة ومرح كبيرين باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: cartoonBrightCompanionFilter,
+      animalSfxLavfi:
+        "aevalsrc='if(lt(mod(t,0.38),0.16),0.28*sin(2*PI*(320+180*exp(-16*mod(t,0.38)))*t)*exp(-8*mod(t,0.38)),0.10*sin(2*PI*520*t)*exp(-11*mod(t,0.38)))':s=24000:d=0.85",
     };
   }
   if (s.includes("عمرو") || s.includes("فارس")) {
@@ -2498,6 +2525,27 @@ const RUNNER_CHARACTER_TEAMS = [
       "سلة الهدايا المفاجئة التي جهزتها تيتة لأشطر طفل في حفظ القرآن",
     ],
   },
+  {
+    mainCharacterName: "تختوخ",
+    companionName: "الكلب زقلط",
+    mainVoice: "Puck",
+    compVoice: "Puck",
+    worldHint: "space_forest",
+    heroProp: "ساندوتش الجبنة السحري وشنطة المقالب الكوميدية المضيئة",
+    compProp: "طوق العظام الذهبي وكورة الألوان النطاطة",
+    stories: [
+      "مقلب كنز البسكوت ومطاردة الكلب زقلط لطبق الفشار في حديقة الألعاب",
+      "تختوخ في المطبخ وسر الكيكة العملاقة اللي طارت في السقف مع زقلط",
+      "مغامرة زقلط بياكل الآيس كريم بالمقلوب ومواقف تختوخ المضحكة في الملاهي",
+      "سر العظمة الذهبية التائهة وإزاي زقلط حفر حفرة طلع منها ماء نافورة مضحك",
+      "تختوخ بيجرب الرياضة الصباحية وزقلط بيقلده بالحركات البهلوانية",
+      "لعبة الاستغماية الكوميدية وزقلط مستخبي في كرتونة الألعاب وديله بيتهز",
+      "تختوخ والبحث عن فرشة السنان بعد ما زقلط عمل نفسه دكتور أسنان",
+      "سباق الزحليقة المائية وتختوخ وزقلط بيقعوا في حوض الكور الملونة بضحك",
+      "مهمة إطعام قطط الحارة وتختوخ بيوزع اللبن وزقلط بيلعب معاهم كورة",
+      "حدوتة البيجامة المنورة وضحك تختوخ وزقلط قبل النوم مع كوباية الحليب",
+    ],
+  },
 ];
 
 function resolveCanonicalTeamForRunner(
@@ -2551,6 +2599,7 @@ function resolveCanonicalTeamForRunner(
     if (/أستاذ شريف|شريف|الصقر الذكي/.test(t)) return RUNNER_CHARACTER_TEAMS[11];
     if (/جدو|الفأر المشاكس/.test(t)) return RUNNER_CHARACTER_TEAMS[12];
     if (/تيتة|تيته|الدب باندا/.test(t)) return RUNNER_CHARACTER_TEAMS[13];
+    if (/تختوخ|زقلط|الكلب زقلط/.test(t)) return RUNNER_CHARACTER_TEAMS[14];
     if (/نورين|أرنوب/.test(t)) return RUNNER_CHARACTER_TEAMS[0];
     if (/المهندسة نوران|نوران|النمر الفرفوش/.test(t)) return RUNNER_CHARACTER_TEAMS[1];
     if (/عمرو المستكشف|عمرو|زعتر/.test(t)) return RUNNER_CHARACTER_TEAMS[2];
@@ -2628,6 +2677,8 @@ function getShortCharacterDisplayNameRunner(fullName = "", dialect = "egyptian")
   if (clean.includes("سمسم")) return "سمسم";
   if (clean.includes("جنى") || clean.includes("نور")) return "جنى";
   if (clean.includes("بلبل")) return "بلبل";
+  if (clean.includes("تختوخ")) return "تختوخ";
+  if (clean.includes("زقلط")) return "الكلب زقلط";
   return clean.split(" ")[0] || clean;
 }
 
