@@ -48,6 +48,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122116852029484976",
+      "photoId": "122116852005484976",
+      "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع كارمن وسمسم",
+      "title": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع كارمن وسمسم",
+      "caption": "✨ مين أسرع بطل هيعد كل النجوم الذهبية في الصورة؟ ✨\nكارمن وسمسم بيجهزوا لحكاية جديدة، والنجوم اللامعة بتنور طريقهم! 🌟\nيلا يا شطار يا حلوين.. عدّوا النجوم مع ماما واكتبوا لنا العدد المظبوط في تعليق! 👀🔢\n👇 اكتبوا الحل واسم البطل عشان نوجهله تحية خاصة بالاسم في الحلقة القادمة! 🎬💖\n🔔 شير للتحدي ومتابعة لصفحة Noreen Kids لمزيد من الألعاب المفيدة! 👍\n#نورين_كيدز #Noreen_Kids #فوازير_أطفال #تحدي_الشطار #أمهات_مصر",
+      "heroName": "كارمن",
+      "companionName": "سمسم",
+      "publishedAtCairo": "2026-10-15 · 22:21 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122116852029484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122116849431484976",
       "photoId": "122116849407484976",
       "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع شوشو ومرجان",
@@ -514,18 +526,6 @@
       "publishedAtCairo": "2026-10-07 · 08:43 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122112941175484976",
       "postKind": "scheduled"
-    },
-    {
-      "postId": "1330185823512542_122112937917484976",
-      "photoId": "122112937791484976",
-      "themeTitle": "تحدي الملاحظة الذكية مع كارمن وسمسم",
-      "title": "تحدي الملاحظة الذكية مع كارمن وسمسم",
-      "caption": "🌟 تحدي أبطال Noreen Kids اليومي للشطار! 🌟\nبصوا كويس في الصورة مع كارمن وسمسم.. 🤔✨\nلو هنسافر النهاردة في مغامرة جديدة: تفتكروا كارمن هيستخدم أنهي أداة ذكية علشان يساعد سمسم؟\n\n1️⃣ اكتبوا إجابتكم في التعليقات 👇\n2️⃣ اكتبوا اسم طفلكم الجميل عشان كارمن وسمسم يحيوه بالاسم في حلقة بكرة! 🎬💖\n3️⃣ متنسوش متابعة صفحة Noreen Kids 🔔👍 ومشاركة البوست مع كل الأمهات!\n\n#نورين_كيدز #Noreen_Kids #قصص_أطفال #حواديت_قبل_النوم #كرتون_أطفال_3D #تربية_إيجابية #أمهات_مصر",
-      "heroName": "كارمن",
-      "companionName": "سمسم",
-      "publishedAtCairo": "2026-10-07 · 08:33 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122112937917484976",
-      "postKind": "scheduled"
     }
   ],
   "facebook": {
@@ -789,14 +789,15 @@
       "id": "gh-run-38791128638",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-15 (22:11 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-15 (22:23 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1792091287045-62ed",
       "longEpisodeId": "ep-gh-long-1792091321758-wdo4",
       "shortEpisodeTitle": "Noreen Kids: حماية مرعى الأعشاب البحرية من دوامة التيار | مغامرات شوشو ومرجان",
-      "longEpisodeTitle": "كارمن ومنطاد الشمس الطائر لرسائل المحبة",
+      "longEpisodeTitle": "Noreen Kids: كارمن ومنطاد الشمس الطائر لرسائل المحبة | مغامرات كارمن وسمسم",
       "shortTitle": "Noreen Kids: حماية مرعى الأعشاب البحرية من دوامة التيار | مغامرات شوشو ومرجان",
-      "longTitle": "كارمن ومنطاد الشمس الطائر لرسائل المحبة",
+      "longTitle": "Noreen Kids: كارمن ومنطاد الشمس الطائر لرسائل المحبة | مغامرات كارمن وسمسم",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -804,9 +805,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "IPex8FMU2P4",
+      "youtubeLongVideoId": "iY6qwC9aAtw",
       "facebookShortVideoId": "1096876526298325",
+      "facebookLongVideoId": "4710383579219365",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1096876526298325",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/4710383579219365",
       "facebookShortTitle": "Noreen Kids | حماية مرعى الأعشاب البحرية من دوامة التيار - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
+      "facebookLongTitle": "Noreen Kids | كارمن ومنطاد الشمس الطائر لرسائل المحبة - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -814,16 +819,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 74,
-        "fileSizeBytes": 11356078,
-        "inspectedAt": "22:11"
+        "durationSec": 357,
+        "fileSizeBytes": 47081062,
+        "inspectedAt": "22:23"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
