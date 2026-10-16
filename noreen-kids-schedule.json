@@ -37,6 +37,16 @@
     {
       "topic": "مفاجأة سدرة بألوان قوس قزح لإسعاد ماما",
       "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "أم ملك وسر لوحة الشجرة الزرقاء في المعرض",
+      "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح"
+    },
+    {
+      "topic": "مفاجأة سدرة بألوان قوس قزح لإسعاد ماما",
+      "mainCharacterName": "سدرة الصغنونة",
       "companionName": "الفراشة الملونة",
       "timestampIso": "2026-10-16T18:52:50.490Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "أم ملك",
       "companionName": "البطريق المرح",
       "timestampIso": "2026-10-14T10:17:45.885Z"
-    },
-    {
-      "topic": "مشاركة قطعة الحلوى والألعاب مع الأخت والأخ",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة"
-    },
-    {
-      "topic": "حكاية الدواء اللذيذ بنكهة الفراولة والشفاء العاجل",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا"
-    },
-    {
-      "topic": "مشاركة قطعة الحلوى والألعاب مع الأخت والأخ",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "timestampIso": "2026-10-13T20:52:06.409Z"
-    },
-    {
-      "topic": "حكاية الدواء اللذيذ بنكهة الفراولة والشفاء العاجل",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "timestampIso": "2026-10-13T20:52:06.409Z"
     }
   ],
   "scheduledHistory": [
