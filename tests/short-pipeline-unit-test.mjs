@@ -188,8 +188,8 @@ export function inspectShortPipelinePreUploadGate({
     if (!dlg || dlg.split(/\s+/).length < 8) {
       errors.push(`[Dialogue Gate FAILED] حوار المشهد ${i + 1} فارغ أو قصير جداً.`);
     }
-    if (/[\u064B-\u065F\u0670]/.test(dlg)) {
-      nonEgyptianSurvivors.push(`تشكيل فصحى في المشهد ${i + 1}`);
+    if (/[\u064B\u064C\u064D]/.test(dlg)) {
+      nonEgyptianSurvivors.push(`تنوين فصحى في المشهد ${i + 1}`);
     }
     for (const rule of NON_EGYPTIAN_LEXICON_RULES) {
       const pattern = new RegExp(`(^|[\\s،.!؟:])${rule.word}(?=[\\s،.!؟:]|$)`);
