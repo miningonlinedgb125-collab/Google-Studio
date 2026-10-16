@@ -37,6 +37,16 @@
     {
       "topic": "حراسة فوانيس الواحة وإنقاذ قافلة التمر في ليلة البدر",
       "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم"
+    },
+    {
+      "topic": "مهمة الطوارئ السريعة لإنقاذ أرنب الوادي وإسعاف",
+      "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "حراسة فوانيس الواحة وإنقاذ قافلة التمر في ليلة البدر",
+      "mainCharacterName": "تامر فارس الواحة",
       "companionName": "كركور الببغاء الحكيم",
       "timestampIso": "2026-10-16T09:49:10.562Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا",
       "timestampIso": "2026-10-13T20:52:06.409Z"
-    },
-    {
-      "topic": "لغز القلعة القديمة وفك شفرة بوابات الشجاعة بالكلمة الطيبة",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم"
-    },
-    {
-      "topic": "ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر"
-    },
-    {
-      "topic": "لغز القلعة القديمة وفك شفرة بوابات الشجاعة بالكلمة الطيبة",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم",
-      "timestampIso": "2026-10-13T18:20:21.433Z"
-    },
-    {
-      "topic": "ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر",
-      "timestampIso": "2026-10-13T18:20:21.433Z"
     }
   ],
   "scheduledHistory": [
@@ -2706,27 +2694,32 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "١٦‏/١٠‏/٢٠٢٦، ١:٠٢:٥١ م",
   "lastCloudRunReport": {
-    "id": "gh-run-38765530629",
-    "uploadMode": "manual_instant",
+    "id": "gh-run-38882845412",
+    "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-15 (19:09 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792080382149-nf5r",
-    "longEpisodeId": "ep-gh-long-1792080406958-oxo8",
-    "shortEpisodeTitle": "Noreen Kids: لغز إشارة كوكب الألوان وإنقاذ الكائن الصغير | مغامرات جنى وبلبل",
-    "longEpisodeTitle": "لغز كهف الشعاب المضيئة وسر الفانوس البحري للأعماق",
-    "shortTitle": "Noreen Kids: لغز إشارة كوكب الألوان وإنقاذ الكائن الصغير | مغامرات جنى وبلبل",
-    "longTitle": "لغز كهف الشعاب المضيئة وسر الفانوس البحري للأعماق",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-16 (13:02 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792144128537-6vps",
+    "longEpisodeId": "ep-gh-long-1792144150562-opgd",
+    "shortEpisodeTitle": "Noreen Kids: حراسة فوانيس الواحة وإنقاذ قافلة التمر في ليلة البدر | مغامرات تامر وكركور",
+    "longEpisodeTitle": "Noreen Kids: مهمة الطوارئ السريعة لإنقاذ أرنب الوادي وإسعاف | مغامرات الطبيبة ملك والقطة لوليتا",
+    "shortTitle": "Noreen Kids: حراسة فوانيس الواحة وإنقاذ قافلة التمر في ليلة البدر | مغامرات تامر وكركور",
+    "longTitle": "Noreen Kids: مهمة الطوارئ السريعة لإنقاذ أرنب الوادي وإسعاف | مغامرات الطبيبة ملك والقطة لوليتا",
     "shortPlaylistId": "PLPwfeXzB3ozU",
+    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "PL5v56fmHZI",
-    "facebookShortVideoId": "2184737112421859",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2184737112421859",
-    "facebookShortTitle": "Noreen Kids | لغز إشارة كوكب الألوان وإنقاذ الكائن الصغير - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
+    "youtubeShortVideoId": "FrNMB7l3x2s",
+    "youtubeLongVideoId": "2Rya28F8dw8",
+    "facebookShortVideoId": "1727805878288583",
+    "facebookLongVideoId": "921981690998721",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1727805878288583",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/921981690998721",
+    "facebookShortTitle": "Noreen Kids | حراسة فوانيس الواحة وإنقاذ قافلة التمر في ليلة البدر - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
+    "facebookLongTitle": "Noreen Kids | مهمة الطوارئ السريعة لإنقاذ أرنب الوادي وإسعاف - مغامرة ملك والقطة لوليتا",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2734,16 +2727,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 720,
-      "height": 1280,
+      "width": 1280,
+      "height": 720,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 65,
-      "fileSizeBytes": 10003415,
-      "inspectedAt": "19:09"
+      "durationSec": 332,
+      "fileSizeBytes": 33785119,
+      "inspectedAt": "13:02"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2752,7 +2745,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-15T16:09:49.604Z"
+    "reportedAtIso": "2026-10-16T10:02:54.576Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880"
