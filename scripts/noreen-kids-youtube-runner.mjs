@@ -4870,27 +4870,126 @@ async function publishDailyInteractive3DPhotoPostForRunner({
     bannerText = `🧭 تحدي المتاهة الذكية: أي مسار [ 1 أو 2 أو 3 ] يوصل ${shortHero} لصديقه ${shortComp}؟ 🌟`;
     const correctPath = 1 + (dynamicSeed % 3);
 
+    let p1Data, p2Data, p3Data;
+    let p1DeadEnd = null, p2DeadEnd = null, p3DeadEnd = null;
+    let goalY = 370;
+
+    if (correctPath === 2) {
+      // Path 2 is WINNER
+      p1Data = "M 340 200 L 520 200 Q 550 200 550 235 L 550 300 Q 550 325 580 325 L 635 325";
+      p1DeadEnd = { x: 635, y: 325 };
+
+      p2Data = "M 340 370 L 450 370 Q 480 370 480 420 L 480 475 Q 480 505 520 505 L 670 505 Q 710 505 710 445 L 710 395 Q 710 370 750 370 L 920 370";
+
+      p3Data = "M 340 540 L 440 540 Q 470 540 470 500 L 470 435 Q 470 415 500 415 L 590 415";
+      p3DeadEnd = { x: 590, y: 415 };
+      goalY = 370;
+    } else if (correctPath === 1) {
+      // Path 1 is WINNER
+      p1Data = "M 340 200 L 470 200 Q 500 200 500 255 L 500 310 Q 500 350 540 350 L 690 350 Q 730 350 730 305 L 730 245 Q 730 200 770 200 L 920 200";
+      goalY = 200;
+
+      p2Data = "M 340 370 L 460 370 Q 490 370 490 425 L 490 465 Q 490 485 530 485 L 620 485";
+      p2DeadEnd = { x: 620, y: 485 };
+
+      p3Data = "M 340 540 L 580 540 Q 610 540 610 500 L 610 445 Q 610 425 640 425 L 710 425";
+      p3DeadEnd = { x: 710, y: 425 };
+    } else {
+      // Path 3 is WINNER
+      p1Data = "M 340 200 L 550 200 Q 580 200 580 245 L 580 305 Q 580 325 620 325 L 680 325";
+      p1DeadEnd = { x: 680, y: 325 };
+
+      p2Data = "M 340 370 L 460 370 Q 490 370 490 315 L 490 255 Q 490 235 530 235 L 610 235";
+      p2DeadEnd = { x: 610, y: 235 };
+
+      p3Data = "M 340 540 L 470 540 Q 500 540 500 485 L 500 425 Q 500 385 540 385 L 690 385 Q 730 385 730 440 L 730 495 Q 730 540 770 540 L 920 540";
+      goalY = 540;
+    }
+
+    const renderDeadEnd = (de) => {
+      if (!de) return "";
+      return `
+        <g transform="translate(${de.x}, ${de.y})">
+          <rect x="-3" y="-24" width="8" height="48" rx="3" fill="#ef4444" stroke="#ffffff" stroke-width="2"/>
+          <rect x="6" y="-17" width="98" height="34" rx="8" fill="#b91c1c" stroke="#fecaca" stroke-width="2.5"/>
+          <text x="55" y="6" font-family="Noto Kufi Arabic, Cairo, sans-serif" font-weight="bold" font-size="14" fill="#ffffff" text-anchor="middle">طريق مسدود ⛔</text>
+        </g>
+      `;
+    };
+
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
       <defs>
-        <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-          <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000" flood-opacity="0.6"/>
-        </filter>
+        <linearGradient id="topBannerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#0f172a"/>
+          <stop offset="50%" stop-color="#1e1b4b"/>
+          <stop offset="100%" stop-color="#0f172a"/>
+        </linearGradient>
       </defs>
-      <rect x="0" y="0" width="1280" height="74" fill="#0f172a"/>
+
+      <!-- Top Banner Bar -->
+      <rect x="0" y="0" width="1280" height="74" fill="url(#topBannerGrad)"/>
       <rect x="0" y="70" width="1280" height="4" fill="#f59e0b"/>
-      <text x="640" y="46" font-size="25" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#fef08a" text-anchor="middle" filter="url(#shadow)">
+      <text x="640" y="47" font-size="24.5" font-family="Noto Kufi Arabic, Cairo, sans-serif" font-weight="bold" fill="#fef08a" text-anchor="middle">
         ${bannerText}
       </text>
-      <rect x="330" y="84" width="620" height="626" rx="20" fill="#0f172a" fill-opacity="0.9" stroke="#f59e0b" stroke-width="4"/>
-      <path d="M 340 200 C 450 150, 480 320, 600 240 C 700 180, 800 220, 930 200" fill="none" stroke="#ef4444" stroke-width="10" stroke-linecap="round"/>
-      <path d="M 340 380 C 480 480, 520 220, 650 380 C 760 500, 820 380, 930 380" fill="none" stroke="#10b981" stroke-width="10" stroke-linecap="round"/>
-      <path d="M 340 540 C 450 620, 520 400, 680 560 C 780 640, 840 520, 930 540" fill="none" stroke="#3b82f6" stroke-width="10" stroke-linecap="round"/>
-      <g filter="url(#shadow)"><circle cx="340" cy="200" r="26" fill="#ef4444" stroke="#ffffff" stroke-width="3"/><text x="340" y="210" font-size="24" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">1</text></g>
-      <g filter="url(#shadow)"><circle cx="340" cy="380" r="26" fill="#10b981" stroke="#ffffff" stroke-width="3"/><text x="340" y="390" font-size="24" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">2</text></g>
-      <g filter="url(#shadow)"><circle cx="340" cy="540" r="26" fill="#3b82f6" stroke="#ffffff" stroke-width="3"/><text x="340" y="550" font-size="24" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">3</text></g>
-      <g filter="url(#shadow)"><circle cx="930" cy="200" r="24" fill="#fbbf24" stroke="#ffffff" stroke-width="3"/><text x="930" y="210" font-size="22" text-anchor="middle">${correctPath === 1 ? "🎯" : "🍎"}</text></g>
-      <g filter="url(#shadow)"><circle cx="930" cy="380" r="28" fill="#10b981" stroke="#fef08a" stroke-width="4"/><text x="930" y="390" font-size="24" text-anchor="middle">${correctPath === 2 ? "🎯" : "⭐"}</text></g>
-      <g filter="url(#shadow)"><circle cx="930" cy="540" r="24" fill="#8b5cf6" stroke="#ffffff" stroke-width="3"/><text x="930" y="550" font-size="22" text-anchor="middle">${correctPath === 3 ? "🎯" : "🎈"}</text></g>
+
+      <!-- Maze Arena Container -->
+      <rect x="330" y="84" width="620" height="626" rx="20" fill="#0b1329" stroke="#f59e0b" stroke-width="4.5"/>
+
+      <!-- Labyrinth Corridor Guidelines -->
+      <g stroke="#1e293b" stroke-width="5" stroke-linecap="round" opacity="0.7">
+        <line x1="360" y1="140" x2="900" y2="140"/>
+        <line x1="360" y1="660" x2="900" y2="660"/>
+        <line x1="420" y1="265" x2="590" y2="265"/>
+        <line x1="680" y1="265" x2="880" y2="265"/>
+        <line x1="420" y1="445" x2="620" y2="445"/>
+        <line x1="700" y1="445" x2="880" y2="445"/>
+        <line x1="640" y1="140" x2="640" y2="235"/>
+        <line x1="640" y1="475" x2="640" y2="660"/>
+      </g>
+
+      <!-- PATH 1 (RED) -->
+      <path d="${p1Data}" fill="none" stroke="#7f1d1d" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="${p1Data}" fill="none" stroke="#ef4444" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="${p1Data}" fill="none" stroke="#fca5a5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- PATH 2 (GREEN) -->
+      <path d="${p2Data}" fill="none" stroke="#064e3b" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="${p2Data}" fill="none" stroke="#10b981" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="${p2Data}" fill="none" stroke="#a7f3d0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- PATH 3 (BLUE) -->
+      <path d="${p3Data}" fill="none" stroke="#1e3a8a" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="${p3Data}" fill="none" stroke="#3b82f6" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="${p3Data}" fill="none" stroke="#bfdbfe" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- DEAD-END BARRIERS ⛔ -->
+      ${renderDeadEnd(p1DeadEnd)}
+      ${renderDeadEnd(p2DeadEnd)}
+      ${renderDeadEnd(p3DeadEnd)}
+
+      <!-- START BADGE 1 (RED) -->
+      <circle cx="340" cy="200" r="26" fill="#ef4444" stroke="#ffffff" stroke-width="3"/>
+      <text x="340" y="209" font-size="23" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">1</text>
+      <polygon points="372,200 364,194 364,206" fill="#fca5a5"/>
+
+      <!-- START BADGE 2 (GREEN) -->
+      <circle cx="340" cy="370" r="26" fill="#10b981" stroke="#ffffff" stroke-width="3"/>
+      <text x="340" y="379" font-size="23" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">2</text>
+      <polygon points="372,370 364,364 364,376" fill="#a7f3d0"/>
+
+      <!-- START BADGE 3 (BLUE) -->
+      <circle cx="340" cy="540" r="26" fill="#3b82f6" stroke="#ffffff" stroke-width="3"/>
+      <text x="340" y="549" font-size="23" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">3</text>
+      <polygon points="372,540 364,534 364,546" fill="#bfdbfe"/>
+
+      <!-- GOAL TARGET (LEADING TO FRIEND) -->
+      <circle cx="920" cy="${goalY}" r="32" fill="#fbbf24" stroke="#ffffff" stroke-width="3.5"/>
+      <circle cx="920" cy="${goalY}" r="24" fill="#f59e0b" stroke="#fef08a" stroke-width="2"/>
+      <text x="920" y="${goalY + 9}" font-size="24" text-anchor="middle">🎯</text>
+      <polygon points="958,${goalY} 950,${goalY - 7} 950,${goalY + 7}" fill="#fde047"/>
+
+      <!-- Outer Gold Frame -->
       <rect x="0" y="0" width="1280" height="720" fill="none" stroke="#f59e0b" stroke-width="8"/>
     </svg>`;
     fs.writeFileSync(svgPath, svg);
