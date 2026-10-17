@@ -1760,7 +1760,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       "-i",
       heroImg,
       "-filter_complex",
-      `[0:v]scale=640:720:force_original_aspect_ratio=increase,crop=640:720,eq=saturation=1.24:contrast=1.08:brightness=0.02,unsharp=5:5:0.85:5:5:0.0[left];[1:v]scale=640:720:force_original_aspect_ratio=increase,crop=640:720,eq=saturation=1.24:contrast=1.08:brightness=0.02,unsharp=5:5:0.85:5:5:0.0[right];[left][right]hstack=inputs=2,vignette=PI/7,drawbox=x=634:y=0:w=12:h=720:color=0xF59E0B@0.95:t=fill,drawbox=x=638:y=0:w=4:h=720:color=0xFEF08A@1.0:t=fill,drawbox=x=0:y=0:w=1280:h=720:color=0xFBBF24@0.95:t=12,drawbox=x=12:y=12:w=1256:h=696:color=0x38BDF8@0.65:t=4,setsar=1,format=yuvj420p[outv]`,
+      `[0:v]scale=640:720:force_original_aspect_ratio=increase,crop=640:720,eq=saturation=1.24:contrast=1.08:brightness=0.02,unsharp=5:5:0.85:5:5:0.0[left];[1:v]scale=640:720:force_original_aspect_ratio=increase,crop=640:720,eq=saturation=1.24:contrast=1.08:brightness=0.02,unsharp=5:5:0.85:5:5:0.0[right];[left][right]hstack=inputs=2,vignette=PI/7,drawbox=x=634:y=0:w=12:h=720:color=0xF59E0B@0.95:t=fill,drawbox=x=638:y=0:w=4:h=720:color=0xFEF08A@1.0:t=fill,drawbox=x=0:y=0:w=1280:h=720:color=0xFBBF24@1.0:t=14,drawbox=x=14:y=14:w=1252:h=692:color=0x06B6D4@0.90:t=6,drawbox=x=380:y=18:w=520:h=68:color=0x0F172A@0.88:t=fill,drawbox=x=380:y=18:w=520:h=68:color=0xFBBF24@1.0:t=4,setsar=1,format=yuvj420p[outv]`,
       "-map",
       "[outv]",
       "-frames:v",
@@ -3312,6 +3312,13 @@ async function generateFreshAiEpisodeForRunner({
   ضع تشكيلاً دقيقاً بالحركات الأساسية على الكلمات المصرية الحساسة لضمان نطقها الصحيح بمحرك الصوت (مثل: كِده، دِلْوَأْتِي، بُصّ، بُصِّي، إِنتِي، لِيكِي، قُولْتِي، شُوفْتِي، عَشَانْ، أَوْي).
 - الالتزام التام بنسبة 100% باللهجة المصرية العامية القاهرية الدافئة للأطفال، وممنوع منعاً باتاً أي تحويل أو تسرب للغة العربية الفصحى.
 
+استراتيجيات النمو ومضاعفة المشاهدات والتفاعل للأطفال (Audience Growth & Retention Directives):
+1. لوحة شرف الأبطال والتحية بالأسماء: في المشهد الأخير، أعلن وسام الشطارة وادعُ الأطفال لكتابة أسمائهم ومدنهم للظهور بالاسم في لوحة شرف أبطال نورين كيدز في الحلقة القادمة.
+2. تحدي الملاحظة السريع (Rewind & Spot Challenge): في المشهد الثاني أو الثالث، اذكر وجود عنصر سري خفي ظهر للحظة واحدة (مفتاح ذهبي، وردة منورة، بلورة سحرية) واطلب من الطفل إعادة المشهد للبحث عنه وكتابة توقيته لرفع معدل المشاهدة (Watch Time).
+3. تفاعل وحركة الأطفال في الفيديوهات القصيرة: أضف توجيهاً حركياً مرحاً يقلده الطفل فوراً (القفز 3 مرات، تحريك اليدين مثل الفراشة، تنظيف الأسنان بالفرشاة مع أرنوب، أو الضحك مع تختوخ).
+4. مهن المستقبل والقدوة التربوية: أبرز دور البطل الإيجابي الملهم (الطب، الهندسة، الفضاء، الاستكشاف، الاختراع، الرفق بالكائنات) ليتعلم الطفل حب العمل والابتكار.
+5. حواديت النوم والسكينة المسائية: عند حلقات النوم أو مع تيتة وجدو، اعتمد نبرة دافئة ومهدئة للاسترخاء قبل النوم بنشاط وشطارة.
+
 قواعد كتابة الحوار والسيناريو الكرتوني الصارمة (Direct Character-to-Character Dialogue with Concrete Story Events):
 1. الحوار في كل مشهد هو كلام تمثيلي كرتوني مباشر صادر من فم الشخصية المتحدثة وتخاطب به صديقها وجهاً لوجه بضمير المتكلم ("أنا"، "إحنا") وتناديه باسمه ("يا ${team.companionName}" أو "يا ${team.mainCharacterName}").
 2. الشخصيات تصف الأحداث الواقعية والمشاعر والأفعال أثناء الحوار بشكل عفوي ممتع يروي القصة للطفل دون حاجة لراوٍ غائب.
@@ -3769,9 +3776,11 @@ function buildInteractiveChallengeMessage(episode, platform = "youtube") {
   const comp = String(episode?.companionName || "أصحابنا الشطار").trim();
   const topic = normalizeEgyptianColloquial(String(episode?.title || "مغامرة النهارده"));
   const moral = normalizeEgyptianColloquial(String(episode?.moralLesson || "التعاون والتفكير الذكي ومساعدة الأصدقاء"));
+  const hallOfFame = "🎖️ [لوحة شرف الأبطال]: اكتب اسمك واسم مدينتك علشان دكتورة نورين وسدرة وتختوخ يعلنوا اسمك ويكرموك في لوحة شرف الحلقة الجاية!";
+  const rewindSpot = "✨ [تحدي الملاحظة السريع]: ركزوا كويس! فيه سر سحري مستخبي للحظة واحدة في المغامرة، مين الشاطر اللي عينه قوية ولمحه؟ رجّع الفيديو واكتبلنا ظهر في أي ثانية!";
   return platform === "facebook"
-    ? `📌 [تحدي الأبطال المثبت] 🌟 سؤال التحدي لشطار نورين كيدز! يا ترى إيه أهم حاجة اتعلمناها من مغامرة "${topic}" مع ${hero} و${comp}؟ 💡 ${moral}. اكتبوا إجابتكم في التعليقات وقولوا لنا مين الشخصية اللي ساعدت أكتر في الحل! 👇💖`
-    : `📌 [تحدي الأبطال المثبت] 🌟 سؤال التحدي لشطار Noreen Kids! يا ترى إيه أهم حاجة اتعلمناها من مغامرة "${topic}" مع ${hero} و${comp}؟ 💡 ${moral}. اكتبوا إجابتكم في التعليقات وقولوا لنا مين الشخصية اللي ساعدت أكتر في الحل! 👇💖`;
+    ? `📌 [تحدي الأبطال المثبت] 🌟 سؤال التحدي لشطار نورين كيدز! يا ترى إيه أهم حاجة اتعلمناها من مغامرة "${topic}" مع ${hero} و${comp}؟ 💡 ${moral}. اكتبوا إجابتكم في التعليقات وقولوا لنا مين الشخصية اللي ساعدت أكتر في الحل! 👇💖\n\n${hallOfFame}\n${rewindSpot}`
+    : `📌 [تحدي الأبطال المثبت] 🌟 سؤال التحدي لشطار Noreen Kids! يا ترى إيه أهم حاجة اتعلمناها من مغامرة "${topic}" مع ${hero} و${comp}؟ 💡 ${moral}. اكتبوا إجابتكم في التعليقات وقولوا لنا مين الشخصية اللي ساعدت أكتر في الحل! 👇💖\n\n${hallOfFame}\n${rewindSpot}`;
 }
 
 async function postYouTubeFirstComment({ accessToken, videoId, message }) {
