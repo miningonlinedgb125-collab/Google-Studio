@@ -1733,7 +1733,29 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
   // Build clean static Duo composite card from approved local character portraits (zero pixel warping)
   const duoCardPath = path.join(tmpDir, `duo_card_${videoFormat}.jpg`);
   const thumbnail1280Path = path.join(tmpDir, `thumbnail_1280x720_${videoFormat}.jpg`);
+  const verticalPosterPath = path.join(tmpDir, `vertical_poster_${videoFormat}.jpg`);
   try {
+    if (isShort) {
+      await execFileAsync("ffmpeg", [
+        "-y",
+        "-i", compImg,
+        "-i", heroImg,
+        "-filter_complex",
+        `[0:v]scale=360:1280:force_original_aspect_ratio=increase,crop=360:1280,eq=saturation=1.35:contrast=1.14:brightness=0.03[left];` +
+        `[1:v]scale=360:1280:force_original_aspect_ratio=increase,crop=360:1280,eq=saturation=1.35:contrast=1.14:brightness=0.03[right];` +
+        `[left][right]hstack=inputs=2,` +
+        `drawbox=x=354:y=0:w=12:h=1280:color=0xF59E0B@0.95:t=fill,` +
+        `drawbox=x=358:y=0:w=4:h=1280:color=0xFEF08A@1.0:t=fill,` +
+        `drawbox=x=0:y=0:w=720:h=1280:color=0xFBBF24@1.0:t=14,` +
+        `drawbox=x=14:y=14:w=692:h=1252:color=0x06B6D4@0.90:t=6,` +
+        `drawbox=x=40:y=40:w=640:h=120:color=0x0F172A@0.92:t=fill,` +
+        `drawbox=x=40:y=40:w=640:h=120:color=0xFBBF24@1.0:t=6,` +
+        `setsar=1[outv]`,
+        "-map", "[outv]",
+        "-frames:v", "1",
+        verticalPosterPath,
+      ]);
+    }
     const halfW = Math.floor(W / 2);
     await execFileAsync("ffmpeg", [
       "-y",
@@ -1987,17 +2009,60 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     const bottomY = Math.round(H * 0.92);
     const travelY = Math.max(160, Math.round(H * 0.85));
 
-    const vfxFilterComplex = [
-      `[0:v]format=yuv420p,loop=loop=-1:size=1:start=0,fps=30,trim=duration=${dur},crop=${W}:${H}:x='${camExprX}':y='${camExprY}'[base]`,
+    const isScene1WithPoster = i === 0 && isShort && fs.existsSync(verticalPosterPath);
+    const isScene2WithSecret = i === 1;
+    const isFinalScene = i === preparedScenes.length - 1;
+
+    const secretSpriteLavfi = "color=c=black@0.0:s=130x130:r=30:d=0.04,format=rgba,geq=r=255:g=220:b=50:a='clip(255*exp(-((X-65)*(X-65)+(Y-65)*(Y-65))/650)+180*exp(-pow(abs(X-65)*abs(Y-65),0.6)/35),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
+
+    const filterSteps = [
+      `[0:v]format=yuv420p,loop=loop=-1:size=1:start=0,fps=30,trim=duration=${dur},crop=${W}:${H}:x='${camExprX}':y='${camExprY}'[base_raw]`,
+    ];
+
+    let currentBase = "base_raw";
+    if (isScene1WithPoster) {
+      filterSteps.push(
+        `[3:v]fade=t=out:st=0.55:d=0.20:alpha=1[post_faded]`,
+        `[${currentBase}][post_faded]overlay=x=0:y=0:enable='lte(t,0.75)':format=yuv420[base_poster]`
+      );
+      currentBase = "base_poster";
+    }
+
+    filterSteps.push(
       `[1:v]split=3[s1][s2][s3]`,
       `[2:v]split=3[o1][o2][o3]`,
-      `[base][s1]overlay=x='${marginX}+${rangeX}*(0.5+0.46*sin(t*0.85+0.4))':y='${bottomY}-${travelY}*mod(t*0.21+0.08,1)':format=yuv420:shortest=1[v1]`,
+      `[${currentBase}][s1]overlay=x='${marginX}+${rangeX}*(0.5+0.46*sin(t*0.85+0.4))':y='${bottomY}-${travelY}*mod(t*0.21+0.08,1)':format=yuv420:shortest=1[v1]`,
       `[v1][s2]overlay=x='${marginX}+${rangeX}*(0.5+0.45*cos(t*1.05+1.9))':y='${bottomY}-${travelY}*mod(t*0.26+0.42,1)':format=yuv420:shortest=1[v2]`,
       `[v2][s3]overlay=x='${marginX}+${rangeX}*(0.5+0.46*sin(t*0.95+3.3))':y='${bottomY}-${travelY}*mod(t*0.23+0.74,1)':format=yuv420:shortest=1[v3]`,
       `[v3][o1]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.78+1.1))':y='${bottomY}-${travelY}*mod(t*0.19+0.24,1)':format=yuv420:shortest=1[v4]`,
-      `[v4][o2]overlay=x='${marginX}+${rangeX}*(0.5+0.44*sin(t*1.12+2.6))':y='${bottomY}-${travelY}*mod(t*0.29+0.58,1)':format=yuv420:shortest=1[v5]`,
-      `[v5][o3]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.92+4.2))':y='${bottomY}-${travelY}*mod(t*0.24+0.86,1)':format=yuv420:shortest=1,drawbox=x=0:y=0:w=${W}:h=${H}:color=${borderColorHex}@0.88:t=8,setsar=1,fade=t=in:st=0:d=0.30,fade=t=out:st=${fadeOutStart}:d=0.30,format=yuv420p[vout]`,
-    ].join(";");
+      `[v4][o2]overlay=x='${marginX}+${rangeX}*(0.5+0.44*sin(t*1.12+2.6))':y='${bottomY}-${travelY}*mod(t*0.29+0.58,1)':format=yuv420:shortest=1[v5]`
+    );
+
+    let preDecorated = "v5";
+    if (isScene2WithSecret) {
+      filterSteps.push(
+        `[${preDecorated}][3:v]overlay=x=${W - 170}:y=180:enable='between(t,6.5,7.8)':format=yuv420[v_secret]`
+      );
+      preDecorated = "v_secret";
+    }
+
+    let finalBoxes = `drawbox=x=0:y=0:w=${W}:h=${H}:color=${borderColorHex}@0.88:t=8`;
+    if (isFinalScene) {
+      finalBoxes += `,drawbox=x=60:y=${Math.round(H * 0.72)}:w=${W - 120}:h=64:color=0x0F172A@0.88:t=fill,drawbox=x=60:y=${Math.round(H * 0.72)}:w=${W - 120}:h=64:color=0xFBBF24@1.0:t=4`;
+    }
+
+    filterSteps.push(
+      `[${preDecorated}][o3]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.92+4.2))':y='${bottomY}-${travelY}*mod(t*0.24+0.86,1)':format=yuv420:shortest=1,${finalBoxes},setsar=1,fade=t=in:st=0:d=0.30,fade=t=out:st=${fadeOutStart}:d=0.30,format=yuv420p[vout]`
+    );
+
+    const vfxFilterComplex = filterSteps.join(";");
+
+    const extraSceneInputs = [];
+    if (isScene1WithPoster) {
+      extraSceneInputs.push("-loop", "1", "-i", verticalPosterPath);
+    } else if (isScene2WithSecret) {
+      extraSceneInputs.push("-f", "lavfi", "-i", secretSpriteLavfi);
+    }
 
     await execFileAsync("ffmpeg", [
       "-y",
@@ -2011,6 +2076,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       "lavfi",
       "-i",
       sprite2Lavfi,
+      ...extraSceneInputs,
       "-filter_complex",
       vfxFilterComplex,
       "-map",
@@ -2918,7 +2984,7 @@ function buildSmartEpisodeForRunner({
     },
     {
       title: `2. التطور: ملاحظة المشكلة مع ${shortComp}`,
-      egyptianShort: `يا خبر أبيض يا ${shortHero}! بص شوف معايا هناك، فيه مشكلة ومحتاجة مننا فكرة ذكية ومساعدة سريعة في ${shortTopicMention}! لازم نتصرف بهدوء وتعاون علشان نساعد الكل، وأنا جهزت ${compProp} ومستعد لخطتك الذكية!`,
+      egyptianShort: `يا خبر أبيض يا ${shortHero}! بص شوف معايا هناك، فيه مشكلة ومحتاجة مساعدة في ${shortTopicMention}! وبُصّ شُوفْ المفتاح السِّرِّي بْيِلْمَع هِنَاك! يلا نتصرف بذكاء وتعاون سوا!`,
       egyptianLong: `يا خبر أبيض يا ${shortHero}! بص شوف معايا هناك بسرعة يا صاحبي! شفت المشكلة اللي حصلت في ${shortTopicMention}؟ الموضوع ده محتاج مننا وقفة سريعة وتفكير هادي علشان نساعد الكل ونحل التحدي ده صح! لو استنينا المشكلة هتكبر وممكن حد يزعل، وإحنا أبطال نورين كيدز دايماً بنكون جاهزين للمساعدة بقلب طيب وهمة عالية! يا ترى هنعمل إيه ${heroAppellation}؟ يلا نفكر سوا بالراحة ومن غير استعجال خالص علشان نوصل لأحسن حل يفرح كل حبايبنا وأصحابنا!`,
       speaker: effectiveCompName,
       voice: compVoice,
