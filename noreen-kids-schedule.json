@@ -37,6 +37,16 @@
     {
       "topic": "حكمة جدو وسر طيارة أطفال الحارة المبهجة",
       "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "سلة تيتة ومفاجأة تكريم حافظ القرآن الصغير",
+      "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا"
+    },
+    {
+      "topic": "حكمة جدو وسر طيارة أطفال الحارة المبهجة",
+      "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس",
       "timestampIso": "2026-10-17T17:57:50.466Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "تيتة",
       "companionName": "الدب باندا",
       "timestampIso": "2026-10-14T22:12:53.063Z"
-    },
-    {
-      "topic": "جدو الحكيم وحل خلاف كرة القدم بين أصحاب الحارة",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "سباق الصقر الذكي وحساب مسافات خريطة الوادي",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "جدو الحكيم وحل خلاف كرة القدم بين أصحاب الحارة",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-10-14T19:27:04.927Z"
-    },
-    {
-      "topic": "سباق الصقر الذكي وحساب مسافات خريطة الوادي",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-10-14T19:27:04.927Z"
     }
   ],
   "scheduledHistory": [
