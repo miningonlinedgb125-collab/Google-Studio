@@ -37,6 +37,16 @@
     {
       "topic": "تختوخ وزقلط ومغامرة الآيس كريم في الملاهي",
       "mainCharacterName": "تختوخ",
+      "companionName": "الكلب زقلط"
+    },
+    {
+      "topic": "طبيبة الغابة وسر علاج جناح كوكو الصغير",
+      "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "تختوخ وزقلط ومغامرة الآيس كريم في الملاهي",
+      "mainCharacterName": "تختوخ",
       "companionName": "الكلب زقلط",
       "timestampIso": "2026-10-17T18:43:19.918Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي",
       "timestampIso": "2026-10-15T09:55:33.746Z"
-    },
-    {
-      "topic": "طبيبة الغابة السحرية وعلاج جناح العصفور",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "وصفة تيتة السحرية لعلاج زكام سنجوب المشاغب",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
-    },
-    {
-      "topic": "طبيبة الغابة السحرية وعلاج جناح العصفور",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-10-14T22:12:53.063Z"
-    },
-    {
-      "topic": "وصفة تيتة السحرية لعلاج زكام سنجوب المشاغب",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "timestampIso": "2026-10-14T22:12:53.063Z"
     }
   ],
   "scheduledHistory": [
@@ -228,7 +216,7 @@
       "id": "gh-run-39058707984",
       "uploadMode": "manual_instant",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-17 (21:47 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-17 (21:48 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1792262438845-0zh4",
       "longEpisodeId": "ep-gh-long-1792262599918-vkjy",
       "shortEpisodeTitle": "Noreen Kids: تختوخ وزقلط ومغامرة الآيس كريم في الملاهي | مغامرات تختوخ والكلب زقلط",
@@ -262,7 +250,7 @@
         "fastStartMoovFirst": true,
         "durationSec": 77,
         "fileSizeBytes": 12194939,
-        "inspectedAt": "21:47"
+        "inspectedAt": "21:48"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2706,32 +2694,27 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "١٧‏/١٠‏/٢٠٢٦، ٩:٤٧:٥٨ م",
   "lastCloudRunReport": {
-    "id": "gh-run-39020691377",
-    "uploadMode": "daily_schedule",
+    "id": "gh-run-39058707984",
+    "uploadMode": "manual_instant",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-17 (12:37 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792228879465-tsm3",
-    "longEpisodeId": "ep-gh-long-1792228925446-5cpg",
-    "shortEpisodeTitle": "Noreen Kids: ذياد والفرفوشة يزرعان شجر الظل في القرية | مغامرات ذياد والعصفورة الفرفوشة",
-    "longEpisodeTitle": "Noreen Kids: أستاذ شريف وسر ترتيب ساعات اليوم الذكي | مغامرات أستاذ شريف والصقر الذكي",
-    "shortTitle": "Noreen Kids: ذياد والفرفوشة يزرعان شجر الظل في القرية | مغامرات ذياد والعصفورة الفرفوشة",
-    "longTitle": "Noreen Kids: أستاذ شريف وسر ترتيب ساعات اليوم الذكي | مغامرات أستاذ شريف والصقر الذكي",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-17 (21:48 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792262438845-0zh4",
+    "longEpisodeId": "ep-gh-long-1792262599918-vkjy",
+    "shortEpisodeTitle": "Noreen Kids: تختوخ وزقلط ومغامرة الآيس كريم في الملاهي | مغامرات تختوخ والكلب زقلط",
+    "longEpisodeTitle": "طبيبة الغابة وسر علاج جناح كوكو الصغير",
+    "shortTitle": "Noreen Kids: تختوخ وزقلط ومغامرة الآيس كريم في الملاهي | مغامرات تختوخ والكلب زقلط",
+    "longTitle": "طبيبة الغابة وسر علاج جناح كوكو الصغير",
     "shortPlaylistId": "PLPwfeXzB3ozU",
-    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "9-vuTwUC1bs",
-    "youtubeLongVideoId": "grMuK26dG-M",
-    "facebookShortVideoId": "1756631338777229",
-    "facebookLongVideoId": "957871373584880",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1756631338777229",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/957871373584880",
-    "facebookShortTitle": "Noreen Kids | ذياد والفرفوشة يزرعان شجر الظل في القرية - مغامرة ذياد والعصفورة الفرفوشة",
-    "facebookLongTitle": "Noreen Kids | أستاذ شريف وسر ترتيب ساعات اليوم الذكي - مغامرة أستاذ شريف والصقر الذكي",
+    "youtubeShortVideoId": "lEWVE3wzTMw",
+    "facebookShortVideoId": "29282717947998976",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/29282717947998976",
+    "facebookShortTitle": "Noreen Kids | تختوخ وزقلط ومغامرة الآيس كريم في الملاهي - مغامرة تختوخ والكلب زقلط",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2739,16 +2722,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 1280,
-      "height": 720,
+      "width": 720,
+      "height": 1280,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 337,
-      "fileSizeBytes": 37402706,
-      "inspectedAt": "12:37"
+      "durationSec": 77,
+      "fileSizeBytes": 12194939,
+      "inspectedAt": "21:48"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2757,7 +2740,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-17T09:37:34.677Z"
+    "reportedAtIso": "2026-10-17T18:48:02.191Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
