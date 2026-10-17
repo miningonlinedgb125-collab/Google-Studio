@@ -2675,6 +2675,16 @@
     {
       "topic": "حكمة جدو وسر طيارة أطفال الحارة المبهجة",
       "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "سلة تيتة ومفاجأة تكريم حافظ القرآن الصغير",
+      "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا"
+    },
+    {
+      "topic": "حكمة جدو وسر طيارة أطفال الحارة المبهجة",
+      "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس",
       "timestampIso": "2026-10-17T17:57:50.466Z"
     },
@@ -2837,43 +2847,21 @@
       "mainCharacterName": "تيتة",
       "companionName": "الدب باندا",
       "timestampIso": "2026-10-14T22:12:53.063Z"
-    },
-    {
-      "topic": "جدو الحكيم وحل خلاف كرة القدم بين أصحاب الحارة",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "سباق الصقر الذكي وحساب مسافات خريطة الوادي",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "جدو الحكيم وحل خلاف كرة القدم بين أصحاب الحارة",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-10-14T19:27:04.927Z"
-    },
-    {
-      "topic": "سباق الصقر الذكي وحساب مسافات خريطة الوادي",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-10-14T19:27:04.927Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-17 · 12:37 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-38950087570",
+    "id": "gh-run-39055568747",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-16 (22:11 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792176649519-qc4b",
-    "longEpisodeId": "ep-gh-long-1792176770490-2i23",
-    "shortEpisodeTitle": "Noreen Kids: مفاجأة سدرة بألوان قوس قزح لإسعاد ماما | مغامرات سدرة الصغنونة والفراشة الملونة",
-    "longEpisodeTitle": "Noreen Kids: أم ملك وسر لوحة الشجرة الزرقاء في المعرض | مغامرات أم ملك والبطريق المرح",
-    "shortTitle": "Noreen Kids: مفاجأة سدرة بألوان قوس قزح لإسعاد ماما | مغامرات سدرة الصغنونة والفراشة الملونة",
-    "longTitle": "Noreen Kids: أم ملك وسر لوحة الشجرة الزرقاء في المعرض | مغامرات أم ملك والبطريق المرح",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-17 (21:14 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792259731423-jtwx",
+    "longEpisodeId": "ep-gh-long-1792259870466-he1h",
+    "shortEpisodeTitle": "Noreen Kids: حكمة جدو وسر طيارة أطفال الحارة المبهجة | مغامرات جدو والفأر المشاكس",
+    "longEpisodeTitle": "Noreen Kids: سلة تيتة ومفاجأة تكريم حافظ القرآن الصغير | مغامرات تيتة والدب باندا",
+    "shortTitle": "Noreen Kids: حكمة جدو وسر طيارة أطفال الحارة المبهجة | مغامرات جدو والفأر المشاكس",
+    "longTitle": "Noreen Kids: سلة تيتة ومفاجأة تكريم حافظ القرآن الصغير | مغامرات تيتة والدب باندا",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2882,14 +2870,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "9C4ga3T3NxU",
-    "youtubeLongVideoId": "gHuew9xPypo",
-    "facebookShortVideoId": "1109729695307218",
-    "facebookLongVideoId": "2117054822508982",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1109729695307218",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2117054822508982",
-    "facebookShortTitle": "Noreen Kids | مفاجأة سدرة بألوان قوس قزح لإسعاد ماما - مغامرة سدرة الصغنونة والفراشة الملونة",
-    "facebookLongTitle": "Noreen Kids | أم ملك وسر لوحة الشجرة الزرقاء في المعرض - مغامرة أم ملك والبطريق المرح",
+    "youtubeShortVideoId": "6Oai2iBWJIA",
+    "youtubeLongVideoId": "uo4VbknZyZY",
+    "facebookShortVideoId": "1120921913997629",
+    "facebookLongVideoId": "1741705906887471",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1120921913997629",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1741705906887471",
+    "facebookShortTitle": "Noreen Kids | حكمة جدو وسر طيارة أطفال الحارة المبهجة - مغامرة جدو والفأر المشاكس",
+    "facebookLongTitle": "Noreen Kids | سلة تيتة ومفاجأة تكريم حافظ القرآن الصغير - مغامرة تيتة والدب باندا",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2904,9 +2892,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 384,
-      "fileSizeBytes": 40821064,
-      "inspectedAt": "22:11"
+      "durationSec": 321,
+      "fileSizeBytes": 37109105,
+      "inspectedAt": "21:14"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2915,7 +2903,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-16T19:11:34.567Z"
+    "reportedAtIso": "2026-10-17T18:14:24.110Z"
   },
   "heroFairRotationIndex": 14,
   "interactiveHeroRotationIndex": 5,
