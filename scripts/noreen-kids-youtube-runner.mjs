@@ -1662,6 +1662,148 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
   return { audioPath: fallbackWav, voiceDurSec: 14, dialogue };
 }
 
+async function synthesizeAiVideoClipForScene(
+  speakerName,
+  dialogueText,
+  characterImgPath,
+  sceneIndex,
+  targetW,
+  targetH,
+  tmpDir
+) {
+  const replicateToken = (
+    process.env.REPLICATE_API_TOKEN || ""
+  ).trim();
+  const hfToken = (
+    process.env.HUGGINGFACE_API_TOKEN || ""
+  ).trim();
+
+  if (!replicateToken && !hfToken) {
+    return null;
+  }
+
+  const promptText = `3D Pixar style cartoon video animation of ${speakerName || "Noreen Kids character"} speaking and expressing emotion, ${String(dialogueText || "").slice(0, 100)}, 3D cartoon style, smooth cinematic animation, Noreen Kids Studio`;
+
+  // 1) Replicate CogVideoX Engine
+  if (replicateToken) {
+    try {
+      let imageUri = null;
+      if (characterImgPath && fs.existsSync(characterImgPath)) {
+        const imgBuf = fs.readFileSync(characterImgPath);
+        imageUri = `data:image/jpeg;base64,${imgBuf.toString("base64")}`;
+      }
+
+      const createRes = await fetch(
+        "https://api.replicate.com/v1/models/chenxwh/cogvideox-5b/predictions",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${replicateToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            input: {
+              prompt: promptText,
+              ...(imageUri ? { image: imageUri } : {}),
+              num_inference_steps: 30,
+              guidance_scale: 6.0,
+            },
+          }),
+        }
+      );
+
+      if (createRes.ok) {
+        let pred = await createRes.json();
+        const getUrl = pred?.urls?.get;
+        const startTime = Date.now();
+
+        while (
+          getUrl &&
+          (pred?.status === "starting" || pred?.status === "processing") &&
+          Date.now() - startTime < 120000
+        ) {
+          await sleep(4000);
+          const pollRes = await fetch(getUrl, {
+            headers: { Authorization: `Bearer ${replicateToken}` },
+          });
+          if (pollRes.ok) {
+            pred = await pollRes.json();
+          }
+        }
+
+        const videoOutputUrl =
+          typeof pred?.output === "string"
+            ? pred.output
+            : Array.isArray(pred?.output)
+            ? pred.output[0]
+            : null;
+
+        if (pred?.status === "succeeded" && videoOutputUrl) {
+          const vBufRes = await fetch(videoOutputUrl);
+          if (vBufRes.ok) {
+            const ab = await vBufRes.arrayBuffer();
+            const clipPath = path.join(tmpDir, `ai_clip_${sceneIndex}.mp4`);
+            fs.writeFileSync(clipPath, Buffer.from(ab));
+            if (fs.existsSync(clipPath) && fs.statSync(clipPath).size > 5000) {
+              console.log(
+                `   ✨ [Replicate CogVideoX AI] المشهد ${sceneIndex + 1}: تم توليد مقطع فيديو أنيميشن ثلاثي الأبعاد بنجاح!`
+              );
+              return clipPath;
+            }
+          }
+        }
+      }
+    } catch (e) {
+      console.warn(
+        `   ⚠️ [Replicate AI Video Notice] المشهد ${sceneIndex + 1}: ${e?.message || e} - الانتقال للتحريك السينمائي القاهري الخالي من التشوه.`
+      );
+    }
+  }
+
+  // 2) Hugging Face Gradio Client / Space Fallback (THUDM/CogVideoX-5B Space)
+  if (hfToken) {
+    try {
+      const gradioRes = await fetch(
+        "https://thudm-cogvideox-5b-space.hf.space/api/predict",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${hfToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data: [promptText, 50, 6.0] }),
+        }
+      );
+      if (gradioRes.ok) {
+        const gradioData = await gradioRes.json();
+        const videoResultPath = Array.isArray(gradioData?.data)
+          ? gradioData.data[0]
+          : null;
+        if (typeof videoResultPath === "string" && videoResultPath.startsWith("http")) {
+          const vBufRes = await fetch(videoResultPath);
+          if (vBufRes.ok) {
+            const ab = await vBufRes.arrayBuffer();
+            const clipPath = path.join(tmpDir, `hf_clip_${sceneIndex}.mp4`);
+            fs.writeFileSync(clipPath, Buffer.from(ab));
+            if (fs.existsSync(clipPath) && fs.statSync(clipPath).size > 5000) {
+              console.log(
+                `   ✨ [HuggingFace Gradio Space AI] المشهد ${sceneIndex + 1}: تم توليد مقطع فيديو أنيميشن ثلاثي الأبعاد بنجاح!`
+              );
+              return clipPath;
+            }
+          }
+        }
+      }
+    } catch (e) {
+      console.warn(
+        `   ⚠️ [HuggingFace AI Video Notice] المشهد ${sceneIndex + 1}: ${e?.message || e}`
+      );
+    }
+  }
+
+  return null;
+}
+
 async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptian") {
   const isShort = videoFormat === "short_9_16";
   const W = isShort ? 720 : 1280;
@@ -1895,12 +2037,24 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     );
     // Strictly show the speaking character's full portrait (Hero when Hero speaks, Companion when Companion speaks)
     const shotImg = activeImg;
-    const prebakedImg = await getPrebakedPortrait(shotImg, i);
+    const aiClipPath = await synthesizeAiVideoClipForScene(
+      sc.speakerName || (isCompTurn ? companionName : heroName),
+      sc.dialogueArabic,
+      shotImg,
+      i,
+      W,
+      H,
+      tmpDir
+    );
+
+    const prebakedImg = aiClipPath ? null : await getPrebakedPortrait(shotImg, i);
 
     console.log(
       `   -> [Scene ${i + 1}/${preparedScenes.length}] Speaker="${
         sc.speakerName || (isCompTurn ? companionName : heroName)
-      }" | Voice=${item.voiceDurSec.toFixed(1)}s | Scene=${dur}s (YouTube Fast-Processing Closed-GOP H.264 + Story VFX + Continuous PCM)...`
+      }" | Voice=${item.voiceDurSec.toFixed(1)}s | Scene=${dur}s (YouTube Fast-Processing Closed-GOP H.264 + Story VFX + Continuous PCM${
+        aiClipPath ? " + AI Video Animation" : ""
+      })...`
     );
 
     // Ensure audio finishes naturally with ample breathing room (strictly 1.0x natural tempo)
@@ -1987,22 +2141,37 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     const bottomY = Math.round(H * 0.92);
     const travelY = Math.max(160, Math.round(H * 0.85));
 
-    const vfxFilterComplex = [
-      `[0:v]format=yuv420p,loop=loop=-1:size=1:start=0,fps=30,trim=duration=${dur},crop=${W}:${H}:x='${camExprX}':y='${camExprY}'[base]`,
-      `[1:v]split=3[s1][s2][s3]`,
-      `[2:v]split=3[o1][o2][o3]`,
-      `[base][s1]overlay=x='${marginX}+${rangeX}*(0.5+0.46*sin(t*0.85+0.4))':y='${bottomY}-${travelY}*mod(t*0.21+0.08,1)':format=yuv420:shortest=1[v1]`,
-      `[v1][s2]overlay=x='${marginX}+${rangeX}*(0.5+0.45*cos(t*1.05+1.9))':y='${bottomY}-${travelY}*mod(t*0.26+0.42,1)':format=yuv420:shortest=1[v2]`,
-      `[v2][s3]overlay=x='${marginX}+${rangeX}*(0.5+0.46*sin(t*0.95+3.3))':y='${bottomY}-${travelY}*mod(t*0.23+0.74,1)':format=yuv420:shortest=1[v3]`,
-      `[v3][o1]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.78+1.1))':y='${bottomY}-${travelY}*mod(t*0.19+0.24,1)':format=yuv420:shortest=1[v4]`,
-      `[v4][o2]overlay=x='${marginX}+${rangeX}*(0.5+0.44*sin(t*1.12+2.6))':y='${bottomY}-${travelY}*mod(t*0.29+0.58,1)':format=yuv420:shortest=1[v5]`,
-      `[v5][o3]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.92+4.2))':y='${bottomY}-${travelY}*mod(t*0.24+0.86,1)':format=yuv420:shortest=1,drawbox=x=0:y=0:w=${W}:h=${H}:color=${borderColorHex}@0.88:t=8,setsar=1,fade=t=in:st=0:d=0.30,fade=t=out:st=${fadeOutStart}:d=0.30,format=yuv420p[vout]`,
-    ].join(";");
+    const vfxFilterComplex = aiClipPath
+      ? [
+          `[0:v]scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},fps=30,trim=duration=${dur},eq=saturation=1.12:contrast=1.04[base]`,
+          `[1:v]split=3[s1][s2][s3]`,
+          `[2:v]split=3[o1][o2][o3]`,
+          `[base][s1]overlay=x='${marginX}+${rangeX}*(0.5+0.46*sin(t*0.85+0.4))':y='${bottomY}-${travelY}*mod(t*0.21+0.08,1)':format=yuv420:shortest=1[v1]`,
+          `[v1][s2]overlay=x='${marginX}+${rangeX}*(0.5+0.45*cos(t*1.05+1.9))':y='${bottomY}-${travelY}*mod(t*0.26+0.42,1)':format=yuv420:shortest=1[v2]`,
+          `[v2][s3]overlay=x='${marginX}+${rangeX}*(0.5+0.46*sin(t*0.95+3.3))':y='${bottomY}-${travelY}*mod(t*0.23+0.74,1)':format=yuv420:shortest=1[v3]`,
+          `[v3][o1]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.78+1.1))':y='${bottomY}-${travelY}*mod(t*0.19+0.24,1)':format=yuv420:shortest=1[v4]`,
+          `[v4][o2]overlay=x='${marginX}+${rangeX}*(0.5+0.44*sin(t*1.12+2.6))':y='${bottomY}-${travelY}*mod(t*0.29+0.58,1)':format=yuv420:shortest=1[v5]`,
+          `[v5][o3]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.92+4.2))':y='${bottomY}-${travelY}*mod(t*0.24+0.86,1)':format=yuv420:shortest=1,drawbox=x=0:y=0:w=${W}:h=${H}:color=${borderColorHex}@0.88:t=8,setsar=1,fade=t=in:st=0:d=0.30,fade=t=out:st=${fadeOutStart}:d=0.30,format=yuv420p[vout]`,
+        ].join(";")
+      : [
+          `[0:v]format=yuv420p,loop=loop=-1:size=1:start=0,fps=30,trim=duration=${dur},crop=${W}:${H}:x='${camExprX}':y='${camExprY}'[base]`,
+          `[1:v]split=3[s1][s2][s3]`,
+          `[2:v]split=3[o1][o2][o3]`,
+          `[base][s1]overlay=x='${marginX}+${rangeX}*(0.5+0.46*sin(t*0.85+0.4))':y='${bottomY}-${travelY}*mod(t*0.21+0.08,1)':format=yuv420:shortest=1[v1]`,
+          `[v1][s2]overlay=x='${marginX}+${rangeX}*(0.5+0.45*cos(t*1.05+1.9))':y='${bottomY}-${travelY}*mod(t*0.26+0.42,1)':format=yuv420:shortest=1[v2]`,
+          `[v2][s3]overlay=x='${marginX}+${rangeX}*(0.5+0.46*sin(t*0.95+3.3))':y='${bottomY}-${travelY}*mod(t*0.23+0.74,1)':format=yuv420:shortest=1[v3]`,
+          `[v3][o1]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.78+1.1))':y='${bottomY}-${travelY}*mod(t*0.19+0.24,1)':format=yuv420:shortest=1[v4]`,
+          `[v4][o2]overlay=x='${marginX}+${rangeX}*(0.5+0.44*sin(t*1.12+2.6))':y='${bottomY}-${travelY}*mod(t*0.29+0.58,1)':format=yuv420:shortest=1[v5]`,
+          `[v5][o3]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.92+4.2))':y='${bottomY}-${travelY}*mod(t*0.24+0.86,1)':format=yuv420:shortest=1,drawbox=x=0:y=0:w=${W}:h=${H}:color=${borderColorHex}@0.88:t=8,setsar=1,fade=t=in:st=0:d=0.30,fade=t=out:st=${fadeOutStart}:d=0.30,format=yuv420p[vout]`,
+        ].join(";");
+
+    const inputArgs = aiClipPath
+      ? ["-stream_loop", "-1", "-i", aiClipPath]
+      : ["-i", prebakedImg];
 
     await execFileAsync("ffmpeg", [
       "-y",
-      "-i",
-      prebakedImg,
+      ...inputArgs,
       "-f",
       "lavfi",
       "-i",
