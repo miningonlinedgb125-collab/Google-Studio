@@ -57,6 +57,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122117821677484976",
+      "photoId": "122117821653484976",
+      "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع تامر وكركور",
+      "title": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع تامر وكركور",
+      "caption": "يا صباح الفل والنشاط على أحلى أمهات وأشطر كتاكيت في الدنيا! 🌟\n\nبطلنا المحبوب \"تامر\" واقف على اليمين ومحتار.. وعاوز يوصل بسرعة لصحبه الوفي \"كركور\" اللي مستنيه على الشمال! 🏃‍♂️💨🐒\nقدامكم في المتاهة 3 مسارات ملونة [ 1 ، 2 ، 3 ].. بس طريق واحد بس هو المظبوط وهيخليهم يتقابلوا! 🎨🔍\nيلا يا شطار، امشوا بصباعكم الذكي على الشاشة واكتشفوا: يا ترى أنهي رقم هو الصح؟ 🕵️‍♂️✨\nاكتبوا لنا رقم المسار واسم بطلكم الصغير في التعليقات، عشان تامر وكركور يحيوه مخصوص بالاسم في حلقة بكرة! 🥳🎉\nاعملوا شير للتحدي مع أصحابكم وماتنسوش تتابعوا الصفحة وتفعلوا الجرس 🔔 عشان يوصلكم كل جديد! 🚀❤️\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
+      "heroName": "تامر",
+      "companionName": "كركور",
+      "publishedAtCairo": "2026-10-19 · 01:32 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122117821677484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122117819793484976",
       "photoId": "122117819769484976",
       "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع كارمن وسمسم",
@@ -523,18 +535,6 @@
       "publishedAtCairo": "2026-10-10 · 18:33 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122114698689484976",
       "postKind": "scheduled"
-    },
-    {
-      "postId": "1330185823512542_122114494695484976",
-      "photoId": "122114494659484976",
-      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع كارمن وسمسم",
-      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع كارمن وسمسم",
-      "caption": "يا أبطالنا الصغننين وأحلى مامات، جاهزين لتحدي قوة الملاحظة النهاردة؟ 🧐🎈\n\n• بطلنا المحبوب \"كارمن\" وصديقه \"سمسم\" في مغامرة جديدة، ومخبيين 3 فروقات ذكية جداً بين الصورة [ أ ] والصورة [ ب ].. يا ترى مين الشاطر اللي هيعرف يطلعهم؟ 🔍🕵️‍♂️\n\n• اكتبوا لنا الـ 3 فروقات في التعليقات واكتبوا اسم طفلكم الشاطر، عشان كارمن وسمسم يحيّوه مخصوص بالاسم في حلقة بكرة! 🥳🎉\n\n• متنسوش تدوسوا متابعة للصفحة 🔔 وتعملوا شير للبوست عشان نتحدى كل أصحابنا الشطار! 🚀❤️\n\n🔍 عايزين فوازير وتحديات أكتر؟ اضغطوا على تصنيف [تحدي الشطار] أو [أبطال نورين كيدز] أعلى البوست لمتابعة كل الألعاب السابقة مع أطفالكم! 🕵️‍♂️✨\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #فروقات_بين_الصورتين #أمهات_مصر",
-      "heroName": "كارمن",
-      "companionName": "سمسم",
-      "publishedAtCairo": "2026-10-10 · 08:41 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122114494695484976",
-      "postKind": "scheduled"
     }
   ],
   "facebook": {
@@ -798,14 +798,15 @@
       "id": "gh-run-39171653129",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-19 (01:23 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-19 (01:34 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1792362016210-ffnn",
       "longEpisodeId": "ep-gh-long-1792362052832-1rly",
       "shortEpisodeTitle": "Noreen Kids: كارمن وسمسم وسر منطاد رسائل المحبة الطائر | مغامرات كارمن وسمسم",
-      "longEpisodeTitle": "تامر وكركور وسر مراية الكريستال في الواحة",
+      "longEpisodeTitle": "Noreen Kids: تامر وكركور وسر مراية الكريستال في الواحة | مغامرات تامر وكركور",
       "shortTitle": "Noreen Kids: كارمن وسمسم وسر منطاد رسائل المحبة الطائر | مغامرات كارمن وسمسم",
-      "longTitle": "تامر وكركور وسر مراية الكريستال في الواحة",
+      "longTitle": "Noreen Kids: تامر وكركور وسر مراية الكريستال في الواحة | مغامرات تامر وكركور",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -813,9 +814,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "VARwdrvqK2I",
+      "youtubeLongVideoId": "9suSl1tjHZY",
       "facebookShortVideoId": "2236484903874135",
+      "facebookLongVideoId": "1540547334756925",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2236484903874135",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1540547334756925",
       "facebookShortTitle": "Noreen Kids | كارمن وسمسم وسر منطاد رسائل المحبة الطائر - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
+      "facebookLongTitle": "Noreen Kids | تامر وكركور وسر مراية الكريستال في الواحة - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -823,16 +828,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 60,
-        "fileSizeBytes": 11093934,
-        "inspectedAt": "01:23"
+        "durationSec": 362,
+        "fileSizeBytes": 45539656,
+        "inspectedAt": "01:34"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
