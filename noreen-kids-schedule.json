@@ -37,6 +37,16 @@
     {
       "topic": "جسر قوس قزح الذكي وإنقاذ عصافير مدينة السحاب",
       "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "سر الخريطة الصوتية وإنقاذ فستق في كهف الصدى",
+      "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي"
+    },
+    {
+      "topic": "جسر قوس قزح الذكي وإنقاذ عصافير مدينة السحاب",
+      "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش",
       "timestampIso": "2026-10-18T09:38:39.573Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "كارمن المخترعة الصغيرة",
       "companionName": "سمسم السنجاب الطائر",
       "timestampIso": "2026-10-15T19:08:41.758Z"
-    },
-    {
-      "topic": "لغز إشارة كوكب الألوان وإنقاذ الكائن الصغير",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف"
-    },
-    {
-      "topic": "لغز كهف الشعاب المضيئة وسر الفانوس البحري للأعماق",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح"
-    },
-    {
-      "topic": "لغز إشارة كوكب الألوان وإنقاذ الكائن الصغير",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف",
-      "timestampIso": "2026-10-15T16:06:46.958Z"
-    },
-    {
-      "topic": "لغز كهف الشعاب المضيئة وسر الفانوس البحري للأعماق",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح",
-      "timestampIso": "2026-10-15T16:06:46.958Z"
     }
   ],
   "scheduledHistory": [
@@ -2703,27 +2691,32 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "١٨‏/١٠‏/٢٠٢٦، ١٢:٥٤:١٧ م",
   "lastCloudRunReport": {
-    "id": "gh-run-39058707984",
-    "uploadMode": "manual_instant",
+    "id": "gh-run-39115958080",
+    "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-17 (21:48 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792262438845-0zh4",
-    "longEpisodeId": "ep-gh-long-1792262599918-vkjy",
-    "shortEpisodeTitle": "Noreen Kids: تختوخ وزقلط ومغامرة الآيس كريم في الملاهي | مغامرات تختوخ والكلب زقلط",
-    "longEpisodeTitle": "طبيبة الغابة وسر علاج جناح كوكو الصغير",
-    "shortTitle": "Noreen Kids: تختوخ وزقلط ومغامرة الآيس كريم في الملاهي | مغامرات تختوخ والكلب زقلط",
-    "longTitle": "طبيبة الغابة وسر علاج جناح كوكو الصغير",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-18 (12:54 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792316249379-4o4z",
+    "longEpisodeId": "ep-gh-long-1792316319573-b6x7",
+    "shortEpisodeTitle": "Noreen Kids: جسر قوس قزح الذكي وإنقاذ عصافير مدينة السحاب | مغامرات المهندسة نوران والنمر الفرفوش",
+    "longEpisodeTitle": "Noreen Kids: سر الخريطة الصوتية وإنقاذ فستق في كهف الصدى | مغامرات عمرو وزعتر",
+    "shortTitle": "Noreen Kids: جسر قوس قزح الذكي وإنقاذ عصافير مدينة السحاب | مغامرات المهندسة نوران والنمر الفرفوش",
+    "longTitle": "Noreen Kids: سر الخريطة الصوتية وإنقاذ فستق في كهف الصدى | مغامرات عمرو وزعتر",
     "shortPlaylistId": "PLPwfeXzB3ozU",
+    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "lEWVE3wzTMw",
-    "facebookShortVideoId": "29282717947998976",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/29282717947998976",
-    "facebookShortTitle": "Noreen Kids | تختوخ وزقلط ومغامرة الآيس كريم في الملاهي - مغامرة تختوخ والكلب زقلط",
+    "youtubeShortVideoId": "P-NFaRj2EF4",
+    "youtubeLongVideoId": "qCq7i8by91Y",
+    "facebookShortVideoId": "1468986891783608",
+    "facebookLongVideoId": "1111772651208246",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1468986891783608",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1111772651208246",
+    "facebookShortTitle": "Noreen Kids | جسر قوس قزح الذكي وإنقاذ عصافير مدينة السحاب - مغامرة المهندسة نوران والنمر الفرفوش",
+    "facebookLongTitle": "Noreen Kids | سر الخريطة الصوتية وإنقاذ فستق في كهف الصدى - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2731,16 +2724,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 720,
-      "height": 1280,
+      "width": 1280,
+      "height": 720,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 77,
-      "fileSizeBytes": 12194939,
-      "inspectedAt": "21:48"
+      "durationSec": 343,
+      "fileSizeBytes": 35546726,
+      "inspectedAt": "12:54"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2749,7 +2742,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-17T18:48:02.191Z"
+    "reportedAtIso": "2026-10-18T09:54:20.456Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
