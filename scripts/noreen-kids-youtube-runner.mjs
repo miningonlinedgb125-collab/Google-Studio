@@ -1444,55 +1444,8 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
     }
   }
 
-  // 1) PRIMARY ENGINE FOR EGYPTIAN DIALECT: Native Egyptian Cairene Neural Voice (ar-EG)
-  // Utilizes ar-EG-SalmaNeural (female characters/narrator) & ar-EG-ShakirNeural (male characters) via msedge-tts
-  // Delivers authentic 100% Cairo Egyptian colloquial cartoon voiceover with full vocalization and phonetic accuracy!
-  const mp3Path = path.join(tmpDir, `edge_${sceneIndex}.mp3`);
-  const ttsDialogue = dialect === "egyptian" ? phoneticEgyptianForEdgeTts(dialogue) : dialogue;
-
-  for (let attempt = 0; attempt < 3; attempt++) {
-    try {
-      const tts = new MsEdgeTTS();
-      await tts.setMetadata(edgeVoice, OUTPUT_FORMAT.AUDIO_24KHZ_96KBITRATE_MONO_MP3);
-      const { audioStream } = tts.toStream(ttsDialogue, {
-        rate: vp.rate || "+3%",
-        pitch: vp.pitch || (isFemale ? "+5Hz" : "+3Hz"),
-      });
-      const chunks = [];
-      await new Promise((resolve, reject) => {
-        audioStream.on("data", (c) => chunks.push(Buffer.isBuffer(c) ? c : Buffer.from(c)));
-        audioStream.on("end", () => resolve());
-        audioStream.on("error", (e) => reject(e));
-      });
-      const mp3Buf = Buffer.concat(chunks);
-      if (mp3Buf.length > 500) {
-        fs.writeFileSync(mp3Path, mp3Buf);
-        const finalPath = await applyRunnerCharacterTimbreAndCompanionSfx(
-          mp3Path,
-          vp,
-          sceneIndex,
-          tmpDir
-        );
-        const durSec = await measureAudioDurationSec(finalPath, 14);
-        console.log(
-          `   🎤 [Native Egyptian Cairene Neural Voice] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر (${edgeVoice}) بنبرة مصرية عامية قاهرية أصيلة 100%! (${durSec.toFixed(1)}s)`
-        );
-        return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
-      }
-    } catch (edgeErr) {
-      if (attempt < 2) {
-        await sleep(800 * (attempt + 1));
-      } else {
-        console.warn(
-          `   ⚠️ [MsEdgeTTS Notice] المشهد ${sceneIndex + 1} (${edgeVoice}) تعذر مؤقتاً، التحويل الفوري للمحرك الثانوي:`,
-          edgeErr?.message || edgeErr
-        );
-      }
-    }
-  }
-
-  // 2) SECONDARY ENGINE: Gemini Live Native Audio & Gemini Native Audio TTS (Fallback)
-// 1) PRIMARY ENGINE: Gemini Live Native Audio (`gemini-2.5-flash-native-audio-preview-12-2025` & `gemini-3.8-live`)
+  // 1) PRIMARY ENGINE: Gemini Live Native Audio (`gemini-2.5-flash-native-audio-preview-12-2025` & `gemini-3.8-live`)
+  // Delivers authentic 100% natural colloquial Egyptian Cairene cartoon voiceover for children
   const apiKey = (process.env.GEMINI_API_KEY || "").trim();
   if (apiKey) {
     try {
@@ -1586,7 +1539,6 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
       // Guaranteed Egyptian Cairene colloquial cartoon voice without leaving the Gemini Native Audio family!
       const ttsModels = ["gemini-3.8-flash-lite-tts", "gemini-3.8-flash-tts"];
       const pureDialogue = stripLeakedVoiceInstructionsRunner(dialogue);
-
       for (const ttsModel of ttsModels) {
         for (let ttsRetry = 0; ttsRetry < 2; ttsRetry++) {
           try {
@@ -1604,6 +1556,7 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
                 },
               },
             });
+
             const b64 = ttsResp.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
             if (b64) {
               const rawBuf = Buffer.from(b64, "base64");
@@ -1639,6 +1592,52 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
         }
       }
     } catch {}
+  }
+
+  // 2) Emergency Fallback: MsEdgeTTS with Phonetic Egyptian Dialect Enforcement
+  // (Only reached if Gemini API key is missing, network is down, or Gemini quota is exhausted)
+  const mp3Path = path.join(tmpDir, `edge_${sceneIndex}.mp3`);
+  const ttsDialogue = dialect === "egyptian" ? phoneticEgyptianForEdgeTts(dialogue) : dialogue;
+
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const tts = new MsEdgeTTS();
+      await tts.setMetadata(edgeVoice, OUTPUT_FORMAT.AUDIO_24KHZ_96KBITRATE_MONO_MP3);
+      const { audioStream } = tts.toStream(ttsDialogue, {
+        rate: vp.rate || "+3%",
+        pitch: vp.pitch || (isFemale ? "+5Hz" : "+3Hz"),
+      });
+      const chunks = [];
+      await new Promise((resolve, reject) => {
+        audioStream.on("data", (c) => chunks.push(Buffer.isBuffer(c) ? c : Buffer.from(c)));
+        audioStream.on("end", () => resolve());
+        audioStream.on("error", (e) => reject(e));
+      });
+      const mp3Buf = Buffer.concat(chunks);
+      if (mp3Buf.length > 500) {
+        fs.writeFileSync(mp3Path, mp3Buf);
+        const finalPath = await applyRunnerCharacterTimbreAndCompanionSfx(
+          mp3Path,
+          vp,
+          sceneIndex,
+          tmpDir
+        );
+        const durSec = await measureAudioDurationSec(finalPath, 14);
+        console.log(
+          `   📢 [MsEdgeTTS Fallback] المشهد ${sceneIndex + 1}: تم توليد الصوت كبديل طوارئ عبر (${edgeVoice}) (${durSec.toFixed(1)}s)`
+        );
+        return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
+      }
+    } catch (edgeErr) {
+      if (attempt < 2) {
+        await sleep(800 * (attempt + 1));
+      } else {
+        console.warn(
+          `   ⚠️ [MsEdgeTTS Notice] المشهد ${sceneIndex + 1} (${edgeVoice}) تعذر مؤقتاً، التحويل لمولد Google TTS الاحتياطي:`,
+          edgeErr?.message || edgeErr
+        );
+      }
+    }
   }
 
   // Fallback 2: Chunked Multi-Sentence Google TTS stream (<= 140 chars per chunk) with Egyptian phonetic text
