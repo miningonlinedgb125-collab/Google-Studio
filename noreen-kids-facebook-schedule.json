@@ -2677,6 +2677,16 @@
     {
       "topic": "سر الشنطة الطائرة وإنقاذ عصفور النجوم",
       "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "نوران والفرفوش وسر مظلة أزهار الواحة الذكية",
+      "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "سر الشنطة الطائرة وإنقاذ عصفور النجوم",
+      "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-10-18T01:24:44.003Z"
     },
@@ -2839,59 +2849,32 @@
       "mainCharacterName": "شوشو القبطان الصغير",
       "companionName": "مرجان الدلفين المرح",
       "timestampIso": "2026-10-15T16:06:46.958Z"
-    },
-    {
-      "topic": "تصميم القلعة البلورية وحمايتها من عاصفة الواحة",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "قارب البردي وسر جزيرة الزهور المضيئة",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي"
-    },
-    {
-      "topic": "تصميم القلعة البلورية وحمايتها من عاصفة الواحة",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-10-15T09:55:33.746Z"
-    },
-    {
-      "topic": "قارب البردي وسر جزيرة الزهور المضيئة",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "timestampIso": "2026-10-15T09:55:33.746Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-17 · 21:48 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-39055568747",
-    "uploadMode": "daily_schedule",
+    "id": "gh-run-39086060374",
+    "uploadMode": "manual_instant",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-17 (21:14 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792259731423-jtwx",
-    "longEpisodeId": "ep-gh-long-1792259870466-he1h",
-    "shortEpisodeTitle": "Noreen Kids: حكمة جدو وسر طيارة أطفال الحارة المبهجة | مغامرات جدو والفأر المشاكس",
-    "longEpisodeTitle": "Noreen Kids: سلة تيتة ومفاجأة تكريم حافظ القرآن الصغير | مغامرات تيتة والدب باندا",
-    "shortTitle": "Noreen Kids: حكمة جدو وسر طيارة أطفال الحارة المبهجة | مغامرات جدو والفأر المشاكس",
-    "longTitle": "Noreen Kids: سلة تيتة ومفاجأة تكريم حافظ القرآن الصغير | مغامرات تيتة والدب باندا",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-18 (04:28 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792286536677-3hso",
+    "longEpisodeId": "ep-gh-long-1792286684003-vj3c",
+    "shortEpisodeTitle": "Noreen Kids: سر الشنطة الطائرة وإنقاذ عصفور النجوم | مغامرات الطبيبة نورين وأرنوب",
+    "longEpisodeTitle": "نوران والفرفوش وسر مظلة أزهار الواحة الذكية",
+    "shortTitle": "Noreen Kids: سر الشنطة الطائرة وإنقاذ عصفور النجوم | مغامرات الطبيبة نورين وأرنوب",
+    "longTitle": "نوران والفرفوش وسر مظلة أزهار الواحة الذكية",
     "shortPlaylistId": "PLPwfeXzB3ozU",
-    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "6Oai2iBWJIA",
-    "youtubeLongVideoId": "uo4VbknZyZY",
-    "facebookShortVideoId": "1120921913997629",
-    "facebookLongVideoId": "1741705906887471",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1120921913997629",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1741705906887471",
-    "facebookShortTitle": "Noreen Kids | حكمة جدو وسر طيارة أطفال الحارة المبهجة - مغامرة جدو والفأر المشاكس",
-    "facebookLongTitle": "Noreen Kids | سلة تيتة ومفاجأة تكريم حافظ القرآن الصغير - مغامرة تيتة والدب باندا",
+    "youtubeShortVideoId": "iqRWQDiiRo8",
+    "facebookShortVideoId": "1599370825209551",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1599370825209551",
+    "facebookShortTitle": "Noreen Kids | سر الشنطة الطائرة وإنقاذ عصفور النجوم - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2899,16 +2882,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 1280,
-      "height": 720,
+      "width": 720,
+      "height": 1280,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 321,
-      "fileSizeBytes": 37109105,
-      "inspectedAt": "21:14"
+      "durationSec": 65,
+      "fileSizeBytes": 9730785,
+      "inspectedAt": "04:28"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2917,7 +2900,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-17T18:14:24.110Z"
+    "reportedAtIso": "2026-10-18T01:28:05.408Z"
   },
   "heroFairRotationIndex": 1,
   "interactiveHeroRotationIndex": 5,
