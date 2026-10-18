@@ -644,6 +644,8 @@ function validateAndAutoFixEgyptianDialect(rawText, sceneIndex = 0, totalScenes 
 }
 
 const CHAR_AVATAR_MAP = [
+  { keywords: ["الشيخ محمود", "شيخ محمود", "الشيخ"], relPath: "src/assets/images/char_sheikh_mahmoud_quran_teacher_1792345521325.jpg" },
+  { keywords: ["الديك الفصيح", "الديك", "ديك"], relPath: "src/assets/images/char_al_deek_al_faseeh_rooster_1792345536970.jpg" },
   { keywords: ["تختوخ", "تختوخه"], relPath: "src/assets/images/char_takhtoukh_chubby_boy_1792069535801.jpg" },
   { keywords: ["زقلط", "الكلب زقلط", "الكلب"], relPath: "src/assets/images/char_zaqlat_funny_dog_1792069553698.jpg" },
   { keywords: ["أم ملك", "ام ملك", "المعلمة"], relPath: "src/assets/images/char_om_malak_teacher_1790685841625.jpg" },
@@ -1143,6 +1145,31 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
       voiceFilter: cartoonBrightCompanionFilter,
       animalSfxLavfi:
         "aevalsrc='0.25*sin(2*PI*(520+360*mod(t*3.8,1))*t)*exp(-5.5*mod(t,0.26))':s=24000:d=0.82",
+    };
+  }
+  if (s.includes("الشيخ محمود") || s.includes("شيخ محمود") || (s.includes("محمود") && s.includes("شيخ"))) {
+    return {
+      isFemale: false,
+      geminiVoice: "Charon",
+      pitch: "-5Hz",
+      rate: "-4%",
+      styleInstruction:
+        "تحدث بصوت معلم قرآن وشيخ مصري أزهري جليل وودود وحنون جداً (الشيخ محمود) بنبرة دافئة وهادئة ومريحة ومطمئنة للأطفال، يقرأ الآيات الكريمة بخشوع وأحكام تجويد سليمة وواضحة جداً، ويشرح المعاني للأطفال بأسلوب مبسط ومحبب ومشجع باللهجة المصرية القاهرية الحنونة",
+      voiceFilter: adultMaleDeepFilter,
+      animalSfxLavfi: null,
+    };
+  }
+  if (s.includes("الديك الفصيح") || s.includes("الديك") || s.includes("ديك فصيح")) {
+    return {
+      isFemale: false,
+      geminiVoice: "Puck",
+      pitch: "+12Hz",
+      rate: "+4%",
+      styleInstruction:
+        "تحدث بصوت الديك الكرتوني الذكي والمرح والفصيح (الديك الفصيح) بنبرة كرتونية مبهجة وفصيحة ومنطلقة تشجع الأطفال على حفظ القرآن والاستيقاظ مبكراً بحماس ومرح وفكاهة لطيفة جداً باللهجة المصرية القاهرية الطبيعية",
+      voiceFilter: cartoonBrightCompanionFilter,
+      animalSfxLavfi:
+        "aevalsrc='(0.22*sin(2*PI*(440+220*sin(PI*t/0.85))*t)+0.12*sin(2*PI*880*t))*exp(-4.5*mod(t,0.25))':s=24000:d=0.85",
     };
   }
   if (s.includes("تختوخ")) {
@@ -2808,6 +2835,27 @@ const RUNNER_CHARACTER_TEAMS = [
       "حدوتة البيجامة المنورة وضحك تختوخ وزقلط قبل النوم مع كوباية الحليب",
     ],
   },
+  {
+    mainCharacterName: "الشيخ محمود",
+    companionName: "الديك الفصيح",
+    mainVoice: "Charon",
+    compVoice: "Puck",
+    worldHint: "floating_library",
+    heroProp: "المصحف الشريف المذهب وحامل المصحف الخشبي المنقوش والفانوس المنور",
+    compProp: "كتاب حكايات نورين الملون وريشة العلم الذهبية والبابيون الأخضر",
+    stories: [
+      "سر سورة الإخلاص وحكاية التوحيد وحب الله مع الشيخ محمود وتسميع الديك الفصيح",
+      "سورة الفلق وسر الاستعاذة وإزاي نحصن أنفسنا قبل النوم ونطرد الخوف بالقرآن",
+      "سورة الناس وحماية القلوب والنية الطيبة وكيف نكون أصحاباً طيبين ومحبوبين",
+      "سورة الكوثر ونهر الجنة وحكاية نهر النبي ﷺ وجزاء الإحسان والعطاء",
+      "سورة النصر والحمد والشكر وفضل قول سبحان الله وبحمده لما ننجز عمل شاطر",
+      "سورة العصر وقيمة الوقت وتنظيم الديك الفصيح ليومه بين الصلاة والتعلم واللعب",
+      "سورة الفيل وجيش أبرهة وقصة الطير الأبابيل وقدرة الله العظيمة بأسلوب مشوق للأطفال",
+      "سورة قريش ونعمة الأمان وشكر الله على نعمة الطعام والبيت الدافئ والعائلة",
+      "سورة الماعون وإطعام المسكين والرفق باليتيم ومساعدة جيراننا ونظافة حارتنا",
+      "خلق الصدق وأمانة النبي ﷺ وحكاية الصادق الأمين وسر بركة الصدق في كل كلمة",
+    ],
+  },
 ];
 
 function resolveCanonicalTeamForRunner(
@@ -2862,6 +2910,7 @@ function resolveCanonicalTeamForRunner(
     if (/جدو|الفأر المشاكس/.test(t)) return RUNNER_CHARACTER_TEAMS[12];
     if (/تيتة|تيته|الدب باندا/.test(t)) return RUNNER_CHARACTER_TEAMS[13];
     if (/تختوخ|زقلط|الكلب زقلط/.test(t)) return RUNNER_CHARACTER_TEAMS[14];
+    if (/الشيخ محمود|شيخ محمود|الديك الفصيح|ديك فصيح|جزء عم|سورة الإخلاص|سورة الفلق|سورة الناس|سورة الكوثر|سورة النصر|سورة العصر|سورة الفيل|سورة قريش|سورة الماعون|القرآن|القرءان|السيرة النبوية/.test(t)) return RUNNER_CHARACTER_TEAMS[15];
     if (/نورين|أرنوب/.test(t)) return RUNNER_CHARACTER_TEAMS[0];
     if (/المهندسة نوران|نوران|النمر الفرفوش/.test(t)) return RUNNER_CHARACTER_TEAMS[1];
     if (/عمرو المستكشف|عمرو|زعتر/.test(t)) return RUNNER_CHARACTER_TEAMS[2];
@@ -2941,6 +2990,8 @@ function getShortCharacterDisplayNameRunner(fullName = "", dialect = "egyptian")
   if (clean.includes("بلبل")) return "بلبل";
   if (clean.includes("تختوخ")) return "تختوخ";
   if (clean.includes("زقلط")) return "الكلب زقلط";
+  if (clean.includes("الشيخ محمود") || clean.includes("شيخ محمود")) return "الشيخ محمود";
+  if (clean.includes("الديك الفصيح") || clean.includes("الديك")) return "الديك الفصيح";
   return clean.split(" ")[0] || clean;
 }
 
@@ -4069,6 +4120,14 @@ const CHARACTER_HERO_PERSONAS = [
     toneName: "عاطفية أسرية مليئة بالدفء والدعاء",
     stylePrompt: "نبرة الجدة الحنونة الطيبة جداً برائحة الفطير والدفء والدعوات القلبية الصادقة مع الدب باندا. ركزي على المحبة، الكرم، ولمّة العيلة، والدعاء بالصحة والبركة.",
     signature: "🥧 تيتة الحنونة والدب باندا باعتين لك حضن دافي ودعوة من القلب!",
+  },
+  {
+    heroKey: "الشيخ محمود",
+    heroName: "الشيخ محمود",
+    compName: "الديك الفصيح",
+    toneName: "وقورة حانية تشجع على القرآن والسنّة",
+    stylePrompt: "نبرة معلم قرآن أزهري جليل وودود وحنون جداً مع رفيقه الديك الفصيح. ركزي على تشجيع الطفل على الصلاة، حفظ القرآن، بر الوالدين، والدعاء بالهداية والبركة والتوفيق.",
+    signature: "📖 الشيخ محمود والديك الفصيح بيدعوا لك بالبركة والتوفيق يا بطل القرآن!",
   },
 ];
 

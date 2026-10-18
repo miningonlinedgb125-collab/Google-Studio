@@ -42,6 +42,10 @@ const APPROVED_CHARACTER_FILES = new Set([
   "char_simsim_flying_squirrel_1790462087579.jpg",
   "char_yassin_boy_knight_1790462110000.jpg",
   "char_karkour_wise_parrot_1790462097550.jpg",
+  "char_takhtoukh_chubby_boy_1792069535801.jpg",
+  "char_zaqlat_funny_dog_1792069553698.jpg",
+  "char_sheikh_mahmoud_quran_teacher_1792345521325.jpg",
+  "char_al_deek_al_faseeh_rooster_1792345536970.jpg",
 ]);
 
 const NON_EGYPTIAN_LEXICON_RULES = [
