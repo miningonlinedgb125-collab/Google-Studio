@@ -1817,7 +1817,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     }
     if (isShort && sceneDialogue) {
       const words = sceneDialogue.split(/\s+/).filter(Boolean);
-      if (words.length > 20) {
+      if (words.length > 24) {
         const sub = words.slice(0, 18).join(" ");
         const cleanEnd = sub.replace(/[\s،,]+$/, "");
         sceneDialogue = cleanEnd.endsWith("!") || cleanEnd.endsWith(".") ? cleanEnd : `${cleanEnd}!`;
@@ -1834,12 +1834,8 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       await sleep(1200);
     }
 
-    // Audio tempo adaptation for Shorts:
-    // Maintain 100% natural 1.0x voice speed with ample breathing room (Zero Truncation)
-    const minSceneFloor = isShort
-      ? Math.max(14, Math.ceil(synth.voiceDurSec + 1.2))
-      : Math.max(26, Math.ceil(synth.voiceDurSec + 1.2));
-    const naturalDur = minSceneFloor;
+    // Snappy cartoon pacing: transition happens immediately after speech with ~0.45s natural breathing room
+    const naturalDur = Number((synth.voiceDurSec + 0.45).toFixed(2));
     preparedScenes.push({
       scene: sc,
       audioPath: synth.audioPath,
@@ -1851,13 +1847,13 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
   // Natural pacing preserved: each scene plays at authentic 1.0x human speaking speed
 
   // Enforce total duration bounds: Short strictly [60..80s] (target 65..75s), Long strictly [300..600s] (target 305..580s)
-  const minTotalSec = isShort ? 65 : 305;
+  const minTotalSec = isShort ? 60 : 305;
   const maxTotalSec = isShort ? 75 : 590;
-  const maxSafeVoiceSec = isShort ? 65 : 550;
+  const maxSafeVoiceSec = isShort ? 68 : 550;
   let totalVoiceSec = preparedScenes.reduce((acc, s) => acc + s.voiceDurSec, 0);
 
   if (totalVoiceSec > maxSafeVoiceSec) {
-    const targetVoiceSec = isShort ? 60 : 520;
+    const targetVoiceSec = isShort ? 62 : 520;
     const speedRatio = Math.min(1.35, Math.max(1.05, totalVoiceSec / targetVoiceSec));
     console.log(
       `   ⚡ [Audio Timing Optimization] Total voice duration (${totalVoiceSec.toFixed(1)}s) exceeds safe threshold (${maxSafeVoiceSec}s) for ${videoFormat}. Applying gentle lossless atempo=${speedRatio.toFixed(2)} to guarantee compliance with [${minTotalSec}..${maxTotalSec}s] gate...`
@@ -1879,7 +1875,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
           const newDur = await measureAudioDurationSec(speedAudio, preparedScenes[i].voiceDurSec / speedRatio);
           preparedScenes[i].audioPath = speedAudio;
           preparedScenes[i].voiceDurSec = newDur;
-          preparedScenes[i].durationSec = Math.max(isShort ? 14 : 26, Math.ceil(newDur + 1.2));
+          preparedScenes[i].durationSec = Number((newDur + 0.45).toFixed(2));
         }
       } catch (tempoErr) {
         console.warn(`   ⚠️ atempo optimization warning for scene ${i + 1}:`, tempoErr?.message || tempoErr);
@@ -1892,38 +1888,28 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     let deficit = minTotalSec - totalDur;
     let idx = 0;
     while (deficit > 0) {
-      preparedScenes[idx % preparedScenes.length].durationSec += 1;
-      deficit--;
+      const addSlice = Math.min(deficit, 0.25);
+      preparedScenes[idx % preparedScenes.length].durationSec = Number(
+        (preparedScenes[idx % preparedScenes.length].durationSec + addSlice).toFixed(2)
+      );
+      deficit -= addSlice;
       idx++;
     }
   } else if (totalDur > maxTotalSec) {
     let excess = totalDur - maxTotalSec;
     for (let i = preparedScenes.length - 1; i >= 0 && excess > 0; i--) {
-      const minAllowed = Math.ceil(preparedScenes[i].voiceDurSec + 0.4);
+      const minAllowed = Number((preparedScenes[i].voiceDurSec + 0.25).toFixed(2));
       const reducible = Math.max(0, preparedScenes[i].durationSec - minAllowed);
       const cut = Math.min(excess, reducible);
-      preparedScenes[i].durationSec -= cut;
+      preparedScenes[i].durationSec = Number((preparedScenes[i].durationSec - cut).toFixed(2));
       excess -= cut;
     }
   }
 
-  // Guarantee absolute invariant: Every scene duration MUST accommodate full speech plus peaceful pause,
-  // without exceeding maxTotalSec
+  // Guarantee absolute invariant: Every scene duration MUST accommodate full speech plus comfortable ending
   for (const s of preparedScenes) {
-    if (s.durationSec < s.voiceDurSec + 0.5) {
-      s.durationSec = Math.ceil(s.voiceDurSec + 0.8);
-    }
-  }
-
-  totalDur = preparedScenes.reduce((acc, s) => acc + s.durationSec, 0);
-  if (totalDur > maxTotalSec) {
-    let excess = totalDur - maxTotalSec;
-    for (let i = preparedScenes.length - 1; i >= 0 && excess > 0; i--) {
-      const minFloor = Math.ceil(preparedScenes[i].voiceDurSec + 0.2);
-      const reducible = Math.max(0, preparedScenes[i].durationSec - minFloor);
-      const cut = Math.min(excess, reducible);
-      preparedScenes[i].durationSec -= cut;
-      excess -= cut;
+    if (s.durationSec < s.voiceDurSec + 0.3) {
+      s.durationSec = Number((s.voiceDurSec + 0.35).toFixed(2));
     }
   }
   
@@ -1994,7 +1980,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       "-i",
       `aevalsrc='0.036*sin(2*PI*(261.63+68*mod(floor(t*0.85),3))*t)*exp(-1.4*mod(t*0.85,1))+0.028*sin(2*PI*(880+220*mod(floor(t*1.8),3))*t)*exp(-5.5*mod(t*0.30,1))':s=48000:c=stereo:d=${dur}`,
       "-filter_complex",
-      `[0:a]aresample=48000${tempoChain},pan=stereo|c0=c0|c1=c0,volume=2.15,adelay=220|220,apad=whole_dur=${dur}[voice];[1:a]volume=0.50,afade=t=in:st=0:d=0.5,afade=t=out:st=${Math.max(
+      `[0:a]aresample=48000${tempoChain},pan=stereo|c0=c0|c1=c0,volume=2.15,adelay=140|140,apad=whole_dur=${dur}[voice];[1:a]volume=0.50,afade=t=in:st=0:d=0.5,afade=t=out:st=${Math.max(
         0.5,
         dur - 0.9
       )}:d=0.7[bgm];[voice][bgm]amix=inputs=2:duration=first:weights='1.0 0.22':normalize=0,alimiter=limit=0.96,asetpts=PTS-STARTPTS[outa]`,
@@ -2101,10 +2087,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       preDecorated = "v_secret";
     }
 
-    let finalBoxes = `drawbox=x=0:y=0:w=${W}:h=${H}:color=${borderColorHex}@0.88:t=8`;
-    if (isFinalScene) {
-      finalBoxes += `,drawbox=x=60:y=${Math.round(H * 0.72)}:w=${W - 120}:h=64:color=0x0F172A@0.88:t=fill,drawbox=x=60:y=${Math.round(H * 0.72)}:w=${W - 120}:h=64:color=0xFBBF24@1.0:t=4`;
-    }
+    const finalBoxes = `drawbox=x=0:y=0:w=${W}:h=${H}:color=${borderColorHex}@0.88:t=8`;
 
     filterSteps.push(
       `[${preDecorated}][o3]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.92+4.2))':y='${bottomY}-${travelY}*mod(t*0.24+0.86,1)':format=yuv420:shortest=1,${finalBoxes},setsar=1,fade=t=in:st=0:d=0.30,fade=t=out:st=${fadeOutStart}:d=0.30,format=yuv420p[vout]`
@@ -3032,14 +3015,14 @@ function buildSmartEpisodeForRunner({
   const sceneTemplates = [
     {
       title: `1. البداية: انطلاق ${shortHero} و${shortComp}`,
-      egyptianShort: `أهلاً بيكم يا أبطال عيلة نورين كيدز! ${compLook} ${shortComp}، حكايتنا النهارده عن ${shortTopicMention}! يلا ننطلق سوا بكل شجاعة وفرحة!`,
+      egyptianShort: `أهلاً بيكم يا أبطال عيلة نورين كيدز! ${compLook} ${shortComp}، حكايتنا النهارده مليانة بهجة وشجاعة عن ${shortTopicMention}! يلا ننطلق سوا بكل نشاط!`,
       egyptianLong: `يا خبر يا أبطال وعيلة نورين كيدز! بصوا بسرعة معايا النهارده، ازيكم يا أحلى أصحاب في الدنيا كلها! ${compLook} معايا يا ${shortComp}، النهارده عندنا مهمة بطولية ومغامرة جميلة أوي عن ${shortTopicMention}! أنا مجهز معايا ${heroProp} علشان نستكشف كل حاجة خطوة بخطوة، وإنت معاك ${compProp} علشان نكون إيد واحدة وعندنا طاقة وهمة عالية أوي! شايفين النور والبهجة اللي حوالينا في المكان ده؟ يلا بينا نفتح عينينا كويس ونبدأ المغامرة سوا بكل شجاعة وفرحة ونشاط يا أبطال!`,
       speaker: effectiveMainName,
       voice: heroVoice,
     },
     {
       title: `2. التطور: ملاحظة المشكلة مع ${shortComp}`,
-      egyptianShort: `يا خبر أبيض يا ${shortHero}! بص شوف معايا، دي مشكلة في ${shortTopicMention} ولازم نساعد أصحابنا بذكاء وتعاون!`,
+      egyptianShort: `يا خبر أبيض يا ${shortHero}! بص شوف معايا هناك، دي مشكلة في ${shortTopicMention} ولازم نساعد أصحابنا بذكاء ونحلها سوا فوراً!`,
       egyptianLong: `يا خبر أبيض يا ${shortHero}! بص شوف معايا هناك بسرعة يا صاحبي! شفت المشكلة اللي حصلت في ${shortTopicMention}؟ الموضوع ده محتاج مننا وقفة سريعة وتفكير هادي علشان نساعد الكل ونحل التحدي ده صح! لو استنينا المشكلة هتكبر وممكن حد يزعل، وإحنا أبطال نورين كيدز دايماً بنكون جاهزين للمساعدة بقلب طيب وهمة عالية! يا ترى هنعمل إيه ${heroAppellation}؟ يلا نفكر سوا بالراحة ومن غير استعجال خالص علشان نوصل لأحسن حل يفرح كل حبايبنا وأصحابنا!`,
       speaker: effectiveCompName,
       voice: compVoice,
@@ -3067,7 +3050,7 @@ function buildSmartEpisodeForRunner({
     },
     {
       title: "6. الحل الذكي: نجاح الفكرة وفرحة الجميع",
-      egyptianShort: `الله يا سلام سلم! بالتعاون وبـ ${heroProp} و${compProp} الفكرة نجحت ورجعت الضحكة منورة لكل أصحابنا!`,
+      egyptianShort: `الله يا سلام سلم! بالتعاون والجدعنة وبـ ${heroProp} و${compProp} الفكرة نجحت مية في المية ورجعت الفرحة والضحكة لكل أصحابنا!`,
       egyptianLong: `الله أكبر يا سلام سلم! الفكرة طلعت حكاية ونجحت مية في المية يا ${shortHero}! بصوا كده وشوفوا يا كل أصحابنا وعيلتنا في كل مكان! أول ما حطينا إيدينا في إيد بعض وتصرفنا بذكاء وأمانة، اتحلت المشكلة كلها ورجعت الضحكة والبهجة تنور وشوش كل أصحابنا من تاني! دي من أسعد اللحظات في حكايتنا النهارده، لما بنشوف تعبنا وشطارتنا بتجيب نتيجة حلوة تفرح القلب، وإثبات حقيقي إننا أبطال لما اشتغلنا سوا بقلب صافي ومحبة!`,
       speaker: effectiveCompName,
       voice: compVoice,
@@ -3081,7 +3064,7 @@ function buildSmartEpisodeForRunner({
     },
     {
       title: `8. المشهد الثامن والتحدي الأخير: رسالة ${shortHero} و${shortComp} لأبطال Noreen Kids`,
-      egyptianShort: `هيييه! نجحت المهمة! 🧩 تحدي الشطار: إيه أهم درس اتعلمتوه؟ اكتبوا اسمكم وإجابتكم في التعليقات يا أبطال!`,
+      egyptianShort: `هيييه! نجحت المهمة يا أبطال! 🧩 تحدي الشطار: إيه أحلى حاجة اتعلمتوها النهارده؟ اكتبوا اسمكم وإجابتكم في التعليقات عشان تكسبوا وسام الشطارة!`,
       egyptianLong: `ودلوقتي يا أصحابنا الحلوين في عيلة نورين كيدز، وصلنا المشهد الثامن والتحدي الأخير في حلقة النهارده مع ${shortHero} و${shortComp}! 🧩 سؤال الشطار للأبطال: إيه أهم درس اتعلمتوه من حكاية النهارده، وإزاي تقدروا تكونوا شطار وأمناء في المدرسة والبيت مع أصحابكم؟ اكتبوا إجابتكم واسمكم في التعليقات تحت الفيديو علشان تظهروا في لوحة الشرف في الحلقة الجاية! وما تنسوش تشتركوا في القناة وتعملوا لايك، بنحبكم أوي ومع السلامة يا أبطال!`,
       speaker: effectiveCompName,
       voice: compVoice,
@@ -3464,7 +3447,7 @@ async function generateFreshAiEpisodeForRunner({
 قواعد صارمة للهجة المصرية في كامل الحلقة:
 1. الحوار في كامل المشاهد يجب أن يكون عامي مصري قاهري أصيل ودافئ وعفوي وممتع للأطفال 100% (يا خبر، بص شوف، يا ترى إيه الحكاية، يلا بينا سوا، متقلقش خالص إحنا شطار وهنحلها، فكرة تجنن، إيه الجمال ده). ممنوع أي تعبيرات فصحى مسرحية جافة.
 2. في المشهد الثامن، اجعل الخاتمة مشجعة مع سؤال تفاعلي للأبطال في التعليقات، ولا تكرر أبداً كلمة "مغامرة" مرتين متتاليتين.
-3. مهم جداً: طول كل مشهد في الفيلم الطويل 75 إلى 95 كلمة، وفي الفيديو القصير 14 إلى 18 كلمة فقط (ممنوع تجاوز 18 كلمة في المشهد القصير لكي يتناسب تماماً مع وقت الشورتس والريلز 55 إلى 65 ثانية بنبرة صوت مصرية طبيعية 100% بدون أي تسريع).
+3. مهم جداً: طول كل مشهد في الفيلم الطويل 75 إلى 95 كلمة، وفي الفيديو القصير 18 إلى 22 كلمة لكل مشهد بحوار كرتوني حي متواصل دون أي صمت، ليتناسب تماماً مع وقت الشورتس والريلز 60 إلى 72 ثانية بنبرة صوت مصرية طبيعية 100% وبانتقال سريع وخاطف بين المشاهد.
 
 ⚠️ قاعدة حاسمة لمنع التكرار:
 تجنب تماماً أي تكرار أو تشابه في الفكرة أو الحبكة أو العنوان مع هذه القصص السابقة المنشورة في القناة:
