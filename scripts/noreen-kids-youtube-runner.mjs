@@ -476,8 +476,21 @@ function prepareTextForNaturalEgyptianTts(rawText, speakerName = "", partnerName
     [/(^|[\s،.!؟:])وبصوا(?=[\s،.!؟:]|$)/gu, "$1وَبُصُّوا"],
     [/(^|[\s،.!؟:])بصي(?=[\s،.!؟:]|$)/gu, "$1بُصِّي"],
     [/(^|[\s،.!؟:])وبصي(?=[\s،.!؟:]|$)/gu, "$1وَبُصِّي"],
+    [/(^|[\s،.!؟:])بص(?=[\s،.!؟:]|$)/gu, "$1بُصّ"],
+    [/(^|[\s،.!؟:])وبص(?=[\s،.!؟:]|$)/gu, "$1وَبُصّ"],
+    [/(^|[\s،.!؟:])شوف(?=[\s،.!؟:]|$)/gu, "$1شُوفْ"],
+    [/(^|[\s،.!؟:])وشوف(?=[\s،.!؟:]|$)/gu, "$1وَشُوفْ"],
     [/(^|[\s،.!؟:])شوفي(?=[\s،.!؟:]|$)/gu, "$1شُوفِي"],
+    [/(^|[\s،.!؟:])وشوفي(?=[\s،.!؟:]|$)/gu, "$1وَشُوفِي"],
+    [/(^|[\s،.!؟:])شوفوا(?=[\s،.!؟:]|$)/gu, "$1شُوفُوا"],
+    [/(^|[\s،.!؟:])وشوفوا(?=[\s،.!؟:]|$)/gu, "$1وَشُوفُوا"],
+    [/(^|[\s،.!؟:])تعال(?=[\s،.!؟:]|$)/gu, "$1تَعَالَى"],
     [/(^|[\s،.!؟:])تعالي(?=[\s،.!؟:]|$)/gu, "$1تَعَالِي"],
+    [/(^|[\s،.!؟:])تعالوا(?=[\s،.!؟:]|$)/gu, "$1تَعَالُوا"],
+    [/(^|[\s،.!؟:])ازيكم(?=[\s،.!؟:]|$)/gu, "$1إِزَّيُّكُو"],
+    [/(^|[\s،.!؟:])إزيكم(?=[\s،.!؟:]|$)/gu, "$1إِزَّيُّكُو"],
+    [/(^|[\s،.!؟:])أهلاً بيكم(?=[\s،.!؟:]|$)/gu, "$1أَهْلًا بيكُو"],
+    [/(^|[\s،.!؟:])أهلا بيكم(?=[\s،.!؟:]|$)/gu, "$1أَهْلًا بيكُو"],
     [/(^|[\s،.!؟:])علشان(?=[\s،.!؟:]|$)/gu, "$1عَلَشَانْ"],
     [/(^|[\s،.!؟:])عشان(?=[\s،.!؟:]|$)/gu, "$1عَشَانْ"],
     [/(^|[\s،.!؟:])أوي(?=[\s،.!؟:]|$)/gu, "$1أَوِي"],
@@ -489,9 +502,37 @@ function prepareTextForNaturalEgyptianTts(rawText, speakerName = "", partnerName
     [/(^|[\s،.!؟:])يا خبر(?=[\s،.!؟:]|$)/gu, "$1يَا خَبَر"],
     [/(^|[\s،.!؟:])يا ترى(?=[\s،.!؟:]|$)/gu, "$1يَا تَرَى"],
     [/(^|[\s،.!؟:])يا تري(?=[\s،.!؟:]|$)/gu, "$1يَا تَرَى"],
+    [/(^|[\s،.!؟:])شاطر(?=[\s،.!؟:]|$)/gu, "$1شَاطِرْ"],
     [/(^|[\s،.!؟:])شاطرة(?=[\s،.!؟:]|$)/gu, "$1شَاطْرَة"],
+    [/(^|[\s،.!؟:])شطار(?=[\s،.!؟:]|$)/gu, "$1شُطَّارْ"],
     [/(^|[\s،.!؟:])شطورة(?=[\s،.!؟:]|$)/gu, "$1شَطُّورَة"],
+    [/(^|[\s،.!؟:])شطور(?=[\s،.!؟:]|$)/gu, "$1شَطُّورْ"],
     [/(^|[\s،.!؟:])أصحابي(?=[\s،.!؟:]|$)/gu, "$1أَصْحَابِي"],
+    [/(^|[\s،.!؟:])أصحابنا(?=[\s،.!؟:]|$)/gu, "$1أَصْحَابْنَا"],
+    [/(^|[\s،.!؟:])صاحبي(?=[\s،.!؟:]|$)/gu, "$1صَاحْبِي"],
+    [/(^|[\s،.!؟:])صاحبتي(?=[\s،.!؟:]|$)/gu, "$1صَاحْبِتِي"],
+    [/(^|[\s،.!؟:])النهارده(?=[\s،.!؟:]|$)/gu, "$1النَّهَارْدَه"],
+    [/(^|[\s،.!؟:])سوا(?=[\s،.!؟:]|$)/gu, "$1سَوَا"],
+    [/(^|[\s،.!؟:])حاجة(?=[\s،.!؟:]|$)/gu, "$1حَاجَة"],
+    [/(^|[\s،.!؟:])حاجات(?=[\s،.!؟:]|$)/gu, "$1حَاجَاتْ"],
+    [/(^|[\s،.!؟:])عايز(?=[\s،.!؟:]|$)/gu, "$1عَايِزْ"],
+    [/(^|[\s،.!؟:])عايزة(?=[\s،.!؟:]|$)/gu, "$1عَايْزَة"],
+    [/(^|[\s،.!؟:])عايزين(?=[\s،.!؟:]|$)/gu, "$1عَايْزِينْ"],
+    [/(^|[\s،.!؟:])عايزك(?=[\s،.!؟:]|$)/gu, "$1عَايْزَكْ"],
+    [/(^|[\s،.!؟:])عايزاك(?=[\s،.!؟:]|$)/gu, "$1عَايْزَاكْ"],
+    [/(^|[\s،.!؟:])عايزاكي(?=[\s،.!؟:]|$)/gu, "$1عَايْزَاكِي"],
+    [/(^|[\s،.!؟:])فرحة(?=[\s،.!؟:]|$)/gu, "$1فَرْحَة"],
+    [/(^|[\s،.!؟:])ضحكة(?=[\s،.!؟:]|$)/gu, "$1ضِحْكَة"],
+    [/(^|[\s،.!؟:])جدعنة(?=[\s،.!؟:]|$)/gu, "$1جَدْعَنَة"],
+    [/(^|[\s،.!؟:])شطارة(?=[\s،.!؟:]|$)/gu, "$1شَطَارَة"],
+    [/(^|[\s،.!؟:])إيد واحدة(?=[\s،.!؟:]|$)/gu, "$1إِيدْ وَاحْدَة"],
+    [/(^|[\s،.!؟:])خطوة بخطوة(?=[\s،.!؟:]|$)/gu, "$1خَطْوَةْ بِخَطْوَةْ"],
+    [/(^|[\s،.!؟:])بالراحة(?=[\s،.!؟:]|$)/gu, "$1بِالرَّاحَة"],
+    [/(^|[\s،.!؟:])خالص(?=[\s،.!؟:]|$)/gu, "$1خَالِصْ"],
+    [/(^|[\s،.!؟:])مفيش(?=[\s،.!؟:]|$)/gu, "$1مَفِيشْ"],
+    [/(^|[\s،.!؟:])قوس قزح(?=[\s،.!؟:]|$)/gu, "$1قَوْسْ قُزَحْ"],
+    [/(^|[\s،.!؟:])تفتكروا(?=[\s،.!؟:]|$)/gu, "$1تِفْتِكْرُو"],
+    [/(^|[\s،.!؟:])عيلتنا(?=[\s،.!؟:]|$)/gu, "$1عِيلِتْنَا"],
   ];
   for (const [re, rep] of vocalizationRules) {
     text = text.replace(re, rep);
@@ -1376,7 +1417,55 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
     }
   }
 
-  // 1) PRIMARY ENGINE: Gemini Live Native Audio (`gemini-2.5-flash-native-audio-preview-12-2025` & `gemini-3.8-live`)
+  // 1) PRIMARY ENGINE FOR EGYPTIAN DIALECT: Native Egyptian Cairene Neural Voice (ar-EG)
+  // Utilizes ar-EG-SalmaNeural (female characters/narrator) & ar-EG-ShakirNeural (male characters) via msedge-tts
+  // Delivers authentic 100% Cairo Egyptian colloquial cartoon voiceover with full vocalization and phonetic accuracy!
+  const mp3Path = path.join(tmpDir, `edge_${sceneIndex}.mp3`);
+  const ttsDialogue = dialect === "egyptian" ? phoneticEgyptianForEdgeTts(dialogue) : dialogue;
+
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const tts = new MsEdgeTTS();
+      await tts.setMetadata(edgeVoice, OUTPUT_FORMAT.AUDIO_24KHZ_96KBITRATE_MONO_MP3);
+      const { audioStream } = tts.toStream(ttsDialogue, {
+        rate: vp.rate || "+3%",
+        pitch: vp.pitch || (isFemale ? "+5Hz" : "+3Hz"),
+      });
+      const chunks = [];
+      await new Promise((resolve, reject) => {
+        audioStream.on("data", (c) => chunks.push(Buffer.isBuffer(c) ? c : Buffer.from(c)));
+        audioStream.on("end", () => resolve());
+        audioStream.on("error", (e) => reject(e));
+      });
+      const mp3Buf = Buffer.concat(chunks);
+      if (mp3Buf.length > 500) {
+        fs.writeFileSync(mp3Path, mp3Buf);
+        const finalPath = await applyRunnerCharacterTimbreAndCompanionSfx(
+          mp3Path,
+          vp,
+          sceneIndex,
+          tmpDir
+        );
+        const durSec = await measureAudioDurationSec(finalPath, 14);
+        console.log(
+          `   🎤 [Native Egyptian Cairene Neural Voice] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر (${edgeVoice}) بنبرة مصرية عامية قاهرية أصيلة 100%! (${durSec.toFixed(1)}s)`
+        );
+        return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
+      }
+    } catch (edgeErr) {
+      if (attempt < 2) {
+        await sleep(800 * (attempt + 1));
+      } else {
+        console.warn(
+          `   ⚠️ [MsEdgeTTS Notice] المشهد ${sceneIndex + 1} (${edgeVoice}) تعذر مؤقتاً، التحويل الفوري للمحرك الثانوي:`,
+          edgeErr?.message || edgeErr
+        );
+      }
+    }
+  }
+
+  // 2) SECONDARY ENGINE: Gemini Live Native Audio & Gemini Native Audio TTS (Fallback)
+// 1) PRIMARY ENGINE: Gemini Live Native Audio (`gemini-2.5-flash-native-audio-preview-12-2025` & `gemini-3.8-live`)
   const apiKey = (process.env.GEMINI_API_KEY || "").trim();
   if (apiKey) {
     try {
@@ -1523,48 +1612,6 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
         }
       }
     } catch {}
-  }
-
-  // 2) Emergency Fallback: MsEdgeTTS with Phonetic Egyptian Dialect Enforcement
-  const mp3Path = path.join(tmpDir, `edge_${sceneIndex}.mp3`);
-  const ttsDialogue = dialect === "egyptian" ? phoneticEgyptianForEdgeTts(dialogue) : dialogue;
-
-  for (let attempt = 0; attempt < 3; attempt++) {
-    try {
-      const tts = new MsEdgeTTS();
-      await tts.setMetadata(edgeVoice, OUTPUT_FORMAT.AUDIO_24KHZ_96KBITRATE_MONO_MP3);
-      const { audioStream } = tts.toStream(ttsDialogue, {
-        rate: vp.rate || "+3%",
-        pitch: vp.pitch || (isFemale ? "+5Hz" : "+3Hz"),
-      });
-      const chunks = [];
-      await new Promise((resolve, reject) => {
-        audioStream.on("data", (c) => chunks.push(Buffer.isBuffer(c) ? c : Buffer.from(c)));
-        audioStream.on("end", () => resolve());
-        audioStream.on("error", (e) => reject(e));
-      });
-      const mp3Buf = Buffer.concat(chunks);
-      if (mp3Buf.length > 500) {
-        fs.writeFileSync(mp3Path, mp3Buf);
-        const finalPath = await applyRunnerCharacterTimbreAndCompanionSfx(
-          mp3Path,
-          vp,
-          sceneIndex,
-          tmpDir
-        );
-        const durSec = await measureAudioDurationSec(finalPath, 14);
-        console.log(
-          `   📢 [Phonetic Egyptian EdgeTTS Fallback] المشهد ${sceneIndex + 1}: تم توليد الصوت باللهجة المصرية العامية بنجاح!`
-        );
-        return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
-      }
-    } catch (e) {
-      if (attempt < 2) {
-        await sleep(500 * (attempt + 1));
-      } else {
-        console.warn("   [TTS Notice] MsEdgeTTS unavailable, using chunked multi-sentence Arabic TTS stream:", e?.message || e);
-      }
-    }
   }
 
   // Fallback 2: Chunked Multi-Sentence Google TTS stream (<= 140 chars per chunk) with Egyptian phonetic text
@@ -2473,8 +2520,8 @@ const RUNNER_CHARACTER_TEAMS = [
     mainVoice: "Kore",
     compVoice: "Fenrir",
     worldHint: "cloud_ship",
-    heroProp: "المفتاح الهندسي الذهبي والمخطط الهولوجرامي",
-    compProp: "صندوق التروس البلورية الملونة",
+    heroProp: "المفتاح الهندسي الذهبي والرسمة الذكية المنورة",
+    compProp: "صندوق الأدوات السحرية اللي بتلمع",
     stories: [
       "بناء جسر قوس قزح الذكي فوق مدينة السحاب بالعلم والتعاون",
       "تصميم القلعة البلورية القوية قدام الهوا في واحة الكريستال",
@@ -3022,8 +3069,8 @@ function buildSmartEpisodeForRunner({
     },
     {
       title: `2. التطور: ملاحظة المشكلة مع ${shortComp}`,
-      egyptianShort: `يا خبر أبيض يا ${shortHero}! بص شوف معايا هناك، دي مشكلة في ${shortTopicMention} ولازم نساعد أصحابنا بذكاء ونحلها سوا فوراً!`,
-      egyptianLong: `يا خبر أبيض يا ${shortHero}! بص شوف معايا هناك بسرعة يا صاحبي! شفت المشكلة اللي حصلت في ${shortTopicMention}؟ الموضوع ده محتاج مننا وقفة سريعة وتفكير هادي علشان نساعد الكل ونحل التحدي ده صح! لو استنينا المشكلة هتكبر وممكن حد يزعل، وإحنا أبطال نورين كيدز دايماً بنكون جاهزين للمساعدة بقلب طيب وهمة عالية! يا ترى هنعمل إيه ${heroAppellation}؟ يلا نفكر سوا بالراحة ومن غير استعجال خالص علشان نوصل لأحسن حل يفرح كل حبايبنا وأصحابنا!`,
+      egyptianShort: `يا خبر أبيض يا ${shortHero}! ${heroLook} ${shortHero}، ${heroSee} معايا هناك، دي مشكلة في ${shortTopicMention} ولازم نساعد أصحابنا بذكاء ونحلها سوا فوراً!`,
+      egyptianLong: `يا خبر أبيض يا ${shortHero}! ${heroLook} ${shortHero}، ${heroSee} معايا هناك بسرعة يا ${isHeroFemale ? "صاحبتي" : "صاحبي"}! ${isHeroFemale ? "شُوفْتِي" : "شُوفْت"} المشكلة اللي حصلت في ${shortTopicMention}؟ الموضوع ده محتاج مننا وقفة بالراحة وتفكير هادي علشان نساعد الكل ونحل التحدي ده صح! لو استنينا المشكلة هتكبر وممكن حد يزعل، وإحنا أبطال نورين كيدز دايماً بنكون جاهزين للمساعدة بقلب طيب وهمة عالية! يا ترى هنعمل إيه ${heroAppellation}؟ يلا نفكر سوا بالراحة ومن غير استعجال خالص علشان نوصل لأحسن حل يفرح كل حبايبنا وأصحابنا!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
