@@ -3101,7 +3101,9 @@ function buildSmartEpisodeForRunner({
 
   const heroAppellation = isHeroFemale ? "يا بطلة" : "يا بطل";
   const heroLook = isHeroFemale ? "بُصِّي يا" : "بُصّ يا";
+  const heroSee = isHeroFemale ? "شُوفِي" : "شُوف";
   const heroFriend = isHeroFemale ? "أجدع صاحبة" : "أجدع صاحب";
+  const compSee = isCompFemale ? "شُوفِي" : "شُوف";
 
   const compAppellation = isCompFemale ? "يا سكرة" : "يا جدع";
   const compLook = isCompFemale ? "بُصِّي يا" : "بُصّ يا";
