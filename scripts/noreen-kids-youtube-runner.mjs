@@ -1456,8 +1456,9 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
       const isEgyptian = dialect !== "fusha";
       const liveWavPath = path.join(tmpDir, `gemini_live_${sceneIndex}.wav`);
       const liveModels = [
-        "gemini-2.5-flash-native-audio-preview-12-2025",
+        "gemini-3.8-live-extended-thinking",
         "gemini-3.8-live",
+        "gemini-2.5-flash-native-audio-preview-12-2025",
       ];
 
       for (const liveModel of liveModels) {
@@ -1537,7 +1538,7 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
 
       // 1b) SECONDARY ENGINE: Gemini Native Audio TTS (`gemini-3.8-flash-lite-tts` / `gemini-3.8-flash-tts`)
       // Guaranteed Egyptian Cairene colloquial cartoon voice without leaving the Gemini Native Audio family!
-      const ttsModels = ["gemini-3.8-flash-lite-tts", "gemini-3.8-flash-tts"];
+      const ttsModels = ["gemini-3.8-flash-tts", "gemini-3.8-flash-lite-tts"];
       const pureDialogue = stripLeakedVoiceInstructionsRunner(dialogue);
       for (const ttsModel of ttsModels) {
         for (let ttsRetry = 0; ttsRetry < 2; ttsRetry++) {
