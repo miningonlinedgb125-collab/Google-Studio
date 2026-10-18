@@ -2667,6 +2667,16 @@
     {
       "topic": "كارمن وسمسم وسر منطاد رسائل المحبة الطائر",
       "mainCharacterName": "كارمن المخترعة الصغيرة",
+      "companionName": "سمسم السنجاب الطائر"
+    },
+    {
+      "topic": "تامر وكركور وسر مراية الكريستال في الواحة",
+      "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم"
+    },
+    {
+      "topic": "كارمن وسمسم وسر منطاد رسائل المحبة الطائر",
+      "mainCharacterName": "كارمن المخترعة الصغيرة",
       "companionName": "سمسم السنجاب الطائر",
       "timestampIso": "2026-10-18T22:20:52.832Z"
     },
@@ -2829,66 +2839,37 @@
       "topic": "مهمة الطوارئ السريعة لإنقاذ أرنب الوادي وإسعاف",
       "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا"
-    },
-    {
-      "topic": "حراسة فوانيس الواحة وإنقاذ قافلة التمر في ليلة البدر",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم",
-      "timestampIso": "2026-10-16T09:49:10.562Z"
-    },
-    {
-      "topic": "مهمة الطوارئ السريعة لإنقاذ أرنب الوادي وإسعاف",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "timestampIso": "2026-10-16T09:49:10.562Z"
-    },
-    {
-      "topic": "حماية مرعى الأعشاب البحرية من دوامة التيار",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح"
-    },
-    {
-      "topic": "كارمن ومنطاد الشمس الطائر لرسائل المحبة",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر"
-    },
-    {
-      "topic": "حماية مرعى الأعشاب البحرية من دوامة التيار",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح",
-      "timestampIso": "2026-10-15T19:08:41.758Z"
-    },
-    {
-      "topic": "كارمن ومنطاد الشمس الطائر لرسائل المحبة",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر",
-      "timestampIso": "2026-10-15T19:08:41.758Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-18 · 12:54 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-39086060374",
-    "uploadMode": "manual_instant",
+    "id": "gh-run-39171653129",
+    "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-18 (04:28 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792286536677-3hso",
-    "longEpisodeId": "ep-gh-long-1792286684003-vj3c",
-    "shortEpisodeTitle": "Noreen Kids: سر الشنطة الطائرة وإنقاذ عصفور النجوم | مغامرات الطبيبة نورين وأرنوب",
-    "longEpisodeTitle": "نوران والفرفوش وسر مظلة أزهار الواحة الذكية",
-    "shortTitle": "Noreen Kids: سر الشنطة الطائرة وإنقاذ عصفور النجوم | مغامرات الطبيبة نورين وأرنوب",
-    "longTitle": "نوران والفرفوش وسر مظلة أزهار الواحة الذكية",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-19 (01:34 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792362016210-ffnn",
+    "longEpisodeId": "ep-gh-long-1792362052832-1rly",
+    "shortEpisodeTitle": "Noreen Kids: كارمن وسمسم وسر منطاد رسائل المحبة الطائر | مغامرات كارمن وسمسم",
+    "longEpisodeTitle": "Noreen Kids: تامر وكركور وسر مراية الكريستال في الواحة | مغامرات تامر وكركور",
+    "shortTitle": "Noreen Kids: كارمن وسمسم وسر منطاد رسائل المحبة الطائر | مغامرات كارمن وسمسم",
+    "longTitle": "Noreen Kids: تامر وكركور وسر مراية الكريستال في الواحة | مغامرات تامر وكركور",
     "shortPlaylistId": "PLPwfeXzB3ozU",
+    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "iqRWQDiiRo8",
-    "facebookShortVideoId": "1599370825209551",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1599370825209551",
-    "facebookShortTitle": "Noreen Kids | سر الشنطة الطائرة وإنقاذ عصفور النجوم - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
+    "youtubeShortVideoId": "VARwdrvqK2I",
+    "youtubeLongVideoId": "9suSl1tjHZY",
+    "facebookShortVideoId": "2236484903874135",
+    "facebookLongVideoId": "1540547334756925",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2236484903874135",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1540547334756925",
+    "facebookShortTitle": "Noreen Kids | كارمن وسمسم وسر منطاد رسائل المحبة الطائر - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
+    "facebookLongTitle": "Noreen Kids | تامر وكركور وسر مراية الكريستال في الواحة - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2896,16 +2877,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 720,
-      "height": 1280,
+      "width": 1280,
+      "height": 720,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 65,
-      "fileSizeBytes": 9730785,
-      "inspectedAt": "04:28"
+      "durationSec": 362,
+      "fileSizeBytes": 45539656,
+      "inspectedAt": "01:34"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2914,7 +2895,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-18T01:28:05.408Z"
+    "reportedAtIso": "2026-10-18T22:34:47.409Z"
   },
   "heroFairRotationIndex": 7,
   "interactiveHeroRotationIndex": 5,
