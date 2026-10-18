@@ -1815,6 +1815,14 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
           : `أهلاً وسهلاً بكل أعضاء وعيلة قناة نورين كيدز الغاليين في كل مكان! ازيكم يا أشطر وأجمل أبطال؟ وحشتونا أوي! أنا ${spk} ومعايا رفيق المغامرة ${prt}، منورين عالمنا السحري النهارده!`;
       sceneDialogue = stripped ? `${greetPrefix} ${stripped}` : greetPrefix;
     }
+    if (isShort && sceneDialogue) {
+      const words = sceneDialogue.split(/\s+/).filter(Boolean);
+      if (words.length > 20) {
+        const sub = words.slice(0, 18).join(" ");
+        const cleanEnd = sub.replace(/[\s،,]+$/, "");
+        sceneDialogue = cleanEnd.endsWith("!") || cleanEnd.endsWith(".") ? cleanEnd : `${cleanEnd}!`;
+      }
+    }
     const sc = {
       ...scenes[i],
       speakerName: spk,
@@ -1842,9 +1850,43 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
 
   // Natural pacing preserved: each scene plays at authentic 1.0x human speaking speed
 
-  // Enforce total duration bounds: Short strictly [60..80s] (target 65..75s), Long strictly [300..600s] (target >= 305s)
+  // Enforce total duration bounds: Short strictly [60..80s] (target 65..75s), Long strictly [300..600s] (target 305..580s)
   const minTotalSec = isShort ? 65 : 305;
   const maxTotalSec = isShort ? 75 : 590;
+  const maxSafeVoiceSec = isShort ? 65 : 550;
+  let totalVoiceSec = preparedScenes.reduce((acc, s) => acc + s.voiceDurSec, 0);
+
+  if (totalVoiceSec > maxSafeVoiceSec) {
+    const targetVoiceSec = isShort ? 60 : 520;
+    const speedRatio = Math.min(1.35, Math.max(1.05, totalVoiceSec / targetVoiceSec));
+    console.log(
+      `   ⚡ [Audio Timing Optimization] Total voice duration (${totalVoiceSec.toFixed(1)}s) exceeds safe threshold (${maxSafeVoiceSec}s) for ${videoFormat}. Applying gentle lossless atempo=${speedRatio.toFixed(2)} to guarantee compliance with [${minTotalSec}..${maxTotalSec}s] gate...`
+    );
+    for (let i = 0; i < preparedScenes.length; i++) {
+      const origAudio = preparedScenes[i].audioPath;
+      const speedAudio = path.join(tmpDir, `tempo_optimized_${i}.wav`);
+      try {
+        await execFileAsync("ffmpeg", [
+          "-y",
+          "-i", origAudio,
+          "-filter:a", `atempo=${speedRatio.toFixed(3)}`,
+          "-ar", "24000",
+          "-ac", "1",
+          "-c:a", "pcm_s16le",
+          speedAudio,
+        ]);
+        if (fs.existsSync(speedAudio) && fs.statSync(speedAudio).size > 1000) {
+          const newDur = await measureAudioDurationSec(speedAudio, preparedScenes[i].voiceDurSec / speedRatio);
+          preparedScenes[i].audioPath = speedAudio;
+          preparedScenes[i].voiceDurSec = newDur;
+          preparedScenes[i].durationSec = Math.max(isShort ? 14 : 26, Math.ceil(newDur + 1.2));
+        }
+      } catch (tempoErr) {
+        console.warn(`   ⚠️ atempo optimization warning for scene ${i + 1}:`, tempoErr?.message || tempoErr);
+      }
+    }
+  }
+
   let totalDur = preparedScenes.reduce((acc, s) => acc + s.durationSec, 0);
   if (totalDur < minTotalSec) {
     let deficit = minTotalSec - totalDur;
@@ -1857,7 +1899,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
   } else if (totalDur > maxTotalSec) {
     let excess = totalDur - maxTotalSec;
     for (let i = preparedScenes.length - 1; i >= 0 && excess > 0; i--) {
-      const minAllowed = Math.ceil(preparedScenes[i].voiceDurSec + 0.65);
+      const minAllowed = Math.ceil(preparedScenes[i].voiceDurSec + 0.4);
       const reducible = Math.max(0, preparedScenes[i].durationSec - minAllowed);
       const cut = Math.min(excess, reducible);
       preparedScenes[i].durationSec -= cut;
@@ -1865,10 +1907,23 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     }
   }
 
-  // Guarantee absolute invariant: Every scene duration MUST accommodate full speech plus peaceful pause
+  // Guarantee absolute invariant: Every scene duration MUST accommodate full speech plus peaceful pause,
+  // without exceeding maxTotalSec
   for (const s of preparedScenes) {
-    if (s.durationSec < s.voiceDurSec + 1.2) {
-      s.durationSec = Math.ceil(s.voiceDurSec + 1.8);
+    if (s.durationSec < s.voiceDurSec + 0.5) {
+      s.durationSec = Math.ceil(s.voiceDurSec + 0.8);
+    }
+  }
+
+  totalDur = preparedScenes.reduce((acc, s) => acc + s.durationSec, 0);
+  if (totalDur > maxTotalSec) {
+    let excess = totalDur - maxTotalSec;
+    for (let i = preparedScenes.length - 1; i >= 0 && excess > 0; i--) {
+      const minFloor = Math.ceil(preparedScenes[i].voiceDurSec + 0.2);
+      const reducible = Math.max(0, preparedScenes[i].durationSec - minFloor);
+      const cut = Math.min(excess, reducible);
+      preparedScenes[i].durationSec -= cut;
+      excess -= cut;
     }
   }
   
@@ -2977,56 +3032,56 @@ function buildSmartEpisodeForRunner({
   const sceneTemplates = [
     {
       title: `1. البداية: انطلاق ${shortHero} و${shortComp}`,
-      egyptianShort: `يا خبر يا أبطال وعيلة نورين كيدز! بصوا بسرعة معايا النهارده، ازيكم يا أحلى أصحاب! ${compLook} ${shortComp}، النهارده عندنا حكاية جميلة أوي عن ${shortTopicMention}! أنا جهزت ${heroProp} وإنت معاك ${compProp}، يلا بينا نبدأ رحلتنا سوا بكل شجاعة وفرحة!`,
+      egyptianShort: `أهلاً بيكم يا أبطال عيلة نورين كيدز! ${compLook} ${shortComp}، حكايتنا النهارده عن ${shortTopicMention}! يلا ننطلق سوا بكل شجاعة وفرحة!`,
       egyptianLong: `يا خبر يا أبطال وعيلة نورين كيدز! بصوا بسرعة معايا النهارده، ازيكم يا أحلى أصحاب في الدنيا كلها! ${compLook} معايا يا ${shortComp}، النهارده عندنا مهمة بطولية ومغامرة جميلة أوي عن ${shortTopicMention}! أنا مجهز معايا ${heroProp} علشان نستكشف كل حاجة خطوة بخطوة، وإنت معاك ${compProp} علشان نكون إيد واحدة وعندنا طاقة وهمة عالية أوي! شايفين النور والبهجة اللي حوالينا في المكان ده؟ يلا بينا نفتح عينينا كويس ونبدأ المغامرة سوا بكل شجاعة وفرحة ونشاط يا أبطال!`,
       speaker: effectiveMainName,
       voice: heroVoice,
     },
     {
       title: `2. التطور: ملاحظة المشكلة مع ${shortComp}`,
-      egyptianShort: `يا خبر أبيض يا ${shortHero}! بص شوف معايا هناك، فيه مشكلة ومحتاجة مساعدة في ${shortTopicMention}! وبُصّ شُوفْ المفتاح السِّرِّي بْيِلْمَع هِنَاك! يلا نتصرف بذكاء وتعاون سوا!`,
+      egyptianShort: `يا خبر أبيض يا ${shortHero}! بص شوف معايا، دي مشكلة في ${shortTopicMention} ولازم نساعد أصحابنا بذكاء وتعاون!`,
       egyptianLong: `يا خبر أبيض يا ${shortHero}! بص شوف معايا هناك بسرعة يا صاحبي! شفت المشكلة اللي حصلت في ${shortTopicMention}؟ الموضوع ده محتاج مننا وقفة سريعة وتفكير هادي علشان نساعد الكل ونحل التحدي ده صح! لو استنينا المشكلة هتكبر وممكن حد يزعل، وإحنا أبطال نورين كيدز دايماً بنكون جاهزين للمساعدة بقلب طيب وهمة عالية! يا ترى هنعمل إيه ${heroAppellation}؟ يلا نفكر سوا بالراحة ومن غير استعجال خالص علشان نوصل لأحسن حل يفرح كل حبايبنا وأصحابنا!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
     {
       title: "3. الحدث المفاجئ: التفكير الهادي ورفض التسرع",
-      egyptianShort: `عندك حق يا ${shortComp} ${compAppellation}! يلا بينا نستخدم ${heroProp} ونتصرف بذكاء وهدوء، علشان لما بنكون إيد واحدة وبنتعاون بأمانة، بنلاقي الحل الصح لكل مشكلة ومفيش حاجة تصعب علينا أبداً!`,
+      egyptianShort: `عندك حق يا ${shortComp}! يلا نستخدم ${heroProp} ونتصرف بهدوء، التعاون الصادق بيحل أصعب مشكلة!`,
       egyptianLong: `كلامك مضبوط مية في المية يا ${shortComp} ${compAppellation}، وأنا ${compProud} بسرعة! بصوا كده يا أصحابي الحلوين، الشطار لما بتقابلهم أي مشكلة بيهدوا الأول ويفكروا بعقلهم وما يتسرعوش أبداً في أي تصرف غلط! التسرع ممكن يبوظ كل حاجة، لكن الصبر والترتيب والأمانة هما اللي بينجحوا أي خطة! أنا هستخدم ${heroProp} دلوقتي علشان نفحص الموقف بدقة ونشوف أول خطوة صح، يلا شجعونا وقولوا يا رب، وإيدينا في إيد بعض وهنعمل كل حاجة تمام!`,
       speaker: effectiveMainName,
       voice: heroVoice,
     },
     {
       title: "4. الخطة الذكية: تجهيز الأدوات وتنظيم العمل",
-      egyptianShort: `${heroLook} ${shortHero}! إحنا عرفنا السبب خلاص وفهمنا اللغز كله، يلا بينا نعمل الحل المظبوط سوا ونفرح كل أصحابنا!`,
+      egyptianShort: `${heroLook} ${shortHero}! عرفنا الحل خلاص، يلا نجهز ${compProp} ونتحرك فوراً لنفرح كل أصحابنا!`,
       egyptianLong: `الله عليك يا ${shortHero}، تسلم أفكارك الذكية ${heroAppellation}! أنا فتحت ${compProp} دلوقتي وفهمت السر كله وعرفت الخطوة المظبوطة اللي لازم نعملها فوراً! الشطارة إننا ننظم شغلنا ونساعد بعض بحب وإخلاص، وأنا جهزت كل حاجة علشان أبدأ معاك خطوة بخطوة! شفتوا يا أصحابنا إزاي لما بنتعاون وبنسمع كلام بعض كل خطوة بتبقى واضحة وسهلة؟ يلا بينا نشمر ونبدأ في الحل العملي علشان الفرحة ترجع تملأ المكان كله من جديد!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
     {
       title: "5. التصرف العملي: العمل المشترك وتجاوز العقبة",
-      egyptianShort: `يلا بينا يا ${shortComp} ${compAppellation}! أنا جهزت ${heroProp} وبدأت أول خطوة صح، ودلوقتي دورك تساعدني بـ ${compProp} علشان نكمل الحل العملي الملموس في ${shortTopicMention} ونتغلب على المشكلة سوا في ثانية واحدة! شايفين يا أصحابنا الشطار، لما بنتعاون وبنكون إيد واحدة مفيش حاجة تصعب علينا أبداً وكل حاجة بتتحل بنجاح وفرحة!`, 
+      egyptianShort: `يلا بينا يا ${shortComp}! أنا جهزت ${heroProp} ودورك تساعدني بـ ${compProp} علشان نتغلب على العقبة سوا!`, 
       egyptianLong: `يلا بينا يا ${shortComp} يا ${compFriend} في الدنيا، إيدي في إيدك ومفيش ثانية نضيعها! أنا بدأت أتحرك بـ ${heroProp} وثبتنا أول جزء صح، ودلوقتي دورك تساعدني بـ ${compProp} علشان نكمل الباقي ونتغلب على العقبة دي بنجاح! شايفين يا أصحابنا الشطار إزاي لما بنجتهد ونشتغل إيد واحدة بنشاط ومحبة، أصعب حاجة بتتحل وبتبقى سهلة وممتعة؟ الجدعنة والأمانة هما أحلى حاجة بتخلينا ننجح ونفرح كل اللي حوالينا، يلا نكمل لآخر خطوة بهمة وفرحة!`,
       speaker: effectiveMainName,
       voice: heroVoice,
     },
     {
       title: "6. الحل الذكي: نجاح الفكرة وفرحة الجميع",
-      egyptianShort: `الله يا سلام سلم! بالتعاون والجدعنة وبـ ${heroProp} و${compProp} الفكرة نجحت مية في المية يا ${shortHero}! اتحلت المشكلة ورجعت الضحكة منورة المكان كله والكل فرحان بشطارتنا سوا!`,
+      egyptianShort: `الله يا سلام سلم! بالتعاون وبـ ${heroProp} و${compProp} الفكرة نجحت ورجعت الضحكة منورة لكل أصحابنا!`,
       egyptianLong: `الله أكبر يا سلام سلم! الفكرة طلعت حكاية ونجحت مية في المية يا ${shortHero}! بصوا كده وشوفوا يا كل أصحابنا وعيلتنا في كل مكان! أول ما حطينا إيدينا في إيد بعض وتصرفنا بذكاء وأمانة، اتحلت المشكلة كلها ورجعت الضحكة والبهجة تنور وشوش كل أصحابنا من تاني! دي من أسعد اللحظات في حكايتنا النهارده، لما بنشوف تعبنا وشطارتنا بتجيب نتيجة حلوة تفرح القلب، وإثبات حقيقي إننا أبطال لما اشتغلنا سوا بقلب صافي ومحبة!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
     {
       title: "7. الاحتفال بالنجاح: الدرس المستفاد وفرحة عيلتنا",
-      egyptianShort: `يا سلام على الفرحة الكبيرة! دلوقتي كل واحد فينا عرف قيمة الصدق والأمانة والتعاون ومساعدة أصحابنا!`,
+      egyptianShort: `يا سلام على الفرحة الكبيرة! اتعلمنا إن الصدق والتعاون هما سر النجاح والسعادة الحقيقي!`,
       egyptianLong: `بجد دي كانت مغامرة ولا أروع يا ${shortComp}، ومش هننساها أبداً من كتر الحلاوة والجمال! شفتوا بقى يا أصحابي الحلوين إيه سر النجاح الكبير ده؟ اتعلمنا النهارده سوا إن الأمانة والنشاط ومساعدة غيرنا هما سر السعادة الحقيقي في الدنيا! ولازم نطبق ده كل يوم في بيوتنا وفي المدرسة ومع كل أصحابنا وجيرانا، ونكون دايماً قدوة في الخير والجدعنة! شكراً يا ${shortComp} يا ${compFriend} وشكراً لكل أصحابنا الأبطال اللي بيشجعونا دايماً في كل مغامرة!`,
       speaker: effectiveMainName,
       voice: heroVoice,
     },
     {
       title: `8. المشهد الثامن والتحدي الأخير: رسالة ${shortHero} و${shortComp} لأبطال Noreen Kids`,
-      egyptianShort: `هيييه! نجحت المهمة يا ${shortHero}! 🧩 تحدي الشطار: يا ترى إيه أهم حاجة اتعلمناها من حكاية ${cleanTopicForAdventure}؟ اكتبوا إجابتكم واسمكم في التعليقات علشان تكسبوا وسام الشطارة وتظهروا في لوحة الشرف! وما تنسوش تشتركوا في القناة وتعملوا لايك، مع السلامة يا أبطال!`,
+      egyptianShort: `هيييه! نجحت المهمة! 🧩 تحدي الشطار: إيه أهم درس اتعلمتوه؟ اكتبوا اسمكم وإجابتكم في التعليقات يا أبطال!`,
       egyptianLong: `ودلوقتي يا أصحابنا الحلوين في عيلة نورين كيدز، وصلنا المشهد الثامن والتحدي الأخير في حلقة النهارده مع ${shortHero} و${shortComp}! 🧩 سؤال الشطار للأبطال: إيه أهم درس اتعلمتوه من حكاية النهارده، وإزاي تقدروا تكونوا شطار وأمناء في المدرسة والبيت مع أصحابكم؟ اكتبوا إجابتكم واسمكم في التعليقات تحت الفيديو علشان تظهروا في لوحة الشرف في الحلقة الجاية! وما تنسوش تشتركوا في القناة وتعملوا لايك، بنحبكم أوي ومع السلامة يا أبطال!`,
       speaker: effectiveCompName,
       voice: compVoice,
@@ -3428,7 +3483,7 @@ ${recentTitlesList}
       let lastErr = null;
       for (let attempt = 1; attempt <= 5; attempt++) {
         try {
-          const targetModel = attempt <= 3 ? "gemini-3.8-flash" : "gemini-3.8-flash-lite";
+          const targetModel = attempt <= 2 ? "gemini-3.8-flash" : (attempt <= 4 ? "gemini-3.5-flash" : "gemini-3.8-flash");
           const response = await ai.models.generateContent({
             model: targetModel,
             contents: prompt,
