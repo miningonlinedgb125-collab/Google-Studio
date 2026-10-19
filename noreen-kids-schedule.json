@@ -37,6 +37,16 @@
     {
       "topic": "أستاذ شريف وسر دفتر زياد وخطة تنظيم الوقت",
       "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "جدو والفأر المشاكس وسر صندوق ألعاب زمان",
+      "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "أستاذ شريف وسر دفتر زياد وخطة تنظيم الوقت",
+      "mainCharacterName": "أستاذ شريف",
       "companionName": "الصقر الذكي",
       "timestampIso": "2026-10-19T21:43:33.865Z"
     },
@@ -199,28 +209,6 @@
       "topic": "سلة تيتة ومفاجأة تكريم حافظ القرآن الصغير",
       "mainCharacterName": "تيتة",
       "companionName": "الدب باندا"
-    },
-    {
-      "topic": "حكمة جدو وسر طيارة أطفال الحارة المبهجة",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-10-17T17:57:50.466Z"
-    },
-    {
-      "topic": "سلة تيتة ومفاجأة تكريم حافظ القرآن الصغير",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "timestampIso": "2026-10-17T17:57:50.466Z"
-    },
-    {
-      "topic": "ذياد والفرفوشة يزرعان شجر الظل في القرية",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة"
-    },
-    {
-      "topic": "أستاذ شريف وسر ترتيب ساعات اليوم الذكي",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
     }
   ],
   "scheduledHistory": [
@@ -2698,32 +2686,27 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٠‏/١٠‏/٢٠٢٦، ١٢:٤٦:٤٧ ص",
   "lastCloudRunReport": {
-    "id": "gh-run-39239625520",
-    "uploadMode": "daily_schedule",
+    "id": "gh-run-39329287548",
+    "uploadMode": "manual_instant",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-19 (14:01 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792406778050-zb2u",
-    "longEpisodeId": "ep-gh-long-1792406840528-dyfu",
-    "shortEpisodeTitle": "Noreen Kids: ملك ولوليتا وسر خطة الإسعاف الذكية بالمدرسة | مغامرات الطبيبة ملك والقطة لوليتا",
-    "longEpisodeTitle": "Noreen Kids: سدرة وسر الدبدوب المفقود وخريطة الألوان | مغامرات سدرة الصغنونة والفراشة الملونة",
-    "shortTitle": "Noreen Kids: ملك ولوليتا وسر خطة الإسعاف الذكية بالمدرسة | مغامرات الطبيبة ملك والقطة لوليتا",
-    "longTitle": "Noreen Kids: سدرة وسر الدبدوب المفقود وخريطة الألوان | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (00:46 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792446131769-lghn",
+    "longEpisodeId": "ep-gh-long-1792446213865-aggb",
+    "shortEpisodeTitle": "Noreen Kids: أستاذ شريف وسر دفتر زياد وخطة تنظيم الوقت | مغامرات أستاذ شريف والصقر الذكي",
+    "longEpisodeTitle": "جدو والفأر المشاكس وسر صندوق ألعاب زمان",
+    "shortTitle": "Noreen Kids: أستاذ شريف وسر دفتر زياد وخطة تنظيم الوقت | مغامرات أستاذ شريف والصقر الذكي",
+    "longTitle": "جدو والفأر المشاكس وسر صندوق ألعاب زمان",
     "shortPlaylistId": "PLPwfeXzB3ozU",
-    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "fpRXGSRenmU",
-    "youtubeLongVideoId": "lQQJhSwDSeQ",
-    "facebookShortVideoId": "1407626381539821",
-    "facebookLongVideoId": "1583400836296668",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1407626381539821",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1583400836296668",
-    "facebookShortTitle": "Noreen Kids | ملك ولوليتا وسر خطة الإسعاف الذكية بالمدرسة - مغامرة ملك والقطة لوليتا",
-    "facebookLongTitle": "Noreen Kids | سدرة وسر الدبدوب المفقود وخريطة الألوان - مغامرة سدرة الصغنونة والفراشة الملونة",
+    "youtubeShortVideoId": "3cl3nrcSSos",
+    "facebookShortVideoId": "1586247939415284",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1586247939415284",
+    "facebookShortTitle": "Noreen Kids | أستاذ شريف وسر دفتر زياد وخطة تنظيم الوقت - مغامرة أستاذ شريف والصقر الذكي",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2731,16 +2714,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 1280,
-      "height": 720,
+      "width": 720,
+      "height": 1280,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 317,
-      "fileSizeBytes": 35011953,
-      "inspectedAt": "14:01"
+      "durationSec": 60,
+      "fileSizeBytes": 9028239,
+      "inspectedAt": "00:46"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2749,7 +2732,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-19T11:01:31.490Z"
+    "reportedAtIso": "2026-10-19T21:46:50.519Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
