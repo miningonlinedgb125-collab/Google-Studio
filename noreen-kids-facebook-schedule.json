@@ -57,6 +57,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122118097257484976",
+      "photoId": "122118097233484976",
+      "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع ذياد والعصفورة الفرفوشة",
+      "title": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع ذياد والعصفورة الفرفوشة",
+      "caption": "✨ مين أسرع بطل هيعد كل النجوم الذهبية في الصورة؟ ✨\nذياد والعصفورة الفرفوشة بيجهزوا لحكاية جديدة، والنجوم اللامعة بتنور طريقهم! 🌟\nيلا يا شطار يا حلوين.. عدّوا النجوم مع ماما واكتبوا لنا العدد المظبوط في تعليق! 👀🔢\n👇 اكتبوا الحل واسم البطل عشان نوجهله تحية خاصة بالاسم في الحلقة القادمة! 🎬💖\n🔔 شير للتحدي ومتابعة لصفحة Noreen Kids لمزيد من الألعاب المفيدة! 👍\n#نورين_كيدز #Noreen_Kids #فوازير_أطفال #تحدي_الشطار #أمهات_مصر",
+      "heroName": "ذياد",
+      "companionName": "العصفورة الفرفوشة",
+      "publishedAtCairo": "2026-10-19 · 23:53 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122118097257484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122118095115484976",
       "photoId": "122118095085484976",
       "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع أم ملك والبطريق المرح",
@@ -523,18 +535,6 @@
       "publishedAtCairo": "2026-10-11 · 08:35 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122114965167484976",
       "postKind": "scheduled"
-    },
-    {
-      "postId": "1330185823512542_122114845089484976",
-      "photoId": "122114845065484976",
-      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع دكتورة ملك والقطة لوليتا",
-      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع دكتورة ملك والقطة لوليتا",
-      "caption": "يا أهلاً بكل أبطال وماميز عيلة نورين كيدز العسل! 🎈 دكتورة ملك وصديقتها القطة لوليتا محضرين لكم النهاردة تحدي ذكاء وقوة ملاحظة يجنن! 🐱🩺\n\n🔍 **شروط التحدي يا أبطال:**\n• ركزوا كويس أوي بين الصورة [ أ ] والصورة [ ب ].. مين الشاطر اللي هيطلع الـ 3 فروقات المستخبيين؟ 🕵️‍♀️✨\n• يلا يا مامي، شاركي مع طفلك واكتبي لنا الـ 3 فروقات ومعاهم (اسم بطلك الصغير) في التعليقات، عشان دكتورة ملك ولوليتا يحيوه بالاسم في حلقة بكرة! 🥳👏\n• اعملوا شير للبوست وتابعوا الصفحة وفعلوا الجرس 🔔 عشان ما يفوتكمش أي تحدي جديد! 🚀\n\n🔍 عايزين فوازير وتحديات أكتر؟ اضغطوا على تصنيف [تحدي الشطار] أو [أبطال نورين كيدز] أعلى البوست لمتابعة كل الألعاب السابقة مع أطفالكم! 🕵️‍♂️✨\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #فروقات_بين_الصورتين #أمهات_مصر",
-      "heroName": "دكتورة ملك",
-      "companionName": "القطة لوليتا",
-      "publishedAtCairo": "2026-10-11 · 00:37 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122114845089484976",
-      "postKind": "scheduled"
     }
   ],
   "facebook": {
@@ -798,14 +798,15 @@
       "id": "gh-run-39320441551",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-19 (23:43 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-19 (23:55 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1792442249748-2rlh",
       "longEpisodeId": "ep-gh-long-1792442395003-t3sy",
       "shortEpisodeTitle": "Noreen Kids: أم ملك وسر دولاب الألوان في مدرسة السعادة | مغامرات أم ملك والبطريق المرح",
-      "longEpisodeTitle": "ذياد وفرفوشة ومهمة دواء الشتاء للعم صابر",
+      "longEpisodeTitle": "Noreen Kids: ذياد وفرفوشة ومهمة دواء الشتاء للعم صابر | مغامرات ذياد والعصفورة الفرفوشة",
       "shortTitle": "Noreen Kids: أم ملك وسر دولاب الألوان في مدرسة السعادة | مغامرات أم ملك والبطريق المرح",
-      "longTitle": "ذياد وفرفوشة ومهمة دواء الشتاء للعم صابر",
+      "longTitle": "Noreen Kids: ذياد وفرفوشة ومهمة دواء الشتاء للعم صابر | مغامرات ذياد والعصفورة الفرفوشة",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -813,9 +814,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "qPbUFMl4UNM",
+      "youtubeLongVideoId": "ULrqkadxSwA",
       "facebookShortVideoId": "1008889682247532",
+      "facebookLongVideoId": "2322417818295949",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1008889682247532",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2322417818295949",
       "facebookShortTitle": "Noreen Kids | أم ملك وسر دولاب الألوان في مدرسة السعادة - مغامرة أم ملك والبطريق المرح",
+      "facebookLongTitle": "Noreen Kids | ذياد وفرفوشة ومهمة دواء الشتاء للعم صابر - مغامرة ذياد والعصفورة الفرفوشة",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -823,16 +828,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 66,
-        "fileSizeBytes": 10066330,
-        "inspectedAt": "23:43"
+        "durationSec": 425,
+        "fileSizeBytes": 45634028,
+        "inspectedAt": "23:55"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
