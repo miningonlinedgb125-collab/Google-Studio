@@ -2667,6 +2667,16 @@
     {
       "topic": "أم ملك وسر دولاب الألوان في مدرسة السعادة",
       "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح"
+    },
+    {
+      "topic": "ذياد وفرفوشة ومهمة دواء الشتاء للعم صابر",
+      "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة"
+    },
+    {
+      "topic": "أم ملك وسر دولاب الألوان في مدرسة السعادة",
+      "mainCharacterName": "أم ملك",
       "companionName": "البطريق المرح",
       "timestampIso": "2026-10-19T20:39:55.003Z"
     },
@@ -2829,43 +2839,21 @@
       "topic": "أستاذ شريف وسر ترتيب ساعات اليوم الذكي",
       "mainCharacterName": "أستاذ شريف",
       "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "ذياد والفرفوشة يزرعان شجر الظل في القرية",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة",
-      "timestampIso": "2026-10-17T09:22:05.446Z"
-    },
-    {
-      "topic": "أستاذ شريف وسر ترتيب ساعات اليوم الذكي",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-10-17T09:22:05.446Z"
-    },
-    {
-      "topic": "مفاجأة سدرة بألوان قوس قزح لإسعاد ماما",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة"
-    },
-    {
-      "topic": "أم ملك وسر لوحة الشجرة الزرقاء في المعرض",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-19 · 14:01 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-39171653129",
+    "id": "gh-run-39320441551",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-19 (01:34 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792362016210-ffnn",
-    "longEpisodeId": "ep-gh-long-1792362052832-1rly",
-    "shortEpisodeTitle": "Noreen Kids: كارمن وسمسم وسر منطاد رسائل المحبة الطائر | مغامرات كارمن وسمسم",
-    "longEpisodeTitle": "Noreen Kids: تامر وكركور وسر مراية الكريستال في الواحة | مغامرات تامر وكركور",
-    "shortTitle": "Noreen Kids: كارمن وسمسم وسر منطاد رسائل المحبة الطائر | مغامرات كارمن وسمسم",
-    "longTitle": "Noreen Kids: تامر وكركور وسر مراية الكريستال في الواحة | مغامرات تامر وكركور",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-19 (23:55 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792442249748-2rlh",
+    "longEpisodeId": "ep-gh-long-1792442395003-t3sy",
+    "shortEpisodeTitle": "Noreen Kids: أم ملك وسر دولاب الألوان في مدرسة السعادة | مغامرات أم ملك والبطريق المرح",
+    "longEpisodeTitle": "Noreen Kids: ذياد وفرفوشة ومهمة دواء الشتاء للعم صابر | مغامرات ذياد والعصفورة الفرفوشة",
+    "shortTitle": "Noreen Kids: أم ملك وسر دولاب الألوان في مدرسة السعادة | مغامرات أم ملك والبطريق المرح",
+    "longTitle": "Noreen Kids: ذياد وفرفوشة ومهمة دواء الشتاء للعم صابر | مغامرات ذياد والعصفورة الفرفوشة",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2874,14 +2862,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "VARwdrvqK2I",
-    "youtubeLongVideoId": "9suSl1tjHZY",
-    "facebookShortVideoId": "2236484903874135",
-    "facebookLongVideoId": "1540547334756925",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2236484903874135",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1540547334756925",
-    "facebookShortTitle": "Noreen Kids | كارمن وسمسم وسر منطاد رسائل المحبة الطائر - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
-    "facebookLongTitle": "Noreen Kids | تامر وكركور وسر مراية الكريستال في الواحة - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
+    "youtubeShortVideoId": "qPbUFMl4UNM",
+    "youtubeLongVideoId": "ULrqkadxSwA",
+    "facebookShortVideoId": "1008889682247532",
+    "facebookLongVideoId": "2322417818295949",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1008889682247532",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2322417818295949",
+    "facebookShortTitle": "Noreen Kids | أم ملك وسر دولاب الألوان في مدرسة السعادة - مغامرة أم ملك والبطريق المرح",
+    "facebookLongTitle": "Noreen Kids | ذياد وفرفوشة ومهمة دواء الشتاء للعم صابر - مغامرة ذياد والعصفورة الفرفوشة",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2896,9 +2884,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 362,
-      "fileSizeBytes": 45539656,
-      "inspectedAt": "01:34"
+      "durationSec": 425,
+      "fileSizeBytes": 45634028,
+      "inspectedAt": "23:55"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2907,7 +2895,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-18T22:34:47.409Z"
+    "reportedAtIso": "2026-10-19T20:55:28.067Z"
   },
   "heroFairRotationIndex": 11,
   "interactiveHeroRotationIndex": 5,
