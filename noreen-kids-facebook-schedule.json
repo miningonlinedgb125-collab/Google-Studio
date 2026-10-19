@@ -57,6 +57,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122117962827484976",
+      "photoId": "122117962803484976",
+      "themeTitle": "تحدي الصورة المختلفة (من 1 إلى 4) مع سدرة الصغنونة والفراشة الملونة",
+      "title": "تحدي الصورة المختلفة (من 1 إلى 4) مع سدرة الصغنونة والفراشة الملونة",
+      "caption": "يا هلا بأحلى ماميز وأشطر كتاكيت في الدنيا! 🌸👶 سدرة الصغنونة وصديقتها الفراشة الملونة جايبينلكم النهاردة تحدي قوة الملاحظة الممتع جداً! 🎨✨\n\n👀🔍 ركزوا في الـ 4 صور كويس أوي.. في 3 صور متطابقين تماماً، وصورة واحدة بس هي اللي مختلفة ومستخبية! يا ترى الشطار عرفوا رقم كام؟ [ 1 ، 2 ، 3 ، 4 ]؟ \n\n🥳 اكتبوا رقم الصورة واسم بطلكم الجميل في التعليقات، عشان سدرة الصغنونة والفراشة الملونة يحيّوه بالاسم ويبعتوله بوسة كبيرة في حلقة بكرة! 💖🎉\n\n🔔 متنسوش تعملوا متابعة وتفعلوا الجرس عشان يوصلكم كل جديد، وشيّروا البوست مع كل الماميز عشان نلعب سوا! 🚀🥰\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
+      "heroName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة",
+      "publishedAtCairo": "2026-10-19 · 13:59 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122117962827484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122117960829484976",
       "photoId": "122117960805484976",
       "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع دكتورة ملك والقطة لوليتا",
@@ -523,18 +535,6 @@
       "publishedAtCairo": "2026-10-11 · 00:18 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122114821671484976",
       "postKind": "scheduled"
-    },
-    {
-      "postId": "1330185823512542_122114702511484976",
-      "photoId": "122114702487484976",
-      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع دكتورة ملك والقطة لوليتا",
-      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع دكتورة ملك والقطة لوليتا",
-      "caption": "يا هلا ومية مسا على أحلى مامي وأشطر أبطال في الدنيا! 🌸👶\n\nدكتورة ملك وصديقتها الشقية القطة \"لوليتا\" محضرين لكم النهاردة تحدي ذكاء وقوة ملاحظة خطييير! 🕵️‍♀️🐱\n\nركزوا كويس أوي يا أبطال بين الصورة [ أ ] والصورة [ ب ].. وورونا شطارتكم:\n\n✨ مين يقدر يكتشف الـ 3 فروقات المستخبيين بذكاء وسرعة؟ 👀🔍\n✨ اكتبوا لنا الفروقات في التعليقات مع \"اسم بطلكم الصغير\"، عشان دكتورة ملك والقطة لوليتا يحيوه مخصوص بالاسم في حلقة بكرة! 🥳👏\n✨ متنسوش تعملوا متابعة وتفعلوا الجرس 🔔 وشير للبوست عشان كل أصحابنا الشطار يشاركوا في التحدي! 📲❤️\n\n🔍 عايزين فوازير وتحديات أكتر؟ اضغطوا على تصنيف [تحدي الشطار] أو [أبطال نورين كيدز] أعلى البوست لمتابعة كل الألعاب السابقة مع أطفالكم! 🕵️‍♂️✨\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #فروقات_بين_الصورتين #أمهات_مصر",
-      "heroName": "دكتورة ملك",
-      "companionName": "القطة لوليتا",
-      "publishedAtCairo": "2026-10-10 · 18:42 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122114702511484976",
-      "postKind": "scheduled"
     }
   ],
   "facebook": {
@@ -798,14 +798,15 @@
       "id": "gh-run-39239625520",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-19 (13:50 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-19 (14:01 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1792406778050-zb2u",
       "longEpisodeId": "ep-gh-long-1792406840528-dyfu",
       "shortEpisodeTitle": "Noreen Kids: ملك ولوليتا وسر خطة الإسعاف الذكية بالمدرسة | مغامرات الطبيبة ملك والقطة لوليتا",
-      "longEpisodeTitle": "سدرة وسر الدبدوب المفقود وخريطة الألوان",
+      "longEpisodeTitle": "Noreen Kids: سدرة وسر الدبدوب المفقود وخريطة الألوان | مغامرات سدرة الصغنونة والفراشة الملونة",
       "shortTitle": "Noreen Kids: ملك ولوليتا وسر خطة الإسعاف الذكية بالمدرسة | مغامرات الطبيبة ملك والقطة لوليتا",
-      "longTitle": "سدرة وسر الدبدوب المفقود وخريطة الألوان",
+      "longTitle": "Noreen Kids: سدرة وسر الدبدوب المفقود وخريطة الألوان | مغامرات سدرة الصغنونة والفراشة الملونة",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -813,9 +814,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "fpRXGSRenmU",
+      "youtubeLongVideoId": "lQQJhSwDSeQ",
       "facebookShortVideoId": "1407626381539821",
+      "facebookLongVideoId": "1583400836296668",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1407626381539821",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1583400836296668",
       "facebookShortTitle": "Noreen Kids | ملك ولوليتا وسر خطة الإسعاف الذكية بالمدرسة - مغامرة ملك والقطة لوليتا",
+      "facebookLongTitle": "Noreen Kids | سدرة وسر الدبدوب المفقود وخريطة الألوان - مغامرة سدرة الصغنونة والفراشة الملونة",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -823,16 +828,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 60,
-        "fileSizeBytes": 8514437,
-        "inspectedAt": "13:50"
+        "durationSec": 317,
+        "fileSizeBytes": 35011953,
+        "inspectedAt": "14:01"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
