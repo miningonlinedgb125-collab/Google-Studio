@@ -2141,30 +2141,14 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     const halfSpanY = Math.round(panRangeY * 0.5);
     const ampX = Math.max(4, Math.round(panRangeX * 0.45));
     const ampY = Math.max(4, Math.round(panRangeY * 0.42));
-    // 2.5D Living Cartoon Character & Animation Engine:
-    // 1. Entrance Bounce-Walk in the first 1.2s (joyful step-hop into the scene)
-    const isHeroTurn = i % 2 === 0;
-    const enterDir = isHeroTurn ? 1 : -1;
-    const walkStepX = `(28 * ${enterDir} * pow(max(0, 1 - t/1.2), 2))`;
-    const walkStepY = `(20 * pow(max(0, 1 - t/1.2), 2) - 9 * abs(sin(PI * min(1.2, t) * 3.2)) * max(0, 1 - t/1.2))`;
-
-    // 2. Continuous Organic Breathing cycle (simulates living chest/shoulder rise and fall)
-    const breathY = `(4.5 * sin(2*PI*t / 2.6))`;
-
-    // 3. Dialogue-Driven Speech Gestures & Nodding during active voiceover
-    const activeVoiceDur = Number((item.voiceDurSec || 5).toFixed(2));
-    const speechActiveFactor = `if(lte(t, ${activeVoiceDur}), 1, 0)`;
-    const speechNodY = `(3.2 * sin(2*PI*t * 2.8) * ${speechActiveFactor})`;
-    const speechGestureX = `(2.6 * sin(2*PI*t * 1.8) * ${speechActiveFactor})`;
-
     const camExprX =
       i % 2 === 0
-        ? `${halfSpanX} + ${walkStepX} + ${speechGestureX} + ${ampX}*sin(2*PI*t/9.5)`
-        : `${halfSpanX} + ${walkStepX} + ${speechGestureX} - ${ampX}*cos(2*PI*t/10.0)`;
+        ? `${halfSpanX}+${ampX}*sin(2*PI*t/9.5)`
+        : `${halfSpanX}-${ampX}*cos(2*PI*t/10.0)`;
     const camExprY =
       i % 2 === 0
-        ? `${halfSpanY} + ${walkStepY} + ${breathY} + ${speechNodY} + ${ampY}*cos(2*PI*t/12.0)`
-        : `${halfSpanY} + ${walkStepY} + ${breathY} + ${speechNodY} + ${ampY}*sin(2*PI*t/11.5)`;
+        ? `${halfSpanY}+${ampY}*cos(2*PI*t/12.0)`
+        : `${halfSpanY}+${ampY}*sin(2*PI*t/11.5)`;
 
     const marginX = Math.round(W * 0.07);
     const rangeX = Math.max(120, W - marginX * 2 - 48);
