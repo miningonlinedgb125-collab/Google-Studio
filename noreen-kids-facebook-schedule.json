@@ -2662,6 +2662,16 @@
     {
       "topic": "أستاذ شريف والصقر في مهمة تنظيم وقت اللعب",
       "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "جدو والفأر المشاكس وسر نخلة الخير في بستان الواحة",
+      "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "أستاذ شريف والصقر في مهمة تنظيم وقت اللعب",
+      "mainCharacterName": "أستاذ شريف",
       "companionName": "الصقر الذكي",
       "timestampIso": "2026-10-19T22:17:08.482Z"
     },
@@ -2824,28 +2834,6 @@
       "topic": "سلة تيتة ومفاجأة تكريم حافظ القرآن الصغير",
       "mainCharacterName": "تيتة",
       "companionName": "الدب باندا"
-    },
-    {
-      "topic": "حكمة جدو وسر طيارة أطفال الحارة المبهجة",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-10-17T17:57:50.466Z"
-    },
-    {
-      "topic": "سلة تيتة ومفاجأة تكريم حافظ القرآن الصغير",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "timestampIso": "2026-10-17T17:57:50.466Z"
-    },
-    {
-      "topic": "ذياد والفرفوشة يزرعان شجر الظل في القرية",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة"
-    },
-    {
-      "topic": "أستاذ شريف وسر ترتيب ساعات اليوم الذكي",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-19 · 23:55 بتوقيت مصر",
