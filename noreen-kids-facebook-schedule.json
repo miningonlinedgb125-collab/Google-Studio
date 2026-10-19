@@ -2667,6 +2667,16 @@
     {
       "topic": "ملك ولوليتا وسر خطة الإسعاف الذكية بالمدرسة",
       "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "سدرة وسر الدبدوب المفقود وخريطة الألوان",
+      "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "ملك ولوليتا وسر خطة الإسعاف الذكية بالمدرسة",
+      "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا",
       "timestampIso": "2026-10-19T10:47:20.528Z"
     },
@@ -2829,28 +2839,6 @@
       "topic": "أم ملك وسر لوحة الشجرة الزرقاء في المعرض",
       "mainCharacterName": "أم ملك",
       "companionName": "البطريق المرح"
-    },
-    {
-      "topic": "مفاجأة سدرة بألوان قوس قزح لإسعاد ماما",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "timestampIso": "2026-10-16T18:52:50.490Z"
-    },
-    {
-      "topic": "أم ملك وسر لوحة الشجرة الزرقاء في المعرض",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "timestampIso": "2026-10-16T18:52:50.490Z"
-    },
-    {
-      "topic": "حراسة فوانيس الواحة وإنقاذ قافلة التمر في ليلة البدر",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم"
-    },
-    {
-      "topic": "مهمة الطوارئ السريعة لإنقاذ أرنب الوادي وإسعاف",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-19 · 01:34 بتوقيت مصر",
