@@ -37,6 +37,16 @@
     {
       "topic": "ملك ولوليتا وسر خطة الإسعاف الذكية بالمدرسة",
       "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "سدرة وسر الدبدوب المفقود وخريطة الألوان",
+      "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "ملك ولوليتا وسر خطة الإسعاف الذكية بالمدرسة",
+      "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا",
       "timestampIso": "2026-10-19T10:47:20.528Z"
     },
@@ -199,28 +209,6 @@
       "topic": "أم ملك وسر لوحة الشجرة الزرقاء في المعرض",
       "mainCharacterName": "أم ملك",
       "companionName": "البطريق المرح"
-    },
-    {
-      "topic": "مفاجأة سدرة بألوان قوس قزح لإسعاد ماما",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "timestampIso": "2026-10-16T18:52:50.490Z"
-    },
-    {
-      "topic": "أم ملك وسر لوحة الشجرة الزرقاء في المعرض",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "timestampIso": "2026-10-16T18:52:50.490Z"
-    },
-    {
-      "topic": "حراسة فوانيس الواحة وإنقاذ قافلة التمر في ليلة البدر",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم"
-    },
-    {
-      "topic": "مهمة الطوارئ السريعة لإنقاذ أرنب الوادي وإسعاف",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا"
     }
   ],
   "scheduledHistory": [
@@ -2703,16 +2691,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "١٩‏/١٠‏/٢٠٢٦، ٢:٠١:٢٨ م",
   "lastCloudRunReport": {
-    "id": "gh-run-39115958080",
+    "id": "gh-run-39239625520",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-18 (12:54 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792316249379-4o4z",
-    "longEpisodeId": "ep-gh-long-1792316319573-b6x7",
-    "shortEpisodeTitle": "Noreen Kids: جسر قوس قزح الذكي وإنقاذ عصافير مدينة السحاب | مغامرات المهندسة نوران والنمر الفرفوش",
-    "longEpisodeTitle": "Noreen Kids: سر الخريطة الصوتية وإنقاذ فستق في كهف الصدى | مغامرات عمرو وزعتر",
-    "shortTitle": "Noreen Kids: جسر قوس قزح الذكي وإنقاذ عصافير مدينة السحاب | مغامرات المهندسة نوران والنمر الفرفوش",
-    "longTitle": "Noreen Kids: سر الخريطة الصوتية وإنقاذ فستق في كهف الصدى | مغامرات عمرو وزعتر",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-19 (14:01 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792406778050-zb2u",
+    "longEpisodeId": "ep-gh-long-1792406840528-dyfu",
+    "shortEpisodeTitle": "Noreen Kids: ملك ولوليتا وسر خطة الإسعاف الذكية بالمدرسة | مغامرات الطبيبة ملك والقطة لوليتا",
+    "longEpisodeTitle": "Noreen Kids: سدرة وسر الدبدوب المفقود وخريطة الألوان | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "shortTitle": "Noreen Kids: ملك ولوليتا وسر خطة الإسعاف الذكية بالمدرسة | مغامرات الطبيبة ملك والقطة لوليتا",
+    "longTitle": "Noreen Kids: سدرة وسر الدبدوب المفقود وخريطة الألوان | مغامرات سدرة الصغنونة والفراشة الملونة",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2721,14 +2709,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "P-NFaRj2EF4",
-    "youtubeLongVideoId": "qCq7i8by91Y",
-    "facebookShortVideoId": "1468986891783608",
-    "facebookLongVideoId": "1111772651208246",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1468986891783608",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1111772651208246",
-    "facebookShortTitle": "Noreen Kids | جسر قوس قزح الذكي وإنقاذ عصافير مدينة السحاب - مغامرة المهندسة نوران والنمر الفرفوش",
-    "facebookLongTitle": "Noreen Kids | سر الخريطة الصوتية وإنقاذ فستق في كهف الصدى - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
+    "youtubeShortVideoId": "fpRXGSRenmU",
+    "youtubeLongVideoId": "lQQJhSwDSeQ",
+    "facebookShortVideoId": "1407626381539821",
+    "facebookLongVideoId": "1583400836296668",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1407626381539821",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1583400836296668",
+    "facebookShortTitle": "Noreen Kids | ملك ولوليتا وسر خطة الإسعاف الذكية بالمدرسة - مغامرة ملك والقطة لوليتا",
+    "facebookLongTitle": "Noreen Kids | سدرة وسر الدبدوب المفقود وخريطة الألوان - مغامرة سدرة الصغنونة والفراشة الملونة",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2743,9 +2731,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 343,
-      "fileSizeBytes": 35546726,
-      "inspectedAt": "12:54"
+      "durationSec": 317,
+      "fileSizeBytes": 35011953,
+      "inspectedAt": "14:01"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2754,7 +2742,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-18T09:54:20.456Z"
+    "reportedAtIso": "2026-10-19T11:01:31.490Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
