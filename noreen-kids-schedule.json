@@ -37,6 +37,16 @@
     {
       "topic": "أم ملك وسر دولاب الألوان في مدرسة السعادة",
       "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح"
+    },
+    {
+      "topic": "ذياد وفرفوشة ومهمة دواء الشتاء للعم صابر",
+      "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة"
+    },
+    {
+      "topic": "أم ملك وسر دولاب الألوان في مدرسة السعادة",
+      "mainCharacterName": "أم ملك",
       "companionName": "البطريق المرح",
       "timestampIso": "2026-10-19T20:39:55.003Z"
     },
@@ -199,28 +209,6 @@
       "topic": "أستاذ شريف وسر ترتيب ساعات اليوم الذكي",
       "mainCharacterName": "أستاذ شريف",
       "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "ذياد والفرفوشة يزرعان شجر الظل في القرية",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة",
-      "timestampIso": "2026-10-17T09:22:05.446Z"
-    },
-    {
-      "topic": "أستاذ شريف وسر ترتيب ساعات اليوم الذكي",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-10-17T09:22:05.446Z"
-    },
-    {
-      "topic": "مفاجأة سدرة بألوان قوس قزح لإسعاد ماما",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة"
-    },
-    {
-      "topic": "أم ملك وسر لوحة الشجرة الزرقاء في المعرض",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح"
     }
   ],
   "scheduledHistory": [
