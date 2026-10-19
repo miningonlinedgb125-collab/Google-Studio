@@ -276,7 +276,7 @@ const FUSHA_AND_GULF_TO_EGYPTIAN_PAIRS = [
 
 function normalizeEgyptianColloquial(rawText) {
   let text = String(rawText || "")
-    .replace(/[\u064B\u064C\u064D]/g, "")
+    .replace(/[\u064B-\u0652\u0670]/g, "")
     .replace(/["«»“”'']/g, "")
     .replace(/Noreen\s*Kids/gi, "نورين كيدز")
     .replace(/هـاننا/g, "سناننا")
@@ -533,6 +533,37 @@ function prepareTextForNaturalEgyptianTts(rawText, speakerName = "", partnerName
     [/(^|[\s،.!؟:])قوس قزح(?=[\s،.!؟:]|$)/gu, "$1قَوْسْ قُزَحْ"],
     [/(^|[\s،.!؟:])تفتكروا(?=[\s،.!؟:]|$)/gu, "$1تِفْتِكْرُو"],
     [/(^|[\s،.!؟:])عيلتنا(?=[\s،.!؟:]|$)/gu, "$1عِيلِتْنَا"],
+    [/(^|[\s،.!؟:])قاعدين(?=[\s،.!؟:]|$)/gu, "$1أَاعْدِين"],
+    [/(^|[\s،.!؟:])وقاعدين(?=[\s،.!؟:]|$)/gu, "$1وَأَاعْدِين"],
+    [/(^|[\s،.!؟:])قاعد(?=[\s،.!؟:]|$)/gu, "$1أَاعِدْ"],
+    [/(^|[\s،.!؟:])وقاعد(?=[\s،.!؟:]|$)/gu, "$1وَأَاعِدْ"],
+    [/(^|[\s،.!؟:])قاعدة(?=[\s،.!؟:]|$)/gu, "$1أَاعْدَة"],
+    [/(^|[\s،.!؟:])وقاعدة(?=[\s،.!؟:]|$)/gu, "$1وَأَاعْدَة"],
+    [/(^|[\s،.!؟:])قعدنا(?=[\s،.!؟:]|$)/gu, "$1أَعَدْنَا"],
+    [/(^|[\s،.!؟:])وقعدنا(?=[\s،.!؟:]|$)/gu, "$1وَأَعَدْنَا"],
+    [/(^|[\s،.!؟:])يقعد(?=[\s،.!؟:]|$)/gu, "$1يِئْعُدْ"],
+    [/(^|[\s،.!؟:])تقعد(?=[\s،.!؟:]|$)/gu, "$1تِئْعُدْ"],
+    [/(^|[\s،.!؟:])نقعد(?=[\s،.!؟:]|$)/gu, "$1نِئْعُدْ"],
+    [/(^|[\s،.!؟:])وقع(?=[\s،.!؟:]|$)/gu, "$1وِئِعْ"],
+    [/(^|[\s،.!؟:])ووقع(?=[\s،.!؟:]|$)/gu, "$1وَوِئِعْ"],
+    [/(^|[\s،.!؟:])وقعت(?=[\s،.!؟:]|$)/gu, "$1وِئِعِتْ"],
+    [/(^|[\s،.!؟:])يقع(?=[\s،.!؟:]|$)/gu, "$1يِئَعْ"],
+    [/(^|[\s،.!؟:])تقع(?=[\s،.!؟:]|$)/gu, "$1تِئَعْ"],
+    [/(^|[\s،.!؟:])وقال(?=[\s،.!؟:]|$)/gu, "$1وَأَالْ"],
+    [/(^|[\s،.!؟:])يقول(?=[\s،.!؟:]|$)/gu, "$1يِئُولْ"],
+    [/(^|[\s،.!؟:])تقول(?=[\s،.!؟:]|$)/gu, "$1تِئُولْ"],
+    [/(^|[\s،.!؟:])نقول(?=[\s،.!؟:]|$)/gu, "$1نِئُولْ"],
+    [/(^|[\s،.!؟:])قولت(?=[\s،.!؟:]|$)/gu, "$1أُولْتْ"],
+    [/(^|[\s،.!؟:])قريب(?=[\s،.!؟:]|$)/gu, "$1أَرِيبْ"],
+    [/(^|[\s،.!؟:])وقريب(?=[\s،.!؟:]|$)/gu, "$1وَأَرِيبْ"],
+    [/(^|[\s،.!؟:])قلبي(?=[\s،.!؟:]|$)/gu, "$1أَلْبِي"],
+    [/(^|[\s،.!؟:])وقلبي(?=[\s،.!؟:]|$)/gu, "$1وَأَلْبِي"],
+    [/(^|[\s،.!؟:])قلب(?=[\s،.!؟:]|$)/gu, "$1أَلْبْ"],
+    [/(^|[\s،.!؟:])وقلب(?=[\s،.!؟:]|$)/gu, "$1وَأَلْبْ"],
+    [/(^|[\s،.!؟:])لقينا(?=[\s،.!؟:]|$)/gu, "$1لِئِينَا"],
+    [/(^|[\s،.!؟:])ولقينا(?=[\s،.!؟:]|$)/gu, "$1وَلِئِينَا"],
+    [/(^|[\s،.!؟:])لقيت(?=[\s،.!؟:]|$)/gu, "$1لِئِيتْ"],
+    [/(^|[\s،.!؟:])ولقيت(?=[\s،.!؟:]|$)/gu, "$1وَلِئِيتْ"],
   ];
   for (const [re, rep] of vocalizationRules) {
     text = text.replace(re, rep);
@@ -1287,7 +1318,7 @@ async function synthesizeChunkViaGeminiLiveRunner(
             systemInstruction: {
               parts: [
                 {
-                  text: "SYSTEM RULE: You are a professional Egyptian Cairene cartoon voice actor for children. Read ONLY the exact Arabic dialogue sent by the user verbatim using natural Cairene pronunciation (hard Egyptian G). Strictly adopt an expressive cartoon delivery. NEVER utter any instructions, character descriptions, meta words, or introductory phrases before, during, or after speaking." ,
+                  text: "SYSTEM RULE: You are a professional Egyptian Cairene cartoon voice actor for children. Read the Arabic dialogue sent by the user completely and verbatim from the very first word to the very last word with natural Cairene pronunciation (hard Egyptian G). Strictly adopt an expressive cartoon delivery. You MUST speak every single sentence fully without skipping, cutting off, or summarizing. NEVER utter any instructions, character descriptions, meta words, or introductory phrases before, during, or after speaking." ,
                 },
               ],
             },
@@ -1463,7 +1494,7 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
 
       for (const liveModel of liveModels) {
         try {
-          const segments = splitArabicTextForGeminiLive(dialogue, 240);
+          const segments = splitArabicTextForGeminiLive(dialogue, 110);
           const pcmParts = [];
           const pauseBuf = Buffer.alloc(8640, 0);
           let allSegmentsOk = segments.length > 0;
@@ -1518,7 +1549,7 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
             const durSec = await measureAudioDurationSec(finalPath, 14);
             const cleanWordCount = dialogue.split(/\s+/).filter(Boolean).length;
             // Realistic cartoon speech speed is ~2.8 to 3.2 words/sec. Any audio faster than ~3.8 words/sec is incomplete/truncated.
-            const minExpectedSec = Math.max(3.5, cleanWordCount * 0.25);
+            const minExpectedSec = Math.max(3.5, cleanWordCount * 0.36);
             if (durSec < minExpectedSec) {
               console.warn(
                 `   ⚠️ [Audio Integrity Gate] المشهد ${sceneIndex + 1}: الصوت المولّد عبر ${liveModel} قصير ومبتور (${durSec.toFixed(1)}s لـ ${cleanWordCount} كلمة - المطلوب على الأقل ${minExpectedSec.toFixed(1)}s)، تم رفض المقطع والتحويل الفوري لمحرك Gemini Native Audio TTS المكتمل!`
