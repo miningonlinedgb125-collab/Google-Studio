@@ -37,6 +37,16 @@
     {
       "topic": "عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات",
       "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي"
+    },
+    {
+      "topic": "إصلاح منارة المرجان المضيئة بأدوات الهندسة",
+      "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات",
+      "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي",
       "timestampIso": "2026-10-20T17:43:42.174Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "تامر فارس الواحة",
       "companionName": "كركور الببغاء الحكيم",
       "timestampIso": "2026-10-18T22:20:52.832Z"
-    },
-    {
-      "topic": "جنى وبلبل وسر نغمات حزام الكويكبات الفضائي",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف",
-      "timestampIso": "2026-10-18T21:09:18.159Z"
-    },
-    {
-      "topic": "شوشو ومرجان وسر سفينة الذكريات الغارقة",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح",
-      "timestampIso": "2026-10-18T21:09:18.159Z"
-    },
-    {
-      "topic": "جسر قوس قزح الذكي وإنقاذ عصافير مدينة السحاب",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "سر الخريطة الصوتية وإنقاذ فستق في كهف الصدى",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي"
     }
   ],
   "scheduledHistory": [
@@ -2688,32 +2676,27 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٠‏/١٠‏/٢٠٢٦، ٨:٤٧:٣٨ م",
   "lastCloudRunReport": {
-    "id": "gh-run-39442436774",
-    "uploadMode": "daily_schedule",
+    "id": "gh-run-39468216484",
+    "uploadMode": "manual_instant",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (18:00 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792507760101-v4lr",
-    "longEpisodeId": "ep-gh-long-1792507893233-pk3e",
-    "shortEpisodeTitle": "Noreen Kids: تختوخ وزقلط وسر طيارة الورق العالقة في الشجرة | مغامرات تختوخ والكلب زقلط",
-    "longEpisodeTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر شتلة الياسمين | مغامرات الشيخ محمود والديك الفصيح",
-    "shortTitle": "Noreen Kids: تختوخ وزقلط وسر طيارة الورق العالقة في الشجرة | مغامرات تختوخ والكلب زقلط",
-    "longTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر شتلة الياسمين | مغامرات الشيخ محمود والديك الفصيح",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (20:47 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792518175096-4n77",
+    "longEpisodeId": "ep-gh-long-1792518222174-ub7y",
+    "shortEpisodeTitle": "Noreen Kids: عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات | مغامرات عمرو وزعتر",
+    "longEpisodeTitle": "إصلاح منارة المرجان المضيئة بأدوات الهندسة",
+    "shortTitle": "Noreen Kids: عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات | مغامرات عمرو وزعتر",
+    "longTitle": "إصلاح منارة المرجان المضيئة بأدوات الهندسة",
     "shortPlaylistId": "PLPwfeXzB3ozU",
-    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "_ZtT1MRVdjY",
-    "youtubeLongVideoId": "eol9q8_SLTU",
-    "facebookShortVideoId": "1134042765971101",
-    "facebookLongVideoId": "1057426260662984",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1134042765971101",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1057426260662984",
-    "facebookShortTitle": "Noreen Kids | تختوخ وزقلط وسر طيارة الورق العالقة في الشجرة - مغامرة تختوخ والكلب زقلط",
-    "facebookLongTitle": "Noreen Kids | الشيخ محمود والديك الفصيح وسر شتلة الياسمين - مغامرة الشيخ محمود والديك الفصيح",
+    "youtubeShortVideoId": "GwWDlfj99wY",
+    "facebookShortVideoId": "1129992583069988",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1129992583069988",
+    "facebookShortTitle": "Noreen Kids | عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2721,16 +2704,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 1280,
-      "height": 720,
+      "width": 720,
+      "height": 1280,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 354,
-      "fileSizeBytes": 43075502,
-      "inspectedAt": "18:00"
+      "durationSec": 67,
+      "fileSizeBytes": 9971958,
+      "inspectedAt": "20:47"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2739,7 +2722,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-20T15:00:02.811Z"
+    "reportedAtIso": "2026-10-20T17:47:41.595Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
