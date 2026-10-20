@@ -57,6 +57,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122118297357484976",
+      "photoId": "122118297333484976",
+      "themeTitle": "تحدي الصورة المختلفة (من 1 إلى 4) مع تيتة والدب باندا",
+      "title": "تحدي الصورة المختلفة (من 1 إلى 4) مع تيتة والدب باندا",
+      "caption": "🔍 تحدي قوة الملاحظة السريعة مع تيتة والدب باندا! 🌟\nأبطالنا الشطار وأمهاتنا الغاليين.. بصوا كويس جداً على الصور الـ 4 المرقمة [ 1 ، 2 ، 3 ، 4 ]! 👀✨\nفيه 3 صور متطابقين تماماً.. وصورة واحدة بس هي اللي مختلفة وفيها تفصيلة ذكية! 🕵️‍♂️💡\nمين أشطر بطل أو بطلة هيعرف يكتشف رقم الصورة المختلفة؟ 🤔\n1️⃣ اكتبوا رقم الصورة المختلفة في تعليق 👇\n2️⃣ واكتبوا اسم طفلكم الشاطر علشان تيتة والدب باندا يحيوه بالاسم ويبعتوله وسام الشطارة! 🏅🎬\n🔔 متنسوش متابعة صفحتنا Noreen Kids لتحديات يومية ممتعة! 👍💖\n#نورين_كيدز #Noreen_Kids #تحدي_الشطار #أبطال_نورين_كيدز #ذكاء_الأطفال #أمهات_مصر",
+      "heroName": "تيتة",
+      "companionName": "الدب باندا",
+      "publishedAtCairo": "2026-10-20 · 13:20 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122118297357484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122118295455484976",
       "photoId": "122118295425484976",
       "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع جدو والفأر المشاكس",
@@ -523,18 +535,6 @@
       "publishedAtCairo": "2026-10-13 · 08:40 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122115862161484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122115154557484976",
-      "photoId": "122115154533484976",
-      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع المهندسة نوران والنمر الفرفوش",
-      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع المهندسة نوران والنمر الفرفوش",
-      "caption": "يا أحلى أمهات وأشطر كتاكيت في الدنيا! 🌟 المهندسة نوران وصديقها \"النمر الفرفوش\" جايبين لكم النهاردة تحدي ذكاء وقوة ملاحظة خطير! 🕵️‍♀️🐯\n\n🔍 بصولنا كده بتركيز عالي على الصورة [ أ ] والصورة [ ب ].. مين البطل اللي عينه صقر وهيطلع الـ **3 فروقات الذكية** المستخبية؟ 👀✨\n\n💬 اكتبوا لنا الفروقات في التعليقات ومعاها **اسم طفلكم الجميل**، عشان المهندسة نوران والنمر الفرفوش يحيوه بالاسم ويبعتوا له تحية مخصوصة في حلقة بكرة! 👏🎉\n\n🔔 متنسوش تعملوا متابعة لصفحتنا وتفعلوا الجرس، واعملوا شير للبوست عشان نتحدى بيه كل أصحابنا الشطار! 🚀\n\n🔍 عايزين فوازير وتحديات أكتر؟ اضغطوا على تصنيف [تحدي الشطار] أو [أبطال نورين كيدز] أعلى البوست لمتابعة كل الألعاب السابقة مع أطفالكم! 🕵️‍♂️✨\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #فروقات_بين_الصورتين #أمهات_مصر",
-      "heroName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "publishedAtCairo": "2026-10-11 · 18:31 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122115154557484976",
-      "postKind": "scheduled"
     }
   ],
   "facebook": {
@@ -798,14 +798,15 @@
       "id": "gh-run-39405069733",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (13:12 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (13:21 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1792490883388-am9b",
       "longEpisodeId": "ep-gh-long-1792490941798-jkpu",
       "shortEpisodeTitle": "Noreen Kids: جدو والفأر المشاكس وسر صندوق ألعاب زمان | مغامرات جدو والفأر المشاكس",
-      "longEpisodeTitle": "مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر",
+      "longEpisodeTitle": "Noreen Kids: مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر | مغامرات تيتة والدب باندا",
       "shortTitle": "Noreen Kids: جدو والفأر المشاكس وسر صندوق ألعاب زمان | مغامرات جدو والفأر المشاكس",
-      "longTitle": "مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر",
+      "longTitle": "Noreen Kids: مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر | مغامرات تيتة والدب باندا",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -813,9 +814,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "ImSyC8nEBFI",
+      "youtubeLongVideoId": "I2gaGngYqF0",
       "facebookShortVideoId": "978574201340537",
+      "facebookLongVideoId": "1786376252612257",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/978574201340537",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1786376252612257",
       "facebookShortTitle": "Noreen Kids | جدو والفأر المشاكس وسر صندوق ألعاب زمان - مغامرة جدو والفأر المشاكس",
+      "facebookLongTitle": "Noreen Kids | مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر - مغامرة تيتة والدب باندا",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -823,16 +828,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 66,
-        "fileSizeBytes": 10475274,
-        "inspectedAt": "13:12"
+        "durationSec": 360,
+        "fileSizeBytes": 41712353,
+        "inspectedAt": "13:21"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
