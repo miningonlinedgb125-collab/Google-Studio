@@ -2652,6 +2652,16 @@
     {
       "topic": "جنى وبلبل وإنقاذ نبتة المريخ العطشانة",
       "mainCharacterName": "جنى رائدة الفضاء",
+      "companionName": "بلبل الروبوت اللطيف"
+    },
+    {
+      "topic": "رحلة المنطاد البلوري وإنقاذ فلة في الوادي",
+      "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي"
+    },
+    {
+      "topic": "جنى وبلبل وإنقاذ نبتة المريخ العطشانة",
+      "mainCharacterName": "جنى رائدة الفضاء",
       "companionName": "بلبل الروبوت اللطيف",
       "timestampIso": "2026-10-20T19:18:17.289Z"
     },
@@ -2814,54 +2824,37 @@
       "mainCharacterName": "سدرة الصغنونة",
       "companionName": "الفراشة الملونة",
       "timestampIso": "2026-10-19T10:47:20.528Z"
-    },
-    {
-      "topic": "كارمن وسمسم وسر منطاد رسائل المحبة الطائر",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر"
-    },
-    {
-      "topic": "تامر وكركور وسر مراية الكريستال في الواحة",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم"
-    },
-    {
-      "topic": "كارمن وسمسم وسر منطاد رسائل المحبة الطائر",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر",
-      "timestampIso": "2026-10-18T22:20:52.832Z"
-    },
-    {
-      "topic": "تامر وكركور وسر مراية الكريستال في الواحة",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم",
-      "timestampIso": "2026-10-18T22:20:52.832Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-20 · 20:47 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-39464741998",
-    "uploadMode": "manual_instant",
+    "id": "gh-run-39481634265",
+    "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (20:21 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792516740777-zr8g",
-    "longEpisodeId": "ep-gh-long-1792516767107-kqck",
-    "shortEpisodeTitle": "Noreen Kids: نوران والنمر وفكرة قبة النجوم لحماية العصافير | مغامرات المهندسة نوران والنمر الفرفوش",
-    "longEpisodeTitle": "سر مية الغابة والنبع اللي نشف فجأة",
-    "shortTitle": "Noreen Kids: نوران والنمر وفكرة قبة النجوم لحماية العصافير | مغامرات المهندسة نوران والنمر الفرفوش",
-    "longTitle": "سر مية الغابة والنبع اللي نشف فجأة",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (22:30 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792523732489-42kz",
+    "longEpisodeId": "ep-gh-long-1792523897289-yyww",
+    "shortEpisodeTitle": "Noreen Kids: جنى وبلبل وإنقاذ نبتة المريخ العطشانة | مغامرات جنى وبلبل",
+    "longEpisodeTitle": "Noreen Kids: رحلة المنطاد البلوري وإنقاذ فلة في الوادي | مغامرات عمرو وزعتر",
+    "shortTitle": "Noreen Kids: جنى وبلبل وإنقاذ نبتة المريخ العطشانة | مغامرات جنى وبلبل",
+    "longTitle": "Noreen Kids: رحلة المنطاد البلوري وإنقاذ فلة في الوادي | مغامرات عمرو وزعتر",
     "shortPlaylistId": "PLPwfeXzB3ozU",
+    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "OOh5wv8FZjE",
-    "facebookShortVideoId": "2319149112258404",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2319149112258404",
-    "facebookShortTitle": "Noreen Kids | نوران والنمر وفكرة قبة النجوم لحماية العصافير - مغامرة المهندسة نوران والنمر الفرفوش",
+    "youtubeShortVideoId": "V1nXkvljnIE",
+    "youtubeLongVideoId": "t6shqwFi814",
+    "facebookShortVideoId": "2593300727821151",
+    "facebookLongVideoId": "1642516864086243",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2593300727821151",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1642516864086243",
+    "facebookShortTitle": "Noreen Kids | جنى وبلبل وإنقاذ نبتة المريخ العطشانة - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
+    "facebookLongTitle": "Noreen Kids | رحلة المنطاد البلوري وإنقاذ فلة في الوادي - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2869,16 +2862,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 720,
-      "height": 1280,
+      "width": 1280,
+      "height": 720,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 60,
-      "fileSizeBytes": 9940500,
-      "inspectedAt": "20:21"
+      "durationSec": 319,
+      "fileSizeBytes": 33774633,
+      "inspectedAt": "22:30"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2887,7 +2880,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-20T17:21:58.331Z"
+    "reportedAtIso": "2026-10-20T19:30:11.953Z"
   },
   "heroFairRotationIndex": 4,
   "interactiveHeroRotationIndex": 5,
