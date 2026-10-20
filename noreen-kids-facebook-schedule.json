@@ -57,6 +57,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122118432705484976",
+      "photoId": "122118432681484976",
+      "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع عمرو وزعتر",
+      "title": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع عمرو وزعتر",
+      "caption": "يا صباح الفل والجمال على أحلى أمهات وأشطر كتاكيت في الدنيا! 🌟 بطلنا المحبوب \"عمرو\" وصديقه الوفي \"زعتر\" مجهزين لكم النهاردة تحدي يجنن لسرعة الملاحظة والذكاء! 🕵️‍♂️✨\n\nفي الصورة الكرتونية القمر دي، في نجوم ذهبية بتلمع ومستخبية بشطارة في كل مكان.. يا ترى البطل الصغير هيعرف يعدّ فيه كام نجمة بالظبط؟ 👀⭐\n\nشجعوا أبطالكم يركزوا، واكتبوا لنا الإجابة الصح مع اسم البطل أو البطلة في الكومنتات 💬👇 عشان \"عمرو وزعتر\" يحيّوهم بالاسم في حلقة بكرة! 🥳🎉\n\nيلا ورونا الشطارة، واعملوا شير للبوست وتابعوا الصفحة وفعلوا الجرس 🔔 عشان يوصلكم كل تحدياتنا ومغامراتنا الجديدة أول بأول! ❤️\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
+      "heroName": "عمرو",
+      "companionName": "زعتر",
+      "publishedAtCairo": "2026-10-20 · 22:28 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122118432705484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122118430695484976",
       "photoId": "122118430671484976",
       "themeTitle": "تحدي الصورة المختلفة (من 1 إلى 4) مع جنى وبلبل",
@@ -523,18 +535,6 @@
       "publishedAtCairo": "2026-10-14 · 00:15 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122116125459484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122116122705484976",
-      "photoId": "122116122681484976",
-      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع سدرة الصغنونة والفراشة الملونة",
-      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع سدرة الصغنونة والفراشة الملونة",
-      "caption": "يا صباح الفل والنشاط على أحلى مامي وأشطر كتاكيت في الدنيا! 🌸✨\n\nسدرة الصغنونة وصديقها \"الفراشة الملونة\" محضرين لكم النهاردة تحدي عسول جداً لقوة الملاحظة والذكاء.. يا ترى مين البطل اللمّاح اللي هيقارن بين الصورة [ أ ] والصورة [ ب ] ويطلع لنا الـ 3 فروقات الذكية المستخبية؟ 🧐🦋🔍\n\nيلا يا مامي، شجعي بطلك وشاركونا الحل في التعليقات مع \"اسم طفلك الجميل\"، عشان سدرة الصغنونة والفراشة الملونة يحيّوه بالاسم ويبعتوا له بوسة كبيرة في حلقة بكرة! 🥳🎉\n\nمتنسوش تدوسوا متابعة للصفحة وتفعلوا الجرس 🔔 واعملوا شير للبوست عشان كل أصحابنا يشاركوا في التحدي! 💖🚀\n\n🔍 عايزين فوازير وتحديات أكتر؟ اضغطوا على تصنيف [تحدي الشطار] أو [أبطال نورين كيدز] أعلى البوست لمتابعة كل الألعاب السابقة مع أطفالكم! 🕵️‍♂️✨\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #فروقات_بين_الصورتين #أمهات_مصر",
-      "heroName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "publishedAtCairo": "2026-10-13 · 23:55 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122116122705484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -798,14 +798,15 @@
       "id": "gh-run-39481634265",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (22:21 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (22:30 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1792523732489-42kz",
       "longEpisodeId": "ep-gh-long-1792523897289-yyww",
       "shortEpisodeTitle": "Noreen Kids: جنى وبلبل وإنقاذ نبتة المريخ العطشانة | مغامرات جنى وبلبل",
-      "longEpisodeTitle": "رحلة المنطاد البلوري وإنقاذ فلة في الوادي",
+      "longEpisodeTitle": "Noreen Kids: رحلة المنطاد البلوري وإنقاذ فلة في الوادي | مغامرات عمرو وزعتر",
       "shortTitle": "Noreen Kids: جنى وبلبل وإنقاذ نبتة المريخ العطشانة | مغامرات جنى وبلبل",
-      "longTitle": "رحلة المنطاد البلوري وإنقاذ فلة في الوادي",
+      "longTitle": "Noreen Kids: رحلة المنطاد البلوري وإنقاذ فلة في الوادي | مغامرات عمرو وزعتر",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -813,9 +814,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "V1nXkvljnIE",
+      "youtubeLongVideoId": "t6shqwFi814",
       "facebookShortVideoId": "2593300727821151",
+      "facebookLongVideoId": "1642516864086243",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2593300727821151",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1642516864086243",
       "facebookShortTitle": "Noreen Kids | جنى وبلبل وإنقاذ نبتة المريخ العطشانة - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
+      "facebookLongTitle": "Noreen Kids | رحلة المنطاد البلوري وإنقاذ فلة في الوادي - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -823,16 +828,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 61,
-        "fileSizeBytes": 10024387,
-        "inspectedAt": "22:21"
+        "durationSec": 319,
+        "fileSizeBytes": 33774633,
+        "inspectedAt": "22:30"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
