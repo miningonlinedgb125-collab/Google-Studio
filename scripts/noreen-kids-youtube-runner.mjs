@@ -3116,11 +3116,11 @@ function buildSmartEpisodeForRunner({
     .replace(/^حكاية\s+|^قصة\s+|^حدوتة\s+|^مغامرة\s+/g, "")
     .replace(/\s+(وسر|وقيمة|وأسرار|وكيفية|وحكاية)\s+.*$/g, "")
     .trim() || cleanTopicForAdventure;
-  const compLookWithMe = isCompFemale ? "بُصِّي معايا يا" : "بُصّ معايا يا";
-  const heroLookWithMe = isHeroFemale ? "بُصِّي معايا يا" : "بُصّ معايا يا";
-
   const isHeroFemale = isFemaleCharacter(effectiveMainName);
   const isCompFemale = isFemaleCharacter(effectiveCompName);
+
+  const compLookWithMe = isCompFemale ? "بُصِّي معايا يا" : "بُصّ معايا يا";
+  const heroLookWithMe = isHeroFemale ? "بُصِّي معايا يا" : "بُصّ معايا يا";
 
   const heroAppellation = isHeroFemale ? "يا بطلة" : "يا بطل";
   const heroLook = isHeroFemale ? "بُصِّي يا" : "بُصّ يا";
