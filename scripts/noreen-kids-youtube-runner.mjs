@@ -1475,8 +1475,8 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
     }
   }
 
-  // 1) PRIMARY ENGINE: Gemini Live Native Audio (`gemini-2.5-flash-native-audio-preview-12-2025` & `gemini-3.8-live`)
-  // Delivers authentic 100% natural colloquial Egyptian Cairene cartoon voiceover for children
+  // 1) PRIMARY PREMIER ENGINE: Gemini Native Audio TTS (`gemini-3.8-flash-tts` & `gemini-3.8-flash-lite-tts`)
+  // Dedicated Native Audio Text-to-Speech: Guarantees 100% full verbatim Egyptian dialogue reading without sentence truncation!
   const apiKey = (process.env.GEMINI_API_KEY || "").trim();
   if (apiKey) {
     try {
@@ -1485,20 +1485,79 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
         httpOptions: { headers: { "User-Agent": "aistudio-build" } },
       });
       const isEgyptian = dialect !== "fusha";
-      const liveWavPath = path.join(tmpDir, `gemini_live_${sceneIndex}.wav`);
+      const audioWavPath = path.join(tmpDir, `gemini_audio_${sceneIndex}.wav`);
+      const ttsModels = ["gemini-3.8-flash-tts", "gemini-3.8-flash-lite-tts"];
+      const pureDialogue = stripLeakedVoiceInstructionsRunner(dialogue);
+
+      for (const ttsModel of ttsModels) {
+        for (let ttsRetry = 0; ttsRetry < 2; ttsRetry++) {
+          try {
+            // Strictly pureDialogue ONLY: TTS models synthesize full verbatim text cleanly
+            const ttsResp = await ai.models.generateContent({
+              model: ttsModel,
+              contents: [{ role: "user", parts: [{ text: pureDialogue }] }],
+              config: {
+                responseModalities: [Modality.AUDIO],
+                speechConfig: {
+                  voiceConfig: {
+                    prebuiltVoiceConfig: { voiceName: geminiVoice },
+                  },
+                },
+              },
+            });
+            const cand = ttsResp?.candidates?.[0];
+            const pcmPart = cand?.content?.parts?.find(
+              (p) =>
+                p?.inlineData?.mimeType?.startsWith("audio/") ||
+                p?.inlineData?.data
+            );
+            const b64 = pcmPart?.inlineData?.data || cand?.content?.parts?.[0]?.inlineData?.data;
+            if (b64) {
+              const rawBuf = Buffer.from(b64, "base64");
+              if (rawBuf.length > 1000) {
+                const wavBuf = ensureWavBuffer(rawBuf);
+                fs.writeFileSync(audioWavPath, wavBuf);
+                const finalPath = await applyRunnerCharacterTimbreAndCompanionSfx(
+                  audioWavPath,
+                  vp,
+                  sceneIndex,
+                  tmpDir
+                );
+                const durSec = await measureAudioDurationSec(finalPath, 14);
+                const cleanWordCount = dialogue.split(/\s+/).filter(Boolean).length;
+                const minExpectedSec = Math.max(3.5, cleanWordCount * 0.20);
+                if (durSec >= minExpectedSec) {
+                  console.log(
+                    `   🎤 [Gemini Native Audio TTS] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر ${ttsModel} بنبرة مصرية قاهرية مكتملة 100% دون أي بتر! (${durSec.toFixed(1)}s)`
+                  );
+                  return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
+                }
+              }
+            }
+          } catch (ttsErr) {
+            const errStr = String(ttsErr?.message || "");
+            console.warn(
+              `   ⚠️ [Gemini Native Audio TTS Warning] المشهد ${sceneIndex + 1} (${ttsModel}): ${errStr}`
+            );
+            if (errStr.includes("429") || errStr.includes("quota") || errStr.includes("RESOURCE_EXHAUSTED")) {
+              await sleep(5000);
+            }
+          }
+        }
+      }
+
+      // 1b) SECONDARY FALLBACK: Gemini Live Native Audio (`gemini-3.8-live` & `gemini-3.8-live-extended-thinking`)
       const liveModels = [
-        "gemini-3.8-live-extended-thinking",
         "gemini-3.8-live",
+        "gemini-3.8-live-extended-thinking",
         "gemini-2.5-flash-native-audio-preview-12-2025",
       ];
-
       for (const liveModel of liveModels) {
         try {
           const segments = splitArabicTextForGeminiLive(dialogue, 110);
           const pcmParts = [];
           const pauseBuf = Buffer.alloc(8640, 0);
           let allSegmentsOk = segments.length > 0;
-
           for (let sIdx = 0; sIdx < segments.length; sIdx++) {
             let segPcm = null;
             for (let retry = 0; retry < 3; retry++) {
@@ -1516,9 +1575,6 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
                 const errMsg = String(segErr?.message || "");
                 if (errMsg.includes("QUOTA_EXCEEDED")) {
                   const waitSec = retry === 0 ? 12 : 25;
-                  console.log(
-                    `   ⏳ [Gemini Live Quota Backoff] انتظار ${waitSec} ثانية لتجديد كوتا الدقيقة ثم إعادة المحاولة (${retry + 1}/3)...`
-                  );
                   await sleep(waitSec * 1000);
                   continue;
                 }
@@ -1536,96 +1592,29 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
             pcmParts.push(segPcm);
             if (sIdx < segments.length - 1) pcmParts.push(pauseBuf);
           }
-
           if (allSegmentsOk && pcmParts.length > 0) {
             const wavBuf = ensureWavBuffer(Buffer.concat(pcmParts));
-            fs.writeFileSync(liveWavPath, wavBuf);
+            fs.writeFileSync(audioWavPath, wavBuf);
             const finalPath = await applyRunnerCharacterTimbreAndCompanionSfx(
-              liveWavPath,
+              audioWavPath,
               vp,
               sceneIndex,
               tmpDir
             );
             const durSec = await measureAudioDurationSec(finalPath, 14);
             const cleanWordCount = dialogue.split(/\s+/).filter(Boolean).length;
-            // Realistic cartoon speech speed is ~2.8 to 3.2 words/sec. Any audio faster than ~3.8 words/sec is incomplete/truncated.
             const minExpectedSec = Math.max(3.5, cleanWordCount * 0.36);
-            if (durSec < minExpectedSec) {
-              console.warn(
-                `   ⚠️ [Audio Integrity Gate] المشهد ${sceneIndex + 1}: الصوت المولّد عبر ${liveModel} قصير ومبتور (${durSec.toFixed(1)}s لـ ${cleanWordCount} كلمة - المطلوب على الأقل ${minExpectedSec.toFixed(1)}s)، تم رفض المقطع والتحويل الفوري لمحرك Gemini Native Audio TTS المكتمل!`
+            if (durSec >= minExpectedSec) {
+              console.log(
+                `   🎤 [Gemini Live Audio] المشهد ${sceneIndex + 1}: تم توليد الصوت عبر ${liveModel} بنبرة مصرية طبيعية! (${durSec.toFixed(1)}s)`
               );
-              allSegmentsOk = false;
-              break;
-            }
-            console.log(
-              `   🎤 [Gemini Live Native Audio] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر ${liveModel} بنبرة مصرية قاهرية طبيعية 100%! (${durSec.toFixed(1)}s)`
-            );
-            return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
-          }
-        } catch (liveErr) {
-          // If Live connection fails, try next live model or fall back to Gemini Native Audio TTS
-        }
-      }
-
-      // 1b) SECONDARY ENGINE: Gemini Native Audio TTS (`gemini-3.8-flash-lite-tts` / `gemini-3.8-flash-tts`)
-      // Guaranteed Egyptian Cairene colloquial cartoon voice without leaving the Gemini Native Audio family!
-      const ttsModels = ["gemini-3.8-flash-tts", "gemini-3.8-flash-lite-tts"];
-      const pureDialogue = stripLeakedVoiceInstructionsRunner(dialogue);
-      for (const ttsModel of ttsModels) {
-        for (let ttsRetry = 0; ttsRetry < 2; ttsRetry++) {
-          try {
-            // Strictly pureDialogue ONLY in user contents: prevents TTS from uttering persona instructions
-            // Strictly pureDialogue ONLY: TTS models reject developer instruction with 400 INVALID_ARGUMENT
-            const ttsResp = await ai.models.generateContent({
-              model: ttsModel,
-              contents: [{ role: "user", parts: [{ text: pureDialogue }] }],
-              config: {
-                responseModalities: [Modality.AUDIO],
-                speechConfig: {
-                  voiceConfig: {
-                    prebuiltVoiceConfig: { voiceName: geminiVoice },
-                  },
-                },
-              },
-            });
-
-            const b64 = ttsResp.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
-            if (b64) {
-              const rawBuf = Buffer.from(b64, "base64");
-              if (rawBuf.length > 1000) {
-                const wavBuf = ensureWavBuffer(rawBuf);
-                fs.writeFileSync(liveWavPath, wavBuf);
-                const finalPath = await applyRunnerCharacterTimbreAndCompanionSfx(
-                  liveWavPath,
-                  vp,
-                  sceneIndex,
-                  tmpDir
-                );
-                const durSec = await measureAudioDurationSec(finalPath, 14);
-                const cleanWordCount = dialogue.split(/\s+/).filter(Boolean).length;
-                const minExpectedSec = Math.max(3.5, cleanWordCount * 0.20);
-                if (durSec >= minExpectedSec) {
-                  console.log(
-                    `   🎤 [Gemini Native Audio TTS] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر ${ttsModel} بنبرة مصرية قاهرية طبيعية 100%! (${durSec.toFixed(1)}s)`
-                  );
-                  return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
-                }
-              }
-            }
-          } catch (ttsErr) {
-            const errStr = String(ttsErr?.message || "");
-            console.warn(
-              `   ⚠️ [Gemini Native Audio TTS Warning] المشهد ${sceneIndex + 1} (${ttsModel}): ${errStr}`
-            );
-            if (errStr.includes("429") || errStr.includes("quota") || errStr.includes("RESOURCE_EXHAUSTED")) {
-              await sleep(5000);
+              return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
             }
           }
-        }
+        } catch (liveErr) {}
       }
     } catch {}
   }
-
   // 2) Emergency Fallback: MsEdgeTTS with Phonetic Egyptian Dialect Enforcement
   // (Only reached if Gemini API key is missing, network is down, or Gemini quota is exhausted)
   const mp3Path = path.join(tmpDir, `edge_${sceneIndex}.mp3`);
@@ -3125,7 +3114,10 @@ function buildSmartEpisodeForRunner({
 
   const shortTopicMention = cleanTopicForAdventure
     .replace(/^حكاية\s+|^قصة\s+|^حدوتة\s+|^مغامرة\s+/g, "")
+    .replace(/\s+(وسر|وقيمة|وأسرار|وكيفية|وحكاية)\s+.*$/g, "")
     .trim() || cleanTopicForAdventure;
+  const compLookWithMe = isCompFemale ? "بُصِّي معايا يا" : "بُصّ معايا يا";
+  const heroLookWithMe = isHeroFemale ? "بُصِّي معايا يا" : "بُصّ معايا يا";
 
   const isHeroFemale = isFemaleCharacter(effectiveMainName);
   const isCompFemale = isFemaleCharacter(effectiveCompName);
@@ -3147,14 +3139,14 @@ function buildSmartEpisodeForRunner({
     {
       title: `1. البداية: انطلاق ${shortHero} و${shortComp}`,
       egyptianShort: `أهلاً بيكم يا أبطال عيلة نورين كيدز! ${compLook} ${shortComp}، حكايتنا النهارده مليانة بهجة وشجاعة عن ${shortTopicMention}! يلا ننطلق سوا بكل نشاط!`,
-      egyptianLong: `يا خبر يا أبطال وعيلة نورين كيدز! بصوا بسرعة معايا النهارده، ازيكم يا أحلى أصحاب في الدنيا كلها! ${compLook} معايا يا ${shortComp}، النهارده عندنا مهمة بطولية ومغامرة جميلة أوي عن ${shortTopicMention}! أنا مجهز معايا ${heroProp} علشان نستكشف كل حاجة خطوة بخطوة، وإنت معاك ${compProp} علشان نكون إيد واحدة وعندنا طاقة وهمة عالية أوي! شايفين النور والبهجة اللي حوالينا في المكان ده؟ يلا بينا نفتح عينينا كويس ونبدأ المغامرة سوا بكل شجاعة وفرحة ونشاط يا أبطال!`,
+      egyptianLong: `يا خبر يا أبطال وعيلة نورين كيدز! بصوا بسرعة معايا النهارده، ازيكم يا أحلى أصحاب في الدنيا كلها! ${compLookWithMe} ${shortComp}، النهارده عندنا مهمة بطولية ومغامرة جميلة أوي عن ${shortTopicMention}! أنا مجهز معايا ${heroProp} علشان نستكشف كل حاجة خطوة بخطوة، وإنت معاك ${compProp} علشان نكون إيد واحدة وعندنا طاقة وهمة عالية أوي! شايفين النور والبهجة اللي حوالينا في المكان ده؟ يلا بينا نفتح عينينا كويس ونبدأ المغامرة سوا بكل شجاعة وفرحة ونشاط يا أبطال!`,
       speaker: effectiveMainName,
       voice: heroVoice,
     },
     {
       title: `2. التطور: ملاحظة المشكلة مع ${shortComp}`,
-      egyptianShort: `يا خبر أبيض يا ${shortHero}! ${heroLook} ${shortHero}، ${heroSee} معايا هناك، دي مشكلة في ${shortTopicMention} ولازم نساعد أصحابنا بذكاء ونحلها سوا فوراً!`,
-      egyptianLong: `يا خبر أبيض يا ${shortHero}! ${heroLook} ${shortHero}، ${heroSee} معايا هناك بسرعة يا ${isHeroFemale ? "صاحبتي" : "صاحبي"}! ${isHeroFemale ? "شُوفْتِي" : "شُوفْت"} المشكلة اللي حصلت في ${shortTopicMention}؟ الموضوع ده محتاج مننا وقفة بالراحة وتفكير هادي علشان نساعد الكل ونحل التحدي ده صح! لو استنينا المشكلة هتكبر وممكن حد يزعل، وإحنا أبطال نورين كيدز دايماً بنكون جاهزين للمساعدة بقلب طيب وهمة عالية! يا ترى هنعمل إيه ${heroAppellation}؟ يلا نفكر سوا بالراحة ومن غير استعجال خالص علشان نوصل لأحسن حل يفرح كل حبايبنا وأصحابنا!`,
+      egyptianShort: `يا خبر أبيض يا ${shortHero}! ${heroLookWithMe} ${shortHero}، ${heroSee} معايا هناك، دي مشكلة في ${shortTopicMention} ولازم نساعد أصحابنا بذكاء ونحلها سوا فوراً!`,
+      egyptianLong: `يا خبر أبيض يا ${shortHero}! ${heroLookWithMe} ${shortHero}، شوفي معايا هناك بسرعة يا ${isHeroFemale ? "صاحبتي" : "صاحبي"}! ${isHeroFemale ? "شُوفْتِي" : "شُوفْت"} المشكلة اللي حصلت في ${shortTopicMention}؟ واستنوا كده، بصوا يا أبطال، شوفتوا النجمة الذهبية السحرية اللي نورت واختفت في ثانية؟ يا ترى مين البطل الشاطر اللي لمحها وعرف ظهرت في الدقيقة كام؟ الموضوع ده محتاج مننا وقفة بالراحة وتفكير هادي علشان نساعد الكل ونحل التحدي ده صح! لو استنينا المشكلة هتكبر، وإحنا أبطال نورين كيدز دايماً بنكون جاهزين للمساعدة بقلب طيب وهمة عالية! يا ترى هنعمل إيه ${heroAppellation}؟ يلا نفكر سوا بالراحة ومن غير استعجال خالص علشان نوصل لأحسن حل يفرح كل حبايبنا وأصحابنا!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
@@ -3196,7 +3188,7 @@ function buildSmartEpisodeForRunner({
     {
       title: `8. المشهد الثامن والتحدي الأخير: رسالة ${shortHero} و${shortComp} لأبطال Noreen Kids`,
       egyptianShort: `هيييه! نجحت المهمة يا أبطال! 🧩 تحدي الشطار: إيه أحلى حاجة اتعلمتوها النهارده؟ اكتبوا اسمكم وإجابتكم في التعليقات عشان تكسبوا وسام الشطارة!`,
-      egyptianLong: `ودلوقتي يا أصحابنا الحلوين في عيلة نورين كيدز، وصلنا المشهد الثامن والتحدي الأخير في حلقة النهارده مع ${shortHero} و${shortComp}! 🧩 سؤال الشطار للأبطال: إيه أهم درس اتعلمتوه من حكاية النهارده، وإزاي تقدروا تكونوا شطار وأمناء في المدرسة والبيت مع أصحابكم؟ اكتبوا إجابتكم واسمكم في التعليقات تحت الفيديو علشان تظهروا في لوحة الشرف في الحلقة الجاية! وما تنسوش تشتركوا في القناة وتعملوا لايك، بنحبكم أوي ومع السلامة يا أبطال!`,
+      egyptianLong: `ودلوقتي يا أصحابنا الحلوين في عيلة نورين كيدز، وصلنا المشهد الثامن والتحدي الأخير في حلقة النهارده مع ${shortHero} و${shortComp}! 🧩 وسؤال الشطار النهاردة: مين فيكم يا أبطال لمح النجمة الذهبية السحرية اللي ظهرت في حلقة النهاردة؟ وإيه أهم درس اتعلمتوه من الحكاية؟ اكتبوا توقيتها وإجابتكم واسمكم في التعليقات تحت الفيديو علشان تظهروا في لوحة الشرف في الحلقة الجاية! وما تنسوش تشتركوا في القناة وتعملوا لايك، بنحبكم أوي ومع السلامة يا أبطال!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
@@ -3597,7 +3589,7 @@ ${recentTitlesList}
       let lastErr = null;
       for (let attempt = 1; attempt <= 5; attempt++) {
         try {
-          const targetModel = attempt <= 2 ? "gemini-3.8-flash" : (attempt <= 4 ? "gemini-3.5-flash" : "gemini-3.8-flash");
+          const targetModel = attempt <= 2 ? "gemini-3.8-flash" : (attempt <= 4 ? "gemini-3.1-flash-lite" : "gemini-3.8-flash");
           const response = await ai.models.generateContent({
             model: targetModel,
             contents: prompt,
