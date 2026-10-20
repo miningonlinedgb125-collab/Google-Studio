@@ -2657,6 +2657,16 @@
     {
       "topic": "نوران والنمر وفكرة قبة النجوم لحماية العصافير",
       "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "سر مية الغابة والنبع اللي نشف فجأة",
+      "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "نوران والنمر وفكرة قبة النجوم لحماية العصافير",
+      "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش",
       "timestampIso": "2026-10-20T17:19:27.107Z"
     },
@@ -2819,59 +2829,32 @@
       "topic": "سر الخريطة الصوتية وإنقاذ فستق في كهف الصدى",
       "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي"
-    },
-    {
-      "topic": "جسر قوس قزح الذكي وإنقاذ عصافير مدينة السحاب",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-10-18T09:38:39.573Z"
-    },
-    {
-      "topic": "سر الخريطة الصوتية وإنقاذ فستق في كهف الصدى",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "timestampIso": "2026-10-18T09:38:39.573Z"
-    },
-    {
-      "topic": "سر الشنطة الطائرة وإنقاذ عصفور النجوم",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "نوران والفرفوش وسر مظلة أزهار الواحة الذكية",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-20 · 18:00 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-39320441551",
-    "uploadMode": "daily_schedule",
+    "id": "gh-run-39464741998",
+    "uploadMode": "manual_instant",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-19 (23:55 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792442249748-2rlh",
-    "longEpisodeId": "ep-gh-long-1792442395003-t3sy",
-    "shortEpisodeTitle": "Noreen Kids: أم ملك وسر دولاب الألوان في مدرسة السعادة | مغامرات أم ملك والبطريق المرح",
-    "longEpisodeTitle": "Noreen Kids: ذياد وفرفوشة ومهمة دواء الشتاء للعم صابر | مغامرات ذياد والعصفورة الفرفوشة",
-    "shortTitle": "Noreen Kids: أم ملك وسر دولاب الألوان في مدرسة السعادة | مغامرات أم ملك والبطريق المرح",
-    "longTitle": "Noreen Kids: ذياد وفرفوشة ومهمة دواء الشتاء للعم صابر | مغامرات ذياد والعصفورة الفرفوشة",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (20:21 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792516740777-zr8g",
+    "longEpisodeId": "ep-gh-long-1792516767107-kqck",
+    "shortEpisodeTitle": "Noreen Kids: نوران والنمر وفكرة قبة النجوم لحماية العصافير | مغامرات المهندسة نوران والنمر الفرفوش",
+    "longEpisodeTitle": "سر مية الغابة والنبع اللي نشف فجأة",
+    "shortTitle": "Noreen Kids: نوران والنمر وفكرة قبة النجوم لحماية العصافير | مغامرات المهندسة نوران والنمر الفرفوش",
+    "longTitle": "سر مية الغابة والنبع اللي نشف فجأة",
     "shortPlaylistId": "PLPwfeXzB3ozU",
-    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "qPbUFMl4UNM",
-    "youtubeLongVideoId": "ULrqkadxSwA",
-    "facebookShortVideoId": "1008889682247532",
-    "facebookLongVideoId": "2322417818295949",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1008889682247532",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2322417818295949",
-    "facebookShortTitle": "Noreen Kids | أم ملك وسر دولاب الألوان في مدرسة السعادة - مغامرة أم ملك والبطريق المرح",
-    "facebookLongTitle": "Noreen Kids | ذياد وفرفوشة ومهمة دواء الشتاء للعم صابر - مغامرة ذياد والعصفورة الفرفوشة",
+    "youtubeShortVideoId": "OOh5wv8FZjE",
+    "facebookShortVideoId": "2319149112258404",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2319149112258404",
+    "facebookShortTitle": "Noreen Kids | نوران والنمر وفكرة قبة النجوم لحماية العصافير - مغامرة المهندسة نوران والنمر الفرفوش",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2879,16 +2862,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 1280,
-      "height": 720,
+      "width": 720,
+      "height": 1280,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 425,
-      "fileSizeBytes": 45634028,
-      "inspectedAt": "23:55"
+      "durationSec": 60,
+      "fileSizeBytes": 9940500,
+      "inspectedAt": "20:21"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2897,7 +2880,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-19T20:55:28.067Z"
+    "reportedAtIso": "2026-10-20T17:21:58.331Z"
   },
   "heroFairRotationIndex": 1,
   "interactiveHeroRotationIndex": 5,
