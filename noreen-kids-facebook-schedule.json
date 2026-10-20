@@ -2662,6 +2662,16 @@
     {
       "topic": "جدو والفأر المشاكس وسر صندوق ألعاب زمان",
       "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر",
+      "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا"
+    },
+    {
+      "topic": "جدو والفأر المشاكس وسر صندوق ألعاب زمان",
+      "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس",
       "timestampIso": "2026-10-20T10:09:01.798Z"
     },
@@ -2824,28 +2834,6 @@
       "topic": "طبيبة الغابة وسر علاج جناح كوكو الصغير",
       "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "تختوخ وزقلط ومغامرة الآيس كريم في الملاهي",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط",
-      "timestampIso": "2026-10-17T18:43:19.918Z"
-    },
-    {
-      "topic": "طبيبة الغابة وسر علاج جناح كوكو الصغير",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-10-17T18:43:19.918Z"
-    },
-    {
-      "topic": "حكمة جدو وسر طيارة أطفال الحارة المبهجة",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "سلة تيتة ومفاجأة تكريم حافظ القرآن الصغير",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-20 · 01:20 بتوقيت مصر",
