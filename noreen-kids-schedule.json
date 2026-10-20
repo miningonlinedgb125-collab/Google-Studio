@@ -37,6 +37,16 @@
     {
       "topic": "جدو والفأر المشاكس وسر صندوق ألعاب زمان",
       "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر",
+      "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا"
+    },
+    {
+      "topic": "جدو والفأر المشاكس وسر صندوق ألعاب زمان",
+      "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس",
       "timestampIso": "2026-10-20T10:09:01.798Z"
     },
@@ -199,28 +209,6 @@
       "topic": "طبيبة الغابة وسر علاج جناح كوكو الصغير",
       "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "تختوخ وزقلط ومغامرة الآيس كريم في الملاهي",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط",
-      "timestampIso": "2026-10-17T18:43:19.918Z"
-    },
-    {
-      "topic": "طبيبة الغابة وسر علاج جناح كوكو الصغير",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-10-17T18:43:19.918Z"
-    },
-    {
-      "topic": "حكمة جدو وسر طيارة أطفال الحارة المبهجة",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "سلة تيتة ومفاجأة تكريم حافظ القرآن الصغير",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
     }
   ],
   "scheduledHistory": [
@@ -2698,27 +2686,32 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٠‏/١٠‏/٢٠٢٦، ١:٢١:٤٢ م",
   "lastCloudRunReport": {
-    "id": "gh-run-39333326006",
-    "uploadMode": "manual_instant",
+    "id": "gh-run-39405069733",
+    "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (01:20 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792448158894-a5ok",
-    "longEpisodeId": "ep-gh-long-1792448228482-2319",
-    "shortEpisodeTitle": "Noreen Kids: أستاذ شريف والصقر في مهمة تنظيم وقت اللعب | مغامرات أستاذ شريف والصقر الذكي",
-    "longEpisodeTitle": "جدو والفأر المشاكس وسر نخلة الخير في بستان الواحة",
-    "shortTitle": "Noreen Kids: أستاذ شريف والصقر في مهمة تنظيم وقت اللعب | مغامرات أستاذ شريف والصقر الذكي",
-    "longTitle": "جدو والفأر المشاكس وسر نخلة الخير في بستان الواحة",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (13:21 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792490883388-am9b",
+    "longEpisodeId": "ep-gh-long-1792490941798-jkpu",
+    "shortEpisodeTitle": "Noreen Kids: جدو والفأر المشاكس وسر صندوق ألعاب زمان | مغامرات جدو والفأر المشاكس",
+    "longEpisodeTitle": "Noreen Kids: مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر | مغامرات تيتة والدب باندا",
+    "shortTitle": "Noreen Kids: جدو والفأر المشاكس وسر صندوق ألعاب زمان | مغامرات جدو والفأر المشاكس",
+    "longTitle": "Noreen Kids: مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر | مغامرات تيتة والدب باندا",
     "shortPlaylistId": "PLPwfeXzB3ozU",
+    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "8XfcUMLRczk",
-    "facebookShortVideoId": "2014406656090196",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2014406656090196",
-    "facebookShortTitle": "Noreen Kids | أستاذ شريف والصقر في مهمة تنظيم وقت اللعب - مغامرة أستاذ شريف والصقر الذكي",
+    "youtubeShortVideoId": "ImSyC8nEBFI",
+    "youtubeLongVideoId": "I2gaGngYqF0",
+    "facebookShortVideoId": "978574201340537",
+    "facebookLongVideoId": "1786376252612257",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/978574201340537",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1786376252612257",
+    "facebookShortTitle": "Noreen Kids | جدو والفأر المشاكس وسر صندوق ألعاب زمان - مغامرة جدو والفأر المشاكس",
+    "facebookLongTitle": "Noreen Kids | مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر - مغامرة تيتة والدب باندا",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2726,16 +2719,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 720,
-      "height": 1280,
+      "width": 1280,
+      "height": 720,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 64,
-      "fileSizeBytes": 9133097,
-      "inspectedAt": "01:20"
+      "durationSec": 360,
+      "fileSizeBytes": 41712353,
+      "inspectedAt": "13:21"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2744,7 +2737,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-19T22:20:42.603Z"
+    "reportedAtIso": "2026-10-20T10:21:45.544Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
