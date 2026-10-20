@@ -95,6 +95,22 @@ const NON_EGYPTIAN_LEXICON_RULES = [
   { word: "هلق", replacement: "دلوقتي", category: "levantine" },
   { word: "هيك", replacement: "كده", category: "levantine" },
   { word: "بدي", replacement: "عايز", category: "levantine" },
+  { word: "مثل", replacement: "زي", category: "fusha" },
+  { word: "ومثل", replacement: "وزي", category: "fusha" },
+  { word: "خفيت", replacement: "اختفت", category: "levantine" },
+  { word: "وخفيت", replacement: "واختفت", category: "levantine" },
+  { word: "رأيت", replacement: "شوفت", category: "fusha" },
+  { word: "ورأيت", replacement: "وشوفت", category: "fusha" },
+  { word: "رأيتم", replacement: "شوفوا", category: "fusha" },
+  { word: "ورأيتم", replacement: "وشوفوا", category: "fusha" },
+  { word: "رأينا", replacement: "شوفنا", category: "fusha" },
+  { word: "ورأينا", replacement: "وشوفنا", category: "fusha" },
+  { word: "أيضاً", replacement: "كمان", category: "fusha" },
+  { word: "أيضا", replacement: "كمان", category: "fusha" },
+  { word: "وأيضاً", replacement: "وكمان", category: "fusha" },
+  { word: "وأيضا", replacement: "وكمان", category: "fusha" },
+  { word: "هكذا", replacement: "كده", category: "fusha" },
+  { word: "وهكذا", replacement: "وكده", category: "fusha" },
 ];
 
 const EGYPTIAN_MARKERS_REGEX =

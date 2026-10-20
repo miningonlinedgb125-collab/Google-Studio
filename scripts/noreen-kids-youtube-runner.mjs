@@ -119,6 +119,22 @@ const FUSHA_AND_GULF_TO_EGYPTIAN_PAIRS = [
   ["أبدا", "خالص"],
   ["دائماً", "دايما"],
   ["دائما", "دايما"],
+  ["مثل", "زي"],
+  ["ومثل", "وزي"],
+  ["خفيت", "اختفت"],
+  ["وخفيت", "واختفت"],
+  ["انخفت", "اختفت"],
+  ["وانخفت", "واختفت"],
+  ["رأيت", "شوفت"],
+  ["ورأيت", "وشوفت"],
+  ["رأيتم", "شوفوا"],
+  ["ورأيتم", "وشوفوا"],
+  ["رأينا", "شوفنا"],
+  ["ورأينا", "وشوفنا"],
+  ["وأيضاً", "وكمان"],
+  ["وأيضا", "وكمان"],
+  ["هكذا", "كده"],
+  ["وهكذا", "وكده"],
   ["أيضاً", "كمان"],
   ["أيضا", "كمان"],
   ["معاً", "سوا"],
@@ -1525,12 +1541,16 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
                 );
                 const durSec = await measureAudioDurationSec(finalPath, 14);
                 const cleanWordCount = dialogue.split(/\s+/).filter(Boolean).length;
-                const minExpectedSec = Math.max(3.5, cleanWordCount * 0.20);
+                const minExpectedSec = Math.max(3.5, cleanWordCount * 0.42);
                 if (durSec >= minExpectedSec) {
                   console.log(
                     `   🎤 [Gemini Native Audio TTS] المشهد ${sceneIndex + 1}: تم توليد الصوت بنجاح عبر ${ttsModel} بنبرة مصرية قاهرية مكتملة 100% دون أي بتر! (${durSec.toFixed(1)}s)`
                   );
                   return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
+                } else {
+                  console.warn(
+                    `   ⚠️ [Voice Truncation Detected] المشهد ${sceneIndex + 1} (${ttsModel}): الصوت مبتور أو ناقص (${durSec.toFixed(1)}s < الحد الأدنى المطلوب ${minExpectedSec.toFixed(1)}s لعدد ${cleanWordCount} كلمة). جاري الرفض والتحويل التلقائي للمحرك البديل فوراً...`
+                  );
                 }
               }
             }
@@ -1603,12 +1623,16 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
             );
             const durSec = await measureAudioDurationSec(finalPath, 14);
             const cleanWordCount = dialogue.split(/\s+/).filter(Boolean).length;
-            const minExpectedSec = Math.max(3.5, cleanWordCount * 0.36);
+            const minExpectedSec = Math.max(3.5, cleanWordCount * 0.42);
             if (durSec >= minExpectedSec) {
               console.log(
                 `   🎤 [Gemini Live Audio] المشهد ${sceneIndex + 1}: تم توليد الصوت عبر ${liveModel} بنبرة مصرية طبيعية! (${durSec.toFixed(1)}s)`
               );
               return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
+            } else {
+              console.warn(
+                `   ⚠️ [Voice Truncation Detected] المشهد ${sceneIndex + 1} (${liveModel}): الصوت مبتور أو ناقص (${durSec.toFixed(1)}s < الحد الأدنى المطلوب ${minExpectedSec.toFixed(1)}s لعدد ${cleanWordCount} كلمة). جاري الرفض والتحويل التلقائي للمحرك البديل فوراً...`
+              );
             }
           }
         } catch (liveErr) {}
