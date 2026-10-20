@@ -37,6 +37,16 @@
     {
       "topic": "تختوخ وزقلط وسر طيارة الورق العالقة في الشجرة",
       "mainCharacterName": "تختوخ",
+      "companionName": "الكلب زقلط"
+    },
+    {
+      "topic": "الشيخ محمود والديك الفصيح وسر شتلة الياسمين",
+      "mainCharacterName": "الشيخ محمود",
+      "companionName": "الديك الفصيح"
+    },
+    {
+      "topic": "تختوخ وزقلط وسر طيارة الورق العالقة في الشجرة",
+      "mainCharacterName": "تختوخ",
       "companionName": "الكلب زقلط",
       "timestampIso": "2026-10-20T14:51:33.233Z"
     },
@@ -199,28 +209,6 @@
       "topic": "نوران والفرفوش وسر مظلة أزهار الواحة الذكية",
       "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "سر الشنطة الطائرة وإنقاذ عصفور النجوم",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-10-18T01:24:44.003Z"
-    },
-    {
-      "topic": "نوران والفرفوش وسر مظلة أزهار الواحة الذكية",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-10-18T01:24:44.003Z"
-    },
-    {
-      "topic": "تختوخ وزقلط ومغامرة الآيس كريم في الملاهي",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط"
-    },
-    {
-      "topic": "طبيبة الغابة وسر علاج جناح كوكو الصغير",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
     }
   ],
   "scheduledHistory": [
@@ -228,7 +216,7 @@
       "id": "gh-run-39442436774",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (17:59 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (18:00 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1792507760101-v4lr",
       "longEpisodeId": "ep-gh-long-1792507893233-pk3e",
       "shortEpisodeTitle": "Noreen Kids: تختوخ وزقلط وسر طيارة الورق العالقة في الشجرة | مغامرات تختوخ والكلب زقلط",
@@ -267,7 +255,7 @@
         "fastStartMoovFirst": true,
         "durationSec": 354,
         "fileSizeBytes": 43075502,
-        "inspectedAt": "17:59"
+        "inspectedAt": "18:00"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2698,16 +2686,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٠‏/١٠‏/٢٠٢٦، ٥:٥٩:٥٠ م",
   "lastCloudRunReport": {
-    "id": "gh-run-39405069733",
+    "id": "gh-run-39442436774",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (13:21 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792490883388-am9b",
-    "longEpisodeId": "ep-gh-long-1792490941798-jkpu",
-    "shortEpisodeTitle": "Noreen Kids: جدو والفأر المشاكس وسر صندوق ألعاب زمان | مغامرات جدو والفأر المشاكس",
-    "longEpisodeTitle": "Noreen Kids: مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر | مغامرات تيتة والدب باندا",
-    "shortTitle": "Noreen Kids: جدو والفأر المشاكس وسر صندوق ألعاب زمان | مغامرات جدو والفأر المشاكس",
-    "longTitle": "Noreen Kids: مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر | مغامرات تيتة والدب باندا",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (18:00 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792507760101-v4lr",
+    "longEpisodeId": "ep-gh-long-1792507893233-pk3e",
+    "shortEpisodeTitle": "Noreen Kids: تختوخ وزقلط وسر طيارة الورق العالقة في الشجرة | مغامرات تختوخ والكلب زقلط",
+    "longEpisodeTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر شتلة الياسمين | مغامرات الشيخ محمود والديك الفصيح",
+    "shortTitle": "Noreen Kids: تختوخ وزقلط وسر طيارة الورق العالقة في الشجرة | مغامرات تختوخ والكلب زقلط",
+    "longTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر شتلة الياسمين | مغامرات الشيخ محمود والديك الفصيح",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2716,14 +2704,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "ImSyC8nEBFI",
-    "youtubeLongVideoId": "I2gaGngYqF0",
-    "facebookShortVideoId": "978574201340537",
-    "facebookLongVideoId": "1786376252612257",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/978574201340537",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1786376252612257",
-    "facebookShortTitle": "Noreen Kids | جدو والفأر المشاكس وسر صندوق ألعاب زمان - مغامرة جدو والفأر المشاكس",
-    "facebookLongTitle": "Noreen Kids | مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر - مغامرة تيتة والدب باندا",
+    "youtubeShortVideoId": "_ZtT1MRVdjY",
+    "youtubeLongVideoId": "eol9q8_SLTU",
+    "facebookShortVideoId": "1134042765971101",
+    "facebookLongVideoId": "1057426260662984",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1134042765971101",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1057426260662984",
+    "facebookShortTitle": "Noreen Kids | تختوخ وزقلط وسر طيارة الورق العالقة في الشجرة - مغامرة تختوخ والكلب زقلط",
+    "facebookLongTitle": "Noreen Kids | الشيخ محمود والديك الفصيح وسر شتلة الياسمين - مغامرة الشيخ محمود والديك الفصيح",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2738,9 +2726,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 360,
-      "fileSizeBytes": 41712353,
-      "inspectedAt": "13:21"
+      "durationSec": 354,
+      "fileSizeBytes": 43075502,
+      "inspectedAt": "18:00"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2749,7 +2737,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-20T10:21:45.544Z"
+    "reportedAtIso": "2026-10-20T15:00:02.811Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
