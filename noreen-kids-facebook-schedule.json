@@ -798,7 +798,7 @@
       "id": "gh-run-39442436774",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (17:59 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (18:00 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1792507760101-v4lr",
       "longEpisodeId": "ep-gh-long-1792507893233-pk3e",
       "shortEpisodeTitle": "Noreen Kids: تختوخ وزقلط وسر طيارة الورق العالقة في الشجرة | مغامرات تختوخ والكلب زقلط",
@@ -837,7 +837,7 @@
         "fastStartMoovFirst": true,
         "durationSec": 354,
         "fileSizeBytes": 43075502,
-        "inspectedAt": "17:59"
+        "inspectedAt": "18:00"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2662,6 +2662,16 @@
     {
       "topic": "تختوخ وزقلط وسر طيارة الورق العالقة في الشجرة",
       "mainCharacterName": "تختوخ",
+      "companionName": "الكلب زقلط"
+    },
+    {
+      "topic": "الشيخ محمود والديك الفصيح وسر شتلة الياسمين",
+      "mainCharacterName": "الشيخ محمود",
+      "companionName": "الديك الفصيح"
+    },
+    {
+      "topic": "تختوخ وزقلط وسر طيارة الورق العالقة في الشجرة",
+      "mainCharacterName": "تختوخ",
       "companionName": "الكلب زقلط",
       "timestampIso": "2026-10-20T14:51:33.233Z"
     },
@@ -2824,28 +2834,6 @@
       "topic": "نوران والفرفوش وسر مظلة أزهار الواحة الذكية",
       "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "سر الشنطة الطائرة وإنقاذ عصفور النجوم",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-10-18T01:24:44.003Z"
-    },
-    {
-      "topic": "نوران والفرفوش وسر مظلة أزهار الواحة الذكية",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-10-18T01:24:44.003Z"
-    },
-    {
-      "topic": "تختوخ وزقلط ومغامرة الآيس كريم في الملاهي",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط"
-    },
-    {
-      "topic": "طبيبة الغابة وسر علاج جناح كوكو الصغير",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-20 · 13:21 بتوقيت مصر",
