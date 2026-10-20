@@ -1933,14 +1933,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
           : `أهلاً وسهلاً بكل أعضاء وعيلة قناة نورين كيدز الغاليين في كل مكان! ازيكم يا أشطر وأجمل أبطال؟ وحشتونا أوي! أنا ${spk} ومعايا رفيق المغامرة ${prt}، منورين عالمنا السحري النهارده!`;
       sceneDialogue = stripped ? `${greetPrefix} ${stripped}` : greetPrefix;
     }
-    if (isShort && sceneDialogue) {
-      const words = sceneDialogue.split(/\s+/).filter(Boolean);
-      if (words.length > 24) {
-        const sub = words.slice(0, 18).join(" ");
-        const cleanEnd = sub.replace(/[\s،,]+$/, "");
-        sceneDialogue = cleanEnd.endsWith("!") || cleanEnd.endsWith(".") ? cleanEnd : `${cleanEnd}!`;
-      }
-    }
+    // Dialogue Completeness Guarantee: Full scene dialogue is preserved 100% verbatim without any word slicing.
     const sc = {
       ...scenes[i],
       speakerName: spk,
