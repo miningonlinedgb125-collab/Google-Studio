@@ -37,6 +37,16 @@
     {
       "topic": "اختراع أجنحة الطيران الآمنة للسناجب الصغيرة",
       "mainCharacterName": "كارمن المخترعة الصغيرة",
+      "companionName": "سمسم السنجاب الطائر"
+    },
+    {
+      "topic": "شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر",
+      "mainCharacterName": "شوشو القبطان الصغير",
+      "companionName": "مرجان الدلفين المرح"
+    },
+    {
+      "topic": "اختراع أجنحة الطيران الآمنة للسناجب الصغيرة",
+      "mainCharacterName": "كارمن المخترعة الصغيرة",
       "companionName": "سمسم السنجاب الطائر",
       "timestampIso": "2026-10-21T10:15:46.065Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "ذياد",
       "companionName": "العصفورة الفرفوشة",
       "timestampIso": "2026-10-19T20:39:55.003Z"
-    },
-    {
-      "topic": "ملك ولوليتا وسر خطة الإسعاف الذكية بالمدرسة",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا"
-    },
-    {
-      "topic": "سدرة وسر الدبدوب المفقود وخريطة الألوان",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة"
-    },
-    {
-      "topic": "ملك ولوليتا وسر خطة الإسعاف الذكية بالمدرسة",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "timestampIso": "2026-10-19T10:47:20.528Z"
-    },
-    {
-      "topic": "سدرة وسر الدبدوب المفقود وخريطة الألوان",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "timestampIso": "2026-10-19T10:47:20.528Z"
     }
   ],
   "scheduledHistory": [
@@ -2688,27 +2676,32 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢١‏/١٠‏/٢٠٢٦، ١:٢٥:٢٨ م",
   "lastCloudRunReport": {
-    "id": "gh-run-39468216484",
-    "uploadMode": "manual_instant",
+    "id": "gh-run-39582203616",
+    "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (20:47 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792518175096-4n77",
-    "longEpisodeId": "ep-gh-long-1792518222174-ub7y",
-    "shortEpisodeTitle": "Noreen Kids: عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات | مغامرات عمرو وزعتر",
-    "longEpisodeTitle": "إصلاح منارة المرجان المضيئة بأدوات الهندسة",
-    "shortTitle": "Noreen Kids: عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات | مغامرات عمرو وزعتر",
-    "longTitle": "إصلاح منارة المرجان المضيئة بأدوات الهندسة",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-21 (13:25 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792577575878-h9hs",
+    "longEpisodeId": "ep-gh-long-1792577746065-9rzl",
+    "shortEpisodeTitle": "Noreen Kids: اختراع أجنحة الطيران الآمنة للسناجب الصغيرة | مغامرات كارمن وسمسم",
+    "longEpisodeTitle": "Noreen Kids: شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر | مغامرات شوشو ومرجان",
+    "shortTitle": "Noreen Kids: اختراع أجنحة الطيران الآمنة للسناجب الصغيرة | مغامرات كارمن وسمسم",
+    "longTitle": "Noreen Kids: شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر | مغامرات شوشو ومرجان",
     "shortPlaylistId": "PLPwfeXzB3ozU",
+    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "GwWDlfj99wY",
-    "facebookShortVideoId": "1129992583069988",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1129992583069988",
-    "facebookShortTitle": "Noreen Kids | عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
+    "youtubeShortVideoId": "7DWb7U-JeQg",
+    "youtubeLongVideoId": "eizIszZRIR0",
+    "facebookShortVideoId": "2323688748446293",
+    "facebookLongVideoId": "955608080631837",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2323688748446293",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/955608080631837",
+    "facebookShortTitle": "Noreen Kids | اختراع أجنحة الطيران الآمنة للسناجب الصغيرة - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
+    "facebookLongTitle": "Noreen Kids | شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2716,16 +2709,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 720,
-      "height": 1280,
+      "width": 1280,
+      "height": 720,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 67,
-      "fileSizeBytes": 9971958,
-      "inspectedAt": "20:47"
+      "durationSec": 305,
+      "fileSizeBytes": 37255905,
+      "inspectedAt": "13:25"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2734,7 +2727,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-20T17:47:41.595Z"
+    "reportedAtIso": "2026-10-21T10:25:32.542Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
