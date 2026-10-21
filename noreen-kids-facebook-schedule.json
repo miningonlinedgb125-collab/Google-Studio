@@ -57,6 +57,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122118635391484976",
+      "photoId": "122118635367484976",
+      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع شوشو ومرجان",
+      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع شوشو ومرجان",
+      "caption": "🎉 فزورة قوة التركيز وسرعة البديهة من عالم Noreen Kids! 🎉\nبصوا كويس على الصورتين [ أ ] و [ ب ].. فيه 3 اختلافات ذكية مستخبية! يا ترى عيونكم الحلوة هتطلعهم؟ 👀✨\n👇 اكتبوا لنا الفروقات الـ 3 في تعليق مع اسم طفلكم الجميل علشان نرحب بيه في حلقة النهاردة! 💖🎬\n🔔 واضغطوا متابعة للصفحة ولايك للبوست عشان متفوتكمش حكاياتنا اليومية! 👍🌟\n#نورين_كيدز #Noreen_Kids #فزورة_اليوم #كرتون_3D #أمهات_مصر",
+      "heroName": "شوشو",
+      "companionName": "مرجان",
+      "publishedAtCairo": "2026-10-21 · 13:22 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122118635391484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122118633423484976",
       "photoId": "122118633399484976",
       "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع كارمن وسمسم",
@@ -523,18 +535,6 @@
       "publishedAtCairo": "2026-10-14 · 13:33 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122116319223484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122116314975484976",
-      "photoId": "122116314951484976",
-      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع ذياد والعصفورة الفرفوشة",
-      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع ذياد والعصفورة الفرفوشة",
-      "caption": "🌟 مين أسرع عبقري هيطلع الـ 3 فروقات بين [ أ ] و [ ب ] مع ذياد والعصفورة الفرفوشة؟ 🌟\nتحدي تفاعلي شيق لكل أبطالنا وأمهاتنا لتنمية التركيز وقوة الملاحظة قبل حلقة الكرتون الجديدة! 🧠✨\n\n👇 ركزوا في كل تفصيلة واكتبوا الفروقات الـ 3 في التعليقات..\n💖 واكتبوا اسم طفلكم الشاطر علشان ذياد والعصفورة الفرفوشة يبعتوله شهادة شطارة وسلام خاص بالاسم! 🏆🎬\n🔔 متنسوش شير للتحدي ومتابعة الصفحة لمغامرات يومية جديدة! 🚀\n\n#نورين_كيدز #Noreen_Kids #قوة_الملاحظة #حكايات_أطفال #ذكاء_الأطفال #أمهات_مصر",
-      "heroName": "ذياد",
-      "companionName": "العصفورة الفرفوشة",
-      "publishedAtCairo": "2026-10-14 · 13:20 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122116314975484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -798,14 +798,15 @@
       "id": "gh-run-39582203616",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-21 (13:18 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-21 (13:25 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1792577575878-h9hs",
       "longEpisodeId": "ep-gh-long-1792577746065-9rzl",
       "shortEpisodeTitle": "Noreen Kids: اختراع أجنحة الطيران الآمنة للسناجب الصغيرة | مغامرات كارمن وسمسم",
-      "longEpisodeTitle": "شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر",
+      "longEpisodeTitle": "Noreen Kids: شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر | مغامرات شوشو ومرجان",
       "shortTitle": "Noreen Kids: اختراع أجنحة الطيران الآمنة للسناجب الصغيرة | مغامرات كارمن وسمسم",
-      "longTitle": "شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر",
+      "longTitle": "Noreen Kids: شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر | مغامرات شوشو ومرجان",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -813,9 +814,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "7DWb7U-JeQg",
+      "youtubeLongVideoId": "eizIszZRIR0",
       "facebookShortVideoId": "2323688748446293",
+      "facebookLongVideoId": "955608080631837",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2323688748446293",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/955608080631837",
       "facebookShortTitle": "Noreen Kids | اختراع أجنحة الطيران الآمنة للسناجب الصغيرة - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
+      "facebookLongTitle": "Noreen Kids | شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -823,16 +828,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 64,
-        "fileSizeBytes": 11450450,
-        "inspectedAt": "13:18"
+        "durationSec": 305,
+        "fileSizeBytes": 37255905,
+        "inspectedAt": "13:25"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
