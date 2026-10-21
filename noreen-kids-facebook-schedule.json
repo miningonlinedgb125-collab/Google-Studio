@@ -2657,6 +2657,16 @@
     {
       "topic": "مهمة إنقاذ القنفذ الصغير في حديقة الألعاب",
       "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "تامر فارس الواحة وسر نبع الماء الصافي في الرمال",
+      "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم"
+    },
+    {
+      "topic": "مهمة إنقاذ القنفذ الصغير في حديقة الألعاب",
+      "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا",
       "timestampIso": "2026-10-21T19:21:36.537Z"
     },
@@ -2819,43 +2829,21 @@
       "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس",
       "timestampIso": "2026-10-19T22:17:08.482Z"
-    },
-    {
-      "topic": "أم ملك وسر دولاب الألوان في مدرسة السعادة",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح"
-    },
-    {
-      "topic": "ذياد وفرفوشة ومهمة دواء الشتاء للعم صابر",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة"
-    },
-    {
-      "topic": "أم ملك وسر دولاب الألوان في مدرسة السعادة",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "timestampIso": "2026-10-19T20:39:55.003Z"
-    },
-    {
-      "topic": "ذياد وفرفوشة ومهمة دواء الشتاء للعم صابر",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة",
-      "timestampIso": "2026-10-19T20:39:55.003Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-21 · 13:25 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-39481634265",
+    "id": "gh-run-39660314610",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (22:30 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792523732489-42kz",
-    "longEpisodeId": "ep-gh-long-1792523897289-yyww",
-    "shortEpisodeTitle": "Noreen Kids: جنى وبلبل وإنقاذ نبتة المريخ العطشانة | مغامرات جنى وبلبل",
-    "longEpisodeTitle": "Noreen Kids: رحلة المنطاد البلوري وإنقاذ فلة في الوادي | مغامرات عمرو وزعتر",
-    "shortTitle": "Noreen Kids: جنى وبلبل وإنقاذ نبتة المريخ العطشانة | مغامرات جنى وبلبل",
-    "longTitle": "Noreen Kids: رحلة المنطاد البلوري وإنقاذ فلة في الوادي | مغامرات عمرو وزعتر",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-21 (22:37 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792610348975-2d7a",
+    "longEpisodeId": "ep-gh-long-1792610496537-9bdr",
+    "shortEpisodeTitle": "Noreen Kids: مهمة إنقاذ القنفذ الصغير في حديقة الألعاب | مغامرات الطبيبة ملك والقطة لوليتا",
+    "longEpisodeTitle": "Noreen Kids: تامر فارس الواحة وسر نبع الماء الصافي في الرمال | مغامرات تامر وكركور",
+    "shortTitle": "Noreen Kids: مهمة إنقاذ القنفذ الصغير في حديقة الألعاب | مغامرات الطبيبة ملك والقطة لوليتا",
+    "longTitle": "Noreen Kids: تامر فارس الواحة وسر نبع الماء الصافي في الرمال | مغامرات تامر وكركور",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2864,14 +2852,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "V1nXkvljnIE",
-    "youtubeLongVideoId": "t6shqwFi814",
-    "facebookShortVideoId": "2593300727821151",
-    "facebookLongVideoId": "1642516864086243",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2593300727821151",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1642516864086243",
-    "facebookShortTitle": "Noreen Kids | جنى وبلبل وإنقاذ نبتة المريخ العطشانة - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
-    "facebookLongTitle": "Noreen Kids | رحلة المنطاد البلوري وإنقاذ فلة في الوادي - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
+    "youtubeShortVideoId": "ME15-nQYfuo",
+    "youtubeLongVideoId": "R4XNk2W93KA",
+    "facebookShortVideoId": "28456233130714152",
+    "facebookLongVideoId": "1661085888800232",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/28456233130714152",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1661085888800232",
+    "facebookShortTitle": "Noreen Kids | مهمة إنقاذ القنفذ الصغير في حديقة الألعاب - مغامرة ملك والقطة لوليتا",
+    "facebookLongTitle": "Noreen Kids | تامر فارس الواحة وسر نبع الماء الصافي في الرمال - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2886,9 +2874,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 319,
-      "fileSizeBytes": 33774633,
-      "inspectedAt": "22:30"
+      "durationSec": 305,
+      "fileSizeBytes": 41859154,
+      "inspectedAt": "22:37"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2897,7 +2885,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-20T19:30:11.953Z"
+    "reportedAtIso": "2026-10-21T19:37:49.860Z"
   },
   "heroFairRotationIndex": 8,
   "interactiveHeroRotationIndex": 5,
