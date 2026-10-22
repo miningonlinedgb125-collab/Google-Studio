@@ -2657,6 +2657,16 @@
     {
       "topic": "حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي",
       "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "مبادرة إعادة تدوير ألعاب الأطفال القديمة وإهدائها",
+      "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة"
+    },
+    {
+      "topic": "حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي",
+      "mainCharacterName": "أستاذ شريف",
       "companionName": "الصقر الذكي",
       "timestampIso": "2026-10-22T19:15:10.384Z"
     },
@@ -2819,43 +2829,21 @@
       "mainCharacterName": "الشيخ محمود",
       "companionName": "الديك الفصيح",
       "timestampIso": "2026-10-20T14:51:33.233Z"
-    },
-    {
-      "topic": "جدو والفأر المشاكس وسر صندوق ألعاب زمان",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
-    },
-    {
-      "topic": "جدو والفأر المشاكس وسر صندوق ألعاب زمان",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-10-20T10:09:01.798Z"
-    },
-    {
-      "topic": "مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "timestampIso": "2026-10-20T10:09:01.798Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-22 · 13:33 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-39660314610",
+    "id": "gh-run-39838033252",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-21 (22:37 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792610348975-2d7a",
-    "longEpisodeId": "ep-gh-long-1792610496537-9bdr",
-    "shortEpisodeTitle": "Noreen Kids: مهمة إنقاذ القنفذ الصغير في حديقة الألعاب | مغامرات الطبيبة ملك والقطة لوليتا",
-    "longEpisodeTitle": "Noreen Kids: تامر فارس الواحة وسر نبع الماء الصافي في الرمال | مغامرات تامر وكركور",
-    "shortTitle": "Noreen Kids: مهمة إنقاذ القنفذ الصغير في حديقة الألعاب | مغامرات الطبيبة ملك والقطة لوليتا",
-    "longTitle": "Noreen Kids: تامر فارس الواحة وسر نبع الماء الصافي في الرمال | مغامرات تامر وكركور",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-22 (22:24 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792696457938-6g3p",
+    "longEpisodeId": "ep-gh-long-1792696510384-rdgp",
+    "shortEpisodeTitle": "Noreen Kids: حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي | مغامرات أستاذ شريف والصقر الذكي",
+    "longEpisodeTitle": "Noreen Kids: مبادرة إعادة تدوير ألعاب الأطفال القديمة وإهدائها | مغامرات ذياد والعصفورة الفرفوشة",
+    "shortTitle": "Noreen Kids: حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي | مغامرات أستاذ شريف والصقر الذكي",
+    "longTitle": "Noreen Kids: مبادرة إعادة تدوير ألعاب الأطفال القديمة وإهدائها | مغامرات ذياد والعصفورة الفرفوشة",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2864,14 +2852,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "ME15-nQYfuo",
-    "youtubeLongVideoId": "R4XNk2W93KA",
-    "facebookShortVideoId": "28456233130714152",
-    "facebookLongVideoId": "1661085888800232",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/28456233130714152",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1661085888800232",
-    "facebookShortTitle": "Noreen Kids | مهمة إنقاذ القنفذ الصغير في حديقة الألعاب - مغامرة ملك والقطة لوليتا",
-    "facebookLongTitle": "Noreen Kids | تامر فارس الواحة وسر نبع الماء الصافي في الرمال - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
+    "youtubeShortVideoId": "rcPm_Xbgoc8",
+    "youtubeLongVideoId": "ma7dLNCyIgM",
+    "facebookShortVideoId": "1626324418983417",
+    "facebookLongVideoId": "942192468684444",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1626324418983417",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/942192468684444",
+    "facebookShortTitle": "Noreen Kids | حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي - مغامرة أستاذ شريف والصقر الذكي",
+    "facebookLongTitle": "Noreen Kids | مبادرة إعادة تدوير ألعاب الأطفال القديمة وإهدائها - مغامرة ذياد والعصفورة الفرفوشة",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2886,9 +2874,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 305,
-      "fileSizeBytes": 41859154,
-      "inspectedAt": "22:37"
+      "durationSec": 313,
+      "fileSizeBytes": 33543946,
+      "inspectedAt": "22:24"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2897,7 +2885,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-21T19:37:49.860Z"
+    "reportedAtIso": "2026-10-22T19:24:28.823Z"
   },
   "heroFairRotationIndex": 12,
   "interactiveHeroRotationIndex": 5,
