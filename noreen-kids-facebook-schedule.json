@@ -57,6 +57,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122119083357484976",
+      "photoId": "122119083327484976",
+      "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع ذياد والعصفورة الفرفوشة",
+      "title": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع ذياد والعصفورة الفرفوشة",
+      "caption": "✨ مين أسرع بطل هيعد كل النجوم الذهبية في الصورة؟ ✨\nذياد والعصفورة الفرفوشة بيجهزوا لحكاية جديدة، والنجوم اللامعة بتنور طريقهم! 🌟\nيلا يا شطار يا حلوين.. عدّوا النجوم مع ماما واكتبوا لنا العدد المظبوط في تعليق! 👀🔢\n👇 اكتبوا الحل واسم البطل عشان نوجهله تحية خاصة بالاسم في الحلقة القادمة! 🎬💖\n🔔 شير للتحدي ومتابعة لصفحة Noreen Kids لمزيد من الألعاب المفيدة! 👍\n#نورين_كيدز #Noreen_Kids #فوازير_أطفال #تحدي_الشطار #أمهات_مصر",
+      "heroName": "ذياد",
+      "companionName": "العصفورة الفرفوشة",
+      "publishedAtCairo": "2026-10-22 · 22:23 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122119083357484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122119081533484976",
       "photoId": "122119081503484976",
       "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع أستاذ شريف والصقر الذكي",
@@ -523,18 +535,6 @@
       "publishedAtCairo": "2026-10-15 · 13:09 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122116698423484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122116691841484976",
-      "photoId": "122116691811484976",
-      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع المهندسة نوران والنمر الفرفوش",
-      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع المهندسة نوران والنمر الفرفوش",
-      "caption": "🏆 مسابقة شطار نورين كيدز الكبرى مع المهندسة نوران والنمر الفرفوش! 🏆\nالصورة [ أ ] شبه الصورة [ ب ] جداً، لكن فيه 3 تفاصيل ذكية مش موجودة غير في واحدة منهم بس! 🔍🧐\nمين فيكم بطل التركيز اللي هيعرف يجمعهم كلهم ويكتبهم صح؟ ✨\n\n👇 مستنيين إجاباتكم وأسامي أبطالنا الحلوين في الكومنتات!\n🎬 أسرع إجابات هتتثبت وهنوجهلها تحية باسم الطفل في مغامرتنا القادمة! 💖\n🔔 اضغطوا متابعة للصفحة ومشاركة علشان نكبر سوا كل يوم! 👍\n\n#نورين_كيدز #Noreen_Kids #تحدي_الفروقات #كرتون_أطفال_3D #أمهات_مصر",
-      "heroName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "publishedAtCairo": "2026-10-15 · 12:57 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122116691841484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -798,14 +798,15 @@
       "id": "gh-run-39838033252",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-22 (22:18 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-22 (22:24 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1792696457938-6g3p",
       "longEpisodeId": "ep-gh-long-1792696510384-rdgp",
       "shortEpisodeTitle": "Noreen Kids: حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي | مغامرات أستاذ شريف والصقر الذكي",
-      "longEpisodeTitle": "مبادرة إعادة تدوير ألعاب الأطفال القديمة وإهدائها",
+      "longEpisodeTitle": "Noreen Kids: مبادرة إعادة تدوير ألعاب الأطفال القديمة وإهدائها | مغامرات ذياد والعصفورة الفرفوشة",
       "shortTitle": "Noreen Kids: حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي | مغامرات أستاذ شريف والصقر الذكي",
-      "longTitle": "مبادرة إعادة تدوير ألعاب الأطفال القديمة وإهدائها",
+      "longTitle": "Noreen Kids: مبادرة إعادة تدوير ألعاب الأطفال القديمة وإهدائها | مغامرات ذياد والعصفورة الفرفوشة",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -813,9 +814,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "rcPm_Xbgoc8",
+      "youtubeLongVideoId": "ma7dLNCyIgM",
       "facebookShortVideoId": "1626324418983417",
+      "facebookLongVideoId": "942192468684444",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1626324418983417",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/942192468684444",
       "facebookShortTitle": "Noreen Kids | حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي - مغامرة أستاذ شريف والصقر الذكي",
+      "facebookLongTitle": "Noreen Kids | مبادرة إعادة تدوير ألعاب الأطفال القديمة وإهدائها - مغامرة ذياد والعصفورة الفرفوشة",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -823,16 +828,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 64,
-        "fileSizeBytes": 9657385,
-        "inspectedAt": "22:18"
+        "durationSec": 313,
+        "fileSizeBytes": 33543946,
+        "inspectedAt": "22:24"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
