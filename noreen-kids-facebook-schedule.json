@@ -2657,6 +2657,16 @@
     {
       "topic": "أم ملك وسر اختيار الكتاب المناسب في المكتبة",
       "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح"
+    },
+    {
+      "topic": "سدرة وبناء برج المكعبات العملاق الملون",
+      "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "أم ملك وسر اختيار الكتاب المناسب في المكتبة",
+      "mainCharacterName": "أم ملك",
       "companionName": "البطريق المرح",
       "timestampIso": "2026-10-22T10:18:35.242Z"
     },
@@ -2819,28 +2829,6 @@
       "mainCharacterName": "تيتة",
       "companionName": "الدب باندا",
       "timestampIso": "2026-10-20T10:09:01.798Z"
-    },
-    {
-      "topic": "أستاذ شريف والصقر في مهمة تنظيم وقت اللعب",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "جدو والفأر المشاكس وسر نخلة الخير في بستان الواحة",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "أستاذ شريف والصقر في مهمة تنظيم وقت اللعب",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-10-19T22:17:08.482Z"
-    },
-    {
-      "topic": "جدو والفأر المشاكس وسر نخلة الخير في بستان الواحة",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-10-19T22:17:08.482Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-21 · 22:37 بتوقيت مصر",
