@@ -2657,6 +2657,16 @@
     {
       "topic": "الشيخ محمود والديك الفصيح وسر طير الأبابيل",
       "mainCharacterName": "الشيخ محمود",
+      "companionName": "الديك الفصيح"
+    },
+    {
+      "topic": "سر البيجامة المنورة وضحكة تختوخ وزقلط",
+      "mainCharacterName": "تختوخ",
+      "companionName": "الكلب زقلط"
+    },
+    {
+      "topic": "الشيخ محمود والديك الفصيح وسر طير الأبابيل",
+      "mainCharacterName": "الشيخ محمود",
       "companionName": "الديك الفصيح",
       "timestampIso": "2026-10-23T23:38:01.764Z"
     },
@@ -2819,43 +2829,21 @@
       "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش",
       "timestampIso": "2026-10-20T17:43:42.174Z"
-    },
-    {
-      "topic": "نوران والنمر وفكرة قبة النجوم لحماية العصافير",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "سر مية الغابة والنبع اللي نشف فجأة",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "نوران والنمر وفكرة قبة النجوم لحماية العصافير",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-10-20T17:19:27.107Z"
-    },
-    {
-      "topic": "سر مية الغابة والنبع اللي نشف فجأة",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-10-20T17:19:27.107Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-23 · 13:28 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-39838033252",
+    "id": "gh-run-40009326794",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-22 (22:24 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792696457938-6g3p",
-    "longEpisodeId": "ep-gh-long-1792696510384-rdgp",
-    "shortEpisodeTitle": "Noreen Kids: حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي | مغامرات أستاذ شريف والصقر الذكي",
-    "longEpisodeTitle": "Noreen Kids: مبادرة إعادة تدوير ألعاب الأطفال القديمة وإهدائها | مغامرات ذياد والعصفورة الفرفوشة",
-    "shortTitle": "Noreen Kids: حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي | مغامرات أستاذ شريف والصقر الذكي",
-    "longTitle": "Noreen Kids: مبادرة إعادة تدوير ألعاب الأطفال القديمة وإهدائها | مغامرات ذياد والعصفورة الفرفوشة",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-24 (02:55 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792798534302-ne91",
+    "longEpisodeId": "ep-gh-long-1792798681764-8sk5",
+    "shortEpisodeTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر طير الأبابيل | مغامرات الشيخ محمود والديك الفصيح",
+    "longEpisodeTitle": "Noreen Kids: سر البيجامة المنورة وضحكة تختوخ وزقلط | مغامرات تختوخ والكلب زقلط",
+    "shortTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر طير الأبابيل | مغامرات الشيخ محمود والديك الفصيح",
+    "longTitle": "Noreen Kids: سر البيجامة المنورة وضحكة تختوخ وزقلط | مغامرات تختوخ والكلب زقلط",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2864,14 +2852,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "rcPm_Xbgoc8",
-    "youtubeLongVideoId": "ma7dLNCyIgM",
-    "facebookShortVideoId": "1626324418983417",
-    "facebookLongVideoId": "942192468684444",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1626324418983417",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/942192468684444",
-    "facebookShortTitle": "Noreen Kids | حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي - مغامرة أستاذ شريف والصقر الذكي",
-    "facebookLongTitle": "Noreen Kids | مبادرة إعادة تدوير ألعاب الأطفال القديمة وإهدائها - مغامرة ذياد والعصفورة الفرفوشة",
+    "youtubeShortVideoId": "p0_hnkJq1HM",
+    "youtubeLongVideoId": "2_eqVTNNlzE",
+    "facebookShortVideoId": "3100075700384197",
+    "facebookLongVideoId": "1794871181558662",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/3100075700384197",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1794871181558662",
+    "facebookShortTitle": "Noreen Kids | الشيخ محمود والديك الفصيح وسر طير الأبابيل - مغامرة الشيخ محمود والديك الفصيح",
+    "facebookLongTitle": "Noreen Kids | سر البيجامة المنورة وضحكة تختوخ وزقلط - مغامرة تختوخ والكلب زقلط",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2886,9 +2874,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 313,
-      "fileSizeBytes": 33543946,
-      "inspectedAt": "22:24"
+      "durationSec": 377,
+      "fileSizeBytes": 44742738,
+      "inspectedAt": "02:55"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2897,7 +2885,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-22T19:24:28.823Z"
+    "reportedAtIso": "2026-10-23T23:55:20.805Z"
   },
   "heroFairRotationIndex": 0,
   "interactiveHeroRotationIndex": 5,
