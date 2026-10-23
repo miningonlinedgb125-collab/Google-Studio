@@ -228,14 +228,15 @@
       "id": "gh-run-40009326794",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-24 (02:42 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-24 (02:55 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1792798534302-ne91",
       "longEpisodeId": "ep-gh-long-1792798681764-8sk5",
       "shortEpisodeTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر طير الأبابيل | مغامرات الشيخ محمود والديك الفصيح",
-      "longEpisodeTitle": "سر البيجامة المنورة وضحكة تختوخ وزقلط",
+      "longEpisodeTitle": "Noreen Kids: سر البيجامة المنورة وضحكة تختوخ وزقلط | مغامرات تختوخ والكلب زقلط",
       "shortTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر طير الأبابيل | مغامرات الشيخ محمود والديك الفصيح",
-      "longTitle": "سر البيجامة المنورة وضحكة تختوخ وزقلط",
+      "longTitle": "Noreen Kids: سر البيجامة المنورة وضحكة تختوخ وزقلط | مغامرات تختوخ والكلب زقلط",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -243,9 +244,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "p0_hnkJq1HM",
+      "youtubeLongVideoId": "2_eqVTNNlzE",
       "facebookShortVideoId": "3100075700384197",
+      "facebookLongVideoId": "1794871181558662",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/3100075700384197",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1794871181558662",
       "facebookShortTitle": "Noreen Kids | الشيخ محمود والديك الفصيح وسر طير الأبابيل - مغامرة الشيخ محمود والديك الفصيح",
+      "facebookLongTitle": "Noreen Kids | سر البيجامة المنورة وضحكة تختوخ وزقلط - مغامرة تختوخ والكلب زقلط",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -253,16 +258,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 60,
-        "fileSizeBytes": 9447670,
-        "inspectedAt": "02:42"
+        "durationSec": 377,
+        "fileSizeBytes": 44742738,
+        "inspectedAt": "02:55"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2193,7 +2198,7 @@
         "speakerName": "تختوخ",
         "voiceName": "Puck",
         "dialect": "egyptian",
-        "dialogueArabic": "يا خبر يا أبطال وعيلة نورين كيدز! بصوا بسرعة معانا النهارده، مساء الخير يا صاحبي يا أغلى كلب زقلط في الدنيا! شوف الهنا واللذاذة، أنا لابس بيجامتي المنورة الجميلة دي، ومعايا كوباية الحليب الدافي اللذيذة دلوأتي عشان نشربها وندخل ننام فورا بهدوء. إيه الرايق ده يا زقلط، أنا بضحك من قلبي كل ما أبص على شكل بيجامتي وهي بتنور في الأوضة زي نجوم السما! كوباية اللبن دي بتدينا صحة وقوة، والضحكة قبل النوم بتخلي أحلامنا كلها سكر وعسل. تعالى يا بطل نقعد سوا جنب السرير، ونجهز نفسنا للنوم الهادي، إحنا شطار وعارفين إن ميعاد النوم لازم نحترمه تماما عشان نصحى الصبح بدري أوي أوي أوي فرحانين وكلنا حيوية!",
+        "dialogueArabic": "يا خبر يا أبطال وعيلة نورين كيدز! بصوا بسرعة معانا النهارده، مساء الخير يا صاحبي يا أغلى كلب زقلط في الدنيا! شوف الهنا واللذاذة، أنا لابس بيجامتي المنورة الجميلة دي، ومعايا كوباية الحليب الدافي اللذيذة دلوأتي عشان نشربها وندخل ننام فورا بهدوء. إيه الرايق ده يا زقلط، أنا بضحك من قلبي كل ما أبص على شكل بيجامتي وهي بتنور في الأوضة زي نجوم السما! كوباية اللبن دي بتدينا صحة وقوة، والضحكة قبل النوم بتخلي أحلامنا كلها سكر وعسل. تعالى يا بطل نقعد سوا جنب السرير، ونجهز نفسنا للنوم الهادي، إحنا شطار وعارفين إن ميعاد النوم لازم نحترمه تماما عشان نصحى الصبح بدري أوي أوي أوي أوي أوي فرحانين وكلنا حيوية!",
         "durationSec": 39
       },
       {
@@ -2277,7 +2282,7 @@
         "speakerName": "تختوخ",
         "voiceName": "Puck",
         "dialect": "egyptian",
-        "dialogueArabic": "شوفت يا زقلط، الدرس الحلو اللي اتعلمناه النهاردة؟ التعاون مع الجيران ومساعدة الصغيرين هي سر البركة في حياتنا! النوم بدري أوي أوي أوي وكوباية اللبن الدافية سنة جميلة بتبني صحتنا وتخلينا عباقرة في المدرسة. والضلمة مفيهاش أي خوف، دي نعمة عشان أجسامنا ترتاح. ودلوأتي يا شطار، يلا كلنا نعمل حركة الأبطال: اضحكوا بصوت عالي ثلاث مرات زي تختوخ ها ها ها، وحركوا إيديكم لفوق زي نجوم السما قبل ما تشربوا اللبن وتدخلوا سريركم بهدوء وشطارة! إنتو شطار ومميزين أوي يا أبطال نورين كيدز!",
+        "dialogueArabic": "شوفت يا زقلط، الدرس الحلو اللي اتعلمناه النهاردة؟ التعاون مع الجيران ومساعدة الصغيرين هي سر البركة في حياتنا! النوم بدري أوي أوي أوي أوي أوي وكوباية اللبن الدافية سنة جميلة بتبني صحتنا وتخلينا عباقرة في المدرسة. والضلمة مفيهاش أي خوف، دي نعمة عشان أجسامنا ترتاح. ودلوأتي يا شطار، يلا كلنا نعمل حركة الأبطال: اضحكوا بصوت عالي ثلاث مرات زي تختوخ ها ها ها، وحركوا إيديكم لفوق زي نجوم السما قبل ما تشربوا اللبن وتدخلوا سريركم بهدوء وشطارة! إنتو شطار ومميزين أوي يا أبطال نورين كيدز!",
         "durationSec": 39
       },
       {
@@ -2686,7 +2691,7 @@
   "firstCommentEnabled": true,
   "autoCommentResponderEnabled": true,
   "facebookAutoCommentResponderEnabled": true,
-  "lastAutoCommentScanAtCairo": "٢٤‏/١٠‏/٢٠٢٦، ٢:٤٢:٥٢ ص",
+  "lastAutoCommentScanAtCairo": "٢٤‏/١٠‏/٢٠٢٦، ٢:٥٥:١٨ ص",
   "lastCloudRunReport": {
     "id": "gh-run-39936223420",
     "uploadMode": "daily_schedule",
@@ -2751,7 +2756,7 @@
     "122116849647484976_2250604229118220",
     "122116814217484976_2094280341209895"
   ],
-  "lastFacebookAutoCommentScanAtCairo": "٢٤‏/١٠‏/٢٠٢٦، ٢:٤٢:٥٠ ص",
+  "lastFacebookAutoCommentScanAtCairo": "٢٤‏/١٠‏/٢٠٢٦، ٢:٥٥:١٦ ص",
   "heroFairRotationIndex": 0,
   "interactiveHeroRotationIndex": 1,
   "heroRoleSwapCycle": false
