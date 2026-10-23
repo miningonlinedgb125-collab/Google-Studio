@@ -37,6 +37,16 @@
     {
       "topic": "الشيخ محمود والديك الفصيح وسر طير الأبابيل",
       "mainCharacterName": "الشيخ محمود",
+      "companionName": "الديك الفصيح"
+    },
+    {
+      "topic": "سر البيجامة المنورة وضحكة تختوخ وزقلط",
+      "mainCharacterName": "تختوخ",
+      "companionName": "الكلب زقلط"
+    },
+    {
+      "topic": "الشيخ محمود والديك الفصيح وسر طير الأبابيل",
+      "mainCharacterName": "الشيخ محمود",
       "companionName": "الديك الفصيح",
       "timestampIso": "2026-10-23T23:38:01.764Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش",
       "timestampIso": "2026-10-20T17:43:42.174Z"
-    },
-    {
-      "topic": "نوران والنمر وفكرة قبة النجوم لحماية العصافير",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "سر مية الغابة والنبع اللي نشف فجأة",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "نوران والنمر وفكرة قبة النجوم لحماية العصافير",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-10-20T17:19:27.107Z"
-    },
-    {
-      "topic": "سر مية الغابة والنبع اللي نشف فجأة",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-10-20T17:19:27.107Z"
     }
   ],
   "scheduledHistory": [
