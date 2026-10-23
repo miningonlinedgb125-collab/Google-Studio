@@ -2657,6 +2657,16 @@
     {
       "topic": "سلة هدايا تيتة ومفاجأة بطل القرآن الصغير",
       "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا"
+    },
+    {
+      "topic": "سر الفانوس الأثري وبوصلة الصدق في خان الخليلي",
+      "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "سلة هدايا تيتة ومفاجأة بطل القرآن الصغير",
+      "mainCharacterName": "تيتة",
       "companionName": "الدب باندا",
       "timestampIso": "2026-10-23T10:11:47.843Z"
     },
@@ -2819,28 +2829,6 @@
       "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-10-20T17:19:27.107Z"
-    },
-    {
-      "topic": "تختوخ وزقلط وسر طيارة الورق العالقة في الشجرة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط"
-    },
-    {
-      "topic": "الشيخ محمود والديك الفصيح وسر شتلة الياسمين",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح"
-    },
-    {
-      "topic": "تختوخ وزقلط وسر طيارة الورق العالقة في الشجرة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط",
-      "timestampIso": "2026-10-20T14:51:33.233Z"
-    },
-    {
-      "topic": "الشيخ محمود والديك الفصيح وسر شتلة الياسمين",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح",
-      "timestampIso": "2026-10-20T14:51:33.233Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-22 · 22:24 بتوقيت مصر",
