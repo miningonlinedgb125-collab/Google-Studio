@@ -57,6 +57,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122119588461484976",
+      "photoId": "122119588437484976",
+      "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع المهندسة نوران والنمر الفرفوش",
+      "title": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع المهندسة نوران والنمر الفرفوش",
+      "caption": "يا صباح الفل والنشاط على أحلى مامي وأشطر كتاكيت في الدنيا! 🌟🐾\n\n🔍 المهندسة نوران واقفة على اليمين ومحتارة جداً، وعايزة توصل بسرعة لصديقها النمر الفرفوش اللي مستنيها على الشمال! قدامها 3 مسارات ملونة [ 1 ، 2 ، 3 ].. ومسار واحد بس هو الصح اللي هيوصلهم لبعض! 🎨✨\n\n🧠 شغلوا قوة الملاحظة الذكية مع أبطالكم.. مين يقدر يتبع الخط المظبوط ويكتب لنا رقمه؟ \n\n💬 اكتبوا الإجابة الصح مع اسم بطلكم أو أميرتكم في الكومنتات، عشان المهندسة نوران والنمر الفرفوش يقولوا اسمهم ويبعتوا لهم تحية مخصوصة وبوسة كبيرة في حلقة بكرة! 🥳🎉\n\n🔔 ما تنسوش تعملوا متابعة وتفعلوا الجرس وشير للبوست، عشان عيلتنا تكبر بكل الشطار! 🚀❤️\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
+      "heroName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش",
+      "publishedAtCairo": "2026-10-24 · 12:40 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122119588461484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122119587069484976",
       "photoId": "122119587045484976",
       "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع دكتورة نورين وأرنوب",
@@ -523,18 +535,6 @@
       "publishedAtCairo": "2026-10-16 · 21:54 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122117160933484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122117045823484976",
-      "photoId": "122117045793484976",
-      "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع دكتورة ملك والقطة لوليتا",
-      "title": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع دكتورة ملك والقطة لوليتا",
-      "caption": "يا هلا بأحلى مامييز وأشطر كتاكيت في الدنيا! 🌟 دكتورة ملك وصاحبتها القطة لوليتا جهزولكم النهاردة تحدي ذكاء خطير! 🐱🔍  \n\n👀 **بصوا كويس في الصورة وركّزوا قوي:** تفتكروا في \"كام نجمة ذهبية\" بتلمع مستخبية جوه الصورة؟ مين صاحب أقوى نظر هيعدّهم كلهم صح؟ ⭐🕵️‍♂️  \n\n💬 **مستنيين إجاباتكم الشاطرة:** اكتبوا العدد الصح ومعاه \"اسم طفلكم الجميل\" في التعليقات، عشان دكتورة ملك والقطة لوليتا يحيّوه بالاسم في حلقة بكرة ويسقفولّه مخصوص! 🎬🎉  \n\n🔔 متنسوش تعملوا متابعة لصفحتنا وتفعلوا الجرس، وشيروا التحدي مع مامييز تانية عشان نشوف مين أشطر بطل النهاردة! 🚀💖  \n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
-      "heroName": "دكتورة ملك",
-      "companionName": "القطة لوليتا",
-      "publishedAtCairo": "2026-10-16 · 13:01 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122117045823484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -798,14 +798,15 @@
       "id": "gh-run-40082280198",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-24 (12:37 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-24 (12:44 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1792834440100-j1cp",
       "longEpisodeId": "ep-gh-long-1792834503939-vqyq",
       "shortEpisodeTitle": "Noreen Kids: سر كوباية اللبن الدافي ونوم مشمش البدري | مغامرات الطبيبة نورين وأرنوب",
-      "longEpisodeTitle": "المهندسة نوران واختراع القطار المغناطيسي",
+      "longEpisodeTitle": "Noreen Kids: المهندسة نوران واختراع القطار المغناطيسي | مغامرات المهندسة نوران والنمر الفرفوش",
       "shortTitle": "Noreen Kids: سر كوباية اللبن الدافي ونوم مشمش البدري | مغامرات الطبيبة نورين وأرنوب",
-      "longTitle": "المهندسة نوران واختراع القطار المغناطيسي",
+      "longTitle": "Noreen Kids: المهندسة نوران واختراع القطار المغناطيسي | مغامرات المهندسة نوران والنمر الفرفوش",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -813,9 +814,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "w0xuTO7njuY",
+      "youtubeLongVideoId": "G9qg5kM7pvQ",
       "facebookShortVideoId": "3170282436502857",
+      "facebookLongVideoId": "1410828087894295",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/3170282436502857",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1410828087894295",
       "facebookShortTitle": "Noreen Kids | سر كوباية اللبن الدافي ونوم مشمش البدري - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
+      "facebookLongTitle": "Noreen Kids | المهندسة نوران واختراع القطار المغناطيسي - مغامرة المهندسة نوران والنمر الفرفوش",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -823,16 +828,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 65,
-        "fileSizeBytes": 9594470,
-        "inspectedAt": "12:37"
+        "durationSec": 305,
+        "fileSizeBytes": 35253125,
+        "inspectedAt": "12:44"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
