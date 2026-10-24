@@ -37,6 +37,16 @@
     {
       "topic": "سر كوباية اللبن الدافي ونوم مشمش البدري",
       "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "المهندسة نوران واختراع القطار المغناطيسي",
+      "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "سر كوباية اللبن الدافي ونوم مشمش البدري",
+      "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-10-24T09:35:03.939Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي",
       "timestampIso": "2026-10-20T19:18:17.289Z"
-    },
-    {
-      "topic": "عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي"
-    },
-    {
-      "topic": "إصلاح منارة المرجان المضيئة بأدوات الهندسة",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "timestampIso": "2026-10-20T17:43:42.174Z"
-    },
-    {
-      "topic": "إصلاح منارة المرجان المضيئة بأدوات الهندسة",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-10-20T17:43:42.174Z"
     }
   ],
   "scheduledHistory": [
@@ -2698,16 +2686,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٤‏/١٠‏/٢٠٢٦، ١٢:٤٤:٤٩ م",
   "lastCloudRunReport": {
-    "id": "gh-run-39936223420",
+    "id": "gh-run-40082280198",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-23 (13:28 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792750041072-na4b",
-    "longEpisodeId": "ep-gh-long-1792750307843-rl0x",
-    "shortEpisodeTitle": "Noreen Kids: سلة هدايا تيتة ومفاجأة بطل القرآن الصغير | مغامرات تيتة والدب باندا",
-    "longEpisodeTitle": "Noreen Kids: سر الفانوس الأثري وبوصلة الصدق في خان الخليلي | مغامرات جدو والفأر المشاكس",
-    "shortTitle": "Noreen Kids: سلة هدايا تيتة ومفاجأة بطل القرآن الصغير | مغامرات تيتة والدب باندا",
-    "longTitle": "Noreen Kids: سر الفانوس الأثري وبوصلة الصدق في خان الخليلي | مغامرات جدو والفأر المشاكس",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-24 (12:44 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792834440100-j1cp",
+    "longEpisodeId": "ep-gh-long-1792834503939-vqyq",
+    "shortEpisodeTitle": "Noreen Kids: سر كوباية اللبن الدافي ونوم مشمش البدري | مغامرات الطبيبة نورين وأرنوب",
+    "longEpisodeTitle": "Noreen Kids: المهندسة نوران واختراع القطار المغناطيسي | مغامرات المهندسة نوران والنمر الفرفوش",
+    "shortTitle": "Noreen Kids: سر كوباية اللبن الدافي ونوم مشمش البدري | مغامرات الطبيبة نورين وأرنوب",
+    "longTitle": "Noreen Kids: المهندسة نوران واختراع القطار المغناطيسي | مغامرات المهندسة نوران والنمر الفرفوش",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2716,14 +2704,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "-Xwq6iyBYmg",
-    "youtubeLongVideoId": "by0W5k2nYpE",
-    "facebookShortVideoId": "2336685587179835",
-    "facebookLongVideoId": "1793388298655214",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2336685587179835",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1793388298655214",
-    "facebookShortTitle": "Noreen Kids | سلة هدايا تيتة ومفاجأة بطل القرآن الصغير - مغامرة تيتة والدب باندا",
-    "facebookLongTitle": "Noreen Kids | سر الفانوس الأثري وبوصلة الصدق في خان الخليلي - مغامرة جدو والفأر المشاكس",
+    "youtubeShortVideoId": "w0xuTO7njuY",
+    "youtubeLongVideoId": "G9qg5kM7pvQ",
+    "facebookShortVideoId": "3170282436502857",
+    "facebookLongVideoId": "1410828087894295",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/3170282436502857",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1410828087894295",
+    "facebookShortTitle": "Noreen Kids | سر كوباية اللبن الدافي ونوم مشمش البدري - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
+    "facebookLongTitle": "Noreen Kids | المهندسة نوران واختراع القطار المغناطيسي - مغامرة المهندسة نوران والنمر الفرفوش",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2738,9 +2726,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 343,
-      "fileSizeBytes": 40684749,
-      "inspectedAt": "13:28"
+      "durationSec": 305,
+      "fileSizeBytes": 35253125,
+      "inspectedAt": "12:44"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2749,7 +2737,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-23T10:28:14.188Z"
+    "reportedAtIso": "2026-10-24T09:44:53.370Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
