@@ -2668,6 +2668,16 @@
     {
       "topic": "أم ملك وسر شجاعة الإذاعة المدرسية الصباحية",
       "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح"
+    },
+    {
+      "topic": "ذياد والعصفورة الفرفوشة ولغز محفظة عم صالح",
+      "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة"
+    },
+    {
+      "topic": "أم ملك وسر شجاعة الإذاعة المدرسية الصباحية",
+      "mainCharacterName": "أم ملك",
       "companionName": "البطريق المرح",
       "timestampIso": "2026-10-25T10:00:29.447Z"
     },
@@ -2830,28 +2840,6 @@
       "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش",
       "timestampIso": "2026-10-24T09:35:03.939Z"
-    },
-    {
-      "topic": "الشيخ محمود والديك الفصيح وسر طير الأبابيل",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح"
-    },
-    {
-      "topic": "سر البيجامة المنورة وضحكة تختوخ وزقلط",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط"
-    },
-    {
-      "topic": "الشيخ محمود والديك الفصيح وسر طير الأبابيل",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح",
-      "timestampIso": "2026-10-23T23:38:01.764Z"
-    },
-    {
-      "topic": "سر البيجامة المنورة وضحكة تختوخ وزقلط",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط",
-      "timestampIso": "2026-10-23T23:38:01.764Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-25 · 11:04 بتوقيت مصر",
