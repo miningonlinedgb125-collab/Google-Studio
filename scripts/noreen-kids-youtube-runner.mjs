@@ -825,7 +825,7 @@ function splitArabicTextForGeminiLive(text, maxChars = 340) {
   return parts;
 }
 
-function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
+function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0, dialect = "fusha") {
   const s = String(speakerName || "");
   const matureWarmFemaleFilter =
     "equalizer=f=210:t=q:w=1.1:g=3.2,equalizer=f=2800:t=q:w=1.2:g=1.8,dynaudnorm=f=150:g=15:p=0.95,volume=2.35,alimiter=limit=0.98:attack=5:release=50";
@@ -834,7 +834,7 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
   const youngWomanDoctorFilter =
     "equalizer=f=260:t=q:w=1.2:g=1.6,equalizer=f=3200:t=q:w=1.2:g=2.4,dynaudnorm=f=150:g=15:p=0.95,volume=2.35,alimiter=limit=0.98:attack=5:release=50";
   const toddlerGirlBrightFilter =
-    "rubberband=pitch=1.22,highpass=f=160,equalizer=f=450:t=q:w=1.2:g=2.5,equalizer=f=3600:t=q:w=1.1:g=3.5,equalizer=f=5200:t=q:w=1.4:g=2.5,dynaudnorm=f=150:g=15:p=0.95,volume=2.35,alimiter=limit=0.98:attack=5:release=50";
+    "highpass=f=160,equalizer=f=450:t=q:w=1.2:g=2.5,equalizer=f=3600:t=q:w=1.1:g=3.5,equalizer=f=5200:t=q:w=1.4:g=2.5,dynaudnorm=f=150:g=15:p=0.95,volume=2.35,alimiter=limit=0.98:attack=5:release=50";
   const boyKnightHeroFilter =
     "equalizer=f=185:t=q:w=1.1:g=3.5,equalizer=f=260:t=q:w=1.2:g=2.2,equalizer=f=2800:t=q:w=1.2:g=1.5,dynaudnorm=f=150:g=15:p=0.95,volume=2.35,alimiter=limit=0.98:attack=5:release=50";
   const childGirlSweetFilter =
@@ -885,7 +885,7 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
       isFemale: true,
       geminiVoice: "Kore",
       pitch: "+0Hz",
-      rate: "+1%",
+      rate: "+0%",
       styleInstruction:
         "تحدثي بصوت شابة مصرية عمرها 20 سنة (الدكتورة ملك طبيبة الطوارئ) بنبرة شابة واثقة وهادئة ولطيفة باللهجة المصرية القاهرية الطبيعية",
       voiceFilter: youngWomanDoctorFilter,
@@ -897,7 +897,7 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
       isFemale: true,
       geminiVoice: "Zephyr",
       pitch: "+26Hz",
-      rate: "+4%",
+      rate: "+0%",
       styleInstruction:
         "تحدثي بصوت طفلة مصرية بريئة وصغيرة جداً عمرها 3 سنوات (سدرة الصغنونة) بطبقة صوت طفولية رقيقة وبريئة ومبهجة ولطيفة جداً للأطفال باللهجة المصرية القاهرية الطبيعية",
       voiceFilter: toddlerGirlBrightFilter,
@@ -909,7 +909,7 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
       isFemale: true,
       geminiVoice: "Zephyr",
       pitch: "+11Hz",
-      rate: "+4%",
+      rate: "+0%",
       styleInstruction:
         "تحدثي بصوت القطة الكرتونية الشقية والمدللة (لوليتا) بنبرة بناتية رقيقة ومرحة وخفيفة الظل باللهجة المصرية القاهرية الطبيعية",
       voiceFilter: cartoonBrightCompanionFilter,
@@ -935,7 +935,7 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
       isFemale: true,
       geminiVoice: "Zephyr",
       pitch: "+13Hz",
-      rate: "+5%",
+      rate: "+0%",
       styleInstruction:
         "تحدثي بصوت العصفورة الفرفوشة المغردة بنبرة كرتونية رقيقة ومزقزقة ومليئة بالبهجة والنشاط باللهجة المصرية القاهرية الطبيعية",
       voiceFilter: cartoonBrightCompanionFilter,
@@ -972,7 +972,7 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
       isFemale: true,
       geminiVoice: "Kore",
       pitch: "+8Hz",
-      rate: "+3%",
+      rate: "+0%",
       styleInstruction:
         "تحدثي بصوت طفلة مصرية عبقرية ومرحة عمرها 7 سنوات (كارمن المخترعة الصغيرة) بنبرة طفولية منطلقة وسريعة البديهة باللهجة المصرية القاهرية الطبيعية",
       voiceFilter: childGirlLivelyFilter,
@@ -1020,7 +1020,7 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
       isFemale: false,
       geminiVoice: "Fenrir",
       pitch: "-1Hz",
-      rate: "+1%",
+      rate: "+0%",
       styleInstruction:
         "تحدث بصوت شاب مصري رياضي ومتعاون (ذياد) بنبرة شبابية مشجعة وودودة وحيوية باللهجة المصرية القاهرية الطبيعية",
       voiceFilter: youngAdultMaleFilter,
@@ -1045,7 +1045,7 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
       isFemale: false,
       geminiVoice: "Puck",
       pitch: "+10Hz",
-      rate: "+4%",
+      rate: "+0%",
       styleInstruction:
         "تحدث بصوت البطريق المرح الكوميدي بنبرة كرتونية مبهجة وخفيفة الظل تضحك الأطفال باللهجة المصرية القاهرية الطبيعية",
       voiceFilter: cartoonBrightCompanionFilter,
@@ -1110,7 +1110,7 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
       isFemale: false,
       geminiVoice: "Charon",
       pitch: "-1Hz",
-      rate: "+1%",
+      rate: "+0%",
       styleInstruction:
         "تحدث بصوت ولد مصري شجاع ونبيل عمره 11 سنة (تامر فارس الواحة) بنبرة فروسية قوية وواثقة ورجولية نبيلة باللهجة المصرية القاهرية الطبيعية، دون أي نعومة أنثوية",
       voiceFilter: boyKnightHeroFilter,
@@ -1135,7 +1135,7 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
       isFemale: false,
       geminiVoice: "Charon",
       pitch: "+1Hz",
-      rate: "+1%",
+      rate: "+0%",
       styleInstruction:
         "تحدث بصوت ولد مصري شجاع ومرح عمره 10 سنوات (شوشو القبطان الصغير) بنبرة بحرية واثقة ومبهجة باللهجة المصرية القاهرية الطبيعية",
       voiceFilter: boyHeroCrispFilter,
@@ -1147,7 +1147,7 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
       isFemale: true,
       geminiVoice: "Puck",
       pitch: "+12Hz",
-      rate: "+4%",
+      rate: "+0%",
       styleInstruction:
         "تحدث بصوت أرنوب الأرنب الكرتوني الشقي والمرح بنبرة نطاطة سريعة وخفيفة الظل تضحك الأطفال باللهجة المصرية القاهرية الطبيعية",
       voiceFilter: cartoonBrightCompanionFilter,
@@ -1160,7 +1160,7 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
       isFemale: true,
       geminiVoice: "Puck",
       pitch: "+10Hz",
-      rate: "+3%",
+      rate: "+0%",
       styleInstruction:
         "تحدث بصوت الدلفين المرح (مرجان) بنبرة كرتونية بحرية مبهجة ومنطلقة باللهجة المصرية القاهرية الطبيعية",
       voiceFilter: cartoonBrightCompanionFilter,
@@ -1173,7 +1173,7 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
       isFemale: true,
       geminiVoice: "Puck",
       pitch: "+14Hz",
-      rate: "+5%",
+      rate: "+0%",
       styleInstruction:
         "تحدث بصوت السنجاب الطائر السريع والنشيط (سمسم) بنبرة كرتونية حماسية وشقية ومبهجة باللهجة المصرية القاهرية الطبيعية",
       voiceFilter: cartoonBrightCompanionFilter,
@@ -1186,7 +1186,7 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
       isFemale: false,
       geminiVoice: "Puck",
       pitch: "+9Hz",
-      rate: "+4%",
+      rate: "+0%",
       styleInstruction:
         "تحدث بصوت الثعلب الصغير الذكي (زعتر) بنبرة كرتونية لماحة وسريعة ومرحة باللهجة المصرية القاهرية الطبيعية",
       voiceFilter: cartoonBrightCompanionFilter,
@@ -1211,7 +1211,7 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
       isFemale: false,
       geminiVoice: "Puck",
       pitch: "+12Hz",
-      rate: "+4%",
+      rate: "+0%",
       styleInstruction:
         "تحدث بصوت الديك الكرتوني الذكي والمرح والفصيح (الديك الفصيح) بنبرة كرتونية مبهجة وفصيحة ومنطلقة تشجع الأطفال على حفظ القرآن والاستيقاظ مبكراً بحماس ومرح وفكاهة لطيفة جداً باللهجة المصرية القاهرية الطبيعية",
       voiceFilter: cartoonBrightCompanionFilter,
@@ -1236,7 +1236,7 @@ function resolveRunnerVoiceProfileForSpeaker(speakerName = "", sceneIndex = 0) {
       isFemale: false,
       geminiVoice: "Puck",
       pitch: "+10Hz",
-      rate: "+5%",
+      rate: "+0%",
       styleInstruction:
         "تحدث بصوت الكلب الكرتوني الكوميدي الشقي والوفي (زقلط) بنبرة كرتونية شقية ومتحمسة وسريعة تضحك الأطفال مع لهفة ومرح كبيرين باللهجة المصرية القاهرية الطبيعية",
       voiceFilter: cartoonBrightCompanionFilter,
@@ -1448,9 +1448,12 @@ async function applyRunnerCharacterTimbreAndCompanionSfx(rawAudioPath, vp, scene
   return rawAudioPath;
 }
 
-async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, dialect = "egyptian") {
+async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, dialect = "fusha") {
   const speaker = String(scene.speakerName || "");
-  const vp = resolveRunnerVoiceProfileForSpeaker(speaker, sceneIndex);
+  const vp = resolveRunnerVoiceProfileForSpeaker(speaker, sceneIndex, dialect);
+  if (dialect === "fusha") {
+    vp.styleInstruction = ;
+  }
   const isFemale = vp.isFemale;
   const geminiVoice = vp.geminiVoice;
   const styleInstruction = vp.styleInstruction || "";
@@ -2754,6 +2757,8 @@ async function submitDeapiJobWithRateLimitRecovery({
           hitRateLimitOnPrimary = true;
           const waitMs = computeDeapiRateLimitWaitMs(submitRes.headers, attempt);
           if (waitMs > 65_000) {
+            globalThis.__deapiAccountExhausted = true;
+
             console.warn(
               `   ⚠️ [${sceneLabel}] HTTP 429 Quota Exhausted on ${route.label} (wait=${(waitMs / 1000).toFixed(0)}s > 65s limit). Switching seamlessly to local fallback...`
             );
@@ -2786,6 +2791,14 @@ async function submitDeapiJobWithRateLimitRecovery({
           break;
         }
 
+        if (String(route.label || route.submitUrl || "").includes("video") && (submitRes.status === 402 || (submitRes.status === 403 && /balance|credit|tier|exhaust/i.test(rawBody)))) {
+          globalThis.__deapiAccountExhausted = true;
+          console.warn(`   🛡️ [Fail-Safe Video Gate] deAPI account balance/credits exhausted (HTTP ${submitRes.status}). Tripping circuit breaker to 2.5D Animated Engine.`);
+          const credErr = new Error(`deAPI Credits Exhausted: HTTP ${submitRes.status}`);
+          credErr.httpStatus = submitRes.status;
+          credErr.isQuotaExhausted = true;
+          throw credErr;
+        }
         if (!submitRes.ok) {
           const errObj = new Error(
             `deAPI ${route.label} HTTP ${submitRes.status}: ${rawBody.slice(0, 260)}`
@@ -3450,6 +3463,10 @@ async function generateAnimatedSceneClipViaDeapi({
   dialect = "fusha",
   preferNativeJointAudio = null,
 }) {
+  if (globalThis.__deapiAccountExhausted) {
+    console.log("   🛡️ [Fail-Safe Video Gate] deAPI credits/tier unavailable: skipping API call and activating 2.5D Animated Ken Burns Engine with floating particles.");
+    return null;
+  }
   const baseUrl = String(process.env.DEAPI_BASE_URL || "https://api.deapi.ai").replace(/\/$/, "");
   const catalog = await discoverActiveDeapiModelsCatalog(apiKey, baseUrl);
   const availableVideoModels = (catalog.videoCandidates || [catalog.img2video].filter(Boolean)).filter(
@@ -4404,7 +4421,7 @@ async function generateAnimatedSceneClipViaDeapi({
   return pingPongPath;
 }
 
-async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptian") {
+async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "fusha") {
   const isShort = videoFormat === "short_9_16";
   const W = isShort ? 1080 : 1920;
   const H = isShort ? 1920 : 1080;
@@ -4564,8 +4581,8 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       const greetPrefix =
         dialect === "fusha"
           ? isShort
-            ? `أَهْلاً بِكُمْ يَا أَبْطَالُ قَنَاةِ نُورِين كِيدْز! أَنَا ${spk} وَمَعِي ${prt}!`
-            : `أَهْلاً وَسَهْلاً بِكُلِّ أَبْطَالِ وَعَائِلَةِ قَنَاةِ نُورِين كِيدْز الرَّائِعِينَ! أَنَا ${spk} وَمَعِي رَفِيقُ المُغَامَرَةِ ${prt}!`
+            ? `مَرْحَباً بِكُمْ يَا أَصْدِقَائِي الأَبْطَالَ فِي عَالَمِ نُورِين كِيدْز السَّاحِرِ! أَنَا ${spk} وَمَعِي رَفِيقُ المُغَامَرَةِ ${prt}!`
+            : `مَرْحَباً بِكُمْ يَا أَصْدِقَائِي الأَبْطَالَ فِي عَالَمِ نُورِين كِيدْز السَّاحِرِ! أَنَا ${spk} وَمَعِي رَفِيقُ المُغَامَرَةِ ${prt}!`
           : isShort
           ? `أهلاً بيكم يا أبطال عيلة نورين كيدز! أنا ${spk} ومعايا ${prt}!`
           : `أهلاً وسهلاً بكل أعضاء وعيلة قناة نورين كيدز الغاليين في كل مكان! ازيكم يا أشطر وأجمل أبطال؟ وحشتونا أوي! أنا ${spk} ومعايا رفيق المغامرة ${prt}، منورين عالمنا السحري النهارده!`;
@@ -4683,10 +4700,10 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     }
   }
 
-  const overscanW = Math.round(W * 1.12);
-  const overscanH = Math.round(H * 1.12);
-  const panRangeX = Math.max(8, overscanW - W);
-  const panRangeY = Math.max(8, overscanH - H);
+  const overscanW = Math.round(W * 1.14);
+  const overscanH = Math.round(H * 1.14);
+  const panRangeX = Math.max(16, overscanW - W);
+  const panRangeY = Math.max(16, overscanH - H);
 
   const prebakedMap = new Map();
   const getPrebakedPortrait = async (rawImgPath, tagIdx) => {
@@ -5013,10 +5030,44 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
         sceneVidOnlyMp4,
       ]);
     } else {
+      // 🛡️ [Disney 2.5D Animated Engine Fallback Gate] Ken Burns Camera Pan + Floating Theme Particles + Cinematic Borders
+      const combinedStoryText = `${rawTopicText} ${sc.dialogueArabic || ""} ${sc.title || ""} ${sc.speakerName || ""}`;
+      let sprite1Lavfi =
+        "color=c=black@0.0:s=42x42:r=30:d=0.04,format=rgba,geq=r=255:g=232:b=95:a='240*exp(-((X-21)*(X-21)+(Y-21)*(Y-21))/56)',format=yuva420p,loop=loop=-1:size=1:start=0";
+      let sprite2Lavfi =
+        "color=c=black@0.0:s=40x40:r=30:d=0.04,format=rgba,geq=r=255:g=180:b=225:a='clip(240*exp(-(abs(X-20)*abs(Y-20))/9)*exp(-((X-20)*(X-20)+(Y-20)*(Y-20))/165),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
+      let borderColorHex = "0xFBBF24";
+
+      if (/بحر|محيط|غواصة|مرجان|حوت|دلفين|شوشو|ماء|مياه|شلال|نهر|مطر|سلحفاة/.test(combinedStoryText)) {
+        sprite1Lavfi =
+          "color=c=black@0.0:s=44x44:r=30:d=0.04,format=rgba,geq=r=145:g=238:b=255:a='clip(230*exp(-pow(sqrt((X-22)*(X-22)+(Y-22)*(Y-22))-14,2)/9)+165*exp(-((X-16)*(X-16)+(Y-15)*(Y-15))/12),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
+        sprite2Lavfi =
+          "color=c=black@0.0:s=34x34:r=30:d=0.04,format=rgba,geq=r=85:g=255:b=235:a='220*exp(-((X-17)*(X-17)+(Y-17)*(Y-17))/50)',format=yuva420p,loop=loop=-1:size=1:start=0";
+        borderColorHex = "0x38BDF8";
+      } else if (/فضاء|كوكب|نجوم|نجمة|زحل|قمر|تلسكوب|مسبار|جنى|بلبل|سماء/.test(combinedStoryText)) {
+        sprite1Lavfi =
+          "color=c=black@0.0:s=44x44:r=30:d=0.04,format=rgba,geq=r=225:g=245:b=255:a='clip(248*exp(-(abs(X-22)*abs(Y-22))/9)*exp(-((X-22)*(X-22)+(Y-22)*(Y-22))/185),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
+        sprite2Lavfi =
+          "color=c=black@0.0:s=36x36:r=30:d=0.04,format=rgba,geq=r=255:g=215:b=90:a='230*exp(-((X-18)*(X-18)+(Y-18)*(Y-18))/54)',format=yuva420p,loop=loop=-1:size=1:start=0";
+        borderColorHex = "0x818CF8";
+      } else if (/سنان|أسنان|عيادة|إسعاف|طبيبة|دكتورة|نورين|أرنوب|ملك|لوليتا|نظافة|غسيل|فواكه/.test(combinedStoryText)) {
+        sprite1Lavfi =
+          "color=c=black@0.0:s=44x44:r=30:d=0.04,format=rgba,geq=r=255:g=255:b=255:a='clip(250*exp(-(abs(X-22)*abs(Y-22))/8)*exp(-((X-22)*(X-22)+(Y-22)*(Y-22))/175),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
+        sprite2Lavfi =
+          "color=c=black@0.0:s=36x36:r=30:d=0.04,format=rgba,geq=r=90:g=250:b=200:a='225*exp(-((X-18)*(X-18)+(Y-18)*(Y-18))/52)',format=yuva420p,loop=loop=-1:size=1:start=0";
+        borderColorHex = "0x34D399";
+      } else if (/مهندسة|نوران|فرفوش|كارمن|سمسم|شريف|صقر|اختراع|جسر|منارة|طاحونة|قطار|مصعد|أرقام/.test(combinedStoryText)) {
+        sprite1Lavfi =
+          "color=c=black@0.0:s=44x44:r=30:d=0.04,format=rgba,geq=r=255:g=210:b=55:a='clip(248*exp(-(abs(X-22)*abs(Y-22))/9)*exp(-((X-22)*(X-22)+(Y-22)*(Y-22))/180),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
+        sprite2Lavfi =
+          "color=c=black@0.0:s=36x36:r=30:d=0.04,format=rgba,geq=r=75:g=200:b=255:a='225*exp(-((X-18)*(X-18)+(Y-18)*(Y-18))/52)',format=yuva420p,loop=loop=-1:size=1:start=0";
+        borderColorHex = "0xF59E0B";
+      }
+
       const halfSpanX = Math.round(panRangeX * 0.5);
       const halfSpanY = Math.round(panRangeY * 0.5);
-      const ampX = Math.max(4, Math.round(panRangeX * 0.45));
-      const ampY = Math.max(4, Math.round(panRangeY * 0.42));
+      const ampX = Math.max(8, Math.round(panRangeX * 0.45));
+      const ampY = Math.max(8, Math.round(panRangeY * 0.42));
       const camExprX =
         i % 2 === 0
           ? `${halfSpanX}+${ampX}*sin(2*PI*t/9.5)`
@@ -5026,12 +5077,77 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
           ? `${halfSpanY}+${ampY}*cos(2*PI*t/12.0)`
           : `${halfSpanY}+${ampY}*sin(2*PI*t/11.5)`;
 
+      const marginX = Math.round(W * 0.07);
+      const rangeX = Math.max(120, W - marginX * 2 - 48);
+      const bottomY = Math.round(H * 0.92);
+      const travelY = Math.max(160, Math.round(H * 0.85));
+
+      const isScene1WithPoster = i === 0 && isShort && fs.existsSync(verticalPosterPath);
+      const isScene2WithSecret = i === 1;
+      const secretSpriteLavfi =
+        "color=c=black@0.0:s=130x130:r=30:d=0.04,format=rgba,geq=r=255:g=220:b=50:a='clip(255*exp(-((X-65)*(X-65)+(Y-65)*(Y-65))/650)+180*exp(-pow(abs(X-65)*abs(Y-65),0.6)/35),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
+
+      const filterSteps = [
+        `[0:v]format=yuv420p,loop=loop=-1:size=1:start=0,fps=30,trim=duration=${dur},crop=${W}:${H}:x='${camExprX}':y='${camExprY}'[base_raw]`,
+      ];
+      let currentBase = "base_raw";
+      let inputOffset = 3;
+
+      const extraSceneInputs = [];
+      if (isScene1WithPoster) {
+        extraSceneInputs.push("-loop", "1", "-i", verticalPosterPath);
+        filterSteps.push(
+          `[${inputOffset}:v]fade=t=out:st=0.55:d=0.20:alpha=1[post_faded]`,
+          `[${currentBase}][post_faded]overlay=x=0:y=0:enable='lte(t,0.75)':format=yuv420[base_poster]`
+        );
+        currentBase = "base_poster";
+        inputOffset++;
+      }
+
+      filterSteps.push(
+        `[1:v]split=3[s1][s2][s3]`,
+        `[2:v]split=3[o1][o2][o3]`,
+        `[${currentBase}][s1]overlay=x='${marginX}+${rangeX}*(0.5+0.46*sin(t*0.85+0.4))':y='${bottomY}-${travelY}*mod(t*0.21+0.08,1)':format=yuv420:shortest=1[v1]`,
+        `[v1][s2]overlay=x='${marginX}+${rangeX}*(0.5+0.45*cos(t*1.05+1.9))':y='${bottomY}-${travelY}*mod(t*0.26+0.42,1)':format=yuv420:shortest=1[v2]`,
+        `[v2][s3]overlay=x='${marginX}+${rangeX}*(0.5+0.46*sin(t*0.95+3.3))':y='${bottomY}-${travelY}*mod(t*0.23+0.74,1)':format=yuv420:shortest=1[v3]`,
+        `[v3][o1]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.78+1.1))':y='${bottomY}-${travelY}*mod(t*0.19+0.24,1)':format=yuv420:shortest=1[v4]`,
+        `[v4][o2]overlay=x='${marginX}+${rangeX}*(0.5+0.44*sin(t*1.12+2.6))':y='${bottomY}-${travelY}*mod(t*0.29+0.58,1)':format=yuv420:shortest=1[v5]`
+      );
+
+      let preDecorated = "v5";
+      if (isScene2WithSecret) {
+        extraSceneInputs.push("-f", "lavfi", "-i", secretSpriteLavfi);
+        filterSteps.push(
+          `[${preDecorated}][${inputOffset}:v]overlay=x=${W - 170}:y=180:enable='between(t,6.5,7.8)':format=yuv420[v_secret]`
+        );
+        preDecorated = "v_secret";
+        inputOffset++;
+      }
+
+      const finalBoxes = `drawbox=x=0:y=0:w=${W}:h=${H}:color=${borderColorHex}@0.88:t=8`;
+      filterSteps.push(
+        `[${preDecorated}][o3]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.92+4.2))':y='${bottomY}-${travelY}*mod(t*0.24+0.86,1)':format=yuv420:shortest=1,${finalBoxes},setsar=1,fade=t=in:st=0:d=0.30,fade=t=out:st=${fadeOutStart}:d=0.30,format=yuv420p[vout]`
+      );
+
+      const vfxFilterComplex = filterSteps.join(";");
+
       await execFileAsync("ffmpeg", [
         "-y",
         "-i",
         prebakedImg,
-        "-vf",
-        `format=yuv420p,loop=loop=-1:size=1:start=0,fps=30,trim=duration=${dur},crop=${W}:${H}:x='${camExprX}':y='${camExprY}',setsar=1,fade=t=in:st=0:d=0.25,fade=t=out:st=${fadeOutStart}:d=0.25,format=yuv420p`,
+        "-f",
+        "lavfi",
+        "-i",
+        sprite1Lavfi,
+        "-f",
+        "lavfi",
+        "-i",
+        sprite2Lavfi,
+        ...extraSceneInputs,
+        "-filter_complex",
+        vfxFilterComplex,
+        "-map",
+        "[vout]",
         "-an",
         "-t",
         String(dur),

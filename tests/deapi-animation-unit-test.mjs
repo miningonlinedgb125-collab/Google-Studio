@@ -199,6 +199,7 @@ test("End-to-end Mock Server (Fusha Primary): Native Joint Audio+Video (/videos/
   const origBaseUrl = process.env.DEAPI_BASE_URL;
   const origFastBackoff = process.env.DEAPI_FAST_TEST_BACKOFF;
   process.env.DEAPI_FAST_TEST_BACKOFF = "1";
+    globalThis.__deapiAccountExhausted = false;
 
   try {
     const mockKeyframeJpg = path.join(tmpDir, "cloud_hd_keyframe.jpg");
@@ -426,6 +427,7 @@ test("End-to-end Mock Server (Egyptian Fallback Mode): Multi-chunk Audio-Syncs (
   const origBaseUrl = process.env.DEAPI_BASE_URL;
   const origFastBackoff = process.env.DEAPI_FAST_TEST_BACKOFF;
   process.env.DEAPI_FAST_TEST_BACKOFF = "1";
+    globalThis.__deapiAccountExhausted = false;
 
   try {
     const longSceneSpeechWav = path.join(tmpDir, "scene_speech_16s.wav");
