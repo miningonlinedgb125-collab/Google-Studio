@@ -21,7 +21,7 @@ on:
 jobs:
   publish-noreen-facebook-daily:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
     permissions:
       contents: write
       actions: read
@@ -49,6 +49,7 @@ jobs:
 
       - name: 4. Run Pre-Upload Short Pipeline Unit Test Gate (Duration 60-80s, Egyptian Dialogue, Zero External Images)
         run: |
+          node --test tests/deapi-animation-unit-test.mjs
           node tests/short-pipeline-unit-test.mjs
 
       - name: 5. Render 3D Episode MP4 + Cover & Publish to Facebook Page (and Unified YouTube if enabled)
@@ -61,6 +62,7 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           APP_URL: ${{ secrets.APP_URL }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DEAPI_API_KEY: ${{ secrets.DEAPI_API_KEY }}
           YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}

@@ -1780,6 +1780,433 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
   return { audioPath: fallbackWav, voiceDurSec: 14, dialogue };
 }
 
+// ============================================================================
+// deAPI.ai 3D Cartoon Image-to-Video Animation Engine (Seamless Motion Pipeline)
+// ============================================================================
+let _cachedDeapiModelInfo = null;
+
+function snapDimensionToGrid(val, minVal = 256, maxVal = 1280, multiple = 32) {
+  const clamped = Math.max(minVal, Math.min(maxVal, Math.round(val)));
+  const snapped = Math.round(clamped / multiple) * multiple;
+  return Math.max(minVal, Math.min(maxVal, snapped));
+}
+
+function scoreDeapiImg2VideoModel(modelObj) {
+  const slug = String(modelObj?.slug || "").toLowerCase();
+  const name = String(modelObj?.name || "").toLowerCase();
+  const combined = slug + " " + name;
+  if (combined.includes("ltx2-5") || combined.includes("ltx2_5") || combined.includes("ltx-2.5")) return 100;
+  if (combined.includes("ltx2-3") || combined.includes("ltx2_3") || combined.includes("ltx-2.3")) return 95;
+  if (combined.includes("ltx2") || combined.includes("ltx-2")) return 90;
+  if (combined.includes("wan2.2") || combined.includes("wan-2.2") || combined.includes("wan2_2")) return 88;
+  if (combined.includes("seedance")) return 86;
+  if (combined.includes("minimax")) return 84;
+  if (combined.includes("ltxv") || combined.includes("ltx")) return 80;
+  return 60;
+}
+
+async function discoverActiveDeapiImg2VideoModel(apiKey, baseUrl = "https://api.deapi.ai") {
+  if (_cachedDeapiModelInfo) return _cachedDeapiModelInfo;
+  const preferredOverride = String(process.env.DEAPI_MODEL || "").trim();
+  const headers = {
+    Authorization: `Bearer ${apiKey}`,
+    Accept: "application/json",
+  };
+
+  const candidateUrls = [
+    `${baseUrl}/api/v2/models?per_page=50&filter[inference_types]=img2video`,
+    `${baseUrl}/api/v2/models?limit=50`,
+    `${baseUrl}/api/v1/client/models?per_page=50&filter[inference_types]=img2video`,
+  ];
+
+  for (const url of candidateUrls) {
+    try {
+      const res = await fetch(url, { headers });
+      if (!res.ok) continue;
+      const json = await res.json();
+      const rawList = Array.isArray(json?.data) ? json.data : Array.isArray(json) ? json : [];
+      const img2vidModels = rawList.filter((m) => {
+        const types = Array.isArray(m?.inference_types) ? m.inference_types.map((t) => String(t).toLowerCase()) : [];
+        return types.includes("img2video") && m?.slug;
+      });
+      if (img2vidModels.length > 0) {
+        let chosen = null;
+        if (preferredOverride) {
+          chosen = img2vidModels.find(
+            (m) => String(m.slug).toLowerCase() === preferredOverride.toLowerCase()
+          );
+        }
+        if (!chosen) {
+          img2vidModels.sort((a, b) => scoreDeapiImg2VideoModel(b) - scoreDeapiImg2VideoModel(a));
+          chosen = img2vidModels[0];
+        }
+        _cachedDeapiModelInfo = chosen;
+        console.log(`   🤖 [deAPI.ai] Selected live img2video model: "${chosen.slug}" (${chosen.name || "3D Animation"})`);
+        return chosen;
+      }
+    } catch (err) {
+      console.warn(`   ⚠️ [deAPI.ai] Model discovery probe notice (${url}):`, err?.message || err);
+    }
+  }
+
+  _cachedDeapiModelInfo = {
+    slug: preferredOverride || "Ltx2_5_22B_Dist_INT8",
+    name: "Fallback LTX Video Model",
+    info: {
+      defaults: { width: 768, height: 512, frames: 97, fps: 24, steps: 20, guidance: 3.0 },
+      limits: { min_width: 256, max_width: 1280, min_height: 256, max_height: 1280, dimension_multiple: 32, min_frames: 25, max_frames: 121 },
+      features: { supports_steps: true, supports_guidance: true, supports_negative_prompt: true },
+    },
+  };
+  return _cachedDeapiModelInfo;
+}
+
+function resolveDeapiModelRenderParams(modelInfo, isShort) {
+  const info = modelInfo && typeof modelInfo.info === "object" && !Array.isArray(modelInfo.info) ? modelInfo.info : {};
+  const defaults = info.defaults || {};
+  const limits = info.limits || {};
+  const features = info.features || {};
+
+  const minW = Number(limits.min_width ?? limits.width?.min ?? 256) || 256;
+  const maxW = Number(limits.max_width ?? limits.width?.max ?? 1024) || 1024;
+  const minH = Number(limits.min_height ?? limits.height?.min ?? 256) || 256;
+  const maxH = Number(limits.max_height ?? limits.height?.max ?? 1024) || 1024;
+  const mult = Number(limits.dimension_multiple ?? 32) || 32;
+
+  // Safe, fast, crisp dimensions respecting total pixel budgets across LTX / Wan / Seedance
+  const desiredW = isShort ? 512 : 768;
+  const desiredH = isShort ? 768 : 512;
+  const width = snapDimensionToGrid(desiredW, minW, maxW, mult);
+  const height = snapDimensionToGrid(desiredH, minH, maxH, mult);
+
+  const fps = Number(defaults.fps ?? limits.fps?.default ?? 24) || 24;
+  const minFrames = Number(limits.min_frames ?? limits.frames?.min ?? 25) || 25;
+  const maxFrames = Number(limits.max_frames ?? limits.frames?.max ?? 121) || 121;
+  let targetFrames = Number(defaults.frames ?? 97) || 97;
+  if (targetFrames < 49 && maxFrames >= 81) {
+    targetFrames = Math.min(97, maxFrames);
+  }
+  targetFrames = Math.max(minFrames, Math.min(maxFrames, Math.round(targetFrames)));
+  // LTX models prefer 8*k + 1 frame counts (e.g., 49, 73, 97, 121) when within limits
+  const slugLower = String(modelInfo?.slug || "").toLowerCase();
+  if (slugLower.includes("ltx")) {
+    const ltxSnap = Math.round((targetFrames - 1) / 8) * 8 + 1;
+    if (ltxSnap >= minFrames && ltxSnap <= maxFrames) {
+      targetFrames = ltxSnap;
+    }
+  }
+
+  const steps =
+    features.supports_steps === false
+      ? null
+      : Number(defaults.steps ?? Math.min(Number(limits.max_steps ?? 30) || 30, Math.max(Number(limits.min_steps ?? 1) || 1, 20)));
+  const guidance =
+    features.supports_guidance === false
+      ? null
+      : defaults.guidance !== undefined
+      ? Number(defaults.guidance)
+      : null;
+  const supportsNegative = features.supports_negative_prompt !== false;
+
+  return { width, height, frames: targetFrames, fps, steps, guidance, supportsNegative };
+}
+
+function buildCartoonSceneMotionPrompt({ speakerName, sceneTitle, sceneIndex, totalScenes, topicText }) {
+  const s = String(speakerName || "");
+  let charSubject = "cute 3D Pixar-style animated cartoon hero character";
+  if (/أرنوب|أرنب/.test(s)) charSubject = "cute 3D Pixar-style animated nurse rabbit character";
+  else if (/نمر|فرفوش|نمور/.test(s)) charSubject = "cheerful 3D Pixar-style animated friendly tiger character";
+  else if (/زقلط|كلب/.test(s)) charSubject = "funny cute 3D Pixar-style animated puppy dog character";
+  else if (/لوليتا|قطة/.test(s)) charSubject = "adorable 3D Pixar-style animated kitten character";
+  else if (/ديك/.test(s)) charSubject = "colorful 3D Pixar-style animated smart rooster character";
+  else if (/كركور|ببغاء/.test(s)) charSubject = "vibrant 3D Pixar-style animated wise parrot character";
+  else if (/عصفورة/.test(s)) charSubject = "cheerful 3D Pixar-style animated little songbird character";
+  else if (/فراشة/.test(s)) charSubject = "magical glowing 3D Pixar-style animated colorful butterfly character";
+  else if (/بطريق/.test(s)) charSubject = "playful 3D Pixar-style animated cute penguin character";
+  else if (/صقر/.test(s)) charSubject = "noble 3D Pixar-style animated smart falcon character";
+  else if (/فأر/.test(s)) charSubject = "playful 3D Pixar-style animated little mouse character";
+  else if (/باندا/.test(s)) charSubject = "cuddly 3D Pixar-style animated panda bear character";
+  else if (/زعتر|ثعلب/.test(s)) charSubject = "clever 3D Pixar-style animated cute fox character";
+  else if (/بلبل|روبوت/.test(s)) charSubject = "friendly 3D Pixar-style animated cute little robot character";
+  else if (/مرجان|دلفين/.test(s)) charSubject = "playful 3D Pixar-style animated smiling dolphin character";
+  else if (/سمسم|سنجاب/.test(s)) charSubject = "energetic 3D Pixar-style animated flying squirrel character";
+
+  let actionBeat = "speaking happily to the viewer with expressive joyful eyes, natural blinking, warm friendly smile, and lively gentle hand and head gestures";
+  if (sceneIndex === 0) {
+    actionBeat = "waving warmly and speaking enthusiastically to welcome kids, expressive blinking eyes, cheerful smile, lively head nod, joyful Pixar cartoon energy";
+  } else if (sceneIndex === 1) {
+    actionBeat = "looking curious and excited while explaining a discovery, expressive eyebrows, natural blinking, animated hand gesture, lively 3D cartoon acting";
+  } else if (sceneIndex === totalScenes - 1) {
+    actionBeat = "celebrating joyfully with a bright proud smile, cheerful wave and enthusiastic friendly gestures while asking kids a fun question, vibrant cartoon motion";
+  } else if (sceneIndex % 2 === 0) {
+    actionBeat = "talking confidently and enthusiastically with lively hand gestures, expressive blinking eyes, warm encouraging smile, smooth 3D character animation";
+  }
+
+  return `High quality 3D Pixar Disney style kids cartoon animation of this exact ${charSubject}, ${actionBeat}. Keep character face, outfit, colors, and proportions 100% consistent with the first frame. Smooth natural motion, gentle cinematic breathing camera, vibrant studio lighting.`;
+}
+
+async function prepareDeapiInputFrameJpg(rawImgPath, targetW, targetH, outJpgPath) {
+  // Center-focus framing that preserves full character head & body without any distortion
+  await execFileAsync("ffmpeg", [
+    "-y",
+    "-i",
+    rawImgPath,
+    "-filter_complex",
+    `[0:v]split=2[bg][fg];[bg]scale=${targetW}:${targetH}:force_original_aspect_ratio=increase,crop=${targetW}:${targetH},boxblur=22:4,eq=brightness=-0.05:saturation=1.15[bg_b];[fg]scale=${targetW}:${targetH}:force_original_aspect_ratio=decrease[fg_f];[bg_b][fg_f]overlay=(W-w)/2:(H-h)/2,setsar=1,format=yuvj420p[outv]`,
+    "-map",
+    "[outv]",
+    "-frames:v",
+    "1",
+    "-q:v",
+    "2",
+    outJpgPath,
+  ]);
+  return fs.existsSync(outJpgPath) && fs.statSync(outJpgPath).size > 1000 ? outJpgPath : rawImgPath;
+}
+
+async function generateAnimatedSceneClipViaDeapi({
+  apiKey,
+  rawImgPath,
+  speakerName,
+  sceneTitle,
+  sceneIndex,
+  totalScenes,
+  topicText,
+  isShort,
+  outW,
+  outH,
+  tmpDir,
+  formatTag,
+}) {
+  const baseUrl = String(process.env.DEAPI_BASE_URL || "https://api.deapi.ai").replace(/\/$/, "");
+  const modelInfo = await discoverActiveDeapiImg2VideoModel(apiKey, baseUrl);
+  const params = resolveDeapiModelRenderParams(modelInfo, isShort);
+  const prompt = buildCartoonSceneMotionPrompt({
+    speakerName,
+    sceneTitle,
+    sceneIndex,
+    totalScenes,
+    topicText,
+  });
+
+  const inputFramePath = path.join(tmpDir, `deapi_in_${formatTag}_${sceneIndex}.jpg`);
+  const preparedInputPath = await prepareDeapiInputFrameJpg(
+    rawImgPath,
+    params.width,
+    params.height,
+    inputFramePath
+  );
+  const imgBuffer = fs.readFileSync(preparedInputPath);
+
+  const endpointsToTry = [
+    {
+      submitUrl: `${baseUrl}/api/v2/videos/animations`,
+      statusBaseUrl: `${baseUrl}/api/v2/jobs`,
+      label: "v2/videos/animations",
+    },
+    {
+      submitUrl: `${baseUrl}/api/v1/client/img2video`,
+      statusBaseUrl: `${baseUrl}/api/v1/client/request-status`,
+      label: "v1/client/img2video",
+    },
+  ];
+
+  let requestId = "";
+  let activeStatusBaseUrl = `${baseUrl}/api/v2/jobs`;
+  let lastSubmitError = null;
+
+  for (const route of endpointsToTry) {
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        const form = new FormData();
+        form.append(
+          "first_frame_image",
+          new Blob([imgBuffer], { type: "image/jpeg" }),
+          path.basename(preparedInputPath)
+        );
+        form.append("prompt", prompt);
+        form.append("model", String(modelInfo.slug));
+        form.append("width", String(params.width));
+        form.append("height", String(params.height));
+        form.append("frames", String(params.frames));
+        form.append("fps", String(params.fps));
+        form.append("seed", "-1");
+        if (params.steps !== null && attempt === 1) {
+          form.append("steps", String(params.steps));
+        }
+        if (params.guidance !== null && attempt === 1) {
+          form.append("guidance", String(params.guidance));
+        }
+        if (params.supportsNegative && attempt === 1) {
+          form.append(
+            "negative_prompt",
+            "blurry, distorted face, extra limbs, morphing identity, horror, ugly, watermark, text glitch, static freeze"
+          );
+        }
+
+        const submitRes = await fetch(route.submitUrl, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            Accept: "application/json",
+          },
+          body: form,
+        });
+
+        const rawBody = await submitRes.text();
+        let parsed = {};
+        try {
+          parsed = JSON.parse(rawBody);
+        } catch {}
+
+        if (submitRes.status === 429 || submitRes.status >= 500) {
+          const backoffMs = 2500 * Math.pow(2, attempt - 1);
+          console.warn(
+            `   ⏳ [deAPI.ai Scene ${sceneIndex + 1}] HTTP ${submitRes.status} on ${route.label} (attempt ${attempt}/3). Retrying in ${backoffMs}ms...`
+          );
+          await sleep(backoffMs);
+          continue;
+        }
+
+        if (!submitRes.ok) {
+          lastSubmitError = new Error(
+            `deAPI ${route.label} HTTP ${submitRes.status}: ${rawBody.slice(0, 260)}`
+          );
+          // If 422 validation failed on optional steps/guidance, retry attempt 2 sends minimal core fields
+          if (submitRes.status === 422 && attempt === 1) {
+            continue;
+          }
+          break;
+        }
+
+        const extractedId = String(
+          parsed?.data?.request_id || parsed?.request_id || parsed?.id || ""
+        ).trim();
+        if (extractedId) {
+          requestId = extractedId;
+          activeStatusBaseUrl = route.statusBaseUrl;
+          break;
+        }
+        lastSubmitError = new Error(`Missing request_id in deAPI response: ${rawBody.slice(0, 200)}`);
+      } catch (netErr) {
+        lastSubmitError = netErr;
+        await sleep(2000 * attempt);
+      }
+    }
+    if (requestId) break;
+  }
+
+  if (!requestId) {
+    throw lastSubmitError || new Error("deAPI animation job submission failed");
+  }
+
+  console.log(
+    `   🎞️ [deAPI.ai Scene ${sceneIndex + 1}/${totalScenes}] Job queued (request_id=${requestId}, model=${modelInfo.slug}, ${params.width}x${params.height}, ${params.frames}f@${params.fps}fps)...`
+  );
+
+  // Poll job status until done (max 240s per scene clip)
+  const maxWaitMs = 240_000;
+  const startedMs = Date.now();
+  let pollIntervalMs = 2500;
+  let resultVideoUrl = "";
+
+  while (Date.now() - startedMs < maxWaitMs) {
+    await sleep(pollIntervalMs);
+    pollIntervalMs = Math.min(8000, Math.round(pollIntervalMs * 1.35));
+
+    const pollUrls = [
+      `${activeStatusBaseUrl}/${encodeURIComponent(requestId)}`,
+      `${baseUrl}/api/v2/jobs/${encodeURIComponent(requestId)}`,
+      `${baseUrl}/api/v1/client/request-status/${encodeURIComponent(requestId)}`,
+    ];
+
+    let pollPayload = null;
+    for (const pUrl of pollUrls) {
+      try {
+        const pRes = await fetch(pUrl, {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            Accept: "application/json",
+          },
+        });
+        if (!pRes.ok) continue;
+        pollPayload = await pRes.json();
+        break;
+      } catch {}
+    }
+
+    if (!pollPayload) continue;
+    const jobObj = pollPayload?.data && typeof pollPayload.data === "object" ? pollPayload.data : pollPayload;
+    const status = String(jobObj?.status || pollPayload?.status || "").toLowerCase();
+
+    if (status === "done" || status === "completed" || status === "succeeded" || status === "success") {
+      resultVideoUrl = String(
+        jobObj?.result_url ||
+          jobObj?.result?.url ||
+          jobObj?.results_alt_formats?.mp4 ||
+          (typeof jobObj?.result === "string" && /^https?:\/\//i.test(jobObj.result) ? jobObj.result : "") ||
+          pollPayload?.result_url ||
+          ""
+      ).trim();
+      break;
+    }
+
+    if (status === "error" || status === "failed" || status === "rejected" || status === "cancelled") {
+      const errDetail = jobObj?.error || jobObj?.message || pollPayload?.error || "Unknown job failure";
+      throw new Error(`deAPI job ${requestId} failed with status="${status}": ${JSON.stringify(errDetail)}`);
+    }
+  }
+
+  if (!resultVideoUrl) {
+    throw new Error(`deAPI job ${requestId} timed out or returned empty result_url`);
+  }
+
+  const rawClipPath = path.join(tmpDir, `deapi_raw_${formatTag}_${sceneIndex}.mp4`);
+  const dlRes = await fetch(resultVideoUrl);
+  if (!dlRes.ok) {
+    throw new Error(`Failed downloading deAPI video (${dlRes.status}) from ${resultVideoUrl}`);
+  }
+  const videoBytes = Buffer.from(await dlRes.arrayBuffer());
+  if (videoBytes.length < 2000) {
+    throw new Error(`Downloaded deAPI video too small (${videoBytes.length} bytes)`);
+  }
+  fs.writeFileSync(rawClipPath, videoBytes);
+
+  // Build seamless Ping-Pong (Forward + Reversed) 30fps loop unit at exact episode resolution (outW x outH)
+  // This eliminates any jump-cut when looping across 15s Short scenes or 39-50s Long scenes!
+  const pingPongPath = path.join(tmpDir, `deapi_pingpong_${formatTag}_${sceneIndex}.mp4`);
+  await execFileAsync("ffmpeg", [
+    "-y",
+    "-i",
+    rawClipPath,
+    "-filter_complex",
+    `[0:v]scale=${outW}:${outH}:force_original_aspect_ratio=increase,crop=${outW}:${outH},fps=30,eq=saturation=1.10:contrast=1.04,setsar=1,format=yuv420p,split=2[fwd][rev_in];[rev_in]trim=start_frame=1,reverse,setpts=PTS-STARTPTS[rev];[fwd][rev]concat=n=2:v=1:a=0[pingpong]`,
+    "-map",
+    "[pingpong]",
+    "-an",
+    "-r",
+    "30",
+    "-c:v",
+    "libx264",
+    "-preset",
+    "veryfast",
+    "-crf",
+    "19",
+    "-pix_fmt",
+    "yuv420p",
+    pingPongPath,
+  ]);
+
+  if (!fs.existsSync(pingPongPath) || fs.statSync(pingPongPath).size < 2000) {
+    throw new Error("FFmpeg ping-pong normalization produced empty clip");
+  }
+
+  console.log(
+    `   ✅ [deAPI.ai Scene ${sceneIndex + 1}/${totalScenes}] Animated 3D clip ready & seamless ping-pong loop prepared!`
+  );
+  return pingPongPath;
+}
+
 async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptian") {
   const isShort = videoFormat === "short_9_16";
   const W = isShort ? 720 : 1280;
@@ -2057,6 +2484,64 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     return finalBaked;
   };
 
+  // Stage 1.5: Generate AI-Animated 3D Cartoon Clips per scene via deAPI.ai (when DEAPI_API_KEY is configured)
+  const deapiApiKey = String(process.env.DEAPI_API_KEY || "").trim();
+  const animatedSceneClipMap = new Map();
+  if (deapiApiKey) {
+    console.log(
+      `🎨 [deAPI.ai 3D Animation Engine] Animating ${preparedScenes.length} scenes for ${videoFormat} from verified local character portraits...`
+    );
+    const DEAPI_CONCURRENCY = 2;
+    const animTasks = preparedScenes.map((item, idx) => async () => {
+      const sc = item.scene;
+      const isCompTurn = idx % 2 === 1;
+      const spkName = sc.speakerName || (isCompTurn ? companionName : heroName);
+      const localPortraitPath = resolveCharacterAvatarPath(
+        spkName,
+        isCompTurn ? companionName : heroName
+      );
+      try {
+        const animatedLoopMp4 = await generateAnimatedSceneClipViaDeapi({
+          apiKey: deapiApiKey,
+          rawImgPath: localPortraitPath,
+          speakerName: spkName,
+          sceneTitle: sc.title || "",
+          sceneIndex: idx,
+          totalScenes: preparedScenes.length,
+          topicText: rawTopicText,
+          isShort,
+          outW: W,
+          outH: H,
+          tmpDir,
+          formatTag: videoFormat,
+        });
+        animatedSceneClipMap.set(idx, animatedLoopMp4);
+      } catch (deapiErr) {
+        console.warn(
+          `   ⚠️ [deAPI.ai Fallback Notice - Scene ${idx + 1}/${preparedScenes.length}] Could not animate via deAPI (${
+            deapiErr?.message || deapiErr
+          }). Falling back to smooth local portrait motion so episode never fails.`
+        );
+      }
+    });
+
+    for (let b = 0; b < animTasks.length; b += DEAPI_CONCURRENCY) {
+      const batch = animTasks.slice(b, b + DEAPI_CONCURRENCY);
+      await Promise.all(batch.map((fn) => fn()));
+    }
+    console.log(
+      `✨ [deAPI.ai Summary] Animated ${animatedSceneClipMap.size}/${preparedScenes.length} scenes for ${videoFormat}.`
+    );
+  } else {
+    console.log(
+      `ℹ️ [deAPI.ai Notice] DEAPI_API_KEY not set in environment; rendering with standard local 3D character motion.`
+    );
+  }
+  if (episode && typeof episode === "object") {
+    episode._deapiAnimatedScenesCount = animatedSceneClipMap.size;
+    episode._totalRenderedScenesCount = preparedScenes.length;
+  }
+
   // Stage 2: Render scene segments in parallel batches (Closed-GOP H.264 video-only + sample-accurate 48kHz Stereo PCM .wav)
   // Separating PCM audio from video segment concatenation eliminates AAC 1024-sample boundary gaps in Long videos.
   const sceneTasks = preparedScenes.map((item, i) => async () => {
@@ -2069,12 +2554,13 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     );
     // Strictly show the speaking character's full portrait (Hero when Hero speaks, Companion when Companion speaks)
     const shotImg = activeImg;
-    const prebakedImg = await getPrebakedPortrait(shotImg, i);
+    const deapiLoopMp4 = animatedSceneClipMap.get(i) || null;
+    const prebakedImg = deapiLoopMp4 ? null : await getPrebakedPortrait(shotImg, i);
 
     console.log(
       `   -> [Scene ${i + 1}/${preparedScenes.length}] Speaker="${
         sc.speakerName || (isCompTurn ? companionName : heroName)
-      }" | Voice=${item.voiceDurSec.toFixed(1)}s | Scene=${dur}s (YouTube Fast-Processing Closed-GOP H.264 + Story VFX + Continuous PCM)...`
+      }" | Mode=${deapiLoopMp4 ? "deAPI-3D-Animated" : "Fallback-Motion"} | Voice=${item.voiceDurSec.toFixed(1)}s | Scene=${dur}s...`
     );
 
     // Ensure audio finishes naturally with ample breathing room (strictly 1.0x natural tempo)
@@ -2168,7 +2654,9 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     const secretSpriteLavfi = "color=c=black@0.0:s=130x130:r=30:d=0.04,format=rgba,geq=r=255:g=220:b=50:a='clip(255*exp(-((X-65)*(X-65)+(Y-65)*(Y-65))/650)+180*exp(-pow(abs(X-65)*abs(Y-65),0.6)/35),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
 
     const filterSteps = [
-      `[0:v]format=yuv420p,loop=loop=-1:size=1:start=0,fps=30,trim=duration=${dur},crop=${W}:${H}:x='${camExprX}':y='${camExprY}'[base_raw]`,
+      deapiLoopMp4
+        ? `[0:v]fps=30,trim=duration=${dur},setpts=PTS-STARTPTS,format=yuv420p[base_raw]`
+        : `[0:v]format=yuv420p,loop=loop=-1:size=1:start=0,fps=30,trim=duration=${dur},crop=${W}:${H}:x='${camExprX}':y='${camExprY}'[base_raw]`,
     ];
 
     let currentBase = "base_raw";
@@ -2213,10 +2701,13 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       extraSceneInputs.push("-f", "lavfi", "-i", secretSpriteLavfi);
     }
 
+    const primaryVideoInputArgs = deapiLoopMp4
+      ? ["-stream_loop", "-1", "-i", deapiLoopMp4]
+      : ["-i", prebakedImg];
+
     await execFileAsync("ffmpeg", [
       "-y",
-      "-i",
-      prebakedImg,
+      ...primaryVideoInputArgs,
       "-f",
       "lavfi",
       "-i",
@@ -5927,6 +6418,9 @@ async function main() {
   if (!process.env.GEMINI_API_KEY && vault.geminiApiKey) {
     process.env.GEMINI_API_KEY = String(vault.geminiApiKey).trim();
   }
+  if (!process.env.DEAPI_API_KEY && (vault.deapiApiKey || vault.DEAPI_API_KEY)) {
+    process.env.DEAPI_API_KEY = String(vault.deapiApiKey || vault.DEAPI_API_KEY).trim();
+  }
   const clientId = (process.env.YOUTUBE_CLIENT_ID || vault.youtubeClientId || "").trim();
   const clientSecret = (process.env.YOUTUBE_CLIENT_SECRET || vault.youtubeClientSecret || "").trim();
   const refreshToken = (process.env.YOUTUBE_REFRESH_TOKEN || vault.youtubeRefreshToken || "").trim();
@@ -6649,6 +7143,8 @@ async function main() {
       videoFormat: task.videoFormat,
       label: task.label,
       durationSec: durSec,
+      deapiAnimatedScenes: Number(task.episode?._deapiAnimatedScenesCount || 0),
+      totalScenesCount: Number(task.episode?._totalRenderedScenesCount || (task.episode?.scenes?.length || 0)),
       firstCommentId,
       runMode,
     });
@@ -7114,11 +7610,11 @@ async function main() {
       `- **وضع التشغيل:** \`${runMode}\``,
       `- **موعد الجدولة اليومية (توقيت مصر):** \`${dailyTime}\``,
       "",
-      "| نوع الفيديو | عنوان يوتيوب | عنوان فيسبوك | المدة | الحجم | رابط يوتيوب | رابط فيسبوك |",
-      "|---|---|---|---|---|---|---|",
+      "| نوع الفيديو | عنوان يوتيوب | عنوان فيسبوك | أنيميشن deAPI | المدة | الحجم | رابط يوتيوب | رابط فيسبوك |",
+      "|---|---|---|---|---|---|---|---|",
       ...results.map(
         (r) =>
-          `| ${r.label} | ${r.cleanTitle} | ${r.facebookTitle || "—"} | ${r.durationSec}s | ${r.fileSizeMb} MB | [YouTube](https://youtu.be/${r.videoId}) | ${
+          `| ${r.label} | ${r.cleanTitle} | ${r.facebookTitle || "—"} | ${r.deapiAnimatedScenes}/${r.totalScenesCount} مشاهد | ${r.durationSec}s | ${r.fileSizeMb} MB | [YouTube](https://youtu.be/${r.videoId}) | ${
             r.facebookPermalinkUrl ? `[Facebook](${r.facebookPermalinkUrl})` : "—"
           } |`
       ),
