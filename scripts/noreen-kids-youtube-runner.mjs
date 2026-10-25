@@ -1871,13 +1871,13 @@ function scoreDeapiImg2ImgModel(modelObj) {
   const slug = String(modelObj?.slug || "").toLowerCase();
   const name = String(modelObj?.name || "").toLowerCase();
   const combined = slug + " " + name;
-  if (combined.includes("flux_2_pro") || combined.includes("flux-2-pro")) return 108;
+  if (combined.includes("flux_2_pro") || combined.includes("flux-2-pro")) return 110;
+  if (combined.includes("flux_2_klein") || combined.includes("flux-2-klein") || combined.includes("flux2klein")) return 108;
   if (combined.includes("flux_2_dev") || combined.includes("flux-2-dev")) return 105;
-  if (combined.includes("qwenimageedit_plus") || combined.includes("qwen-image-edit-plus")) return 103;
-  if (combined.includes("flux_2_klein") || combined.includes("flux-2-klein") || combined.includes("flux2klein")) return 100;
-  if (combined.includes("qwenimageedit") || combined.includes("qwen-image-edit")) return 94;
-  if (combined.includes("flux") && combined.includes("kontext")) return 92;
-  if (combined.includes("flux")) return 86;
+  if (combined.includes("qwenimageedit_plus") || combined.includes("qwen-image-edit-plus")) return 90;
+  if (combined.includes("qwenimageedit") || combined.includes("qwen-image-edit")) return 88;
+  if (combined.includes("flux") && combined.includes("kontext")) return 86;
+  if (combined.includes("flux")) return 80;
   return 60;
 }
 
@@ -4404,7 +4404,7 @@ async function generateAnimatedSceneClipViaDeapi({
   return pingPongPath;
 }
 
-async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "fusha") {
+async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptian") {
   const isShort = videoFormat === "short_9_16";
   const W = isShort ? 1080 : 1920;
   const H = isShort ? 1920 : 1080;
@@ -4539,7 +4539,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "fusha")
   } catch {}
 
   const deapiApiKey = String(process.env.DEAPI_API_KEY || "").trim();
-  const useNativeJointEngineAudio = dialect === "fusha" && Boolean(deapiApiKey);
+  const useNativeJointEngineAudio = dialect === "fusha" && Boolean(deapiApiKey) && process.env.DEAPI_NATIVE_VOICE === "1";
 
   // STEP 1: Prepare scene scripts & timing
   // When using Native Joint Engine Audio (Fusha + deAPI), the video model itself speaks the dialogue and generates real Foley SFX!

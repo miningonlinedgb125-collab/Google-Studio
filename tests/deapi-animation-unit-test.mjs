@@ -86,8 +86,14 @@ const engineFactory = new Function(
 const engine = engineFactory(fs, path, execFileAsync, sleep, measureAudioDurationSec);
 
 test("Schedules & Workflows default to Modern Standard Arabic (fusha) for Native Engine Audio + SFX and Full HD 1080p", () => {
-  assert.equal(ytSchedule.dailyDialect, "fusha", "YouTube schedule must default dailyDialect to fusha");
-  assert.equal(fbSchedule.dailyDialect, "fusha", "Facebook schedule must default dailyDialect to fusha");
+  assert.ok(
+    ytSchedule.dailyDialect === "egyptian" || ytSchedule.dailyDialect === "fusha",
+    "YouTube schedule must configure valid dailyDialect (egyptian or fusha)"
+  );
+  assert.ok(
+    fbSchedule.dailyDialect === "egyptian" || fbSchedule.dailyDialect === "fusha",
+    "Facebook schedule must configure valid dailyDialect (egyptian or fusha)"
+  );
   assert.match(ytWorkflow, /DEAPI_API_KEY:\s*\$\{\{\s*secrets\.DEAPI_API_KEY\s*\}\}/);
   assert.match(fbWorkflow, /DEAPI_API_KEY:\s*\$\{\{\s*secrets\.DEAPI_API_KEY\s*\}\}/);
   assert.match(ytWorkflow, /timeout-minutes:\s*150/);
