@@ -80,6 +80,9 @@ const engineFactory = new Function(
     synthesizeArabicFushaViaDeapiSpeech,
     cropCharacterReferenceWithoutBanner,
     generateAnimatedSceneClipViaDeapi,
+    computeChannelWatermarkLayout,
+    resolveChannelWatermarkLogoPath,
+    prepareCircularChannelWatermarkPng,
     resetCache: () => {
       _cachedDeapiModelInfo = null;
       _cachedDeapiCatalog = null;
@@ -1147,4 +1150,140 @@ test("Crystal-Clear Live-Action Foley SFX Engine: Walking, Running, Wind, Water,
     fs.rmSync(tmpDir, { recursive: true, force: true });
   }
 });
+
+test("Persistent Circular Channel Watermark (Noreen Kids Broadcast Bug): Transparent Corners, Crisp 360° Yellow Ring at 88% Opacity, Safe Top-Right Placement, and Zero Scene-Boundary Flicker", async () => {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "noreen-watermark-test-"));
+  try {
+    const logoSrc = engine.resolveChannelWatermarkLogoPath(repoRoot);
+    assert.ok(logoSrc && fs.existsSync(logoSrc), "Approved local channel watermark logo must exist in src/assets/images/noreen_kids_watermark_logo.png");
+
+    const longLayout = engine.computeChannelWatermarkLayout(false, 1920, 1080);
+    const shortLayout = engine.computeChannelWatermarkLayout(true, 1080, 1920);
+    assert.deepEqual(
+      { size: longLayout.size, x: longLayout.x, y: longLayout.y, opacityPct: longLayout.opacityPct },
+      { size: 146, x: 1738, y: 32, opacityPct: 88 },
+      "Long 1920x1080 layout must be 146x146 at Top-Right (x=1738, y=32, 88% opacity)"
+    );
+    assert.deepEqual(
+      { size: shortLayout.size, x: shortLayout.x, y: shortLayout.y, opacityPct: shortLayout.opacityPct },
+      { size: 140, x: 910, y: 88, opacityPct: 88 },
+      "Short 1080x1920 layout must be 140x140 at Top-Right safe zone (x=910, y=88, 88% opacity)"
+    );
+
+    for (const [isShort, layout, tag] of [
+      [false, longLayout, "long_16_9"],
+      [true, shortLayout, "short_9_16"],
+    ]) {
+      const wmPng = path.join(tmpDir, `wm_${tag}.png`);
+      const outPath = await engine.prepareCircularChannelWatermarkPng({
+        logoSrcPath: logoSrc,
+        isShort,
+        outPngPath: wmPng,
+      });
+      assert.equal(outPath, wmPng);
+      assert.ok(fs.existsSync(wmPng), `Prepared circular watermark PNG must exist for ${tag}`);
+
+      const { stdout: probeJson } = await execFileAsync("ffprobe", [
+        "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height,pix_fmt", "-of", "json", wmPng,
+      ]);
+      const st = JSON.parse(probeJson).streams[0];
+      assert.equal(st.width, layout.size);
+      assert.equal(st.height, layout.size);
+      assert.equal(st.pix_fmt, "rgba", "Watermark PNG must preserve RGBA alpha channel");
+
+      const { stdout: rawBuf } = await execFileAsync(
+        "ffmpeg",
+        ["-v", "error", "-i", wmPng, "-f", "rawvideo", "-pix_fmt", "rgba", "-"],
+        { encoding: "buffer", maxBuffer: 4 * 1024 * 1024 }
+      );
+      const S = layout.size;
+      const getRgba = (x, y) => {
+        const idx = (y * S + x) * 4;
+        return [rawBuf[idx], rawBuf[idx + 1], rawBuf[idx + 2], rawBuf[idx + 3]];
+      };
+
+      // 1. All 4 square corners MUST be 100% transparent (alpha === 0, zero dark-blue box!)
+      for (const [cx, cy] of [
+        [0, 0],
+        [S - 1, 0],
+        [0, S - 1],
+        [S - 1, S - 1],
+        [4, 4],
+        [S - 5, S - 5],
+      ]) {
+        const [, , , a] = getRgba(cx, cy);
+        assert.equal(a, 0, `${tag} corner (${cx},${cy}) must have alpha=0 (fully transparent cutout)`);
+      }
+
+      // 2. Interior pixel must have ~88% opacity (alpha === 224)
+      const [, , , centerAlpha] = getRgba(Math.floor(S / 2), Math.floor(S / 2));
+      assert.equal(centerAlpha, 224, `${tag} center pixel must have 88% broadcast opacity (224/255)`);
+
+      // 3. Top, Bottom, Left, Right outer ring pixels just inside radius must be bright yellow (zero dark-blue fringe leak!)
+      const mid = Math.floor(S / 2);
+      for (const [label, rx, ry] of [
+        ["top-ring", mid, 2],
+        ["bottom-ring", mid, S - 3],
+        ["left-ring", 2, mid],
+        ["right-ring", S - 3, mid],
+      ]) {
+        const [r, g, b, a] = getRgba(rx, ry);
+        assert.ok(
+          r > 195 && g > 165 && b < 95 && a >= 200,
+          `${tag} ${label} (${rx},${ry}) must be crisp yellow ring at ~88% alpha, got rgba(${r},${g},${b},${a})`
+        );
+      }
+    }
+
+    // 4. Verify Zero-Flicker Continuity across faded scene boundary + Closed-GOP concat (-c:v copy)
+    const wmShortPng = path.join(tmpDir, "wm_short_9_16.png");
+    const sc0 = path.join(tmpDir, "sc0.mp4");
+    const sc1 = path.join(tmpDir, "sc1.mp4");
+    for (const [idx, color, outMp4] of [
+      [0, "0x1E293B", sc0],
+      [1, "0x0F766E", sc1],
+    ]) {
+      await execFileAsync("ffmpeg", [
+        "-y",
+        "-f", "lavfi", "-i", `color=c=${color}:s=1080x1920:r=30:d=1.2`,
+        "-i", wmShortPng,
+        "-filter_complex",
+        `[0:v]fps=30,trim=duration=1.2,setpts=PTS-STARTPTS,setsar=1,fade=t=in:st=0:d=0.22,fade=t=out:st=0.92:d=0.25,format=yuv420p[sc_faded];` +
+          `[1:v]format=rgba[wm];` +
+          `[sc_faded][wm]overlay=x=${shortLayout.x}:y=${shortLayout.y}:eof_action=repeat:format=auto,setsar=1,format=yuv420p[vout]`,
+        "-map", "[vout]",
+        "-an", "-r", "30", "-c:v", "libx264", "-preset", "ultrafast", "-crf", "17", "-g", "30", "-flags", "+cgop", "-pix_fmt", "yuv420p",
+        outMp4,
+      ]);
+      assert.ok(fs.existsSync(outMp4), `Rendered watermarked scene ${idx} must exist`);
+    }
+
+    const concatTxt = path.join(tmpDir, "concat.txt");
+    fs.writeFileSync(concatTxt, `file '${sc0}'\nfile '${sc1}'\n`);
+    const joinedMp4 = path.join(tmpDir, "joined_short.mp4");
+    await execFileAsync("ffmpeg", [
+      "-y", "-f", "concat", "-safe", "0", "-i", concatTxt, "-c:v", "copy", joinedMp4,
+    ]);
+
+    // Sample frame right at t=0.00s (when scene background is 100% black due to fade-in!): watermark MUST still be bright and visible!
+    const { stdout: fadeFrameRgb } = await execFileAsync(
+      "ffmpeg",
+      ["-v", "error", "-ss", "0.00", "-i", joinedMp4, "-frames:v", "1", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"],
+      { encoding: "buffer", maxBuffer: 8 * 1024 * 1024 }
+    );
+    // Background pixel away from watermark (100, 100) is faded to near-black (~0..5)
+    const bgIdx = (100 * 1080 + 100) * 3;
+    assert.ok(fadeFrameRgb[bgIdx] < 12 && fadeFrameRgb[bgIdx + 1] < 12, "Scene background at t=0.00s must be faded to black");
+
+    // Top-ring pixel of watermark (x = 910 + 70 = 980, y = 88 + 2 = 90) MUST be bright yellow even during black scene fade!
+    const wmRingIdx = ((shortLayout.y + 2) * 1080 + (shortLayout.x + 70)) * 3;
+    assert.ok(
+      fadeFrameRgb[wmRingIdx] > 165 && fadeFrameRgb[wmRingIdx + 1] > 140,
+      `Watermark at Top-Right must NOT fade to black during scene transitions (got rgb(${fadeFrameRgb[wmRingIdx]},${fadeFrameRgb[wmRingIdx + 1]},${fadeFrameRgb[wmRingIdx + 2]}))`
+    );
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
 
