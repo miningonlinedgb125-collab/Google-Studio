@@ -1452,7 +1452,9 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
   const speaker = String(scene.speakerName || "");
   const vp = resolveRunnerVoiceProfileForSpeaker(speaker, sceneIndex, dialect);
   if (dialect === "fusha") {
-    vp.styleInstruction = ;
+    vp.styleInstruction = vp.isFemale
+      ? "تحدثي باللغة العربية الفصحى السلسة والواضحة للأطفال بنبرة كرتونية دافئة ومبهجة"
+      : "تحدث باللغة العربية الفصحى السلسة والواضحة للأطفال بنبرة كرتونية حماسية ومبهجة";
   }
   const isFemale = vp.isFemale;
   const geminiVoice = vp.geminiVoice;
