@@ -37,6 +37,16 @@
     {
       "topic": "شوشو ومرجان وإنقاذ الحوت الصغير في البحر",
       "mainCharacterName": "شوشو القبطان الصغير",
+      "companionName": "مرجان الدلفين المرح"
+    },
+    {
+      "topic": "كارمن وسمسم وسر جهاز تحلية المطر لورد السطح",
+      "mainCharacterName": "كارمن المخترعة الصغيرة",
+      "companionName": "سمسم السنجاب الطائر"
+    },
+    {
+      "topic": "شوشو ومرجان وإنقاذ الحوت الصغير في البحر",
+      "mainCharacterName": "شوشو القبطان الصغير",
       "companionName": "مرجان الدلفين المرح",
       "timestampIso": "2026-10-25T02:04:06.017Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "تامر فارس الواحة",
       "companionName": "كركور الببغاء الحكيم",
       "timestampIso": "2026-10-21T19:21:36.537Z"
-    },
-    {
-      "topic": "اختراع أجنحة الطيران الآمنة للسناجب الصغيرة",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر"
-    },
-    {
-      "topic": "شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح"
-    },
-    {
-      "topic": "اختراع أجنحة الطيران الآمنة للسناجب الصغيرة",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر",
-      "timestampIso": "2026-10-21T10:15:46.065Z"
-    },
-    {
-      "topic": "شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح",
-      "timestampIso": "2026-10-21T10:15:46.065Z"
     }
   ],
   "scheduledHistory": [
@@ -2700,32 +2688,27 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٥‏/١٠‏/٢٠٢٦، ٥:١٠:٣٨ ص",
   "lastCloudRunReport": {
-    "id": "gh-run-40082280198",
-    "uploadMode": "daily_schedule",
+    "id": "gh-run-40152782287",
+    "uploadMode": "manual_instant",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-24 (12:44 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792834440100-j1cp",
-    "longEpisodeId": "ep-gh-long-1792834503939-vqyq",
-    "shortEpisodeTitle": "Noreen Kids: سر كوباية اللبن الدافي ونوم مشمش البدري | مغامرات الطبيبة نورين وأرنوب",
-    "longEpisodeTitle": "Noreen Kids: المهندسة نوران واختراع القطار المغناطيسي | مغامرات المهندسة نوران والنمر الفرفوش",
-    "shortTitle": "Noreen Kids: سر كوباية اللبن الدافي ونوم مشمش البدري | مغامرات الطبيبة نورين وأرنوب",
-    "longTitle": "Noreen Kids: المهندسة نوران واختراع القطار المغناطيسي | مغامرات المهندسة نوران والنمر الفرفوش",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-25 (05:10 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792893748065-brd9",
+    "longEpisodeId": "ep-gh-long-1792893846017-8gs6",
+    "shortEpisodeTitle": "Noreen Kids: شوشو ومرجان وإنقاذ الحوت الصغير في البحر | مغامرات شوشو ومرجان",
+    "longEpisodeTitle": "كارمن وسمسم وسر جهاز تحلية المطر لورد السطح",
+    "shortTitle": "Noreen Kids: شوشو ومرجان وإنقاذ الحوت الصغير في البحر | مغامرات شوشو ومرجان",
+    "longTitle": "كارمن وسمسم وسر جهاز تحلية المطر لورد السطح",
     "shortPlaylistId": "PLPwfeXzB3ozU",
-    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "w0xuTO7njuY",
-    "youtubeLongVideoId": "G9qg5kM7pvQ",
-    "facebookShortVideoId": "3170282436502857",
-    "facebookLongVideoId": "1410828087894295",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/3170282436502857",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1410828087894295",
-    "facebookShortTitle": "Noreen Kids | سر كوباية اللبن الدافي ونوم مشمش البدري - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
-    "facebookLongTitle": "Noreen Kids | المهندسة نوران واختراع القطار المغناطيسي - مغامرة المهندسة نوران والنمر الفرفوش",
+    "youtubeShortVideoId": "qbY_FYua2lQ",
+    "facebookShortVideoId": "2265097617397291",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2265097617397291",
+    "facebookShortTitle": "Noreen Kids | شوشو ومرجان وإنقاذ الحوت الصغير في البحر - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2733,16 +2716,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 1280,
-      "height": 720,
+      "width": 720,
+      "height": 1280,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 305,
-      "fileSizeBytes": 35253125,
-      "inspectedAt": "12:44"
+      "durationSec": 60,
+      "fileSizeBytes": 13274972,
+      "inspectedAt": "05:10"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2751,7 +2734,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-24T09:44:53.370Z"
+    "reportedAtIso": "2026-10-25T02:10:41.400Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
