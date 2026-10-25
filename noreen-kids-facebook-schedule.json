@@ -2671,6 +2671,16 @@
     {
       "topic": "كارمن وسمسم واختراع حصادة التفاح الذكية للبستان",
       "mainCharacterName": "كارمن المخترعة الصغيرة",
+      "companionName": "سمسم السنجاب الطائر"
+    },
+    {
+      "topic": "تامر وكركور وسر خيمة التسامح في واحة النخيل",
+      "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم"
+    },
+    {
+      "topic": "كارمن وسمسم واختراع حصادة التفاح الذكية للبستان",
+      "mainCharacterName": "كارمن المخترعة الصغيرة",
       "companionName": "سمسم السنجاب الطائر",
       "timestampIso": "2026-10-25T02:57:22.500Z"
     },
@@ -2833,59 +2843,32 @@
       "mainCharacterName": "سدرة الصغنونة",
       "companionName": "الفراشة الملونة",
       "timestampIso": "2026-10-22T10:18:35.242Z"
-    },
-    {
-      "topic": "مهمة إنقاذ القنفذ الصغير في حديقة الألعاب",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا"
-    },
-    {
-      "topic": "تامر فارس الواحة وسر نبع الماء الصافي في الرمال",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم"
-    },
-    {
-      "topic": "مهمة إنقاذ القنفذ الصغير في حديقة الألعاب",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "timestampIso": "2026-10-21T19:21:36.537Z"
-    },
-    {
-      "topic": "تامر فارس الواحة وسر نبع الماء الصافي في الرمال",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم",
-      "timestampIso": "2026-10-21T19:21:36.537Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-25 · 05:10 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-40119204394",
-    "uploadMode": "daily_schedule",
+    "id": "gh-run-40156206318",
+    "uploadMode": "manual_instant",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-24 (21:23 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792865299758-23c7",
-    "longEpisodeId": "ep-gh-long-1792865321199-ts70",
-    "shortEpisodeTitle": "Noreen Kids: لغز آثار أقدام الشبل التائه في جبل التلج | مغامرات عمرو وزعتر",
-    "longEpisodeTitle": "Noreen Kids: جنى رائدة الفضاء وتعلم السباحة في الفضاء | مغامرات جنى وبلبل",
-    "shortTitle": "Noreen Kids: لغز آثار أقدام الشبل التائه في جبل التلج | مغامرات عمرو وزعتر",
-    "longTitle": "Noreen Kids: جنى رائدة الفضاء وتعلم السباحة في الفضاء | مغامرات جنى وبلبل",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-25 (06:06 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792896960620-hwql",
+    "longEpisodeId": "ep-gh-long-1792897042500-50hs",
+    "shortEpisodeTitle": "Noreen Kids: كارمن وسمسم واختراع حصادة التفاح الذكية للبستان | مغامرات كارمن وسمسم",
+    "longEpisodeTitle": "تامر وكركور وسر خيمة التسامح في واحة النخيل",
+    "shortTitle": "Noreen Kids: كارمن وسمسم واختراع حصادة التفاح الذكية للبستان | مغامرات كارمن وسمسم",
+    "longTitle": "تامر وكركور وسر خيمة التسامح في واحة النخيل",
     "shortPlaylistId": "PLPwfeXzB3ozU",
-    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "1U1x8tWOJb4",
-    "youtubeLongVideoId": "j02vK7YV8-A",
-    "facebookShortVideoId": "1064671059947384",
-    "facebookLongVideoId": "2242919186424271",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1064671059947384",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2242919186424271",
-    "facebookShortTitle": "Noreen Kids | لغز آثار أقدام الشبل التائه في جبل التلج - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
-    "facebookLongTitle": "Noreen Kids | جنى رائدة الفضاء وتعلم السباحة في الفضاء - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
+    "youtubeShortVideoId": "zlHVIkdRuQQ",
+    "facebookShortVideoId": "3373583432850039",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/3373583432850039",
+    "facebookShortTitle": "Noreen Kids | كارمن وسمسم واختراع حصادة التفاح الذكية للبستان - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2893,16 +2876,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 1280,
-      "height": 720,
+      "width": 720,
+      "height": 1280,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 368,
-      "fileSizeBytes": 43641733,
-      "inspectedAt": "21:23"
+      "durationSec": 62,
+      "fileSizeBytes": 24127734,
+      "inspectedAt": "06:06"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2911,7 +2894,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-24T18:23:05.091Z"
+    "reportedAtIso": "2026-10-25T03:06:47.485Z"
   },
   "heroFairRotationIndex": 6,
   "interactiveHeroRotationIndex": 5,
