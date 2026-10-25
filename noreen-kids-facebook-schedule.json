@@ -57,6 +57,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122120064639484976",
+      "photoId": "122120064615484976",
+      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع تيتة والدب باندا",
+      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع تيتة والدب باندا",
+      "caption": "🎉 فزورة قوة التركيز وسرعة البديهة من عالم Noreen Kids! 🎉\nبصوا كويس على الصورتين [ أ ] و [ ب ].. فيه 3 اختلافات ذكية مستخبية! يا ترى عيونكم الحلوة هتطلعهم؟ 👀✨\n👇 اكتبوا لنا الفروقات الـ 3 في تعليق مع اسم طفلكم الجميل علشان نرحب بيه في حلقة النهاردة! 💖🎬\n🔔 واضغطوا متابعة للصفحة ولايك للبوست عشان متفوتكمش حكاياتنا اليومية! 👍🌟\n#نورين_كيدز #Noreen_Kids #فزورة_اليوم #كرتون_3D #أمهات_مصر",
+      "heroName": "تيتة",
+      "companionName": "الدب باندا",
+      "publishedAtCairo": "2026-10-25 · 21:56 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122120064639484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122120062677484976",
       "photoId": "122120062653484976",
       "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع جدو والفأر المشاكس",
@@ -523,18 +535,6 @@
       "publishedAtCairo": "2026-10-19 · 01:32 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122117821677484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122117819793484976",
-      "photoId": "122117819769484976",
-      "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع كارمن وسمسم",
-      "title": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع كارمن وسمسم",
-      "caption": "يا مساء الفل والنشاط على أحلى مامي وأشطر كتاكيت في الدنيا! 🌟\n\nكارمن وصديقه سمسم محضرين لكم النهاردة تحدي جديد وقوي جداً لقوة الملاحظة والتركيز.. في الصورة الكرتونية المبهجة دي، استخبت مننا نجوم ذهبية بتلمع، ياترى مين البطل الذكي اللي هيقدر يلاقيهم ويعدّهم كلهم صح؟ 👀✨\n\nيلا افتحوا عيونكم كويس، واكتبوا الإجابة الصحيحة مع \"اسم طفلكم الشاطر\" في الكومنتات.. عشان كارمن وسمسم يحيّوه بنفسهم بالاسم في حلقة بكرة ويفرحوا بشطارته! 🥳🎉\n\nمتنسوش تدوسوا متابعة للبيدج 🔔 وتعملوا شير للبوست عشان نتحدى بيه كل أصحابنا الحلوين ونشوف مين أسرع واحد هيعد النجوم! 💪❤️\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
-      "heroName": "كارمن",
-      "companionName": "سمسم",
-      "publishedAtCairo": "2026-10-19 · 01:22 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122117819793484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -817,21 +817,24 @@
         "3D Kids Animation"
       ],
       "thumbnailTextAr": "شال الصوف الملون الذي"
-    }
+    },
+    "_deapiAnimatedScenesCount": 8,
+    "_totalRenderedScenesCount": 8
   },
   "scheduledHistory": [
     {
       "id": "gh-run-40221019085",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-25 (21:47 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-25 (21:58 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1792952758242-gb8d",
       "longEpisodeId": "ep-gh-long-1792952825355-womx",
       "shortEpisodeTitle": "Noreen Kids: جدي الحكيم والفأر المشاكس ومفاجأة بيت الجدة الدافئ | مغامرات جدي الحكيم والفأر المشاكس",
-      "longEpisodeTitle": "شال الصوف الملون الذي نسجته جدتي الحنون لتدفئة",
+      "longEpisodeTitle": "Noreen Kids: شال الصوف الملون الذي نسجته جدتي الحنون لتدفئة | مغامرات جدتي الحنون والدب باندا",
       "shortTitle": "Noreen Kids: جدي الحكيم والفأر المشاكس ومفاجأة بيت الجدة الدافئ | مغامرات جدي الحكيم والفأر المشاكس",
-      "longTitle": "شال الصوف الملون الذي نسجته جدتي الحنون لتدفئة",
+      "longTitle": "Noreen Kids: شال الصوف الملون الذي نسجته جدتي الحنون لتدفئة | مغامرات جدتي الحنون والدب باندا",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -839,9 +842,13 @@
       "dialect": "fusha",
       "status": "uploaded_live",
       "youtubeShortVideoId": "B0TLLMoLke0",
+      "youtubeLongVideoId": "E6h5PE7HbIc",
       "facebookShortVideoId": "1433042242313449",
+      "facebookLongVideoId": "1104797118942070",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1433042242313449",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1104797118942070",
       "facebookShortTitle": "Noreen Kids | جدي الحكيم والفأر المشاكس ومفاجأة بيت الجدة الدافئ - مغامرة جدو والفأر المشاكس",
+      "facebookLongTitle": "Noreen Kids | شال الصوف الملون الذي نسجته جدتي الحنون لتدفئة - مغامرة تيتة والدب باندا",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -849,16 +856,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 1080,
-        "height": 1920,
+        "width": 1920,
+        "height": 1080,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 68,
-        "fileSizeBytes": 74511811,
-        "inspectedAt": "21:47"
+        "durationSec": 412,
+        "fileSizeBytes": 133620040,
+        "inspectedAt": "21:58"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
