@@ -2678,6 +2678,16 @@
     {
       "topic": "مَلَك وَلُولِيتَا وَإِسْعَافُ صَدِيقِ الحَدِيقَةِ",
       "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "سدرة والفراشة ورحلة الحروف الملونة المفقودة",
+      "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "مَلَك وَلُولِيتَا وَإِسْعَافُ صَدِيقِ الحَدِيقَةِ",
+      "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا",
       "timestampIso": "2026-10-25T06:28:19.149Z"
     },
@@ -2840,28 +2850,6 @@
       "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس",
       "timestampIso": "2026-10-23T10:11:47.843Z"
-    },
-    {
-      "topic": "حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "مبادرة إعادة تدوير ألعاب الأطفال القديمة وإهدائها",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة"
-    },
-    {
-      "topic": "حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-10-22T19:15:10.384Z"
-    },
-    {
-      "topic": "مبادرة إعادة تدوير ألعاب الأطفال القديمة وإهدائها",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة",
-      "timestampIso": "2026-10-22T19:15:10.384Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-25 · 07:05 بتوقيت مصر",
