@@ -37,6 +37,16 @@
     {
       "topic": "كارمن وسمسم ومناطيد المحبة الطائرة بين القرى",
       "mainCharacterName": "كارمن المخترعة الصغيرة",
+      "companionName": "سمسم السنجاب الطائر"
+    },
+    {
+      "topic": "تنظيف شاطئ الأصداف الملونة وحماية السلاحف البحرية",
+      "mainCharacterName": "شوشو القبطان الصغير",
+      "companionName": "مرجان الدلفين المرح"
+    },
+    {
+      "topic": "كارمن وسمسم ومناطيد المحبة الطائرة بين القرى",
+      "mainCharacterName": "كارمن المخترعة الصغيرة",
       "companionName": "سمسم السنجاب الطائر",
       "timestampIso": "2026-10-25T20:37:52.407Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "ذياد",
       "companionName": "العصفورة الفرفوشة",
       "timestampIso": "2026-10-19T20:39:55.003Z"
-    },
-    {
-      "topic": "ملك ولوليتا وسر خطة الإسعاف الذكية بالمدرسة",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا"
-    },
-    {
-      "topic": "سدرة وسر الدبدوب المفقود وخريطة الألوان",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة"
-    },
-    {
-      "topic": "ملك ولوليتا وسر خطة الإسعاف الذكية بالمدرسة",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "timestampIso": "2026-10-19T10:47:20.528Z"
-    },
-    {
-      "topic": "سدرة وسر الدبدوب المفقود وخريطة الألوان",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "timestampIso": "2026-10-19T10:47:20.528Z"
     }
   ],
   "scheduledHistory": [
@@ -2683,16 +2671,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٥‏/١٠‏/٢٠٢٦، ١١:٤١:٣٧ م",
   "lastCloudRunReport": {
-    "id": "gh-run-39468216484",
+    "id": "gh-run-40231352083",
     "uploadMode": "manual_instant",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-20 (20:47 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792518175096-4n77",
-    "longEpisodeId": "ep-gh-long-1792518222174-ub7y",
-    "shortEpisodeTitle": "Noreen Kids: عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات | مغامرات عمرو وزعتر",
-    "longEpisodeTitle": "إصلاح منارة المرجان المضيئة بأدوات الهندسة",
-    "shortTitle": "Noreen Kids: عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات | مغامرات عمرو وزعتر",
-    "longTitle": "إصلاح منارة المرجان المضيئة بأدوات الهندسة",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-25 (23:41 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792960620147-u8ny",
+    "longEpisodeId": "ep-gh-long-1792960672407-2uqc",
+    "shortEpisodeTitle": "Noreen Kids: كارمن وسمسم ومناطيد المحبة الطائرة بين القرى | مغامرات كارمن وسمسم",
+    "longEpisodeTitle": "تنظيف شاطئ الأصداف الملونة وحماية السلاحف البحرية",
+    "shortTitle": "Noreen Kids: كارمن وسمسم ومناطيد المحبة الطائرة بين القرى | مغامرات كارمن وسمسم",
+    "longTitle": "تنظيف شاطئ الأصداف الملونة وحماية السلاحف البحرية",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "privacyStatus": "public",
     "madeForKids": false,
@@ -2700,10 +2688,10 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "GwWDlfj99wY",
-    "facebookShortVideoId": "1129992583069988",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1129992583069988",
-    "facebookShortTitle": "Noreen Kids | عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
+    "youtubeShortVideoId": "aZnnapgZbMw",
+    "facebookShortVideoId": "1870064020822884",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1870064020822884",
+    "facebookShortTitle": "Noreen Kids | كارمن وسمسم ومناطيد المحبة الطائرة بين القرى - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2718,9 +2706,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 67,
-      "fileSizeBytes": 9971958,
-      "inspectedAt": "20:47"
+      "durationSec": 61,
+      "fileSizeBytes": 11691622,
+      "inspectedAt": "23:41"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2729,7 +2717,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-20T17:47:41.595Z"
+    "reportedAtIso": "2026-10-25T20:41:40.296Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
