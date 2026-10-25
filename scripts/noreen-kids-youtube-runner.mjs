@@ -1780,6 +1780,63 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
   return { audioPath: fallbackWav, voiceDurSec: 14, dialogue };
 }
 
+
+function computeChannelWatermarkLayout(isShort, W = isShort ? 720 : 1280, H = isShort ? 1280 : 720) {
+  const size = isShort ? Math.round(W * 0.155) : Math.round(H * 0.145);
+  const marginRight = isShort ? Math.round(W * 0.035) : Math.round(W * 0.022);
+  const marginTop = isShort ? Math.round(H * 0.052) : Math.round(H * 0.035);
+  const x = Math.max(0, W - size - marginRight);
+  const y = Math.max(0, Math.min(H - size, marginTop));
+  return { size, x, y, marginRight, marginTop, opacityPct: 88, alphaMax: 224 };
+}
+
+function resolveChannelWatermarkLogoPath(repoRootDir = process.cwd()) {
+  const allowedDir = path.resolve(repoRootDir, "src", "assets", "images");
+  const candidate = path.resolve(allowedDir, "noreen_kids_watermark_logo.png");
+  if (candidate.startsWith(allowedDir) && fs.existsSync(candidate)) {
+    return candidate;
+  }
+  return null;
+}
+
+async function prepareCircularChannelWatermarkPng({ logoSrcPath, isShort, outPngPath, W, H }) {
+  if (!logoSrcPath || !fs.existsSync(logoSrcPath)) {
+    return null;
+  }
+  const { size, alphaMax } = computeChannelWatermarkLayout(isShort, W, H);
+  const cx = ((size - 1) / 2).toFixed(2);
+  const cy = ((size - 1) / 2).toFixed(2);
+  const outerR = (size * 0.498).toFixed(2);
+  const ringInnerR = (size * 0.498 - 3.1).toFixed(2);
+  const distExpr = `sqrt((X-${cx})*(X-${cx})+(Y-${cy})*(Y-${cy}))`;
+  const ringMixExpr = `clip((${distExpr}-${ringInnerR})/0.9,0,1)`;
+  const vf =
+    `crop=trunc(iw*0.9697):trunc(ih*0.9492):trunc(iw*0.0117):trunc(ih*0.0078),` +
+    `scale=${size}:${size}:flags=lanczos,` +
+    `format=rgba,` +
+    `geq=` +
+    `r='round(r(X,Y)*(1-0.85*${ringMixExpr})+253*0.85*${ringMixExpr})':` +
+    `g='round(g(X,Y)*(1-0.85*${ringMixExpr})+224*0.85*${ringMixExpr})':` +
+    `b='round(b(X,Y)*(1-0.85*${ringMixExpr})+20*0.85*${ringMixExpr})':` +
+    `a='round(${alphaMax}*clip((${outerR}-${distExpr})/1.15,0,1))'`;
+
+  await execFileAsync("ffmpeg", [
+    "-y",
+    "-i",
+    logoSrcPath,
+    "-vf",
+    vf,
+    "-frames:v",
+    "1",
+    outPngPath,
+  ]);
+
+  if (fs.existsSync(outPngPath) && fs.statSync(outPngPath).size > 500) {
+    return outPngPath;
+  }
+  return null;
+}
+
 async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptian") {
   const isShort = videoFormat === "short_9_16";
   const W = isShort ? 720 : 1280;
@@ -2057,6 +2114,25 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     return finalBaked;
   };
 
+  // Prepare persistent circular channel watermark (Broadcast Bug: Top-Right, 88% opacity)
+  const wmLayout = computeChannelWatermarkLayout(isShort, W, H);
+  const watermarkLogoSrc = resolveChannelWatermarkLogoPath(process.cwd());
+  let channelWatermarkPng = null;
+  if (watermarkLogoSrc) {
+    try {
+      channelWatermarkPng = await prepareCircularChannelWatermarkPng({
+        logoSrcPath: watermarkLogoSrc,
+        isShort,
+        outPngPath: path.join(tmpDir, `channel_watermark_${videoFormat}.png`),
+        W,
+        H,
+      });
+    } catch (wmErr) {
+      console.warn("   ⚠️ [Watermark Notice] Could not prepare circular watermark PNG:", wmErr?.message || wmErr);
+    }
+  }
+  const hasChannelWatermark = Boolean(channelWatermarkPng && fs.existsSync(channelWatermarkPng));
+
   // Stage 2: Render scene segments in parallel batches (Closed-GOP H.264 video-only + sample-accurate 48kHz Stereo PCM .wav)
   // Separating PCM audio from video segment concatenation eliminates AAC 1024-sample boundary gaps in Long videos.
   const sceneTasks = preparedScenes.map((item, i) => async () => {
@@ -2198,20 +2274,29 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       preDecorated = "v_secret";
     }
 
-    const finalBoxes = `drawbox=x=0:y=0:w=${W}:h=${H}:color=${borderColorHex}@0.88:t=8`;
-
-    filterSteps.push(
-      `[${preDecorated}][o3]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.92+4.2))':y='${bottomY}-${travelY}*mod(t*0.24+0.86,1)':format=yuv420:shortest=1,${finalBoxes},setsar=1,fade=t=in:st=0:d=0.30,fade=t=out:st=${fadeOutStart}:d=0.30,format=yuv420p[vout]`
-    );
-
-    const vfxFilterComplex = filterSteps.join(";");
-
     const extraSceneInputs = [];
     if (isScene1WithPoster) {
       extraSceneInputs.push("-loop", "1", "-i", verticalPosterPath);
     } else if (isScene2WithSecret) {
       extraSceneInputs.push("-f", "lavfi", "-i", secretSpriteLavfi);
     }
+
+    const finalBoxes = `drawbox=x=0:y=0:w=${W}:h=${H}:color=${borderColorHex}@0.88:t=8`;
+    if (hasChannelWatermark) {
+      const wmInputIdx = 3 + extraSceneInputs.length;
+      extraSceneInputs.push("-i", channelWatermarkPng);
+      filterSteps.push(
+        `[${preDecorated}][o3]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.92+4.2))':y='${bottomY}-${travelY}*mod(t*0.24+0.86,1)':format=yuv420:shortest=1,${finalBoxes},setsar=1,fade=t=in:st=0:d=0.30,fade=t=out:st=${fadeOutStart}:d=0.30,format=yuv420p[v_faded]`,
+        `[${wmInputIdx}:v]format=rgba[wm]`,
+        `[v_faded][wm]overlay=x=${wmLayout.x}:y=${wmLayout.y}:eof_action=repeat:format=auto,setsar=1,format=yuv420p[vout]`
+      );
+    } else {
+      filterSteps.push(
+        `[${preDecorated}][o3]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.92+4.2))':y='${bottomY}-${travelY}*mod(t*0.24+0.86,1)':format=yuv420:shortest=1,${finalBoxes},setsar=1,fade=t=in:st=0:d=0.30,fade=t=out:st=${fadeOutStart}:d=0.30,format=yuv420p[vout]`
+      );
+    }
+
+    const vfxFilterComplex = filterSteps.join(";");
 
     await execFileAsync("ffmpeg", [
       "-y",
