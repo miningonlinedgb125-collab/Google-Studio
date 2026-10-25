@@ -37,6 +37,16 @@
     {
       "topic": "سدرة والفراشة ولعبة الاستغماية في المزرعة",
       "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "أم ملك وسر الكلمات السحرية في بستان السعادة",
+      "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح"
+    },
+    {
+      "topic": "سدرة والفراشة ولعبة الاستغماية في المزرعة",
+      "mainCharacterName": "سدرة الصغنونة",
       "companionName": "الفراشة الملونة",
       "timestampIso": "2026-10-25T07:40:02.262Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "تختوخ",
       "companionName": "الكلب زقلط",
       "timestampIso": "2026-10-23T23:38:01.764Z"
-    },
-    {
-      "topic": "سلة هدايا تيتة ومفاجأة بطل القرآن الصغير",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
-    },
-    {
-      "topic": "سر الفانوس الأثري وبوصلة الصدق في خان الخليلي",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "سلة هدايا تيتة ومفاجأة بطل القرآن الصغير",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "timestampIso": "2026-10-23T10:11:47.843Z"
-    },
-    {
-      "topic": "سر الفانوس الأثري وبوصلة الصدق في خان الخليلي",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-10-23T10:11:47.843Z"
     }
   ],
   "scheduledHistory": [
