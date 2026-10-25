@@ -3099,7 +3099,10 @@ async function upscaleVideoClipViaDeapi({
   tmpDir,
   tag = "shot",
 }) {
-  if (process.env.DEAPI_VIDEO_UPSCALE === "0") return null;
+  if (process.env.DEAPI_VIDEO_UPSCALE === "0") {
+    console.log(`   ℹ️ [${sceneLabel}] Video upscale bypassed (DEAPI_VIDEO_UPSCALE=0); local Lanczos+CAS mastering enabled.`);
+    return null;
+  }
   if (!inputMp4Path || !fs.existsSync(inputMp4Path)) return null;
 
   const candidates = (catalog?.vidUpscaleCandidates || [catalog?.vidUpscale].filter(Boolean)).filter(
@@ -3670,7 +3673,7 @@ async function generateAnimatedSceneClipViaDeapi({
               baseUrl,
               statusBaseUrl,
               requestId,
-              maxWaitMs: 270_000,
+              maxWaitMs: 180_000,
             });
 
             const candidateRawMp4 = path.join(

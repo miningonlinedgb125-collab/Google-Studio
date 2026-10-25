@@ -7,7 +7,7 @@
   "studioServerAutoEnabled": false,
   "aiRandomStoryAndCharactersEnabled": true,
   "unifiedDualPublishEnabled": true,
-  "selectedWorkflowMode": "daily_schedule",
+  "selectedWorkflowMode": "short_only",
   "dailyDialect": "fusha",
   "shortCustomTitleAr": "",
   "shortCustomCaptionAr": "",

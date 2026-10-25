@@ -10,7 +10,7 @@ on:
         description: 'اختر وضع التشغيل والرفع على يوتيوب وفيسبوك (الجدولة اليومية / قصير فقط / طويل فقط / الاثنين معاً / التفاعل المصور والتعليقات)'
         required: true
         type: choice
-        default: 'daily_schedule (الجدولة اليومية: قصير + طويل)'
+        default: 'short_only (تشغيل قصير فقط - Short 9:16)'
         options:
           - 'daily_schedule (الجدولة اليومية: قصير + طويل)'
           - 'short_only (تشغيل قصير فقط - Short 9:16)'
@@ -54,7 +54,7 @@ jobs:
 
       - name: 5. Generate 3D Episode, Synthesize Arabic Voiceover, Render Shared MP4 & Upload to YouTube + Facebook
         env:
-          RUN_MODE: ${{ github.event.inputs.run_mode || 'daily_schedule' }}
+          RUN_MODE: ${{ github.event.inputs.run_mode || 'short_only' }}
           GITHUB_EVENT_NAME: ${{ github.event_name }}
           GITHUB_EVENT_SCHEDULE: ${{ github.event.schedule || '' }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -62,6 +62,7 @@ jobs:
           APP_URL: ${{ secrets.APP_URL }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DEAPI_API_KEY: ${{ secrets.DEAPI_API_KEY }}
+          DEAPI_VIDEO_UPSCALE: '0'
           YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
