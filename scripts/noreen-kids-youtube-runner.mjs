@@ -1832,10 +1832,12 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
 let _cachedDeapiModelInfo = null;
 let _cachedDeapiCatalog = null;
 let _lastDeapiSubmissionAtMs = 0;
+const _sessionUnavailableSlugs = new Set();
 
 function snapDimensionToGrid(val, minVal = 256, maxVal = 1280, multiple = 32) {
+  const safeMult = Math.max(2, Number(multiple) || 32);
   const clamped = Math.max(minVal, Math.min(maxVal, Math.round(val)));
-  const snapped = Math.round(clamped / multiple) * multiple;
+  const snapped = Math.round(clamped / safeMult) * safeMult;
   return Math.max(minVal, Math.min(maxVal, snapped));
 }
 
@@ -1843,11 +1845,12 @@ function scoreDeapiImg2VideoModel(modelObj) {
   const slug = String(modelObj?.slug || "").toLowerCase();
   const name = String(modelObj?.name || "").toLowerCase();
   const combined = slug + " " + name;
-  if (combined.includes("ltx2-5") || combined.includes("ltx2_5") || combined.includes("ltx-2.5")) return 100;
-  if (combined.includes("ltx2-3") || combined.includes("ltx2_3") || combined.includes("ltx-2.3")) return 95;
-  if (combined.includes("ltx2") || combined.includes("ltx-2")) return 90;
+  if (combined.includes("seedance-2.5") || combined.includes("seedance_2_5") || combined.includes("seedance-2-5")) return 116;
+  if (combined.includes("seedance-2") || combined.includes("seedance")) return 112;
+  if (combined.includes("ltx2-5") || combined.includes("ltx2_5") || combined.includes("ltx-2.5")) return 104;
+  if (combined.includes("ltx2-3") || combined.includes("ltx2_3") || combined.includes("ltx-2.3")) return 98;
+  if (combined.includes("ltx2") || combined.includes("ltx-2")) return 92;
   if (combined.includes("wan2.2") || combined.includes("wan-2.2") || combined.includes("wan2_2")) return 88;
-  if (combined.includes("seedance")) return 86;
   if (combined.includes("minimax")) return 84;
   if (combined.includes("ltxv") || combined.includes("ltx")) return 80;
   return 60;
@@ -1868,11 +1871,13 @@ function scoreDeapiImg2ImgModel(modelObj) {
   const slug = String(modelObj?.slug || "").toLowerCase();
   const name = String(modelObj?.name || "").toLowerCase();
   const combined = slug + " " + name;
+  if (combined.includes("flux_2_pro") || combined.includes("flux-2-pro")) return 108;
+  if (combined.includes("flux_2_dev") || combined.includes("flux-2-dev")) return 105;
+  if (combined.includes("qwenimageedit_plus") || combined.includes("qwen-image-edit-plus")) return 103;
   if (combined.includes("flux_2_klein") || combined.includes("flux-2-klein") || combined.includes("flux2klein")) return 100;
-  if (combined.includes("qwenimageedit_plus") || combined.includes("qwen-image-edit-plus")) return 96;
-  if (combined.includes("qwenimageedit") || combined.includes("qwen-image-edit")) return 92;
-  if (combined.includes("flux") && combined.includes("kontext")) return 90;
-  if (combined.includes("flux")) return 85;
+  if (combined.includes("qwenimageedit") || combined.includes("qwen-image-edit")) return 94;
+  if (combined.includes("flux") && combined.includes("kontext")) return 92;
+  if (combined.includes("flux")) return 86;
   return 60;
 }
 
@@ -1880,11 +1885,23 @@ function scoreDeapiTxt2ImgModel(modelObj) {
   const slug = String(modelObj?.slug || "").toLowerCase();
   const name = String(modelObj?.name || "").toLowerCase();
   const combined = slug + " " + name;
-  if (combined.includes("flux_2") || combined.includes("flux-2")) return 98;
+  if (combined.includes("flux_2_pro") || combined.includes("flux-2-pro")) return 108;
+  if (combined.includes("flux_2_dev") || combined.includes("flux-2-dev")) return 105;
+  if (combined.includes("flux_2") || combined.includes("flux-2")) return 100;
   if (combined.includes("flux1schnell") || combined.includes("flux-1-schnell") || combined.includes("schnell")) return 95;
   if (combined.includes("zimageturbo") || combined.includes("z-image-turbo")) return 92;
   if (combined.includes("flux")) return 88;
   return 65;
+}
+
+function scoreDeapiVidUpscaleModel(modelObj) {
+  const slug = String(modelObj?.slug || "").toLowerCase();
+  const name = String(modelObj?.name || "").toLowerCase();
+  const combined = slug + " " + name;
+  if (combined.includes("flashvsr")) return 105;
+  if (combined.includes("realesrgan") && combined.includes("x2")) return 100;
+  if (combined.includes("realesrgan")) return 92;
+  return 70;
 }
 
 function scoreDeapiArabicTtsModel(modelObj) {
@@ -1967,6 +1984,7 @@ async function discoverActiveDeapiModelsCatalog(apiKey, baseUrl = "https://api.d
     `${baseUrl}/api/v2/models?per_page=50&filter[inference_types]=img2video`,
     `${baseUrl}/api/v2/models?per_page=50&filter[inference_types]=img2img`,
     `${baseUrl}/api/v2/models?per_page=50&filter[inference_types]=txt2img`,
+    `${baseUrl}/api/v2/models?per_page=50&filter[inference_types]=vid-upscale`,
     `${baseUrl}/api/v2/models?per_page=50&filter[inference_types]=txt2audio`,
     `${baseUrl}/api/v1/client/models?per_page=100`,
   ];
@@ -1999,60 +2017,75 @@ async function discoverActiveDeapiModelsCatalog(apiKey, baseUrl = "https://api.d
       m.inference_types.some((t) => String(t).toLowerCase() === typeName)
     );
 
-  const img2vidList = byType("img2video");
-  const aud2vidList = byType("aud2video");
-  const img2imgList = byType("img2img");
-  const txt2imgList = byType("txt2img");
+  const img2vidList = [...byType("img2video")].sort((a, b) => scoreDeapiImg2VideoModel(b) - scoreDeapiImg2VideoModel(a));
+  const aud2vidList = [...byType("aud2video")].sort((a, b) => scoreDeapiAud2VideoModel(b) - scoreDeapiAud2VideoModel(a));
+  const img2imgList = [...byType("img2img")].sort((a, b) => scoreDeapiImg2ImgModel(b) - scoreDeapiImg2ImgModel(a));
+  const txt2imgList = [...byType("txt2img")].sort((a, b) => scoreDeapiTxt2ImgModel(b) - scoreDeapiTxt2ImgModel(a));
+  const vidUpscaleList = [...byType("vid-upscale"), ...byType("vid_upscale")].sort(
+    (a, b) => scoreDeapiVidUpscaleModel(b) - scoreDeapiVidUpscaleModel(a)
+  );
   const txt2audioList = byType("txt2audio");
 
-  let chosenVideo = null;
-  if (preferredVideoOverride) {
-    chosenVideo = img2vidList.find((m) => String(m.slug).toLowerCase() === preferredVideoOverride.toLowerCase()) || null;
-  }
-  if (!chosenVideo && img2vidList.length > 0) {
-    img2vidList.sort((a, b) => scoreDeapiImg2VideoModel(b) - scoreDeapiImg2VideoModel(a));
-    chosenVideo = img2vidList[0];
-  }
-  if (!chosenVideo) {
-    chosenVideo = {
-      slug: preferredVideoOverride || "Ltx2_5_22B_Dist_INT8",
-      name: "Fallback LTX Video Model",
-      inference_types: ["img2video", "aud2video", "txt2video"],
-      info: {
-        defaults: { width: 768, height: 512, frames: 97, fps: 24, steps: 20, guidance: 3.0 },
-        limits: { min_width: 256, max_width: 1280, min_height: 256, max_height: 1280, dimension_multiple: 32, min_frames: 49, max_frames: 241 },
-        features: { supports_steps: true, supports_guidance: true, supports_negative_prompt: true },
+  const defaultLtxFallback = {
+    slug: preferredVideoOverride || "Ltx2_5_22B_Dist_INT8",
+    name: "Fallback LTX-2.5 Joint Audio-Video Model",
+    inference_types: ["img2video", "aud2video", "txt2video"],
+    info: {
+      defaults: { width: 1024, height: 576, frames: 193, fps: 24, steps: 20, guidance: 3.0 },
+      limits: {
+        min_width: 512,
+        max_width: 1344,
+        min_height: 512,
+        max_height: 1344,
+        max_pixels: 943718,
+        dimension_multiple: 32,
+        min_frames: 49,
+        max_frames: 241,
       },
-    };
+      features: { supports_steps: true, supports_guidance: true, supports_negative_prompt: true },
+    },
+  };
+
+  let videoCandidates = [];
+  if (preferredVideoOverride) {
+    const exact = img2vidList.find((m) => String(m.slug).toLowerCase() === preferredVideoOverride.toLowerCase());
+    if (exact) videoCandidates.push(exact);
   }
+  for (const m of img2vidList) {
+    if (!videoCandidates.some((x) => x.slug === m.slug)) {
+      videoCandidates.push(m);
+    }
+  }
+  if (!videoCandidates.some((x) => /ltx2|ltx-2|ltx_2/i.test(String(x.slug || "")))) {
+    videoCandidates.push(defaultLtxFallback);
+  }
+  const chosenVideo = videoCandidates[0] || defaultLtxFallback;
 
   let chosenAud2Video = null;
   if (preferredVideoOverride) {
     chosenAud2Video = aud2vidList.find((m) => String(m.slug).toLowerCase() === preferredVideoOverride.toLowerCase()) || null;
   }
   if (!chosenAud2Video && aud2vidList.length > 0) {
-    aud2vidList.sort((a, b) => scoreDeapiAud2VideoModel(b) - scoreDeapiAud2VideoModel(a));
     chosenAud2Video = aud2vidList[0];
   }
-  // LTX-2 / LTX-2.5 models natively support audio-syncs even if catalog was mocked with minimal fields
-  if (!chosenAud2Video && /ltx2|ltx-2|ltx_2/i.test(String(chosenVideo?.slug || ""))) {
-    chosenAud2Video = chosenVideo;
+  if (!chosenAud2Video) {
+    const ltxCandidate = videoCandidates.find((x) => /ltx2|ltx-2|ltx_2/i.test(String(x?.slug || "")));
+    if (ltxCandidate) chosenAud2Video = ltxCandidate;
   }
 
-  let chosenImg2Img = null;
+  let img2imgCandidates = [];
   if (preferredImageOverride) {
-    chosenImg2Img = img2imgList.find((m) => String(m.slug).toLowerCase() === preferredImageOverride.toLowerCase()) || null;
+    const exactImg = img2imgList.find((m) => String(m.slug).toLowerCase() === preferredImageOverride.toLowerCase());
+    if (exactImg) img2imgCandidates.push(exactImg);
   }
-  if (!chosenImg2Img && img2imgList.length > 0) {
-    img2imgList.sort((a, b) => scoreDeapiImg2ImgModel(b) - scoreDeapiImg2ImgModel(a));
-    chosenImg2Img = img2imgList[0];
+  for (const m of img2imgList) {
+    if (!img2imgCandidates.some((x) => x.slug === m.slug)) {
+      img2imgCandidates.push(m);
+    }
   }
-
-  let chosenTxt2Img = null;
-  if (txt2imgList.length > 0) {
-    txt2imgList.sort((a, b) => scoreDeapiTxt2ImgModel(b) - scoreDeapiTxt2ImgModel(a));
-    chosenTxt2Img = txt2imgList[0];
-  }
+  const chosenImg2Img = img2imgCandidates[0] || null;
+  const chosenTxt2Img = txt2imgList[0] || null;
+  const chosenVidUpscale = vidUpscaleList[0] || { slug: "FlashVSR_Tiny", name: "FlashVSR Tiny 2x Diffusion Video Upscaler" };
 
   let chosenArabicTts = null;
   if (txt2audioList.length > 0) {
@@ -2068,14 +2101,19 @@ async function discoverActiveDeapiModelsCatalog(apiKey, baseUrl = "https://api.d
   _cachedDeapiModelInfo = chosenVideo;
   _cachedDeapiCatalog = {
     img2video: chosenVideo,
+    videoCandidates,
     aud2video: chosenAud2Video,
     img2img: chosenImg2Img,
+    img2imgCandidates,
     txt2img: chosenTxt2Img,
+    txt2imgCandidates: txt2imgList,
+    vidUpscale: chosenVidUpscale,
+    vidUpscaleCandidates: vidUpscaleList.length > 0 ? vidUpscaleList : [chosenVidUpscale],
     arabicTts: chosenArabicTts,
   };
 
   console.log(
-    `   🤖 [deAPI.ai] Active pipeline models -> AudioSync="${chosenAud2Video?.slug || "fallback"}" | Video="${chosenVideo.slug}" | MultiRef-Scene="${chosenImg2Img?.slug || "auto"}" | MSA-TTS="${chosenArabicTts?.slug || "Chatterbox"}"`
+    `   🤖 [deAPI.ai] Active Cinema Pipeline -> VideoCandidates=[${videoCandidates.slice(0, 3).map((m) => m.slug).join(" -> ")}] | Keyframe="${chosenImg2Img?.slug || chosenTxt2Img?.slug || "auto"}" | VidUpscale="${chosenVidUpscale?.slug || "none"}" | MSA-TTS="${chosenArabicTts?.slug || "Chatterbox"}"`
   );
   return _cachedDeapiCatalog;
 }
@@ -2090,29 +2128,81 @@ function resolveDeapiModelRenderParams(modelInfo, isShort, targetDurationSec = n
   const defaults = info.defaults || {};
   const limits = info.limits || {};
   const features = info.features || {};
+  const slugLower = String(modelInfo?.slug || "").toLowerCase();
+  const isSeedance = slugLower.includes("seedance");
+  const isLtx2 = /ltx2|ltx-2|ltx_2/i.test(slugLower);
 
-  const minW = Number(limits.min_width ?? limits.width?.min ?? 256) || 256;
-  const maxW = Number(limits.max_width ?? limits.width?.max ?? 1024) || 1024;
-  const minH = Number(limits.min_height ?? limits.height?.min ?? 256) || 256;
-  const maxH = Number(limits.max_height ?? limits.height?.max ?? 1024) || 1024;
-  const mult = Number(limits.dimension_multiple ?? 32) || 32;
+  const minW = Number(limits.min_width ?? limits.width?.min ?? (isSeedance ? 432 : 512)) || (isSeedance ? 432 : 512);
+  const maxW = Number(limits.max_width ?? limits.width?.max ?? (isSeedance ? 2206 : isLtx2 ? 1344 : 1280)) || 1280;
+  const minH = Number(limits.min_height ?? limits.height?.min ?? (isSeedance ? 432 : 512)) || (isSeedance ? 432 : 512);
+  const maxH = Number(limits.max_height ?? limits.height?.max ?? (isSeedance ? 2206 : isLtx2 ? 1344 : 1280)) || 1280;
+  const mult = Number(limits.dimension_multiple ?? (isSeedance ? 16 : 32)) || (isSeedance ? 16 : 32);
+  const maxPixels =
+    Number(limits.max_pixels ?? limits.pixels?.max ?? (isSeedance ? 2_073_600 : isLtx2 ? 950_272 : 1_048_576)) ||
+    950_272;
 
-  const desiredW = isShort ? 512 : 768;
-  const desiredH = isShort ? 768 : 512;
-  const width = snapDimensionToGrid(desiredW, minW, maxW, mult);
-  const height = snapDimensionToGrid(desiredH, minH, maxH, mult);
+  // Target true HD widescreen / vertical 9:16 pairs rather than blurry 512x768
+  const preferredPairs = isShort
+    ? isSeedance
+      ? [
+          [1088, 1920],
+          [1072, 1920],
+          [896, 1600],
+          [736, 1280],
+          [720, 1280],
+          [576, 1024],
+        ]
+      : [
+          [736, 1280],
+          [704, 1248],
+          [640, 1152],
+          [576, 1024],
+          [544, 960],
+          [512, 896],
+        ]
+    : isSeedance
+    ? [
+        [1920, 1088],
+        [1920, 1072],
+        [1600, 896],
+        [1280, 736],
+        [1280, 720],
+        [1024, 576],
+      ]
+    : [
+        [1280, 736],
+        [1248, 704],
+        [1152, 640],
+        [1024, 576],
+        [960, 544],
+        [896, 512],
+      ];
+
+  let width = snapDimensionToGrid(isShort ? 576 : 1024, minW, maxW, mult);
+  let height = snapDimensionToGrid(isShort ? 1024 : 576, minH, maxH, mult);
+  for (const [candW, candH] of preferredPairs) {
+    const sw = snapDimensionToGrid(candW, minW, maxW, mult);
+    const sh = snapDimensionToGrid(candH, minH, maxH, mult);
+    if (sw >= minW && sw <= maxW && sh >= minH && sh <= maxH && sw * sh <= maxPixels) {
+      width = sw;
+      height = sh;
+      break;
+    }
+  }
 
   const fps = Number(defaults.fps ?? limits.fps?.default ?? 24) || 24;
-  const slugLower = String(modelInfo?.slug || "").toLowerCase();
-  const isLtx2 = /ltx2|ltx-2|ltx_2/i.test(slugLower);
-  const minFrames = Number(limits.min_frames ?? limits.frames?.min ?? (isLtx2 ? 49 : 25)) || (isLtx2 ? 49 : 25);
-  const maxFrames = Number(limits.max_frames ?? limits.frames?.max ?? (isLtx2 ? 241 : 121)) || (isLtx2 ? 241 : 121);
+  const minFrames =
+    Number(limits.min_frames ?? limits.frames?.min ?? (isSeedance ? 97 : isLtx2 ? 49 : 25)) ||
+    (isSeedance ? 97 : isLtx2 ? 49 : 25);
+  const maxFrames =
+    Number(limits.max_frames ?? limits.frames?.max ?? (isSeedance ? 721 : isLtx2 ? 241 : 121)) ||
+    (isSeedance ? 721 : isLtx2 ? 241 : 121);
 
-  let targetFrames = Number(defaults.frames ?? 97) || 97;
+  let targetFrames = Number(defaults.frames ?? (isSeedance ? 193 : 193)) || 193;
   if (typeof targetDurationSec === "number" && targetDurationSec > 0) {
     targetFrames = Math.round(targetDurationSec * fps);
-  } else if (targetFrames < 49 && maxFrames >= 81) {
-    targetFrames = Math.min(97, maxFrames);
+  } else if (targetFrames < 97 && maxFrames >= 121) {
+    targetFrames = Math.min(193, maxFrames);
   }
 
   targetFrames = Math.max(minFrames, Math.min(maxFrames, Math.round(targetFrames)));
@@ -2125,18 +2215,18 @@ function resolveDeapiModelRenderParams(modelInfo, isShort, targetDurationSec = n
   }
 
   const steps =
-    features.supports_steps === false
+    isSeedance || features.supports_steps === false
       ? null
       : Number(defaults.steps ?? Math.min(Number(limits.max_steps ?? 30) || 30, Math.max(Number(limits.min_steps ?? 1) || 1, 20)));
   const guidance =
-    features.supports_guidance === false
+    isSeedance || features.supports_guidance === false
       ? null
       : defaults.guidance !== undefined
       ? Number(defaults.guidance)
       : null;
-  const supportsNegative = features.supports_negative_prompt !== false;
+  const supportsNegative = !isSeedance && features.supports_negative_prompt !== false;
 
-  return { width, height, frames: targetFrames, fps, steps, guidance, supportsNegative, minFrames, maxFrames };
+  return { width, height, frames: targetFrames, fps, steps, guidance, supportsNegative, minFrames, maxFrames, isSeedance, isLtx2 };
 }
 
 function computeAudioChunkPlanSec(totalVoiceSec, maxChunkSec = 9.4, minChunkSec = 2.2) {
@@ -2510,11 +2600,40 @@ async function probeHasAudioStream(mediaPath) {
   }
 }
 
+async function probeAudioStreamLoudness(mediaPath) {
+  const hasStream = await probeHasAudioStream(mediaPath);
+  if (!hasStream) {
+    return { hasAudio: false, isAudible: false, meanVolumeDb: -91, maxVolumeDb: -91 };
+  }
+  try {
+    const { stderr } = await execFileAsync("ffmpeg", [
+      "-hide_banner",
+      "-i",
+      mediaPath,
+      "-vn",
+      "-af",
+      "volumedetect",
+      "-f",
+      "null",
+      "-",
+    ]);
+    const log = String(stderr || "");
+    const meanMatch = log.match(/mean_volume:\s*(-?\d+(?:\.\d+)?)\s*dB/i);
+    const maxMatch = log.match(/max_volume:\s*(-?\d+(?:\.\d+)?)\s*dB/i);
+    const meanVolumeDb = meanMatch ? parseFloat(meanMatch[1]) : -26;
+    const maxVolumeDb = maxMatch ? parseFloat(maxMatch[1]) : -14;
+    const isAudible = meanVolumeDb > -52 || maxVolumeDb > -40;
+    return { hasAudio: true, isAudible, meanVolumeDb, maxVolumeDb };
+  } catch {
+    return { hasAudio: true, isAudible: true, meanVolumeDb: -26, maxVolumeDb: -14 };
+  }
+}
+
 async function cropCharacterReferenceWithoutBanner(rawImgPath, outJpgPath) {
   const isCharCard = /char_[a-z0-9_]+\.(jpg|jpeg|png)$/i.test(path.basename(rawImgPath));
   const vfFilter = isCharCard
-    ? "crop=in_w:trunc(ih*0.76/2)*2:0:0,scale=768:768:force_original_aspect_ratio=increase,crop=768:768,setsar=1,format=yuvj420p"
-    : "scale=768:768:force_original_aspect_ratio=increase,crop=768:768,setsar=1,format=yuvj420p";
+    ? "crop=in_w:trunc(ih*0.76/2)*2:0:0,scale=1024:1024:flags=lanczos:force_original_aspect_ratio=increase,crop=1024:1024,setsar=1,format=yuvj420p"
+    : "scale=1024:1024:flags=lanczos:force_original_aspect_ratio=increase,crop=1024:1024,setsar=1,format=yuvj420p";
 
   await execFileAsync("ffmpeg", [
     "-y",
@@ -2525,7 +2644,7 @@ async function cropCharacterReferenceWithoutBanner(rawImgPath, outJpgPath) {
     "-frames:v",
     "1",
     "-q:v",
-    "2",
+    "1",
     outJpgPath,
   ]);
   return fs.existsSync(outJpgPath) && fs.statSync(outJpgPath).size > 1000 ? outJpgPath : rawImgPath;
@@ -2555,9 +2674,9 @@ async function buildCleanLocalDuoStoryFrameJpg({
     "-i",
     rightImg,
     "-filter_complex",
-    `[0:v]scale=${targetW}:${targetH}:force_original_aspect_ratio=increase,crop=${targetW}:${targetH},boxblur=26:5,eq=brightness=0.03:saturation=1.22[bg];` +
-      `[0:v]scale=${charW}:${charH}:force_original_aspect_ratio=decrease[c1];` +
-      `[1:v]scale=${charW}:${charH}:force_original_aspect_ratio=decrease[c2];` +
+    `[0:v]scale=${targetW}:${targetH}:flags=lanczos:force_original_aspect_ratio=increase,crop=${targetW}:${targetH},boxblur=26:5,eq=brightness=0.03:saturation=1.22[bg];` +
+      `[0:v]scale=${charW}:${charH}:flags=lanczos:force_original_aspect_ratio=decrease[c1];` +
+      `[1:v]scale=${charW}:${charH}:flags=lanczos:force_original_aspect_ratio=decrease[c2];` +
       `[bg][c1]overlay=x=${leftX}:y=${posY}[tmp1];` +
       `[tmp1][c2]overlay=x=${rightX}:y=${posY},setsar=1,format=yuvj420p[outv]`,
     "-map",
@@ -2565,7 +2684,7 @@ async function buildCleanLocalDuoStoryFrameJpg({
     "-frames:v",
     "1",
     "-q:v",
-    "2",
+    "1",
     outJpgPath,
   ]);
   return fs.existsSync(outJpgPath) && fs.statSync(outJpgPath).size > 1000 ? outJpgPath : heroCleanPath;
@@ -2579,13 +2698,13 @@ async function prepareDeapiInputFrameJpg(rawImgPath, targetW, targetH, outJpgPat
     "-i",
     rawImgPath,
     "-filter_complex",
-    `[0:v]${preCrop}split=2[bg][fg];[bg]scale=${targetW}:${targetH}:force_original_aspect_ratio=increase,crop=${targetW}:${targetH},boxblur=22:4,eq=brightness=-0.03:saturation=1.15[bg_b];[fg]scale=${targetW}:${targetH}:force_original_aspect_ratio=decrease[fg_f];[bg_b][fg_f]overlay=(W-w)/2:(H-h)/2,setsar=1,format=yuvj420p[outv]`,
+    `[0:v]${preCrop}split=2[bg][fg];[bg]scale=${targetW}:${targetH}:flags=lanczos:force_original_aspect_ratio=increase,crop=${targetW}:${targetH},boxblur=22:4,eq=brightness=-0.03:saturation=1.15[bg_b];[fg]scale=${targetW}:${targetH}:flags=lanczos:force_original_aspect_ratio=decrease[fg_f];[bg_b][fg_f]overlay=(W-w)/2:(H-h)/2,setsar=1,format=yuvj420p[outv]`,
     "-map",
     "[outv]",
     "-frames:v",
     "1",
     "-q:v",
-    "2",
+    "1",
     outJpgPath,
   ]);
   return fs.existsSync(outJpgPath) && fs.statSync(outJpgPath).size > 1000 ? outJpgPath : rawImgPath;
@@ -2652,9 +2771,11 @@ async function submitDeapiJobWithRateLimitRecovery({
         }
 
         if (!submitRes.ok) {
-          lastSubmitError = new Error(
+          const errObj = new Error(
             `deAPI ${route.label} HTTP ${submitRes.status}: ${rawBody.slice(0, 260)}`
           );
+          errObj.httpStatus = submitRes.status;
+          lastSubmitError = errObj;
           if (submitRes.status === 422 && attempt === 1) {
             continue;
           }
@@ -2765,7 +2886,6 @@ async function synthesizeArabicFushaViaDeapiSpeech({
   const catalog = await discoverActiveDeapiModelsCatalog(apiKey, baseUrl);
   const ttsModel = String(catalog?.arabicTts?.slug || "Chatterbox");
 
-  // Split long MSA paragraphs into <= 280 char chunks so Chatterbox synthesizes cleanly without clipping
   const sentences = String(text || "")
     .replace(/\s+/g, " ")
     .trim()
@@ -2865,6 +2985,191 @@ async function synthesizeArabicFushaViaDeapiSpeech({
   return mergedWav;
 }
 
+function splitDialogueIntoTimedNativeShots(dialogueArabic, totalTargetSec = 16.8, maxShotSec = 9.6, minShotSec = 4.2) {
+  const safeTotal = Math.max(minShotSec, Number(totalTargetSec) || 8.4);
+  const numShots = Math.max(1, Math.ceil(safeTotal / maxShotSec));
+  const perShotDur = Number(Math.max(minShotSec, safeTotal / numShots).toFixed(2));
+  const cleanText = String(dialogueArabic || "").replace(/\s+/g, " ").trim();
+  if (!cleanText || numShots === 1) {
+    return [{ index: 0, durSec: Number(safeTotal.toFixed(2)), arabicLine: cleanText }];
+  }
+
+  const clauses = cleanText
+    .split(/(?<=[.!؟،؛\n])\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  const buckets = Array.from({ length: numShots }, () => []);
+  if (clauses.length >= numShots) {
+    const targetCharsPerBucket = Math.ceil(cleanText.length / numShots);
+    let bIdx = 0;
+    let curLen = 0;
+    for (let i = 0; i < clauses.length; i++) {
+      buckets[bIdx].push(clauses[i]);
+      curLen += clauses[i].length;
+      const remainingClauses = clauses.length - (i + 1);
+      const remainingBuckets = numShots - (bIdx + 1);
+      if (
+        bIdx < numShots - 1 &&
+        (curLen >= targetCharsPerBucket || remainingClauses === remainingBuckets) &&
+        remainingClauses >= remainingBuckets
+      ) {
+        bIdx++;
+        curLen = 0;
+      }
+    }
+  } else {
+    const words = cleanText.split(/\s+/).filter(Boolean);
+    const chunkSize = Math.max(1, Math.ceil(words.length / numShots));
+    for (let b = 0; b < numShots; b++) {
+      buckets[b] = words.slice(b * chunkSize, (b + 1) * chunkSize);
+    }
+  }
+
+  return buckets.map((parts, idx) => ({
+    index: idx,
+    durSec: idx === numShots - 1 ? Number(Math.max(minShotSec, safeTotal - perShotDur * (numShots - 1)).toFixed(2)) : perShotDur,
+    arabicLine: parts.join(" ").trim() || cleanText,
+  }));
+}
+
+function buildNativeJointAudioVideoShotPrompt({
+  baseMotionPrompt,
+  heroName,
+  companionName,
+  speakerName,
+  shotArabicLine,
+  soundEffectsEn,
+  foleyTheme = "park",
+  shotIndex = 0,
+  totalShots = 1,
+}) {
+  const heroDesc = describeCharacterVisualAppearanceEn(heroName);
+  const compDesc = companionName ? describeCharacterVisualAppearanceEn(companionName) : "";
+  const speakerIsCompanion =
+    companionName && String(speakerName || "").trim() === String(companionName || "").trim();
+  const activeSpeakerEn = speakerIsCompanion
+    ? compDesc.split("(")[0].trim()
+    : heroDesc.split("(")[0].trim();
+
+  const themeFoleyMap = {
+    water: "gentle ocean waves splashing against the boat, playful water droplets, seabirds calling softly, footsteps on wooden deck",
+    sea: "gentle ocean waves splashing against the boat, playful water droplets, seabirds calling softly, footsteps on wooden deck",
+    space: "futuristic soft spacecraft hum, playful gentle control-panel chimes, light footsteps inside the cabin",
+    workshop: "light wooden and metallic tool clinks, footsteps on clean workshop floor, mechanical toy gears clicking",
+    forest: "crisp footsteps on grassy path, rustling green tree leaves, cheerful songbirds chirping, gentle breeze",
+    oasis: "soft footsteps on warm golden sand, palm fronds rustling in the breeze, trickling oasis water stream",
+    clinic: "light footsteps in bright pediatric room, gentle stethoscope and medical kit handling sounds",
+    park: "natural footsteps walking on garden path, rustling leaves, cheerful birds chirping, lively outdoor ambiance",
+  };
+  const foleyDesc = [
+    String(soundEffectsEn || "").trim(),
+    themeFoleyMap[foleyTheme] || themeFoleyMap.park,
+  ]
+    .filter(Boolean)
+    .join(", ");
+
+  const cleanSpeech = String(shotArabicLine || "")
+    .replace(/["«»]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  const shotProgressionCue =
+    totalShots > 1
+      ? `Continuous story shot ${shotIndex + 1} of ${totalShots}: characters continue moving naturally forward together in the environment with dynamic Pixar body acting.`
+      : `Dynamic continuous story shot: characters walk, gesture, and interact together physically throughout the scene.`;
+
+  return (
+    `Masterpiece 4K 3D Pixar-Disney animated feature film shot, ultra-sharp textures, rich cinematic lighting, vibrant colors, smooth 24fps character animation. ` +
+    `${shotProgressionCue} ${baseMotionPrompt} ` +
+    (cleanSpeech
+      ? `${activeSpeakerEn} faces their friend with expressive lip-synced mouth movements and speaks clearly and warmly in fluent child-friendly Modern Standard Arabic (العربية الفصحى السلسة للأطفال): "${cleanSpeech}". `
+      : "") +
+    `DIEGETIC SOUNDTRACK & REALISTIC FOLEY AUDIO: Crisp synchronized environmental sound effects (${foleyDesc}) matching every footstep, hand gesture, and physical movement on screen, with crystal-clear natural Arabic voice and zero background music or static noise.`
+  );
+}
+
+async function upscaleVideoClipViaDeapi({
+  apiKey,
+  baseUrl,
+  catalog,
+  inputMp4Path,
+  clipDurationSec = 8,
+  sceneLabel = "deAPI VidUpscale",
+  tmpDir,
+  tag = "shot",
+}) {
+  if (process.env.DEAPI_VIDEO_UPSCALE === "0") return null;
+  if (!inputMp4Path || !fs.existsSync(inputMp4Path)) return null;
+
+  const candidates = (catalog?.vidUpscaleCandidates || [catalog?.vidUpscale].filter(Boolean)).filter(
+    (m) => m?.slug && !_sessionUnavailableSlugs.has(m.slug)
+  );
+  if (candidates.length === 0) return null;
+
+  const chosenUpscaler =
+    candidates.find((m) => {
+      const sl = String(m.slug).toLowerCase();
+      if (clipDurationSec > 10.5 && sl.includes("flashvsr")) return false;
+      return true;
+    }) || candidates[0];
+
+  if (clipDurationSec > 10.5 && String(chosenUpscaler.slug).toLowerCase().includes("flashvsr")) {
+    return null;
+  }
+
+  try {
+    const vidBytes = fs.readFileSync(inputMp4Path);
+    const { requestId, statusBaseUrl } = await submitDeapiJobWithRateLimitRecovery({
+      apiKey,
+      sceneLabel: `${sceneLabel} (${chosenUpscaler.slug})`,
+      endpointsToTry: [
+        {
+          submitUrl: `${baseUrl}/api/v2/videos/upscales`,
+          statusBaseUrl: `${baseUrl}/api/v2/jobs`,
+          label: "v2/videos/upscales",
+        },
+        {
+          submitUrl: `${baseUrl}/api/v1/client/vid-upscale`,
+          statusBaseUrl: `${baseUrl}/api/v1/client/request-status`,
+          label: "v1/client/vid-upscale",
+        },
+      ],
+      buildRequestInit: () => {
+        const form = new FormData();
+        form.append("video", new Blob([vidBytes], { type: "video/mp4" }), path.basename(inputMp4Path));
+        form.append("model", String(chosenUpscaler.slug));
+        form.append("scale", "2");
+        return { body: form };
+      },
+    });
+
+    const upscaledUrl = await pollDeapiJobResultUrl({
+      apiKey,
+      baseUrl,
+      statusBaseUrl,
+      requestId,
+      maxWaitMs: 210_000,
+    });
+    const dl = await fetch(upscaledUrl);
+    if (!dl.ok) throw new Error(`Failed downloading upscaled video (${dl.status})`);
+    const outBytes = Buffer.from(await dl.arrayBuffer());
+    if (outBytes.length < 2000) throw new Error(`Upscaled video too small (${outBytes.length}B)`);
+
+    const upscaledMp4 = path.join(tmpDir, `deapi_upscaled_${tag}.mp4`);
+    fs.writeFileSync(upscaledMp4, outBytes);
+    console.log(`   ✨ [${sceneLabel}] AI 2x Super-Resolution Video Upscale succeeded (${chosenUpscaler.slug})!`);
+    return upscaledMp4;
+  } catch (upErr) {
+    const status = upErr?.httpStatus || 0;
+    if ([400, 402, 403, 404, 422].includes(status)) {
+      _sessionUnavailableSlugs.add(chosenUpscaler.slug);
+    }
+    console.warn(`   ℹ️ [${sceneLabel}] AI video upscale skipped (${upErr?.message || upErr}); using Lanczos+CAS HD mastering.`);
+    return null;
+  }
+}
+
 async function generateMultiCharacterStoryKeyframeViaDeapi({
   apiKey,
   baseUrl,
@@ -2880,117 +3185,129 @@ async function generateMultiCharacterStoryKeyframeViaDeapi({
   formatTag,
 }) {
   const keyframeOutPath = path.join(tmpDir, `deapi_story_keyframe_${formatTag}_${sceneIndex}.jpg`);
+  const editCandidates = (catalog?.img2imgCandidates || [catalog?.img2img].filter(Boolean)).filter(
+    (m) => m?.slug && !_sessionUnavailableSlugs.has(m.slug)
+  );
 
-  if (catalog?.img2img?.slug && heroCleanPath && compCleanPath) {
-    try {
-      const editModel = catalog.img2img;
-      const editInfo = editModel?.info && typeof editModel.info === "object" && !Array.isArray(editModel.info) ? editModel.info : {};
-      const editDefaults = editInfo.defaults || {};
-      const editLimits = editInfo.limits || {};
-      const minW = Number(editLimits.min_width ?? 256) || 256;
-      const maxW = Number(editLimits.max_width ?? 1024) || 1024;
-      const minH = Number(editLimits.min_height ?? 256) || 256;
-      const maxH = Number(editLimits.max_height ?? 1024) || 1024;
-      const mult = Number(editLimits.dimension_multiple ?? 32) || 32;
-      const imgW = snapDimensionToGrid(targetW, minW, maxW, mult);
-      const imgH = snapDimensionToGrid(targetH, minH, maxH, mult);
-      const editSteps = Number(editDefaults.steps ?? 20) || 20;
+  if (editCandidates.length > 0 && heroCleanPath && compCleanPath) {
+    const heroBuf = fs.readFileSync(heroCleanPath);
+    const compBuf = fs.readFileSync(compCleanPath);
 
-      const heroBuf = fs.readFileSync(heroCleanPath);
-      const compBuf = fs.readFileSync(compCleanPath);
-      const combinedRefPath = path.join(tmpDir, `deapi_duoref_${formatTag}_${sceneIndex}.jpg`);
-      await buildCleanLocalDuoStoryFrameJpg({
-        heroCleanPath,
-        compCleanPath,
-        targetW: imgW,
-        targetH: imgH,
-        sceneIndex,
-        outJpgPath: combinedRefPath,
-      });
-      const combinedBuf = fs.readFileSync(combinedRefPath);
+    for (const editModel of editCandidates.slice(0, 2)) {
+      try {
+        const editInfo = editModel?.info && typeof editModel.info === "object" && !Array.isArray(editModel.info) ? editModel.info : {};
+        const editDefaults = editInfo.defaults || {};
+        const editLimits = editInfo.limits || {};
+        const minW = Number(editLimits.min_width ?? 512) || 512;
+        const maxW = Number(editLimits.max_width ?? 1536) || 1536;
+        const minH = Number(editLimits.min_height ?? 512) || 512;
+        const maxH = Number(editLimits.max_height ?? 1536) || 1536;
+        const mult = Number(editLimits.dimension_multiple ?? 32) || 32;
+        const desiredImgW = targetW < targetH ? Math.max(targetW, 768) : Math.max(targetW, 1280);
+        const desiredImgH = targetW < targetH ? Math.max(targetH, 1344) : Math.max(targetH, 736);
+        const imgW = snapDimensionToGrid(desiredImgW, minW, maxW, mult);
+        const imgH = snapDimensionToGrid(desiredImgH, minH, maxH, mult);
+        const editSteps = Number(editDefaults.steps ?? 24) || 24;
 
-      const { requestId, statusBaseUrl } = await submitDeapiJobWithRateLimitRecovery({
-        apiKey,
-        sceneLabel: `deAPI Story-Frame ${sceneIndex + 1}/${totalScenes}`,
-        endpointsToTry: [
-          {
-            submitUrl: `${baseUrl}/api/v2/images/edits`,
-            statusBaseUrl: `${baseUrl}/api/v2/jobs`,
-            label: "v2/images/edits",
-          },
-        ],
-        buildRequestInit: (attempt) => {
-          const form = new FormData();
-          form.append("prompt", sceneKeyframePrompt);
-          form.append("model", String(editModel.slug));
-          form.append("steps", String(editSteps));
-          form.append("seed", "-1");
-          if (attempt === 1) {
-            form.append("width", String(imgW));
-            form.append("height", String(imgH));
-            form.append("images[]", new Blob([heroBuf], { type: "image/jpeg" }), "hero_ref.jpg");
-            form.append("images[]", new Blob([compBuf], { type: "image/jpeg" }), "companion_ref.jpg");
-            if (editInfo.features?.supports_negative_prompt !== false) {
-              form.append("negative_prompt", "text, watermark, banner, nameplate, logo, split screen, static card, blurry, deformed");
+        const combinedRefPath = path.join(tmpDir, `deapi_duoref_${formatTag}_${sceneIndex}.jpg`);
+        await buildCleanLocalDuoStoryFrameJpg({
+          heroCleanPath,
+          compCleanPath,
+          targetW: imgW,
+          targetH: imgH,
+          sceneIndex,
+          outJpgPath: combinedRefPath,
+        });
+        const combinedBuf = fs.readFileSync(combinedRefPath);
+
+        const { requestId, statusBaseUrl } = await submitDeapiJobWithRateLimitRecovery({
+          apiKey,
+          sceneLabel: `deAPI Story-Frame ${sceneIndex + 1}/${totalScenes} (${editModel.slug})`,
+          endpointsToTry: [
+            {
+              submitUrl: `${baseUrl}/api/v2/images/edits`,
+              statusBaseUrl: `${baseUrl}/api/v2/jobs`,
+              label: "v2/images/edits",
+            },
+          ],
+          buildRequestInit: (attempt) => {
+            const form = new FormData();
+            form.append("prompt", sceneKeyframePrompt);
+            form.append("model", String(editModel.slug));
+            form.append("steps", String(editSteps));
+            form.append("seed", "-1");
+            if (attempt === 1) {
+              form.append("width", String(imgW));
+              form.append("height", String(imgH));
+              form.append("images[]", new Blob([heroBuf], { type: "image/jpeg" }), "hero_ref.jpg");
+              form.append("images[]", new Blob([compBuf], { type: "image/jpeg" }), "companion_ref.jpg");
+              if (editInfo.features?.supports_negative_prompt !== false) {
+                form.append("negative_prompt", "text, watermark, banner, nameplate, logo, split screen, static card, blurry, lowres, deformed");
+              }
+            } else {
+              form.append("image", new Blob([combinedBuf], { type: "image/jpeg" }), "duo_scene_ref.jpg");
             }
-          } else {
-            form.append("image", new Blob([combinedBuf], { type: "image/jpeg" }), "duo_scene_ref.jpg");
-          }
-          return { body: form };
-        },
-      });
+            return { body: form };
+          },
+        });
 
-      const imgUrl = await pollDeapiJobResultUrl({
-        apiKey,
-        baseUrl,
-        statusBaseUrl,
-        requestId,
-        maxWaitMs: 150_000,
-      });
-      const dl = await fetch(imgUrl);
-      if (dl.ok) {
-        const bytes = Buffer.from(await dl.arrayBuffer());
-        if (bytes.length > 1500) {
-          const rawDlPath = path.join(tmpDir, `deapi_story_raw_${formatTag}_${sceneIndex}.img`);
-          fs.writeFileSync(rawDlPath, bytes);
-          await execFileAsync("ffmpeg", [
-            "-y",
-            "-i",
-            rawDlPath,
-            "-vf",
-            `scale=${targetW}:${targetH}:force_original_aspect_ratio=increase,crop=${targetW}:${targetH},setsar=1,format=yuvj420p`,
-            "-frames:v",
-            "1",
-            "-q:v",
-            "2",
-            keyframeOutPath,
-          ]);
-          if (fs.existsSync(keyframeOutPath) && fs.statSync(keyframeOutPath).size > 1500) {
-            console.log(`   🖼️ [deAPI.ai Scene ${sceneIndex + 1}/${totalScenes}] Multi-character 3D story keyframe synthesized (${editModel.slug})!`);
-            return keyframeOutPath;
+        const imgUrl = await pollDeapiJobResultUrl({
+          apiKey,
+          baseUrl,
+          statusBaseUrl,
+          requestId,
+          maxWaitMs: 150_000,
+        });
+        const dl = await fetch(imgUrl);
+        if (dl.ok) {
+          const bytes = Buffer.from(await dl.arrayBuffer());
+          if (bytes.length > 1500) {
+            const rawDlPath = path.join(tmpDir, `deapi_story_raw_${formatTag}_${sceneIndex}.img`);
+            fs.writeFileSync(rawDlPath, bytes);
+            await execFileAsync("ffmpeg", [
+              "-y",
+              "-i",
+              rawDlPath,
+              "-vf",
+              `scale=${targetW}:${targetH}:flags=lanczos:force_original_aspect_ratio=increase,crop=${targetW}:${targetH},setsar=1,format=yuvj420p`,
+              "-frames:v",
+              "1",
+              "-q:v",
+              "1",
+              keyframeOutPath,
+            ]);
+            if (fs.existsSync(keyframeOutPath) && fs.statSync(keyframeOutPath).size > 1500) {
+              console.log(`   🖼️ [deAPI.ai Scene ${sceneIndex + 1}/${totalScenes}] Cinema HD 3D story keyframe synthesized (${editModel.slug}, ${imgW}x${imgH})!`);
+              return keyframeOutPath;
+            }
           }
         }
+      } catch (editErr) {
+        if ([402, 403, 404].includes(editErr?.httpStatus || 0)) {
+          _sessionUnavailableSlugs.add(editModel.slug);
+        }
+        console.warn(
+          `   ℹ️ [deAPI.ai Scene ${sceneIndex + 1}] Multi-ref image edit (${editModel.slug}) notice: ${editErr?.message || editErr}`
+        );
       }
-    } catch (editErr) {
-      console.warn(
-        `   ℹ️ [deAPI.ai Scene ${sceneIndex + 1}] Multi-ref image edit skipped (${editErr?.message || editErr}); trying txt2img story keyframe...`
-      );
     }
   }
 
-  if (catalog?.txt2img?.slug) {
+  if (catalog?.txt2img?.slug && !_sessionUnavailableSlugs.has(catalog.txt2img.slug)) {
     try {
       const txtModel = catalog.txt2img;
       const txtInfo = txtModel?.info && typeof txtModel.info === "object" && !Array.isArray(txtModel.info) ? txtModel.info : {};
       const txtLimits = txtInfo.limits || {};
       const txtDefaults = txtInfo.defaults || {};
-      const minW = Number(txtLimits.min_width ?? 256) || 256;
-      const maxW = Number(txtLimits.max_width ?? 1024) || 1024;
-      const minH = Number(txtLimits.min_height ?? 256) || 256;
-      const maxH = Number(txtLimits.max_height ?? 1024) || 1024;
+      const minW = Number(txtLimits.min_width ?? 512) || 512;
+      const maxW = Number(txtLimits.max_width ?? 1536) || 1536;
+      const minH = Number(txtLimits.min_height ?? 512) || 512;
+      const maxH = Number(txtLimits.max_height ?? 1536) || 1536;
       const mult = Number(txtLimits.dimension_multiple ?? 32) || 32;
-      const imgW = snapDimensionToGrid(targetW, minW, maxW, mult);
-      const imgH = snapDimensionToGrid(targetH, minH, maxH, mult);
+      const desiredImgW = targetW < targetH ? Math.max(targetW, 768) : Math.max(targetW, 1280);
+      const desiredImgH = targetW < targetH ? Math.max(targetH, 1344) : Math.max(targetH, 736);
+      const imgW = snapDimensionToGrid(desiredImgW, minW, maxW, mult);
+      const imgH = snapDimensionToGrid(desiredImgH, minH, maxH, mult);
 
       const { requestId, statusBaseUrl } = await submitDeapiJobWithRateLimitRecovery({
         apiKey,
@@ -3015,7 +3332,7 @@ async function generateMultiCharacterStoryKeyframeViaDeapi({
               payload.steps = Number(txtDefaults.steps);
             }
             if (txtInfo.features?.supports_negative_prompt !== false) {
-              payload.negative_prompt = "text, watermark, banner, nameplate, logo, split screen, ugly, deformed, horror";
+              payload.negative_prompt = "text, watermark, banner, nameplate, logo, split screen, ugly, blurry, lowres, deformed, horror";
             }
           }
           return {
@@ -3043,15 +3360,15 @@ async function generateMultiCharacterStoryKeyframeViaDeapi({
             "-i",
             rawDlPath,
             "-vf",
-            `scale=${targetW}:${targetH}:force_original_aspect_ratio=increase,crop=${targetW}:${targetH},setsar=1,format=yuvj420p`,
+            `scale=${targetW}:${targetH}:flags=lanczos:force_original_aspect_ratio=increase,crop=${targetW}:${targetH},setsar=1,format=yuvj420p`,
             "-frames:v",
             "1",
             "-q:v",
-            "2",
+            "1",
             keyframeOutPath,
           ]);
           if (fs.existsSync(keyframeOutPath) && fs.statSync(keyframeOutPath).size > 1500) {
-            console.log(`   🖼️ [deAPI.ai Scene ${sceneIndex + 1}/${totalScenes}] 3D story scene keyframe generated (${txtModel.slug})!`);
+            console.log(`   🖼️ [deAPI.ai Scene ${sceneIndex + 1}/${totalScenes}] HD 3D story scene keyframe generated (${txtModel.slug}, ${imgW}x${imgH})!`);
             return keyframeOutPath;
           }
         }
@@ -3075,11 +3392,11 @@ async function extractLastFrameAsJpg(videoMp4Path, targetW, targetH, outJpgPath)
       "-i",
       videoMp4Path,
       "-vf",
-      `scale=${targetW}:${targetH}:force_original_aspect_ratio=increase,crop=${targetW}:${targetH},setsar=1,format=yuvj420p`,
+      `scale=${targetW}:${targetH}:flags=lanczos:force_original_aspect_ratio=increase,crop=${targetW}:${targetH},setsar=1,format=yuvj420p`,
       "-frames:v",
       "1",
       "-q:v",
-      "2",
+      "1",
       outJpgPath,
     ]);
     if (fs.existsSync(outJpgPath) && fs.statSync(outJpgPath).size > 1500) {
@@ -3099,6 +3416,7 @@ async function generateAnimatedSceneClipViaDeapi({
   speakerName,
   sceneTitle,
   dialogueArabic,
+  soundEffectsEn,
   aiVisualScenePromptEn,
   sceneAudioPath,
   sceneDurationSec,
@@ -3110,12 +3428,28 @@ async function generateAnimatedSceneClipViaDeapi({
   outH,
   tmpDir,
   formatTag,
+  dialect = "fusha",
+  preferNativeJointAudio = null,
 }) {
   const baseUrl = String(process.env.DEAPI_BASE_URL || "https://api.deapi.ai").replace(/\/$/, "");
   const catalog = await discoverActiveDeapiModelsCatalog(apiKey, baseUrl);
-  const videoModelInfo = catalog.img2video;
+  const availableVideoModels = (catalog.videoCandidates || [catalog.img2video].filter(Boolean)).filter(
+    (m) => m?.slug && !_sessionUnavailableSlugs.has(m.slug)
+  );
+  const videoModelInfo = availableVideoModels[0] || catalog.img2video;
   const audioSyncModelInfo = catalog.aud2video || null;
-  const baseParams = resolveDeapiModelRenderParams(audioSyncModelInfo || videoModelInfo, isShort);
+
+  const hasValidSceneAudio =
+    Boolean(sceneAudioPath) && fs.existsSync(sceneAudioPath) && fs.statSync(sceneAudioPath).size > 1000;
+  const useNativeJointAudioVideo =
+    preferNativeJointAudio !== null
+      ? Boolean(preferNativeJointAudio)
+      : dialect === "fusha" || !hasValidSceneAudio;
+
+  const primaryModelForSizing = useNativeJointAudioVideo
+    ? videoModelInfo
+    : audioSyncModelInfo || videoModelInfo;
+  const baseParams = resolveDeapiModelRenderParams(primaryModelForSizing, isShort);
 
   const effectiveHeroName = heroName || speakerName || "الطبيبة نورين";
   const effectiveCompName = companionName || "";
@@ -3143,7 +3477,7 @@ async function generateAnimatedSceneClipViaDeapi({
         foleyTheme: "park",
       };
 
-  // Stage A: Prepare initial multi-character 3D story scene keyframe
+  // Stage A: Prepare initial multi-character HD 3D story scene keyframe
   let initialKeyframePath = null;
   const primaryHeroPath = heroImgPath || rawImgPath;
   const primaryCompPath = compImgPath || null;
@@ -3190,12 +3524,433 @@ async function generateAnimatedSceneClipViaDeapi({
     );
   }
 
-  // Stage B1: Chunked Lip-Synced Audio-to-Video (/api/v2/videos/audio-syncs) with Last-Frame Chaining!
-  // When sceneAudioPath is provided and aud2video is supported, slice the scene's speech into <= 9.4s chunks
-  // (matching LTX-2.5's 1..10s audio window & up to 241 frames @ 24fps) so character lips & gestures match the exact dialogue!
-  const hasValidSceneAudio =
-    sceneAudioPath && fs.existsSync(sceneAudioPath) && fs.statSync(sceneAudioPath).size > 1000;
+  // ==========================================================================
+  // Stage B0 (PRIMARY): Native Joint Audio + Video Generation (/api/v2/videos/animations)
+  // Generates authentic 3D character acting + Modern Standard Arabic speech + real synchronized Foley SFX in one pass!
+  // ==========================================================================
+  if (useNativeJointAudioVideo && dialogueArabic) {
+    try {
+      const targetSceneSec = Math.max(
+        isShort ? 13.5 : 36.0,
+        Number(sceneDurationSec) || (isShort ? 16.8 : 40.0)
+      );
 
+      const getOrderedActiveVideoCandidates = () => {
+        const filtered = (catalog.videoCandidates || [catalog.img2video].filter(Boolean)).filter(
+          (m) => m?.slug && !_sessionUnavailableSlugs.has(m.slug)
+        );
+        return filtered.length > 0 ? filtered : [catalog.img2video];
+      };
+
+      const computeMaxShotWindowForModel = (modelObj) => {
+        const p = resolveDeapiModelRenderParams(modelObj, isShort);
+        const maxModelSec = p.maxFrames / Math.max(1, p.fps);
+        if (p.isSeedance) {
+          return Math.min(maxModelSec, isShort ? 17.6 : 20.5);
+        }
+        return Math.min(maxModelSec, isShort ? 9.2 : 10.0);
+      };
+
+      let activeCandidates = getOrderedActiveVideoCandidates();
+      let shotPlan = splitDialogueIntoTimedNativeShots(
+        dialogueArabic,
+        targetSceneSec,
+        computeMaxShotWindowForModel(activeCandidates[0]),
+        4.2
+      );
+
+      const normShotVideoPaths = [];
+      const masterShotWavPaths = [];
+      let currentFirstFramePath = initialKeyframePath;
+      let totalActualSec = 0;
+      let usedModelSlug = String(activeCandidates[0]?.slug || "Ltx2_5_22B_Dist_INT8");
+      let anyShotUpscaled = false;
+
+      for (let sIdx = 0; sIdx < shotPlan.length; sIdx++) {
+        let shot = shotPlan[sIdx];
+        activeCandidates = getOrderedActiveVideoCandidates();
+
+        let rawShotMp4 = null;
+        let shotChosenModel = null;
+        let shotChosenParams = null;
+        let lastModelErr = null;
+
+        for (let mIdx = 0; mIdx < activeCandidates.length; mIdx++) {
+          const candModel = activeCandidates[mIdx];
+          const candMaxSec = computeMaxShotWindowForModel(candModel);
+          if (sIdx === 0 && shot.durSec > candMaxSec + 0.4) {
+            shotPlan = splitDialogueIntoTimedNativeShots(dialogueArabic, targetSceneSec, candMaxSec, 4.2);
+            shot = shotPlan[0];
+          }
+          const candParams = resolveDeapiModelRenderParams(candModel, isShort, shot.durSec);
+          const shotFramePath = path.join(
+            tmpDir,
+            `deapi_native_in_${formatTag}_${sceneIndex}_${sIdx}_${mIdx}.jpg`
+          );
+          await execFileAsync("ffmpeg", [
+            "-y",
+            "-i",
+            currentFirstFramePath,
+            "-vf",
+            `scale=${candParams.width}:${candParams.height}:flags=lanczos:force_original_aspect_ratio=increase,crop=${candParams.width}:${candParams.height},setsar=1,format=yuvj420p`,
+            "-frames:v",
+            "1",
+            "-q:v",
+            "1",
+            shotFramePath,
+          ]);
+          const frameBytes = fs.readFileSync(
+            fs.existsSync(shotFramePath) ? shotFramePath : currentFirstFramePath
+          );
+
+          const shotPrompt = buildNativeJointAudioVideoShotPrompt({
+            baseMotionPrompt: prompts.videoMotionPrompt,
+            heroName: effectiveHeroName,
+            companionName: effectiveCompName,
+            speakerName: speakerName || effectiveHeroName,
+            shotArabicLine: shot.arabicLine,
+            soundEffectsEn,
+            foleyTheme: prompts.foleyTheme || "park",
+            shotIndex: sIdx,
+            totalShots: shotPlan.length,
+          });
+
+          try {
+            const { requestId, statusBaseUrl } = await submitDeapiJobWithRateLimitRecovery({
+              apiKey,
+              sceneLabel: `deAPI Native-AV Scene ${sceneIndex + 1}/${totalScenes} [Shot ${sIdx + 1}/${shotPlan.length} | ${candModel.slug}]`,
+              endpointsToTry: [
+                {
+                  submitUrl: `${baseUrl}/api/v2/videos/animations`,
+                  statusBaseUrl: `${baseUrl}/api/v2/jobs`,
+                  label: "v2/videos/animations",
+                },
+                {
+                  submitUrl: `${baseUrl}/api/v1/client/img2video`,
+                  statusBaseUrl: `${baseUrl}/api/v1/client/request-status`,
+                  label: "v1/client/img2video",
+                },
+              ],
+              buildRequestInit: (attempt) => {
+                const form = new FormData();
+                form.append(
+                  "first_frame_image",
+                  new Blob([frameBytes], { type: "image/jpeg" }),
+                  `scene_${sceneIndex}_shot_${sIdx}.jpg`
+                );
+                form.append("prompt", shotPrompt);
+                form.append("model", String(candModel.slug));
+                form.append("width", String(candParams.width));
+                form.append("height", String(candParams.height));
+                form.append("frames", String(candParams.frames));
+                form.append("fps", String(candParams.fps));
+                form.append("seed", "-1");
+                if (candParams.steps !== null && attempt !== 2) {
+                  form.append("steps", String(candParams.steps));
+                }
+                if (candParams.guidance !== null && attempt !== 2) {
+                  form.append("guidance", String(candParams.guidance));
+                }
+                if (candParams.supportsNegative && attempt !== 2) {
+                  form.append(
+                    "negative_prompt",
+                    "silent video, muted audio, closed mouth while speaking, frozen face, static image, blurry, lowres, pixelated, distorted face, extra limbs, watermark, text, banner"
+                  );
+                }
+                return { body: form };
+              },
+            });
+
+            console.log(
+              `   🎬🔊 [deAPI.ai Native-AV Scene ${sceneIndex + 1}/${totalScenes} Shot ${sIdx + 1}/${shotPlan.length}] Queued (id=${requestId}, model=${candModel.slug}, ${candParams.width}x${candParams.height}, ${candParams.frames}f@${candParams.fps}fps)...`
+            );
+
+            const shotVideoUrl = await pollDeapiJobResultUrl({
+              apiKey,
+              baseUrl,
+              statusBaseUrl,
+              requestId,
+              maxWaitMs: 270_000,
+            });
+
+            const candidateRawMp4 = path.join(
+              tmpDir,
+              `deapi_native_raw_${formatTag}_${sceneIndex}_${sIdx}.mp4`
+            );
+            const dlRes = await fetch(shotVideoUrl);
+            if (!dlRes.ok) {
+              throw new Error(`Failed downloading native AV shot (${dlRes.status})`);
+            }
+            const videoBytes = Buffer.from(await dlRes.arrayBuffer());
+            if (videoBytes.length < 2000) {
+              throw new Error(`Native AV shot too small (${videoBytes.length}B)`);
+            }
+            fs.writeFileSync(candidateRawMp4, videoBytes);
+
+            rawShotMp4 = candidateRawMp4;
+            shotChosenModel = candModel;
+            shotChosenParams = candParams;
+            usedModelSlug = String(candModel.slug);
+            break;
+          } catch (candErr) {
+            lastModelErr = candErr;
+            const status = candErr?.httpStatus || 0;
+            if ([400, 402, 403, 404, 422].includes(status) && activeCandidates.length > 1) {
+              _sessionUnavailableSlugs.add(candModel.slug);
+              console.warn(
+                `   ℹ️ [deAPI.ai] Model "${candModel.slug}" unavailable on this account/tier (HTTP ${status}); switching seamlessly to next model...`
+              );
+              continue;
+            }
+            throw candErr;
+          }
+        }
+
+        if (!rawShotMp4 || !shotChosenModel) {
+          throw lastModelErr || new Error("No video model produced rawShotMp4");
+        }
+
+        const rawMeasuredDur = await measureAudioDurationSec(rawShotMp4, shot.durSec);
+        const targetShotDurSec = Number(
+          (rawMeasuredDur >= 2.0 ? rawMeasuredDur : shot.durSec).toFixed(3)
+        );
+
+        // Step 1: Extract authentic native joint audio (spoken Arabic + real synchronized Foley SFX) BEFORE upscaling!
+        const audioLoudness = await probeAudioStreamLoudness(rawShotMp4);
+        const shotMasterWav = path.join(
+          tmpDir,
+          `deapi_native_shot_master_${formatTag}_${sceneIndex}_${sIdx}.wav`
+        );
+
+        if (audioLoudness.hasAudio && audioLoudness.isAudible) {
+          await execFileAsync("ffmpeg", [
+            "-y",
+            "-i",
+            rawShotMp4,
+            "-vn",
+            "-af",
+            `highpass=f=45,lowpass=f=16500,acompressor=threshold=-20dB:ratio=2.4:attack=12:release=180:makeup=2.2dB,alimiter=limit=0.93,afade=t=in:st=0:d=0.04,afade=t=out:st=${Math.max(0.1, targetShotDurSec - 0.06).toFixed(3)}:d=0.06,apad=whole_dur=${targetShotDurSec}`,
+            "-t",
+            String(targetShotDurSec),
+            "-ar",
+            "48000",
+            "-ac",
+            "2",
+            "-c:a",
+            "pcm_s16le",
+            shotMasterWav,
+          ]);
+          console.log(
+            `   🔊 [Scene ${sceneIndex + 1} Shot ${sIdx + 1}] Extracted native engine soundtrack (mean=${audioLoudness.meanVolumeDb.toFixed(1)}dB, max=${audioLoudness.maxVolumeDb.toFixed(1)}dB, dur=${targetShotDurSec}s)`
+          );
+        } else {
+          console.warn(
+            `   ⚠️ [Scene ${sceneIndex + 1} Shot ${sIdx + 1}] Video clip had silent/missing audio stream; synthesizing Fusha fallback + Foley...`
+          );
+          let fallbackSpeechPath = null;
+          try {
+            fallbackSpeechPath = await synthesizeArabicFushaViaDeapiSpeech({
+              apiKey,
+              text: shot.arabicLine,
+              sceneIndex: sceneIndex * 10 + sIdx,
+              tmpDir,
+            });
+          } catch {}
+          const fallbackFoleyWav = await buildSceneFoleyAmbienceWav(
+            prompts.foleyTheme || "park",
+            targetShotDurSec,
+            tmpDir,
+            `${formatTag}_fb_${sceneIndex}_${sIdx}`
+          );
+          if (fallbackSpeechPath && fs.existsSync(fallbackSpeechPath)) {
+            await execFileAsync("ffmpeg", [
+              "-y",
+              "-i",
+              fallbackSpeechPath,
+              "-i",
+              fallbackFoleyWav,
+              "-filter_complex",
+              `[0:a]aresample=48000,aformat=channel_layouts=stereo,volume=1.35,apad=whole_dur=${targetShotDurSec}[sp];[1:a]aresample=48000,aformat=channel_layouts=stereo,volume=0.85[fx];[sp][fx]amix=inputs=2:duration=first:dropout_transition=0,alimiter=limit=0.93[aout]`,
+              "-map",
+              "[aout]",
+              "-t",
+              String(targetShotDurSec),
+              "-ar",
+              "48000",
+              "-ac",
+              "2",
+              "-c:a",
+              "pcm_s16le",
+              shotMasterWav,
+            ]);
+          } else {
+            fs.copyFileSync(fallbackFoleyWav, shotMasterWav);
+          }
+        }
+        masterShotWavPaths.push(shotMasterWav);
+
+        // Step 2: Optional 2x AI Diffusion Video Super-Resolution (/api/v2/videos/upscales)
+        let visualSourceMp4 = rawShotMp4;
+        const shouldUpscaleShot =
+          process.env.DEAPI_VIDEO_UPSCALE !== "0" &&
+          (isShort || process.env.DEAPI_UPSCALE_LONG === "1") &&
+          Math.max(shotChosenParams.width, shotChosenParams.height) < Math.max(outW, outH);
+
+        if (shouldUpscaleShot) {
+          const upscaledMp4 = await upscaleVideoClipViaDeapi({
+            apiKey,
+            baseUrl,
+            catalog,
+            inputMp4Path: rawShotMp4,
+            clipDurationSec: targetShotDurSec,
+            sceneLabel: `Scene ${sceneIndex + 1} Shot ${sIdx + 1}`,
+            tmpDir,
+            tag: `${formatTag}_${sceneIndex}_${sIdx}`,
+          });
+          if (upscaledMp4) {
+            visualSourceMp4 = upscaledMp4;
+            anyShotUpscaled = true;
+          }
+        }
+
+        // Step 3: Cinema Full HD Mastering (Lanczos + Contrast Adaptive Sharpening, CRF 15)
+        const visDur = await measureAudioDurationSec(visualSourceMp4, targetShotDurSec);
+        const ptsRatio =
+          visDur > 0.4 ? Math.max(0.8, Math.min(1.25, targetShotDurSec / visDur)) : 1.0;
+
+        const normShotMp4 = path.join(
+          tmpDir,
+          `deapi_native_norm_${formatTag}_${sceneIndex}_${sIdx}.mp4`
+        );
+        await execFileAsync("ffmpeg", [
+          "-y",
+          "-i",
+          visualSourceMp4,
+          "-vf",
+          `setpts=${ptsRatio.toFixed(4)}*PTS,scale=${outW}:${outH}:flags=lanczos:force_original_aspect_ratio=increase,crop=${outW}:${outH},cas=0.38,fps=30,eq=saturation=1.08:contrast=1.03,setsar=1,format=yuv420p`,
+          "-an",
+          "-t",
+          String(targetShotDurSec),
+          "-r",
+          "30",
+          "-c:v",
+          "libx264",
+          "-preset",
+          "fast",
+          "-crf",
+          "15",
+          "-pix_fmt",
+          "yuv420p",
+          normShotMp4,
+        ]);
+        normShotVideoPaths.push(normShotMp4);
+        totalActualSec += targetShotDurSec;
+
+        // Step 4: Chain last frame into next shot for seamless continuous story progression
+        if (sIdx < shotPlan.length - 1) {
+          const nextChainJpg = path.join(
+            tmpDir,
+            `deapi_native_chain_${formatTag}_${sceneIndex}_${sIdx}.jpg`
+          );
+          const extractedChain = await extractLastFrameAsJpg(
+            visualSourceMp4,
+            shotChosenParams.width,
+            shotChosenParams.height,
+            nextChainJpg
+          );
+          if (extractedChain) {
+            currentFirstFramePath = extractedChain;
+          }
+        }
+      }
+
+      if (normShotVideoPaths.length > 0 && masterShotWavPaths.length > 0) {
+        const nativeSceneMp4 = path.join(
+          tmpDir,
+          `deapi_native_scene_${formatTag}_${sceneIndex}.mp4`
+        );
+        if (normShotVideoPaths.length === 1) {
+          fs.copyFileSync(normShotVideoPaths[0], nativeSceneMp4);
+        } else {
+          const vConcatTxt = path.join(
+            tmpDir,
+            `deapi_native_vconcat_${formatTag}_${sceneIndex}.txt`
+          );
+          fs.writeFileSync(
+            vConcatTxt,
+            normShotVideoPaths.map((p) => `file '${p.replace(/'/g, "'\\''")}'`).join("\n")
+          );
+          await execFileAsync("ffmpeg", [
+            "-y",
+            "-f",
+            "concat",
+            "-safe",
+            "0",
+            "-i",
+            vConcatTxt,
+            "-c:v",
+            "copy",
+            nativeSceneMp4,
+          ]);
+        }
+
+        const mergedMasterAudioWav = path.join(
+          tmpDir,
+          `deapi_native_master_audio_${formatTag}_${sceneIndex}.wav`
+        );
+        if (masterShotWavPaths.length === 1) {
+          fs.copyFileSync(masterShotWavPaths[0], mergedMasterAudioWav);
+        } else {
+          const aConcatTxt = path.join(
+            tmpDir,
+            `deapi_native_aconcat_${formatTag}_${sceneIndex}.txt`
+          );
+          fs.writeFileSync(
+            aConcatTxt,
+            masterShotWavPaths.map((p) => `file '${p.replace(/'/g, "'\\''")}'`).join("\n")
+          );
+          await execFileAsync("ffmpeg", [
+            "-y",
+            "-f",
+            "concat",
+            "-safe",
+            "0",
+            "-i",
+            aConcatTxt,
+            "-c:a",
+            "pcm_s16le",
+            mergedMasterAudioWav,
+          ]);
+        }
+
+        if (fs.existsSync(nativeSceneMp4) && fs.statSync(nativeSceneMp4).size > 2000) {
+          fs.writeFileSync(
+            `${nativeSceneMp4}.meta.json`,
+            JSON.stringify({
+              mode: "native-joint-av-chained",
+              hasNativeJointAudio: true,
+              masterAudioWavPath: mergedMasterAudioWav,
+              actualDurationSec: Number(totalActualSec.toFixed(3)),
+              chunksCount: normShotVideoPaths.length,
+              videoModelSlug: usedModelSlug,
+              upscaled: anyShotUpscaled,
+              foleyTheme: prompts.foleyTheme || "park",
+            })
+          );
+          console.log(
+            `   ✅ [deAPI.ai Scene ${sceneIndex + 1}/${totalScenes}] Cinema HD Native-Audio 3D scene ready (${normShotVideoPaths.length} shot(s), ${totalActualSec.toFixed(1)}s, model=${usedModelSlug}, upscaled=${anyShotUpscaled})!`
+          );
+          return nativeSceneMp4;
+        }
+      }
+    } catch (nativeAvErr) {
+      console.warn(
+        `   ⚠️ [deAPI.ai Scene ${sceneIndex + 1}] Native Joint AV route notice (${nativeAvErr?.message || nativeAvErr}); attempting secondary animation fallback...`
+      );
+    }
+  }
+
+  // Stage B1 (Optional Egyptian Override Mode): Chunked Lip-Synced Audio-to-Video (/api/v2/videos/audio-syncs)
   if (hasValidSceneAudio && audioSyncModelInfo?.slug) {
     try {
       const measuredAudioDur = await measureAudioDurationSec(
@@ -3217,7 +3972,6 @@ async function generateAnimatedSceneClipViaDeapi({
           chunk.durSec
         );
 
-        // Slice exact MP3 audio window for this chunk (128kbps mono MP3, < 200KB, ideal for deAPI audio-syncs)
         const chunkAudioMp3 = path.join(
           tmpDir,
           `deapi_audchunk_${formatTag}_${sceneIndex}_${cIdx}.mp3`
@@ -3322,14 +4076,12 @@ async function generateAnimatedSceneClipViaDeapi({
         }
         fs.writeFileSync(rawChunkMp4, videoBytes);
 
-        // Extract any native LTX environmental/foley audio track before video normalization (NEVER discard blindly!)
         if (await probeHasAudioStream(rawChunkMp4)) {
           const nativeChunkWav = path.join(
             tmpDir,
             `deapi_native_aud_${formatTag}_${sceneIndex}_${cIdx}.wav`
           );
           try {
-            // High/low shelf filtering isolates ambient foley texture so we can layer it subtly without doubling speech
             await execFileAsync("ffmpeg", [
               "-y",
               "-i",
@@ -3353,7 +4105,6 @@ async function generateAnimatedSceneClipViaDeapi({
           } catch {}
         }
 
-        // Normalize visual chunk to exact episode resolution & exact chunk duration (smooth time-stretch if frame count slightly differs)
         const rawChunkVidDur = await measureAudioDurationSec(rawChunkMp4, chunk.durSec);
         const ptsRatio =
           rawChunkVidDur > 0.4
@@ -3369,7 +4120,7 @@ async function generateAnimatedSceneClipViaDeapi({
           "-i",
           rawChunkMp4,
           "-vf",
-          `setpts=${ptsRatio.toFixed(4)}*PTS,scale=${outW}:${outH}:force_original_aspect_ratio=increase,crop=${outW}:${outH},fps=30,eq=saturation=1.10:contrast=1.04,setsar=1,format=yuv420p`,
+          `setpts=${ptsRatio.toFixed(4)}*PTS,scale=${outW}:${outH}:flags=lanczos:force_original_aspect_ratio=increase,crop=${outW}:${outH},cas=0.35,fps=30,eq=saturation=1.08:contrast=1.03,setsar=1,format=yuv420p`,
           "-an",
           "-t",
           String(chunk.durSec),
@@ -3378,16 +4129,15 @@ async function generateAnimatedSceneClipViaDeapi({
           "-c:v",
           "libx264",
           "-preset",
-          "veryfast",
+          "fast",
           "-crf",
-          "19",
+          "16",
           "-pix_fmt",
           "yuv420p",
           normChunkMp4,
         ]);
         normChunkVideoPaths.push(normChunkMp4);
 
-        // Chain the last frame of Chunk k into the first_frame_image of Chunk k+1 for seamless continuous motion!
         if (cIdx < chunkPlan.length - 1) {
           const nextChainJpg = path.join(
             tmpDir,
@@ -3468,7 +4218,6 @@ async function generateAnimatedSceneClipViaDeapi({
         }
 
         if (fs.existsSync(syncedSceneMp4) && fs.statSync(syncedSceneMp4).size > 2000) {
-          // Attach optional metadata sidecar on tmpDir so renderEpisodeMp4 can blend native LTX SFX!
           const sidecarMetaPath = `${syncedSceneMp4}.meta.json`;
           fs.writeFileSync(
             sidecarMetaPath,
@@ -3492,7 +4241,11 @@ async function generateAnimatedSceneClipViaDeapi({
     }
   }
 
-  // Stage B2 (Fallback or when no audio file passed): Standard Image-to-Video (/api/v2/videos/animations) + Native Audio Extraction!
+  // Stage B2 (Final Single-Shot Fallback): Standard Image-to-Video (/api/v2/videos/animations) + Native Audio Extraction
+  const fallbackModel =
+    (catalog.videoCandidates || [catalog.img2video]).find((m) => m?.slug && !_sessionUnavailableSlugs.has(m.slug)) ||
+    videoModelInfo;
+  const fallbackParams = resolveDeapiModelRenderParams(fallbackModel, isShort);
   const imgBuffer = fs.readFileSync(initialKeyframePath);
   const { requestId, statusBaseUrl } = await submitDeapiJobWithRateLimitRecovery({
     apiKey,
@@ -3517,19 +4270,19 @@ async function generateAnimatedSceneClipViaDeapi({
         path.basename(initialKeyframePath)
       );
       form.append("prompt", prompts.videoMotionPrompt);
-      form.append("model", String(videoModelInfo.slug));
-      form.append("width", String(baseParams.width));
-      form.append("height", String(baseParams.height));
-      form.append("frames", String(baseParams.frames));
-      form.append("fps", String(baseParams.fps));
+      form.append("model", String(fallbackModel.slug));
+      form.append("width", String(fallbackParams.width));
+      form.append("height", String(fallbackParams.height));
+      form.append("frames", String(fallbackParams.frames));
+      form.append("fps", String(fallbackParams.fps));
       form.append("seed", "-1");
-      if (baseParams.steps !== null && attempt !== 2) {
-        form.append("steps", String(baseParams.steps));
+      if (fallbackParams.steps !== null && attempt !== 2) {
+        form.append("steps", String(fallbackParams.steps));
       }
-      if (baseParams.guidance !== null && attempt !== 2) {
-        form.append("guidance", String(baseParams.guidance));
+      if (fallbackParams.guidance !== null && attempt !== 2) {
+        form.append("guidance", String(fallbackParams.guidance));
       }
-      if (baseParams.supportsNegative && attempt !== 2) {
+      if (fallbackParams.supportsNegative && attempt !== 2) {
         form.append(
           "negative_prompt",
           "blurry, distorted face, extra limbs, morphing identity, horror, ugly, watermark, text, banner, static freeze"
@@ -3540,7 +4293,7 @@ async function generateAnimatedSceneClipViaDeapi({
   });
 
   console.log(
-    `   🎞️ [deAPI.ai Scene ${sceneIndex + 1}/${totalScenes}] Video animation job queued (request_id=${requestId}, model=${videoModelInfo.slug}, ${baseParams.width}x${baseParams.height}, ${baseParams.frames}f@${baseParams.fps}fps)...`
+    `   🎞️ [deAPI.ai Scene ${sceneIndex + 1}/${totalScenes}] Video animation job queued (request_id=${requestId}, model=${fallbackModel.slug}, ${fallbackParams.width}x${fallbackParams.height}, ${fallbackParams.frames}f@${fallbackParams.fps}fps)...`
   );
 
   const resultVideoUrl = await pollDeapiJobResultUrl({
@@ -3562,7 +4315,6 @@ async function generateAnimatedSceneClipViaDeapi({
   }
   fs.writeFileSync(rawClipPath, videoBytes);
 
-  // Extract native LTX-2.5 generated sound effects from rawClipPath before building visual loop!
   let extractedAnimNativeSfxWav = null;
   if (await probeHasAudioStream(rawClipPath)) {
     const candWav = path.join(tmpDir, `deapi_anim_native_sfx_${formatTag}_${sceneIndex}.wav`);
@@ -3596,7 +4348,7 @@ async function generateAnimatedSceneClipViaDeapi({
     "-i",
     rawClipPath,
     "-filter_complex",
-    `[0:v]scale=${outW}:${outH}:force_original_aspect_ratio=increase,crop=${outW}:${outH},fps=30,eq=saturation=1.10:contrast=1.04,setsar=1,format=yuv420p,split=2[fwd][rev_in];[rev_in]trim=start_frame=1,reverse,setpts=PTS-STARTPTS[rev];[fwd][rev]concat=n=2:v=1:a=0[pingpong]`,
+    `[0:v]scale=${outW}:${outH}:flags=lanczos:force_original_aspect_ratio=increase,crop=${outW}:${outH},cas=0.35,fps=30,eq=saturation=1.08:contrast=1.03,setsar=1,format=yuv420p,split=2[fwd][rev_in];[rev_in]trim=start_frame=1,reverse,setpts=PTS-STARTPTS[rev];[fwd][rev]concat=n=2:v=1:a=0[pingpong]`,
     "-map",
     "[pingpong]",
     "-an",
@@ -3605,9 +4357,9 @@ async function generateAnimatedSceneClipViaDeapi({
     "-c:v",
     "libx264",
     "-preset",
-    "veryfast",
+    "fast",
     "-crf",
-    "19",
+    "16",
     "-pix_fmt",
     "yuv420p",
     pingPongPath,
@@ -3633,10 +4385,10 @@ async function generateAnimatedSceneClipViaDeapi({
   return pingPongPath;
 }
 
-async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptian") {
+async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "fusha") {
   const isShort = videoFormat === "short_9_16";
-  const W = isShort ? 720 : 1280;
-  const H = isShort ? 1280 : 720;
+  const W = isShort ? 1080 : 1920;
+  const H = isShort ? 1920 : 1080;
   const scenes =
     Array.isArray(episode?.scenes) && episode.scenes.length > 0
       ? episode.scenes
@@ -3644,30 +4396,38 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
           {
             id: "s1",
             speakerName: "الطبيبة نورين",
-            durationSec: isShort ? 17 : 39,
+            durationSec: isShort ? 17 : 40,
             dialogueArabic:
-              "ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بصوا كده معانا النهارده على المغامرة الجميلة دي!",
+              dialect === "fusha"
+                ? "أَهْلاً بِكُمْ يَا أَصْدِقَائِي الأَبْطَالُ فِي قَنَاةِ نُورِين كِيدْز! هَيَّا نَبْدَأُ مَعاً مُغَامَرَتَنَا الرَّائِعَةَ اليَوْمَ!"
+                : "ازيكم يا أصحابي الحلوين في قناة نورين كيدز! بصوا كده معانا النهارده على المغامرة الجميلة دي!",
           },
           {
             id: "s2",
             speakerName: "أرنوب الشقي الممرض",
-            durationSec: isShort ? 17 : 39,
+            durationSec: isShort ? 17 : 40,
             dialogueArabic:
-              "يلا بينا يا دكتورة نورين نساعد بعض ونفكر بذكاء علشان نلاقي الحل الصح ونفرح كل أصحابنا!",
+              dialect === "fusha"
+                ? "هَيَّا بِنَا يَا دُكْتُورَة نُورِين نَتَعَاوَنُ وَنُفَكِّرُ بِذَكَاءٍ حَتَّى نَجِدَ الحَلَّ الصَّحِيحَ وَنُسْعِدَ جَمِيعَ أَصْدِقَائِنَا!"
+                : "يلا بينا يا دكتورة نورين نساعد بعض ونفكر بذكاء علشان نلاقي الحل الصح ونفرح كل أصحابنا!",
           },
           {
             id: "s3",
             speakerName: "الطبيبة نورين",
-            durationSec: isShort ? 17 : 39,
+            durationSec: isShort ? 17 : 40,
             dialogueArabic:
-              "إيه الجمال ده يا أرنوب! لما بنشتغل سوا وبنسمع كلام بعض كل حاجة صعبة بتبقى سهلة وجميلة!",
+              dialect === "fusha"
+                ? "مَا أَجْمَلَ هَذَا يَا أَرْنُوب! عِنْدَمَا نَعْمَلُ مَعاً وَنَسْتَمِعُ إِلَى بَعْضِنَا يُصْبِحُ كُلُّ أَمْرٍ صَعْبٍ سَهْلاً وَمُمْتِعاً!"
+                : "إيه الجمال ده يا أرنوب! لما بنشتغل سوا وبنسمع كلام بعض كل حاجة صعبة بتبقى سهلة وجميلة!",
           },
           {
             id: "s4",
             speakerName: "أرنوب الشقي الممرض",
-            durationSec: isShort ? 17 : 39,
+            durationSec: isShort ? 17 : 40,
             dialogueArabic:
-              "شكراً ليكم يا أصحابي الحلوين! متنسوش تشتركوا في قناة نورين كيدز وتستنونا كل يوم في مغامرة جديدة!",
+              dialect === "fusha"
+                ? "شُكْراً لَكُمْ يَا أَصْدِقَائِي الأَذْكِيَاء! لَا تَنْسَوُا الاشْتِرَاكَ فِي قَنَاةِ نُورِين كِيدْز وَأَجِيبُوا فِي التَّعْلِيقَاتِ!"
+                : "شكراً ليكم يا أصحابي الحلوين! متنسوش تشتركوا في قناة نورين كيدز وتستنونا كل يوم في مغامرة جديدة!",
           },
         ];
 
@@ -3701,7 +4461,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
   const heroImg = resolveCharacterAvatarPath(heroName, heroName);
   const compImg = resolveCharacterAvatarPath(companionName, companionName);
 
-  // Build clean static Duo composite card from approved local character portraits (zero pixel warping)
+  // Build crisp HD Duo composite card & 1280x720 YouTube Cover Thumbnail
   const duoCardPath = path.join(tmpDir, `duo_card_${videoFormat}.jpg`);
   const thumbnail1280Path = path.join(tmpDir, `thumbnail_1280x720_${videoFormat}.jpg`);
   const verticalPosterPath = path.join(tmpDir, `vertical_poster_${videoFormat}.jpg`);
@@ -3712,18 +4472,14 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
         "-i", compImg,
         "-i", heroImg,
         "-filter_complex",
-        `[0:v]scale=360:1280:force_original_aspect_ratio=increase,crop=360:1280,eq=saturation=1.35:contrast=1.14:brightness=0.03[left];` +
-        `[1:v]scale=360:1280:force_original_aspect_ratio=increase,crop=360:1280,eq=saturation=1.35:contrast=1.14:brightness=0.03[right];` +
+        `[0:v]scale=540:1920:flags=lanczos:force_original_aspect_ratio=increase,crop=540:1920,eq=saturation=1.22:contrast=1.08:brightness=0.02[left];` +
+        `[1:v]scale=540:1920:flags=lanczos:force_original_aspect_ratio=increase,crop=540:1920,eq=saturation=1.22:contrast=1.08:brightness=0.02[right];` +
         `[left][right]hstack=inputs=2,` +
-        `drawbox=x=354:y=0:w=12:h=1280:color=0xF59E0B@0.95:t=fill,` +
-        `drawbox=x=358:y=0:w=4:h=1280:color=0xFEF08A@1.0:t=fill,` +
-        `drawbox=x=0:y=0:w=720:h=1280:color=0xFBBF24@1.0:t=14,` +
-        `drawbox=x=14:y=14:w=692:h=1252:color=0x06B6D4@0.90:t=6,` +
-        `drawbox=x=40:y=40:w=640:h=120:color=0x0F172A@0.92:t=fill,` +
-        `drawbox=x=40:y=40:w=640:h=120:color=0xFBBF24@1.0:t=6,` +
+        `drawbox=x=536:y=0:w=8:h=1920:color=0xF59E0B@0.95:t=fill,` +
         `setsar=1[outv]`,
         "-map", "[outv]",
         "-frames:v", "1",
+        "-q:v", "1",
         verticalPosterPath,
       ]);
     }
@@ -3735,17 +4491,16 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       "-i",
       heroImg,
       "-filter_complex",
-      `[0:v]scale=${halfW}:${H}:force_original_aspect_ratio=increase,crop=${halfW}:${H}[left];[1:v]scale=${W - halfW}:${H}:force_original_aspect_ratio=increase,crop=${W - halfW}:${H}[right];[left][right]hstack=inputs=2,eq=saturation=1.16:contrast=1.06,drawbox=x=${halfW - 3}:y=0:w=6:h=${H}:color=0xFBBF24@0.95:t=fill[outv]`,
+      `[0:v]scale=${halfW}:${H}:flags=lanczos:force_original_aspect_ratio=increase,crop=${halfW}:${H}[left];[1:v]scale=${W - halfW}:${H}:flags=lanczos:force_original_aspect_ratio=increase,crop=${W - halfW}:${H}[right];[left][right]hstack=inputs=2,eq=saturation=1.14:contrast=1.05,drawbox=x=${halfW - 3}:y=0:w=6:h=${H}:color=0xFBBF24@0.95:t=fill[outv]`,
       "-map",
       "[outv]",
       "-frames:v",
       "1",
       "-q:v",
-      "2",
+      "1",
       duoCardPath,
     ]);
 
-    // Also build a dedicated 1280x720 YouTube Cover Thumbnail strictly with the Episode's Main Hero + Companion ONLY
     await execFileAsync("ffmpeg", [
       "-y",
       "-i",
@@ -3753,25 +4508,34 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       "-i",
       heroImg,
       "-filter_complex",
-      `[0:v]scale=640:720:force_original_aspect_ratio=increase,crop=640:720,eq=saturation=1.24:contrast=1.08:brightness=0.02,unsharp=5:5:0.85:5:5:0.0[left];[1:v]scale=640:720:force_original_aspect_ratio=increase,crop=640:720,eq=saturation=1.24:contrast=1.08:brightness=0.02,unsharp=5:5:0.85:5:5:0.0[right];[left][right]hstack=inputs=2,vignette=PI/7,drawbox=x=634:y=0:w=12:h=720:color=0xF59E0B@0.95:t=fill,drawbox=x=638:y=0:w=4:h=720:color=0xFEF08A@1.0:t=fill,drawbox=x=0:y=0:w=1280:h=720:color=0xFBBF24@1.0:t=14,drawbox=x=14:y=14:w=1252:h=692:color=0x06B6D4@0.90:t=6,drawbox=x=380:y=18:w=520:h=68:color=0x0F172A@0.88:t=fill,drawbox=x=380:y=18:w=520:h=68:color=0xFBBF24@1.0:t=4,setsar=1,format=yuvj420p[outv]`,
+      `[0:v]scale=640:720:flags=lanczos:force_original_aspect_ratio=increase,crop=640:720,eq=saturation=1.20:contrast=1.07:brightness=0.02,cas=0.35[left];[1:v]scale=640:720:flags=lanczos:force_original_aspect_ratio=increase,crop=640:720,eq=saturation=1.20:contrast=1.07:brightness=0.02,cas=0.35[right];[left][right]hstack=inputs=2,vignette=PI/8,drawbox=x=634:y=0:w=12:h=720:color=0xF59E0B@0.95:t=fill,drawbox=x=638:y=0:w=4:h=720:color=0xFEF08A@1.0:t=fill,drawbox=x=0:y=0:w=1280:h=720:color=0xFBBF24@1.0:t=12,setsar=1,format=yuvj420p[outv]`,
       "-map",
       "[outv]",
       "-frames:v",
       "1",
       "-q:v",
-      "3",
+      "2",
       thumbnail1280Path,
     ]);
   } catch {}
 
-  // STEP 1: Synthesize all scene voiceovers first and measure exact audio durations so dialogue is NEVER cut off
+  const deapiApiKey = String(process.env.DEAPI_API_KEY || "").trim();
+  const useNativeJointEngineAudio = dialect === "fusha" && Boolean(deapiApiKey);
+
+  // STEP 1: Prepare scene scripts & timing
+  // When using Native Joint Engine Audio (Fusha + deAPI), the video model itself speaks the dialogue and generates real Foley SFX!
   const preparedScenes = [];
   for (let i = 0; i < scenes.length; i++) {
     const isHeroTurn = i % 2 === 0;
     const spk = isHeroTurn ? heroName : companionName;
     const prt = isHeroTurn ? companionName : heroName;
     let sceneDialogue = stripLeakedVoiceInstructionsRunner(String(scenes[i]?.dialogueArabic || "").trim());
-    if (i === 0 && !/أعضاء.*نورين كيدز|عيلة.*نورين كيدز/.test(sceneDialogue.slice(0, 140))) {
+    if (
+      i === 0 &&
+      !/أعضاء.*نورين كيدز|عيلة.*نورين كيدز|عائلة.*نورين كيدز|أبطال.*نورين كيدز|قناة.*نورين كيدز/.test(
+        sceneDialogue.slice(0, 150)
+      )
+    ) {
       const stripped = sceneDialogue
         .replace(
           /^(ازيكم يا أصحابي الحلوين في قناة نورين كيدز\s*[!،.]?\s*(عاملين إيه النهارده\s*[؟!،.]?\s*)?|ازيكم يا أصحابي الحلوين\s*[!،.]?\s*)/i,
@@ -3780,69 +4544,87 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
         .trim();
       const greetPrefix =
         dialect === "fusha"
-          ? `أَهْلاً وَسَهْلاً بِكُلِّ أَعْضَاءِ وَأَبْطَالِ عَائِلَةِ قَنَاةِ نُورِين كِيدْز الْغَالِين! أَنَا ${spk} وَمَعِي رَفِيقِي ${prt}!`
+          ? isShort
+            ? `أَهْلاً بِكُمْ يَا أَبْطَالُ قَنَاةِ نُورِين كِيدْز! أَنَا ${spk} وَمَعِي ${prt}!`
+            : `أَهْلاً وَسَهْلاً بِكُلِّ أَبْطَالِ وَعَائِلَةِ قَنَاةِ نُورِين كِيدْز الرَّائِعِينَ! أَنَا ${spk} وَمَعِي رَفِيقُ المُغَامَرَةِ ${prt}!`
           : isShort
           ? `أهلاً بيكم يا أبطال عيلة نورين كيدز! أنا ${spk} ومعايا ${prt}!`
           : `أهلاً وسهلاً بكل أعضاء وعيلة قناة نورين كيدز الغاليين في كل مكان! ازيكم يا أشطر وأجمل أبطال؟ وحشتونا أوي! أنا ${spk} ومعايا رفيق المغامرة ${prt}، منورين عالمنا السحري النهارده!`;
       sceneDialogue = stripped ? `${greetPrefix} ${stripped}` : greetPrefix;
     }
-    // Dialogue Completeness Guarantee: Full scene dialogue is preserved 100% verbatim without any word slicing.
+
     const sc = {
       ...scenes[i],
       speakerName: spk,
       partnerName: prt,
       dialogueArabic: sceneDialogue || scenes[i]?.dialogueArabic,
     };
-    let synth = await synthesizeRawSpeechOnly(sc, i, scenes.length, tmpDir, dialect);
-    if (i < scenes.length - 1) {
-      await sleep(1200);
-    }
 
-    // Snappy cartoon pacing: transition happens immediately after speech with ~0.45s natural breathing room
-    const naturalDur = Number((synth.voiceDurSec + 0.45).toFixed(2));
-    preparedScenes.push({
-      scene: sc,
-      audioPath: synth.audioPath,
-      voiceDurSec: synth.voiceDurSec,
-      durationSec: naturalDur,
-    });
+    if (useNativeJointEngineAudio) {
+      const wordCount = String(sc.dialogueArabic || "")
+        .split(/\s+/)
+        .filter(Boolean).length;
+      const rawEstSec = wordCount / 2.25 + 1.4;
+      const targetDur = isShort
+        ? Number(Math.max(15.6, Math.min(18.2, rawEstSec)).toFixed(2))
+        : Number(Math.max(38.5, Math.min(44.5, rawEstSec)).toFixed(2));
+      preparedScenes.push({
+        scene: sc,
+        audioPath: null,
+        voiceDurSec: Number((targetDur - 0.4).toFixed(2)),
+        durationSec: targetDur,
+      });
+    } else {
+      const synth = await synthesizeRawSpeechOnly(sc, i, scenes.length, tmpDir, dialect);
+      if (i < scenes.length - 1) {
+        await sleep(1200);
+      }
+      const naturalDur = Number((synth.voiceDurSec + 0.45).toFixed(2));
+      preparedScenes.push({
+        scene: sc,
+        audioPath: synth.audioPath,
+        voiceDurSec: synth.voiceDurSec,
+        durationSec: naturalDur,
+      });
+    }
   }
 
-  // Natural pacing preserved: each scene plays at authentic 1.0x human speaking speed
-
-  // Enforce total duration bounds: Short strictly [60..80s] (target 65..75s), Long strictly [300..600s] (target 305..580s)
-  const minTotalSec = isShort ? 60 : 305;
-  const maxTotalSec = isShort ? 75 : 590;
+  // Enforce total duration bounds: Short strictly [60..80s] (target 64..74s), Long strictly [305..590s]
+  const minTotalSec = isShort ? 62 : 308;
+  const maxTotalSec = isShort ? 75 : 585;
   const maxSafeVoiceSec = isShort ? 68 : 550;
-  let totalVoiceSec = preparedScenes.reduce((acc, s) => acc + s.voiceDurSec, 0);
 
-  if (totalVoiceSec > maxSafeVoiceSec) {
-    const targetVoiceSec = isShort ? 62 : 520;
-    const speedRatio = Math.min(1.35, Math.max(1.05, totalVoiceSec / targetVoiceSec));
-    console.log(
-      `   ⚡ [Audio Timing Optimization] Total voice duration (${totalVoiceSec.toFixed(1)}s) exceeds safe threshold (${maxSafeVoiceSec}s) for ${videoFormat}. Applying gentle lossless atempo=${speedRatio.toFixed(2)} to guarantee compliance with [${minTotalSec}..${maxTotalSec}s] gate...`
-    );
-    for (let i = 0; i < preparedScenes.length; i++) {
-      const origAudio = preparedScenes[i].audioPath;
-      const speedAudio = path.join(tmpDir, `tempo_optimized_${i}.wav`);
-      try {
-        await execFileAsync("ffmpeg", [
-          "-y",
-          "-i", origAudio,
-          "-filter:a", `atempo=${speedRatio.toFixed(3)}`,
-          "-ar", "24000",
-          "-ac", "1",
-          "-c:a", "pcm_s16le",
-          speedAudio,
-        ]);
-        if (fs.existsSync(speedAudio) && fs.statSync(speedAudio).size > 1000) {
-          const newDur = await measureAudioDurationSec(speedAudio, preparedScenes[i].voiceDurSec / speedRatio);
-          preparedScenes[i].audioPath = speedAudio;
-          preparedScenes[i].voiceDurSec = newDur;
-          preparedScenes[i].durationSec = Number((newDur + 0.45).toFixed(2));
+  if (!useNativeJointEngineAudio) {
+    let totalVoiceSec = preparedScenes.reduce((acc, s) => acc + s.voiceDurSec, 0);
+    if (totalVoiceSec > maxSafeVoiceSec) {
+      const targetVoiceSec = isShort ? 62 : 520;
+      const speedRatio = Math.min(1.35, Math.max(1.05, totalVoiceSec / targetVoiceSec));
+      console.log(
+        `   ⚡ [Audio Timing Optimization] Total voice duration (${totalVoiceSec.toFixed(1)}s) exceeds safe threshold (${maxSafeVoiceSec}s) for ${videoFormat}. Applying gentle lossless atempo=${speedRatio.toFixed(2)}...`
+      );
+      for (let i = 0; i < preparedScenes.length; i++) {
+        const origAudio = preparedScenes[i].audioPath;
+        if (!origAudio) continue;
+        const speedAudio = path.join(tmpDir, `tempo_optimized_${i}.wav`);
+        try {
+          await execFileAsync("ffmpeg", [
+            "-y",
+            "-i", origAudio,
+            "-filter:a", `atempo=${speedRatio.toFixed(3)}`,
+            "-ar", "24000",
+            "-ac", "1",
+            "-c:a", "pcm_s16le",
+            speedAudio,
+          ]);
+          if (fs.existsSync(speedAudio) && fs.statSync(speedAudio).size > 1000) {
+            const newDur = await measureAudioDurationSec(speedAudio, preparedScenes[i].voiceDurSec / speedRatio);
+            preparedScenes[i].audioPath = speedAudio;
+            preparedScenes[i].voiceDurSec = newDur;
+            preparedScenes[i].durationSec = Number((newDur + 0.45).toFixed(2));
+          }
+        } catch (tempoErr) {
+          console.warn(`   ⚠️ atempo optimization warning for scene ${i + 1}:`, tempoErr?.message || tempoErr);
         }
-      } catch (tempoErr) {
-        console.warn(`   ⚠️ atempo optimization warning for scene ${i + 1}:`, tempoErr?.message || tempoErr);
       }
     }
   }
@@ -3862,7 +4644,11 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
   } else if (totalDur > maxTotalSec) {
     let excess = totalDur - maxTotalSec;
     for (let i = preparedScenes.length - 1; i >= 0 && excess > 0; i--) {
-      const minAllowed = Number((preparedScenes[i].voiceDurSec + 0.25).toFixed(2));
+      const minAllowed = useNativeJointEngineAudio
+        ? isShort
+          ? 14.5
+          : 37.5
+        : Number((preparedScenes[i].voiceDurSec + 0.25).toFixed(2));
       const reducible = Math.max(0, preparedScenes[i].durationSec - minAllowed);
       const cut = Math.min(excess, reducible);
       preparedScenes[i].durationSec = Number((preparedScenes[i].durationSec - cut).toFixed(2));
@@ -3870,20 +4656,19 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     }
   }
 
-  // Guarantee absolute invariant: Every scene duration MUST accommodate full speech plus comfortable ending
-  for (const s of preparedScenes) {
-    if (s.durationSec < s.voiceDurSec + 0.3) {
-      s.durationSec = Number((s.voiceDurSec + 0.35).toFixed(2));
+  if (!useNativeJointEngineAudio) {
+    for (const s of preparedScenes) {
+      if (s.durationSec < s.voiceDurSec + 0.3) {
+        s.durationSec = Number((s.voiceDurSec + 0.35).toFixed(2));
+      }
     }
   }
-  
-  const overscanW = Math.round(W * 1.14);
-  const overscanH = Math.round(H * 1.14);
+
+  const overscanW = Math.round(W * 1.12);
+  const overscanH = Math.round(H * 1.12);
   const panRangeX = Math.max(8, overscanW - W);
   const panRangeY = Math.max(8, overscanH - H);
 
-  // Stage 1: Pre-bake and pre-scale unique character portraits once (Pixar 3D color grading + yuv420p)
-  // so FFmpeg does not re-evaluate scale+eq filters on 9,000-15,000 frames in Long videos.
   const prebakedMap = new Map();
   const getPrebakedPortrait = async (rawImgPath, tagIdx) => {
     const cacheKey = `duo_${tagIdx % 2}`;
@@ -3911,11 +4696,11 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
         "-i",
         rawImgPath,
         "-vf",
-        `crop=iw:trunc(ih*0.76/2)*2:0:0,scale=${overscanW}:${overscanH}:force_original_aspect_ratio=increase,crop=${overscanW}:${overscanH},eq=saturation=1.14:contrast=1.05,vignette=PI/6,setsar=1,format=yuv420p`,
+        `crop=iw:trunc(ih*0.76/2)*2:0:0,scale=${overscanW}:${overscanH}:flags=lanczos:force_original_aspect_ratio=increase,crop=${overscanW}:${overscanH},eq=saturation=1.12:contrast=1.04,setsar=1,format=yuv420p`,
         "-frames:v",
         "1",
         "-q:v",
-        "2",
+        "1",
         bakedPath,
       ]);
     }
@@ -3927,12 +4712,13 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     return finalBaked;
   };
 
-  // Stage 1.5: Generate Multi-Character AI-Animated 3D Cartoon Story Clips per scene via deAPI.ai
-  const deapiApiKey = String(process.env.DEAPI_API_KEY || "").trim();
+  // Stage 1.5: Generate Multi-Character Cinema HD 3D Cartoon Story Clips + Native Audio/SFX via deAPI.ai
   const animatedSceneClipMap = new Map();
   if (deapiApiKey) {
     console.log(
-      `🎨 [deAPI.ai 3D Story Animation Engine] Creating multi-character animated story scenes (${heroName} + ${companionName} + story cast) sequentially across ${preparedScenes.length} scenes for ${videoFormat}...`
+      `🎨 [deAPI.ai Cinema 3D Engine] Generating ${W}x${H} Full HD animated scenes with ${
+        useNativeJointEngineAudio ? "NATIVE ENGINE VOICE (Fusha) + REAL DIEGETIC FOLEY SFX" : "lip-synced audio"
+      } (${heroName} + ${companionName}) across ${preparedScenes.length} scenes for ${videoFormat}...`
     );
     const animateSingleScene = async (idx, passLabel = "Pass 1") => {
       const item = preparedScenes[idx];
@@ -3953,6 +4739,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
         speakerName: spkName,
         sceneTitle: sc.title || "",
         dialogueArabic: sc.dialogueArabic || "",
+        soundEffectsEn: sc.soundEffectsEn || "",
         aiVisualScenePromptEn: sc.visualScenePromptEn || "",
         sceneAudioPath: item.audioPath,
         sceneDurationSec: item.durationSec,
@@ -3964,11 +4751,21 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
         outH: H,
         tmpDir,
         formatTag: `${videoFormat}_${passLabel.replace(/\s+/g, "").toLowerCase()}`,
+        dialect,
+        preferNativeJointAudio: useNativeJointEngineAudio,
       });
       animatedSceneClipMap.set(idx, animatedLoopMp4);
+      if (animatedLoopMp4 && fs.existsSync(`${animatedLoopMp4}.meta.json`)) {
+        try {
+          const meta = JSON.parse(fs.readFileSync(`${animatedLoopMp4}.meta.json`, "utf8"));
+          if (meta.hasNativeJointAudio && Number(meta.actualDurationSec) >= 4.0) {
+            item.durationSec = Number(Number(meta.actualDurationSec).toFixed(2));
+            item.voiceDurSec = Number(Math.max(1, item.durationSec - 0.3).toFixed(2));
+          }
+        } catch {}
+      }
     };
 
-    // Strictly sequential (CONCURRENCY = 1) so simultaneous bursts never trigger HTTP 429 drops on Scene 1 or Scene 4!
     for (let idx = 0; idx < preparedScenes.length; idx++) {
       try {
         await animateSingleScene(idx, "p1");
@@ -3979,7 +4776,6 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       }
     }
 
-    // Recovery Pass for any scene that transiently failed (ensures Scene 1 & Final Scene never remain static due to temporary spikes)
     if (animatedSceneClipMap.size < preparedScenes.length) {
       const missingIndices = [];
       for (let idx = 0; idx < preparedScenes.length; idx++) {
@@ -3996,18 +4792,18 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
           console.warn(
             `   ⚠️ [deAPI.ai Fallback Notice - Scene ${idx + 1}/${preparedScenes.length}] Could not animate after recovery pass (${
               retryErr?.message || retryErr
-            }). Using banner-free duo motion fallback.`
+            }). Using HD duo motion fallback.`
           );
         }
       }
     }
 
     console.log(
-      `✨ [deAPI.ai Summary] Animated ${animatedSceneClipMap.size}/${preparedScenes.length} multi-character story scenes for ${videoFormat}.`
+      `✨ [deAPI.ai Summary] Animated ${animatedSceneClipMap.size}/${preparedScenes.length} Full HD story scenes for ${videoFormat}.`
     );
   } else {
     console.log(
-      `ℹ️ [deAPI.ai Notice] DEAPI_API_KEY not set in environment; rendering with standard local 3D character motion.`
+      `ℹ️ [deAPI.ai Notice] DEAPI_API_KEY not set in environment; rendering with local Full HD 3D character motion.`
     );
   }
   if (episode && typeof episode === "object") {
@@ -4015,22 +4811,19 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     episode._totalRenderedScenesCount = preparedScenes.length;
   }
 
-  // Stage 2: Render scene segments in parallel batches (Closed-GOP H.264 video-only + sample-accurate 48kHz Stereo PCM .wav)
-  // Separating PCM audio from video segment concatenation eliminates AAC 1024-sample boundary gaps in Long videos.
+  // Stage 2: Render Full HD 1080p Closed-GOP H.264 video segments + sample-accurate 48kHz Stereo PCM .wav
   const sceneTasks = preparedScenes.map((item, i) => async () => {
     const sc = item.scene;
-    const dur = item.durationSec;
+    let dur = item.durationSec;
     const isCompTurn = i % 2 === 1;
     const activeImg = resolveCharacterAvatarPath(
       sc.speakerName || (isCompTurn ? companionName : heroName),
       isCompTurn ? companionName : heroName
     );
-    // Strictly show the speaking character's full portrait (Hero when Hero speaks, Companion when Companion speaks)
-    const shotImg = activeImg;
     const deapiLoopMp4 = animatedSceneClipMap.get(i) || null;
-    const prebakedImg = deapiLoopMp4 ? null : await getPrebakedPortrait(shotImg, i);
+    const prebakedImg = deapiLoopMp4 ? null : await getPrebakedPortrait(activeImg, i);
 
-    let clipMeta = { mode: "none", foleyTheme: "park", nativeSfxWavPath: null };
+    let clipMeta = { mode: "none", foleyTheme: "park", nativeSfxWavPath: null, hasNativeJointAudio: false, masterAudioWavPath: null };
     if (deapiLoopMp4 && fs.existsSync(`${deapiLoopMp4}.meta.json`)) {
       try {
         clipMeta = JSON.parse(fs.readFileSync(`${deapiLoopMp4}.meta.json`, "utf8"));
@@ -4043,249 +4836,231 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       clipMeta.foleyTheme = inferred.foleyTheme || "park";
     }
 
+    const hasAuthenticNativeAudio =
+      Boolean(clipMeta.hasNativeJointAudio) &&
+      Boolean(clipMeta.masterAudioWavPath) &&
+      fs.existsSync(clipMeta.masterAudioWavPath) &&
+      fs.statSync(clipMeta.masterAudioWavPath).size > 1000;
+
+    // If a scene fell back (no native joint audio and no pre-synthesized audioPath), synthesize voiceover now so no scene is ever silent
+    let effectiveVoicePath = item.audioPath;
+    if (!hasAuthenticNativeAudio && (!effectiveVoicePath || !fs.existsSync(effectiveVoicePath))) {
+      const fbSynth = await synthesizeRawSpeechOnly(sc, i, preparedScenes.length, tmpDir, dialect);
+      effectiveVoicePath = fbSynth.audioPath;
+      item.voiceDurSec = fbSynth.voiceDurSec;
+      dur = Math.max(dur, Number((fbSynth.voiceDurSec + 0.45).toFixed(2)));
+    }
+
     const isLipSyncedChained = clipMeta.mode === "audio-sync-chained";
     console.log(
       `   -> [Scene ${i + 1}/${preparedScenes.length}] Speaker="${
         sc.speakerName || (isCompTurn ? companionName : heroName)
-      }" | Mode=${isLipSyncedChained ? "deAPI-LipSync-Chained" : deapiLoopMp4 ? "deAPI-3D-Animated" : "Fallback-Motion"} | Foley="${clipMeta.foleyTheme}" | Voice=${item.voiceDurSec.toFixed(1)}s | Scene=${dur}s...`
+      }" | Mode=${
+        hasAuthenticNativeAudio
+          ? `Native-Joint-AV (${clipMeta.videoModelSlug || "deAPI"})`
+          : isLipSyncedChained
+          ? "deAPI-LipSync-Chained"
+          : deapiLoopMp4
+          ? "deAPI-3D-Animated"
+          : "Fallback-HD-Motion"
+      } | Foley="${clipMeta.foleyTheme}" | Dur=${dur}s | Res=${W}x${H}...`
     );
 
-    // Synthesize realistic contextual Foley SFX (footsteps, water waves/splashes, birds/leaves, workshop gears, oasis breeze, or space chimes)
-    const contextualFoleyWav = await synthesizeContextualFoleySfxWav({
-      foleyTheme: clipMeta.foleyTheme || "park",
-      durationSec: dur,
-      sceneIndex: i,
-      tmpDir,
-    });
-
-    const hasNativeSfx =
-      clipMeta.nativeSfxWavPath &&
-      fs.existsSync(clipMeta.nativeSfxWavPath) &&
-      fs.statSync(clipMeta.nativeSfxWavPath).size > 1000;
-
-    // Zero audio delay when lip-synced via audio-syncs so phonemes match mouth frames at millisecond accuracy!
-    const voiceDelayFilter = isLipSyncedChained ? "" : ",adelay=80|80";
     const mixedWav = path.join(tmpDir, `scene_mixed_${i}.wav`);
+    if (hasAuthenticNativeAudio) {
+      // 100% pure native joint audio from the video model (authentic Arabic voice + real synchronized footsteps/water/environment Foley, ZERO synthetic noise!)
+      await execFileAsync("ffmpeg", [
+        "-y",
+        "-i",
+        clipMeta.masterAudioWavPath,
+        "-af",
+        `aresample=48000,aformat=sample_fmts=s16:sample_rates=48000:channel_layouts=stereo,apad=whole_dur=${dur}`,
+        "-t",
+        String(dur),
+        "-c:a",
+        "pcm_s16le",
+        "-ar",
+        "48000",
+        "-ac",
+        "2",
+        mixedWav,
+      ]);
+    } else {
+      const contextualFoleyWav = await synthesizeContextualFoleySfxWav({
+        foleyTheme: clipMeta.foleyTheme || "park",
+        durationSec: dur,
+        sceneIndex: i,
+        tmpDir,
+      });
 
-    const mixInputs = [
-      "-y",
-      "-i",
-      item.audioPath,
-      "-i",
-      contextualFoleyWav,
-      "-f",
-      "lavfi",
-      "-i",
-      `aevalsrc='0.026*sin(2*PI*(261.63+68*mod(floor(t*0.85),3))*t)*exp(-1.4*mod(t*0.85,1))+0.018*sin(2*PI*(880+220*mod(floor(t*1.8),3))*t)*exp(-5.5*mod(t*0.30,1))':s=48000:c=stereo:d=${dur}`,
-    ];
-    if (hasNativeSfx) {
-      mixInputs.push("-i", clipMeta.nativeSfxWavPath);
+      const hasNativeSfx =
+        clipMeta.nativeSfxWavPath &&
+        fs.existsSync(clipMeta.nativeSfxWavPath) &&
+        fs.statSync(clipMeta.nativeSfxWavPath).size > 1000;
+
+      const voiceDelayFilter = isLipSyncedChained ? "" : ",adelay=80|80";
+      const mixInputs = [
+        "-y",
+        "-i",
+        effectiveVoicePath,
+        "-i",
+        contextualFoleyWav,
+      ];
+      if (hasNativeSfx) {
+        mixInputs.push("-i", clipMeta.nativeSfxWavPath);
+      }
+
+      const fadeOutSt = Math.max(0.5, dur - 0.85);
+      const sfxCombineFilter = hasNativeSfx
+        ? `[1:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo[ctx_sfx];[2:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,apad=whole_dur=${dur}[nat_sfx];[ctx_sfx][nat_sfx]amix=inputs=2:duration=first:weights='0.85 1.0':normalize=0,afade=t=in:st=0:d=0.20,afade=t=out:st=${fadeOutSt}:d=0.55[sfx_raw];`
+        : `[1:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,afade=t=in:st=0:d=0.20,afade=t=out:st=${fadeOutSt}:d=0.55[sfx_raw];`;
+
+      const cinemaMixFilter =
+        `[0:a]aresample=48000${voiceDelayFilter},aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=2.10,apad=whole_dur=${dur},asplit=2[v_main][v_sc1];` +
+        sfxCombineFilter +
+        `[sfx_raw][v_sc1]sidechaincompress=threshold=0.04:ratio=2.6:attack=15:release=220[sfx_ducked];` +
+        `[v_main][sfx_ducked]amix=inputs=2:duration=first:weights='1.0 0.72':normalize=0,alimiter=limit=0.96,asetpts=PTS-STARTPTS,aformat=sample_fmts=s16:sample_rates=48000:channel_layouts=stereo[outa]`;
+
+      await execFileAsync("ffmpeg", [
+        ...mixInputs,
+        "-filter_complex",
+        cinemaMixFilter,
+        "-map",
+        "[outa]",
+        "-t",
+        String(dur),
+        "-c:a",
+        "pcm_s16le",
+        "-ar",
+        "48000",
+        "-ac",
+        "2",
+        mixedWav,
+      ]);
     }
-
-    const fadeOutSt = Math.max(0.5, dur - 0.85);
-    const sfxCombineFilter = hasNativeSfx
-      ? `[1:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo[ctx_sfx];[3:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,apad=whole_dur=${dur}[nat_sfx];[ctx_sfx][nat_sfx]amix=inputs=2:duration=first:weights='1.0 0.75':normalize=0,afade=t=in:st=0:d=0.25,afade=t=out:st=${fadeOutSt}:d=0.65[sfx_raw];`
-      : `[1:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,afade=t=in:st=0:d=0.25,afade=t=out:st=${fadeOutSt}:d=0.65[sfx_raw];`;
-
-    const cinemaMixFilter =
-      `[0:a]aresample=48000${voiceDelayFilter},aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=2.20,apad=whole_dur=${dur},asplit=3[v_main][v_sc1][v_sc2];` +
-      sfxCombineFilter +
-      `[sfx_raw][v_sc1]sidechaincompress=threshold=0.035:ratio=3.2:attack=15:release=240[sfx_ducked];` +
-      `[2:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0.42,afade=t=in:st=0:d=0.5,afade=t=out:st=${fadeOutSt}:d=0.7[bgm_raw];` +
-      `[bgm_raw][v_sc2]sidechaincompress=threshold=0.03:ratio=5.5:attack=15:release=320[bgm_ducked];` +
-      `[v_main][sfx_ducked][bgm_ducked]amix=inputs=3:duration=first:weights='1.0 0.62 0.18':normalize=0,alimiter=limit=0.96,asetpts=PTS-STARTPTS,aformat=sample_fmts=s16:sample_rates=48000:channel_layouts=stereo[outa]`;
-
-    await execFileAsync("ffmpeg", [
-      ...mixInputs,
-      "-filter_complex",
-      cinemaMixFilter,
-      "-map",
-      "[outa]",
-      "-t",
-      String(dur),
-      "-c:a",
-      "pcm_s16le",
-      "-ar",
-      "48000",
-      "-ac",
-      "2",
-      mixedWav,
-    ]);
 
     const sceneVidOnlyMp4 = path.join(tmpDir, `scene_vid_${i}.mp4`);
-    const fadeOutStart = Math.max(0.4, Number((dur - 0.35).toFixed(2)));
-    const combinedStoryText = `${rawTopicText} ${sc.dialogueArabic || ""} ${sc.title || ""} ${sc.speakerName || ""}`;
-    let sprite1Lavfi =
-      "color=c=black@0.0:s=42x42:r=30:d=0.04,format=rgba,geq=r=255:g=232:b=95:a='240*exp(-((X-21)*(X-21)+(Y-21)*(Y-21))/56)',format=yuva420p,loop=loop=-1:size=1:start=0";
-    let sprite2Lavfi =
-      "color=c=black@0.0:s=40x40:r=30:d=0.04,format=rgba,geq=r=255:g=180:b=225:a='clip(240*exp(-(abs(X-20)*abs(Y-20))/9)*exp(-((X-20)*(X-20)+(Y-20)*(Y-20))/165),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
-    let borderColorHex = "0xFBBF24";
+    const fadeOutStart = Math.max(0.4, Number((dur - 0.28).toFixed(2)));
 
-    if (/بحر|محيط|غواصة|مرجان|حوت|دلفين|شوشو|ماء|مياه|شلال|نهر|مطر|سلحفاة/.test(combinedStoryText)) {
-      sprite1Lavfi =
-        "color=c=black@0.0:s=44x44:r=30:d=0.04,format=rgba,geq=r=145:g=238:b=255:a='clip(230*exp(-pow(sqrt((X-22)*(X-22)+(Y-22)*(Y-22))-14,2)/9)+165*exp(-((X-16)*(X-16)+(Y-15)*(Y-15))/12),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
-      sprite2Lavfi =
-        "color=c=black@0.0:s=34x34:r=30:d=0.04,format=rgba,geq=r=85:g=255:b=235:a='220*exp(-((X-17)*(X-17)+(Y-17)*(Y-17))/50)',format=yuva420p,loop=loop=-1:size=1:start=0";
-      borderColorHex = "0x38BDF8";
-    } else if (/فضاء|كوكب|نجوم|نجمة|زحل|قمر|تلسكوب|مسبار|جنى|بلبل|سماء/.test(combinedStoryText)) {
-      sprite1Lavfi =
-        "color=c=black@0.0:s=44x44:r=30:d=0.04,format=rgba,geq=r=225:g=245:b=255:a='clip(248*exp(-(abs(X-22)*abs(Y-22))/9)*exp(-((X-22)*(X-22)+(Y-22)*(Y-22))/185),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
-      sprite2Lavfi =
-        "color=c=black@0.0:s=36x36:r=30:d=0.04,format=rgba,geq=r=255:g=215:b=90:a='230*exp(-((X-18)*(X-18)+(Y-18)*(Y-18))/54)',format=yuva420p,loop=loop=-1:size=1:start=0";
-      borderColorHex = "0x818CF8";
-    } else if (/سنان|أسنان|عيادة|إسعاف|طبيبة|دكتورة|نورين|أرنوب|ملك|لوليتا|نظافة|غسيل|فواكه/.test(combinedStoryText)) {
-      sprite1Lavfi =
-        "color=c=black@0.0:s=44x44:r=30:d=0.04,format=rgba,geq=r=255:g=255:b=255:a='clip(250*exp(-(abs(X-22)*abs(Y-22))/8)*exp(-((X-22)*(X-22)+(Y-22)*(Y-22))/175),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
-      sprite2Lavfi =
-        "color=c=black@0.0:s=36x36:r=30:d=0.04,format=rgba,geq=r=90:g=250:b=200:a='225*exp(-((X-18)*(X-18)+(Y-18)*(Y-18))/52)',format=yuva420p,loop=loop=-1:size=1:start=0";
-      borderColorHex = "0x34D399";
-    } else if (/مهندسة|نوران|فرفوش|كارمن|سمسم|شريف|صقر|اختراع|جسر|منارة|طاحونة|قطار|مصعد|أرقام/.test(combinedStoryText)) {
-      sprite1Lavfi =
-        "color=c=black@0.0:s=44x44:r=30:d=0.04,format=rgba,geq=r=255:g=210:b=55:a='clip(248*exp(-(abs(X-22)*abs(Y-22))/9)*exp(-((X-22)*(X-22)+(Y-22)*(Y-22))/180),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
-      sprite2Lavfi =
-        "color=c=black@0.0:s=36x36:r=30:d=0.04,format=rgba,geq=r=75:g=200:b=255:a='225*exp(-((X-18)*(X-18)+(Y-18)*(Y-18))/52)',format=yuva420p,loop=loop=-1:size=1:start=0";
-      borderColorHex = "0xF59E0B";
+    if (deapiLoopMp4) {
+      // Pure Cinema Full HD 1080p frame: zero synthetic floating circles, zero thick border, crisp High@L4.2 12Mbps encoding!
+      await execFileAsync("ffmpeg", [
+        "-y",
+        "-stream_loop",
+        "-1",
+        "-i",
+        deapiLoopMp4,
+        "-vf",
+        `fps=30,trim=duration=${dur},setpts=PTS-STARTPTS,setsar=1,fade=t=in:st=0:d=0.22,fade=t=out:st=${fadeOutStart}:d=0.25,format=yuv420p`,
+        "-an",
+        "-t",
+        String(dur),
+        "-r",
+        "30",
+        "-vsync",
+        "cfr",
+        "-c:v",
+        "libx264",
+        "-preset",
+        "fast",
+        "-profile:v",
+        "high",
+        "-level:v",
+        "4.2",
+        "-crf",
+        "17",
+        "-maxrate",
+        "12000k",
+        "-bufsize",
+        "24000k",
+        "-g",
+        "60",
+        "-keyint_min",
+        "60",
+        "-sc_threshold",
+        "0",
+        "-bf",
+        "2",
+        "-flags",
+        "+cgop",
+        "-pix_fmt",
+        "yuv420p",
+        "-colorspace",
+        "bt709",
+        "-color_primaries",
+        "bt709",
+        "-color_trc",
+        "bt709",
+        sceneVidOnlyMp4,
+      ]);
+    } else {
+      const halfSpanX = Math.round(panRangeX * 0.5);
+      const halfSpanY = Math.round(panRangeY * 0.5);
+      const ampX = Math.max(4, Math.round(panRangeX * 0.45));
+      const ampY = Math.max(4, Math.round(panRangeY * 0.42));
+      const camExprX =
+        i % 2 === 0
+          ? `${halfSpanX}+${ampX}*sin(2*PI*t/9.5)`
+          : `${halfSpanX}-${ampX}*cos(2*PI*t/10.0)`;
+      const camExprY =
+        i % 2 === 0
+          ? `${halfSpanY}+${ampY}*cos(2*PI*t/12.0)`
+          : `${halfSpanY}+${ampY}*sin(2*PI*t/11.5)`;
+
+      await execFileAsync("ffmpeg", [
+        "-y",
+        "-i",
+        prebakedImg,
+        "-vf",
+        `format=yuv420p,loop=loop=-1:size=1:start=0,fps=30,trim=duration=${dur},crop=${W}:${H}:x='${camExprX}':y='${camExprY}',setsar=1,fade=t=in:st=0:d=0.25,fade=t=out:st=${fadeOutStart}:d=0.25,format=yuv420p`,
+        "-an",
+        "-t",
+        String(dur),
+        "-r",
+        "30",
+        "-vsync",
+        "cfr",
+        "-c:v",
+        "libx264",
+        "-preset",
+        "fast",
+        "-profile:v",
+        "high",
+        "-level:v",
+        "4.2",
+        "-crf",
+        "17",
+        "-maxrate",
+        "12000k",
+        "-bufsize",
+        "24000k",
+        "-g",
+        "60",
+        "-keyint_min",
+        "60",
+        "-sc_threshold",
+        "0",
+        "-bf",
+        "2",
+        "-flags",
+        "+cgop",
+        "-pix_fmt",
+        "yuv420p",
+        "-colorspace",
+        "bt709",
+        "-color_primaries",
+        "bt709",
+        "-color_trc",
+        "bt709",
+        sceneVidOnlyMp4,
+      ]);
     }
-
-    const halfSpanX = Math.round(panRangeX * 0.5);
-    const halfSpanY = Math.round(panRangeY * 0.5);
-    const ampX = Math.max(4, Math.round(panRangeX * 0.45));
-    const ampY = Math.max(4, Math.round(panRangeY * 0.42));
-    const camExprX =
-      i % 2 === 0
-        ? `${halfSpanX}+${ampX}*sin(2*PI*t/9.5)`
-        : `${halfSpanX}-${ampX}*cos(2*PI*t/10.0)`;
-    const camExprY =
-      i % 2 === 0
-        ? `${halfSpanY}+${ampY}*cos(2*PI*t/12.0)`
-        : `${halfSpanY}+${ampY}*sin(2*PI*t/11.5)`;
-
-    const marginX = Math.round(W * 0.07);
-    const rangeX = Math.max(120, W - marginX * 2 - 48);
-    const bottomY = Math.round(H * 0.92);
-    const travelY = Math.max(160, Math.round(H * 0.85));
-
-    const isScene1WithPoster = i === 0 && isShort && !deapiLoopMp4 && fs.existsSync(verticalPosterPath);
-    const isScene2WithSecret = i === 1;
-    const isFinalScene = i === preparedScenes.length - 1;
-
-    const secretSpriteLavfi = "color=c=black@0.0:s=130x130:r=30:d=0.04,format=rgba,geq=r=255:g=220:b=50:a='clip(255*exp(-((X-65)*(X-65)+(Y-65)*(Y-65))/650)+180*exp(-pow(abs(X-65)*abs(Y-65),0.6)/35),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
-
-    const filterSteps = [
-      deapiLoopMp4
-        ? `[0:v]fps=30,trim=duration=${dur},setpts=PTS-STARTPTS,format=yuv420p[base_raw]`
-        : `[0:v]format=yuv420p,loop=loop=-1:size=1:start=0,fps=30,trim=duration=${dur},crop=${W}:${H}:x='${camExprX}':y='${camExprY}'[base_raw]`,
-    ];
-
-    let currentBase = "base_raw";
-    if (isScene1WithPoster) {
-      filterSteps.push(
-        `[3:v]fade=t=out:st=0.55:d=0.20:alpha=1[post_faded]`,
-        `[${currentBase}][post_faded]overlay=x=0:y=0:enable='lte(t,0.75)':format=yuv420[base_poster]`
-      );
-      currentBase = "base_poster";
-    }
-
-    filterSteps.push(
-      `[1:v]split=3[s1][s2][s3]`,
-      `[2:v]split=3[o1][o2][o3]`,
-      `[${currentBase}][s1]overlay=x='${marginX}+${rangeX}*(0.5+0.46*sin(t*0.85+0.4))':y='${bottomY}-${travelY}*mod(t*0.21+0.08,1)':format=yuv420:shortest=1[v1]`,
-      `[v1][s2]overlay=x='${marginX}+${rangeX}*(0.5+0.45*cos(t*1.05+1.9))':y='${bottomY}-${travelY}*mod(t*0.26+0.42,1)':format=yuv420:shortest=1[v2]`,
-      `[v2][s3]overlay=x='${marginX}+${rangeX}*(0.5+0.46*sin(t*0.95+3.3))':y='${bottomY}-${travelY}*mod(t*0.23+0.74,1)':format=yuv420:shortest=1[v3]`,
-      `[v3][o1]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.78+1.1))':y='${bottomY}-${travelY}*mod(t*0.19+0.24,1)':format=yuv420:shortest=1[v4]`,
-      `[v4][o2]overlay=x='${marginX}+${rangeX}*(0.5+0.44*sin(t*1.12+2.6))':y='${bottomY}-${travelY}*mod(t*0.29+0.58,1)':format=yuv420:shortest=1[v5]`
-    );
-
-    let preDecorated = "v5";
-    if (isScene2WithSecret) {
-      filterSteps.push(
-        `[${preDecorated}][3:v]overlay=x=${W - 170}:y=180:enable='between(t,6.5,7.8)':format=yuv420[v_secret]`
-      );
-      preDecorated = "v_secret";
-    }
-
-    const finalBoxes = `drawbox=x=0:y=0:w=${W}:h=${H}:color=${borderColorHex}@0.88:t=8`;
-
-    filterSteps.push(
-      `[${preDecorated}][o3]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.92+4.2))':y='${bottomY}-${travelY}*mod(t*0.24+0.86,1)':format=yuv420:shortest=1,${finalBoxes},setsar=1,fade=t=in:st=0:d=0.30,fade=t=out:st=${fadeOutStart}:d=0.30,format=yuv420p[vout]`
-    );
-
-    const vfxFilterComplex = filterSteps.join(";");
-
-    const extraSceneInputs = [];
-    if (isScene1WithPoster) {
-      extraSceneInputs.push("-loop", "1", "-i", verticalPosterPath);
-    } else if (isScene2WithSecret) {
-      extraSceneInputs.push("-f", "lavfi", "-i", secretSpriteLavfi);
-    }
-
-    const primaryVideoInputArgs = deapiLoopMp4
-      ? ["-stream_loop", "-1", "-i", deapiLoopMp4]
-      : ["-i", prebakedImg];
-
-    await execFileAsync("ffmpeg", [
-      "-y",
-      ...primaryVideoInputArgs,
-      "-f",
-      "lavfi",
-      "-i",
-      sprite1Lavfi,
-      "-f",
-      "lavfi",
-      "-i",
-      sprite2Lavfi,
-      ...extraSceneInputs,
-      "-filter_complex",
-      vfxFilterComplex,
-      "-map",
-      "[vout]",
-      "-an",
-      "-t",
-      String(dur),
-      "-r",
-      "30",
-      "-vsync",
-      "cfr",
-      "-c:v",
-      "libx264",
-      "-preset",
-      "veryfast",
-      "-profile:v",
-      "high",
-      "-level:v",
-      "4.1",
-      "-crf",
-      "22",
-      "-maxrate",
-      "2500k",
-      "-bufsize",
-      "5000k",
-      "-g",
-      "60",
-      "-keyint_min",
-      "60",
-      "-sc_threshold",
-      "0",
-      "-bf",
-      "2",
-      "-flags",
-      "+cgop",
-      "-pix_fmt",
-      "yuv420p",
-      "-colorspace",
-      "bt709",
-      "-color_primaries",
-      "bt709",
-      "-color_trc",
-      "bt709",
-      sceneVidOnlyMp4,
-    ]);
 
     return { index: i, videoPath: sceneVidOnlyMp4, wavPath: mixedWav };
   });
 
   const renderedItems = [];
-  const BATCH_CONCURRENCY = 3;
+  const BATCH_CONCURRENCY = 2;
   for (let b = 0; b < sceneTasks.length; b += BATCH_CONCURRENCY) {
     const batch = sceneTasks.slice(b, b + BATCH_CONCURRENCY);
     const batchOut = await Promise.all(batch.map((fn) => fn()));
@@ -4293,8 +5068,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
   }
   renderedItems.sort((a, b) => a.index - b.index);
 
-  // Stage 3: Concatenate Closed-GOP H.264 video stream + Continuous PCM audio stream in a single pass
-  // with AAC-LC 48kHz Stereo, BT.709 color tags, and +faststart moov atom at the front of the file.
+  // Stage 3: Lossless Closed-GOP H.264 video stream copy + 256kbps AAC-LC 48kHz Stereo + +faststart
   const concatVidTxt = path.join(tmpDir, `concat_vid_${videoFormat}.txt`);
   const concatAudTxt = path.join(tmpDir, `concat_aud_${videoFormat}.txt`);
   fs.writeFileSync(
@@ -4307,29 +5081,6 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
   );
 
   const finalMp4 = path.join(tmpDir, `noreen_kids_${videoFormat}.mp4`);
-  const vEncoderArgs = isShort
-    ? [
-        "-c:v", "libx264",
-        "-preset", "veryfast",
-        "-profile:v", "high",
-        "-level:v", "4.1",
-        "-crf", "20",
-        "-pix_fmt", "yuv420p",
-        "-g", "60",
-        "-keyint_min", "60",
-        "-sc_threshold", "0",
-        "-flags", "+cgop",
-        "-colorspace", "bt709",
-        "-color_primaries", "bt709",
-        "-color_trc", "bt709",
-      ]
-    : [
-        "-c:v", "copy",
-        "-colorspace", "bt709",
-        "-color_primaries", "bt709",
-        "-color_trc", "bt709",
-      ];
-
   await execFileAsync("ffmpeg", [
     "-y",
     "-f",
@@ -4350,13 +5101,20 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     "0:v:0",
     "-map",
     "1:a:0",
-    ...vEncoderArgs,
+    "-c:v",
+    "copy",
+    "-colorspace",
+    "bt709",
+    "-color_primaries",
+    "bt709",
+    "-color_trc",
+    "bt709",
     "-c:a",
     "aac",
     "-profile:a",
     "aac_low",
     "-b:a",
-    "192k",
+    "256k",
     "-ar",
     "48000",
     "-ac",
@@ -5134,9 +5892,9 @@ function buildSmartEpisodeForRunner({
   const particleCycle = ["fireflies", "sparkles", "clouds", "bubbles", "starlight"];
 
   const count = isShort ? 4 : 8;
-  const perSceneSec = isShort ? 17 : 39;
-  const egyptianTopic = normalizeEgyptianColloquial(cleanTopic);
-  const cleanTopicForAdventure = egyptianTopic.replace(/^(مغامرة\s+|رحلة\s+)/i, "").trim() || egyptianTopic;
+  const perSceneSec = isShort ? 17 : 40;
+  const baseTopic = isEgyptian ? normalizeEgyptianColloquial(cleanTopic) : cleanTopic;
+  const cleanTopicForAdventure = baseTopic.replace(/^(مغامرة\s+|رحلة\s+)/i, "").trim() || baseTopic;
 
   const shortTopicMention = cleanTopicForAdventure
     .replace(/^حكاية\s+|^قصة\s+|^حدوتة\s+|^مغامرة\s+/g, "")
@@ -5161,9 +5919,16 @@ function buildSmartEpisodeForRunner({
     ? (isCompFemale ? "فخورة بيكي علشان نبهتيني" : "فخورة بيك علشان نبهتني")
     : (isCompFemale ? "فخور بيكي علشان نبهتيني" : "فخور بيك علشان نبهتني");
 
+  const fushaLookAtComp = isCompFemale ? "انْظُرِي مَعِي يَا" : "انْظُرْ مَعِي يَا";
+  const fushaLookAtHero = isHeroFemale ? "انْظُرِي مَعِي يَا" : "انْظُرْ مَعِي يَا";
+  const fushaHeroTitle = isHeroFemale ? "يَا بَطَلَتَنَا الذَّكِيَّةَ" : "يَا بَطَلَنَا الذَّكِيَّ";
+  const fushaCompTitle = isCompFemale ? "يَا رَفِيقَتِي الرَّائِعَةَ" : "يَا رَفِيقِي الرَّائِعَ";
+
   const sceneTemplates = [
     {
       title: `1. البداية: انطلاق ${shortHero} و${shortComp}`,
+      fushaShort: `أَهْلاً بِكُمْ يَا أَبْطَالُ قَنَاةِ نُورِين كِيدْز! ${fushaLookAtComp} ${shortComp}، لَدَيْنَا اليَوْمَ مُغَامَرَةٌ شَيِّقَةٌ حَوْلَ ${shortTopicMention}، هَيَّا نَمْشِي مَعاً بِحَمَاسٍ وَنَسْتَكْشِفُ المَكَانَ خُطْوَةً بِخُطْوَةٍ!`,
+      fushaLong: `أَهْلاً وَسَهْلاً بِكُلِّ أَبْطَالِ وَعَائِلَةِ قَنَاةِ نُورِين كِيدْز الرَّائِعِينَ فِي كُلِّ مَكَانٍ! ${fushaLookAtComp} ${shortComp} ${fushaCompTitle}، اليَوْمَ نَنْطَلِقُ مَعاً فِي مُهِمَّةٍ جَمِيلَةٍ وَمُفِيدَةٍ حَوْلَ ${shortTopicMention}! لَقَدْ أَحْضَرْتُ مَعِي ${heroProp} لِنَفْحَصَ كُلَّ شَيْءٍ بِدِقَّةٍ، وَأَنْتَ مَعَكَ ${compProp} لِنَتَعَاوَنَ يَداً بِيَدٍ! مَا أَجْمَلَ هَذَا المَكَانَ المُشْرِقَ! هَيَّا نَتَقَدَّمُ مَعاً بِشَجَاعَةٍ وَنَشَاطٍ يَا أَصْدِقَائِي!`,
       egyptianShort: `أهلاً بيكم يا أبطال عيلة نورين كيدز! ${compLook} ${shortComp}، حكايتنا النهارده مليانة بهجة وشجاعة عن ${shortTopicMention}! يلا ننطلق سوا بكل نشاط!`,
       egyptianLong: `يا خبر يا أبطال وعيلة نورين كيدز! بصوا بسرعة معايا النهارده، ازيكم يا أحلى أصحاب في الدنيا كلها! ${compLookWithMe} ${shortComp}، النهارده عندنا مهمة بطولية ومغامرة جميلة أوي عن ${shortTopicMention}! أنا مجهز معايا ${heroProp} علشان نستكشف كل حاجة خطوة بخطوة، وإنت معاك ${compProp} علشان نكون إيد واحدة وعندنا طاقة وهمة عالية أوي! شايفين النور والبهجة اللي حوالينا في المكان ده؟ يلا بينا نفتح عينينا كويس ونبدأ المغامرة سوا بكل شجاعة وفرحة ونشاط يا أبطال!`,
       speaker: effectiveMainName,
@@ -5171,6 +5936,8 @@ function buildSmartEpisodeForRunner({
     },
     {
       title: `2. التطور: ملاحظة المشكلة مع ${shortComp}`,
+      fushaShort: `يَا لَلْمُفَاجَأَةِ يَا ${shortHero}! ${fushaLookAtHero} ${shortHero} هُنَاكَ عِنْدَ المَمَرِّ، لَقَدْ ظَهَرَتْ مُشْكِلَةٌ فِي ${shortTopicMention}، وَيَجِبُ أَنْ نَتَحَرَّكَ مَعاً بِسُرْعَةٍ وَذَكَاءٍ لِنُسَاعِدَ أَصْدِقَاءَنَا الأَعِزَّاءَ!`,
+      fushaLong: `يَا لَلْمُفَاجَأَةِ يَا ${shortHero}! ${fushaLookAtHero} ${shortHero} ${fushaHeroTitle} إِلَى هُنَاكَ بِسُرْعَةٍ! هَلْ لَاحَظْتُمْ يَا أَصْدِقَائِي الأَبْطَالَ تِلْكَ المُشْكِلَةَ الَّتِي حَدَثَتْ فِي ${shortTopicMention}؟ وَانْظُرُوا جَيِّداً، لَقَدْ لَمَعَتْ نَجْمَةٌ ذَهَبِيَّةٌ سِحْرِيَّةٌ لِلَحْظَةٍ خَاطِفَةٍ، فَمَنْ مِنْكُمْ شَاهَدَهَا؟ هَذَا المَوْقِفُ يَحْتَاجُ مِنَّا إِلَى هُدُوءٍ وَتَفْكِيرٍ سَلِيمٍ دُونَ تَسَرُّعٍ! هَيَّا نَقْتَرِبُ مَعاً وَنُفَكِّرُ فِي أَفْضَلِ خُطَّةٍ تُعِيدُ البَسْمَةَ وَالأَمَانَ لِلْجَمِيعِ!`,
       egyptianShort: `يا خبر أبيض يا ${shortHero}! ${heroLookWithMe} ${shortHero}، ${heroSee} معايا هناك، دي مشكلة في ${shortTopicMention} ولازم نساعد أصحابنا بذكاء ونحلها سوا فوراً!`,
       egyptianLong: `يا خبر أبيض يا ${shortHero}! ${heroLookWithMe} ${shortHero}، شوفي معايا هناك بسرعة يا ${isHeroFemale ? "صاحبتي" : "صاحبي"}! ${isHeroFemale ? "شُوفْتِي" : "شُوفْت"} المشكلة اللي حصلت في ${shortTopicMention}؟ واستنوا كده، بصوا يا أبطال، شوفتوا النجمة الذهبية السحرية اللي نورت واختفت في ثانية؟ يا ترى مين البطل الشاطر اللي لمحها وعرف ظهرت في الدقيقة كام؟ الموضوع ده محتاج مننا وقفة بالراحة وتفكير هادي علشان نساعد الكل ونحل التحدي ده صح! لو استنينا المشكلة هتكبر، وإحنا أبطال نورين كيدز دايماً بنكون جاهزين للمساعدة بقلب طيب وهمة عالية! يا ترى هنعمل إيه ${heroAppellation}؟ يلا نفكر سوا بالراحة ومن غير استعجال خالص علشان نوصل لأحسن حل يفرح كل حبايبنا وأصحابنا!`,
       speaker: effectiveCompName,
@@ -5178,6 +5945,8 @@ function buildSmartEpisodeForRunner({
     },
     {
       title: "3. الحدث المفاجئ: التفكير الهادي ورفض التسرع",
+      fushaShort: `أَحْسَنْتَ المُلَاحَظَةَ يَا ${shortComp}! سَنَسْتَخْدِمُ الآنَ ${heroProp} بِهُدُوءٍ وَإِتْقَانٍ، فَالصَّبْرُ وَالتَّعَاوُنُ الصَّادِقُ يَحُلَّانِ أَصْعَبَ المُشْكِلَاتِ!`,
+      fushaLong: `أَحْسَنْتَ المُلَاحَظَةَ يَا ${shortComp} ${fushaCompTitle}! انْظُرُوا يَا أَصْدِقَائِي الأَذْكِيَاءَ، الأَبْطَالُ الحَقِيقِيُّونَ عِنْدَمَا تُوَاجِهُهُمْ أَيُّ مُشْكِلَةٍ يَتَرَيَّثُونَ وَيُفَكِّرُونَ بِحِكْمَةٍ وَلَا يَتَسَرَّعُونَ أَبَداً! التَّسَرُّعُ قَدْ يُفْسِدُ العَمَلَ، أَمَّا النِّظَامُ وَالصَّبْرُ وَالأَمَانَةُ فَهِيَ مِفْتَاحُ النَّجَاحِ! سَأَسْتَعْمِلُ الآنَ ${heroProp} لِنَفْحَصَ المَكَانَ خُطْوَةً بِخُطْوَةٍ، هَيَّا شَجِّعُونَا يَا أَبْطَالُ وَنَحْنُ نَعْمَلُ مَعاً!`,
       egyptianShort: `عندك حق يا ${shortComp}! يلا نستخدم ${heroProp} ونتصرف بهدوء، التعاون الصادق بيحل أصعب مشكلة!`,
       egyptianLong: `كلامك مضبوط مية في المية يا ${shortComp} ${compAppellation}، وأنا ${compProud} بسرعة! بصوا كده يا أصحابي الحلوين، الشطار لما بتقابلهم أي مشكلة بيهدوا الأول ويفكروا بعقلهم وما يتسرعوش أبداً في أي تصرف غلط! التسرع ممكن يبوظ كل حاجة، لكن الصبر والترتيب والأمانة هما اللي بينجحوا أي خطة! أنا هستخدم ${heroProp} دلوقتي علشان نفحص الموقف بدقة ونشوف أول خطوة صح، يلا شجعونا وقولوا يا رب، وإيدينا في إيد بعض وهنعمل كل حاجة تمام!`,
       speaker: effectiveMainName,
@@ -5185,6 +5954,8 @@ function buildSmartEpisodeForRunner({
     },
     {
       title: "4. الخطة الذكية: تجهيز الأدوات وتنظيم العمل",
+      fushaShort: `فِكْرَةٌ ذَكِيَّةٌ جِدّاً يَا ${shortHero}! لَقَدْ جَهَّزْتُ ${compProp} وَأَصْبَحَتِ الخُطَّةُ وَاضِحَةً، هَيَّا نَبْدَأُ العَمَلَ المُنَظَّمَ فَوْراً!`,
+      fushaLong: `بَارَكَ اللهُ فِي أَفْكَارِكَ الذَّكِيَّةِ يَا ${shortHero} ${fushaHeroTitle}! لَقَدْ فَتَحْتُ ${compProp} الآنَ وَرَتَّبْتُ الأَدَوَاتِ الَّتِي نَحْتَاجُ إِلَيْهَا لِنَبْدَأَ فَوْراً! الرَّائِعُ فِي فَرِيقِنَا أَنَّنَا نُنَظِّمُ عَمَلَنَا وَيُسَاعِدُ بَعْضُنَا بَعْضاً بِمَحَبَّةٍ وَإِخْلَاصٍ! أَرَأَيْتُمْ يَا أَصْدِقَائِي كَيْفَ يُصْبِحُ كُلُّ أَمْرٍ وَاضِحاً وَسَهْلاً عِنْدَمَا نَسْتَمِعُ لِبَعْضِنَا؟ هَيَّا نَبْدَأُ التَّنْفِيذَ العَمَلِيَّ لِتَعُودَ البَهْجَةُ إِلَى المَكَانِ!`,
       egyptianShort: `${heroLook} ${shortHero}! عرفنا الحل خلاص، يلا نجهز ${compProp} ونتحرك فوراً لنفرح كل أصحابنا!`,
       egyptianLong: `الله عليك يا ${shortHero}، تسلم أفكارك الذكية ${heroAppellation}! أنا فتحت ${compProp} دلوقتي وفهمت السر كله وعرفت الخطوة المظبوطة اللي لازم نعملها فوراً! الشطارة إننا ننظم شغلنا ونساعد بعض بحب وإخلاص، وأنا جهزت كل حاجة علشان أبدأ معاك خطوة بخطوة! شفتوا يا أصحابنا إزاي لما بنتعاون وبنسمع كلام بعض كل خطوة بتبقى واضحة وسهلة؟ يلا بينا نشمر ونبدأ في الحل العملي علشان الفرحة ترجع تملأ المكان كله من جديد!`,
       speaker: effectiveCompName,
@@ -5192,6 +5963,8 @@ function buildSmartEpisodeForRunner({
     },
     {
       title: "5. التصرف العملي: العمل المشترك وتجاوز العقبة",
+      fushaShort: `هَيَّا بِنَا يَا ${shortComp}! سَأُثَبِّتُ هَذَا الجُزْءَ بِوَاسِطَةِ ${heroProp}، وَنَاوِلْنِي ${compProp} لِنَتَجَاوَزَ العَقَبَةَ مَعاً بِنَجَاحٍ!`,
+      fushaLong: `هَيَّا بِنَا يَا ${shortComp} ${fushaCompTitle}، يَدِي فِي يَدِكَ وَلَا نُضَيِّعُ لَحْظَةً وَاحِدَةً! لَقَدْ بَدَأْتُ العَمَلَ بِاسْتِخْدَامِ ${heroProp} وَثَبَّتْنَا الجُزْءَ الأَوَّلَ بِإِحْكَامٍ، وَالآنَ حَانَ دَوْرُكَ لِتُسَاعِدَنِي بِوَاسِطَةِ ${compProp} حَتَّى نَتَجَاوَزَ هَذِهِ العَقَبَةَ بِنَجَاحٍ تَامٍّ! انْظُرُوا يَا أَصْدِقَائِي الشُّطَّارَ كَيْفَ يَجْعَلُ الاجْتِهَادُ وَالعَمَلُ الجَمَاعِيُّ أَصْعَبَ المَهَامِّ سَهْلَةً وَمُمْتِعَةً! هَيَّا نُكْمِلُ حَتَّى الخُطْوَةِ الأَخِيرَةِ!`,
       egyptianShort: `يلا بينا يا ${shortComp}! أنا جهزت ${heroProp} ودورك تساعدني بـ ${compProp} علشان نتغلب على العقبة سوا!`, 
       egyptianLong: `يلا بينا يا ${shortComp} يا ${compFriend} في الدنيا، إيدي في إيدك ومفيش ثانية نضيعها! أنا بدأت أتحرك بـ ${heroProp} وثبتنا أول جزء صح، ودلوقتي دورك تساعدني بـ ${compProp} علشان نكمل الباقي ونتغلب على العقبة دي بنجاح! شايفين يا أصحابنا الشطار إزاي لما بنجتهد ونشتغل إيد واحدة بنشاط ومحبة، أصعب حاجة بتتحل وبتبقى سهلة وممتعة؟ الجدعنة والأمانة هما أحلى حاجة بتخلينا ننجح ونفرح كل اللي حوالينا، يلا نكمل لآخر خطوة بهمة وفرحة!`,
       speaker: effectiveMainName,
@@ -5199,6 +5972,8 @@ function buildSmartEpisodeForRunner({
     },
     {
       title: "6. الحل الذكي: نجاح الفكرة وفرحة الجميع",
+      fushaShort: `رَائِعٌ جِدّاً! بِفَضْلِ التَّعَاوُنِ الذَّكِيِّ وَاسْتِخْدَامِ ${heroProp} وَ${compProp} نَجَحَتِ الخُطَّةُ تَمَاماً، وَعَادَتِ الفَرْحَةُ وَالابْتِسَامَةُ لِكُلِّ أَصْدِقَائِنَا فِي الحَالِ!`,
+      fushaLong: `مَا شَاءَ اللهُ، إِنَّهُ إِنْجَازٌ مُذْهِلٌ يَا ${shortHero}! انْظُرُوا وَشَاهِدُوا يَا كُلَّ أَصْدِقَائِنَا فِي كُلِّ مَكَانٍ! بِمُجَرَّدِ أَنْ تَعَاوَنَّا بِصِدْقٍ وَإِتْقَانٍ وَاسْتَخْدَمْنَا عُقُولَنَا بِذَكَاءٍ، انْحَلَّتِ المُشْكِلَةُ بِالْكَامِلِ وَعَادَتِ الضَّحْكَةُ وَالسَّعَادَةُ تُنِيرُ وُجُوهَ الجَمِيعِ مِنْ جَدِيدٍ! هَذِهِ هِيَ أَسْعَدُ لَحْظَةٍ فِي حِكَايَتِنَا اليَوْمَ، حِينَ نَرَى ثَمَرَةَ الجُهْدِ وَالمَحَبَّةِ تَسْعَدُ بِهَا القُلُوبُ!`,
       egyptianShort: `الله يا سلام سلم! بالتعاون والجدعنة وبـ ${heroProp} و${compProp} الفكرة نجحت مية في المية ورجعت الفرحة والضحكة لكل أصحابنا!`,
       egyptianLong: `الله أكبر يا سلام سلم! الفكرة طلعت حكاية ونجحت مية في المية يا ${shortHero}! بصوا كده وشوفوا يا كل أصحابنا وعيلتنا في كل مكان! أول ما حطينا إيدينا في إيد بعض وتصرفنا بذكاء وأمانة، اتحلت المشكلة كلها ورجعت الضحكة والبهجة تنور وشوش كل أصحابنا من تاني! دي من أسعد اللحظات في حكايتنا النهارده، لما بنشوف تعبنا وشطارتنا بتجيب نتيجة حلوة تفرح القلب، وإثبات حقيقي إننا أبطال لما اشتغلنا سوا بقلب صافي ومحبة!`,
       speaker: effectiveCompName,
@@ -5206,6 +5981,8 @@ function buildSmartEpisodeForRunner({
     },
     {
       title: "7. الاحتفال بالنجاح: الدرس المستفاد وفرحة عيلتنا",
+      fushaShort: `يَا لَهَا مِنْ فَرْحَةٍ كَبِيرَةٍ! لَقَدْ تَعَلَّمْنَا اليَوْمَ أَنَّ الصِّدْقَ وَالتَّعَاوُنَ هُمَا سِرُّ النَّجَاحِ وَالسَّعَادَةِ الحَقِيقِيَّةِ!`,
+      fushaLong: `حَقّاً لَقَدْ كَانَتْ تَجْرِبَةً رَائِعَةً لَا تُنْسَى يَا ${shortComp}! هَلْ عَرَفْتُمْ يَا أَصْدِقَائِي الأَبْطَالَ مَا هُوَ سِرُّ هَذَا النَّجَاحِ الكَبِيرِ؟ لَقَدْ تَعَلَّمْنَا اليَوْمَ مَعاً أَنَّ الأَمَانَةَ وَالنَّشَاطَ وَمُسَاعَدَةَ الآخَرِينَ هِيَ سِرُّ السَّعَادَةِ الحَقِيقِيَّةِ فِي حَيَاتِنَا! هَيَّا نُطَبِّقُ هَذَا الخُلُقَ الجَمِيلَ كُلَّ يَوْمٍ فِي البَيْتِ وَالمَدْرَسَةِ وَمَعَ جَمِيعِ جِيرَانِنَا وَأَصْدِقَائِنَا، شُكْراً لَكَ يَا ${shortComp} عَلَى هِمَّتِكَ العَالِيَةِ!`,
       egyptianShort: `يا سلام على الفرحة الكبيرة! اتعلمنا إن الصدق والتعاون هما سر النجاح والسعادة الحقيقي!`,
       egyptianLong: `بجد دي كانت مغامرة ولا أروع يا ${shortComp}، ومش هننساها أبداً من كتر الحلاوة والجمال! شفتوا بقى يا أصحابي الحلوين إيه سر النجاح الكبير ده؟ اتعلمنا النهارده سوا إن الأمانة والنشاط ومساعدة غيرنا هما سر السعادة الحقيقي في الدنيا! ولازم نطبق ده كل يوم في بيوتنا وفي المدرسة ومع كل أصحابنا وجيرانا، ونكون دايماً قدوة في الخير والجدعنة! شكراً يا ${shortComp} يا ${compFriend} وشكراً لكل أصحابنا الأبطال اللي بيشجعونا دايماً في كل مغامرة!`,
       speaker: effectiveMainName,
@@ -5213,6 +5990,8 @@ function buildSmartEpisodeForRunner({
     },
     {
       title: `8. المشهد الثامن والتحدي الأخير: رسالة ${shortHero} و${shortComp} لأبطال Noreen Kids`,
+      fushaShort: `مَرْحَى! لَقَدْ نَجَحَتِ المُهِمَّةُ يَا أَبْطَالُ! سؤال الشطار اليَوْمَ: مَا أَجْمَلُ دَرْسٍ تَعَلَّمْتُمُوهُ مَعَنَا؟ اكتبوا إجابتكم في التعليقات مَعَ اسْمِكُمْ لِتَفُوزُوا بِوِسَامِ الشَّطَارَةِ!`,
+      fushaLong: `وَالآنَ يَا أَصْدِقَاءَنَا الرَّائِعِينَ فِي عَائِلَةِ نُورِين كِيدْز، وَصَلْنَا إِلَى المشهد الثامن والتحدي الأخير فِي حَلْقَةِ اليَوْمَ مَعَ ${shortHero} وَ${shortComp}! 🧩 سؤال الشطار اليَوْمَ: مَنْ مِنْكُمْ يَا أَبْطَالُ لَمَحَ النَّجْمَةَ الذَّهَبِيَّةَ السِّحْرِيَّةَ الَّتِي ظَهَرَتْ فِي الحَلْقَةِ؟ وَمَا أَهَمُّ دَرْسٍ اسْتَفَدْتُمُوهُ مِنَ القِصَّةِ؟ اكتبوا إجابتكم في التعليقات مَعَ أَسْمَائِكُمْ لِتَظْهَرُوا فِي لَوْحَةِ الشَّرَفِ القَادِمَةِ، وَلَا تَنْسَوُا الاشْتِرَاكَ فِي القَنَاةِ، إِلَى اللِّقَاءِ!`,
       egyptianShort: `هيييه! نجحت المهمة يا أبطال! 🧩 تحدي الشطار: إيه أحلى حاجة اتعلمتوها النهارده؟ اكتبوا اسمكم وإجابتكم في التعليقات عشان تكسبوا وسام الشطارة!`,
       egyptianLong: `ودلوقتي يا أصحابنا الحلوين في عيلة نورين كيدز، وصلنا المشهد الثامن والتحدي الأخير في حلقة النهارده مع ${shortHero} و${shortComp}! 🧩 وسؤال الشطار النهاردة: مين فيكم يا أبطال لمح النجمة الذهبية السحرية اللي ظهرت في حلقة النهاردة؟ وإيه أهم درس اتعلمتوه من الحكاية؟ اكتبوا توقيتها وإجابتكم واسمكم في التعليقات تحت الفيديو علشان تظهروا في لوحة الشرف في الحلقة الجاية! وما تنسوش تشتركوا في القناة وتعملوا لايك، بنحبكم أوي ومع السلامة يا أبطال!`,
       speaker: effectiveCompName,
@@ -5227,24 +6006,32 @@ function buildSmartEpisodeForRunner({
   const minWordsPerScene = isShort ? 12 : 35;
   const scenes = selectedTemplates.map((tpl, idx) => {
     const aiSc = Array.isArray(aiScenes) ? aiScenes[idx] : null;
-    const rawAiText = String(aiSc?.dialogueArabic || "").trim();
-    const fallbackText = isShort ? tpl.egyptianShort : tpl.egyptianLong;
-    // Intelligent Dialect Sanitizer: Preserve rich AI stories while auto-sanitizing dialect
+    const rawAiText = stripLeakedVoiceInstructionsRunner(String(aiSc?.dialogueArabic || "").trim());
+    const fallbackText = isEgyptian
+      ? isShort
+        ? tpl.egyptianShort
+        : tpl.egyptianLong
+      : isShort
+      ? tpl.fushaShort
+      : tpl.fushaLong;
+
     let chosenRaw = fallbackText;
     if (rawAiText && rawAiText.split(/\s+/).filter(Boolean).length >= minWordsPerScene) {
-      chosenRaw = normalizeEgyptianColloquial(rawAiText);
+      chosenRaw = isEgyptian ? normalizeEgyptianColloquial(rawAiText) : rawAiText;
     }
     if (idx === selectedTemplates.length - 1) {
-      const interactiveEnding = isShort
-        ? ` 🧩 تحدي الشطار: يا ترى إيه أهم حاجة اتعلمناها من مغامرة ${cleanTopicForAdventure}؟ اكتبوا إجابتكم في التعليقات وقولوا لنا مين كان أكتر شخصية ساعدت في الحل!`
-        : ` 🧩 سؤال الشطار: إيه أهم درس اتعلمناه النهارده من مغامرة ${cleanTopicForAdventure}، وإزاي نقدر نستخدمه في حياتنا؟ اكتبوا إجابتكم في التعليقات!`;
+      const interactiveEnding = isEgyptian
+        ? isShort
+          ? ` 🧩 تحدي الشطار: يا ترى إيه أهم حاجة اتعلمناها من مغامرة ${cleanTopicForAdventure}؟ اكتبوا إجابتكم في التعليقات وقولوا لنا مين كان أكتر شخصية ساعدت في الحل!`
+          : ` 🧩 سؤال الشطار: إيه أهم درس اتعلمناه النهارده من مغامرة ${cleanTopicForAdventure}، وإزاي نقدر نستخدمه في حياتنا؟ اكتبوا إجابتكم في التعليقات!`
+        : isShort
+        ? ` سؤال الشطار: مَا أَهَمُّ دَرْسٍ تَعَلَّمْنَاهُ مِنْ مُغَامَرَةِ ${cleanTopicForAdventure}؟ اكتبوا إجابتكم في التعليقات!`
+        : ` سؤال الشطار: مَا أَهَمُّ دَرْسٍ تَعَلَّمْنَاهُ اليَوْمَ مِنْ مُغَامَرَةِ ${cleanTopicForAdventure}، وَكَيْفَ نُطَبِّقُهُ فِي حَيَاتِنَا؟ اكتبوا إجابتكم في التعليقات!`;
       if (!/\?|؟|اكتبوا.*تعليق|إجابت/.test(chosenRaw)) chosenRaw += interactiveEnding;
     }
-    const validated = runPreTtsEgyptianValidationLayer(
-      chosenRaw,
-      idx,
-      selectedTemplates.length
-    ).validatedText;
+    const validated = isEgyptian
+      ? runPreTtsEgyptianValidationLayer(chosenRaw, idx, selectedTemplates.length).validatedText
+      : chosenRaw.replace(/\s+/g, " ").trim();
     const isHeroTurn = idx % 2 === 0;
     const assignedSpeaker = isHeroTurn ? effectiveMainName : effectiveCompName;
     const assignedVoice = isHeroTurn ? heroVoice : compVoice;
@@ -5260,6 +6047,7 @@ function buildSmartEpisodeForRunner({
       voiceName: assignedVoice,
       dialect: dialectMode,
       dialogueArabic: validated,
+      soundEffectsEn: String(aiSc?.soundEffectsEn || "").trim(),
       visualScenePromptEn: String(aiSc?.visualScenePromptEn || "").trim(),
       durationSec: perSceneSec,
     };
@@ -5522,11 +6310,12 @@ async function generateFreshAiEpisodeForRunner({
   team,
   topic,
   videoFormat,
-  dialect = "egyptian",
+  dialect = "fusha",
   dailyTime = "19:00",
   excludedTitles = [],
 }) {
   const isShort = videoFormat === "short_9_16";
+  const isFusha = dialect !== "egyptian";
   const scCount = isShort ? 4 : 8;
   const apiKey = String(process.env.GEMINI_API_KEY || "").trim();
   if (apiKey) {
@@ -5536,85 +6325,76 @@ async function generateFreshAiEpisodeForRunner({
         .slice(0, 30)
         .map((t) => `- ${t}`)
         .join("\n");
+      const languageDirectives = isFusha
+        ? `قواعد اللغة العربية الفصحى السلسة للأطفال والتشكيل الصوتي (إلزامي 100% لأن محرك الفيديو الأصلي ينطق الحوار مباشرةً):
+- اكتب الحوار باللغة العربية الفصحى المبسطة الدافئة والمحببة للأطفال (على غرار أفلام ديزني وبيكسار المدبلجة بالفصحى السلسة)، وامنع تماماً أي كلمات عامية.
+- التزم بالتأنيث والتذكير الفصيح السليم: البطل الأول "${team.mainCharacterName}" (${isFemaleCharacter(team.mainCharacterName) ? "أنثى" : "ذكر"})، والرفيق الثاني "${team.companionName}" (${isFemaleCharacter(team.companionName) ? "أنثى" : "ذكر"}).
+- ضع التشكيل الواضح (الحركات الأساسية وأواخر الكلمات المهمة) ليخرج النطق العربي الأصلي من محرك الفيديو سليماً وواضحاً مئة بالمئة.
+- طول كل مشهد في الفيديو القصير: 24 إلى 32 كلمة متصلة ومفهومة. وطول كل مشهد في الفيلم الطويل: 68 إلى 84 كلمة متصلة وواضحة.`
+        : `قواعد التأنيث والتذكير ومخاطبة الشخصيات (باللهجة المصرية الصافية 100% وبدون أي فصحى):
+- البطل الأول: "${team.mainCharacterName}" وهو (${isFemaleCharacter(team.mainCharacterName) ? "أنثى" : "ذكر"}).
+- الرفيق الثاني: "${team.companionName}" وهو (${isFemaleCharacter(team.companionName) ? "أنثى" : "ذكر"}).
+- إذا كان المخاطب أنثى: يجب مخاطبتها بصيغة المؤنث المصرية بياء المخاطبة الصريحة (بُصِّي، تَعَالِي، شُوفِي، إِنتِي، شَاطْرَة، يَا بَطَلَة).
+- إذا كان المخاطب ذكراً: استخدام صيغ المذكر المصرية (بُصّ يا بطل، تَعَالَى، شُوف، إِنتَ شاطر).
+- طول كل مشهد في الفيلم الطويل 75 إلى 95 كلمة، وفي الفيديو القصير 18 إلى 22 كلمة.`;
+
       const prompt = `أنت المخرج الإبداعي والمؤلف المتميز لقناة الأطفال كرتون ثلاثي الأبعاد "Noreen Kids".
 قم بابتكار وتأليف حلقة كرتونية ممتعة ذات حبكة درامية واضحة ومفهومة جداً للأطفال (${
         isShort
-          ? "فيديو قصير YouTube Shorts / Facebook Reels من 4 مشاهد مترابطة بحبكة سريعة وممتعة للأطفال، كل مشهد 16 إلى 22 كلمة بحوار كرتوني مرح ومركّز ليكون إجمالي وقت الفيديو 60 إلى 75 ثانية فقط"
-          : "حلقة كرتون طويلة كاملة من 8 مشاهد متسلسلة بحبكة درامية واضحة وعميقة للأطفال، كل مشهد 90 إلى 115 كلمة بالحوار المصري القاهري المتصل الممتع دون أي صمت أو انقطاع"
-      }) باللهجة المصرية القاهرية الطبيعية للأطفال بنسبة 100% بدون أي تشكيل فصحى وبدون جمل عامة غامضة.
+          ? "فيديو قصير YouTube Shorts / Facebook Reels من 4 مشاهد مترابطة بحبكة سريعة وممتعة للأطفال ليكون إجمالي وقت الفيديو 64 إلى 74 ثانية"
+          : "حلقة كرتون طويلة كاملة من 8 مشاهد متسلسلة بحبكة درامية واضحة وعميقة للأطفال"
+      }) ${
+        isFusha
+          ? "باللغة العربية الفصحى السلسة المبسطة للأطفال والمشكولة بوضوح تام"
+          : "باللهجة المصرية القاهرية الطبيعية للأطفال بنسبة 100%"
+      }.
 
 البطل الرئيسي: "${team.mainCharacterName}" (الأداة: ${team.heroProp}).
 المرافق: "${team.companionName}" (الأداة: ${team.compProp}).
 الموضوع والدرس: مغامرة أصيلة وممتعة مستوحاة من: "${topic}".
 
-🎯 الهدف الأهم والمحوري: تقديم قصة وحبكة درامية مفهومة وواضحة جداً للطفل، وليست مجرد نصوص عامة أو شعارات ملصوقة جنب بعضها!
-يجب أن يفهم الطفل والمشاهد بوضوح تام من خلال حوار الشخصيات:
-1. البداية والمكان: أين الأبطال وماذا كانا يفعلان في البداية؟
-2. الموقف أو المشكلة المحددة الملموسة: ما هو الحدث الواقعي الواضح الذي وقع؟ (موقف ملموس بالأسماء والأشياء، مثل: نسيان عم أحمد محفظته أو أدواته، قطة صغيرة محتاجة مساعدة، لعبة أو جسر انكسر، عصفور سقط من عشه، نبتة عطشانة، مفتاح ضائع، إعانة جار كبير في السن).
-3. الخطة والتعاون: كيف فكرا بهدوء واستخدما أدواتهما (${team.heroProp} و ${team.compProp}) بطريقة ذكية وتعاونية لحل المشكلة خطوة بخطوة؟
-4. الحل العملي الملموس: ماذا حدث بالتفصيل وكيف نجحت الفكرة وعادت الفرحة والابتسامة للجميع؟
-5. الدرس التربوي: ما هي القيمة الأخلاقية الجميلة التي تعلمناها ونطبقها في المدرسة والبيت؟
+🎯 الهدف الأهم والمحوري: تقديم قصة وحبكة درامية مفهومة وواضحة جداً للطفل مع أفعال حركية ومؤثرات صوتية طبيعية حية (خطوات مشي وجري، خرير أو رشات ماء، حفيف أوراق الشجر، زقزقة عصافير، صوت الأدوات):
+1. البداية والمكان: أين الأبطال وماذا يفعلان معاً في البداية؟
+2. الموقف أو المشكلة الملموسة: حدث واقعي واضح مع شخصيات أو كائنات لطيفة داخل القصة (قطة صغيرة، سلحفاة، عصفور، جار طيب، جسر خشبي، نبتة عطشى).
+3. الخطة والتعاون: كيف فكرا بهدوء واستخدما أدواتهما (${team.heroProp} و ${team.compProp}) معاً لحل المشكلة خطوة بخطوة؟
+4. الحل العملي والدرس التربوي: نجاح الفكرة وعودة الفرحة، مع طرح سؤال تفاعلي للأطفال في المشهد الأخير ("سؤال الشطار" و"اكتبوا إجابتكم في التعليقات").
 
-قواعد التأنيث والتذكير ومخاطبة الشخصيات (باللهجة المصرية الصافية 100% وبدون أي فصحى):
-- البطل الأول: "${team.mainCharacterName}" وهو (${isFemaleCharacter(team.mainCharacterName) ? "أنثى" : "ذكر"}).
-- الرفيق الثاني: "${team.companionName}" وهو (${isFemaleCharacter(team.companionName) ? "أنثى" : "ذكر"}).
-- إذا كان المخاطب أنثى (${isFemaleCharacter(team.mainCharacterName) ? team.mainCharacterName : ""} ${isFemaleCharacter(team.companionName) ? team.companionName : ""}):
-  * يجب مخاطبتها بصيغة المؤنث المصرية بياء المخاطبة الصريحة: (بُصِّي، تَعَالِي، شُوفِي، اسْمَعِي، خَلِّيكِي، جَرَّبِي، قُولْتِي، شُوفْتِي، عَمَلْتِي، لَقِيتِي، إِنتِي، لِيكِي، مَعَاكِي، عَلِيكِي، فِيكِي، عَايْزَاكِي، شَاطْرَة، يَا بَطَلَة، يَا شَطُّورَة، يَا سُكَّرَة). ممنوع نهائياً مخاطبة الأنثى بـ (بص، تعال، شوف، إنت، يا بطل، يا شاطر، يا جدع)!
-- إذا كان المخاطب ذكراً:
-  * استخدام صيغ المذكر المصرية: (بُصّ يا بطل، تَعَالَى، شُوف، إِنتَ شاطر، قولت، شوفت، عايزك، يا بطل، يا شاطر).
-- التشكيل الصوتي التمييزي:
-  ضع تشكيلاً دقيقاً بالحركات الأساسية على الكلمات المصرية الحساسة لضمان نطقها الصحيح بمحرك الصوت (مثل: كِده، دِلْوَأْتِي، بُصّ، بُصِّي، إِنتِي، لِيكِي، قُولْتِي، شُوفْتِي، عَشَانْ، أَوْي).
-- الالتزام التام بنسبة 100% باللهجة المصرية العامية القاهرية الدافئة للأطفال، وممنوع منعاً باتاً أي تحويل أو تسرب للغة العربية الفصحى.
+${languageDirectives}
 
-استراتيجيات النمو ومضاعفة المشاهدات والتفاعل للأطفال (Audience Growth & Retention Directives):
-1. لوحة شرف الأبطال والتحية بالأسماء: في المشهد الأخير، أعلن وسام الشطارة وادعُ الأطفال لكتابة أسمائهم ومدنهم للظهور بالاسم في لوحة شرف أبطال نورين كيدز في الحلقة القادمة.
-2. تحدي الملاحظة السريع (Rewind & Spot Challenge): في المشهد الثاني أو الثالث، اذكر وجود عنصر سري خفي ظهر للحظة واحدة (مفتاح ذهبي، وردة منورة، بلورة سحرية) واطلب من الطفل إعادة المشهد للبحث عنه وكتابة توقيته لرفع معدل المشاهدة (Watch Time).
-3. تفاعل وحركة الأطفال في الفيديوهات القصيرة: أضف توجيهاً حركياً مرحاً يقلده الطفل فوراً (القفز 3 مرات، تحريك اليدين مثل الفراشة، تنظيف الأسنان بالفرشاة مع أرنوب، أو الضحك مع تختوخ).
-4. مهن المستقبل والقدوة التربوية: أبرز دور البطل الإيجابي الملهم (الطب، الهندسة، الفضاء، الاستكشاف، الاختراع، الرفق بالكائنات) ليتعلم الطفل حب العمل والابتكار.
-5. حواديت النوم والسكينة المسائية: عند حلقات النوم أو مع تيتة وجدو، اعتمد نبرة دافئة ومهدئة للاسترخاء قبل النوم بنشاط وشطارة.
-
-قواعد كتابة الحوار والسيناريو الكرتوني الصارمة (Direct Character-to-Character Dialogue with Concrete Story Events):
-1. الحوار في كل مشهد هو كلام تمثيلي كرتوني مباشر صادر من فم الشخصية المتحدثة وتخاطب به صديقها وجهاً لوجه بضمير المتكلم ("أنا"، "إحنا") وتناديه باسمه ("يا ${team.companionName}" أو "يا ${team.mainCharacterName}").
-2. الشخصيات تصف الأحداث الواقعية والمشاعر والأفعال أثناء الحوار بشكل عفوي ممتع يروي القصة للطفل دون حاجة لراوٍ غائب.
-3. توزيع المتحدثين وتسلسل الحبكة الإلزامي بين المشاهد:${
+قواعد توزيع المتحدثين وتسلسل الحبكة الإلزامي بين المشاهد (حوار تمثيلي مباشر بين البطلين وجهاً لوجه دون أي راوٍ خارجي):${
   isShort
     ? `
-- المشهد 1: المتحدث هو "${team.mainCharacterName}" (يبدأ بحماس وتشويق، يصف الموقف والمشكلة المحددة التي شاهداها للتو وينادي صديقه).
-- المشهد 2: المتحدث هو "${team.companionName}" (يرد مباشرة ويشرح خطورة الموقف ولماذا يجب المساعدة فوراً، ويقترح خطة ذكية بأداته ${team.compProp}).
-- المشهد 3: المتحدث هو "${team.mainCharacterName}" (يتعاون مع صديقه عملياً وينفذان الحل الذكي خطوة بخطوة باستخدام ${team.heroProp} ويصفان لحظة حل المشكلة بنجاح).
-- المشهد 4: المتحدث هو "${team.companionName}" (يحتفل بنجاح الفكرة وعودة الفرحة، يلخص الدرس المستفاد بوضوح، ويطرح سؤال التحدي التفاعلي للأطفال ويكتبوا إجابتهم في التعليقات).`
+- المشهد 1: المتحدث هو "${team.mainCharacterName}" (يبدأ بحماس وتشويق أثناء حركتهما معاً، يصف الموقف والمشكلة المحددة التي شاهداها وينادي صديقه).
+- المشهد 2: المتحدث هو "${team.companionName}" (يرد مباشرة أثناء فحص الموقف ويقترح خطة ذكية بأداته ${team.compProp}).
+- المشهد 3: المتحدث هو "${team.mainCharacterName}" (يتعاون مع صديقه عملياً وينفذان الحل الذكي خطوة بخطوة باستخدام ${team.heroProp}).
+- المشهد 4: المتحدث هو "${team.companionName}" (يحتفل بنجاح الفكرة وعودة الفرحة، يلخص الدرس المستفاد، ويطرح سؤال الشطار للأطفال ليكتبوا إجابتهم في التعليقات).`
     : `
-- المشهد 1: المتحدث هو "${team.mainCharacterName}" (يخاطب صديقه بحماس، يحدد المكان والنشاط الجميل الذي يقومان به في البداية).
-- المشهد 2: المتحدث هو "${team.companionName}" (يلاحظ الحدث المفاجئ ويصف المشكلة الملموسة بدقة وتأثيرها على من حولهما).
-- المشهد 3: المتحدث هو "${team.mainCharacterName}" (يهدئ صديقه ويرفض التصرف العشوائي أو التسرع، ويوضح أهمية التفكير الهادئ والأمانة).
-- المشهد 4: المتحدث هو "${team.companionName}" (يوافق ويضع خطة العمل المرتبة، ويجهز أداته ${team.compProp} للبدء في الحل).
-- المشهد 5: المتحدث هو "${team.mainCharacterName}" (يبدأ الخطوات العملية بالتعاون المشترك مستخدماً ${team.heroProp} ويتغلبان على عقبة بسيطة).
-- المشهد 6: المتحدث هو "${team.companionName}" (يحتفل بالنتيجة المبهرة والحل الحقيقي وفرحة الجميع بأسلوبه الكرتوني المرح).
-- المشهد 7: المتحدث هو "${team.mainCharacterName}" (يلخص العبرة الحياتية والدرس التربوي للأطفال وكيف يطبقونه في المدرسة والبيت).
-- المشهد 8: المتحدث هو "${team.companionName}" (المشهد الثامن والتحدي الأخير: يختم بحب، ويطرح سؤال الشطار التفاعلي للأطفال ويكتبوا إجابتهم في التعليقات).`
+- المشهد 1: المتحدث هو "${team.mainCharacterName}" (يخاطب صديقه بحماس أثناء سيرهما معاً في المكان).
+- المشهد 2: المتحدث هو "${team.companionName}" (يلاحظ الحدث المفاجئ ويصف المشكلة الملموسة بدقة، ويشير للنجمة الذهبية السحرية).
+- المشهد 3: المتحدث هو "${team.mainCharacterName}" (يهدئ صديقه ويوضح أهمية التفكير الهادئ والأمانة).
+- المشهد 4: المتحدث هو "${team.companionName}" (يضع خطة العمل المرتبة ويجهز أداته ${team.compProp}).
+- المشهد 5: المتحدث هو "${team.mainCharacterName}" (يبدأ الخطوات العملية بالتعاون المشترك مستخدماً ${team.heroProp}).
+- المشهد 6: المتحدث هو "${team.companionName}" (يحتفل بالنتيجة المبهرة والحل الحقيقي وفرحة الجميع).
+- المشهد 7: المتحدث هو "${team.mainCharacterName}" (يلخص العبرة الحياتية والدرس التربوي للأطفال).
+- المشهد 8: المتحدث هو "${team.companionName}" (المشهد الثامن والتحدي الأخير: يطرح سؤال الشطار التفاعلي للأطفال ويكتبوا إجابتهم في التعليقات).`
 }
 
-قواعد صارمة للهجة المصرية في كامل الحلقة:
-1. الحوار في كامل المشاهد يجب أن يكون عامي مصري قاهري أصيل ودافئ وعفوي وممتع للأطفال 100% (يا خبر، بص شوف، يا ترى إيه الحكاية، يلا بينا سوا، متقلقش خالص إحنا شطار وهنحلها، فكرة تجنن، إيه الجمال ده). ممنوع أي تعبيرات فصحى مسرحية جافة.
-2. في المشهد الثامن، اجعل الخاتمة مشجعة مع سؤال تفاعلي للأبطال في التعليقات، ولا تكرر أبداً كلمة "مغامرة" مرتين متتاليتين.
-3. مهم جداً: طول كل مشهد في الفيلم الطويل 75 إلى 95 كلمة، وفي الفيديو القصير 18 إلى 22 كلمة لكل مشهد بحوار كرتوني حي متواصل دون أي صمت، ليتناسب تماماً مع وقت الشورتس والريلز 60 إلى 72 ثانية بنبرة صوت مصرية طبيعية 100% وبانتقال سريع وخاطف بين المشاهد.
-
 ⚠️ قاعدة حاسمة لمنع التكرار:
-تجنب تماماً أي تكرار أو تشابه في الفكرة أو الحبكة أو العنوان مع هذه القصص السابقة المنشورة في القناة:
+تجنب تماماً أي تكرار أو تشابه مع هذه القصص السابقة:
 ${recentTitlesList}
-ابتكر قصة وحبكة أصلية جديدة كلياً وغير مسبوقة لهذا البطل وصديقه!
 
 أخرج JSON فقط يحتوي على:
 {
-  "title": "عنوان القصة الجديد والمشوق بحيث يكون كامل المعنى وبطول 35 إلى 50 حرفاً دون أن ينقطع المعنى وبدون كلمة Noreen Kids وبدون هاشتاج",
+  "title": "عنوان القصة الجديد والمشوق باللغة العربية (35 إلى 50 حرفاً بدون كلمة Noreen Kids وبدون هاشتاج)",
   "moralLesson": "الدرس المستفاد من الحلقة",
   "scenes": [
     {
       "sceneNumber": 1,
       "speakerName": "${team.mainCharacterName}",
       "title": "عنوان المشهد",
-      "dialogueArabic": "الحوار الكرتوني المباشر الصادر من فم هذه الشخصية فقط دون أي راوي (المشهد الطويل: 90 إلى 115 كلمة، المشهد القصير: 16 إلى 22 كلمة)",
-      "visualScenePromptEn": "English Pixar 3D visual action description (20-35 words) showing BOTH the Hero and Companion together in the same shot with any supporting story characters (e.g. baby whale, puppy, neighbor) actively moving, running, swimming, or working together to act out this exact scene, no text"
+      "dialogueArabic": "الحوار الكرتوني المباشر الصادر من فم هذه الشخصية فقط دون أي راوي",
+      "visualScenePromptEn": "English Pixar 3D visual action description (25-40 words) showing BOTH the Hero and Companion together in the same shot with any supporting story characters actively walking, running, crouching, or working together physically to act out this exact scene, 4K sharp lighting, no text",
+      "soundEffectsEn": "Concise English list of realistic synchronized Foley sound effects matching the physical action in this scene (e.g. crisp footsteps on grass, gentle water splash, wooden tool click, cheerful bird chirps), no music"
     }
   ]
 }`;
@@ -8189,10 +8969,14 @@ async function main() {
     : schedule.githubPublishTimeCairo ||
       schedule.dailyPublishTimeCairo ||
       "19:00";
-  const dailyDialect =
-    (isFacebookWorkflow ? fbSchedule.dailyDialect : schedule.dailyDialect) === "fusha"
-      ? "fusha"
-      : "egyptian";
+  const rawCfgDialect = String(
+    process.env.FORCE_DIALECT ||
+      (isFacebookWorkflow ? fbSchedule.dailyDialect : schedule.dailyDialect) ||
+      "fusha"
+  )
+    .trim()
+    .toLowerCase();
+  const dailyDialect = rawCfgDialect === "egyptian" ? "egyptian" : "fusha";
   const privacyStatus =
     schedule.privacyStatus || fbSchedule.privacyStatus || "public";
   const madeForKids =
@@ -8520,7 +9304,7 @@ async function main() {
     }
 
     console.log(
-      `✅ PRE-UPLOAD UNIT TEST GATE PASSED: Duration=${durSec}s | AV-Drift=${avDrift.toFixed(2)}s | Codec=${vCodec}/${pixFmt}/${aCodec} 48kHz Stereo (Closed-GOP=${closedGop}) | Dialogue=100% Egyptian Verified | ExternalImages=0 | FastStart=Enabled`
+      `✅ PRE-UPLOAD UNIT TEST GATE PASSED: Duration=${durSec}s | Res=${vStream.width}x${vStream.height} | AV-Drift=${avDrift.toFixed(2)}s | Codec=${vCodec}/${pixFmt}/${aCodec} 48kHz Stereo (Closed-GOP=${closedGop}) | Dialogue=100% ${dailyDialect === "fusha" ? "Arabic Fusha + Native Engine Audio/SFX" : "Egyptian"} Verified | ExternalImages=0 | FastStart=Enabled`
     );
 
     // Dedicated 3D Interactive Challenge for this video hero & companion (Short hero post + Long hero post)
@@ -8738,8 +9522,8 @@ async function main() {
           videoCodec: "h264",
           videoProfile: "High",
           pixelFormat: "yuv420p",
-          width: longResNow ? 1280 : 720,
-          height: longResNow ? 720 : 1280,
+          width: longResNow ? 1920 : 1080,
+          height: longResNow ? 1080 : 1920,
           fps: 30,
           audioCodec: "aac",
           audioSampleRate: 48000,
@@ -8867,8 +9651,8 @@ async function main() {
         videoCodec: "h264",
         videoProfile: "High",
         pixelFormat: "yuv420p",
-        width: longRes ? 1280 : 720,
-        height: longRes ? 720 : 1280,
+        width: longRes ? 1920 : 1080,
+        height: longRes ? 1080 : 1920,
         fps: 30,
         audioCodec: "aac",
         audioSampleRate: 48000,

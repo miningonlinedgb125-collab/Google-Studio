@@ -2,7 +2,7 @@
   "channel": "Noreen Kids",
   "dailyPublishTimeCairo": "08:15",
   "githubPublishTimeCairo": "08:15",
-  "dailyDialect": "egyptian",
+  "dailyDialect": "fusha",
   "selectedWorkflowMode": "daily_schedule",
   "isAutoDailyScheduleEnabled": false,
   "isGitHubScheduleEnabled": true,
