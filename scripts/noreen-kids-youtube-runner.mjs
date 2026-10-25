@@ -1491,7 +1491,44 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
     }
   }
 
-  // 1) PRIMARY PREMIER ENGINE: Gemini Native Audio TTS (`gemini-3.8-flash-tts` & `gemini-3.8-flash-lite-tts`)
+  // 0) FUSHA (Modern Standard Arabic) PRIMARY ENGINE: deAPI Chatterbox Multilingual TTS (`lang: "ar"`)
+  // Note: deAPI TTS supports Modern Standard Arabic ("ar") natively, whereas Egyptian Colloquial ("egyptian")
+  // starts directly with Gemini Native Audio Egyptian TTS below so colloquial Cairene pronunciation stays 100% authentic!
+  const deapiTtsKey = String(process.env.DEAPI_API_KEY || "").trim();
+  if (dialect === "fusha" && deapiTtsKey) {
+    try {
+      const fushaRawDialogue = stripLeakedVoiceInstructionsRunner(dialogue);
+      const deapiSpeechWav = await synthesizeArabicFushaViaDeapiSpeech({
+        apiKey: deapiTtsKey,
+        text: fushaRawDialogue,
+        sceneIndex,
+        tmpDir,
+      });
+      if (deapiSpeechWav && fs.existsSync(deapiSpeechWav)) {
+        const finalPath = await applyRunnerCharacterTimbreAndCompanionSfx(
+          deapiSpeechWav,
+          vp,
+          sceneIndex,
+          tmpDir
+        );
+        const durSec = await measureAudioDurationSec(finalPath, 14);
+        const cleanWordCount = dialogue.split(/\s+/).filter(Boolean).length;
+        const minExpectedSec = Math.max(3.5, cleanWordCount * 0.40);
+        if (durSec >= minExpectedSec) {
+          console.log(
+            `   🎤 [deAPI Chatterbox Arabic TTS] المشهد ${sceneIndex + 1}: تم توليد الصوت العربي الفصيح بنجاح عبر deAPI! (${durSec.toFixed(1)}s)`
+          );
+          return { audioPath: finalPath, voiceDurSec: durSec, dialogue };
+        }
+      }
+    } catch (deapiTtsErr) {
+      console.warn(
+        `   ⚠️ [deAPI Arabic TTS Notice] المشهد ${sceneIndex + 1}: تعذر التوليد المؤقت عبر deAPI (${deapiTtsErr?.message || deapiTtsErr})، التحويل التلقائي لمحرك الصوت البديل...`
+      );
+    }
+  }
+
+  // 1) PRIMARY PREMIER ENGINE FOR EGYPTIAN COLLOQUIAL: Gemini Native Audio TTS (`gemini-3.8-flash-tts` & `gemini-3.8-flash-lite-tts`)
   // Dedicated Native Audio Text-to-Speech: Guarantees 100% full verbatim Egyptian dialogue reading without sentence truncation!
   const apiKey = (process.env.GEMINI_API_KEY || "").trim();
   if (apiKey) {
@@ -1502,7 +1539,12 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
       });
       const isEgyptian = dialect !== "fusha";
       const audioWavPath = path.join(tmpDir, `gemini_audio_${sceneIndex}.wav`);
-      const ttsModels = ["gemini-3.8-flash-tts", "gemini-3.8-flash-lite-tts"];
+      if (!globalThis.__exhaustedGeminiDailyTtsModels) {
+        globalThis.__exhaustedGeminiDailyTtsModels = new Set();
+      }
+      const ttsModels = ["gemini-3.8-flash-tts", "gemini-3.8-flash-lite-tts"].filter(
+        (m) => !globalThis.__exhaustedGeminiDailyTtsModels.has(m)
+      );
       const pureDialogue = stripLeakedVoiceInstructionsRunner(dialogue);
 
       for (const ttsModel of ttsModels) {
@@ -1557,10 +1599,14 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
           } catch (ttsErr) {
             const errStr = String(ttsErr?.message || "");
             console.warn(
-              `   ⚠️ [Gemini Native Audio TTS Warning] المشهد ${sceneIndex + 1} (${ttsModel}): ${errStr}`
+              `   ⚠️ [Gemini Native Audio TTS Warning] المشهد ${sceneIndex + 1} (${ttsModel}): ${errStr.slice(0, 220)}`
             );
+            if (/PerDay|per_day|daily/i.test(errStr) && (errStr.includes("429") || errStr.includes("RESOURCE_EXHAUSTED"))) {
+              globalThis.__exhaustedGeminiDailyTtsModels.add(ttsModel);
+              break;
+            }
             if (errStr.includes("429") || errStr.includes("quota") || errStr.includes("RESOURCE_EXHAUSTED")) {
-              await sleep(5000);
+              await sleep(5500);
             }
           }
         }
@@ -1781,7 +1827,7 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
 }
 
 // ============================================================================
-// deAPI.ai 3D Cartoon Storyboard + Multi-Character Action Animation Engine
+// deAPI.ai 3D Cartoon Storyboard + Lip-Synced Audio-to-Video & Foley SFX Engine
 // ============================================================================
 let _cachedDeapiModelInfo = null;
 let _cachedDeapiCatalog = null;
@@ -1807,6 +1853,17 @@ function scoreDeapiImg2VideoModel(modelObj) {
   return 60;
 }
 
+function scoreDeapiAud2VideoModel(modelObj) {
+  const slug = String(modelObj?.slug || "").toLowerCase();
+  const name = String(modelObj?.name || "").toLowerCase();
+  const combined = slug + " " + name;
+  if (combined.includes("ltx2-5") || combined.includes("ltx2_5") || combined.includes("ltx-2.5")) return 100;
+  if (combined.includes("ltx2-3") || combined.includes("ltx2_3") || combined.includes("ltx-2.3")) return 96;
+  if (combined.includes("ltx2") || combined.includes("ltx-2")) return 92;
+  if (combined.includes("ltx")) return 85;
+  return 70;
+}
+
 function scoreDeapiImg2ImgModel(modelObj) {
   const slug = String(modelObj?.slug || "").toLowerCase();
   const name = String(modelObj?.name || "").toLowerCase();
@@ -1828,6 +1885,22 @@ function scoreDeapiTxt2ImgModel(modelObj) {
   if (combined.includes("zimageturbo") || combined.includes("z-image-turbo")) return 92;
   if (combined.includes("flux")) return 88;
   return 65;
+}
+
+function scoreDeapiArabicTtsModel(modelObj) {
+  const slug = String(modelObj?.slug || "").toLowerCase();
+  const name = String(modelObj?.name || "").toLowerCase();
+  const combined = slug + " " + name;
+  const langs = Array.isArray(modelObj?.languages)
+    ? modelObj.languages.map((l) => String(l?.code || l || "").toLowerCase())
+    : Array.isArray(modelObj?.info?.languages)
+    ? modelObj.info.languages.map((l) => String(l?.code || l || "").toLowerCase())
+    : [];
+  const explicitlyHasAr = langs.some((c) => c === "ar" || c.startsWith("ar-") || c.includes("arab"));
+  if (combined.includes("chatterbox")) return explicitlyHasAr ? 105 : 100;
+  if (explicitlyHasAr) return 95;
+  if (combined.includes("qwen3") && combined.includes("tts")) return 75;
+  return 40;
 }
 
 function computeDeapiRateLimitWaitMs(headers, attempt = 1) {
@@ -1890,9 +1963,11 @@ async function discoverActiveDeapiModelsCatalog(apiKey, baseUrl = "https://api.d
   const candidateUrls = [
     `${baseUrl}/api/v2/models?per_page=100`,
     `${baseUrl}/api/v2/models?limit=100`,
+    `${baseUrl}/api/v2/models?per_page=50&filter[inference_types]=aud2video`,
     `${baseUrl}/api/v2/models?per_page=50&filter[inference_types]=img2video`,
     `${baseUrl}/api/v2/models?per_page=50&filter[inference_types]=img2img`,
     `${baseUrl}/api/v2/models?per_page=50&filter[inference_types]=txt2img`,
+    `${baseUrl}/api/v2/models?per_page=50&filter[inference_types]=txt2audio`,
     `${baseUrl}/api/v1/client/models?per_page=100`,
   ];
 
@@ -1907,12 +1982,11 @@ async function discoverActiveDeapiModelsCatalog(apiKey, baseUrl = "https://api.d
           allModelsBySlug.set(m.slug, m);
         }
       }
-      // If we got both video and image models from the first full catalog call, stop early
       const vals = [...allModelsBySlug.values()];
       const hasVid = vals.some((x) => (x.inference_types || []).some((t) => String(t).toLowerCase() === "img2video"));
+      const hasAudVid = vals.some((x) => (x.inference_types || []).some((t) => String(t).toLowerCase() === "aud2video"));
       const hasImgEdit = vals.some((x) => (x.inference_types || []).some((t) => String(t).toLowerCase() === "img2img"));
-      const hasTxtImg = vals.some((x) => (x.inference_types || []).some((t) => String(t).toLowerCase() === "txt2img"));
-      if (hasVid && (hasImgEdit || hasTxtImg)) break;
+      if (hasVid && hasAudVid && hasImgEdit) break;
     } catch (err) {
       console.warn(`   ⚠️ [deAPI.ai] Catalog probe notice (${url}):`, err?.message || err);
     }
@@ -1926,8 +2000,10 @@ async function discoverActiveDeapiModelsCatalog(apiKey, baseUrl = "https://api.d
     );
 
   const img2vidList = byType("img2video");
+  const aud2vidList = byType("aud2video");
   const img2imgList = byType("img2img");
   const txt2imgList = byType("txt2img");
+  const txt2audioList = byType("txt2audio");
 
   let chosenVideo = null;
   if (preferredVideoOverride) {
@@ -1941,12 +2017,26 @@ async function discoverActiveDeapiModelsCatalog(apiKey, baseUrl = "https://api.d
     chosenVideo = {
       slug: preferredVideoOverride || "Ltx2_5_22B_Dist_INT8",
       name: "Fallback LTX Video Model",
+      inference_types: ["img2video", "aud2video", "txt2video"],
       info: {
         defaults: { width: 768, height: 512, frames: 97, fps: 24, steps: 20, guidance: 3.0 },
-        limits: { min_width: 256, max_width: 1280, min_height: 256, max_height: 1280, dimension_multiple: 32, min_frames: 25, max_frames: 121 },
+        limits: { min_width: 256, max_width: 1280, min_height: 256, max_height: 1280, dimension_multiple: 32, min_frames: 49, max_frames: 241 },
         features: { supports_steps: true, supports_guidance: true, supports_negative_prompt: true },
       },
     };
+  }
+
+  let chosenAud2Video = null;
+  if (preferredVideoOverride) {
+    chosenAud2Video = aud2vidList.find((m) => String(m.slug).toLowerCase() === preferredVideoOverride.toLowerCase()) || null;
+  }
+  if (!chosenAud2Video && aud2vidList.length > 0) {
+    aud2vidList.sort((a, b) => scoreDeapiAud2VideoModel(b) - scoreDeapiAud2VideoModel(a));
+    chosenAud2Video = aud2vidList[0];
+  }
+  // LTX-2 / LTX-2.5 models natively support audio-syncs even if catalog was mocked with minimal fields
+  if (!chosenAud2Video && /ltx2|ltx-2|ltx_2/i.test(String(chosenVideo?.slug || ""))) {
+    chosenAud2Video = chosenVideo;
   }
 
   let chosenImg2Img = null;
@@ -1964,15 +2054,28 @@ async function discoverActiveDeapiModelsCatalog(apiKey, baseUrl = "https://api.d
     chosenTxt2Img = txt2imgList[0];
   }
 
+  let chosenArabicTts = null;
+  if (txt2audioList.length > 0) {
+    const scoredTts = [...txt2audioList].sort((a, b) => scoreDeapiArabicTtsModel(b) - scoreDeapiArabicTtsModel(a));
+    if (scoreDeapiArabicTtsModel(scoredTts[0]) >= 70) {
+      chosenArabicTts = scoredTts[0];
+    }
+  }
+  if (!chosenArabicTts) {
+    chosenArabicTts = { slug: "Chatterbox", name: "Chatterbox Multilingual TTS" };
+  }
+
   _cachedDeapiModelInfo = chosenVideo;
   _cachedDeapiCatalog = {
     img2video: chosenVideo,
+    aud2video: chosenAud2Video,
     img2img: chosenImg2Img,
     txt2img: chosenTxt2Img,
+    arabicTts: chosenArabicTts,
   };
 
   console.log(
-    `   🤖 [deAPI.ai] Active pipeline models -> Video="${chosenVideo.slug}" | MultiRef-Scene="${chosenImg2Img?.slug || "auto"}" | Story-Gen="${chosenTxt2Img?.slug || "auto"}"`
+    `   🤖 [deAPI.ai] Active pipeline models -> AudioSync="${chosenAud2Video?.slug || "fallback"}" | Video="${chosenVideo.slug}" | MultiRef-Scene="${chosenImg2Img?.slug || "auto"}" | MSA-TTS="${chosenArabicTts?.slug || "Chatterbox"}"`
   );
   return _cachedDeapiCatalog;
 }
@@ -1982,7 +2085,7 @@ async function discoverActiveDeapiImg2VideoModel(apiKey, baseUrl = "https://api.
   return cat.img2video;
 }
 
-function resolveDeapiModelRenderParams(modelInfo, isShort) {
+function resolveDeapiModelRenderParams(modelInfo, isShort, targetDurationSec = null) {
   const info = modelInfo && typeof modelInfo.info === "object" && !Array.isArray(modelInfo.info) ? modelInfo.info : {};
   const defaults = info.defaults || {};
   const limits = info.limits || {};
@@ -2000,18 +2103,24 @@ function resolveDeapiModelRenderParams(modelInfo, isShort) {
   const height = snapDimensionToGrid(desiredH, minH, maxH, mult);
 
   const fps = Number(defaults.fps ?? limits.fps?.default ?? 24) || 24;
-  const minFrames = Number(limits.min_frames ?? limits.frames?.min ?? 25) || 25;
-  const maxFrames = Number(limits.max_frames ?? limits.frames?.max ?? 121) || 121;
+  const slugLower = String(modelInfo?.slug || "").toLowerCase();
+  const isLtx2 = /ltx2|ltx-2|ltx_2/i.test(slugLower);
+  const minFrames = Number(limits.min_frames ?? limits.frames?.min ?? (isLtx2 ? 49 : 25)) || (isLtx2 ? 49 : 25);
+  const maxFrames = Number(limits.max_frames ?? limits.frames?.max ?? (isLtx2 ? 241 : 121)) || (isLtx2 ? 241 : 121);
+
   let targetFrames = Number(defaults.frames ?? 97) || 97;
-  if (targetFrames < 49 && maxFrames >= 81) {
+  if (typeof targetDurationSec === "number" && targetDurationSec > 0) {
+    targetFrames = Math.round(targetDurationSec * fps);
+  } else if (targetFrames < 49 && maxFrames >= 81) {
     targetFrames = Math.min(97, maxFrames);
   }
+
   targetFrames = Math.max(minFrames, Math.min(maxFrames, Math.round(targetFrames)));
-  const slugLower = String(modelInfo?.slug || "").toLowerCase();
   if (slugLower.includes("ltx")) {
     const ltxSnap = Math.round((targetFrames - 1) / 8) * 8 + 1;
-    if (ltxSnap >= minFrames && ltxSnap <= maxFrames) {
-      targetFrames = ltxSnap;
+    const clampedSnap = Math.max(minFrames, Math.min(maxFrames, ltxSnap));
+    if ((clampedSnap - 1) % 8 === 0) {
+      targetFrames = clampedSnap;
     }
   }
 
@@ -2027,7 +2136,28 @@ function resolveDeapiModelRenderParams(modelInfo, isShort) {
       : null;
   const supportsNegative = features.supports_negative_prompt !== false;
 
-  return { width, height, frames: targetFrames, fps, steps, guidance, supportsNegative };
+  return { width, height, frames: targetFrames, fps, steps, guidance, supportsNegative, minFrames, maxFrames };
+}
+
+function computeAudioChunkPlanSec(totalVoiceSec, maxChunkSec = 9.4, minChunkSec = 2.2) {
+  const safeTotal = Math.max(2.2, Number(totalVoiceSec) || 6.0);
+  if (safeTotal <= maxChunkSec) {
+    return [{ startSec: 0, durSec: Number(safeTotal.toFixed(2)) }];
+  }
+  const numChunks = Math.ceil(safeTotal / maxChunkSec);
+  const evenDur = safeTotal / numChunks;
+  const chunks = [];
+  let cursor = 0;
+  for (let i = 0; i < numChunks; i++) {
+    const rem = safeTotal - cursor;
+    const dur = i === numChunks - 1 ? rem : Math.max(minChunkSec, Math.min(maxChunkSec, evenDur));
+    chunks.push({
+      startSec: Number(cursor.toFixed(3)),
+      durSec: Number(Math.max(minChunkSec, dur).toFixed(3)),
+    });
+    cursor += dur;
+  }
+  return chunks;
 }
 
 function describeCharacterVisualAppearanceEn(charName) {
@@ -2160,27 +2290,40 @@ function inferSupportingCastAndSettingEn(combinedArabicText, heroName = "") {
   }
 
   let settingEn = "a vibrant sunlit 3D Pixar Egyptian neighborhood park with lush trees and colorful houses";
-  if (/بحر|محيط|خليج|مرجان|حوت|دلفين|شوشو|شاطئ|سفينة|قارب|منارة/.test(txt)) {
+  let foleyTheme = "park";
+  let foleyPromptCueEn = "natural footsteps on garden path, gentle breeze in trees, and cheerful outdoor bird ambiance";
+
+  if (/بحر|محيط|خليج|مرجان|حوت|دلفين|شوشو|شاطئ|سفينة|قارب|منارة|ماء|مياه|نهر|شلال/.test(txt)) {
     settingEn = "a sparkling turquoise ocean bay with colorful coral reefs, gentle waves, and a bright boat deck";
+    foleyTheme = "water";
+    foleyPromptCueEn = "splashing ocean waves, gentle water ripples, bubbles, and wooden boat deck footsteps";
   } else if (/فضاء|كوكب|قمر|نجوم|مجرة|مكوك|جنى|مدار/.test(txt)) {
     settingEn = "a colorful magical outer-space station deck overlooking glowing stars and cheerful planets";
+    foleyTheme = "space";
+    foleyPromptCueEn = "light space-boot footsteps, playful sci-fi console chimes, and gentle starship hum";
   } else if (/واحة|صحراء|نخيل|خيمة|قلعة|تامر|بئر/.test(txt)) {
     settingEn = "a golden sunlit Arabian oasis with lush palm trees, sparkling water spring, and lantern tents";
-  } else if (/غابة|شجرة|وادي|أدغال|عمرو|نهر|شلال/.test(txt)) {
-    settingEn = "an enchanted sunlit green adventure forest with wooden bridge, flowers, and sparkling stream";
+    foleyTheme = "oasis";
+    foleyPromptCueEn = "soft footsteps on oasis sand, palm leaves rustling in warm breeze, and trickling spring water";
+  } else if (/غابة|شجرة|وادي|أدغال|عمرو|بستان|تفاح|ثمار/.test(txt)) {
+    settingEn = "an enchanted sunlit green orchard and adventure forest with wooden bridge, fruit trees, and sparkling stream";
+    foleyTheme = "forest";
+    foleyPromptCueEn = "lively footsteps on grass, rustling orchard leaves, cheerful songbirds, and gentle stream water";
+  } else if (/اختراع|معمل|ورشة|جسر|نوران|كارمن|آلة|حصادة|روبوت/.test(txt)) {
+    settingEn = "a colorful kids invention workshop and sunny orchard construction site with cheerful smart tools";
+    foleyTheme = "workshop";
+    foleyPromptCueEn = "active footsteps, playful mechanical gear clicks, gadget whirs, and cheerful workshop foley";
   } else if (/مدرسة|فصل|مكتبة|كتب|سبورة|أم ملك|شريف/.test(txt)) {
     settingEn = "a bright colorful 3D Pixar kids classroom and library filled with books and sunny windows";
+    foleyTheme = "park";
+    foleyPromptCueEn = "light classroom footsteps, page turns, and cheerful schoolyard ambiance";
   } else if (/عيادة|مستشفى|إسعاف|أسنان|سنان|نورين|ملك/.test(txt)) {
     settingEn = "a cheerful colorful pediatric kids clinic and sunny garden rescue area";
-  } else if (/مطبخ|كعك|فطير|تيتة|طعام|سندوتش|خضار|فواكه/.test(txt)) {
-    settingEn = "a warm cozy sunlit family kitchen and garden table with fresh colorful fruits";
-  } else if (/مسجد|جامع|قرآن|سورة|الشيخ محمود/.test(txt)) {
-    settingEn = "a serene sunlit courtyard with warm Islamic geometric arches, lanterns, and green garden";
-  } else if (/اختراع|معمل|ورشة|جسر|نوران|كارمن/.test(txt)) {
-    settingEn = "a colorful kids invention workshop and sunny park construction site with cheerful tools";
+    foleyTheme = "park";
+    foleyPromptCueEn = "gentle footsteps, playful medical kit clicks, and sunny garden bird ambiance";
   }
 
-  return { supportingCast, settingEn };
+  return { supportingCast, settingEn, foleyTheme, foleyPromptCueEn };
 }
 
 function buildMultiCharacterStoryPrompts({
@@ -2197,7 +2340,7 @@ function buildMultiCharacterStoryPrompts({
   const heroDesc = describeCharacterVisualAppearanceEn(heroName);
   const compDesc = describeCharacterVisualAppearanceEn(companionName);
   const combinedAr = `${topicText || ""} ${sceneTitle || ""} ${dialogueArabic || ""}`;
-  const { supportingCast, settingEn } = inferSupportingCastAndSettingEn(combinedAr, heroName);
+  const { supportingCast, settingEn, foleyTheme, foleyPromptCueEn } = inferSupportingCastAndSettingEn(combinedAr, heroName);
   const castWithClause = supportingCast ? ` together with ${supportingCast}` : "";
   const customAction = String(aiVisualScenePromptEn || "")
     .replace(/\s+/g, " ")
@@ -2206,39 +2349,42 @@ function buildMultiCharacterStoryPrompts({
   const progressRatio = totalScenes > 1 ? sceneIndex / (totalScenes - 1) : 0;
   let stageAction = "";
   if (sceneIndex === 0) {
-    stageAction = `walking and moving excitedly side by side into ${settingEn}, discovering the situation${castWithClause}, pointing forward and talking expressively to each other`;
+    stageAction = `walking forward side by side into ${settingEn}, discovering the situation${castWithClause}, pointing and gesturing expressively`;
   } else if (progressRatio < 0.5) {
-    stageAction = `hurrying together in ${settingEn}${castWithClause}, examining the problem closely, gesturing with animated teamwork and expressive faces`;
+    stageAction = `moving closer together in ${settingEn}${castWithClause}, examining the problem and coordinating their teamwork`;
   } else if (sceneIndex < totalScenes - 1) {
-    stageAction = `actively working side by side in ${settingEn} to rescue and solve the challenge${castWithClause}, moving dynamically together with joyful energy`;
+    stageAction = `actively working side by side in ${settingEn} to solve the challenge${castWithClause} with dynamic coordinated cartoon movement`;
   } else {
-    stageAction = `jumping, waving, and celebrating happily together in ${settingEn}${castWithClause} with big proud smiles and lively cartoon body movement`;
+    stageAction = `stepping forward happily, waving, and celebrating together in ${settingEn}${castWithClause} with joyful smiles`;
   }
 
   const unifiedAction = customAction.length > 20
     ? `${customAction} in ${settingEn}${castWithClause}`
     : stageAction;
 
-  const activeSpeakerDesc = speakerName === companionName ? compDesc : heroDesc;
+  const isCompSpeaking = speakerName && companionName && speakerName === companionName;
+  const activeSpeakerDesc = isCompSpeaking ? compDesc : heroDesc;
+  const listenerDesc = isCompSpeaking ? heroDesc : compDesc;
 
   const sceneKeyframePrompt =
-    `3D Pixar Disney animated movie wide-medium shot featuring BOTH characters together in the same scene: ${heroDesc} AND ${compDesc}${castWithClause}. ` +
+    `3D Pixar Disney animated movie medium-wide shot featuring BOTH characters clearly facing the camera together in the same frame: ${heroDesc} AND ${compDesc}${castWithClause}. ` +
     `Action: they are ${unifiedAction}. ` +
-    `Full environment background (${settingEn}), rich cinematic warm lighting, expressive joyful 3D cartoon characters interacting together, pure clean movie frame, strictly NO text, NO letters, NO logos, NO banners, NO split screen.`;
+    `Rich 3D environment (${settingEn}), warm cinematic lighting, clear expressive faces and mouths visible for lip-sync dialogue, pure clean movie frame, strictly NO text, NO letters, NO logos, NO banners, NO split screen.`;
 
   const videoMotionPrompt =
-    `3D Pixar animated cartoon movie scene: BOTH characters (${heroDesc} and ${compDesc}${castWithClause}) moving naturally together in the scene, ` +
-    `${unifiedAction}. ${activeSpeakerDesc} is speaking expressively while both characters move their bodies, arms, and heads naturally, blinking eyes, lively cartoon acting, gentle cinematic tracking camera, smooth Pixar animation, no static freeze, no text.`;
+    `3D Pixar animated cartoon movie scene with accurate lip-sync and natural sound effects: ${activeSpeakerDesc} is speaking the dialogue with accurate expressive mouth lip-sync, natural blinking, and lively hand and body gestures, while ${listenerDesc} reacts, nods, and moves alongside them${castWithClause}, ` +
+    `${unifiedAction}. Natural realistic foley sound effects (${foleyPromptCueEn}), steady smooth cinema camera, vibrant Pixar 3D character acting, no static freeze, no text.`;
 
   return {
     sceneKeyframePrompt,
     videoMotionPrompt,
     supportingCast,
     settingEn,
+    foleyTheme,
+    foleyPromptCueEn,
   };
 }
 
-// Backward-compatible export used by unit tests & single-call callers
 function buildCartoonSceneMotionPrompt({
   speakerName,
   heroName,
@@ -2264,15 +2410,110 @@ function buildCartoonSceneMotionPrompt({
     }).videoMotionPrompt;
   }
   const charDesc = describeCharacterVisualAppearanceEn(speakerName);
-  return `High quality 3D Pixar Disney style kids cartoon animation of ${charDesc}, moving naturally with expressive blinking eyes, warm smile, lively body and hand gestures in a vibrant 3D cartoon world. Smooth natural motion, gentle cinematic tracking camera, no text.`;
+  return `High quality 3D Pixar Disney style kids cartoon animation of ${charDesc}, speaking with accurate expressive lip-sync, blinking eyes, warm smile, lively body gestures and footsteps in a vibrant 3D cartoon world. Smooth natural motion, no text.`;
+}
+
+async function synthesizeContextualFoleySfxWav({
+  foleyTheme = "park",
+  durationSec = 10,
+  sceneIndex = 0,
+  tmpDir,
+}) {
+  const dur = Math.max(1.0, Number(durationSec) || 8.0);
+  const outWav = path.join(tmpDir, `foley_sfx_${foleyTheme}_${sceneIndex}.wav`);
+
+  // Physical footsteps + scene-specific organic foley pulses (water splashes, orchard birds, workshop gears, oasis breeze, or space chimes)
+  let pulseExpr = "";
+  let noiseFilter = "";
+  if (foleyTheme === "water") {
+    // Rhythmic deck footsteps + bubbly water splashes + gentle ocean surf waves
+    pulseExpr =
+      "0.070*sin(2*PI*115*t)*exp(-22*mod(t*2.05,1))+0.042*sin(2*PI*(860+340*mod(floor(t*3.1),4))*t)*exp(-13*mod(t*3.1,1))+0.028*sin(2*PI*(520+180*sin(2*PI*2.2*t))*t)*exp(-10*mod(t*1.55,1))";
+    noiseFilter =
+      "[1:a]bandpass=f=460:width_type=h:w=620,tremolo=f=0.32:d=0.68,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0.95[amb];[0:a][amb]amix=inputs=2:weights='1.0 0.90':normalize=0,volume=1.35[outa]";
+  } else if (foleyTheme === "forest") {
+    // Crisp footsteps on grass + cheerful birds chirping + rustling orchard leaves
+    pulseExpr =
+      "0.068*sin(2*PI*128*t)*exp(-24*mod(t*2.20,1))+0.040*sin(2*PI*(2420+520*sin(2*PI*9*t))*t)*exp(-16*mod(t*1.35,1))+0.030*sin(2*PI*(1950+380*cos(2*PI*7*t))*t)*exp(-18*mod(t*0.95+0.4,1))";
+    noiseFilter =
+      "[1:a]bandpass=f=1100:width_type=h:w=950,tremolo=f=0.48:d=0.55,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0.55[amb];[0:a][amb]amix=inputs=2:weights='1.0 0.70':normalize=0,volume=1.30[outa]";
+  } else if (foleyTheme === "workshop") {
+    // Active footsteps + playful mechanical invention clicks, gears, and friendly gadget chimes
+    pulseExpr =
+      "0.068*sin(2*PI*134*t)*exp(-24*mod(t*2.30,1))+0.045*sin(2*PI*(660+280*mod(floor(t*3.8),3))*t)*exp(-20*mod(t*3.8,1))+0.030*sin(2*PI*(1180+220*mod(floor(t*1.9),2))*t)*exp(-15*mod(t*1.9,1))";
+    noiseFilter =
+      "[1:a]bandpass=f=820:width_type=h:w=700,tremolo=f=0.60:d=0.45,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0.42[amb];[0:a][amb]amix=inputs=2:weights='1.0 0.60':normalize=0,volume=1.30[outa]";
+  } else if (foleyTheme === "space") {
+    // Light space-boot steps + gentle sci-fi console sparkles + soft starship hum
+    pulseExpr =
+      "0.060*sin(2*PI*108*t)*exp(-22*mod(t*1.90,1))+0.038*sin(2*PI*(1340+420*mod(floor(t*1.6),4))*t)*exp(-9*mod(t*1.6,1))+0.022*sin(2*PI*(196+10*sin(2*PI*0.5*t))*t)";
+    noiseFilter =
+      "[1:a]bandpass=f=620:width_type=h:w=500,tremolo=f=0.25:d=0.50,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0.38[amb];[0:a][amb]amix=inputs=2:weights='1.0 0.55':normalize=0,volume=1.25[outa]";
+  } else if (foleyTheme === "oasis") {
+    // Soft sand footsteps + oasis water spring trickle + warm desert palm breeze
+    pulseExpr =
+      "0.064*sin(2*PI*104*t)*exp(-20*mod(t*2.00,1))+0.038*sin(2*PI*(780+260*mod(floor(t*2.6),3))*t)*exp(-15*mod(t*2.6,1))";
+    noiseFilter =
+      "[1:a]bandpass=f=720:width_type=h:w=780,tremolo=f=0.34:d=0.62,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0.65[amb];[0:a][amb]amix=inputs=2:weights='1.0 0.80':normalize=0,volume=1.30[outa]";
+  } else {
+    // Park/Neighborhood: lively footsteps + morning birds + gentle outdoor breeze
+    pulseExpr =
+      "0.066*sin(2*PI*126*t)*exp(-24*mod(t*2.15,1))+0.036*sin(2*PI*(2200+460*sin(2*PI*8*t))*t)*exp(-17*mod(t*1.25,1))";
+    noiseFilter =
+      "[1:a]bandpass=f=960:width_type=h:w=850,tremolo=f=0.40:d=0.55,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0.48[amb];[0:a][amb]amix=inputs=2:weights='1.0 0.65':normalize=0,volume=1.28[outa]";
+  }
+
+  await execFileAsync("ffmpeg", [
+    "-y",
+    "-f",
+    "lavfi",
+    "-i",
+    `aevalsrc='${pulseExpr}':s=48000:c=stereo:d=${dur}`,
+    "-f",
+    "lavfi",
+    "-i",
+    `anoisesrc=color=pink:r=48000:a=0.042:d=${dur}`,
+    "-filter_complex",
+    noiseFilter,
+    "-map",
+    "[outa]",
+    "-t",
+    String(dur),
+    "-c:a",
+    "pcm_s16le",
+    "-ar",
+    "48000",
+    "-ac",
+    "2",
+    outWav,
+  ]);
+  return outWav;
+}
+
+async function probeHasAudioStream(mediaPath) {
+  if (!mediaPath || !fs.existsSync(mediaPath)) return false;
+  try {
+    const { stdout } = await execFileAsync("ffprobe", [
+      "-v",
+      "error",
+      "-select_streams",
+      "a:0",
+      "-show_entries",
+      "stream=codec_name",
+      "-of",
+      "default=noprint_wrappers=1:nokey=1",
+      mediaPath,
+    ]);
+    return Boolean(String(stdout || "").trim());
+  } catch {
+    return false;
+  }
 }
 
 async function cropCharacterReferenceWithoutBanner(rawImgPath, outJpgPath) {
-  // Local char_*.jpg portraits have a nameplate banner across the bottom ~22%.
-  // Cropping top 76% preserves 100% of the 3D character head & body while eliminating all text banners!
-  const isCharCard = /char_[a-z0-9_]+.(jpg|jpeg|png)$/i.test(path.basename(rawImgPath));
+  const isCharCard = /char_[a-z0-9_]+\.(jpg|jpeg|png)$/i.test(path.basename(rawImgPath));
   const vfFilter = isCharCard
-    ? "crop=in_w:Math.floor(in_h*0.76):0:0,scale=768:768:force_original_aspect_ratio=increase,crop=768:768,setsar=1,format=yuvj420p".replace("Math.floor(in_h*0.76)", "trunc(ih*0.76/2)*2")
+    ? "crop=in_w:trunc(ih*0.76/2)*2:0:0,scale=768:768:force_original_aspect_ratio=increase,crop=768:768,setsar=1,format=yuvj420p"
     : "scale=768:768:force_original_aspect_ratio=increase,crop=768:768,setsar=1,format=yuvj420p";
 
   await execFileAsync("ffmpeg", [
@@ -2298,7 +2539,6 @@ async function buildCleanLocalDuoStoryFrameJpg({
   sceneIndex,
   outJpgPath,
 }) {
-  // Clean banner-free side-by-side Pixar duo staging with soft depth-of-field world backdrop (NO dividing bars, NO text boxes)
   const swapSides = sceneIndex % 2 === 1;
   const leftImg = swapSides ? compCleanPath : heroCleanPath;
   const rightImg = swapSides ? heroCleanPath : compCleanPath;
@@ -2332,7 +2572,7 @@ async function buildCleanLocalDuoStoryFrameJpg({
 }
 
 async function prepareDeapiInputFrameJpg(rawImgPath, targetW, targetH, outJpgPath) {
-  const isCharCard = /char_[a-z0-9_]+.(jpg|jpeg|png)$/i.test(path.basename(rawImgPath));
+  const isCharCard = /char_[a-z0-9_]+\.(jpg|jpeg|png)$/i.test(path.basename(rawImgPath));
   const preCrop = isCharCard ? "crop=iw:trunc(ih*0.76/2)*2:0:0," : "";
   await execFileAsync("ffmpeg", [
     "-y",
@@ -2438,7 +2678,6 @@ async function submitDeapiJobWithRateLimitRecovery({
       }
     }
 
-    // Do NOT jump to legacy v1 if v2 returned 429 (both share the exact same account rate limit!)
     if (hitRateLimitOnPrimary) break;
   }
 
@@ -2495,6 +2734,8 @@ async function pollDeapiJobResultUrl({
         jobObj?.result_url ||
           jobObj?.result?.url ||
           jobObj?.results_alt_formats?.mp4 ||
+          jobObj?.results_alt_formats?.wav ||
+          jobObj?.results_alt_formats?.mp3 ||
           jobObj?.results_alt_formats?.jpg ||
           jobObj?.results_alt_formats?.png ||
           (typeof jobObj?.result === "string" && /^https?:\/\//i.test(jobObj.result) ? jobObj.result : "") ||
@@ -2514,6 +2755,116 @@ async function pollDeapiJobResultUrl({
   throw new Error(`deAPI job ${requestId} timed out or returned empty result_url`);
 }
 
+async function synthesizeArabicFushaViaDeapiSpeech({
+  apiKey,
+  text,
+  sceneIndex = 0,
+  tmpDir,
+}) {
+  const baseUrl = String(process.env.DEAPI_BASE_URL || "https://api.deapi.ai").replace(/\/$/, "");
+  const catalog = await discoverActiveDeapiModelsCatalog(apiKey, baseUrl);
+  const ttsModel = String(catalog?.arabicTts?.slug || "Chatterbox");
+
+  // Split long MSA paragraphs into <= 280 char chunks so Chatterbox synthesizes cleanly without clipping
+  const sentences = String(text || "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .split(/(?<=[.!؟،])\s+/)
+    .filter(Boolean);
+  const chunks = [];
+  let cur = "";
+  for (const s of sentences) {
+    if (!cur) cur = s;
+    else if ((cur + " " + s).length <= 280) cur += " " + s;
+    else {
+      chunks.push(cur);
+      cur = s;
+    }
+  }
+  if (cur) chunks.push(cur);
+  if (chunks.length === 0) return null;
+
+  const wavSegments = [];
+  for (let cIdx = 0; cIdx < chunks.length; cIdx++) {
+    const { requestId, statusBaseUrl } = await submitDeapiJobWithRateLimitRecovery({
+      apiKey,
+      sceneLabel: `deAPI Arabic TTS ${sceneIndex + 1}.${cIdx + 1}`,
+      endpointsToTry: [
+        {
+          submitUrl: `${baseUrl}/api/v2/audio/speech`,
+          statusBaseUrl: `${baseUrl}/api/v2/jobs`,
+          label: "v2/audio/speech",
+        },
+        {
+          submitUrl: `${baseUrl}/api/v1/client/txt2audio`,
+          statusBaseUrl: `${baseUrl}/api/v1/client/request-status`,
+          label: "v1/client/txt2audio",
+        },
+      ],
+      buildRequestInit: () => ({
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: ttsModel,
+          voice: "default",
+          lang: "ar",
+          speed: 1,
+          format: "wav",
+          sample_rate: 24000,
+          text: chunks[cIdx],
+        }),
+      }),
+    });
+
+    const audioUrl = await pollDeapiJobResultUrl({
+      apiKey,
+      baseUrl,
+      statusBaseUrl,
+      requestId,
+      maxWaitMs: 90_000,
+    });
+    const dl = await fetch(audioUrl);
+    if (!dl.ok) throw new Error(`Failed downloading deAPI TTS audio (${dl.status})`);
+    const rawAudioPath = path.join(tmpDir, `deapi_tts_raw_${sceneIndex}_${cIdx}.audio`);
+    fs.writeFileSync(rawAudioPath, Buffer.from(await dl.arrayBuffer()));
+    const normWavPath = path.join(tmpDir, `deapi_tts_norm_${sceneIndex}_${cIdx}.wav`);
+    await execFileAsync("ffmpeg", [
+      "-y",
+      "-i",
+      rawAudioPath,
+      "-ar",
+      "24000",
+      "-ac",
+      "1",
+      "-c:a",
+      "pcm_s16le",
+      normWavPath,
+    ]);
+    if (fs.existsSync(normWavPath) && fs.statSync(normWavPath).size > 1000) {
+      wavSegments.push(normWavPath);
+    }
+  }
+
+  if (wavSegments.length === 0) return null;
+  if (wavSegments.length === 1) return wavSegments[0];
+
+  const listPath = path.join(tmpDir, `deapi_tts_concat_${sceneIndex}.txt`);
+  fs.writeFileSync(listPath, wavSegments.map((p) => `file '${p.replace(/'/g, "'\\''")}'`).join("\n"));
+  const mergedWav = path.join(tmpDir, `deapi_tts_merged_${sceneIndex}.wav`);
+  await execFileAsync("ffmpeg", [
+    "-y",
+    "-f",
+    "concat",
+    "-safe",
+    "0",
+    "-i",
+    listPath,
+    "-c:a",
+    "pcm_s16le",
+    mergedWav,
+  ]);
+  return mergedWav;
+}
+
 async function generateMultiCharacterStoryKeyframeViaDeapi({
   apiKey,
   baseUrl,
@@ -2530,8 +2881,6 @@ async function generateMultiCharacterStoryKeyframeViaDeapi({
 }) {
   const keyframeOutPath = path.join(tmpDir, `deapi_story_keyframe_${formatTag}_${sceneIndex}.jpg`);
 
-  // Attempt 1: Multi-Reference Image Edit (/api/v2/images/edits) passing BOTH cropped Hero + Companion references
-  // so their exact Noreen Kids 3D designs appear together in the story environment with supporting characters!
   if (catalog?.img2img?.slug && heroCleanPath && compCleanPath) {
     try {
       const editModel = catalog.img2img;
@@ -2549,7 +2898,6 @@ async function generateMultiCharacterStoryKeyframeViaDeapi({
 
       const heroBuf = fs.readFileSync(heroCleanPath);
       const compBuf = fs.readFileSync(compCleanPath);
-      // Also build a clean combined duo reference image in case the selected img2img model accepts single 'image'
       const combinedRefPath = path.join(tmpDir, `deapi_duoref_${formatTag}_${sceneIndex}.jpg`);
       await buildCleanLocalDuoStoryFrameJpg({
         heroCleanPath,
@@ -2586,7 +2934,6 @@ async function generateMultiCharacterStoryKeyframeViaDeapi({
               form.append("negative_prompt", "text, watermark, banner, nameplate, logo, split screen, static card, blurry, deformed");
             }
           } else {
-            // Fallback form layout if model expects single 'image' field instead of 'images[]'
             form.append("image", new Blob([combinedBuf], { type: "image/jpeg" }), "duo_scene_ref.jpg");
           }
           return { body: form };
@@ -2631,7 +2978,6 @@ async function generateMultiCharacterStoryKeyframeViaDeapi({
     }
   }
 
-  // Attempt 2: Text-to-Image Story Scene Generation (/api/v2/images/generations) with rich character visual profiles
   if (catalog?.txt2img?.slug) {
     try {
       const txtModel = catalog.txt2img;
@@ -2720,6 +3066,29 @@ async function generateMultiCharacterStoryKeyframeViaDeapi({
   return null;
 }
 
+async function extractLastFrameAsJpg(videoMp4Path, targetW, targetH, outJpgPath) {
+  try {
+    await execFileAsync("ffmpeg", [
+      "-y",
+      "-sseof",
+      "-0.15",
+      "-i",
+      videoMp4Path,
+      "-vf",
+      `scale=${targetW}:${targetH}:force_original_aspect_ratio=increase,crop=${targetW}:${targetH},setsar=1,format=yuvj420p`,
+      "-frames:v",
+      "1",
+      "-q:v",
+      "2",
+      outJpgPath,
+    ]);
+    if (fs.existsSync(outJpgPath) && fs.statSync(outJpgPath).size > 1500) {
+      return outJpgPath;
+    }
+  } catch {}
+  return null;
+}
+
 async function generateAnimatedSceneClipViaDeapi({
   apiKey,
   rawImgPath,
@@ -2731,6 +3100,8 @@ async function generateAnimatedSceneClipViaDeapi({
   sceneTitle,
   dialogueArabic,
   aiVisualScenePromptEn,
+  sceneAudioPath,
+  sceneDurationSec,
   sceneIndex,
   totalScenes,
   topicText,
@@ -2742,8 +3113,9 @@ async function generateAnimatedSceneClipViaDeapi({
 }) {
   const baseUrl = String(process.env.DEAPI_BASE_URL || "https://api.deapi.ai").replace(/\/$/, "");
   const catalog = await discoverActiveDeapiModelsCatalog(apiKey, baseUrl);
-  const modelInfo = catalog.img2video;
-  const params = resolveDeapiModelRenderParams(modelInfo, isShort);
+  const videoModelInfo = catalog.img2video;
+  const audioSyncModelInfo = catalog.aud2video || null;
+  const baseParams = resolveDeapiModelRenderParams(audioSyncModelInfo || videoModelInfo, isShort);
 
   const effectiveHeroName = heroName || speakerName || "الطبيبة نورين";
   const effectiveCompName = companionName || "";
@@ -2768,10 +3140,11 @@ async function generateAnimatedSceneClipViaDeapi({
           totalScenes,
           topicText,
         }),
+        foleyTheme: "park",
       };
 
-  // Prepare clean banner-free character references (strip bottom nameplate banner from char_*.jpg)
-  let preparedInputPath = null;
+  // Stage A: Prepare initial multi-character 3D story scene keyframe
+  let initialKeyframePath = null;
   const primaryHeroPath = heroImgPath || rawImgPath;
   const primaryCompPath = compImgPath || null;
 
@@ -2781,47 +3154,346 @@ async function generateAnimatedSceneClipViaDeapi({
     await cropCharacterReferenceWithoutBanner(primaryHeroPath, heroCleanPath);
     await cropCharacterReferenceWithoutBanner(primaryCompPath, compCleanPath);
 
-    // Stage A: Synthesize unified multi-character 3D story scene keyframe (Hero + Companion + Supporting Cast in story world)
-    preparedInputPath = await generateMultiCharacterStoryKeyframeViaDeapi({
+    initialKeyframePath = await generateMultiCharacterStoryKeyframeViaDeapi({
       apiKey,
       baseUrl,
       catalog,
       heroCleanPath,
       compCleanPath,
       sceneKeyframePrompt: prompts.sceneKeyframePrompt,
-      targetW: params.width,
-      targetH: params.height,
+      targetW: baseParams.width,
+      targetH: baseParams.height,
       sceneIndex,
       totalScenes,
       tmpDir,
       formatTag,
     });
 
-    // Clean local banner-free duo fallback if neither img2img nor txt2img model is enabled on account
-    if (!preparedInputPath) {
+    if (!initialKeyframePath) {
       const localDuoFramePath = path.join(tmpDir, `deapi_local_duo_${formatTag}_${sceneIndex}.jpg`);
-      preparedInputPath = await buildCleanLocalDuoStoryFrameJpg({
+      initialKeyframePath = await buildCleanLocalDuoStoryFrameJpg({
         heroCleanPath,
         compCleanPath,
-        targetW: params.width,
-        targetH: params.height,
+        targetW: baseParams.width,
+        targetH: baseParams.height,
         sceneIndex,
         outJpgPath: localDuoFramePath,
       });
     }
   } else {
     const inputFramePath = path.join(tmpDir, `deapi_in_${formatTag}_${sceneIndex}.jpg`);
-    preparedInputPath = await prepareDeapiInputFrameJpg(
+    initialKeyframePath = await prepareDeapiInputFrameJpg(
       rawImgPath || primaryHeroPath,
-      params.width,
-      params.height,
+      baseParams.width,
+      baseParams.height,
       inputFramePath
     );
   }
 
-  const imgBuffer = fs.readFileSync(preparedInputPath);
+  // Stage B1: Chunked Lip-Synced Audio-to-Video (/api/v2/videos/audio-syncs) with Last-Frame Chaining!
+  // When sceneAudioPath is provided and aud2video is supported, slice the scene's speech into <= 9.4s chunks
+  // (matching LTX-2.5's 1..10s audio window & up to 241 frames @ 24fps) so character lips & gestures match the exact dialogue!
+  const hasValidSceneAudio =
+    sceneAudioPath && fs.existsSync(sceneAudioPath) && fs.statSync(sceneAudioPath).size > 1000;
 
-  // Stage B: Animate the multi-character story frame via img2video with full 429 RPM recovery
+  if (hasValidSceneAudio && audioSyncModelInfo?.slug) {
+    try {
+      const measuredAudioDur = await measureAudioDurationSec(
+        sceneAudioPath,
+        Number(sceneDurationSec) || 8.0
+      );
+      const totalTargetSec = Math.max(measuredAudioDur, Number(sceneDurationSec) || measuredAudioDur);
+      const chunkPlan = computeAudioChunkPlanSec(totalTargetSec, 9.4, 2.2);
+
+      const normChunkVideoPaths = [];
+      const extractedNativeSfxPaths = [];
+      let currentFirstFramePath = initialKeyframePath;
+
+      for (let cIdx = 0; cIdx < chunkPlan.length; cIdx++) {
+        const chunk = chunkPlan[cIdx];
+        const chunkParams = resolveDeapiModelRenderParams(
+          audioSyncModelInfo,
+          isShort,
+          chunk.durSec
+        );
+
+        // Slice exact MP3 audio window for this chunk (128kbps mono MP3, < 200KB, ideal for deAPI audio-syncs)
+        const chunkAudioMp3 = path.join(
+          tmpDir,
+          `deapi_audchunk_${formatTag}_${sceneIndex}_${cIdx}.mp3`
+        );
+        await execFileAsync("ffmpeg", [
+          "-y",
+          "-i",
+          sceneAudioPath,
+          "-ss",
+          String(chunk.startSec),
+          "-t",
+          String(chunk.durSec),
+          "-af",
+          `apad=whole_dur=${chunk.durSec}`,
+          "-t",
+          String(chunk.durSec),
+          "-ar",
+          "24000",
+          "-ac",
+          "1",
+          "-b:a",
+          "128k",
+          chunkAudioMp3,
+        ]);
+
+        const frameBuf = fs.readFileSync(currentFirstFramePath);
+        const audioBuf = fs.readFileSync(chunkAudioMp3);
+
+        const { requestId, statusBaseUrl } = await submitDeapiJobWithRateLimitRecovery({
+          apiKey,
+          sceneLabel: `deAPI LipSync Scene ${sceneIndex + 1}/${totalScenes} [Chunk ${cIdx + 1}/${chunkPlan.length}]`,
+          endpointsToTry: [
+            {
+              submitUrl: `${baseUrl}/api/v2/videos/audio-syncs`,
+              statusBaseUrl: `${baseUrl}/api/v2/jobs`,
+              label: "v2/videos/audio-syncs",
+            },
+            {
+              submitUrl: `${baseUrl}/api/v1/client/aud2video`,
+              statusBaseUrl: `${baseUrl}/api/v1/client/request-status`,
+              label: "v1/client/aud2video",
+            },
+          ],
+          buildRequestInit: (attempt) => {
+            const form = new FormData();
+            form.append("prompt", prompts.videoMotionPrompt);
+            form.append("model", String(audioSyncModelInfo.slug));
+            form.append("width", String(chunkParams.width));
+            form.append("height", String(chunkParams.height));
+            form.append("frames", String(chunkParams.frames));
+            form.append("fps", String(chunkParams.fps));
+            form.append("seed", "-1");
+            form.append(
+              "audio",
+              new Blob([audioBuf], { type: "audio/mpeg" }),
+              `scene_${sceneIndex}_chunk_${cIdx}.mp3`
+            );
+            form.append(
+              "first_frame_image",
+              new Blob([frameBuf], { type: "image/jpeg" }),
+              path.basename(currentFirstFramePath)
+            );
+            if (chunkParams.steps !== null && attempt !== 2) {
+              form.append("steps", String(chunkParams.steps));
+            }
+            if (chunkParams.guidance !== null && attempt !== 2) {
+              form.append("guidance", String(chunkParams.guidance));
+            }
+            if (chunkParams.supportsNegative && attempt !== 2) {
+              form.append(
+                "negative_prompt",
+                "closed mouth while speaking, frozen face, static image, blurry, distorted face, extra limbs, watermark, text, banner"
+              );
+            }
+            return { body: form };
+          },
+        });
+
+        console.log(
+          `   🎙️🎞️ [deAPI.ai Lip-Sync Scene ${sceneIndex + 1}/${totalScenes} Chunk ${cIdx + 1}/${chunkPlan.length}] Queued (id=${requestId}, ${chunk.durSec}s -> ${chunkParams.frames}f@${chunkParams.fps}fps)...`
+        );
+
+        const chunkVideoUrl = await pollDeapiJobResultUrl({
+          apiKey,
+          baseUrl,
+          statusBaseUrl,
+          requestId,
+          maxWaitMs: 240_000,
+        });
+
+        const rawChunkMp4 = path.join(
+          tmpDir,
+          `deapi_sync_raw_${formatTag}_${sceneIndex}_${cIdx}.mp4`
+        );
+        const dlRes = await fetch(chunkVideoUrl);
+        if (!dlRes.ok) {
+          throw new Error(`Failed downloading audio-sync chunk (${dlRes.status})`);
+        }
+        const videoBytes = Buffer.from(await dlRes.arrayBuffer());
+        if (videoBytes.length < 2000) {
+          throw new Error(`Audio-sync video chunk too small (${videoBytes.length}B)`);
+        }
+        fs.writeFileSync(rawChunkMp4, videoBytes);
+
+        // Extract any native LTX environmental/foley audio track before video normalization (NEVER discard blindly!)
+        if (await probeHasAudioStream(rawChunkMp4)) {
+          const nativeChunkWav = path.join(
+            tmpDir,
+            `deapi_native_aud_${formatTag}_${sceneIndex}_${cIdx}.wav`
+          );
+          try {
+            // High/low shelf filtering isolates ambient foley texture so we can layer it subtly without doubling speech
+            await execFileAsync("ffmpeg", [
+              "-y",
+              "-i",
+              rawChunkMp4,
+              "-vn",
+              "-af",
+              `bandreject=f=1100:width_type=h:w=1500,volume=0.55,apad=whole_dur=${chunk.durSec}`,
+              "-t",
+              String(chunk.durSec),
+              "-ar",
+              "48000",
+              "-ac",
+              "2",
+              "-c:a",
+              "pcm_s16le",
+              nativeChunkWav,
+            ]);
+            if (fs.existsSync(nativeChunkWav) && fs.statSync(nativeChunkWav).size > 1000) {
+              extractedNativeSfxPaths.push(nativeChunkWav);
+            }
+          } catch {}
+        }
+
+        // Normalize visual chunk to exact episode resolution & exact chunk duration (smooth time-stretch if frame count slightly differs)
+        const rawChunkVidDur = await measureAudioDurationSec(rawChunkMp4, chunk.durSec);
+        const ptsRatio =
+          rawChunkVidDur > 0.4
+            ? Math.max(0.75, Math.min(1.35, chunk.durSec / rawChunkVidDur))
+            : 1.0;
+
+        const normChunkMp4 = path.join(
+          tmpDir,
+          `deapi_sync_norm_${formatTag}_${sceneIndex}_${cIdx}.mp4`
+        );
+        await execFileAsync("ffmpeg", [
+          "-y",
+          "-i",
+          rawChunkMp4,
+          "-vf",
+          `setpts=${ptsRatio.toFixed(4)}*PTS,scale=${outW}:${outH}:force_original_aspect_ratio=increase,crop=${outW}:${outH},fps=30,eq=saturation=1.10:contrast=1.04,setsar=1,format=yuv420p`,
+          "-an",
+          "-t",
+          String(chunk.durSec),
+          "-r",
+          "30",
+          "-c:v",
+          "libx264",
+          "-preset",
+          "veryfast",
+          "-crf",
+          "19",
+          "-pix_fmt",
+          "yuv420p",
+          normChunkMp4,
+        ]);
+        normChunkVideoPaths.push(normChunkMp4);
+
+        // Chain the last frame of Chunk k into the first_frame_image of Chunk k+1 for seamless continuous motion!
+        if (cIdx < chunkPlan.length - 1) {
+          const nextChainJpg = path.join(
+            tmpDir,
+            `deapi_chain_frame_${formatTag}_${sceneIndex}_${cIdx}.jpg`
+          );
+          const extractedChain = await extractLastFrameAsJpg(
+            rawChunkMp4,
+            chunkParams.width,
+            chunkParams.height,
+            nextChainJpg
+          );
+          if (extractedChain) {
+            currentFirstFramePath = extractedChain;
+          }
+        }
+      }
+
+      if (normChunkVideoPaths.length > 0) {
+        const syncedSceneMp4 = path.join(
+          tmpDir,
+          `deapi_synced_scene_${formatTag}_${sceneIndex}.mp4`
+        );
+        if (normChunkVideoPaths.length === 1) {
+          fs.copyFileSync(normChunkVideoPaths[0], syncedSceneMp4);
+        } else {
+          const vConcatTxt = path.join(
+            tmpDir,
+            `deapi_sync_vconcat_${formatTag}_${sceneIndex}.txt`
+          );
+          fs.writeFileSync(
+            vConcatTxt,
+            normChunkVideoPaths.map((p) => `file '${p.replace(/'/g, "'\\''")}'`).join("\n")
+          );
+          await execFileAsync("ffmpeg", [
+            "-y",
+            "-f",
+            "concat",
+            "-safe",
+            "0",
+            "-i",
+            vConcatTxt,
+            "-c:v",
+            "copy",
+            syncedSceneMp4,
+          ]);
+        }
+
+        let mergedNativeSfxWav = null;
+        if (extractedNativeSfxPaths.length > 0) {
+          mergedNativeSfxWav = path.join(
+            tmpDir,
+            `deapi_native_sfx_merged_${formatTag}_${sceneIndex}.wav`
+          );
+          if (extractedNativeSfxPaths.length === 1) {
+            fs.copyFileSync(extractedNativeSfxPaths[0], mergedNativeSfxWav);
+          } else {
+            const aConcatTxt = path.join(
+              tmpDir,
+              `deapi_sync_aconcat_${formatTag}_${sceneIndex}.txt`
+            );
+            fs.writeFileSync(
+              aConcatTxt,
+              extractedNativeSfxPaths.map((p) => `file '${p.replace(/'/g, "'\\''")}'`).join("\n")
+            );
+            await execFileAsync("ffmpeg", [
+              "-y",
+              "-f",
+              "concat",
+              "-safe",
+              "0",
+              "-i",
+              aConcatTxt,
+              "-c:a",
+              "pcm_s16le",
+              mergedNativeSfxWav,
+            ]);
+          }
+        }
+
+        if (fs.existsSync(syncedSceneMp4) && fs.statSync(syncedSceneMp4).size > 2000) {
+          // Attach optional metadata sidecar on tmpDir so renderEpisodeMp4 can blend native LTX SFX!
+          const sidecarMetaPath = `${syncedSceneMp4}.meta.json`;
+          fs.writeFileSync(
+            sidecarMetaPath,
+            JSON.stringify({
+              mode: "audio-sync-chained",
+              chunksCount: normChunkVideoPaths.length,
+              foleyTheme: prompts.foleyTheme || "park",
+              nativeSfxWavPath: mergedNativeSfxWav || null,
+            })
+          );
+          console.log(
+            `   ✅ [deAPI.ai Scene ${sceneIndex + 1}/${totalScenes}] Lip-synced continuous 3D story scene ready (${normChunkVideoPaths.length} chained chunk(s), foley=${prompts.foleyTheme})!`
+          );
+          return syncedSceneMp4;
+        }
+      }
+    } catch (syncErr) {
+      console.warn(
+        `   ℹ️ [deAPI.ai Scene ${sceneIndex + 1}] Audio-syncs route notice (${syncErr?.message || syncErr}); falling back seamlessly to img2video animation...`
+      );
+    }
+  }
+
+  // Stage B2 (Fallback or when no audio file passed): Standard Image-to-Video (/api/v2/videos/animations) + Native Audio Extraction!
+  const imgBuffer = fs.readFileSync(initialKeyframePath);
   const { requestId, statusBaseUrl } = await submitDeapiJobWithRateLimitRecovery({
     apiKey,
     sceneLabel: `deAPI.ai Video Scene ${sceneIndex + 1}/${totalScenes}`,
@@ -2842,22 +3514,22 @@ async function generateAnimatedSceneClipViaDeapi({
       form.append(
         "first_frame_image",
         new Blob([imgBuffer], { type: "image/jpeg" }),
-        path.basename(preparedInputPath)
+        path.basename(initialKeyframePath)
       );
       form.append("prompt", prompts.videoMotionPrompt);
-      form.append("model", String(modelInfo.slug));
-      form.append("width", String(params.width));
-      form.append("height", String(params.height));
-      form.append("frames", String(params.frames));
-      form.append("fps", String(params.fps));
+      form.append("model", String(videoModelInfo.slug));
+      form.append("width", String(baseParams.width));
+      form.append("height", String(baseParams.height));
+      form.append("frames", String(baseParams.frames));
+      form.append("fps", String(baseParams.fps));
       form.append("seed", "-1");
-      if (params.steps !== null && attempt !== 2) {
-        form.append("steps", String(params.steps));
+      if (baseParams.steps !== null && attempt !== 2) {
+        form.append("steps", String(baseParams.steps));
       }
-      if (params.guidance !== null && attempt !== 2) {
-        form.append("guidance", String(params.guidance));
+      if (baseParams.guidance !== null && attempt !== 2) {
+        form.append("guidance", String(baseParams.guidance));
       }
-      if (params.supportsNegative && attempt !== 2) {
+      if (baseParams.supportsNegative && attempt !== 2) {
         form.append(
           "negative_prompt",
           "blurry, distorted face, extra limbs, morphing identity, horror, ugly, watermark, text, banner, static freeze"
@@ -2868,7 +3540,7 @@ async function generateAnimatedSceneClipViaDeapi({
   });
 
   console.log(
-    `   🎞️ [deAPI.ai Scene ${sceneIndex + 1}/${totalScenes}] Video animation job queued (request_id=${requestId}, model=${modelInfo.slug}, ${params.width}x${params.height}, ${params.frames}f@${params.fps}fps)...`
+    `   🎞️ [deAPI.ai Scene ${sceneIndex + 1}/${totalScenes}] Video animation job queued (request_id=${requestId}, model=${videoModelInfo.slug}, ${baseParams.width}x${baseParams.height}, ${baseParams.frames}f@${baseParams.fps}fps)...`
   );
 
   const resultVideoUrl = await pollDeapiJobResultUrl({
@@ -2890,7 +3562,34 @@ async function generateAnimatedSceneClipViaDeapi({
   }
   fs.writeFileSync(rawClipPath, videoBytes);
 
-  // Build seamless Ping-Pong (Forward + Reversed) 30fps loop unit at exact episode resolution (outW x outH)
+  // Extract native LTX-2.5 generated sound effects from rawClipPath before building visual loop!
+  let extractedAnimNativeSfxWav = null;
+  if (await probeHasAudioStream(rawClipPath)) {
+    const candWav = path.join(tmpDir, `deapi_anim_native_sfx_${formatTag}_${sceneIndex}.wav`);
+    try {
+      await execFileAsync("ffmpeg", [
+        "-y",
+        "-stream_loop",
+        "-1",
+        "-i",
+        rawClipPath,
+        "-vn",
+        "-t",
+        String(Math.max(4, Number(sceneDurationSec) || 12)),
+        "-ar",
+        "48000",
+        "-ac",
+        "2",
+        "-c:a",
+        "pcm_s16le",
+        candWav,
+      ]);
+      if (fs.existsSync(candWav) && fs.statSync(candWav).size > 1000) {
+        extractedAnimNativeSfxWav = candWav;
+      }
+    } catch {}
+  }
+
   const pingPongPath = path.join(tmpDir, `deapi_pingpong_${formatTag}_${sceneIndex}.mp4`);
   await execFileAsync("ffmpeg", [
     "-y",
@@ -2917,6 +3616,16 @@ async function generateAnimatedSceneClipViaDeapi({
   if (!fs.existsSync(pingPongPath) || fs.statSync(pingPongPath).size < 2000) {
     throw new Error("FFmpeg ping-pong normalization produced empty clip");
   }
+
+  fs.writeFileSync(
+    `${pingPongPath}.meta.json`,
+    JSON.stringify({
+      mode: "img2video-pingpong",
+      chunksCount: 1,
+      foleyTheme: prompts.foleyTheme || "park",
+      nativeSfxWavPath: extractedAnimNativeSfxWav,
+    })
+  );
 
   console.log(
     `   ✅ [deAPI.ai Scene ${sceneIndex + 1}/${totalScenes}] Multi-character animated 3D story clip ready & seamless loop prepared!`
@@ -3245,6 +3954,8 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
         sceneTitle: sc.title || "",
         dialogueArabic: sc.dialogueArabic || "",
         aiVisualScenePromptEn: sc.visualScenePromptEn || "",
+        sceneAudioPath: item.audioPath,
+        sceneDurationSec: item.durationSec,
         sceneIndex: idx,
         totalScenes: preparedScenes.length,
         topicText: rawTopicText,
@@ -3319,30 +4030,75 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     const deapiLoopMp4 = animatedSceneClipMap.get(i) || null;
     const prebakedImg = deapiLoopMp4 ? null : await getPrebakedPortrait(shotImg, i);
 
+    let clipMeta = { mode: "none", foleyTheme: "park", nativeSfxWavPath: null };
+    if (deapiLoopMp4 && fs.existsSync(`${deapiLoopMp4}.meta.json`)) {
+      try {
+        clipMeta = JSON.parse(fs.readFileSync(`${deapiLoopMp4}.meta.json`, "utf8"));
+      } catch {}
+    } else {
+      const inferred = inferSupportingCastAndSettingEn(
+        `${rawTopicText} ${sc.title || ""} ${sc.dialogueArabic || ""}`,
+        heroName
+      );
+      clipMeta.foleyTheme = inferred.foleyTheme || "park";
+    }
+
+    const isLipSyncedChained = clipMeta.mode === "audio-sync-chained";
     console.log(
       `   -> [Scene ${i + 1}/${preparedScenes.length}] Speaker="${
         sc.speakerName || (isCompTurn ? companionName : heroName)
-      }" | Mode=${deapiLoopMp4 ? "deAPI-3D-Animated" : "Fallback-Motion"} | Voice=${item.voiceDurSec.toFixed(1)}s | Scene=${dur}s...`
+      }" | Mode=${isLipSyncedChained ? "deAPI-LipSync-Chained" : deapiLoopMp4 ? "deAPI-3D-Animated" : "Fallback-Motion"} | Foley="${clipMeta.foleyTheme}" | Voice=${item.voiceDurSec.toFixed(1)}s | Scene=${dur}s...`
     );
 
-    // Ensure audio finishes naturally with ample breathing room (strictly 1.0x natural tempo)
-    const gentleTempo = 1.0;
-    const tempoChain = "";
+    // Synthesize realistic contextual Foley SFX (footsteps, water waves/splashes, birds/leaves, workshop gears, oasis breeze, or space chimes)
+    const contextualFoleyWav = await synthesizeContextualFoleySfxWav({
+      foleyTheme: clipMeta.foleyTheme || "park",
+      durationSec: dur,
+      sceneIndex: i,
+      tmpDir,
+    });
 
+    const hasNativeSfx =
+      clipMeta.nativeSfxWavPath &&
+      fs.existsSync(clipMeta.nativeSfxWavPath) &&
+      fs.statSync(clipMeta.nativeSfxWavPath).size > 1000;
+
+    // Zero audio delay when lip-synced via audio-syncs so phonemes match mouth frames at millisecond accuracy!
+    const voiceDelayFilter = isLipSyncedChained ? "" : ",adelay=80|80";
     const mixedWav = path.join(tmpDir, `scene_mixed_${i}.wav`);
-    await execFileAsync("ffmpeg", [
+
+    const mixInputs = [
       "-y",
       "-i",
       item.audioPath,
+      "-i",
+      contextualFoleyWav,
       "-f",
       "lavfi",
       "-i",
-      `aevalsrc='0.036*sin(2*PI*(261.63+68*mod(floor(t*0.85),3))*t)*exp(-1.4*mod(t*0.85,1))+0.028*sin(2*PI*(880+220*mod(floor(t*1.8),3))*t)*exp(-5.5*mod(t*0.30,1))':s=48000:c=stereo:d=${dur}`,
+      `aevalsrc='0.026*sin(2*PI*(261.63+68*mod(floor(t*0.85),3))*t)*exp(-1.4*mod(t*0.85,1))+0.018*sin(2*PI*(880+220*mod(floor(t*1.8),3))*t)*exp(-5.5*mod(t*0.30,1))':s=48000:c=stereo:d=${dur}`,
+    ];
+    if (hasNativeSfx) {
+      mixInputs.push("-i", clipMeta.nativeSfxWavPath);
+    }
+
+    const fadeOutSt = Math.max(0.5, dur - 0.85);
+    const sfxCombineFilter = hasNativeSfx
+      ? `[1:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo[ctx_sfx];[3:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,apad=whole_dur=${dur}[nat_sfx];[ctx_sfx][nat_sfx]amix=inputs=2:duration=first:weights='1.0 0.75':normalize=0,afade=t=in:st=0:d=0.25,afade=t=out:st=${fadeOutSt}:d=0.65[sfx_raw];`
+      : `[1:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,afade=t=in:st=0:d=0.25,afade=t=out:st=${fadeOutSt}:d=0.65[sfx_raw];`;
+
+    const cinemaMixFilter =
+      `[0:a]aresample=48000${voiceDelayFilter},aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=2.20,apad=whole_dur=${dur},asplit=3[v_main][v_sc1][v_sc2];` +
+      sfxCombineFilter +
+      `[sfx_raw][v_sc1]sidechaincompress=threshold=0.035:ratio=3.2:attack=15:release=240[sfx_ducked];` +
+      `[2:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0.42,afade=t=in:st=0:d=0.5,afade=t=out:st=${fadeOutSt}:d=0.7[bgm_raw];` +
+      `[bgm_raw][v_sc2]sidechaincompress=threshold=0.03:ratio=5.5:attack=15:release=320[bgm_ducked];` +
+      `[v_main][sfx_ducked][bgm_ducked]amix=inputs=3:duration=first:weights='1.0 0.62 0.18':normalize=0,alimiter=limit=0.96,asetpts=PTS-STARTPTS,aformat=sample_fmts=s16:sample_rates=48000:channel_layouts=stereo[outa]`;
+
+    await execFileAsync("ffmpeg", [
+      ...mixInputs,
       "-filter_complex",
-      `[0:a]aresample=48000${tempoChain},pan=stereo|c0=c0|c1=c0,volume=2.15,adelay=140|140,apad=whole_dur=${dur}[voice];[1:a]volume=0.50,afade=t=in:st=0:d=0.5,afade=t=out:st=${Math.max(
-        0.5,
-        dur - 0.9
-      )}:d=0.7[bgm];[voice][bgm]amix=inputs=2:duration=first:weights='1.0 0.22':normalize=0,alimiter=limit=0.96,asetpts=PTS-STARTPTS[outa]`,
+      cinemaMixFilter,
       "-map",
       "[outa]",
       "-t",
