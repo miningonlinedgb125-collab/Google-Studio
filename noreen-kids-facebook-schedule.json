@@ -2673,6 +2673,16 @@
     {
       "topic": "سدرة والفراشة ولعبة الاستغماية في المزرعة",
       "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "أم ملك وسر الكلمات السحرية في بستان السعادة",
+      "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح"
+    },
+    {
+      "topic": "سدرة والفراشة ولعبة الاستغماية في المزرعة",
+      "mainCharacterName": "سدرة الصغنونة",
       "companionName": "الفراشة الملونة",
       "timestampIso": "2026-10-25T07:40:02.262Z"
     },
@@ -2835,43 +2845,21 @@
       "mainCharacterName": "تختوخ",
       "companionName": "الكلب زقلط",
       "timestampIso": "2026-10-23T23:38:01.764Z"
-    },
-    {
-      "topic": "سلة هدايا تيتة ومفاجأة بطل القرآن الصغير",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
-    },
-    {
-      "topic": "سر الفانوس الأثري وبوصلة الصدق في خان الخليلي",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "سلة هدايا تيتة ومفاجأة بطل القرآن الصغير",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "timestampIso": "2026-10-23T10:11:47.843Z"
-    },
-    {
-      "topic": "سر الفانوس الأثري وبوصلة الصدق في خان الخليلي",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-10-23T10:11:47.843Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-25 · 10:05 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-40156206318",
+    "id": "gh-run-40173028434",
     "uploadMode": "manual_instant",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-25 (06:06 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792896960620-hwql",
-    "longEpisodeId": "ep-gh-long-1792897042500-50hs",
-    "shortEpisodeTitle": "Noreen Kids: كارمن وسمسم واختراع حصادة التفاح الذكية للبستان | مغامرات كارمن وسمسم",
-    "longEpisodeTitle": "تامر وكركور وسر خيمة التسامح في واحة النخيل",
-    "shortTitle": "Noreen Kids: كارمن وسمسم واختراع حصادة التفاح الذكية للبستان | مغامرات كارمن وسمسم",
-    "longTitle": "تامر وكركور وسر خيمة التسامح في واحة النخيل",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-25 (11:04 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792913738204-eh36",
+    "longEpisodeId": "ep-gh-long-1792914002262-6h01",
+    "shortEpisodeTitle": "Noreen Kids: سدرة والفراشة ولعبة الاستغماية في المزرعة | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "longEpisodeTitle": "أم ملك وسر الكلمات السحرية في بستان السعادة",
+    "shortTitle": "Noreen Kids: سدرة والفراشة ولعبة الاستغماية في المزرعة | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "longTitle": "أم ملك وسر الكلمات السحرية في بستان السعادة",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "privacyStatus": "public",
     "madeForKids": false,
@@ -2879,10 +2867,10 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "zlHVIkdRuQQ",
-    "facebookShortVideoId": "3373583432850039",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/3373583432850039",
-    "facebookShortTitle": "Noreen Kids | كارمن وسمسم واختراع حصادة التفاح الذكية للبستان - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
+    "youtubeShortVideoId": "JnH28da26o4",
+    "facebookShortVideoId": "1532513762240364",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1532513762240364",
+    "facebookShortTitle": "Noreen Kids | سدرة والفراشة ولعبة الاستغماية في المزرعة - مغامرة سدرة الصغنونة والفراشة الملونة",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2890,16 +2878,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 720,
-      "height": 1280,
+      "width": 1080,
+      "height": 1920,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 62,
-      "fileSizeBytes": 24127734,
-      "inspectedAt": "06:06"
+      "durationSec": 67,
+      "fileSizeBytes": 82564874,
+      "inspectedAt": "11:04"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2908,7 +2896,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-25T03:06:47.485Z"
+    "reportedAtIso": "2026-10-25T08:04:36.953Z"
   },
   "heroFairRotationIndex": 9,
   "interactiveHeroRotationIndex": 5,
