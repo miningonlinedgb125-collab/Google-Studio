@@ -1334,7 +1334,9 @@ async function synthesizeChunkViaGeminiLiveRunner(
             systemInstruction: {
               parts: [
                 {
-                  text: "SYSTEM RULE: You are a professional Egyptian Cairene cartoon voice actor for children. Read the Arabic dialogue sent by the user completely and verbatim from the very first word to the very last word with natural Cairene pronunciation (hard Egyptian G). Strictly adopt an expressive cartoon delivery. You MUST speak every single sentence fully without skipping, cutting off, or summarizing. NEVER utter any instructions, character descriptions, meta words, or introductory phrases before, during, or after speaking." ,
+                  text: isEgyptian
+                    ? "SYSTEM RULE: You are a professional Egyptian Cairene cartoon voice actor for children. Read the Arabic dialogue sent by the user completely and verbatim from the very first word to the very last word with natural Cairene pronunciation (hard Egyptian G). Strictly adopt an expressive cartoon delivery. You MUST speak every single sentence fully without skipping, cutting off, or summarizing. NEVER utter any instructions, character descriptions, meta words, or introductory phrases before, during, or after speaking."
+                    : "SYSTEM RULE: You are a master Classical Arabic (الفصحى السليمة المشكولة) cartoon voice actor for children (Disney/Pixar Arabic dubbing standard). Read the vocalized Arabic dialogue completely and verbatim from the first word to the last word in 100% pure Modern Standard Arabic with full grammatical harakat. Pronounce EVERY letter القاف (ق) as a crisp, authentic classical Arabic uvular Qaf [q] — NEVER pronounce ق as an Egyptian/Levantine glottal stop hamza [ʔ] and NEVER use colloquial pronunciation. Speak expressively and warmly without skipping, summarizing, or adding any meta words.",
                 },
               ],
             },
@@ -2872,63 +2874,153 @@ async function synthesizeContextualFoleySfxWav({
   durationSec = 10,
   sceneIndex = 0,
   tmpDir,
+  companionName = "",
+  soundEffectsEn = "",
+  dialogueArabic = "",
 }) {
   const dur = Math.max(1.0, Number(durationSec) || 8.0);
-  const outWav = path.join(tmpDir, `foley_sfx_${foleyTheme}_${sceneIndex}.wav`);
+  const safeIdx = String(sceneIndex).replace(/[^a-zA-Z0-9_-]/g, "_");
+  const outWav = path.join(tmpDir, `foley_sfx_${foleyTheme}_${safeIdx}.wav`);
 
-  // Physical footsteps + scene-specific organic foley pulses (water splashes, orchard birds, workshop gears, oasis breeze, or space chimes)
-  let pulseExpr = "";
-  let noiseFilter = "";
-  if (foleyTheme === "water") {
-    // Rhythmic deck footsteps + bubbly water splashes + gentle ocean surf waves
-    pulseExpr =
-      "0.070*sin(2*PI*115*t)*exp(-22*mod(t*2.05,1))+0.042*sin(2*PI*(860+340*mod(floor(t*3.1),4))*t)*exp(-13*mod(t*3.1,1))+0.028*sin(2*PI*(520+180*sin(2*PI*2.2*t))*t)*exp(-10*mod(t*1.55,1))";
-    noiseFilter =
-      "[1:a]bandpass=f=460:width_type=h:w=620,tremolo=f=0.32:d=0.68,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0.95[amb];[0:a][amb]amix=inputs=2:weights='1.0 0.90':normalize=0,volume=1.35[outa]";
-  } else if (foleyTheme === "forest") {
-    // Crisp footsteps on grass + cheerful birds chirping + rustling orchard leaves
-    pulseExpr =
-      "0.068*sin(2*PI*128*t)*exp(-24*mod(t*2.20,1))+0.040*sin(2*PI*(2420+520*sin(2*PI*9*t))*t)*exp(-16*mod(t*1.35,1))+0.030*sin(2*PI*(1950+380*cos(2*PI*7*t))*t)*exp(-18*mod(t*0.95+0.4,1))";
-    noiseFilter =
-      "[1:a]bandpass=f=1100:width_type=h:w=950,tremolo=f=0.48:d=0.55,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0.55[amb];[0:a][amb]amix=inputs=2:weights='1.0 0.70':normalize=0,volume=1.30[outa]";
-  } else if (foleyTheme === "workshop") {
-    // Active footsteps + playful mechanical invention clicks, gears, and friendly gadget chimes
-    pulseExpr =
-      "0.068*sin(2*PI*134*t)*exp(-24*mod(t*2.30,1))+0.045*sin(2*PI*(660+280*mod(floor(t*3.8),3))*t)*exp(-20*mod(t*3.8,1))+0.030*sin(2*PI*(1180+220*mod(floor(t*1.9),2))*t)*exp(-15*mod(t*1.9,1))";
-    noiseFilter =
-      "[1:a]bandpass=f=820:width_type=h:w=700,tremolo=f=0.60:d=0.45,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0.42[amb];[0:a][amb]amix=inputs=2:weights='1.0 0.60':normalize=0,volume=1.30[outa]";
-  } else if (foleyTheme === "space") {
-    // Light space-boot steps + gentle sci-fi console sparkles + soft starship hum
-    pulseExpr =
-      "0.060*sin(2*PI*108*t)*exp(-22*mod(t*1.90,1))+0.038*sin(2*PI*(1340+420*mod(floor(t*1.6),4))*t)*exp(-9*mod(t*1.6,1))+0.022*sin(2*PI*(196+10*sin(2*PI*0.5*t))*t)";
-    noiseFilter =
-      "[1:a]bandpass=f=620:width_type=h:w=500,tremolo=f=0.25:d=0.50,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0.38[amb];[0:a][amb]amix=inputs=2:weights='1.0 0.55':normalize=0,volume=1.25[outa]";
-  } else if (foleyTheme === "oasis") {
-    // Soft sand footsteps + oasis water spring trickle + warm desert palm breeze
-    pulseExpr =
-      "0.064*sin(2*PI*104*t)*exp(-20*mod(t*2.00,1))+0.038*sin(2*PI*(780+260*mod(floor(t*2.6),3))*t)*exp(-15*mod(t*2.6,1))";
-    noiseFilter =
-      "[1:a]bandpass=f=720:width_type=h:w=780,tremolo=f=0.34:d=0.62,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0.65[amb];[0:a][amb]amix=inputs=2:weights='1.0 0.80':normalize=0,volume=1.30[outa]";
+  const combinedCtx = `${companionName} ${soundEffectsEn} ${dialogueArabic}`.toLowerCase();
+  const isRunning =
+    /جري|يجري|نجري|تجر|نركض|يركض|بسرعة|ننطلق|انطلق|أسرع|سريع|سباق|قفز|يقفز|\brun\b|\brunning\b|\bsprint|\bhurry|\bdash|\bchase|\bjump/i.test(
+      combinedCtx
+    );
+  const hasWaterAction =
+    foleyTheme === "water" ||
+    foleyTheme === "sea" ||
+    foleyTheme === "oasis" ||
+    /ماء|مياه|نهر|بحر|شلال|أمواج|مطر|سقاية|قطرات|ينبوع|بئر|\bwater\b|\bsplash|\bwave|\brain|\bstream|\briver/i.test(
+      combinedCtx
+    );
+
+  // Adaptive step cadence: brisk running (3.25 steps/s) vs lively walking (2.05 steps/s)
+  const stepRate = isRunning ? 3.25 : 2.05;
+  const stepBodyFreq = foleyTheme === "water" ? 132 : foleyTheme === "oasis" ? 118 : isRunning ? 156 : 138;
+  const stepCrunchFreq = foleyTheme === "water" ? 780 : foleyTheme === "forest" ? 1350 : foleyTheme === "oasis" ? 980 : 1180;
+
+  // Companion & scene creature authentic acoustic vocalizations + wing/paw foley
+  let creatureCallExpr = "";
+  let hasBirdWings = false;
+  if (/الصقر|صقر|\bfalcon|\bhawk|\beagle/i.test(combinedCtx)) {
+    // Noble falcon downward avian cry every ~3.1s + feathered wing whooshes
+    hasBirdWings = true;
+    creatureCallExpr =
+      "0.22*lt(mod(t+0.45,3.15),0.36)*sin(2*PI*(1560-480*mod(t+0.45,3.15)/0.36)*t)*sin(PI*mod(t+0.45,3.15)/0.36)";
+  } else if (/الديك|ديك|\brooster/i.test(combinedCtx)) {
+    // Cheerful rooster cluck/crow motif every ~3.2s + wing flap
+    hasBirdWings = true;
+    creatureCallExpr =
+      "0.21*lt(mod(t+0.50,3.25),0.42)*(sin(2*PI*(720+260*sin(2*PI*4.5*mod(t+0.50,3.25)))*t)+0.45*sin(4*PI*720*t))*sin(PI*mod(t+0.50,3.25)/0.42)";
+  } else if (/كركور|ببغاء|\bparrot/i.test(combinedCtx)) {
+    // Playful tropical parrot two-tone whistle chirp + wing flutter
+    hasBirdWings = true;
+    creatureCallExpr =
+      "0.21*lt(mod(t+0.40,2.95),0.30)*sin(2*PI*(1180+560*mod(t+0.40,2.95)/0.30)*t)*sin(PI*mod(t+0.40,2.95)/0.30)";
+  } else if (/العصفورة|عصفور|طيور|طائر|حمامة|يمامة|\bbird|\bsparrow|\bchirp/i.test(combinedCtx)) {
+    // Melodic songbird double-chirp tweet every ~2.35s + rapid light wing flutter
+    hasBirdWings = true;
+    creatureCallExpr =
+      "0.22*lt(mod(t+0.35,2.35),0.26)*sin(2*PI*(2480+620*sin(2*PI*14*t))*t)*exp(-9*mod(t+0.35,0.13))";
+  } else if (/القطة|لوليتا|قطة|قطط|\bcat\b|\bkitten|\bmeow/i.test(combinedCtx)) {
+    // Sweet expressive kitten meow glide every ~3.2s
+    creatureCallExpr =
+      "0.22*lt(mod(t+0.55,3.20),0.40)*(sin(2*PI*(760+310*sin(PI*mod(t+0.55,3.20)/0.40))*t)+0.40*sin(4*PI*(760+310*sin(PI*mod(t+0.55,3.20)/0.40))*t))*sin(PI*mod(t+0.55,3.20)/0.40)";
+  } else if (/الكلب|زقلط|جرو|كلب|\bdog\b|\bpuppy|\bbark/i.test(combinedCtx)) {
+    // Playful puppy happy double-yip every ~3.0s
+    creatureCallExpr =
+      "0.23*lt(mod(t+0.45,3.00),0.32)*(sin(2*PI*(520+240*mod(t+0.45,0.16)/0.16)*t)+0.4*sin(4*PI*560*t))*exp(-14*mod(t+0.45,0.16))";
+  } else if (/أرنوب|أرنب|\brabbit|\bbunny/i.test(combinedCtx)) {
+    // Bouncy rabbit double-hop spring thud + cute soft squeak
+    creatureCallExpr =
+      "0.21*exp(-20*mod(t*2.65,1))*sin(2*PI*(165+95*exp(-15*mod(t*2.65,1)))*t)+0.15*lt(mod(t+0.6,2.90),0.18)*sin(2*PI*(1880+320*mod(t+0.6,0.18)/0.18)*t)*sin(PI*mod(t+0.6,2.90)/0.18)";
+  } else if (/مرجان|دلفين|حوت|سلحفاة|فقمة|\bdolphin|\bwhale/i.test(combinedCtx)) {
+    // Playful dolphin whistle + clicks
+    creatureCallExpr =
+      "0.21*lt(mod(t+0.35,2.80),0.32)*sin(2*PI*(1650+980*mod(t+0.35,2.80)/0.32)*t)*sin(PI*mod(t+0.35,2.80)/0.32)";
+  } else if (/الفأر|فأر|سمسم|سنجاب|\bmouse|\bsquirrel/i.test(combinedCtx)) {
+    // Cute tiny high-pitched double-squeak chatter
+    creatureCallExpr =
+      "0.19*lt(mod(t+0.40,2.65),0.22)*sin(2*PI*(2780+520*sin(2*PI*18*t))*t)*exp(-14*mod(t+0.40,0.11))";
+  } else if (/البطريق|بطريق|\bpenguin/i.test(combinedCtx)) {
+    // Cute playful penguin honk-chirp
+    creatureCallExpr =
+      "0.21*lt(mod(t+0.50,3.05),0.28)*(sin(2*PI*(440+150*mod(t+0.50,3.05)/0.28)*t)+0.5*sin(4*PI*460*t))*sin(PI*mod(t+0.50,3.05)/0.28)";
+  } else if (/الفراشة|فراشة|\bbutterfly/i.test(combinedCtx)) {
+    hasBirdWings = true;
+    creatureCallExpr =
+      "0.18*lt(mod(t+0.35,2.60),0.24)*sin(2*PI*(2320+480*sin(2*PI*12*t))*t)*exp(-10*mod(t+0.35,0.12))";
+  } else if (/النمر|نمور|باندا|زعتر|ثعلب|شبل|مهر|حصان|خروف|\btiger|\bpanda|\bfox/i.test(combinedCtx)) {
+    // Friendly playful animal cub chirp-chuff + padded paws
+    creatureCallExpr =
+      "0.21*lt(mod(t+0.50,3.10),0.28)*(sin(2*PI*(370+160*sin(PI*mod(t+0.50,3.10)/0.28))*t)+0.4*sin(4*PI*390*t))*sin(PI*mod(t+0.50,3.10)/0.28)";
+  } else if (/بلبل|روبوت|\brobot/i.test(combinedCtx)) {
+    // Friendly companion robot melodic double-beep
+    creatureCallExpr =
+      "0.19*lt(mod(t+0.45,3.00),0.24)*sin(2*PI*(1040+380*floor(mod(t+0.45,0.24)*8.5))*t)*exp(-10*mod(t+0.45,0.12))";
   } else {
-    // Park/Neighborhood: lively footsteps + morning birds + gentle outdoor breeze
-    pulseExpr =
-      "0.066*sin(2*PI*126*t)*exp(-24*mod(t*2.15,1))+0.036*sin(2*PI*(2200+460*sin(2*PI*8*t))*t)*exp(-17*mod(t*1.25,1))";
-    noiseFilter =
-      "[1:a]bandpass=f=960:width_type=h:w=850,tremolo=f=0.40:d=0.55,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0.48[amb];[0:a][amb]amix=inputs=2:weights='1.0 0.65':normalize=0,volume=1.28[outa]";
+    // Default outdoor nature songbird chirps in garden/park
+    hasBirdWings = foleyTheme === "forest" || foleyTheme === "park";
+    creatureCallExpr =
+      "0.18*lt(mod(t+0.45,2.80),0.24)*sin(2*PI*(2360+520*sin(2*PI*11*t))*t)*exp(-10*mod(t+0.45,0.12))";
   }
+
+  // Water droplets / Workshop tool clinks / Space console chimes accent
+  let scenePropAccentExpr = "0";
+  if (hasWaterAction) {
+    scenePropAccentExpr =
+      "0.18*sin(2*PI*(780+380*mod(floor(t*3.2),4))*t)*exp(-15*mod(t*3.2,1))+0.12*sin(2*PI*(540+210*sin(2*PI*2.4*t))*t)*exp(-11*mod(t*1.65,1))";
+  } else if (foleyTheme === "workshop") {
+    scenePropAccentExpr =
+      "0.16*sin(2*PI*(680+290*mod(floor(t*3.4),3))*t)*exp(-22*mod(t*3.4,1))";
+  } else if (foleyTheme === "space") {
+    scenePropAccentExpr =
+      "0.14*sin(2*PI*(1320+410*mod(floor(t*1.7),4))*t)*exp(-11*mod(t*1.7,1))";
+  }
+
+  // Input 0: Stereo tonal & body impacts (alternating L/R heel-toe footsteps + creature calls + water/prop accents)
+  const leftHeel = `0.38*(0.65+0.35*mod(floor(t*${stepRate}),2))*sin(2*PI*${stepBodyFreq}*t)*exp(-24*mod(t*${stepRate},1))`;
+  const rightHeel = `0.38*(1.0-0.35*mod(floor(t*${stepRate}),2))*sin(2*PI*${stepBodyFreq}*t)*exp(-24*mod(t*${stepRate},1))`;
+  const stereoToneExpr = `${leftHeel}+1.30*(${creatureCallExpr})+1.20*(${scenePropAccentExpr})|${rightHeel}+1.45*(${creatureCallExpr})+1.15*(${scenePropAccentExpr})`;
+
+  // Input 1: Broadband percussive step-crunch + feathered wing-flap envelope (multiplied with filtered pink noise so footsteps & wings sound 100% physical on earth/grass/wood!)
+  const wingFlapEnv = hasBirdWings
+    ? `+0.92*lt(mod(t+0.25,2.75),0.46)*exp(-13*mod(t*7.5,1))`
+    : "";
+  const crunchEnvExpr = `0.95*exp(-17*mod(t*${stepRate},1))+0.42*exp(-22*mod(t*${stepRate}+0.52,1))${wingFlapEnv}`;
+
+  // Input 2: Pink noise split into (a) physical footstep/wing texture, (b) moving outdoor wind gusts, and (c) rustling leaves / surf wash
+  const windFreq = hasWaterAction ? 490 : foleyTheme === "oasis" ? 640 : 540;
+  const leafFreq = hasWaterAction ? 1450 : 2350;
+  const windGain = hasWaterAction ? 1.85 : isRunning ? 1.70 : 1.50;
+
+  const filterComplex =
+    `[0:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo[tones];` +
+    `[1:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo[step_env];` +
+    `[2:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,asplit=3[n_step][n_wind][n_leaf];` +
+    `[n_step]bandpass=f=${stepCrunchFreq}:width_type=h:w=1450,volume=3.5[n_step_bp];` +
+    `[n_step_bp][step_env]amultiply,volume=${isRunning ? "1.65" : "1.40"}[step_crunch];` +
+    `[n_wind]bandpass=f=${windFreq}:width_type=h:w=620,tremolo=f=0.38:d=0.68,volume=${windGain}[wind_bed];` +
+    `[n_leaf]bandpass=f=${leafFreq}:width_type=h:w=1600,tremolo=f=0.68:d=0.58,volume=1.35[leaf_bed];` +
+    `[tones][step_crunch][wind_bed][leaf_bed]amix=inputs=4:weights='1.15 1.35 1.10 0.95':normalize=0,highpass=f=55,lowpass=f=14500,volume=2.25,alimiter=limit=0.92[outa]`;
 
   await execFileAsync("ffmpeg", [
     "-y",
     "-f",
     "lavfi",
     "-i",
-    `aevalsrc='${pulseExpr}':s=48000:c=stereo:d=${dur}`,
+    `aevalsrc='${stereoToneExpr}':s=48000:c=stereo:d=${dur}`,
     "-f",
     "lavfi",
     "-i",
-    `anoisesrc=color=pink:r=48000:a=0.042:d=${dur}`,
+    `aevalsrc='${crunchEnvExpr}|${crunchEnvExpr}':s=48000:c=stereo:d=${dur}`,
+    "-f",
+    "lavfi",
+    "-i",
+    `anoisesrc=color=pink:r=48000:a=0.28:d=${dur}`,
     "-filter_complex",
-    noiseFilter,
+    filterComplex,
     "-map",
     "[outa]",
     "-t",
@@ -3438,6 +3530,343 @@ function splitDialogueIntoTimedNativeShots(dialogueArabic, totalTargetSec = 16.8
   }));
 }
 
+function normalizeAndVocalizePureFushaText(rawText, { isTitle = false } = {}) {
+  let s = String(rawText || "")
+    .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!s) return "";
+
+  // 1) Multi-word colloquial idioms -> Pure Classical Vocalized Arabic (Fusha)
+  const phraseReplacements = [
+    [/لحد\s+ما\s+بقت/gu, isTitle ? "حتى أصبحت" : "حَتَّى أَصْبَحَتْ"],
+    [/لحد\s+ما\s+بقى/gu, isTitle ? "حتى أصبح" : "حَتَّى أَصْبَحَ"],
+    [/بدون\s+ما\s+يقع/gu, isTitle ? "دون أن يسقط" : "دُونَ أَنْ يَسْقُطَ"],
+    [/بدون\s+بطاريات/gu, isTitle ? "دون بطاريات" : "دُونَ بَطَّارِيَّاتٍ"],
+    [/غسيل\s+الإيدين\s+بالمية\s+والصابون/gu, isTitle ? "غسل اليدين بالماء والصابون" : "غَسْلِ الْيَدَيْنِ بِالْمَاءِ وَالصَّابُونِ"],
+    [/سناننا\s+بيضا\s+وقوية\s+ونضيفة/gu, isTitle ? "أسناننا بيضاء وقوية ونظيفة" : "أَسْنَانِنَا بَيْضَاءَ وَقَوِيَّةً وَنَظِيفَةً"],
+    [/النوم\s+البدري/gu, isTitle ? "النوم المبكر" : "النَّوْمِ الْمُبَكِّرِ"],
+    [/اللبن\s+الدافي/gu, isTitle ? "الحليب الدافئ" : "الْحَلِيبِ الدَّافِئِ"],
+    [/المية\s+النظيفة/gu, isTitle ? "الماء النظيف" : "الْمَاءِ النَّظِيفِ"],
+    [/قدام\s+الهوا/gu, isTitle ? "أمام الرياح" : "أَمَامَ الرِّيَاحِ"],
+    [/جناح\s+الهوا/gu, isTitle ? "جناح الهواء" : "جَنَاحِ الْهَوَاءِ"],
+    [/اللي\s+بتقوي/gu, isTitle ? "التي تقوي" : "الَّتِي تُقَوِّي"],
+    [/اللي\s+بتلمع/gu, isTitle ? "التي تلمع" : "الَّتِي تَلْمَعُ"],
+    [/اللي\s+بتغني/gu, isTitle ? "التي تغني" : "الَّتِي تُغَنِّي"],
+    [/اللي\s+بينور\s+لما\s+نقول/gu, isTitle ? "الذي يضيء حين نقول" : "الَّذِي يُضِيءُ حِينَ نَقُولُ"],
+    [/اللي\s+بينور/gu, isTitle ? "الذي يضيء" : "الَّذِي يُضِيءُ"],
+    [/اللي\s+بتنور/gu, isTitle ? "التي تضيء" : "الَّتِي تُضِيءُ"],
+    [/اللي\s+فتحت/gu, isTitle ? "التي تفتحت" : "الَّتِي تَفَتَّحَتْ"],
+    [/اللي\s+بيطير/gu, isTitle ? "الذي يطير" : "الَّذِي يَطِيرُ"],
+    [/اللي\s+طارت/gu, isTitle ? "التي طارت" : "الَّتِي طَارَتْ"],
+    [/اللي\s+حكاها/gu, isTitle ? "التي رواها" : "الَّتِي رَوَاهَا"],
+    [/وإزاي\s+لقى\s+أصحابه/gu, isTitle ? "وكيف وجد أصدقاءه" : "وَكَيْفَ وَجَدَ أَصْدِقَاءَهُ"],
+    [/وإزاي\s+الصدق\s+بينجي\s+دايماً?/gu, isTitle ? "وكيف ينجي الصدق دائماً" : "وَكَيْفَ يُنْجِي الصِّدْقُ دَائِماً"],
+    [/وإزاي\s+زقلط\s+حفر/gu, isTitle ? "وكيف حفر زقلط" : "وَكَيْفَ حَفَرَ زُقْلُطُ"],
+    [/وإزاي\s+نحصن/gu, isTitle ? "وكيف نحصن" : "وَكَيْفَ نُحَصِّنُ"],
+    [/كتاب\s+حواديت\s+زمان/gu, isTitle ? "كتاب حكايات الزمان" : "كِتَابُ حِكَايَاتِ الزَّمَانِ"],
+    [/أصحاب\s+جداد/gu, isTitle ? "أصدقاء جدد" : "أَصْدِقَاءَ جُدُدٍ"],
+    [/خفيف\s+الدم/gu, isTitle ? "خفيف الظل" : "خَفِيفِ الظِّلِّ"],
+    [/فرشة\s+السنان/gu, isTitle ? "فرشاة الأسنان" : "فُرْشَاةِ الأَسْنَانِ"],
+    [/كوباية\s+الحليب/gu, isTitle ? "كوب الحليب" : "كُوبِ الْحَلِيبِ"],
+    [/وديله\s+بيتهز/gu, isTitle ? "وذيله يهتز" : "وَذَيْلُهُ يَهْتَزُّ"],
+    [/يلا\s+بينا/gu, isTitle ? "هيا بنا" : "هَيَّا بِنَا"],
+    [/ما\s+تنسوش/gu, isTitle ? "لا تنسوا" : "لَا تَنْسَوْا"],
+    [/متنسوش/gu, isTitle ? "لا تنسوا" : "لَا تَنْسَوْا"],
+  ];
+  for (const [re, rep] of phraseReplacements) {
+    s = s.replace(re, rep);
+  }
+
+  // 2) Single-word colloquial & glottal-stop hamza-for-Qaf leaks -> Pure Fusha
+  const wordReplacements = [
+    ["أولت", isTitle ? "قلت" : "قُلْتُ"],
+    ["طريء", isTitle ? "طريق" : "طَرِيقٌ"],
+    ["دئيئة", isTitle ? "دقيقة" : "دَقِيقَةٌ"],
+    ["حئيئي", isTitle ? "حقيقي" : "حَقِيقِيٌّ"],
+    ["حئيئة", isTitle ? "حقيقة" : "حَقِيقَةٌ"],
+    ["ئلبي", isTitle ? "قلبي" : "قَلْبِي"],
+    ["حدوتة", isTitle ? "حكاية" : "حِكَايَةُ"],
+    ["حواديت", isTitle ? "حكايات" : "حِكَايَاتِ"],
+    ["اللي", isTitle ? "الذي" : "الَّذِي"],
+    ["إزاي", isTitle ? "كيف" : "كَيْفَ"],
+    ["ازاي", isTitle ? "كيف" : "كَيْفَ"],
+    ["وإزاي", isTitle ? "وكيف" : "وَكَيْفَ"],
+    ["علشان", isTitle ? "لكي" : "لِكَيْ"],
+    ["عشان", isTitle ? "لكي" : "لِكَيْ"],
+    ["بقت", isTitle ? "أصبحت" : "أَصْبَحَتْ"],
+    ["سناننا", isTitle ? "أسناننا" : "أَسْنَانِنَا"],
+    ["بيضا", isTitle ? "بيضاء" : "بَيْضَاءَ"],
+    ["ونضيفة", isTitle ? "ونظيفة" : "وَنَظِيفَةً"],
+    ["نضيفة", isTitle ? "نظيفة" : "نَظِيفَةً"],
+    ["الإيدين", isTitle ? "اليدين" : "الْيَدَيْنِ"],
+    ["المية", isTitle ? "الماء" : "الْمَاءِ"],
+    ["بالمية", isTitle ? "بالماء" : "بِالْمَاءِ"],
+    ["الدافي", isTitle ? "الدافئ" : "الدَّافِئِ"],
+    ["والفانوس الدافي", isTitle ? "والفانوس الدافئ" : "وَالْفَانُوسَ الدَّافِئَ"],
+    ["الدافية", isTitle ? "الدافئة" : "الدَّافِئَةِ"],
+    ["المنور", isTitle ? "المضيء" : "الْمُضِيءِ"],
+    ["المنورة", isTitle ? "المضيئة" : "الْمُضِيئَةِ"],
+    ["البدري", isTitle ? "المبكر" : "الْمُبَكِّرِ"],
+    ["شنطة", isTitle ? "حقيبة" : "حَقِيبَةُ"],
+    ["وشنطة", isTitle ? "وحقيبة" : "وَحَقِيبَةُ"],
+    ["التابلت", isTitle ? "الجهاز اللوحي" : "الْجِهَازُ اللَّوْحِيُّ"],
+    ["المراية", isTitle ? "المرآة" : "الْمِرْآةُ"],
+    ["قدام", isTitle ? "أمام" : "أَمَامَ"],
+    ["الهوا", isTitle ? "الهواء" : "الْهَوَاءِ"],
+    ["حوالين", isTitle ? "حول" : "حَوْلَ"],
+    ["دايماً", isTitle ? "دائماً" : "دَائِماً"],
+    ["دايما", isTitle ? "دائماً" : "دَائِماً"],
+    ["دلوقتي", isTitle ? "الآن" : "الآنَ"],
+    ["ودلوقتي", isTitle ? "والآن" : "وَالآنَ"],
+    ["كده", isTitle ? "هكذا" : "هَكَذَا"],
+    ["أوي", isTitle ? "جداً" : "جِدّاً"],
+    ["سوا", isTitle ? "معاً" : "مَعاً"],
+    ["إحنا", isTitle ? "نحن" : "نَحْنُ"],
+    ["إيه", isTitle ? "ماذا" : "مَاذَا"],
+    ["ليه", isTitle ? "لماذا" : "لِمَاذَا"],
+    ["يلا", isTitle ? "هيا" : "هَيَّا"],
+    ["بصوا", isTitle ? "انظروا" : "انْظُرُوا"],
+    ["بصي", isTitle ? "انظري" : "انْظُرِي"],
+    ["الفرفوشة", isTitle ? "المرحة" : "الْمَرِحَةُ"],
+    ["الفرفوش", isTitle ? "المرح" : "الْمَرِحُ"],
+    ["الصغنونة", isTitle ? "الصغيرة" : "الصَّغِيرَةُ"],
+    ["الاستغماية", isTitle ? "الغميضة" : "الْغُمَّيْضَةِ"],
+    ["الزحليقة", isTitle ? "المزلقة" : "الْمِزْلَقَةِ"],
+    ["مستخبي", isTitle ? "مختبئ" : "مُخْتَبِئٌ"],
+    ["جدو", isTitle ? "جدي الحكيم" : "جَدِّي"],
+    ["تيتة", isTitle ? "جدتي الحنون" : "جَدَّتِي"],
+    ["تيتا", isTitle ? "جدتي الحنون" : "جَدَّتِي"],
+  ];
+  for (const [fromW, toW] of wordReplacements) {
+    const re = new RegExp(`(^|[\\s،.!؟؛:"«»()\\-])${fromW}(?=[\\s،.!؟؛:"«»()\\-]|$)`, "gu");
+    s = s.replace(re, `$1${toW}`);
+  }
+
+  if (isTitle) {
+    return s.replace(/\s+/g, " ").trim();
+  }
+
+  // 3) Fix ungrammatical Arabic vocative "يَا الـ..." -> "يَا أَيُّهَا / يَا أَيَّتُهَا الـ..."
+  s = s.replace(
+    /(^|[\s،.!؟؛:])(?:يَا|يا)\s+(الْ|ال)([^\s،.!؟؛:]+)/gu,
+    (match, lead, alPrefix, restWord) => {
+      if (/^لَّ?ه/u.test(restWord)) return match;
+      const plainRest = restWord.replace(/[\u064B-\u065F\u0670]/gu, "");
+      const isFem =
+        /ة$/.test(plainRest) ||
+        /^(عصفورة|قطة|فراشة|طبيبة|مهندسة|بطلة|سلحفاة|غزالة|نحلة|فقمة|حمامة)/u.test(plainRest);
+      return `${lead}${isFem ? "يَا أَيَّتُهَا" : "يَا أَيُّهَا"} ${alPrefix}${restWord}`;
+    }
+  );
+
+  // 4) Explicit Classical Qaf (ق) Vocalization Lock — anchors neural audio-video models onto crisp uvular [q] (never glottal stop [ʔ])
+  const qafVocalizations = [
+    ["قناة", "قَنَاةِ"],
+    ["وقناة", "وَقَنَاةِ"],
+    ["القناة", "الْقَنَاةِ"],
+    ["صفحة", "صَفْحَةِ"],
+    ["وصفحة", "وَصَفْحَةِ"],
+    ["سؤال الشطار", "سُؤَالُ الشُّطَّارِ"],
+    ["اكتبوا إجابتكم في التعليقات", "اكْتُبُوا إِجَابَتَكُمْ فِي التَّعْلِيقَاتِ"],
+    ["التعليقات", "التَّعْلِيقَاتِ"],
+    ["الاشتراك", "الاشْتِرَاكَ"],
+    ["قصة", "قِصَّةِ"],
+    ["القصة", "الْقِصَّةِ"],
+    ["قصص", "قِصَصِ"],
+    ["صديقي", "صَدِيقِي"],
+    ["صديقتي", "صَدِيقَتِي"],
+    ["أصدقائي", "أَصْدِقَائِي"],
+    ["أصدقائنا", "أَصْدِقَائِنَا"],
+    ["أصدقاءنا", "أَصْدِقَاءَنَا"],
+    ["أصدقائكم", "أَصْدِقَائِكُمْ"],
+    ["الأصدقاء", "الأَصْدِقَاءِ"],
+    ["رفيقي", "رَفِيقِي"],
+    ["رفيقتي", "رَفِيقَتِي"],
+    ["رفيق", "رَفِيقُ"],
+    ["فريقنا", "فَرِيقِنَا"],
+    ["الفريق", "الْفَرِيقِ"],
+    ["الصقر", "الصَّقْرُ"],
+    ["وبالصقر", "وَبِالصَّقْرِ"],
+    ["دقة", "دِقَّةٍ"],
+    ["بدقة", "بِدِقَّةٍ"],
+    ["الدقيقة", "الدَّقِيقَةِ"],
+    ["الصدق", "الصِّدْقِ"],
+    ["بصدق", "بِصِدْقٍ"],
+    ["الصادق", "الصَّادِقُ"],
+    ["حقا", "حَقّاً"],
+    ["حقاً", "حَقّاً"],
+    ["الحق", "الْحَقِّ"],
+    ["الحقيقي", "الْحَقِيقِيُّ"],
+    ["الحقيقية", "الْحَقِيقِيَّةِ"],
+    ["القلب", "الْقَلْبِ"],
+    ["القلوب", "الْقُلُوبِ"],
+    ["قلوبنا", "قُلُوبِنَا"],
+    ["حقيبة", "حَقِيبَةُ"],
+    ["الحقيبة", "الْحَقِيبَةِ"],
+    ["قرية", "قَرْيَةِ"],
+    ["القرية", "الْقَرْيَةِ"],
+    ["قارب", "قَارِبِ"],
+    ["القارب", "الْقَارِبِ"],
+    ["قمة", "قِمَّةِ"],
+    ["القمة", "الْقِمَّةِ"],
+    ["القلعة", "الْقَلْعَةِ"],
+    ["الوقت", "الْوَقْتِ"],
+    ["وقت", "وَقْتِ"],
+    ["قوية", "قَوِيَّةً"],
+    ["وقوية", "وَقَوِيَّةً"],
+    ["القوية", "الْقَوِيَّةِ"],
+    ["قوي", "قَوِيٌّ"],
+    ["القوي", "الْقَوِيُّ"],
+    ["نتقدم", "نَتَقَدَّمُ"],
+    ["نقترب", "نَقْتَرِبُ"],
+    ["نقول", "نَقُولُ"],
+    ["يقول", "يَقُولُ"],
+    ["تقول", "تَقُولُ"],
+    ["قال", "قَالَ"],
+    ["قالت", "قَالَتْ"],
+    ["سقى البذرة", "سَقَى الْبَذْرَةَ"],
+    ["سقى", "سَقَى"],
+    ["القادمة", "الْقَادِمَةِ"],
+    ["القديم", "الْقَدِيمِ"],
+    ["القديمة", "الْقَدِيمَةِ"],
+    ["العقبة", "الْعَقَبَةَ"],
+    ["إتقان", "إِتْقَانٍ"],
+    ["بإتقان", "بِإِتْقَانٍ"],
+    ["القرآن", "الْقُرْآنِ"],
+    ["الفقراء", "الْفُقَرَاءِ"],
+    ["قطة", "قِطَّةٍ"],
+    ["القطة", "الْقِطَّةُ"],
+    ["القمر", "الْقَمَرِ"],
+    ["قمر", "قَمَرِ"],
+    ["قوس قزح", "قَوْسِ قُزَحَ"],
+    ["قبل", "قَبْلَ"],
+    ["فوق", "فَوْقَ"],
+    ["طريق", "طَرِيقِ"],
+    ["الطريق", "الطَّرِيقِ"],
+    ["إنقاذ", "إِنْقَاذِ"],
+    ["لإنقاذ", "لِإِنْقَاذِ"],
+    ["مقالب", "مَقَالِبُ"],
+    ["مقاعد", "مَقَاعِدَ"],
+    ["أقلام", "أَقْلَامَ"],
+    ["الأقلام", "الأَقْلَامَ"],
+    ["الفقاعات", "الْفُقَّاعَاتِ"],
+    ["المقرمشة", "الْمُقَرْمِشَةِ"],
+    ["الفأر المشاكس", "الْفَأْرُ الْمُشَاكِسُ"],
+    ["الفأر", "الْفَأْرُ"],
+    ["العصفورة", "الْعُصْفُورَةُ"],
+    ["النمر", "النَّمِرُ"],
+    ["الديك الفصيح", "الدِّيكُ الْفَصِيحُ"],
+    ["الكلب زقلط", "الْكَلْبُ زُقْلُطُ"],
+    ["البطريق المرح", "الْبِطْرِيقُ الْمَرِحُ"],
+    ["الفراشة الملونة", "الْفَرَاشَةُ الْمُلَوَّنَةُ"],
+    ["الدب باندا", "الدُّبُّ بَانْدَا"],
+    ["أرنوب", "أَرْنُوبُ"],
+    ["مرجان", "مَرْجَانُ"],
+    ["كركور", "كَرْكُورُ"],
+    ["سمسم", "سِمْسِمُ"],
+    ["بلبل", "بُلْبُلُ"],
+    ["نحافظ على", "نُحَافِظُ عَلَى"],
+    ["والفانوس", "وَالْفَانُوسَ"],
+    ["الزارع الصبور", "الزَّارِعِ الصَّبُورِ"],
+    ["البذرة", "الْبَذْرَةِ"],
+    ["نخلة عالية", "نَخْلَةً عَالِيَةً"],
+    ["عصا الحكمة المنقوشة", "عَصَا الْحِكْمَةِ الْمَنْقُوشَةَ"],
+  ];
+  for (const [plainQ, vocQ] of qafVocalizations) {
+    const re = new RegExp(`(^|[\\s،.!؟؛:"«»()\\-])${plainQ}(?=[\\s،.!؟؛:"«»()\\-]|$)`, "gu");
+    s = s.replace(re, `$1${vocQ}`);
+  }
+
+  // Ensure any remaining bare 'ق' before long alif 'ا' (without tanween) carries explicit classical fatha 'قَا'
+  s = s.replace(/ق(?=ا(?![\u064B]))/gu, "قَ");
+
+  return s.replace(/\s+/g, " ").trim();
+}
+
+function ensureFinalSceneClosingCtaAndQuestion(
+  rawText,
+  { dialect = "fusha", isShort = true, topicMention = "" } = {}
+) {
+  const isFusha = dialect === "fusha";
+  let text = String(rawText || "")
+    .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  // Strip any partial/incomplete trailing subscribe/farewell clause so the final sentence is always clean and never duplicated
+  text = text
+    .replace(
+      /[،.!؟؛\s]*(?:وَ?لَا\s+تَنْسَوُ?ا|وَ?لا\s+تنسوا|و?ما\s+تنسوش|و?متنسوش)\s+(?:الاشْتِرَاكَ|الاشتراك|تشتركوا|اشتركوا)[\s\S]*$/u,
+      ""
+    )
+    .replace(
+      /[،.!؟؛\s]*(?:إِلَى\s+اللِّقَ?اءِ|إلى\s+اللقاء|مع\s+السلامة)(?:\s+يَا\s+أَبْطَالُ|\s+يا\s+أبطال|\s+يا\s+أصحابي)?[!؟.]*\s*$/u,
+      ""
+    )
+    .trim();
+
+  const plainCheck = text.replace(/[\u064B-\u065F\u0670]/gu, "");
+  const hasQuestionMark = /\?|؟/.test(plainCheck);
+  const hasSmartQuestionLabel = /سؤال\s+الشطار|تحدي\s+الشطار/.test(plainCheck);
+  const hasCommentsPrompt = /تعليقات/.test(plainCheck);
+
+  const cleanTopic = isFusha
+    ? normalizeAndVocalizePureFushaText(topicMention || "الْقِصَّةِ")
+    : String(topicMention || "حكاية النهارده").trim();
+
+  // 1) Guarantee "سؤال الشطار" + interactive question + comments prompt
+  if (!hasQuestionMark) {
+    if (text && !/[.!؟]$/.test(text)) text += "!";
+    const fullQuestionBlock = isFusha
+      ? isShort
+        ? `سُؤَالُ الشُّطَّارِ: مَا أَجْمَلُ دَرْسٍ تَعَلَّمْتُمُوهُ مَعَنَا الْيَوْمَ؟ اكْتُبُوا إِجَابَتَكُمْ فِي التَّعْلِيقَاتِ!`
+        : `سُؤَالُ الشُّطَّارِ الْيَوْمَ: مَنْ مِنْكُمْ لَمَحَ النَّجْمَةَ الذَّهَبِيَّةَ السِّحْرِيَّةَ فِي الْحَلْقَةِ، وَمَا أَهَمُّ دَرْسٍ تَعَلَّمْتُمُوهُ مِنْ مُغَامَرَةِ ${cleanTopic}؟ اكْتُبُوا إِجَابَتَكُمْ فِي التَّعْلِيقَاتِ!`
+      : isShort
+      ? `سؤال الشطار: إيه أحلى درس اتعلمتوه معانا النهارده؟ اكتبوا إجابتكم في التعليقات!`
+      : `سؤال الشطار النهارده: مين فيكم لمح النجمة الذهبية السحرية في الحلقة، وإيه أهم درس اتعلمتوه من مغامرة ${cleanTopic}؟ اكتبوا إجابتكم في التعليقات!`;
+    text = text ? `${text} ${fullQuestionBlock}` : fullQuestionBlock;
+  } else {
+    if (!hasSmartQuestionLabel) {
+      // Inject "سؤال الشطار:" cleanly right before the final question sentence
+      const qLabel = isFusha ? "سُؤَالُ الشُّطَّارِ:" : "سؤال الشطار:";
+      if (/(?:وَالآنَ|والآن|ودلوقتي)\s+[^.!؟]*[؟?]/.test(text)) {
+        text = text.replace(/(?:وَالآنَ|والآن|ودلوقتي)\s+/u, `${qLabel} `);
+      } else {
+        const lastSentBoundary = Math.max(text.lastIndexOf("!"), text.lastIndexOf("."));
+        const qMarkPos = Math.max(text.indexOf("؟"), text.indexOf("?"));
+        if (lastSentBoundary > 0 && lastSentBoundary < qMarkPos) {
+          text = `${text.slice(0, lastSentBoundary + 1)} ${qLabel} ${text.slice(lastSentBoundary + 1).trim()}`;
+        } else {
+          text = `${qLabel} ${text}`;
+        }
+      }
+    }
+    if (!hasCommentsPrompt) {
+      if (!/[.!؟]$/.test(text)) text += "؟";
+      text += isFusha
+        ? " اكْتُبُوا إِجَابَتَكُمْ فِي التَّعْلِيقَاتِ!"
+        : " اكتبوا إجابتكم في التعليقات!";
+    }
+  }
+
+  if (text && !/[.!؟]$/.test(text)) {
+    text += "!";
+  }
+
+  // 2) Guarantee the VERY LAST SENTENCE always urges Subscribe + Like + Share on Noreen Kids Channel & Page (قناة وصفحة نورين كيدز)
+  const finalClosingSentence = isFusha
+    ? isShort
+      ? "وَلَا تَنْسَوُا الاشْتِرَاكَ فِي قَنَاةِ وَصَفْحَةِ نُورِين كِيدْز، وَالضَّغْطَ عَلَى الإِعْجَابِ وَمُشَارَكَةَ الْفِيدْيُو مَعَ أَصْدِقَائِكُمْ!"
+      : "وَلَا تَنْسَوُا الاشْتِرَاكَ فِي قَنَاةِ وَصَفْحَةِ نُورِين كِيدْز، وَالضَّغْطَ عَلَى زِرِّ الإِعْجَابِ وَمُشَارَكَةَ الْحَلْقَةِ مَعَ كُلِّ أَصْدِقَائِكُمْ، إِلَى اللِّقَاءِ يَا أَبْطَالُ!"
+    : isShort
+    ? "وما تنسوش تشتركوا في قناة وصفحة نورين كيدز، وتعملوا لايك وشير للفيديو مع كل أصحابكم!"
+    : "وما تنسوش تشتركوا في قناة وصفحة نورين كيدز، وتعملوا لايك وشير للحلقة مع كل أصحابكم، مع السلامة يا أبطال!";
+
+  const combined = `${text} ${finalClosingSentence}`.replace(/\s+/g, " ").trim();
+  return isFusha ? normalizeAndVocalizePureFushaText(combined) : combined;
+}
+
 function buildNativeJointAudioVideoShotPrompt({
   baseMotionPrompt,
   heroName,
@@ -3456,32 +3885,48 @@ function buildNativeJointAudioVideoShotPrompt({
   const activeProfile = speakerIsCompanion && compProfile ? compProfile : heroProfile;
   const listenerProfile = speakerIsCompanion ? heroProfile : compProfile;
 
+  const companionSfxHint =
+    compProfile && compProfile.kind === "bird"
+      ? "distinct realistic bird chirps and crisp feathered wing flutters"
+      : compProfile && compProfile.kind === "dolphin"
+      ? "playful dolphin whistles, clicks, and crisp water splashes"
+      : compProfile && compProfile.kind === "penguin"
+      ? "playful penguin chirps and pattering webbed footsteps"
+      : compProfile && compProfile.kind === "butterfly"
+      ? "delicate fluttering wings and cheerful garden bird tweets"
+      : compProfile && compProfile.kind === "quadruped"
+      ? "expressive cute real animal vocalizations and scampering four-paw footsteps"
+      : "";
+
   const themeFoleyMap = {
-    water: "gentle ocean waves splashing against the boat hull, playful water droplets, soft seabird calls, and crisp footsteps on the wooden deck",
-    sea: "gentle ocean waves splashing against the boat hull, playful water droplets, soft seabird calls, and crisp footsteps on the wooden deck",
-    space: "soft spacecraft cabin hum, gentle futuristic console chimes, and light footsteps across the deck",
-    workshop: "light wooden and metallic tool clinks, footsteps on the clean workshop floor, and playful mechanical gadget clicks",
-    forest: "crisp footsteps walking on the grassy orchard path, green tree leaves rustling in a gentle breeze, and cheerful songbird wing flutters",
-    oasis: "soft footsteps on warm golden oasis sand, palm fronds rustling gently, and clear spring water trickling nearby",
-    clinic: "light footsteps in the sunny pediatric room and gentle medical kit handling clicks",
-    park: "natural footsteps crunching softly on the garden path, rustling tree leaves in a light breeze, and lively outdoor nature foley",
+    water: "prominent ocean waves splashing against the boat hull, crisp water droplets, seabird calls, and distinct footsteps on the wooden deck",
+    sea: "prominent ocean waves splashing against the boat hull, crisp water droplets, seabird calls, and distinct footsteps on the wooden deck",
+    space: "clear spacecraft cabin hum, futuristic console chimes, and crisp footsteps across the deck",
+    workshop: "distinct wooden and metallic tool clinks, crisp footsteps on the workshop floor, and mechanical gadget clicks",
+    forest: "clearly audible footsteps walking and running on the grassy path, wind blowing through rustling green tree leaves, and lively songbird chirps",
+    oasis: "clearly audible footsteps on warm oasis sand, desert breeze rustling palm fronds, and clear spring water trickling nearby",
+    clinic: "crisp footsteps in the sunny pediatric room and distinct medical kit handling clicks",
+    park: "clearly audible footsteps walking and running on the garden path, fresh outdoor wind rustling tree leaves, and lively nature foley",
   };
   const foleyDesc = [
     String(soundEffectsEn || "").trim(),
+    companionSfxHint,
     themeFoleyMap[foleyTheme] || themeFoleyMap.park,
   ]
     .filter(Boolean)
     .join(", ");
 
-  const cleanSpeech = String(shotArabicLine || "")
-    .replace(/["«»]/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
+  const cleanSpeech = normalizeAndVocalizePureFushaText(
+    String(shotArabicLine || "")
+      .replace(/["«»]/g, "")
+      .replace(/\s+/g, " ")
+      .trim()
+  );
 
   const shotProgressionCue =
     totalShots > 1
-      ? `In continuous story shot ${shotIndex + 1} of ${totalShots}, the camera glides smoothly at medium-wide Pixar cinema framing.`
-      : `The camera glides smoothly at medium-wide Pixar cinema framing with lively natural motion.`;
+      ? `In continuous live-acting story shot ${shotIndex + 1} of ${totalShots}, the camera glides smoothly at medium-wide Pixar cinema framing.`
+      : `The camera glides smoothly at medium-wide Pixar cinema framing with lively natural theatrical acting.`;
 
   const anatomyAnchor =
     compProfile && compProfile.kind !== "human"
@@ -3489,16 +3934,16 @@ function buildNativeJointAudioVideoShotPrompt({
       : "";
 
   const speechActionSentence = cleanSpeech
-    ? `${activeProfile.shortLabelEn} (${activeProfile.speakingCueEn}) speaks clearly, warmly, and naturally in fluent child-friendly Modern Standard Arabic: "${cleanSpeech}"${
-        listenerProfile ? `, while ${listenerProfile.shortLabelEn} (${listenerProfile.listenerReactionEn}) reacts warmly.` : "."
+    ? `${activeProfile.shortLabelEn} (${activeProfile.speakingCueEn}) speaks clearly, expressively, and naturally in 100% pure vocalized Classical Modern Standard Arabic (الفصحى السليمة المشكولة) with crisp classical uvular Qaf [q] articulation on every 'ق' letter (never glottal-stop hamza [ʔ], zero colloquial dialect): "${cleanSpeech}"${
+        listenerProfile ? `, while ${listenerProfile.shortLabelEn} (${listenerProfile.listenerReactionEn}) reacts warmly in real time.` : "."
       }`
     : "";
 
   return (
-    `A vibrant 4K 3D Pixar-Disney animated feature film scene with rich cinematic lighting and smooth 24fps animation. ` +
+    `A vibrant 4K 3D Pixar-Disney theatrical animated feature film scene with live dramatic acting, rich cinematic lighting, and smooth 24fps animation. ` +
     `${shotProgressionCue} ${baseMotionPrompt}${anatomyAnchor} ` +
     `${speechActionSentence} ` +
-    `Throughout the shot, authentic synchronized diegetic foley sound effects play clearly in the environment — including ${foleyDesc} — matching every physical movement and spoken Arabic word naturally.`
+    `Loud, crisp, clearly audible foreground diegetic foley sound effects play vividly alongside the voice — including ${foleyDesc} — synchronized to every footstep, wind gust, creature movement, and spoken Arabic word.`
   );
 }
 
@@ -4106,7 +4551,7 @@ async function generateAnimatedSceneClipViaDeapi({
                 if (candParams.supportsNegative && attempt !== 2) {
                   form.append(
                     "negative_prompt",
-                    `silent video, muted audio, background music, musical score, singing, closed mouth while speaking, frozen face, static image, blurry, lowres, pixelated, distorted face, extra limbs, watermark, text, banner, ${ANTI_CHIMERA_NEGATIVE_PROMPT}`
+                    `silent video, muted audio, faint sound effects, background music, musical score, singing, colloquial Egyptian accent, glottal stop Qaf, mumbled speech, closed mouth while speaking, frozen face, static image, blurry, lowres, pixelated, distorted face, extra limbs, watermark, text, banner, ${ANTI_CHIMERA_NEGATIVE_PROMPT}`
                   );
                 }
                 return { body: form };
@@ -4213,6 +4658,9 @@ async function generateAnimatedSceneClipViaDeapi({
             durationSec: targetShotDurSec,
             sceneIndex: `${formatTag}_fb_${sceneIndex}_${sIdx}`,
             tmpDir,
+            companionName,
+            soundEffectsEn,
+            dialogueArabic: shot.arabicLine,
           });
           if (fallbackSpeechPath && fs.existsSync(fallbackSpeechPath)) {
             await execFileAsync("ffmpeg", [
@@ -4985,8 +5433,8 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "fusha")
     let sceneDialogue = stripLeakedVoiceInstructionsRunner(String(scenes[i]?.dialogueArabic || "").trim());
     if (
       i === 0 &&
-      !/أعضاء.*نورين كيدز|عيلة.*نورين كيدز|عائلة.*نورين كيدز|أبطال.*نورين كيدز|قناة.*نورين كيدز/.test(
-        sceneDialogue.slice(0, 150)
+      !/أعضاء.*نورين كيدز|عيلة.*نورين كيدز|عائلة.*نورين كيدز|أبطال.*نورين كيدز|قناة.*نورين كيدز|عالم.*نورين كيدز/.test(
+        sceneDialogue.replace(/[\u064B-\u065F\u0670]/gu, "").slice(0, 180)
       )
     ) {
       const stripped = sceneDialogue
@@ -4997,13 +5445,22 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "fusha")
         .trim();
       const greetPrefix =
         dialect === "fusha"
-          ? isShort
-            ? `مَرْحَباً بِكُمْ يَا أَصْدِقَائِي الأَبْطَالَ فِي عَالَمِ نُورِين كِيدْز السَّاحِرِ! أَنَا ${spk} وَمَعِي رَفِيقُ المُغَامَرَةِ ${prt}!`
-            : `مَرْحَباً بِكُمْ يَا أَصْدِقَائِي الأَبْطَالَ فِي عَالَمِ نُورِين كِيدْز السَّاحِرِ! أَنَا ${spk} وَمَعِي رَفِيقُ المُغَامَرَةِ ${prt}!`
+          ? `مَرْحَباً بِكُمْ يَا أَصْدِقَائِي الأَبْطَالَ فِي قَنَاةِ نُورِين كِيدْز! أَنَا ${spk} وَمَعِي رَفِيقُ الْمُغَامَرَةِ ${prt}!`
           : isShort
           ? `أهلاً بيكم يا أبطال عيلة نورين كيدز! أنا ${spk} ومعايا ${prt}!`
           : `أهلاً وسهلاً بكل أعضاء وعيلة قناة نورين كيدز الغاليين في كل مكان! ازيكم يا أشطر وأجمل أبطال؟ وحشتونا أوي! أنا ${spk} ومعايا رفيق المغامرة ${prt}، منورين عالمنا السحري النهارده!`;
       sceneDialogue = stripped ? `${greetPrefix} ${stripped}` : greetPrefix;
+    }
+
+    if (i === scenes.length - 1) {
+      sceneDialogue = ensureFinalSceneClosingCtaAndQuestion(sceneDialogue, {
+        dialect,
+        isShort,
+        topicMention: rawTopicText,
+      });
+    }
+    if (dialect === "fusha") {
+      sceneDialogue = normalizeAndVocalizePureFushaText(sceneDialogue);
     }
 
     const sc = {
@@ -5014,13 +5471,18 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "fusha")
     };
 
     if (useNativeJointEngineAudio) {
+      const isFinalScene = i === scenes.length - 1;
       const wordCount = String(sc.dialogueArabic || "")
         .split(/\s+/)
         .filter(Boolean).length;
       const rawEstSec = wordCount / 2.25 + 1.4;
       const targetDur = isShort
-        ? Number(Math.max(15.6, Math.min(18.2, rawEstSec)).toFixed(2))
-        : Number(Math.max(38.5, Math.min(44.5, rawEstSec)).toFixed(2));
+        ? isFinalScene
+          ? Number(Math.max(18.0, Math.min(21.4, rawEstSec)).toFixed(2))
+          : Number(Math.max(15.2, Math.min(17.2, rawEstSec)).toFixed(2))
+        : isFinalScene
+        ? Number(Math.max(41.0, Math.min(46.8, rawEstSec)).toFixed(2))
+        : Number(Math.max(38.5, Math.min(44.2, rawEstSec)).toFixed(2));
       preparedScenes.push({
         scene: sc,
         audioPath: null,
@@ -5096,10 +5558,15 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "fusha")
     }
   } else if (totalDur > maxTotalSec) {
     let excess = totalDur - maxTotalSec;
-    for (let i = preparedScenes.length - 1; i >= 0 && excess > 0; i--) {
+    for (let i = 0; i < preparedScenes.length && excess > 0; i++) {
+      const isFinalScene = i === preparedScenes.length - 1;
       const minAllowed = useNativeJointEngineAudio
         ? isShort
-          ? 14.5
+          ? isFinalScene
+            ? 18.0
+            : 14.5
+          : isFinalScene
+          ? 40.5
           : 37.5
         : Number((preparedScenes[i].voiceDurSec + 0.25).toFixed(2));
       const reducible = Math.max(0, preparedScenes[i].durationSec - minAllowed);
@@ -5336,14 +5803,35 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "fusha")
     );
 
     const mixedWav = path.join(tmpDir, `scene_mixed_${i}.wav`);
+    const contextualFoleyWav = await synthesizeContextualFoleySfxWav({
+      foleyTheme: clipMeta.foleyTheme || "park",
+      durationSec: dur,
+      sceneIndex: i,
+      tmpDir,
+      companionName,
+      soundEffectsEn: sc.soundEffectsEn || "",
+      dialogueArabic: sc.dialogueArabic || "",
+    });
+    const fadeOutSt = Math.max(0.5, dur - 0.85);
+
     if (hasAuthenticNativeAudio) {
-      // 100% pure native joint audio from the video model (authentic Arabic voice + real synchronized footsteps/water/environment Foley, ZERO synthetic noise!)
+      // Authentic deAPI native voice + native shot SFX blended with crystal-clear stereo physical Foley (footsteps, running, wind, water, and real bird/animal calls) via dynamic sidechain ducking!
+      const nativeCinemaMixFilter =
+        `[0:a]aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,apad=whole_dur=${dur},asplit=2[nat_v][nat_sc];` +
+        `[1:a]aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,afade=t=in:st=0:d=0.15,afade=t=out:st=${fadeOutSt}:d=0.45[fx_in];` +
+        `[fx_in][nat_sc]sidechaincompress=threshold=0.055:ratio=2.2:attack=18:release=220[fx_ducked];` +
+        `[nat_v][fx_ducked]amix=inputs=2:duration=first:weights='1.0 0.78':normalize=0,alimiter=limit=0.96,asetpts=PTS-STARTPTS,aformat=sample_fmts=s16:sample_rates=48000:channel_layouts=stereo[outa]`;
+
       await execFileAsync("ffmpeg", [
         "-y",
         "-i",
         clipMeta.masterAudioWavPath,
-        "-af",
-        `aresample=48000,aformat=sample_fmts=s16:sample_rates=48000:channel_layouts=stereo,apad=whole_dur=${dur}`,
+        "-i",
+        contextualFoleyWav,
+        "-filter_complex",
+        nativeCinemaMixFilter,
+        "-map",
+        "[outa]",
         "-t",
         String(dur),
         "-c:a",
@@ -5355,13 +5843,6 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "fusha")
         mixedWav,
       ]);
     } else {
-      const contextualFoleyWav = await synthesizeContextualFoleySfxWav({
-        foleyTheme: clipMeta.foleyTheme || "park",
-        durationSec: dur,
-        sceneIndex: i,
-        tmpDir,
-      });
-
       const hasNativeSfx =
         clipMeta.nativeSfxWavPath &&
         fs.existsSync(clipMeta.nativeSfxWavPath) &&
@@ -5379,16 +5860,15 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "fusha")
         mixInputs.push("-i", clipMeta.nativeSfxWavPath);
       }
 
-      const fadeOutSt = Math.max(0.5, dur - 0.85);
       const sfxCombineFilter = hasNativeSfx
-        ? `[1:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo[ctx_sfx];[2:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,apad=whole_dur=${dur}[nat_sfx];[ctx_sfx][nat_sfx]amix=inputs=2:duration=first:weights='0.85 1.0':normalize=0,afade=t=in:st=0:d=0.20,afade=t=out:st=${fadeOutSt}:d=0.55[sfx_raw];`
+        ? `[1:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo[ctx_sfx];[2:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,apad=whole_dur=${dur}[nat_sfx];[ctx_sfx][nat_sfx]amix=inputs=2:duration=first:weights='0.95 1.0':normalize=0,afade=t=in:st=0:d=0.20,afade=t=out:st=${fadeOutSt}:d=0.55[sfx_raw];`
         : `[1:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,afade=t=in:st=0:d=0.20,afade=t=out:st=${fadeOutSt}:d=0.55[sfx_raw];`;
 
       const cinemaMixFilter =
         `[0:a]aresample=48000${voiceDelayFilter},aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=2.10,apad=whole_dur=${dur},asplit=2[v_main][v_sc1];` +
         sfxCombineFilter +
-        `[sfx_raw][v_sc1]sidechaincompress=threshold=0.04:ratio=2.6:attack=15:release=220[sfx_ducked];` +
-        `[v_main][sfx_ducked]amix=inputs=2:duration=first:weights='1.0 0.72':normalize=0,alimiter=limit=0.96,asetpts=PTS-STARTPTS,aformat=sample_fmts=s16:sample_rates=48000:channel_layouts=stereo[outa]`;
+        `[sfx_raw][v_sc1]sidechaincompress=threshold=0.05:ratio=2.3:attack=15:release=220[sfx_ducked];` +
+        `[v_main][sfx_ducked]amix=inputs=2:duration=first:weights='1.0 0.80':normalize=0,alimiter=limit=0.96,asetpts=PTS-STARTPTS,aformat=sample_fmts=s16:sample_rates=48000:channel_layouts=stereo[outa]`;
 
       await execFileAsync("ffmpeg", [
         ...mixInputs,
@@ -6414,24 +6894,40 @@ function buildSmartEpisodeForRunner({
   const isShort = videoFormat === "short_9_16";
   const isEgyptian = dialect !== "fusha";
   const dialectMode = isEgyptian ? "egyptian" : "fusha";
-  const cleanTopic = String(topic || team.stories[0]).replace(/هـاننا/g, "سناننا").trim();
+  const rawCleanTopic = String(topic || team.stories[0]).replace(/هـاننا/g, "سناننا").trim();
+  const cleanTopic = isEgyptian
+    ? rawCleanTopic
+    : normalizeAndVocalizePureFushaText(rawCleanTopic, { isTitle: true });
   const effectiveMainName = team.mainCharacterName;
   const effectiveCompName = team.companionName;
-  const shortHero = getShortCharacterDisplayNameRunner(effectiveMainName, dialectMode);
-  const shortComp = getShortCharacterDisplayNameRunner(effectiveCompName, dialectMode);
-  const titleShortHero = getShortCharacterDisplayNameRunner(effectiveMainName, "fusha");
-  const titleShortComp = getShortCharacterDisplayNameRunner(effectiveCompName, "fusha");
+  const rawShortHero = getShortCharacterDisplayNameRunner(effectiveMainName, dialectMode);
+  const rawShortComp = getShortCharacterDisplayNameRunner(effectiveCompName, dialectMode);
+  const shortHero = isEgyptian ? rawShortHero : normalizeAndVocalizePureFushaText(rawShortHero);
+  const shortComp = isEgyptian ? rawShortComp : normalizeAndVocalizePureFushaText(rawShortComp);
+  const titleShortHero = normalizeAndVocalizePureFushaText(
+    getShortCharacterDisplayNameRunner(effectiveMainName, "fusha"),
+    { isTitle: true }
+  );
+  const titleShortComp = normalizeAndVocalizePureFushaText(
+    getShortCharacterDisplayNameRunner(effectiveCompName, "fusha"),
+    { isTitle: true }
+  );
   const heroVoice = team.mainVoice || "Zephyr";
   const compVoice = team.compVoice || "Puck";
-  const heroProp = team.heroProp || "الأداة الذكية المضيئة";
-  const compProp = team.compProp || "حقيبة المساعدة السحرية";
+  const rawHeroProp = team.heroProp || "الأداة الذكية المضيئة";
+  const rawCompProp = team.compProp || "حقيبة المساعدة السحرية";
+  const heroProp = isEgyptian ? rawHeroProp : normalizeAndVocalizePureFushaText(rawHeroProp);
+  const compProp = isEgyptian ? rawCompProp : normalizeAndVocalizePureFushaText(rawCompProp);
 
-  const rawCoreTitle = String(aiTitle || cleanTopic)
+  const rawCoreTitleCandidate = String(aiTitle || cleanTopic)
     .replace(/^Noreen\s*Kids\s*[:\-|]?\s*/i, "")
     .split("|")[0]
     .replace(/#[^\s#]+/g, "")
     .replace(/\s+/g, " ")
     .trim();
+  const rawCoreTitle = isEgyptian
+    ? rawCoreTitleCandidate
+    : normalizeAndVocalizePureFushaText(rawCoreTitleCandidate, { isTitle: true });
 
   // Smart Word-Boundary Title Engine:
   // Preserves full words and prevents awkward dangling prepositions
@@ -6461,11 +6957,13 @@ function buildSmartEpisodeForRunner({
 
   const count = isShort ? 4 : 8;
   const perSceneSec = isShort ? 17 : 40;
-  const baseTopic = isEgyptian ? normalizeEgyptianColloquial(cleanTopic) : cleanTopic;
-  const cleanTopicForAdventure = baseTopic.replace(/^(مغامرة\s+|رحلة\s+)/i, "").trim() || baseTopic;
+  const baseTopic = isEgyptian
+    ? normalizeEgyptianColloquial(cleanTopic)
+    : normalizeAndVocalizePureFushaText(rawCleanTopic);
+  const cleanTopicForAdventure = baseTopic.replace(/^(مغامرة\s+|رحلة\s+|مُغَامَرَةُ?\s+|رِحْلَةُ?\s+)/iu, "").trim() || baseTopic;
 
   const shortTopicMention = cleanTopicForAdventure
-    .replace(/^حكاية\s+|^قصة\s+|^حدوتة\s+|^مغامرة\s+/g, "")
+    .replace(/^حكاية\s+|^حِكَايَةُ\s+|^قصة\s+|^قِصَّةُ?\s+|^حدوتة\s+|^مغامرة\s+/gu, "")
     .replace(/\s+(وسر|وقيمة|وأسرار|وكيفية|وحكاية)\s+.*$/g, "")
     .trim() || cleanTopicForAdventure;
   const isHeroFemale = isFemaleCharacter(effectiveMainName);
@@ -6557,11 +7055,11 @@ function buildSmartEpisodeForRunner({
       voice: heroVoice,
     },
     {
-      title: `8. المشهد الثامن والتحدي الأخير: رسالة ${shortHero} و${shortComp} لأبطال Noreen Kids`,
-      fushaShort: `مَرْحَى! لَقَدْ نَجَحَتِ المُهِمَّةُ يَا أَبْطَالُ! سؤال الشطار اليَوْمَ: مَا أَجْمَلُ دَرْسٍ تَعَلَّمْتُمُوهُ مَعَنَا؟ اكتبوا إجابتكم في التعليقات مَعَ اسْمِكُمْ لِتَفُوزُوا بِوِسَامِ الشَّطَارَةِ!`,
-      fushaLong: `وَالآنَ يَا أَصْدِقَاءَنَا الرَّائِعِينَ فِي عَائِلَةِ نُورِين كِيدْز، وَصَلْنَا إِلَى المشهد الثامن والتحدي الأخير فِي حَلْقَةِ اليَوْمَ مَعَ ${shortHero} وَ${shortComp}! 🧩 سؤال الشطار اليَوْمَ: مَنْ مِنْكُمْ يَا أَبْطَالُ لَمَحَ النَّجْمَةَ الذَّهَبِيَّةَ السِّحْرِيَّةَ الَّتِي ظَهَرَتْ فِي الحَلْقَةِ؟ وَمَا أَهَمُّ دَرْسٍ اسْتَفَدْتُمُوهُ مِنَ القِصَّةِ؟ اكتبوا إجابتكم في التعليقات مَعَ أَسْمَائِكُمْ لِتَظْهَرُوا فِي لَوْحَةِ الشَّرَفِ القَادِمَةِ، وَلَا تَنْسَوُا الاشْتِرَاكَ فِي القَنَاةِ، إِلَى اللِّقَاءِ!`,
-      egyptianShort: `هيييه! نجحت المهمة يا أبطال! 🧩 تحدي الشطار: إيه أحلى حاجة اتعلمتوها النهارده؟ اكتبوا اسمكم وإجابتكم في التعليقات عشان تكسبوا وسام الشطارة!`,
-      egyptianLong: `ودلوقتي يا أصحابنا الحلوين في عيلة نورين كيدز، وصلنا المشهد الثامن والتحدي الأخير في حلقة النهارده مع ${shortHero} و${shortComp}! 🧩 وسؤال الشطار النهاردة: مين فيكم يا أبطال لمح النجمة الذهبية السحرية اللي ظهرت في حلقة النهاردة؟ وإيه أهم درس اتعلمتوه من الحكاية؟ اكتبوا توقيتها وإجابتكم واسمكم في التعليقات تحت الفيديو علشان تظهروا في لوحة الشرف في الحلقة الجاية! وما تنسوش تشتركوا في القناة وتعملوا لايك، بنحبكم أوي ومع السلامة يا أبطال!`,
+      title: `8. المشهد الثامن والتحدي الأخير: رسالة ${titleShortHero} و${titleShortComp} لأبطال Noreen Kids`,
+      fushaShort: `مَرْحَى! لَقَدْ نَجَحَتِ الْمُهِمَّةُ يَا أَبْطَالُ! سُؤَالُ الشُّطَّارِ الْيَوْمَ: مَا أَجْمَلُ دَرْسٍ تَعَلَّمْتُمُوهُ مَعَنَا؟ اكْتُبُوا إِجَابَتَكُمْ فِي التَّعْلِيقَاتِ! وَلَا تَنْسَوُا الاشْتِرَاكَ فِي قَنَاةِ وَصَفْحَةِ نُورِين كِيدْز، وَالضَّغْطَ عَلَى الإِعْجَابِ وَمُشَارَكَةَ الْفِيدْيُو مَعَ أَصْدِقَائِكُمْ!`,
+      fushaLong: `وَالآنَ يَا أَصْدِقَاءَنَا الرَّائِعِينَ فِي عَائِلَةِ نُورِين كِيدْز، وَصَلْنَا إِلَى التَّحَدِّي الأَخِيرِ فِي حَلْقَةِ الْيَوْمَ مَعَ ${shortHero} وَ${shortComp}! سُؤَالُ الشُّطَّارِ الْيَوْمَ: مَنْ مِنْكُمْ يَا أَبْطَالُ لَمَحَ النَّجْمَةَ الذَّهَبِيَّةَ السِّحْرِيَّةَ الَّتِي ظَهَرَتْ فِي الْحَلْقَةِ، وَمَا أَهَمُّ دَرْسٍ اسْتَفَدْتُمُوهُ مِنَ الْقِصَّةِ؟ اكْتُبُوا إِجَابَتَكُمْ فِي التَّعْلِيقَاتِ مَعَ أَسْمَائِكُمْ لِتَظْهَرُوا فِي لَوْحَةِ الشَّرَفِ الْقَادِمَةِ! وَلَا تَنْسَوُا الاشْتِرَاكَ فِي قَنَاةِ وَصَفْحَةِ نُورِين كِيدْز، وَالضَّغْطَ عَلَى زِرِّ الإِعْجَابِ وَمُشَارَكَةَ الْحَلْقَةِ مَعَ كُلِّ أَصْدِقَائِكُمْ، إِلَى اللِّقَاءِ يَا أَبْطَالُ!`,
+      egyptianShort: `هيييه! نجحت المهمة يا أبطال! سؤال الشطار: إيه أحلى حاجة اتعلمتوها النهارده؟ اكتبوا اسمكم وإجابتكم في التعليقات! وما تنسوش تشتركوا في قناة وصفحة نورين كيدز، وتعملوا لايك وشير للفيديو مع كل أصحابكم!`,
+      egyptianLong: `ودلوقتي يا أصحابنا الحلوين في عيلة نورين كيدز، وصلنا للمشهد الثامن والتحدي الأخير في حلقة النهارده مع ${shortHero} و${shortComp}! سؤال الشطار النهارده: مين فيكم يا أبطال لمح النجمة الذهبية السحرية اللي ظهرت في حلقة النهارده، وإيه أهم درس اتعلمتوه من الحكاية؟ اكتبوا توقيتها وإجابتكم واسمكم في التعليقات تحت الفيديو علشان تظهروا في لوحة الشرف الجاية! وما تنسوش تشتركوا في قناة وصفحة نورين كيدز، وتعملوا لايك وشير للحلقة مع كل أصحابكم، مع السلامة يا أبطال!`,
       speaker: effectiveCompName,
       voice: compVoice,
     },
@@ -6585,21 +7083,20 @@ function buildSmartEpisodeForRunner({
 
     let chosenRaw = fallbackText;
     if (rawAiText && rawAiText.split(/\s+/).filter(Boolean).length >= minWordsPerScene) {
-      chosenRaw = isEgyptian ? normalizeEgyptianColloquial(rawAiText) : rawAiText;
+      chosenRaw = isEgyptian
+        ? normalizeEgyptianColloquial(rawAiText)
+        : normalizeAndVocalizePureFushaText(rawAiText);
     }
     if (idx === selectedTemplates.length - 1) {
-      const interactiveEnding = isEgyptian
-        ? isShort
-          ? ` 🧩 تحدي الشطار: يا ترى إيه أهم حاجة اتعلمناها من مغامرة ${cleanTopicForAdventure}؟ اكتبوا إجابتكم في التعليقات وقولوا لنا مين كان أكتر شخصية ساعدت في الحل!`
-          : ` 🧩 سؤال الشطار: إيه أهم درس اتعلمناه النهارده من مغامرة ${cleanTopicForAdventure}، وإزاي نقدر نستخدمه في حياتنا؟ اكتبوا إجابتكم في التعليقات!`
-        : isShort
-        ? ` سؤال الشطار: مَا أَهَمُّ دَرْسٍ تَعَلَّمْنَاهُ مِنْ مُغَامَرَةِ ${cleanTopicForAdventure}؟ اكتبوا إجابتكم في التعليقات!`
-        : ` سؤال الشطار: مَا أَهَمُّ دَرْسٍ تَعَلَّمْنَاهُ اليَوْمَ مِنْ مُغَامَرَةِ ${cleanTopicForAdventure}، وَكَيْفَ نُطَبِّقُهُ فِي حَيَاتِنَا؟ اكتبوا إجابتكم في التعليقات!`;
-      if (!/\?|؟|اكتبوا.*تعليق|إجابت/.test(chosenRaw)) chosenRaw += interactiveEnding;
+      chosenRaw = ensureFinalSceneClosingCtaAndQuestion(chosenRaw, {
+        dialect: dialectMode,
+        isShort,
+        topicMention: cleanTopicForAdventure,
+      });
     }
     const validated = isEgyptian
       ? runPreTtsEgyptianValidationLayer(chosenRaw, idx, selectedTemplates.length).validatedText
-      : chosenRaw.replace(/\s+/g, " ").trim();
+      : normalizeAndVocalizePureFushaText(chosenRaw);
     const isHeroTurn = idx % 2 === 0;
     const assignedSpeaker = isHeroTurn ? effectiveMainName : effectiveCompName;
     const assignedVoice = isHeroTurn ? heroVoice : compVoice;
@@ -9845,16 +10342,25 @@ async function main() {
       );
     }
 
-    // 2. Dialogue Integrity & Egyptian Dialect Gate
+    // 2. Dialogue Integrity, Pure Fusha / Egyptian Dialect & Final-Scene CTA Gate
     const epScenes = Array.isArray(task.episode?.scenes) ? task.episode.scenes : [];
     for (let sIdx = 0; sIdx < epScenes.length; sIdx++) {
-      const scText = String(epScenes[sIdx]?.dialogueArabic || "").trim();
+      let scText = String(epScenes[sIdx]?.dialogueArabic || "").trim();
       if (!scText || scText.split(/\s+/).length < 5) {
         throw new Error(`[Pre-Upload Unit Test FAILED] Scene ${sIdx + 1} dialogue is empty or too short. Upload blocked.`);
+      }
+      if (sIdx === epScenes.length - 1) {
+        scText = ensureFinalSceneClosingCtaAndQuestion(scText, {
+          dialect: dailyDialect,
+          isShort: task.videoFormat === "short_9_16",
+          topicMention: task.episode?.title || "",
+        });
       }
       if (dailyDialect === "egyptian") {
         const validation = runPreTtsEgyptianValidationLayer(scText, sIdx, epScenes.length);
         epScenes[sIdx].dialogueArabic = validation.validatedText;
+      } else {
+        epScenes[sIdx].dialogueArabic = normalizeAndVocalizePureFushaText(scText);
       }
     }
 

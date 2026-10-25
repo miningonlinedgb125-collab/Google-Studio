@@ -64,6 +64,8 @@ const engineFactory = new Function(
     computeDeapiRateLimitWaitMs,
     computeAudioChunkPlanSec,
     splitDialogueIntoTimedNativeShots,
+    normalizeAndVocalizePureFushaText,
+    ensureFinalSceneClosingCtaAndQuestion,
     buildNativeJointAudioVideoShotPrompt,
     probeAudioStreamLoudness,
     discoverActiveDeapiModelsCatalog,
@@ -905,3 +907,244 @@ test("Anti-Chimera Species Lock & Chatterbox MP3 Format Compliance: Human Heroes
     fs.rmSync(tmpDir, { recursive: true, force: true });
   }
 });
+
+test("Pure Classical Vocalized Fusha & Authentic Qaf [q] Guard: Eliminates All Colloquialisms, Fixes Vocative 'يا الـ', and Enforces Uvular Qaf", () => {
+  // Exact real colloquial leak case from Run 40211170743 (Grandpa + Mischievous Mouse)
+  const leakedFushaSample =
+    "انْظُرْ مَعِي يَا الفأر المشاكس، اليَوْمَ نَنْطَلِقُ حَوْلَ حدوتة الزارع الصبور اللي سقى البذرة لحد ما بقت نخلة عالية! مَعِي عصا الحكمة المنقوشة وكتاب حواديت زمان والفانوس الدافي، وإزاي نحافظ على سناننا بيضا وقوية ونضيفة بالمية!";
+
+  const purified = engine.normalizeAndVocalizePureFushaText(leakedFushaSample);
+  const plainPurified = purified.replace(/[\u064B-\u065F\u0670]/gu, "");
+
+  assert.doesNotMatch(
+    plainPurified,
+    /(^|\s)(اللي|بقت|حدوتة|حواديت|إزاي|ازاي|سناننا|بيضا|ونضيفة|بالمية|المية|الدافي|علشان|دلوقتي|الفرفوشة)(\s|$)/u,
+    `Purified Fusha must contain ZERO colloquial words, got: ${purified}`
+  );
+  assert.doesNotMatch(
+    plainPurified,
+    /يا الفأر/u,
+    "Must fix ungrammatical 'يا الفأر' into classical 'يا أيها الفأر'"
+  );
+  assert.match(purified, /يَا أَيُّهَا الْفَأْرُ/u);
+  assert.match(purified, /سَقَى/u, "Verb سَقَى must carry vocalized Qaf");
+  assert.match(purified, /حَتَّى أَصْبَحَتْ/u, "'لحد ما بقت' must become 'حَتَّى أَصْبَحَتْ'");
+  assert.match(purified, /وَقَوِيَّةً/u, "'وقوية' must carry explicit vocalized Qaf");
+
+  // Feminine vocative check ("يا العصفورة الفرفوشة" -> "يَا أَيَّتُهَا الْعُصْفُورَةُ الْمَرِحَةُ")
+  const femVoc = engine.normalizeAndVocalizePureFushaText("هيا يا العصفورة الفرفوشة نقول الحق في قناة وصفحة نورين كيدز!");
+  assert.match(femVoc, /يَا أَيَّتُهَا/u);
+  assert.match(femVoc, /قَنَاةِ وَصَفْحَةِ/u);
+  assert.match(femVoc, /نَقُولُ الْحَقَّ|نَقُولُ الْحَقِّ/u);
+
+  // Dialectal hamza-for-Qaf restoration ("أولت طريء حئيئي دئيئة" -> pure Qaf)
+  const hamzaFixed = engine.normalizeAndVocalizePureFushaText("أولت هذا طريء حئيئي في دئيئة");
+  assert.match(hamzaFixed, /قُلْتُ/u);
+  assert.match(hamzaFixed, /طَرِيقٌ/u);
+  assert.match(hamzaFixed, /حَقِيقِيٌّ/u);
+  assert.match(hamzaFixed, /دَقِيقَةٌ/u);
+
+  // Verify Native Joint AV shot prompt enforces classical uvular Qaf [q] and loud foreground SFX
+  const avPrompt = engine.buildNativeJointAudioVideoShotPrompt({
+    baseMotionPrompt: "Professor Sherif and the Smart Falcon walk along a sunlit path.",
+    heroName: "أستاذ شريف",
+    companionName: "الصقر الذكي",
+    speakerName: "أستاذ شريف",
+    shotArabicLine: "انظر يا الصقر الذكي إلى القرية الجميلة فوق القمة!",
+    soundEffectsEn: "crisp footsteps walking on path, fresh wind breeze, falcon wing flap",
+    foleyTheme: "park",
+    shotIndex: 0,
+    totalShots: 2,
+  });
+  assert.match(avPrompt, /crisp classical uvular Qaf \[q\] articulation/i);
+  assert.match(avPrompt, /never glottal-stop hamza/i);
+  assert.match(avPrompt, /Loud, crisp, clearly audible foreground diegetic foley sound effects/i);
+  assert.match(avPrompt, /يَا أَيُّهَا الصَّقْرُ/u);
+});
+
+test("Mandatory Final-Scene Closing CTA & سؤال الشطار: Enforced in BOTH Short & Long Videos (Fusha & Egyptian, AI & Fallback)", () => {
+  // Case 1: AI Short Fusha ending that previously had a generic '?' question without 'سؤال الشطار' and without Subscribe/Like/Share (exact Run 40211170743 Scene 4!)
+  const run40211170743Scene4 =
+    "بِالتَّأْكِيدِ يَا أُسْتَاذُ شَرِيف! عِنْدَمَا يَكُونُ كُلُّ شَيْءٍ فِي مَكَانِهِ الصَّحِيحِ نَشْعُرُ بِالرَّاحَةِ وَالسَّعَادَةِ. وَالآنَ يَا أَطْفَالُ، مَاذَا تُحِبُّونَ أَنْ تُرَتِّبُوا فِي غُرَفِكُمْ الْيَوْمَ؟ اكْتُبُوا إِجَابَتَكُمْ فِي التَّعْلِيقَاتِ!";
+
+  const fixedShortFusha = engine.ensureFinalSceneClosingCtaAndQuestion(run40211170743Scene4, {
+    dialect: "fusha",
+    isShort: true,
+    topicMention: "تنظيم الوقت",
+  });
+  const plainShortFusha = fixedShortFusha.replace(/[\u064B-\u065F\u0670]/gu, "");
+
+  assert.match(plainShortFusha, /سؤال الشطار/, "Short Fusha final scene must explicitly include 'سؤال الشطار'");
+  assert.match(plainShortFusha, /التعليقات/, "Short Fusha final scene must prompt answers in comments");
+  assert.match(
+    plainShortFusha,
+    /لا تنسوا الاشتراك في قناة وصفحة نورين كيدز.*الإعجاب.*مشاركة.*أصدقائكم!$/,
+    `Short Fusha final scene MUST end with Subscribe + Like + Share on قناة وصفحة نورين كيدز, got: ${plainShortFusha}`
+  );
+
+  // Case 2: Long Fusha final scene that previously ended with incomplete "ولا تنسوا الاشتراك في القناة، إلى اللقاء!" (exact Run 40211170743 Long Scene 8!)
+  const run40211170743Scene8 =
+    "وَالآنَ يَا أَصْدِقَاءَنَا الرَّائِعِينَ فِي عَائِلَةِ نُورِين كِيدْز! 🧩 سؤال الشطار اليَوْمَ: مَا أَهَمُّ دَرْسٍ اسْتَفَدْتُمُوهُ مِنَ القِصَّةِ؟ اكتبوا إجابتكم في التعليقات، وَلَا تَنْسَوُا الاشْتِرَاكَ فِي القَنَاةِ، إِلَى اللِّقَاءِ!";
+
+  const fixedLongFusha = engine.ensureFinalSceneClosingCtaAndQuestion(run40211170743Scene8, {
+    dialect: "fusha",
+    isShort: false,
+    topicMention: "الصبر والتعاون",
+  });
+  const plainLongFusha = fixedLongFusha.replace(/[\u064B-\u065F\u0670]/gu, "");
+  const countDontForget = (plainLongFusha.match(/لا تنسوا الاشتراك/g) || []).length;
+  assert.equal(countDontForget, 1, "Must replace partial trailing CTA cleanly without duplicating 'لا تنسوا الاشتراك'");
+  assert.match(plainLongFusha, /سؤال الشطار/);
+  assert.match(
+    plainLongFusha,
+    /ولا تنسوا الاشتراك في قناة وصفحة نورين كيدز.*الإعجاب.*مشاركة.*إلى اللقاء يا أبطال!$/,
+    `Long Fusha final scene MUST end with full Subscribe + Like + Share on قناة وصفحة نورين كيدز, got: ${plainLongFusha}`
+  );
+
+  // Case 3: Short & Long Egyptian final scenes (even when AI omitted question & CTA completely)
+  const bareEgyptian = "يا سلام! الفكرة نجحت وفرحنا كل أصحابنا في الحديقة!";
+  const fixedShortEg = engine.ensureFinalSceneClosingCtaAndQuestion(bareEgyptian, {
+    dialect: "egyptian",
+    isShort: true,
+    topicMention: "التعاون في الحديقة",
+  });
+  const fixedLongEg = engine.ensureFinalSceneClosingCtaAndQuestion(bareEgyptian, {
+    dialect: "egyptian",
+    isShort: false,
+    topicMention: "التعاون في الحديقة",
+  });
+
+  for (const egOut of [fixedShortEg, fixedLongEg]) {
+    assert.match(egOut, /سؤال الشطار/, "Egyptian final scene must include 'سؤال الشطار'");
+    assert.match(egOut, /التعليقات/, "Egyptian final scene must include 'التعليقات'");
+    assert.match(
+      egOut,
+      /وما تنسوش تشتركوا في قناة وصفحة نورين كيدز، وتعملوا لايك وشير/,
+      `Egyptian final scene must end with Subscribe + Like + Share on قناة وصفحة نورين كيدز, got: ${egOut}`
+    );
+  }
+});
+
+test("Crystal-Clear Live-Action Foley SFX Engine: Walking, Running, Wind, Water, and Bird/Animal Companion Calls Are Vividly Audible & Duck Smoothly Under Native Voice", async () => {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "deapi-foley-sfx-"));
+  try {
+    const scenarios = [
+      {
+        label: "Falcon + Running + Wind",
+        foleyTheme: "park",
+        companionName: "الصقر الذكي",
+        soundEffectsEn: "running footsteps on path, strong wind breeze, falcon wing flaps",
+        dialogueArabic: "هَيَّا نَجْرِي بِسُرْعَةٍ يَا أَيُّهَا الصَّقْرُ الذَّكِيُّ!",
+      },
+      {
+        label: "Songbird + Forest Leaves",
+        foleyTheme: "forest",
+        companionName: "العصفورة الفرفوشة",
+        soundEffectsEn: "walking footsteps on grass, rustling leaves, cheerful bird chirps",
+        dialogueArabic: "نَمْشِي مَعاً فِي الْغَابَةِ الْجَمِيلَةِ!",
+      },
+      {
+        label: "Kitten + Clinic/Garden",
+        foleyTheme: "park",
+        companionName: "القطة لوليتا",
+        soundEffectsEn: "cute cat meow, footsteps on garden path",
+        dialogueArabic: "انْظُرُوا إِلَى الْقِطَّةِ لُولِيتَا اللطيفة!",
+      },
+      {
+        label: "Puppy + Playful Park",
+        foleyTheme: "park",
+        companionName: "الكلب زقلط",
+        soundEffectsEn: "playful puppy bark, running paws",
+        dialogueArabic: "هَيَّا نَلْعَبُ وَنَرْكُضُ فِي الْحَدِيقَةِ!",
+      },
+      {
+        label: "Dolphin + Ocean Water",
+        foleyTheme: "water",
+        companionName: "مرجان الدلفين المرح",
+        soundEffectsEn: "ocean waves splashing, dolphin clicks, footsteps on wooden boat deck",
+        dialogueArabic: "أَمْوَاجُ الْبَحْرِ وَالْمَاءِ تَتَلَأْلَأُ مَعَ الدُّلْفِينِ!",
+      },
+      {
+        label: "Rooster + Oasis Breeze",
+        foleyTheme: "oasis",
+        companionName: "الديك الفصيح",
+        soundEffectsEn: "sand footsteps, desert breeze, rooster call",
+        dialogueArabic: "صَبَاحُ النَّشَاطِ فِي الْوَاحَةِ!",
+      },
+    ];
+
+    let sampleFoleyWav = null;
+    for (let i = 0; i < scenarios.length; i++) {
+      const sc = scenarios[i];
+      const wavPath = await engine.synthesizeContextualFoleySfxWav({
+        foleyTheme: sc.foleyTheme,
+        durationSec: 4.5,
+        sceneIndex: `test_${i}`,
+        tmpDir,
+        companionName: sc.companionName,
+        soundEffectsEn: sc.soundEffectsEn,
+        dialogueArabic: sc.dialogueArabic,
+      });
+      assert.ok(fs.existsSync(wavPath) && fs.statSync(wavPath).size > 50_000, `${sc.label} WAV must be generated`);
+      const loudness = await engine.probeAudioStreamLoudness(wavPath);
+      assert.equal(loudness.hasAudio, true, `${sc.label} must have stereo audio stream`);
+      assert.ok(
+        loudness.meanVolumeDb > -24.5 && loudness.meanVolumeDb < -8.0,
+        `${sc.label} Foley must be clearly audible (expected mean between -24.5dB and -8dB, got ${loudness.meanVolumeDb.toFixed(1)}dB)`
+      );
+      assert.ok(
+        loudness.maxVolumeDb > -8.5,
+        `${sc.label} Foley peaks (footsteps/bird/animal calls) must be crisp and prominent (expected max > -8.5dB, got ${loudness.maxVolumeDb.toFixed(1)}dB)`
+      );
+      if (i === 0) sampleFoleyWav = wavPath;
+    }
+
+    // Verify Stage 2 Native-AV sidechain cinema mix formula blends authentic speech + rich stereo Foley cleanly without clipping
+    const mockSpeechWav = path.join(tmpDir, "mock_native_speech.wav");
+    await execFileAsync("ffmpeg", [
+      "-y",
+      "-f",
+      "lavfi",
+      "-i",
+      "aevalsrc='0.38*lt(mod(t,1.5),0.85)*sin(2*PI*220*t)|0.38*lt(mod(t,1.5),0.85)*sin(2*PI*220*t)':s=48000:c=stereo:d=4.5",
+      "-c:a",
+      "pcm_s16le",
+      mockSpeechWav,
+    ]);
+    const mixedNativeOut = path.join(tmpDir, "mixed_native_cinema.wav");
+    const dur = 4.5;
+    const fadeOutSt = dur - 0.85;
+    const nativeCinemaMixFilter =
+      `[0:a]aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,apad=whole_dur=${dur},asplit=2[nat_v][nat_sc];` +
+      `[1:a]aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,afade=t=in:st=0:d=0.15,afade=t=out:st=${fadeOutSt}:d=0.45[fx_in];` +
+      `[fx_in][nat_sc]sidechaincompress=threshold=0.055:ratio=2.2:attack=18:release=220[fx_ducked];` +
+      `[nat_v][fx_ducked]amix=inputs=2:duration=first:weights='1.0 0.78':normalize=0,alimiter=limit=0.96,asetpts=PTS-STARTPTS,aformat=sample_fmts=s16:sample_rates=48000:channel_layouts=stereo[outa]`;
+
+    await execFileAsync("ffmpeg", [
+      "-y",
+      "-i",
+      mockSpeechWav,
+      "-i",
+      sampleFoleyWav,
+      "-filter_complex",
+      nativeCinemaMixFilter,
+      "-map",
+      "[outa]",
+      "-t",
+      String(dur),
+      "-c:a",
+      "pcm_s16le",
+      "-ar",
+      "48000",
+      "-ac",
+      "2",
+      mixedNativeOut,
+    ]);
+    const mixLoudness = await engine.probeAudioStreamLoudness(mixedNativeOut);
+    assert.equal(mixLoudness.isAudible, true);
+    assert.ok(mixLoudness.meanVolumeDb > -18.0, `Combined Native Voice + SFX cinema mix must be rich and full (got ${mixLoudness.meanVolumeDb.toFixed(1)}dB)`);
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
