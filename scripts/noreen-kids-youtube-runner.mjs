@@ -2274,17 +2274,21 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       preDecorated = "v_secret";
     }
 
+    let currentInputIdx = 3;
     const extraSceneInputs = [];
     if (isScene1WithPoster) {
       extraSceneInputs.push("-loop", "1", "-i", verticalPosterPath);
+      currentInputIdx++;
     } else if (isScene2WithSecret) {
       extraSceneInputs.push("-f", "lavfi", "-i", secretSpriteLavfi);
+      currentInputIdx++;
     }
 
     const finalBoxes = `drawbox=x=0:y=0:w=${W}:h=${H}:color=${borderColorHex}@0.88:t=8`;
     if (hasChannelWatermark) {
-      const wmInputIdx = 3 + extraSceneInputs.length;
+      const wmInputIdx = currentInputIdx;
       extraSceneInputs.push("-i", channelWatermarkPng);
+      currentInputIdx++;
       filterSteps.push(
         `[${preDecorated}][o3]overlay=x='${marginX}+${rangeX}*(0.5+0.43*cos(t*0.92+4.2))':y='${bottomY}-${travelY}*mod(t*0.24+0.86,1)':format=yuv420:shortest=1,${finalBoxes},setsar=1,fade=t=in:st=0:d=0.30,fade=t=out:st=${fadeOutStart}:d=0.30,format=yuv420p[v_faded]`,
         `[${wmInputIdx}:v]format=rgba[wm]`,
