@@ -37,6 +37,16 @@
     {
       "topic": "أم ملك وسر شجاعة الإذاعة المدرسية الصباحية",
       "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح"
+    },
+    {
+      "topic": "ذياد والعصفورة الفرفوشة ولغز محفظة عم صالح",
+      "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة"
+    },
+    {
+      "topic": "أم ملك وسر شجاعة الإذاعة المدرسية الصباحية",
+      "mainCharacterName": "أم ملك",
       "companionName": "البطريق المرح",
       "timestampIso": "2026-10-25T10:00:29.447Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش",
       "timestampIso": "2026-10-24T09:35:03.939Z"
-    },
-    {
-      "topic": "الشيخ محمود والديك الفصيح وسر طير الأبابيل",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح"
-    },
-    {
-      "topic": "سر البيجامة المنورة وضحكة تختوخ وزقلط",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط"
-    },
-    {
-      "topic": "الشيخ محمود والديك الفصيح وسر طير الأبابيل",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح",
-      "timestampIso": "2026-10-23T23:38:01.764Z"
-    },
-    {
-      "topic": "سر البيجامة المنورة وضحكة تختوخ وزقلط",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط",
-      "timestampIso": "2026-10-23T23:38:01.764Z"
     }
   ],
   "scheduledHistory": [
@@ -2704,27 +2692,27 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٥‏/١٠‏/٢٠٢٦، ١:٢٧:٢٣ م",
   "lastCloudRunReport": {
-    "id": "gh-run-40168872468",
+    "id": "gh-run-40182121174",
     "uploadMode": "manual_instant",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-25 (10:05 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792909677406-hl5o",
-    "longEpisodeId": "ep-gh-long-1792909699148-48v1",
-    "shortEpisodeTitle": "Noreen Kids: مَلَك وَلُولِيتَا وَإِسْعَافُ صَدِيقِ الحَدِيقَةِ | مغامرات الطبيبة ملك والقطة لوليتا",
-    "longEpisodeTitle": "سدرة والفراشة ورحلة الحروف الملونة المفقودة",
-    "shortTitle": "Noreen Kids: مَلَك وَلُولِيتَا وَإِسْعَافُ صَدِيقِ الحَدِيقَةِ | مغامرات الطبيبة ملك والقطة لوليتا",
-    "longTitle": "سدرة والفراشة ورحلة الحروف الملونة المفقودة",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-25 (13:27 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792921905345-4z3b",
+    "longEpisodeId": "ep-gh-long-1792922429447-0iad",
+    "shortEpisodeTitle": "Noreen Kids: أم ملك وسر شجاعة الإذاعة المدرسية الصباحية | مغامرات أم ملك والبطريق المرح",
+    "longEpisodeTitle": "ذياد والعصفورة الفرفوشة ولغز محفظة عم صالح",
+    "shortTitle": "Noreen Kids: أم ملك وسر شجاعة الإذاعة المدرسية الصباحية | مغامرات أم ملك والبطريق المرح",
+    "longTitle": "ذياد والعصفورة الفرفوشة ولغز محفظة عم صالح",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
-    "dialect": "fusha",
+    "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "zZ765g0S-NM",
-    "facebookShortVideoId": "2201035870838718",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2201035870838718",
-    "facebookShortTitle": "Noreen Kids | مَلَك وَلُولِيتَا وَإِسْعَافُ صَدِيقِ الحَدِيقَةِ - مغامرة ملك والقطة لوليتا",
+    "youtubeShortVideoId": "OUo3LUoq1VY",
+    "facebookShortVideoId": "954484744010684",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/954484744010684",
+    "facebookShortTitle": "Noreen Kids | أم ملك وسر شجاعة الإذاعة المدرسية الصباحية - مغامرة أم ملك والبطريق المرح",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2739,9 +2727,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 64,
-      "fileSizeBytes": 93574922,
-      "inspectedAt": "10:05"
+      "durationSec": 62,
+      "fileSizeBytes": 14092861,
+      "inspectedAt": "13:27"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2750,7 +2738,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-25T07:05:19.721Z"
+    "reportedAtIso": "2026-10-25T10:27:26.435Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
