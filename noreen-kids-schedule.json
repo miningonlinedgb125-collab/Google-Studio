@@ -228,14 +228,15 @@
       "id": "gh-run-40221019085",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-25 (21:47 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-25 (21:58 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1792952758242-gb8d",
       "longEpisodeId": "ep-gh-long-1792952825355-womx",
       "shortEpisodeTitle": "Noreen Kids: جدي الحكيم والفأر المشاكس ومفاجأة بيت الجدة الدافئ | مغامرات جدي الحكيم والفأر المشاكس",
-      "longEpisodeTitle": "شال الصوف الملون الذي نسجته جدتي الحنون لتدفئة",
+      "longEpisodeTitle": "Noreen Kids: شال الصوف الملون الذي نسجته جدتي الحنون لتدفئة | مغامرات جدتي الحنون والدب باندا",
       "shortTitle": "Noreen Kids: جدي الحكيم والفأر المشاكس ومفاجأة بيت الجدة الدافئ | مغامرات جدي الحكيم والفأر المشاكس",
-      "longTitle": "شال الصوف الملون الذي نسجته جدتي الحنون لتدفئة",
+      "longTitle": "Noreen Kids: شال الصوف الملون الذي نسجته جدتي الحنون لتدفئة | مغامرات جدتي الحنون والدب باندا",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -243,9 +244,13 @@
       "dialect": "fusha",
       "status": "uploaded_live",
       "youtubeShortVideoId": "B0TLLMoLke0",
+      "youtubeLongVideoId": "E6h5PE7HbIc",
       "facebookShortVideoId": "1433042242313449",
+      "facebookLongVideoId": "1104797118942070",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1433042242313449",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1104797118942070",
       "facebookShortTitle": "Noreen Kids | جدي الحكيم والفأر المشاكس ومفاجأة بيت الجدة الدافئ - مغامرة جدو والفأر المشاكس",
+      "facebookLongTitle": "Noreen Kids | شال الصوف الملون الذي نسجته جدتي الحنون لتدفئة - مغامرة تيتة والدب باندا",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -253,16 +258,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 1080,
-        "height": 1920,
+        "width": 1920,
+        "height": 1080,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 68,
-        "fileSizeBytes": 74511811,
-        "inspectedAt": "21:47"
+        "durationSec": 412,
+        "fileSizeBytes": 133620040,
+        "inspectedAt": "21:58"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2313,7 +2318,9 @@
         "3D Kids Animation"
       ],
       "thumbnailTextAr": "شال الصوف الملون الذي"
-    }
+    },
+    "_deapiAnimatedScenesCount": 8,
+    "_totalRenderedScenesCount": 8
   },
   "repliedCommentIds": [
     "UgyaWT69fPkCCdH0Xpx4AaABAg",
@@ -2687,7 +2694,7 @@
   "firstCommentEnabled": true,
   "autoCommentResponderEnabled": true,
   "facebookAutoCommentResponderEnabled": true,
-  "lastAutoCommentScanAtCairo": "٢٥‏/١٠‏/٢٠٢٦، ٩:٤٧:٠٤ م",
+  "lastAutoCommentScanAtCairo": "٢٥‏/١٠‏/٢٠٢٦، ٩:٥٨:٠٣ م",
   "lastCloudRunReport": {
     "id": "gh-run-40211170743",
     "uploadMode": "manual_instant",
@@ -2747,7 +2754,7 @@
     "122116849647484976_2250604229118220",
     "122116814217484976_2094280341209895"
   ],
-  "lastFacebookAutoCommentScanAtCairo": "٢٥‏/١٠‏/٢٠٢٦، ٩:٤٧:٠٢ م",
+  "lastFacebookAutoCommentScanAtCairo": "٢٥‏/١٠‏/٢٠٢٦، ٩:٥٨:٠١ م",
   "heroFairRotationIndex": 14,
   "interactiveHeroRotationIndex": 1,
   "heroRoleSwapCycle": false
