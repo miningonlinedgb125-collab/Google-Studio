@@ -1924,13 +1924,17 @@ function computeDeapiRateLimitWaitMs(headers, attempt = 1) {
   const minFloorMs = process.env.DEAPI_FAST_TEST_BACKOFF === "1" ? 80 : 18_000;
   const scheduleMs = process.env.DEAPI_FAST_TEST_BACKOFF === "1"
     ? [80, 120, 160, 200, 250]
-    : [22_000, 45_000, 62_000, 65_000, 65_000];
+    : [20_000, 35_000, 50_000, 60_000, 60_000];
   let headerWaitMs = 0;
   if (headers && typeof headers.get === "function") {
     const retryAfterRaw = String(headers.get("retry-after") || "").trim();
     if (retryAfterRaw) {
       const sec = parseFloat(retryAfterRaw);
       if (!isNaN(sec) && sec > 0) {
+        if (sec > 65) {
+          // Daily or long-window quota exhaustion (e.g. 74910s); return directly so caller activates fallback immediately
+          return Math.ceil(sec * 1000);
+        }
         headerWaitMs = Math.ceil((sec + 2) * 1000);
       }
     }
@@ -1941,9 +1945,12 @@ function computeDeapiRateLimitWaitMs(headers, attempt = 1) {
         if (!isNaN(val) && val > 0) {
           if (val > 1_700_000_000) {
             const diffMs = val * 1000 - Date.now();
-            if (diffMs > 0 && diffMs < 180_000) headerWaitMs = Math.ceil(diffMs + 2500);
-          } else if (val <= 180) {
+            if (diffMs > 0 && diffMs < 65_000) headerWaitMs = Math.ceil(diffMs + 2500);
+            else if (diffMs >= 65_000) return Math.ceil(diffMs);
+          } else if (val <= 65) {
             headerWaitMs = Math.ceil((val + 2.5) * 1000);
+          } else {
+            return Math.ceil(val * 1000);
           }
         }
       }
@@ -1953,7 +1960,7 @@ function computeDeapiRateLimitWaitMs(headers, attempt = 1) {
   if (process.env.DEAPI_FAST_TEST_BACKOFF === "1") {
     return headerWaitMs > 0 ? Math.min(headerWaitMs, 500) : fallbackMs;
   }
-  return Math.max(minFloorMs, headerWaitMs || fallbackMs);
+  return Math.min(65_000, Math.max(minFloorMs, headerWaitMs || fallbackMs));
 }
 
 async function paceDeapiSubmissionWindow() {
@@ -2746,6 +2753,15 @@ async function submitDeapiJobWithRateLimitRecovery({
         if (submitRes.status === 429) {
           hitRateLimitOnPrimary = true;
           const waitMs = computeDeapiRateLimitWaitMs(submitRes.headers, attempt);
+          if (waitMs > 65_000) {
+            console.warn(
+              `   ⚠️ [${sceneLabel}] HTTP 429 Quota Exhausted on ${route.label} (wait=${(waitMs / 1000).toFixed(0)}s > 65s limit). Switching seamlessly to local fallback...`
+            );
+            const quotaErr = new Error(`deAPI ${route.label} HTTP 429 Quota Exhausted (${(waitMs / 1000).toFixed(0)}s): ${rawBody.slice(0, 200)}`);
+            quotaErr.httpStatus = 429;
+            quotaErr.isQuotaExhausted = true;
+            throw quotaErr;
+          }
           console.warn(
             `   ⏳ [${sceneLabel}] HTTP 429 Rate Limit on ${route.label} (attempt ${attempt}/${maxAttemptsPerRoute}). Waiting ${(waitMs / 1000).toFixed(1)}s for RPM bucket reset...`
           );
