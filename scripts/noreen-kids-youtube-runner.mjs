@@ -1781,9 +1781,11 @@ async function synthesizeRawSpeechOnly(scene, sceneIndex, totalScenes, tmpDir, d
 }
 
 // ============================================================================
-// deAPI.ai 3D Cartoon Image-to-Video Animation Engine (Seamless Motion Pipeline)
+// deAPI.ai 3D Cartoon Storyboard + Multi-Character Action Animation Engine
 // ============================================================================
 let _cachedDeapiModelInfo = null;
+let _cachedDeapiCatalog = null;
+let _lastDeapiSubmissionAtMs = 0;
 
 function snapDimensionToGrid(val, minVal = 256, maxVal = 1280, multiple = 32) {
   const clamped = Math.max(minVal, Math.min(maxVal, Math.round(val)));
@@ -1805,18 +1807,93 @@ function scoreDeapiImg2VideoModel(modelObj) {
   return 60;
 }
 
-async function discoverActiveDeapiImg2VideoModel(apiKey, baseUrl = "https://api.deapi.ai") {
-  if (_cachedDeapiModelInfo) return _cachedDeapiModelInfo;
-  const preferredOverride = String(process.env.DEAPI_MODEL || "").trim();
+function scoreDeapiImg2ImgModel(modelObj) {
+  const slug = String(modelObj?.slug || "").toLowerCase();
+  const name = String(modelObj?.name || "").toLowerCase();
+  const combined = slug + " " + name;
+  if (combined.includes("flux_2_klein") || combined.includes("flux-2-klein") || combined.includes("flux2klein")) return 100;
+  if (combined.includes("qwenimageedit_plus") || combined.includes("qwen-image-edit-plus")) return 96;
+  if (combined.includes("qwenimageedit") || combined.includes("qwen-image-edit")) return 92;
+  if (combined.includes("flux") && combined.includes("kontext")) return 90;
+  if (combined.includes("flux")) return 85;
+  return 60;
+}
+
+function scoreDeapiTxt2ImgModel(modelObj) {
+  const slug = String(modelObj?.slug || "").toLowerCase();
+  const name = String(modelObj?.name || "").toLowerCase();
+  const combined = slug + " " + name;
+  if (combined.includes("flux_2") || combined.includes("flux-2")) return 98;
+  if (combined.includes("flux1schnell") || combined.includes("flux-1-schnell") || combined.includes("schnell")) return 95;
+  if (combined.includes("zimageturbo") || combined.includes("z-image-turbo")) return 92;
+  if (combined.includes("flux")) return 88;
+  return 65;
+}
+
+function computeDeapiRateLimitWaitMs(headers, attempt = 1) {
+  const minFloorMs = process.env.DEAPI_FAST_TEST_BACKOFF === "1" ? 80 : 18_000;
+  const scheduleMs = process.env.DEAPI_FAST_TEST_BACKOFF === "1"
+    ? [80, 120, 160, 200, 250]
+    : [22_000, 45_000, 62_000, 65_000, 65_000];
+  let headerWaitMs = 0;
+  if (headers && typeof headers.get === "function") {
+    const retryAfterRaw = String(headers.get("retry-after") || "").trim();
+    if (retryAfterRaw) {
+      const sec = parseFloat(retryAfterRaw);
+      if (!isNaN(sec) && sec > 0) {
+        headerWaitMs = Math.ceil((sec + 2) * 1000);
+      }
+    }
+    if (!headerWaitMs) {
+      const resetRaw = String(headers.get("x-ratelimit-reset") || "").trim();
+      if (resetRaw) {
+        const val = parseFloat(resetRaw);
+        if (!isNaN(val) && val > 0) {
+          if (val > 1_700_000_000) {
+            const diffMs = val * 1000 - Date.now();
+            if (diffMs > 0 && diffMs < 180_000) headerWaitMs = Math.ceil(diffMs + 2500);
+          } else if (val <= 180) {
+            headerWaitMs = Math.ceil((val + 2.5) * 1000);
+          }
+        }
+      }
+    }
+  }
+  const fallbackMs = scheduleMs[Math.min(Math.max(0, attempt - 1), scheduleMs.length - 1)];
+  if (process.env.DEAPI_FAST_TEST_BACKOFF === "1") {
+    return headerWaitMs > 0 ? Math.min(headerWaitMs, 500) : fallbackMs;
+  }
+  return Math.max(minFloorMs, headerWaitMs || fallbackMs);
+}
+
+async function paceDeapiSubmissionWindow() {
+  const minGapMs = process.env.DEAPI_FAST_TEST_BACKOFF === "1"
+    ? 10
+    : Number(process.env.DEAPI_MIN_REQUEST_GAP_MS || 4500);
+  const elapsed = Date.now() - _lastDeapiSubmissionAtMs;
+  if (_lastDeapiSubmissionAtMs > 0 && elapsed < minGapMs) {
+    await sleep(minGapMs - elapsed);
+  }
+  _lastDeapiSubmissionAtMs = Date.now();
+}
+
+async function discoverActiveDeapiModelsCatalog(apiKey, baseUrl = "https://api.deapi.ai") {
+  if (_cachedDeapiCatalog) return _cachedDeapiCatalog;
+  const preferredVideoOverride = String(process.env.DEAPI_MODEL || "").trim();
+  const preferredImageOverride = String(process.env.DEAPI_IMAGE_MODEL || "").trim();
   const headers = {
     Authorization: `Bearer ${apiKey}`,
     Accept: "application/json",
   };
 
+  const allModelsBySlug = new Map();
   const candidateUrls = [
+    `${baseUrl}/api/v2/models?per_page=100`,
+    `${baseUrl}/api/v2/models?limit=100`,
     `${baseUrl}/api/v2/models?per_page=50&filter[inference_types]=img2video`,
-    `${baseUrl}/api/v2/models?limit=50`,
-    `${baseUrl}/api/v1/client/models?per_page=50&filter[inference_types]=img2video`,
+    `${baseUrl}/api/v2/models?per_page=50&filter[inference_types]=img2img`,
+    `${baseUrl}/api/v2/models?per_page=50&filter[inference_types]=txt2img`,
+    `${baseUrl}/api/v1/client/models?per_page=100`,
   ];
 
   for (const url of candidateUrls) {
@@ -1825,40 +1902,84 @@ async function discoverActiveDeapiImg2VideoModel(apiKey, baseUrl = "https://api.
       if (!res.ok) continue;
       const json = await res.json();
       const rawList = Array.isArray(json?.data) ? json.data : Array.isArray(json) ? json : [];
-      const img2vidModels = rawList.filter((m) => {
-        const types = Array.isArray(m?.inference_types) ? m.inference_types.map((t) => String(t).toLowerCase()) : [];
-        return types.includes("img2video") && m?.slug;
-      });
-      if (img2vidModels.length > 0) {
-        let chosen = null;
-        if (preferredOverride) {
-          chosen = img2vidModels.find(
-            (m) => String(m.slug).toLowerCase() === preferredOverride.toLowerCase()
-          );
+      for (const m of rawList) {
+        if (m?.slug && !allModelsBySlug.has(m.slug)) {
+          allModelsBySlug.set(m.slug, m);
         }
-        if (!chosen) {
-          img2vidModels.sort((a, b) => scoreDeapiImg2VideoModel(b) - scoreDeapiImg2VideoModel(a));
-          chosen = img2vidModels[0];
-        }
-        _cachedDeapiModelInfo = chosen;
-        console.log(`   🤖 [deAPI.ai] Selected live img2video model: "${chosen.slug}" (${chosen.name || "3D Animation"})`);
-        return chosen;
       }
+      // If we got both video and image models from the first full catalog call, stop early
+      const vals = [...allModelsBySlug.values()];
+      const hasVid = vals.some((x) => (x.inference_types || []).some((t) => String(t).toLowerCase() === "img2video"));
+      const hasImgEdit = vals.some((x) => (x.inference_types || []).some((t) => String(t).toLowerCase() === "img2img"));
+      const hasTxtImg = vals.some((x) => (x.inference_types || []).some((t) => String(t).toLowerCase() === "txt2img"));
+      if (hasVid && (hasImgEdit || hasTxtImg)) break;
     } catch (err) {
-      console.warn(`   ⚠️ [deAPI.ai] Model discovery probe notice (${url}):`, err?.message || err);
+      console.warn(`   ⚠️ [deAPI.ai] Catalog probe notice (${url}):`, err?.message || err);
     }
   }
 
-  _cachedDeapiModelInfo = {
-    slug: preferredOverride || "Ltx2_5_22B_Dist_INT8",
-    name: "Fallback LTX Video Model",
-    info: {
-      defaults: { width: 768, height: 512, frames: 97, fps: 24, steps: 20, guidance: 3.0 },
-      limits: { min_width: 256, max_width: 1280, min_height: 256, max_height: 1280, dimension_multiple: 32, min_frames: 25, max_frames: 121 },
-      features: { supports_steps: true, supports_guidance: true, supports_negative_prompt: true },
-    },
+  const allModels = [...allModelsBySlug.values()];
+  const byType = (typeName) =>
+    allModels.filter((m) =>
+      Array.isArray(m?.inference_types) &&
+      m.inference_types.some((t) => String(t).toLowerCase() === typeName)
+    );
+
+  const img2vidList = byType("img2video");
+  const img2imgList = byType("img2img");
+  const txt2imgList = byType("txt2img");
+
+  let chosenVideo = null;
+  if (preferredVideoOverride) {
+    chosenVideo = img2vidList.find((m) => String(m.slug).toLowerCase() === preferredVideoOverride.toLowerCase()) || null;
+  }
+  if (!chosenVideo && img2vidList.length > 0) {
+    img2vidList.sort((a, b) => scoreDeapiImg2VideoModel(b) - scoreDeapiImg2VideoModel(a));
+    chosenVideo = img2vidList[0];
+  }
+  if (!chosenVideo) {
+    chosenVideo = {
+      slug: preferredVideoOverride || "Ltx2_5_22B_Dist_INT8",
+      name: "Fallback LTX Video Model",
+      info: {
+        defaults: { width: 768, height: 512, frames: 97, fps: 24, steps: 20, guidance: 3.0 },
+        limits: { min_width: 256, max_width: 1280, min_height: 256, max_height: 1280, dimension_multiple: 32, min_frames: 25, max_frames: 121 },
+        features: { supports_steps: true, supports_guidance: true, supports_negative_prompt: true },
+      },
+    };
+  }
+
+  let chosenImg2Img = null;
+  if (preferredImageOverride) {
+    chosenImg2Img = img2imgList.find((m) => String(m.slug).toLowerCase() === preferredImageOverride.toLowerCase()) || null;
+  }
+  if (!chosenImg2Img && img2imgList.length > 0) {
+    img2imgList.sort((a, b) => scoreDeapiImg2ImgModel(b) - scoreDeapiImg2ImgModel(a));
+    chosenImg2Img = img2imgList[0];
+  }
+
+  let chosenTxt2Img = null;
+  if (txt2imgList.length > 0) {
+    txt2imgList.sort((a, b) => scoreDeapiTxt2ImgModel(b) - scoreDeapiTxt2ImgModel(a));
+    chosenTxt2Img = txt2imgList[0];
+  }
+
+  _cachedDeapiModelInfo = chosenVideo;
+  _cachedDeapiCatalog = {
+    img2video: chosenVideo,
+    img2img: chosenImg2Img,
+    txt2img: chosenTxt2Img,
   };
-  return _cachedDeapiModelInfo;
+
+  console.log(
+    `   🤖 [deAPI.ai] Active pipeline models -> Video="${chosenVideo.slug}" | MultiRef-Scene="${chosenImg2Img?.slug || "auto"}" | Story-Gen="${chosenTxt2Img?.slug || "auto"}"`
+  );
+  return _cachedDeapiCatalog;
+}
+
+async function discoverActiveDeapiImg2VideoModel(apiKey, baseUrl = "https://api.deapi.ai") {
+  const cat = await discoverActiveDeapiModelsCatalog(apiKey, baseUrl);
+  return cat.img2video;
 }
 
 function resolveDeapiModelRenderParams(modelInfo, isShort) {
@@ -1873,7 +1994,6 @@ function resolveDeapiModelRenderParams(modelInfo, isShort) {
   const maxH = Number(limits.max_height ?? limits.height?.max ?? 1024) || 1024;
   const mult = Number(limits.dimension_multiple ?? 32) || 32;
 
-  // Safe, fast, crisp dimensions respecting total pixel budgets across LTX / Wan / Seedance
   const desiredW = isShort ? 512 : 768;
   const desiredH = isShort ? 768 : 512;
   const width = snapDimensionToGrid(desiredW, minW, maxW, mult);
@@ -1887,7 +2007,6 @@ function resolveDeapiModelRenderParams(modelInfo, isShort) {
     targetFrames = Math.min(97, maxFrames);
   }
   targetFrames = Math.max(minFrames, Math.min(maxFrames, Math.round(targetFrames)));
-  // LTX models prefer 8*k + 1 frame counts (e.g., 49, 73, 97, 121) when within limits
   const slugLower = String(modelInfo?.slug || "").toLowerCase();
   if (slugLower.includes("ltx")) {
     const ltxSnap = Math.round((targetFrames - 1) / 8) * 8 + 1;
@@ -1911,48 +2030,316 @@ function resolveDeapiModelRenderParams(modelInfo, isShort) {
   return { width, height, frames: targetFrames, fps, steps, guidance, supportsNegative };
 }
 
-function buildCartoonSceneMotionPrompt({ speakerName, sceneTitle, sceneIndex, totalScenes, topicText }) {
-  const s = String(speakerName || "");
-  let charSubject = "cute 3D Pixar-style animated cartoon hero character";
-  if (/أرنوب|أرنب/.test(s)) charSubject = "cute 3D Pixar-style animated nurse rabbit character";
-  else if (/نمر|فرفوش|نمور/.test(s)) charSubject = "cheerful 3D Pixar-style animated friendly tiger character";
-  else if (/زقلط|كلب/.test(s)) charSubject = "funny cute 3D Pixar-style animated puppy dog character";
-  else if (/لوليتا|قطة/.test(s)) charSubject = "adorable 3D Pixar-style animated kitten character";
-  else if (/ديك/.test(s)) charSubject = "colorful 3D Pixar-style animated smart rooster character";
-  else if (/كركور|ببغاء/.test(s)) charSubject = "vibrant 3D Pixar-style animated wise parrot character";
-  else if (/عصفورة/.test(s)) charSubject = "cheerful 3D Pixar-style animated little songbird character";
-  else if (/فراشة/.test(s)) charSubject = "magical glowing 3D Pixar-style animated colorful butterfly character";
-  else if (/بطريق/.test(s)) charSubject = "playful 3D Pixar-style animated cute penguin character";
-  else if (/صقر/.test(s)) charSubject = "noble 3D Pixar-style animated smart falcon character";
-  else if (/فأر/.test(s)) charSubject = "playful 3D Pixar-style animated little mouse character";
-  else if (/باندا/.test(s)) charSubject = "cuddly 3D Pixar-style animated panda bear character";
-  else if (/زعتر|ثعلب/.test(s)) charSubject = "clever 3D Pixar-style animated cute fox character";
-  else if (/بلبل|روبوت/.test(s)) charSubject = "friendly 3D Pixar-style animated cute little robot character";
-  else if (/مرجان|دلفين/.test(s)) charSubject = "playful 3D Pixar-style animated smiling dolphin character";
-  else if (/سمسم|سنجاب/.test(s)) charSubject = "energetic 3D Pixar-style animated flying squirrel character";
+function describeCharacterVisualAppearanceEn(charName) {
+  const s = String(charName || "").trim();
+  if (/الشيخ محمود|شيخ محمود/.test(s)) {
+    return "Sheikh Mahmoud (a kind smiling Egyptian Quran teacher wearing a clean white galabeya and white cap with a gentle short beard)";
+  }
+  if (/الديك الفصيح|ديك/.test(s)) {
+    return "Al-Deek Al-Faseeh (a colorful smart 3D Pixar rooster with bright red crest, vibrant feathers, and expressive eyes)";
+  }
+  if (/تختوخ/.test(s)) {
+    return "Takhtoukh (a cheerful cute chubby 8-year-old Egyptian boy with curly dark hair, rosy cheeks, wearing a bright yellow and blue sporty shirt)";
+  }
+  if (/زقلط|كلب/.test(s)) {
+    return "Zaqlat (a funny adorable 3D Pixar puppy dog with floppy ears, wagging tail, and a bright collar)";
+  }
+  if (/أم ملك|ام ملك/.test(s)) {
+    return "Teacher Om Malak (a warm smiling Egyptian female school teacher wearing a neat pastel hijab and modest colorful blazer)";
+  }
+  if (/بطريق/.test(s)) {
+    return "Al-Batreeq (a playful cute 3D Pixar little penguin wearing a colorful bow tie)";
+  }
+  if (/ملك/.test(s) && !/أم ملك|ام ملك/.test(s)) {
+    return "Dr. Malak (a brave cheerful young Egyptian girl emergency doctor wearing a bright medical rescue jacket and stethoscope)";
+  }
+  if (/لوليتا|قطة/.test(s)) {
+    return "Lolita (an adorable fluffy white-and-orange 3D Pixar kitten wearing a cute little helper collar)";
+  }
+  if (/سدرة الصغنونة|سدرة/.test(s)) {
+    return "Little Sidra (a sweet cute 4-year-old Egyptian toddler girl with pigtails, big sparkling eyes, and a colorful dress)";
+  }
+  if (/فراشة/.test(s)) {
+    return "the Colorful Butterfly (a magical glowing 3D Pixar butterfly with sparkling rainbow wings and cute smiling face)";
+  }
+  if (/ذياد|زياد/.test(s)) {
+    return "Ziad (a kind athletic young Egyptian scout hero wearing a neat adventure vest and carrying a helper backpack)";
+  }
+  if (/عصفورة/.test(s)) {
+    return "the Cheerful Songbird (a bright colorful 3D Pixar little bird fluttering happily)";
+  }
+  if (/شريف/.test(s)) {
+    return "Mr. Sherif (a friendly smart Egyptian teacher wearing neat glasses and a tidy smart-casual shirt)";
+  }
+  if (/صقر/.test(s)) {
+    return "the Smart Falcon (a noble friendly 3D Pixar falcon with golden-brown feathers and keen bright eyes)";
+  }
+  if (/جدو/.test(s)) {
+    return "Grandpa Gedo (a warm loving Egyptian grandfather with silver hair, friendly glasses, and cozy traditional vest)";
+  }
+  if (/فأر/.test(s)) {
+    return "the Playful Little Mouse (a cute tiny 3D Pixar mouse with big round ears and a cheerful smile)";
+  }
+  if (/تيتة|تيته/.test(s)) {
+    return "Grandma Teta (a kind loving Egyptian grandmother with a warm headscarf, gentle glasses, and sweet smile)";
+  }
+  if (/باندا/.test(s)) {
+    return "the Cuddly Panda (a friendly cute 3D Pixar baby panda bear)";
+  }
+  if (/نوران/.test(s)) {
+    return "Engineer Nouran (a clever cheerful 10-year-old Egyptian girl engineer wearing a yellow safety helmet, denim overalls, and holding smart tools)";
+  }
+  if (/نمر|فرفوش|نمور/.test(s)) {
+    return "Namoor (a cheerful friendly 3D Pixar cute tiger cub with bright orange stripes and big friendly smile)";
+  }
+  if (/تامر|ياسين/.test(s)) {
+    return "Knight Tamer (a brave 10-year-old Arabian oasis boy knight wearing a shining golden-trimmed tunic and cape)";
+  }
+  if (/كركور|ببغاء/.test(s)) {
+    return "Karkour (a vibrant colorful 3D Pixar wise parrot with emerald and scarlet feathers)";
+  }
+  if (/عمرو|فارس المستكشف/.test(s)) {
+    return "Explorer Amr (an adventurous 9-year-old Egyptian boy explorer wearing a khaki safari hat, explorer vest, and compass)";
+  }
+  if (/زعتر|ثعلب/.test(s)) {
+    return "Zaatar (a clever cute 3D Pixar little orange fox wearing an explorer bandana)";
+  }
+  if (/جنى|نور رائدة/.test(s)) {
+    return "Astronaut Jana (a bright 9-year-old Egyptian girl astronaut wearing a sleek white-and-purple space suit with open helmet visor)";
+  }
+  if (/بلبل|روبوت/.test(s)) {
+    return "Bulbul (a cute friendly small round 3D Pixar helper robot with glowing blue expressive eyes)";
+  }
+  if (/شوشو|كريم/.test(s)) {
+    return "Captain Shoushou (a brave 9-year-old Egyptian boy sea captain wearing a crisp white-and-navy captain hat and blue maritime jacket)";
+  }
+  if (/مرجان|دلفين/.test(s)) {
+    return "Marjan (a playful smiling 3D Pixar azure-blue dolphin jumping and swimming gracefully)";
+  }
+  if (/كارمن|سلمى/.test(s)) {
+    return "Inventor Carmen (a creative 9-year-old Egyptian girl inventor with curly hair, cute goggles on her forehead, and colorful workshop apron)";
+  }
+  if (/سمسم|سنجاب/.test(s)) {
+    return "Simsim (an energetic cute 3D Pixar flying squirrel with fluffy tail)";
+  }
+  if (/أرنوب|أرنب/.test(s)) {
+    return "Arnoob (a cute cheerful 3D Pixar white bunny rabbit nurse wearing a tiny nurse cap)";
+  }
+  return "Dr. Noreen (a cheerful 9-year-old Egyptian girl junior doctor wearing a neat white lab coat, pink shirt, and stethoscope)";
+}
 
-  let actionBeat = "speaking happily to the viewer with expressive joyful eyes, natural blinking, warm friendly smile, and lively gentle hand and head gestures";
-  if (sceneIndex === 0) {
-    actionBeat = "waving warmly and speaking enthusiastically to welcome kids, expressive blinking eyes, cheerful smile, lively head nod, joyful Pixar cartoon energy";
-  } else if (sceneIndex === 1) {
-    actionBeat = "looking curious and excited while explaining a discovery, expressive eyebrows, natural blinking, animated hand gesture, lively 3D cartoon acting";
-  } else if (sceneIndex === totalScenes - 1) {
-    actionBeat = "celebrating joyfully with a bright proud smile, cheerful wave and enthusiastic friendly gestures while asking kids a fun question, vibrant cartoon motion";
-  } else if (sceneIndex % 2 === 0) {
-    actionBeat = "talking confidently and enthusiastically with lively hand gestures, expressive blinking eyes, warm encouraging smile, smooth 3D character animation";
+function inferSupportingCastAndSettingEn(combinedArabicText, heroName = "") {
+  const txt = String(combinedArabicText || "");
+  let supportingCast = "";
+  if (/حوت صغير|الحوت الصغير|حوت/.test(txt)) {
+    supportingCast = "a cute friendly baby blue whale in the water";
+  } else if (/سلحفاة|سلاحف/.test(txt)) {
+    supportingCast = "cute baby sea turtles near coral reefs";
+  } else if (/فقمة/.test(txt)) {
+    supportingCast = "an adorable baby seal on sea rocks";
+  } else if (/نجم البحر/.test(txt)) {
+    supportingCast = "a glowing golden starfish on colorful coral";
+  } else if (/جرو|كلب صغير/.test(txt)) {
+    supportingCast = "a tiny cute lost puppy";
+  } else if (/قطة صغيرة|قطقوطة/.test(txt) && !/لوليتا/.test(heroName)) {
+    supportingCast = "a tiny cute kitten needing help";
+  } else if (/مهر|حصان/.test(txt)) {
+    supportingCast = "a cute young Arabian foal";
+  } else if (/خروف/.test(txt)) {
+    supportingCast = "a fluffy little white lamb";
+  } else if (/قنفذ/.test(txt)) {
+    supportingCast = "a cute tiny hedgehog";
+  } else if (/غزالة|غزال/.test(txt)) {
+    supportingCast = "a gentle cute baby deer";
+  } else if (/حمامة|عصفور صغير|فرخ/.test(txt)) {
+    supportingCast = "a tiny baby bird near its nest";
+  } else if (/عم أحمد|عم إبراهيم|نجار|بائع|جار مسن|جد/.test(txt) && !/جدو/.test(heroName)) {
+    supportingCast = "a kind elderly Egyptian neighbor smiling gratefully";
+  } else if (/أطفال|أصحاب|تلاميذ|فصل|مدرسة|حضانة/.test(txt)) {
+    supportingCast = "two cheerful young school kids watching happily in the background";
   }
 
-  return `High quality 3D Pixar Disney style kids cartoon animation of this exact ${charSubject}, ${actionBeat}. Keep character face, outfit, colors, and proportions 100% consistent with the first frame. Smooth natural motion, gentle cinematic breathing camera, vibrant studio lighting.`;
+  let settingEn = "a vibrant sunlit 3D Pixar Egyptian neighborhood park with lush trees and colorful houses";
+  if (/بحر|محيط|خليج|مرجان|حوت|دلفين|شوشو|شاطئ|سفينة|قارب|منارة/.test(txt)) {
+    settingEn = "a sparkling turquoise ocean bay with colorful coral reefs, gentle waves, and a bright boat deck";
+  } else if (/فضاء|كوكب|قمر|نجوم|مجرة|مكوك|جنى|مدار/.test(txt)) {
+    settingEn = "a colorful magical outer-space station deck overlooking glowing stars and cheerful planets";
+  } else if (/واحة|صحراء|نخيل|خيمة|قلعة|تامر|بئر/.test(txt)) {
+    settingEn = "a golden sunlit Arabian oasis with lush palm trees, sparkling water spring, and lantern tents";
+  } else if (/غابة|شجرة|وادي|أدغال|عمرو|نهر|شلال/.test(txt)) {
+    settingEn = "an enchanted sunlit green adventure forest with wooden bridge, flowers, and sparkling stream";
+  } else if (/مدرسة|فصل|مكتبة|كتب|سبورة|أم ملك|شريف/.test(txt)) {
+    settingEn = "a bright colorful 3D Pixar kids classroom and library filled with books and sunny windows";
+  } else if (/عيادة|مستشفى|إسعاف|أسنان|سنان|نورين|ملك/.test(txt)) {
+    settingEn = "a cheerful colorful pediatric kids clinic and sunny garden rescue area";
+  } else if (/مطبخ|كعك|فطير|تيتة|طعام|سندوتش|خضار|فواكه/.test(txt)) {
+    settingEn = "a warm cozy sunlit family kitchen and garden table with fresh colorful fruits";
+  } else if (/مسجد|جامع|قرآن|سورة|الشيخ محمود/.test(txt)) {
+    settingEn = "a serene sunlit courtyard with warm Islamic geometric arches, lanterns, and green garden";
+  } else if (/اختراع|معمل|ورشة|جسر|نوران|كارمن/.test(txt)) {
+    settingEn = "a colorful kids invention workshop and sunny park construction site with cheerful tools";
+  }
+
+  return { supportingCast, settingEn };
+}
+
+function buildMultiCharacterStoryPrompts({
+  heroName,
+  companionName,
+  speakerName,
+  sceneTitle,
+  dialogueArabic,
+  aiVisualScenePromptEn,
+  sceneIndex,
+  totalScenes,
+  topicText,
+}) {
+  const heroDesc = describeCharacterVisualAppearanceEn(heroName);
+  const compDesc = describeCharacterVisualAppearanceEn(companionName);
+  const combinedAr = `${topicText || ""} ${sceneTitle || ""} ${dialogueArabic || ""}`;
+  const { supportingCast, settingEn } = inferSupportingCastAndSettingEn(combinedAr, heroName);
+  const castWithClause = supportingCast ? ` together with ${supportingCast}` : "";
+  const customAction = String(aiVisualScenePromptEn || "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  const progressRatio = totalScenes > 1 ? sceneIndex / (totalScenes - 1) : 0;
+  let stageAction = "";
+  if (sceneIndex === 0) {
+    stageAction = `walking and moving excitedly side by side into ${settingEn}, discovering the situation${castWithClause}, pointing forward and talking expressively to each other`;
+  } else if (progressRatio < 0.5) {
+    stageAction = `hurrying together in ${settingEn}${castWithClause}, examining the problem closely, gesturing with animated teamwork and expressive faces`;
+  } else if (sceneIndex < totalScenes - 1) {
+    stageAction = `actively working side by side in ${settingEn} to rescue and solve the challenge${castWithClause}, moving dynamically together with joyful energy`;
+  } else {
+    stageAction = `jumping, waving, and celebrating happily together in ${settingEn}${castWithClause} with big proud smiles and lively cartoon body movement`;
+  }
+
+  const unifiedAction = customAction.length > 20
+    ? `${customAction} in ${settingEn}${castWithClause}`
+    : stageAction;
+
+  const activeSpeakerDesc = speakerName === companionName ? compDesc : heroDesc;
+
+  const sceneKeyframePrompt =
+    `3D Pixar Disney animated movie wide-medium shot featuring BOTH characters together in the same scene: ${heroDesc} AND ${compDesc}${castWithClause}. ` +
+    `Action: they are ${unifiedAction}. ` +
+    `Full environment background (${settingEn}), rich cinematic warm lighting, expressive joyful 3D cartoon characters interacting together, pure clean movie frame, strictly NO text, NO letters, NO logos, NO banners, NO split screen.`;
+
+  const videoMotionPrompt =
+    `3D Pixar animated cartoon movie scene: BOTH characters (${heroDesc} and ${compDesc}${castWithClause}) moving naturally together in the scene, ` +
+    `${unifiedAction}. ${activeSpeakerDesc} is speaking expressively while both characters move their bodies, arms, and heads naturally, blinking eyes, lively cartoon acting, gentle cinematic tracking camera, smooth Pixar animation, no static freeze, no text.`;
+
+  return {
+    sceneKeyframePrompt,
+    videoMotionPrompt,
+    supportingCast,
+    settingEn,
+  };
+}
+
+// Backward-compatible export used by unit tests & single-call callers
+function buildCartoonSceneMotionPrompt({
+  speakerName,
+  heroName,
+  companionName,
+  sceneTitle,
+  dialogueArabic,
+  aiVisualScenePromptEn,
+  sceneIndex,
+  totalScenes,
+  topicText,
+}) {
+  if (heroName && companionName) {
+    return buildMultiCharacterStoryPrompts({
+      heroName,
+      companionName,
+      speakerName: speakerName || heroName,
+      sceneTitle,
+      dialogueArabic,
+      aiVisualScenePromptEn,
+      sceneIndex,
+      totalScenes,
+      topicText,
+    }).videoMotionPrompt;
+  }
+  const charDesc = describeCharacterVisualAppearanceEn(speakerName);
+  return `High quality 3D Pixar Disney style kids cartoon animation of ${charDesc}, moving naturally with expressive blinking eyes, warm smile, lively body and hand gestures in a vibrant 3D cartoon world. Smooth natural motion, gentle cinematic tracking camera, no text.`;
+}
+
+async function cropCharacterReferenceWithoutBanner(rawImgPath, outJpgPath) {
+  // Local char_*.jpg portraits have a nameplate banner across the bottom ~22%.
+  // Cropping top 76% preserves 100% of the 3D character head & body while eliminating all text banners!
+  const isCharCard = /char_[a-z0-9_]+.(jpg|jpeg|png)$/i.test(path.basename(rawImgPath));
+  const vfFilter = isCharCard
+    ? "crop=in_w:Math.floor(in_h*0.76):0:0,scale=768:768:force_original_aspect_ratio=increase,crop=768:768,setsar=1,format=yuvj420p".replace("Math.floor(in_h*0.76)", "trunc(ih*0.76/2)*2")
+    : "scale=768:768:force_original_aspect_ratio=increase,crop=768:768,setsar=1,format=yuvj420p";
+
+  await execFileAsync("ffmpeg", [
+    "-y",
+    "-i",
+    rawImgPath,
+    "-vf",
+    vfFilter,
+    "-frames:v",
+    "1",
+    "-q:v",
+    "2",
+    outJpgPath,
+  ]);
+  return fs.existsSync(outJpgPath) && fs.statSync(outJpgPath).size > 1000 ? outJpgPath : rawImgPath;
+}
+
+async function buildCleanLocalDuoStoryFrameJpg({
+  heroCleanPath,
+  compCleanPath,
+  targetW,
+  targetH,
+  sceneIndex,
+  outJpgPath,
+}) {
+  // Clean banner-free side-by-side Pixar duo staging with soft depth-of-field world backdrop (NO dividing bars, NO text boxes)
+  const swapSides = sceneIndex % 2 === 1;
+  const leftImg = swapSides ? compCleanPath : heroCleanPath;
+  const rightImg = swapSides ? heroCleanPath : compCleanPath;
+  const charH = Math.round(targetH * (targetH > targetW ? 0.56 : 0.86));
+  const charW = Math.round(targetW * 0.54);
+  const leftX = Math.max(0, Math.round(targetW * 0.02));
+  const rightX = Math.max(0, targetW - charW - Math.round(targetW * 0.02));
+  const posY = Math.max(0, Math.round((targetH - charH) * 0.58));
+
+  await execFileAsync("ffmpeg", [
+    "-y",
+    "-i",
+    leftImg,
+    "-i",
+    rightImg,
+    "-filter_complex",
+    `[0:v]scale=${targetW}:${targetH}:force_original_aspect_ratio=increase,crop=${targetW}:${targetH},boxblur=26:5,eq=brightness=0.03:saturation=1.22[bg];` +
+      `[0:v]scale=${charW}:${charH}:force_original_aspect_ratio=decrease[c1];` +
+      `[1:v]scale=${charW}:${charH}:force_original_aspect_ratio=decrease[c2];` +
+      `[bg][c1]overlay=x=${leftX}:y=${posY}[tmp1];` +
+      `[tmp1][c2]overlay=x=${rightX}:y=${posY},setsar=1,format=yuvj420p[outv]`,
+    "-map",
+    "[outv]",
+    "-frames:v",
+    "1",
+    "-q:v",
+    "2",
+    outJpgPath,
+  ]);
+  return fs.existsSync(outJpgPath) && fs.statSync(outJpgPath).size > 1000 ? outJpgPath : heroCleanPath;
 }
 
 async function prepareDeapiInputFrameJpg(rawImgPath, targetW, targetH, outJpgPath) {
-  // Center-focus framing that preserves full character head & body without any distortion
+  const isCharCard = /char_[a-z0-9_]+.(jpg|jpeg|png)$/i.test(path.basename(rawImgPath));
+  const preCrop = isCharCard ? "crop=iw:trunc(ih*0.76/2)*2:0:0," : "";
   await execFileAsync("ffmpeg", [
     "-y",
     "-i",
     rawImgPath,
     "-filter_complex",
-    `[0:v]split=2[bg][fg];[bg]scale=${targetW}:${targetH}:force_original_aspect_ratio=increase,crop=${targetW}:${targetH},boxblur=22:4,eq=brightness=-0.05:saturation=1.15[bg_b];[fg]scale=${targetW}:${targetH}:force_original_aspect_ratio=decrease[fg_f];[bg_b][fg_f]overlay=(W-w)/2:(H-h)/2,setsar=1,format=yuvj420p[outv]`,
+    `[0:v]${preCrop}split=2[bg][fg];[bg]scale=${targetW}:${targetH}:force_original_aspect_ratio=increase,crop=${targetW}:${targetH},boxblur=22:4,eq=brightness=-0.03:saturation=1.15[bg_b];[fg]scale=${targetW}:${targetH}:force_original_aspect_ratio=decrease[fg_f];[bg_b][fg_f]overlay=(W-w)/2:(H-h)/2,setsar=1,format=yuvj420p[outv]`,
     "-map",
     "[outv]",
     "-frames:v",
@@ -1964,93 +2351,31 @@ async function prepareDeapiInputFrameJpg(rawImgPath, targetW, targetH, outJpgPat
   return fs.existsSync(outJpgPath) && fs.statSync(outJpgPath).size > 1000 ? outJpgPath : rawImgPath;
 }
 
-async function generateAnimatedSceneClipViaDeapi({
+async function submitDeapiJobWithRateLimitRecovery({
   apiKey,
-  rawImgPath,
-  speakerName,
-  sceneTitle,
-  sceneIndex,
-  totalScenes,
-  topicText,
-  isShort,
-  outW,
-  outH,
-  tmpDir,
-  formatTag,
+  endpointsToTry,
+  buildRequestInit,
+  sceneLabel,
 }) {
-  const baseUrl = String(process.env.DEAPI_BASE_URL || "https://api.deapi.ai").replace(/\/$/, "");
-  const modelInfo = await discoverActiveDeapiImg2VideoModel(apiKey, baseUrl);
-  const params = resolveDeapiModelRenderParams(modelInfo, isShort);
-  const prompt = buildCartoonSceneMotionPrompt({
-    speakerName,
-    sceneTitle,
-    sceneIndex,
-    totalScenes,
-    topicText,
-  });
-
-  const inputFramePath = path.join(tmpDir, `deapi_in_${formatTag}_${sceneIndex}.jpg`);
-  const preparedInputPath = await prepareDeapiInputFrameJpg(
-    rawImgPath,
-    params.width,
-    params.height,
-    inputFramePath
-  );
-  const imgBuffer = fs.readFileSync(preparedInputPath);
-
-  const endpointsToTry = [
-    {
-      submitUrl: `${baseUrl}/api/v2/videos/animations`,
-      statusBaseUrl: `${baseUrl}/api/v2/jobs`,
-      label: "v2/videos/animations",
-    },
-    {
-      submitUrl: `${baseUrl}/api/v1/client/img2video`,
-      statusBaseUrl: `${baseUrl}/api/v1/client/request-status`,
-      label: "v1/client/img2video",
-    },
-  ];
-
-  let requestId = "";
-  let activeStatusBaseUrl = `${baseUrl}/api/v2/jobs`;
   let lastSubmitError = null;
+  const maxAttemptsPerRoute = 5;
 
-  for (const route of endpointsToTry) {
-    for (let attempt = 1; attempt <= 3; attempt++) {
+  for (let rIdx = 0; rIdx < endpointsToTry.length; rIdx++) {
+    const route = endpointsToTry[rIdx];
+    let hitRateLimitOnPrimary = false;
+
+    for (let attempt = 1; attempt <= maxAttemptsPerRoute; attempt++) {
       try {
-        const form = new FormData();
-        form.append(
-          "first_frame_image",
-          new Blob([imgBuffer], { type: "image/jpeg" }),
-          path.basename(preparedInputPath)
-        );
-        form.append("prompt", prompt);
-        form.append("model", String(modelInfo.slug));
-        form.append("width", String(params.width));
-        form.append("height", String(params.height));
-        form.append("frames", String(params.frames));
-        form.append("fps", String(params.fps));
-        form.append("seed", "-1");
-        if (params.steps !== null && attempt === 1) {
-          form.append("steps", String(params.steps));
-        }
-        if (params.guidance !== null && attempt === 1) {
-          form.append("guidance", String(params.guidance));
-        }
-        if (params.supportsNegative && attempt === 1) {
-          form.append(
-            "negative_prompt",
-            "blurry, distorted face, extra limbs, morphing identity, horror, ugly, watermark, text glitch, static freeze"
-          );
-        }
-
+        await paceDeapiSubmissionWindow();
+        const reqInit = buildRequestInit(attempt);
         const submitRes = await fetch(route.submitUrl, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${apiKey}`,
             Accept: "application/json",
+            ...(reqInit.headers || {}),
           },
-          body: form,
+          body: reqInit.body,
         });
 
         const rawBody = await submitRes.text();
@@ -2059,20 +2384,37 @@ async function generateAnimatedSceneClipViaDeapi({
           parsed = JSON.parse(rawBody);
         } catch {}
 
-        if (submitRes.status === 429 || submitRes.status >= 500) {
-          const backoffMs = 2500 * Math.pow(2, attempt - 1);
+        if (submitRes.status === 429) {
+          hitRateLimitOnPrimary = true;
+          const waitMs = computeDeapiRateLimitWaitMs(submitRes.headers, attempt);
           console.warn(
-            `   ⏳ [deAPI.ai Scene ${sceneIndex + 1}] HTTP ${submitRes.status} on ${route.label} (attempt ${attempt}/3). Retrying in ${backoffMs}ms...`
+            `   ⏳ [${sceneLabel}] HTTP 429 Rate Limit on ${route.label} (attempt ${attempt}/${maxAttemptsPerRoute}). Waiting ${(waitMs / 1000).toFixed(1)}s for RPM bucket reset...`
           );
-          await sleep(backoffMs);
-          continue;
+          lastSubmitError = new Error(`deAPI ${route.label} HTTP 429: ${rawBody.slice(0, 200)}`);
+          if (attempt < maxAttemptsPerRoute) {
+            await sleep(waitMs);
+            continue;
+          }
+          break;
+        }
+
+        if (submitRes.status >= 500) {
+          const backoffMs = process.env.DEAPI_FAST_TEST_BACKOFF === "1" ? 60 : 3500 * Math.pow(2, attempt - 1);
+          console.warn(
+            `   ⏳ [${sceneLabel}] HTTP ${submitRes.status} server busy on ${route.label} (attempt ${attempt}/${maxAttemptsPerRoute}). Retrying in ${(backoffMs / 1000).toFixed(1)}s...`
+          );
+          lastSubmitError = new Error(`deAPI ${route.label} HTTP ${submitRes.status}: ${rawBody.slice(0, 200)}`);
+          if (attempt < maxAttemptsPerRoute) {
+            await sleep(backoffMs);
+            continue;
+          }
+          break;
         }
 
         if (!submitRes.ok) {
           lastSubmitError = new Error(
             `deAPI ${route.label} HTTP ${submitRes.status}: ${rawBody.slice(0, 260)}`
           );
-          // If 422 validation failed on optional steps/guidance, retry attempt 2 sends minimal core fields
           if (submitRes.status === 422 && attempt === 1) {
             continue;
           }
@@ -2083,39 +2425,44 @@ async function generateAnimatedSceneClipViaDeapi({
           parsed?.data?.request_id || parsed?.request_id || parsed?.id || ""
         ).trim();
         if (extractedId) {
-          requestId = extractedId;
-          activeStatusBaseUrl = route.statusBaseUrl;
-          break;
+          return {
+            requestId: extractedId,
+            statusBaseUrl: route.statusBaseUrl,
+          };
         }
         lastSubmitError = new Error(`Missing request_id in deAPI response: ${rawBody.slice(0, 200)}`);
       } catch (netErr) {
         lastSubmitError = netErr;
-        await sleep(2000 * attempt);
+        const netWait = process.env.DEAPI_FAST_TEST_BACKOFF === "1" ? 50 : 2500 * attempt;
+        if (attempt < maxAttemptsPerRoute) await sleep(netWait);
       }
     }
-    if (requestId) break;
+
+    // Do NOT jump to legacy v1 if v2 returned 429 (both share the exact same account rate limit!)
+    if (hitRateLimitOnPrimary) break;
   }
 
-  if (!requestId) {
-    throw lastSubmitError || new Error("deAPI animation job submission failed");
-  }
+  throw lastSubmitError || new Error(`${sceneLabel} submission failed`);
+}
 
-  console.log(
-    `   🎞️ [deAPI.ai Scene ${sceneIndex + 1}/${totalScenes}] Job queued (request_id=${requestId}, model=${modelInfo.slug}, ${params.width}x${params.height}, ${params.frames}f@${params.fps}fps)...`
-  );
-
-  // Poll job status until done (max 240s per scene clip)
-  const maxWaitMs = 240_000;
+async function pollDeapiJobResultUrl({
+  apiKey,
+  baseUrl,
+  statusBaseUrl,
+  requestId,
+  maxWaitMs = 240_000,
+}) {
   const startedMs = Date.now();
-  let pollIntervalMs = 2500;
-  let resultVideoUrl = "";
+  let pollIntervalMs = process.env.DEAPI_FAST_TEST_BACKOFF === "1" ? 40 : 2500;
 
   while (Date.now() - startedMs < maxWaitMs) {
     await sleep(pollIntervalMs);
-    pollIntervalMs = Math.min(8000, Math.round(pollIntervalMs * 1.35));
+    if (process.env.DEAPI_FAST_TEST_BACKOFF !== "1") {
+      pollIntervalMs = Math.min(7500, Math.round(pollIntervalMs * 1.3));
+    }
 
     const pollUrls = [
-      `${activeStatusBaseUrl}/${encodeURIComponent(requestId)}`,
+      `${statusBaseUrl}/${encodeURIComponent(requestId)}`,
       `${baseUrl}/api/v2/jobs/${encodeURIComponent(requestId)}`,
       `${baseUrl}/api/v1/client/request-status/${encodeURIComponent(requestId)}`,
     ];
@@ -2129,6 +2476,10 @@ async function generateAnimatedSceneClipViaDeapi({
             Accept: "application/json",
           },
         });
+        if (pRes.status === 429) {
+          await sleep(process.env.DEAPI_FAST_TEST_BACKOFF === "1" ? 60 : 5000);
+          continue;
+        }
         if (!pRes.ok) continue;
         pollPayload = await pRes.json();
         break;
@@ -2140,14 +2491,17 @@ async function generateAnimatedSceneClipViaDeapi({
     const status = String(jobObj?.status || pollPayload?.status || "").toLowerCase();
 
     if (status === "done" || status === "completed" || status === "succeeded" || status === "success") {
-      resultVideoUrl = String(
+      const resultUrl = String(
         jobObj?.result_url ||
           jobObj?.result?.url ||
           jobObj?.results_alt_formats?.mp4 ||
+          jobObj?.results_alt_formats?.jpg ||
+          jobObj?.results_alt_formats?.png ||
           (typeof jobObj?.result === "string" && /^https?:\/\//i.test(jobObj.result) ? jobObj.result : "") ||
           pollPayload?.result_url ||
           ""
       ).trim();
+      if (resultUrl) return resultUrl;
       break;
     }
 
@@ -2157,9 +2511,373 @@ async function generateAnimatedSceneClipViaDeapi({
     }
   }
 
-  if (!resultVideoUrl) {
-    throw new Error(`deAPI job ${requestId} timed out or returned empty result_url`);
+  throw new Error(`deAPI job ${requestId} timed out or returned empty result_url`);
+}
+
+async function generateMultiCharacterStoryKeyframeViaDeapi({
+  apiKey,
+  baseUrl,
+  catalog,
+  heroCleanPath,
+  compCleanPath,
+  sceneKeyframePrompt,
+  targetW,
+  targetH,
+  sceneIndex,
+  totalScenes,
+  tmpDir,
+  formatTag,
+}) {
+  const keyframeOutPath = path.join(tmpDir, `deapi_story_keyframe_${formatTag}_${sceneIndex}.jpg`);
+
+  // Attempt 1: Multi-Reference Image Edit (/api/v2/images/edits) passing BOTH cropped Hero + Companion references
+  // so their exact Noreen Kids 3D designs appear together in the story environment with supporting characters!
+  if (catalog?.img2img?.slug && heroCleanPath && compCleanPath) {
+    try {
+      const editModel = catalog.img2img;
+      const editInfo = editModel?.info && typeof editModel.info === "object" && !Array.isArray(editModel.info) ? editModel.info : {};
+      const editDefaults = editInfo.defaults || {};
+      const editLimits = editInfo.limits || {};
+      const minW = Number(editLimits.min_width ?? 256) || 256;
+      const maxW = Number(editLimits.max_width ?? 1024) || 1024;
+      const minH = Number(editLimits.min_height ?? 256) || 256;
+      const maxH = Number(editLimits.max_height ?? 1024) || 1024;
+      const mult = Number(editLimits.dimension_multiple ?? 32) || 32;
+      const imgW = snapDimensionToGrid(targetW, minW, maxW, mult);
+      const imgH = snapDimensionToGrid(targetH, minH, maxH, mult);
+      const editSteps = Number(editDefaults.steps ?? 20) || 20;
+
+      const heroBuf = fs.readFileSync(heroCleanPath);
+      const compBuf = fs.readFileSync(compCleanPath);
+      // Also build a clean combined duo reference image in case the selected img2img model accepts single 'image'
+      const combinedRefPath = path.join(tmpDir, `deapi_duoref_${formatTag}_${sceneIndex}.jpg`);
+      await buildCleanLocalDuoStoryFrameJpg({
+        heroCleanPath,
+        compCleanPath,
+        targetW: imgW,
+        targetH: imgH,
+        sceneIndex,
+        outJpgPath: combinedRefPath,
+      });
+      const combinedBuf = fs.readFileSync(combinedRefPath);
+
+      const { requestId, statusBaseUrl } = await submitDeapiJobWithRateLimitRecovery({
+        apiKey,
+        sceneLabel: `deAPI Story-Frame ${sceneIndex + 1}/${totalScenes}`,
+        endpointsToTry: [
+          {
+            submitUrl: `${baseUrl}/api/v2/images/edits`,
+            statusBaseUrl: `${baseUrl}/api/v2/jobs`,
+            label: "v2/images/edits",
+          },
+        ],
+        buildRequestInit: (attempt) => {
+          const form = new FormData();
+          form.append("prompt", sceneKeyframePrompt);
+          form.append("model", String(editModel.slug));
+          form.append("steps", String(editSteps));
+          form.append("seed", "-1");
+          if (attempt === 1) {
+            form.append("width", String(imgW));
+            form.append("height", String(imgH));
+            form.append("images[]", new Blob([heroBuf], { type: "image/jpeg" }), "hero_ref.jpg");
+            form.append("images[]", new Blob([compBuf], { type: "image/jpeg" }), "companion_ref.jpg");
+            if (editInfo.features?.supports_negative_prompt !== false) {
+              form.append("negative_prompt", "text, watermark, banner, nameplate, logo, split screen, static card, blurry, deformed");
+            }
+          } else {
+            // Fallback form layout if model expects single 'image' field instead of 'images[]'
+            form.append("image", new Blob([combinedBuf], { type: "image/jpeg" }), "duo_scene_ref.jpg");
+          }
+          return { body: form };
+        },
+      });
+
+      const imgUrl = await pollDeapiJobResultUrl({
+        apiKey,
+        baseUrl,
+        statusBaseUrl,
+        requestId,
+        maxWaitMs: 150_000,
+      });
+      const dl = await fetch(imgUrl);
+      if (dl.ok) {
+        const bytes = Buffer.from(await dl.arrayBuffer());
+        if (bytes.length > 1500) {
+          const rawDlPath = path.join(tmpDir, `deapi_story_raw_${formatTag}_${sceneIndex}.img`);
+          fs.writeFileSync(rawDlPath, bytes);
+          await execFileAsync("ffmpeg", [
+            "-y",
+            "-i",
+            rawDlPath,
+            "-vf",
+            `scale=${targetW}:${targetH}:force_original_aspect_ratio=increase,crop=${targetW}:${targetH},setsar=1,format=yuvj420p`,
+            "-frames:v",
+            "1",
+            "-q:v",
+            "2",
+            keyframeOutPath,
+          ]);
+          if (fs.existsSync(keyframeOutPath) && fs.statSync(keyframeOutPath).size > 1500) {
+            console.log(`   🖼️ [deAPI.ai Scene ${sceneIndex + 1}/${totalScenes}] Multi-character 3D story keyframe synthesized (${editModel.slug})!`);
+            return keyframeOutPath;
+          }
+        }
+      }
+    } catch (editErr) {
+      console.warn(
+        `   ℹ️ [deAPI.ai Scene ${sceneIndex + 1}] Multi-ref image edit skipped (${editErr?.message || editErr}); trying txt2img story keyframe...`
+      );
+    }
   }
+
+  // Attempt 2: Text-to-Image Story Scene Generation (/api/v2/images/generations) with rich character visual profiles
+  if (catalog?.txt2img?.slug) {
+    try {
+      const txtModel = catalog.txt2img;
+      const txtInfo = txtModel?.info && typeof txtModel.info === "object" && !Array.isArray(txtModel.info) ? txtModel.info : {};
+      const txtLimits = txtInfo.limits || {};
+      const txtDefaults = txtInfo.defaults || {};
+      const minW = Number(txtLimits.min_width ?? 256) || 256;
+      const maxW = Number(txtLimits.max_width ?? 1024) || 1024;
+      const minH = Number(txtLimits.min_height ?? 256) || 256;
+      const maxH = Number(txtLimits.max_height ?? 1024) || 1024;
+      const mult = Number(txtLimits.dimension_multiple ?? 32) || 32;
+      const imgW = snapDimensionToGrid(targetW, minW, maxW, mult);
+      const imgH = snapDimensionToGrid(targetH, minH, maxH, mult);
+
+      const { requestId, statusBaseUrl } = await submitDeapiJobWithRateLimitRecovery({
+        apiKey,
+        sceneLabel: `deAPI Story-Txt2Img ${sceneIndex + 1}/${totalScenes}`,
+        endpointsToTry: [
+          {
+            submitUrl: `${baseUrl}/api/v2/images/generations`,
+            statusBaseUrl: `${baseUrl}/api/v2/jobs`,
+            label: "v2/images/generations",
+          },
+        ],
+        buildRequestInit: (attempt) => {
+          const payload = {
+            prompt: sceneKeyframePrompt,
+            model: String(txtModel.slug),
+            width: imgW,
+            height: imgH,
+            seed: -1,
+          };
+          if (attempt === 1) {
+            if (txtInfo.features?.supports_steps !== false && txtDefaults.steps) {
+              payload.steps = Number(txtDefaults.steps);
+            }
+            if (txtInfo.features?.supports_negative_prompt !== false) {
+              payload.negative_prompt = "text, watermark, banner, nameplate, logo, split screen, ugly, deformed, horror";
+            }
+          }
+          return {
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          };
+        },
+      });
+
+      const imgUrl = await pollDeapiJobResultUrl({
+        apiKey,
+        baseUrl,
+        statusBaseUrl,
+        requestId,
+        maxWaitMs: 120_000,
+      });
+      const dl = await fetch(imgUrl);
+      if (dl.ok) {
+        const bytes = Buffer.from(await dl.arrayBuffer());
+        if (bytes.length > 1500) {
+          const rawDlPath = path.join(tmpDir, `deapi_txt2img_raw_${formatTag}_${sceneIndex}.img`);
+          fs.writeFileSync(rawDlPath, bytes);
+          await execFileAsync("ffmpeg", [
+            "-y",
+            "-i",
+            rawDlPath,
+            "-vf",
+            `scale=${targetW}:${targetH}:force_original_aspect_ratio=increase,crop=${targetW}:${targetH},setsar=1,format=yuvj420p`,
+            "-frames:v",
+            "1",
+            "-q:v",
+            "2",
+            keyframeOutPath,
+          ]);
+          if (fs.existsSync(keyframeOutPath) && fs.statSync(keyframeOutPath).size > 1500) {
+            console.log(`   🖼️ [deAPI.ai Scene ${sceneIndex + 1}/${totalScenes}] 3D story scene keyframe generated (${txtModel.slug})!`);
+            return keyframeOutPath;
+          }
+        }
+      }
+    } catch (txtErr) {
+      console.warn(
+        `   ℹ️ [deAPI.ai Scene ${sceneIndex + 1}] Txt2Img keyframe skipped (${txtErr?.message || txtErr}); using banner-free duo composite.`
+      );
+    }
+  }
+
+  return null;
+}
+
+async function generateAnimatedSceneClipViaDeapi({
+  apiKey,
+  rawImgPath,
+  heroImgPath,
+  compImgPath,
+  heroName,
+  companionName,
+  speakerName,
+  sceneTitle,
+  dialogueArabic,
+  aiVisualScenePromptEn,
+  sceneIndex,
+  totalScenes,
+  topicText,
+  isShort,
+  outW,
+  outH,
+  tmpDir,
+  formatTag,
+}) {
+  const baseUrl = String(process.env.DEAPI_BASE_URL || "https://api.deapi.ai").replace(/\/$/, "");
+  const catalog = await discoverActiveDeapiModelsCatalog(apiKey, baseUrl);
+  const modelInfo = catalog.img2video;
+  const params = resolveDeapiModelRenderParams(modelInfo, isShort);
+
+  const effectiveHeroName = heroName || speakerName || "الطبيبة نورين";
+  const effectiveCompName = companionName || "";
+  const prompts = effectiveCompName
+    ? buildMultiCharacterStoryPrompts({
+        heroName: effectiveHeroName,
+        companionName: effectiveCompName,
+        speakerName: speakerName || effectiveHeroName,
+        sceneTitle,
+        dialogueArabic,
+        aiVisualScenePromptEn,
+        sceneIndex,
+        totalScenes,
+        topicText,
+      })
+    : {
+        sceneKeyframePrompt: "",
+        videoMotionPrompt: buildCartoonSceneMotionPrompt({
+          speakerName,
+          sceneTitle,
+          sceneIndex,
+          totalScenes,
+          topicText,
+        }),
+      };
+
+  // Prepare clean banner-free character references (strip bottom nameplate banner from char_*.jpg)
+  let preparedInputPath = null;
+  const primaryHeroPath = heroImgPath || rawImgPath;
+  const primaryCompPath = compImgPath || null;
+
+  if (primaryHeroPath && primaryCompPath && effectiveCompName) {
+    const heroCleanPath = path.join(tmpDir, `clean_hero_ref_${formatTag}_${sceneIndex}.jpg`);
+    const compCleanPath = path.join(tmpDir, `clean_comp_ref_${formatTag}_${sceneIndex}.jpg`);
+    await cropCharacterReferenceWithoutBanner(primaryHeroPath, heroCleanPath);
+    await cropCharacterReferenceWithoutBanner(primaryCompPath, compCleanPath);
+
+    // Stage A: Synthesize unified multi-character 3D story scene keyframe (Hero + Companion + Supporting Cast in story world)
+    preparedInputPath = await generateMultiCharacterStoryKeyframeViaDeapi({
+      apiKey,
+      baseUrl,
+      catalog,
+      heroCleanPath,
+      compCleanPath,
+      sceneKeyframePrompt: prompts.sceneKeyframePrompt,
+      targetW: params.width,
+      targetH: params.height,
+      sceneIndex,
+      totalScenes,
+      tmpDir,
+      formatTag,
+    });
+
+    // Clean local banner-free duo fallback if neither img2img nor txt2img model is enabled on account
+    if (!preparedInputPath) {
+      const localDuoFramePath = path.join(tmpDir, `deapi_local_duo_${formatTag}_${sceneIndex}.jpg`);
+      preparedInputPath = await buildCleanLocalDuoStoryFrameJpg({
+        heroCleanPath,
+        compCleanPath,
+        targetW: params.width,
+        targetH: params.height,
+        sceneIndex,
+        outJpgPath: localDuoFramePath,
+      });
+    }
+  } else {
+    const inputFramePath = path.join(tmpDir, `deapi_in_${formatTag}_${sceneIndex}.jpg`);
+    preparedInputPath = await prepareDeapiInputFrameJpg(
+      rawImgPath || primaryHeroPath,
+      params.width,
+      params.height,
+      inputFramePath
+    );
+  }
+
+  const imgBuffer = fs.readFileSync(preparedInputPath);
+
+  // Stage B: Animate the multi-character story frame via img2video with full 429 RPM recovery
+  const { requestId, statusBaseUrl } = await submitDeapiJobWithRateLimitRecovery({
+    apiKey,
+    sceneLabel: `deAPI.ai Video Scene ${sceneIndex + 1}/${totalScenes}`,
+    endpointsToTry: [
+      {
+        submitUrl: `${baseUrl}/api/v2/videos/animations`,
+        statusBaseUrl: `${baseUrl}/api/v2/jobs`,
+        label: "v2/videos/animations",
+      },
+      {
+        submitUrl: `${baseUrl}/api/v1/client/img2video`,
+        statusBaseUrl: `${baseUrl}/api/v1/client/request-status`,
+        label: "v1/client/img2video",
+      },
+    ],
+    buildRequestInit: (attempt) => {
+      const form = new FormData();
+      form.append(
+        "first_frame_image",
+        new Blob([imgBuffer], { type: "image/jpeg" }),
+        path.basename(preparedInputPath)
+      );
+      form.append("prompt", prompts.videoMotionPrompt);
+      form.append("model", String(modelInfo.slug));
+      form.append("width", String(params.width));
+      form.append("height", String(params.height));
+      form.append("frames", String(params.frames));
+      form.append("fps", String(params.fps));
+      form.append("seed", "-1");
+      if (params.steps !== null && attempt !== 2) {
+        form.append("steps", String(params.steps));
+      }
+      if (params.guidance !== null && attempt !== 2) {
+        form.append("guidance", String(params.guidance));
+      }
+      if (params.supportsNegative && attempt !== 2) {
+        form.append(
+          "negative_prompt",
+          "blurry, distorted face, extra limbs, morphing identity, horror, ugly, watermark, text, banner, static freeze"
+        );
+      }
+      return { body: form };
+    },
+  });
+
+  console.log(
+    `   🎞️ [deAPI.ai Scene ${sceneIndex + 1}/${totalScenes}] Video animation job queued (request_id=${requestId}, model=${modelInfo.slug}, ${params.width}x${params.height}, ${params.frames}f@${params.fps}fps)...`
+  );
+
+  const resultVideoUrl = await pollDeapiJobResultUrl({
+    apiKey,
+    baseUrl,
+    statusBaseUrl,
+    requestId,
+    maxWaitMs: 240_000,
+  });
 
   const rawClipPath = path.join(tmpDir, `deapi_raw_${formatTag}_${sceneIndex}.mp4`);
   const dlRes = await fetch(resultVideoUrl);
@@ -2173,7 +2891,6 @@ async function generateAnimatedSceneClipViaDeapi({
   fs.writeFileSync(rawClipPath, videoBytes);
 
   // Build seamless Ping-Pong (Forward + Reversed) 30fps loop unit at exact episode resolution (outW x outH)
-  // This eliminates any jump-cut when looping across 15s Short scenes or 39-50s Long scenes!
   const pingPongPath = path.join(tmpDir, `deapi_pingpong_${formatTag}_${sceneIndex}.mp4`);
   await execFileAsync("ffmpeg", [
     "-y",
@@ -2202,7 +2919,7 @@ async function generateAnimatedSceneClipViaDeapi({
   }
 
   console.log(
-    `   ✅ [deAPI.ai Scene ${sceneIndex + 1}/${totalScenes}] Animated 3D clip ready & seamless ping-pong loop prepared!`
+    `   ✅ [deAPI.ai Scene ${sceneIndex + 1}/${totalScenes}] Multi-character animated 3D story clip ready & seamless loop prepared!`
   );
   return pingPongPath;
 }
@@ -2460,39 +3177,56 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
   // so FFmpeg does not re-evaluate scale+eq filters on 9,000-15,000 frames in Long videos.
   const prebakedMap = new Map();
   const getPrebakedPortrait = async (rawImgPath, tagIdx) => {
-    if (prebakedMap.has(rawImgPath)) {
-      return prebakedMap.get(rawImgPath);
+    const cacheKey = `duo_${tagIdx % 2}`;
+    if (prebakedMap.has(cacheKey)) {
+      return prebakedMap.get(cacheKey);
     }
-    const bakedPath = path.join(tmpDir, `prebaked_static_${tagIdx}.jpg`);
-    await execFileAsync("ffmpeg", [
-      "-y",
-      "-i",
-      rawImgPath,
-      "-vf",
-      `scale=${overscanW}:${overscanH}:force_original_aspect_ratio=increase,crop=${overscanW}:${overscanH},eq=saturation=1.14:contrast=1.05,vignette=PI/6,setsar=1,format=yuv420p`,
-      "-frames:v",
-      "1",
-      "-q:v",
-      "2",
-      bakedPath,
-    ]);
+    const bakedPath = path.join(tmpDir, `prebaked_duo_static_${tagIdx}.jpg`);
+    try {
+      const heroClean = path.join(tmpDir, `fallback_hero_clean_${tagIdx}.jpg`);
+      const compClean = path.join(tmpDir, `fallback_comp_clean_${tagIdx}.jpg`);
+      await cropCharacterReferenceWithoutBanner(heroImg, heroClean);
+      await cropCharacterReferenceWithoutBanner(compImg, compClean);
+      await buildCleanLocalDuoStoryFrameJpg({
+        heroCleanPath: heroClean,
+        compCleanPath: compClean,
+        targetW: overscanW,
+        targetH: overscanH,
+        sceneIndex: tagIdx,
+        outJpgPath: bakedPath,
+      });
+    } catch {}
+    if (!fs.existsSync(bakedPath) || fs.statSync(bakedPath).size <= 1000) {
+      await execFileAsync("ffmpeg", [
+        "-y",
+        "-i",
+        rawImgPath,
+        "-vf",
+        `crop=iw:trunc(ih*0.76/2)*2:0:0,scale=${overscanW}:${overscanH}:force_original_aspect_ratio=increase,crop=${overscanW}:${overscanH},eq=saturation=1.14:contrast=1.05,vignette=PI/6,setsar=1,format=yuv420p`,
+        "-frames:v",
+        "1",
+        "-q:v",
+        "2",
+        bakedPath,
+      ]);
+    }
     const finalBaked =
       fs.existsSync(bakedPath) && fs.statSync(bakedPath).size > 1000
         ? bakedPath
         : rawImgPath;
-    prebakedMap.set(rawImgPath, finalBaked);
+    prebakedMap.set(cacheKey, finalBaked);
     return finalBaked;
   };
 
-  // Stage 1.5: Generate AI-Animated 3D Cartoon Clips per scene via deAPI.ai (when DEAPI_API_KEY is configured)
+  // Stage 1.5: Generate Multi-Character AI-Animated 3D Cartoon Story Clips per scene via deAPI.ai
   const deapiApiKey = String(process.env.DEAPI_API_KEY || "").trim();
   const animatedSceneClipMap = new Map();
   if (deapiApiKey) {
     console.log(
-      `🎨 [deAPI.ai 3D Animation Engine] Animating ${preparedScenes.length} scenes for ${videoFormat} from verified local character portraits...`
+      `🎨 [deAPI.ai 3D Story Animation Engine] Creating multi-character animated story scenes (${heroName} + ${companionName} + story cast) sequentially across ${preparedScenes.length} scenes for ${videoFormat}...`
     );
-    const DEAPI_CONCURRENCY = 2;
-    const animTasks = preparedScenes.map((item, idx) => async () => {
+    const animateSingleScene = async (idx, passLabel = "Pass 1") => {
+      const item = preparedScenes[idx];
       const sc = item.scene;
       const isCompTurn = idx % 2 === 1;
       const spkName = sc.speakerName || (isCompTurn ? companionName : heroName);
@@ -2500,37 +3234,65 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
         spkName,
         isCompTurn ? companionName : heroName
       );
+      const animatedLoopMp4 = await generateAnimatedSceneClipViaDeapi({
+        apiKey: deapiApiKey,
+        rawImgPath: localPortraitPath,
+        heroImgPath: heroImg,
+        compImgPath: compImg,
+        heroName,
+        companionName,
+        speakerName: spkName,
+        sceneTitle: sc.title || "",
+        dialogueArabic: sc.dialogueArabic || "",
+        aiVisualScenePromptEn: sc.visualScenePromptEn || "",
+        sceneIndex: idx,
+        totalScenes: preparedScenes.length,
+        topicText: rawTopicText,
+        isShort,
+        outW: W,
+        outH: H,
+        tmpDir,
+        formatTag: `${videoFormat}_${passLabel.replace(/\s+/g, "").toLowerCase()}`,
+      });
+      animatedSceneClipMap.set(idx, animatedLoopMp4);
+    };
+
+    // Strictly sequential (CONCURRENCY = 1) so simultaneous bursts never trigger HTTP 429 drops on Scene 1 or Scene 4!
+    for (let idx = 0; idx < preparedScenes.length; idx++) {
       try {
-        const animatedLoopMp4 = await generateAnimatedSceneClipViaDeapi({
-          apiKey: deapiApiKey,
-          rawImgPath: localPortraitPath,
-          speakerName: spkName,
-          sceneTitle: sc.title || "",
-          sceneIndex: idx,
-          totalScenes: preparedScenes.length,
-          topicText: rawTopicText,
-          isShort,
-          outW: W,
-          outH: H,
-          tmpDir,
-          formatTag: videoFormat,
-        });
-        animatedSceneClipMap.set(idx, animatedLoopMp4);
+        await animateSingleScene(idx, "p1");
       } catch (deapiErr) {
         console.warn(
-          `   ⚠️ [deAPI.ai Fallback Notice - Scene ${idx + 1}/${preparedScenes.length}] Could not animate via deAPI (${
-            deapiErr?.message || deapiErr
-          }). Falling back to smooth local portrait motion so episode never fails.`
+          `   ⚠️ [deAPI.ai Pass 1 Notice - Scene ${idx + 1}/${preparedScenes.length}] ${deapiErr?.message || deapiErr}`
         );
       }
-    });
-
-    for (let b = 0; b < animTasks.length; b += DEAPI_CONCURRENCY) {
-      const batch = animTasks.slice(b, b + DEAPI_CONCURRENCY);
-      await Promise.all(batch.map((fn) => fn()));
     }
+
+    // Recovery Pass for any scene that transiently failed (ensures Scene 1 & Final Scene never remain static due to temporary spikes)
+    if (animatedSceneClipMap.size < preparedScenes.length) {
+      const missingIndices = [];
+      for (let idx = 0; idx < preparedScenes.length; idx++) {
+        if (!animatedSceneClipMap.has(idx)) missingIndices.push(idx);
+      }
+      console.log(
+        `   🔄 [deAPI.ai Recovery Pass] Retrying ${missingIndices.length} un-animated scene(s) [${missingIndices.map((n) => n + 1).join(", ")}] after cooldown...`
+      );
+      await sleep(process.env.DEAPI_FAST_TEST_BACKOFF === "1" ? 100 : 25_000);
+      for (const idx of missingIndices) {
+        try {
+          await animateSingleScene(idx, "p2");
+        } catch (retryErr) {
+          console.warn(
+            `   ⚠️ [deAPI.ai Fallback Notice - Scene ${idx + 1}/${preparedScenes.length}] Could not animate after recovery pass (${
+              retryErr?.message || retryErr
+            }). Using banner-free duo motion fallback.`
+          );
+        }
+      }
+    }
+
     console.log(
-      `✨ [deAPI.ai Summary] Animated ${animatedSceneClipMap.size}/${preparedScenes.length} scenes for ${videoFormat}.`
+      `✨ [deAPI.ai Summary] Animated ${animatedSceneClipMap.size}/${preparedScenes.length} multi-character story scenes for ${videoFormat}.`
     );
   } else {
     console.log(
@@ -2647,7 +3409,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     const bottomY = Math.round(H * 0.92);
     const travelY = Math.max(160, Math.round(H * 0.85));
 
-    const isScene1WithPoster = i === 0 && isShort && fs.existsSync(verticalPosterPath);
+    const isScene1WithPoster = i === 0 && isShort && !deapiLoopMp4 && fs.existsSync(verticalPosterPath);
     const isScene2WithSecret = i === 1;
     const isFinalScene = i === preparedScenes.length - 1;
 
@@ -3742,6 +4504,7 @@ function buildSmartEpisodeForRunner({
       voiceName: assignedVoice,
       dialect: dialectMode,
       dialogueArabic: validated,
+      visualScenePromptEn: String(aiSc?.visualScenePromptEn || "").trim(),
       durationSec: perSceneSec,
     };
   });
@@ -4090,7 +4853,13 @@ ${recentTitlesList}
   "title": "عنوان القصة الجديد والمشوق بحيث يكون كامل المعنى وبطول 35 إلى 50 حرفاً دون أن ينقطع المعنى وبدون كلمة Noreen Kids وبدون هاشتاج",
   "moralLesson": "الدرس المستفاد من الحلقة",
   "scenes": [
-    { "sceneNumber": 1, "speakerName": "${team.mainCharacterName}", "title": "عنوان المشهد", "dialogueArabic": "الحوار الكرتوني المباشر الصادر من فم هذه الشخصية فقط دون أي راوي (المشهد الطويل: 90 إلى 115 كلمة، المشهد القصير: 16 إلى 22 كلمة)" }
+    {
+      "sceneNumber": 1,
+      "speakerName": "${team.mainCharacterName}",
+      "title": "عنوان المشهد",
+      "dialogueArabic": "الحوار الكرتوني المباشر الصادر من فم هذه الشخصية فقط دون أي راوي (المشهد الطويل: 90 إلى 115 كلمة، المشهد القصير: 16 إلى 22 كلمة)",
+      "visualScenePromptEn": "English Pixar 3D visual action description (20-35 words) showing BOTH the Hero and Companion together in the same shot with any supporting story characters (e.g. baby whale, puppy, neighbor) actively moving, running, swimming, or working together to act out this exact scene, no text"
+    }
   ]
 }`;
       let parsed = null;
