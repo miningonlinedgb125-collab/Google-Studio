@@ -37,6 +37,16 @@
     {
       "topic": "مَلَك وَلُولِيتَا وَإِسْعَافُ صَدِيقِ الحَدِيقَةِ",
       "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "سدرة والفراشة ورحلة الحروف الملونة المفقودة",
+      "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "مَلَك وَلُولِيتَا وَإِسْعَافُ صَدِيقِ الحَدِيقَةِ",
+      "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا",
       "timestampIso": "2026-10-25T06:28:19.149Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس",
       "timestampIso": "2026-10-23T10:11:47.843Z"
-    },
-    {
-      "topic": "حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "مبادرة إعادة تدوير ألعاب الأطفال القديمة وإهدائها",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة"
-    },
-    {
-      "topic": "حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-10-22T19:15:10.384Z"
-    },
-    {
-      "topic": "مبادرة إعادة تدوير ألعاب الأطفال القديمة وإهدائها",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة",
-      "timestampIso": "2026-10-22T19:15:10.384Z"
     }
   ],
   "scheduledHistory": [
@@ -2714,27 +2702,27 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٥‏/١٠‏/٢٠٢٦، ١٠:٠٥:١٦ ص",
   "lastCloudRunReport": {
-    "id": "gh-run-40159439145",
+    "id": "gh-run-40168872468",
     "uploadMode": "manual_instant",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-25 (07:05 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792900089899-fvqc",
-    "longEpisodeId": "ep-gh-long-1792900160923-u70j",
-    "shortEpisodeTitle": "Noreen Kids: تامر وكركور ولغز ثمار شجرة الأمانة الذهبية | مغامرات تامر وكركور",
-    "longEpisodeTitle": "ملك ولوليتا وسر حقيبة الطوارئ ورقم النجدة",
-    "shortTitle": "Noreen Kids: تامر وكركور ولغز ثمار شجرة الأمانة الذهبية | مغامرات تامر وكركور",
-    "longTitle": "ملك ولوليتا وسر حقيبة الطوارئ ورقم النجدة",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-25 (10:05 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792909677406-hl5o",
+    "longEpisodeId": "ep-gh-long-1792909699148-48v1",
+    "shortEpisodeTitle": "Noreen Kids: مَلَك وَلُولِيتَا وَإِسْعَافُ صَدِيقِ الحَدِيقَةِ | مغامرات الطبيبة ملك والقطة لوليتا",
+    "longEpisodeTitle": "سدرة والفراشة ورحلة الحروف الملونة المفقودة",
+    "shortTitle": "Noreen Kids: مَلَك وَلُولِيتَا وَإِسْعَافُ صَدِيقِ الحَدِيقَةِ | مغامرات الطبيبة ملك والقطة لوليتا",
+    "longTitle": "سدرة والفراشة ورحلة الحروف الملونة المفقودة",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
-    "dialect": "egyptian",
+    "dialect": "fusha",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "zBEXF8sYixk",
-    "facebookShortVideoId": "1439469834242988",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1439469834242988",
-    "facebookShortTitle": "Noreen Kids | تامر وكركور ولغز ثمار شجرة الأمانة الذهبية - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
+    "youtubeShortVideoId": "zZ765g0S-NM",
+    "facebookShortVideoId": "2201035870838718",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2201035870838718",
+    "facebookShortTitle": "Noreen Kids | مَلَك وَلُولِيتَا وَإِسْعَافُ صَدِيقِ الحَدِيقَةِ - مغامرة ملك والقطة لوليتا",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2742,16 +2730,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 720,
-      "height": 1280,
+      "width": 1080,
+      "height": 1920,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 62,
-      "fileSizeBytes": 20342374,
-      "inspectedAt": "07:05"
+      "durationSec": 64,
+      "fileSizeBytes": 93574922,
+      "inspectedAt": "10:05"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2760,7 +2748,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-25T04:05:21.869Z"
+    "reportedAtIso": "2026-10-25T07:05:19.721Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
