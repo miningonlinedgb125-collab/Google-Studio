@@ -37,6 +37,16 @@
     {
       "topic": "تامر وكركور ولغز ثمار شجرة الأمانة الذهبية",
       "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم"
+    },
+    {
+      "topic": "ملك ولوليتا وسر حقيبة الطوارئ ورقم النجدة",
+      "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "تامر وكركور ولغز ثمار شجرة الأمانة الذهبية",
+      "mainCharacterName": "تامر فارس الواحة",
       "companionName": "كركور الببغاء الحكيم",
       "timestampIso": "2026-10-25T03:49:20.923Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "ذياد",
       "companionName": "العصفورة الفرفوشة",
       "timestampIso": "2026-10-22T19:15:10.384Z"
-    },
-    {
-      "topic": "أم ملك وسر اختيار الكتاب المناسب في المكتبة",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح"
-    },
-    {
-      "topic": "سدرة وبناء برج المكعبات العملاق الملون",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة"
-    },
-    {
-      "topic": "أم ملك وسر اختيار الكتاب المناسب في المكتبة",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "timestampIso": "2026-10-22T10:18:35.242Z"
-    },
-    {
-      "topic": "سدرة وبناء برج المكعبات العملاق الملون",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "timestampIso": "2026-10-22T10:18:35.242Z"
     }
   ],
   "scheduledHistory": [
@@ -2707,16 +2695,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٥‏/١٠‏/٢٠٢٦، ٧:٠٥:١٩ ص",
   "lastCloudRunReport": {
-    "id": "gh-run-40152782287",
+    "id": "gh-run-40159439145",
     "uploadMode": "manual_instant",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-25 (05:10 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792893748065-brd9",
-    "longEpisodeId": "ep-gh-long-1792893846017-8gs6",
-    "shortEpisodeTitle": "Noreen Kids: شوشو ومرجان وإنقاذ الحوت الصغير في البحر | مغامرات شوشو ومرجان",
-    "longEpisodeTitle": "كارمن وسمسم وسر جهاز تحلية المطر لورد السطح",
-    "shortTitle": "Noreen Kids: شوشو ومرجان وإنقاذ الحوت الصغير في البحر | مغامرات شوشو ومرجان",
-    "longTitle": "كارمن وسمسم وسر جهاز تحلية المطر لورد السطح",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-25 (07:05 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1792900089899-fvqc",
+    "longEpisodeId": "ep-gh-long-1792900160923-u70j",
+    "shortEpisodeTitle": "Noreen Kids: تامر وكركور ولغز ثمار شجرة الأمانة الذهبية | مغامرات تامر وكركور",
+    "longEpisodeTitle": "ملك ولوليتا وسر حقيبة الطوارئ ورقم النجدة",
+    "shortTitle": "Noreen Kids: تامر وكركور ولغز ثمار شجرة الأمانة الذهبية | مغامرات تامر وكركور",
+    "longTitle": "ملك ولوليتا وسر حقيبة الطوارئ ورقم النجدة",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "privacyStatus": "public",
     "madeForKids": false,
@@ -2724,10 +2712,10 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "qbY_FYua2lQ",
-    "facebookShortVideoId": "2265097617397291",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2265097617397291",
-    "facebookShortTitle": "Noreen Kids | شوشو ومرجان وإنقاذ الحوت الصغير في البحر - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
+    "youtubeShortVideoId": "zBEXF8sYixk",
+    "facebookShortVideoId": "1439469834242988",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1439469834242988",
+    "facebookShortTitle": "Noreen Kids | تامر وكركور ولغز ثمار شجرة الأمانة الذهبية - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2742,9 +2730,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 60,
-      "fileSizeBytes": 13274972,
-      "inspectedAt": "05:10"
+      "durationSec": 62,
+      "fileSizeBytes": 20342374,
+      "inspectedAt": "07:05"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2753,7 +2741,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-25T02:10:41.400Z"
+    "reportedAtIso": "2026-10-25T04:05:21.869Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
