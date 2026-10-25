@@ -69,6 +69,10 @@ const engineFactory = new Function(
     discoverActiveDeapiModelsCatalog,
     resolveDeapiModelRenderParams,
     inferSupportingCastAndSettingEn,
+    getCharacterSpeciesProfileEn,
+    describeCharacterVisualAppearanceEn,
+    sanitizeAiVisualScenePromptAgainstChimeras,
+    ANTI_CHIMERA_NEGATIVE_PROMPT,
     buildMultiCharacterStoryPrompts,
     synthesizeContextualFoleySfxWav,
     synthesizeArabicFushaViaDeapiSpeech,
@@ -96,6 +100,18 @@ test("Schedules & Workflows default to Modern Standard Arabic (fusha) for Native
   );
   assert.match(ytWorkflow, /DEAPI_API_KEY:\s*\$\{\{\s*secrets\.DEAPI_API_KEY\s*\}\}/);
   assert.match(fbWorkflow, /DEAPI_API_KEY:\s*\$\{\{\s*secrets\.DEAPI_API_KEY\s*\}\}/);
+  assert.match(ytWorkflow, /DEAPI_NATIVE_VOICE:\s*['"]?1['"]?/, "YouTube workflow must explicitly set DEAPI_NATIVE_VOICE=1");
+  assert.match(fbWorkflow, /DEAPI_NATIVE_VOICE:\s*['"]?1['"]?/, "Facebook workflow must explicitly set DEAPI_NATIVE_VOICE=1");
+  assert.match(
+    runnerCode,
+    /dialect === "fusha" && Boolean\(deapiApiKey\) && process\.env\.DEAPI_NATIVE_VOICE !== "0"/,
+    "renderEpisodeMp4 must enable useNativeJointEngineAudio by default for Fusha unless DEAPI_NATIVE_VOICE === '0'"
+  );
+  assert.doesNotMatch(
+    runnerCode,
+    /buildSceneFoleyAmbienceWav/,
+    "Runner must not contain undefined buildSceneFoleyAmbienceWav ReferenceError"
+  );
   assert.match(ytWorkflow, /timeout-minutes:\s*150/);
   assert.match(fbWorkflow, /timeout-minutes:\s*150/);
   assert.match(
@@ -589,6 +605,297 @@ test("End-to-end Mock Server (Egyptian Fallback Mode): Multi-chunk Audio-Syncs (
     assert.ok(sawFirstFrameField, "Must upload reference/chained frame in 'first_frame_image' field");
     assert.ok(injected429Recovered, "Must recover cleanly from HTTP 429 during audio-sync chunking");
     assert.ok(fs.existsSync(syncedMp4), "Final chained lip-synced MP4 must exist");
+  } finally {
+    if (origBaseUrl === undefined) delete process.env.DEAPI_BASE_URL;
+    else process.env.DEAPI_BASE_URL = origBaseUrl;
+    if (origFastBackoff === undefined) delete process.env.DEAPI_FAST_TEST_BACKOFF;
+    else process.env.DEAPI_FAST_TEST_BACKOFF = origFastBackoff;
+    if (server) await new Promise((r) => server.close(r));
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test("Anti-Chimera Species Lock & Chatterbox MP3 Format Compliance: Human Heroes Stay 100% Human, Bird/Animal Companions Never Receive Portrait-Bust Fusion or Humanoid Actions", async () => {
+  // 1. Verify all canonical heroes resolve to 100% human and all animal/bird companions resolve to pure non-human species
+  const heroes = [
+    "ذياد",
+    "الطبيبة نورين",
+    "أستاذ شريف",
+    "الشيخ محمود",
+    "تيتا فوزية",
+    "جدو صالح",
+    "كابتن طارق",
+    "مهندس كريم",
+    "كارمن المخترعة الصغيرة",
+    "شوشو القبطان الصغير",
+  ];
+  for (const h of heroes) {
+    const prof = engine.getCharacterSpeciesProfileEn(h);
+    assert.equal(prof.kind, "human", `Hero "${h}" must strictly have kind="human"`);
+    assert.match(prof.visualDescEn, /100%\s*(normal\s+)?human/i);
+  }
+
+  const nonHumanCompanions = [
+    ["العصفورة الفرفوشة", "bird"],
+    ["الصقر الذكي", "bird"],
+    ["الديك الفصيح", "bird"],
+    ["كركور الببغاء", "bird"],
+    ["أرنوب الشقي الممرض", "quadruped"],
+    ["القطة لوليتا", "quadruped"],
+    ["زقلط الكلب الوفي", "quadruped"],
+    ["زعتر الثعلب الصغير", "quadruped"],
+    ["نمور الصغير الشجاع", "quadruped"],
+    ["سمسم السنجاب الطائر", "quadruped"],
+    ["الفأر الذكي", "quadruped"],
+    ["باندا اللطيف", "quadruped"],
+    ["مرجان الدلفين المرح", "dolphin"],
+    ["البطريق المرح", "penguin"],
+    ["فراشة الألوان الجميلة", "butterfly"],
+    ["بلبل الروبوت الصغير", "robot"],
+  ];
+
+  for (const [compName, expectedKind] of nonHumanCompanions) {
+    const prof = engine.getCharacterSpeciesProfileEn(compName);
+    assert.equal(prof.kind, expectedKind, `Companion "${compName}" must strictly resolve to "${expectedKind}"`);
+    assert.match(prof.visualDescEn, /NO human body|ZERO human body|pure/i);
+    assert.doesNotMatch(
+      prof.visualDescEn,
+      /\b(nurse|shirt|jacket|pants|trousers|dress|vest|bow tie|bandana)\b/i,
+      `Companion "${compName}" description must NOT contain human clothing/uniform words`
+    );
+  }
+
+  // 2. Verify Ziad + Cheerful Bird prompts strictly separate human actions from bird actions (even when the bird speaks!)
+  const birdSpeakingPrompts = engine.buildMultiCharacterStoryPrompts({
+    heroName: "ذياد",
+    companionName: "العصفورة الفرفوشة",
+    speakerName: "العصفورة الفرفوشة",
+    sceneTitle: "مغامرة التعاون في الحديقة",
+    dialogueArabic: "زَقْزَقْ! هَيَّا يَا ذِيَادُ نَجْمَعُ البُذُورَ مَعاً بِسُرْعَةٍ وَنَشَاطٍ!",
+    aiVisualScenePromptEn: "Ziad and the bird walking side by side and pointing with lively hand gestures in the park",
+    sceneIndex: 1,
+    totalScenes: 4,
+    topicText: "التعاون والنشاط في الحديقة",
+  });
+
+  assert.match(birdSpeakingPrompts.sceneKeyframePrompt, /STRICT ANATOMY LOCK/);
+  assert.match(birdSpeakingPrompts.sceneKeyframePrompt, /palm-sized|miniature bird anatomy/i);
+  assert.doesNotMatch(
+    birdSpeakingPrompts.sceneKeyframePrompt,
+    /walking side by side/i,
+    "Sanitizer must strip joint bipedal 'walking side by side' from AI visual prompts"
+  );
+  assert.match(
+    birdSpeakingPrompts.videoMotionPrompt,
+    /small orange bird beak|tiny real songbird/i,
+    "When bird companion speaks, videoMotionPrompt must animate beak + wings, NOT human hands"
+  );
+
+  // 3. Mock server test: verify /api/v2/images/edits does NOT upload companion_ref.jpg portrait bust when companion is a bird,
+  //    includes ANTI_CHIMERA_NEGATIVE_PROMPT, and verify synthesizeArabicFushaViaDeapiSpeech sends format: "mp3" (not "wav" -> 422)
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "deapi-antichimera-"));
+  let server = null;
+  const origBaseUrl = process.env.DEAPI_BASE_URL;
+  const origFastBackoff = process.env.DEAPI_FAST_TEST_BACKOFF;
+  process.env.DEAPI_FAST_TEST_BACKOFF = "1";
+  globalThis.__deapiAccountExhausted = false;
+
+  try {
+    const mockKeyframeJpg = path.join(tmpDir, "ziad_bird_keyframe.jpg");
+    await execFileAsync("ffmpeg", [
+      "-y", "-f", "lavfi", "-i", "testsrc=duration=1:size=576x1024:rate=1", "-frames:v", "1", mockKeyframeJpg,
+    ]);
+    const mockNativeAvMp4 = path.join(tmpDir, "ziad_bird_native.mp4");
+    await execFileAsync("ffmpeg", [
+      "-y",
+      "-f", "lavfi", "-i", "testsrc=duration=6.2:size=576x1024:rate=24",
+      "-f", "lavfi", "-i", "sine=frequency=440:duration=6.2:sample_rate=48000",
+      "-c:v", "libx264", "-pix_fmt", "yuv420p",
+      "-c:a", "aac", "-ac", "2", "-shortest",
+      mockNativeAvMp4,
+    ]);
+    const mockTtsMp3 = path.join(tmpDir, "chatterbox_out.mp3");
+    await execFileAsync("ffmpeg", [
+      "-y", "-f", "lavfi", "-i", "sine=frequency=330:duration=2.0:sample_rate=24000", "-c:a", "libmp3lame", mockTtsMp3,
+    ]);
+
+    let capturedEditsMultipart = "";
+    let capturedSpeechPayload = null;
+    let jobSeq = 0;
+    const jobKind = new Map();
+
+    server = http.createServer((req, res) => {
+      const host = req.headers.host;
+      if (req.url.startsWith("/api/v2/models")) {
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(
+          JSON.stringify({
+            data: [
+              {
+                name: "FLUX.2 Klein 4B",
+                slug: "Flux_2_Klein_4B_BF16",
+                inference_types: ["txt2img", "img2img"],
+                info: {
+                  defaults: { width: 576, height: 1024, steps: 4 },
+                  limits: { min_width: 256, max_width: 1024, min_height: 256, max_height: 1024, dimension_multiple: 32 },
+                  features: { supports_steps: true, supports_negative_prompt: true },
+                },
+              },
+              {
+                name: "LTX-2.5 22B Distilled",
+                slug: "Ltx2_5_22B_Dist_INT8",
+                inference_types: ["img2video", "aud2video", "txt2video"],
+                info: {
+                  defaults: { width: 576, height: 1024, frames: 97, fps: 24, steps: 20, guidance: 3.0 },
+                  limits: { min_width: 256, max_width: 1024, min_height: 256, max_height: 1024, dimension_multiple: 32, min_frames: 49, max_frames: 241 },
+                  features: { supports_steps: true, supports_guidance: true, supports_negative_prompt: true },
+                },
+              },
+              {
+                name: "Chatterbox Multilingual TTS",
+                slug: "Chatterbox",
+                inference_types: ["txt2audio"],
+                languages: [{ slug: "ar", name: "Arabic" }],
+              },
+            ],
+          })
+        );
+        return;
+      }
+
+      if (req.method === "POST" && req.url === "/api/v2/images/edits") {
+        const chunks = [];
+        req.on("data", (c) => chunks.push(c));
+        req.on("end", () => {
+          capturedEditsMultipart = Buffer.concat(chunks).toString("latin1");
+          const id = `img_${++jobSeq}`;
+          jobKind.set(id, "img");
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ data: { request_id: id } }));
+        });
+        return;
+      }
+
+      if (req.method === "POST" && req.url === "/api/v2/videos/animations") {
+        req.on("data", () => {});
+        req.on("end", () => {
+          const id = `anim_${++jobSeq}`;
+          jobKind.set(id, "anim");
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ data: { request_id: id } }));
+        });
+        return;
+      }
+
+      if (req.method === "POST" && req.url === "/api/v2/audio/speech") {
+        const chunks = [];
+        req.on("data", (c) => chunks.push(c));
+        req.on("end", () => {
+          const parsed = JSON.parse(Buffer.concat(chunks).toString("utf8"));
+          capturedSpeechPayload = parsed;
+          if (parsed.format !== "mp3") {
+            res.writeHead(422, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ message: "This output format is not supported by this model. Available formats: mp3." }));
+            return;
+          }
+          const id = `tts_${++jobSeq}`;
+          jobKind.set(id, "tts");
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ data: { request_id: id } }));
+        });
+        return;
+      }
+
+      if (req.method === "GET" && req.url.startsWith("/api/v2/jobs/")) {
+        const id = req.url.split("/").pop();
+        const k = jobKind.get(id);
+        const urlMap = {
+          img: `http://${host}/download/keyframe.jpg`,
+          anim: `http://${host}/download/native.mp4`,
+          tts: `http://${host}/download/speech.mp3`,
+        };
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ data: { status: "done", result_url: urlMap[k] } }));
+        return;
+      }
+
+      if (req.url === "/download/keyframe.jpg") {
+        res.writeHead(200, { "Content-Type": "image/jpeg" });
+        res.end(fs.readFileSync(mockKeyframeJpg));
+        return;
+      }
+      if (req.url === "/download/native.mp4") {
+        res.writeHead(200, { "Content-Type": "video/mp4" });
+        res.end(fs.readFileSync(mockNativeAvMp4));
+        return;
+      }
+      if (req.url === "/download/speech.mp3") {
+        res.writeHead(200, { "Content-Type": "audio/mpeg" });
+        res.end(fs.readFileSync(mockTtsMp3));
+        return;
+      }
+
+      res.writeHead(404);
+      res.end("Not found");
+    });
+
+    await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+    const port = server.address().port;
+    process.env.DEAPI_BASE_URL = `http://127.0.0.1:${port}`;
+    engine.resetCache();
+
+    // Verify Chatterbox TTS sends format: "mp3" and converts cleanly to WAV
+    const ttsWav = await engine.synthesizeArabicFushaViaDeapiSpeech({
+      apiKey: "test_key",
+      text: "مَرْحَباً يَا أَصْدِقَائِي!",
+      sceneIndex: 0,
+      tmpDir,
+    });
+    assert.ok(capturedSpeechPayload, "Must call /api/v2/audios/speech");
+    assert.equal(capturedSpeechPayload.format, "mp3", "Chatterbox request must send format='mp3' (never 'wav')");
+    assert.ok(ttsWav && fs.existsSync(ttsWav), "Converted WAV from Chatterbox MP3 must exist");
+
+    // Verify Ziad + Cheerful Bird keyframe edit sends ONLY hero_ref.jpg (NO companion_ref.jpg or duo_scene_ref.jpg!)
+    const ziadImg = path.join(repoRoot, "src/assets/images/char_ziad_young_man_1790685879815.jpg");
+    const birdImg = path.join(repoRoot, "src/assets/images/char_cheerful_bird_1790685899352.jpg");
+
+    await engine.generateAnimatedSceneClipViaDeapi({
+      apiKey: "test_key",
+      rawImgPath: birdImg,
+      heroImgPath: ziadImg,
+      compImgPath: birdImg,
+      heroName: "ذياد",
+      companionName: "العصفورة الفرفوشة",
+      speakerName: "العصفورة الفرفوشة",
+      sceneTitle: "مغامرة البذور في الحديقة",
+      dialogueArabic: "زَقْزَقْ! هَيَّا يَا ذِيَادُ نَجْمَعُ البُذُورَ مَعاً!",
+      dialect: "fusha",
+      preferNativeJointAudio: true,
+      sceneAudioPath: null,
+      sceneDurationSec: 7.5,
+      sceneIndex: 1,
+      totalScenes: 4,
+      topicText: "التعاون في الحديقة",
+      isShort: true,
+      outW: 1080,
+      outH: 1920,
+      tmpDir,
+      formatTag: "short_9_16",
+    });
+
+    assert.ok(capturedEditsMultipart.includes('filename="hero_ref.jpg"'), "Must include human hero_ref.jpg in v2/images/edits");
+    assert.ok(
+      !capturedEditsMultipart.includes('filename="companion_ref.jpg"'),
+      "Must NEVER pass 1024x1024 non-human companion_ref.jpg portrait bust into v2/images/edits (prevents bird-headed human chimera)"
+    );
+    assert.ok(
+      !capturedEditsMultipart.includes('filename="duo_scene_ref.jpg"'),
+      "Must NEVER pass equal-bust duo_scene_ref.jpg into v2/images/edits when companion is non-human"
+    );
+    assert.ok(
+      capturedEditsMultipart.includes("human body with bird head"),
+      "v2/images/edits negative_prompt must include explicit anti-chimera terms"
+    );
   } finally {
     if (origBaseUrl === undefined) delete process.env.DEAPI_BASE_URL;
     else process.env.DEAPI_BASE_URL = origBaseUrl;

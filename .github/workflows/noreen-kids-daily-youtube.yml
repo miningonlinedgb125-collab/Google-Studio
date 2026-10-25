@@ -62,6 +62,7 @@ jobs:
           APP_URL: ${{ secrets.APP_URL }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DEAPI_API_KEY: ${{ secrets.DEAPI_API_KEY }}
+          DEAPI_NATIVE_VOICE: '1'
           DEAPI_VIDEO_UPSCALE: '0'
           YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}

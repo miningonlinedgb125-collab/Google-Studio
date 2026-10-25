@@ -2262,102 +2262,442 @@ function computeAudioChunkPlanSec(totalVoiceSec, maxChunkSec = 9.4, minChunkSec 
   return chunks;
 }
 
-function describeCharacterVisualAppearanceEn(charName) {
+const ANTI_CHIMERA_NEGATIVE_PROMPT =
+  "anthropomorphic animal, furry, humanoid bird, humanoid animal, human body with animal head, human body with bird head, bird-headed human, animal-headed person, hybrid creature, chimera, half-human half-animal, animal wearing human clothes, animal with human hands, bird with human arms, standing upright bipedal animal, mutant, deformed anatomy";
+
+function getCharacterSpeciesProfileEn(charName) {
   const s = String(charName || "").trim();
   if (/الشيخ محمود|شيخ محمود/.test(s)) {
-    return "Sheikh Mahmoud (a kind smiling Egyptian Quran teacher wearing a clean white galabeya and white cap with a gentle short beard)";
+    return {
+      kind: "human",
+      speciesAr: "إنسان بشري كامل",
+      shortLabelEn: "Sheikh Mahmoud",
+      visualDescEn:
+        "Sheikh Mahmoud (a 100% human kind smiling Egyptian Quran teacher wearing a clean white galabeya and white cap with a gentle short beard)",
+      actionPoseEn: "walking gently and gesturing warmly with expressive human hands",
+      speakingCueEn: "speaking with accurate human mouth lip-sync and warm facial expressions",
+      listenerReactionEn: "smiling warmly and nodding encouragingly",
+      mouthPartEn: "mouth",
+    };
   }
   if (/الديك الفصيح|ديك/.test(s)) {
-    return "Al-Deek Al-Faseeh (a colorful smart 3D Pixar rooster with bright red crest, vibrant feathers, and expressive eyes)";
+    return {
+      kind: "bird",
+      speciesAr: "طائر ديك حقيقي صغير بأجنحة وريش ومنقار بدون أي جسم بشري أو ملابس بشرية",
+      shortLabelEn: "Al-Deek Al-Faseeh the small rooster",
+      visualDescEn:
+        "Al-Deek Al-Faseeh (a small natural-scale 3D Pixar colorful rooster bird with bright red comb, real feathered wings, vibrant tail feathers, bird legs, and small beak — 100% pure non-human bird anatomy, NO human body, NO clothes, NO human arms)",
+      actionPoseEn: "perched naturally on a wooden courtyard rail beside the human hero, flapping its feathered wings lively",
+      speakingCueEn: "moving its small cartoon bird beak expressively while keeping its 100% real small rooster body",
+      listenerReactionEn: "tilting its feathered bird head and flapping its small wings happily",
+      mouthPartEn: "beak",
+    };
   }
   if (/تختوخ/.test(s)) {
-    return "Takhtoukh (a cheerful cute chubby 8-year-old Egyptian boy with curly dark hair, rosy cheeks, wearing a bright yellow and blue sporty shirt)";
+    return {
+      kind: "human",
+      speciesAr: "طفل بشري كامل",
+      shortLabelEn: "Takhtoukh",
+      visualDescEn:
+        "Takhtoukh (a 100% human cheerful cute chubby 8-year-old Egyptian boy with curly dark hair, rosy cheeks, wearing a bright yellow and blue sporty shirt)",
+      actionPoseEn: "walking energetically and gesturing with expressive human hands",
+      speakingCueEn: "speaking with accurate human mouth lip-sync and joyful facial expressions",
+      listenerReactionEn: "smiling broadly and reacting enthusiastically",
+      mouthPartEn: "mouth",
+    };
   }
   if (/زقلط|كلب/.test(s)) {
-    return "Zaqlat (a funny adorable 3D Pixar puppy dog with floppy ears, wagging tail, and a bright collar)";
+    return {
+      kind: "quadruped",
+      speciesAr: "جرو كلب حقيقي صغير يمشي على أربع قوائم بدون أي جسم بشري أو ملابس بشرية",
+      shortLabelEn: "Zaqlat the little puppy",
+      visualDescEn:
+        "Zaqlat (a small cute natural-scale four-legged 3D Pixar puppy dog on four paws with floppy ears and wagging tail — 100% pure real puppy anatomy, NO human body, NO clothes, NO human hands)",
+      actionPoseEn: "trotting and hopping playfully on all four paws on the ground beside the human hero",
+      speakingCueEn: "moving its cute puppy muzzle expressively while standing on all four paws as a 100% real small dog",
+      listenerReactionEn: "wagging its tail and tilting its floppy-eared puppy head on four paws",
+      mouthPartEn: "muzzle",
+    };
   }
   if (/أم ملك|ام ملك/.test(s)) {
-    return "Teacher Om Malak (a warm smiling Egyptian female school teacher wearing a neat pastel hijab and modest colorful blazer)";
+    return {
+      kind: "human",
+      speciesAr: "معلمة بشرية كاملة",
+      shortLabelEn: "Teacher Om Malak",
+      visualDescEn:
+        "Teacher Om Malak (a 100% human warm smiling Egyptian female school teacher wearing a neat pastel hijab and modest colorful blazer)",
+      actionPoseEn: "walking gracefully and gesturing kindly with expressive human hands",
+      speakingCueEn: "speaking with accurate human mouth lip-sync and warm maternal expressions",
+      listenerReactionEn: "smiling kindly and nodding attentively",
+      mouthPartEn: "mouth",
+    };
   }
   if (/بطريق/.test(s)) {
-    return "Al-Batreeq (a playful cute 3D Pixar little penguin wearing a colorful bow tie)";
+    return {
+      kind: "penguin",
+      speciesAr: "طائر بطريق حقيقي صغير قصير القامة بزعانف ومنقار بدون أي جسم بشري أو أيدٍ بشرية",
+      shortLabelEn: "the little Penguin",
+      visualDescEn:
+        "Al-Batreeq (a small knee-high plump 3D Pixar little penguin with black-and-white feathers, short penguin flippers, orange webbed feet, and small orange beak — 100% pure small penguin bird anatomy, NO human body, NO human arms or hands, NO human clothes)",
+      actionPoseEn: "waddling happily on short webbed feet and flapping its tiny penguin flippers at knee height beside the human hero",
+      speakingCueEn: "moving its cute orange penguin beak expressively while staying a small knee-high real penguin",
+      listenerReactionEn: "flapping its short penguin flippers and bobbing its little penguin head joyfully",
+      mouthPartEn: "beak",
+    };
   }
   if (/ملك/.test(s) && !/أم ملك|ام ملك/.test(s)) {
-    return "Dr. Malak (a brave cheerful young Egyptian girl emergency doctor wearing a bright medical rescue jacket and stethoscope)";
+    return {
+      kind: "human",
+      speciesAr: "طبيبة بشرية كاملة",
+      shortLabelEn: "Dr. Malak",
+      visualDescEn:
+        "Dr. Malak (a 100% human brave cheerful young Egyptian woman emergency doctor wearing a bright medical rescue jacket and stethoscope)",
+      actionPoseEn: "walking briskly and gesturing with expressive human hands",
+      speakingCueEn: "speaking with accurate human mouth lip-sync and caring facial expressions",
+      listenerReactionEn: "smiling warmly and watching attentively",
+      mouthPartEn: "mouth",
+    };
   }
   if (/لوليتا|قطة/.test(s)) {
-    return "Lolita (an adorable fluffy white-and-orange 3D Pixar kitten wearing a cute little helper collar)";
+    return {
+      kind: "quadruped",
+      speciesAr: "قطة حقيقية صغيرة تمشي على أربع قوائم بدون أي جسم بشري أو ملابس بشرية",
+      shortLabelEn: "Lolita the little kitten",
+      visualDescEn:
+        "Lolita (a small adorable four-legged fluffy white-and-orange 3D Pixar kitten walking on four paws with a fluffy tail and whiskers — 100% pure real small cat anatomy, NO human body, NO clothes, NO human hands)",
+      actionPoseEn: "walking and sitting gracefully on all four paws at small pet scale beside the human hero",
+      speakingCueEn: "moving its tiny cute kitten mouth expressively while staying on four paws as a 100% real small cat",
+      listenerReactionEn: "purring, blinking big cute cat eyes, and swishing its fluffy tail on four paws",
+      mouthPartEn: "kitten mouth",
+    };
   }
   if (/سدرة الصغنونة|سدرة/.test(s)) {
-    return "Little Sidra (a sweet cute 4-year-old Egyptian toddler girl with pigtails, big sparkling eyes, and a colorful dress)";
+    return {
+      kind: "human",
+      speciesAr: "طفلة بشرية صغيرة كاملة",
+      shortLabelEn: "Little Sidra",
+      visualDescEn:
+        "Little Sidra (a 100% human sweet cute 4-year-old Egyptian toddler girl with pigtails, big sparkling eyes, and a colorful dress)",
+      actionPoseEn: "stepping happily and gesturing with tiny human hands",
+      speakingCueEn: "speaking with accurate toddler human mouth lip-sync and innocent joyful expressions",
+      listenerReactionEn: "giggling and watching with wide sparkling eyes",
+      mouthPartEn: "mouth",
+    };
   }
   if (/فراشة/.test(s)) {
-    return "the Colorful Butterfly (a magical glowing 3D Pixar butterfly with sparkling rainbow wings and cute smiling face)";
+    return {
+      kind: "butterfly",
+      speciesAr: "فراشة حقيقية صغيرة بأجنحة ملونة تطير في الهواء بدون أي جسم بشري إطلاقاً",
+      shortLabelEn: "the tiny Colorful Butterfly",
+      visualDescEn:
+        "the Colorful Butterfly (a tiny palm-sized glowing 3D Pixar butterfly with sparkling rainbow butterfly wings and tiny antennae — 100% pure small butterfly anatomy, NOT a humanoid fairy, NO human body, NO limbs or clothes)",
+      actionPoseEn: "fluttering its sparkling rainbow wings gracefully in mid-air near shoulder height beside the human hero",
+      speakingCueEn: "speaking expressively while hovering in mid-air as a tiny palm-sized real butterfly",
+      listenerReactionEn: "fluttering in joyful circles in the air with glowing rainbow wings",
+      mouthPartEn: "mouth",
+    };
   }
   if (/ذياد|زياد/.test(s)) {
-    return "Ziad (a kind athletic young Egyptian scout hero wearing a neat adventure vest and carrying a helper backpack)";
+    return {
+      kind: "human",
+      speciesAr: "شاب بشري رياضي كامل",
+      shortLabelEn: "Ziad",
+      visualDescEn:
+        "Ziad (a 100% human kind athletic young Egyptian man with neat wavy black hair, trimmed short beard, warm smile, wearing a teal-and-cream sporty jacket)",
+      actionPoseEn: "walking naturally and gesturing with expressive human hands",
+      speakingCueEn: "speaking with accurate human mouth lip-sync and warm friendly facial expressions",
+      listenerReactionEn: "smiling warmly and looking fondly at his tiny bird friend",
+      mouthPartEn: "mouth",
+    };
   }
   if (/عصفورة/.test(s)) {
-    return "the Cheerful Songbird (a bright colorful 3D Pixar little bird fluttering happily)";
+    return {
+      kind: "bird",
+      speciesAr: "عصفورة حقيقية صغيرة الحجم (بحجم الكف) بريش وأجنحة ومنقار صغير بدون أي جسم بشري أو ملابس أو أيدٍ بشرية إطلاقاً",
+      shortLabelEn: "the tiny Cheerful Songbird",
+      visualDescEn:
+        "the Cheerful Songbird (a tiny palm-sized sky-blue and sunny-yellow 3D Pixar little songbird with a tiny pastel flower crown, real feathered wings, tiny bird feet, and small orange beak — 100% pure miniature bird anatomy, ZERO human body, ZERO human torso, ZERO clothes, ZERO human hands)",
+      actionPoseEn: "fluttering its tiny blue feathered wings in mid-air and perching on a tree branch or Ziad's shoulder at true miniature songbird scale",
+      speakingCueEn: "opening and closing its small orange bird beak in expressive lip-sync while perched or fluttering as a 100% tiny real songbird",
+      listenerReactionEn: "fluttering its tiny blue wings happily and chirping from its perch beside Ziad",
+      mouthPartEn: "beak",
+    };
   }
   if (/شريف/.test(s)) {
-    return "Mr. Sherif (a friendly smart Egyptian teacher wearing neat glasses and a tidy smart-casual shirt)";
+    return {
+      kind: "human",
+      speciesAr: "معلم بشري كامل",
+      shortLabelEn: "Mr. Sherif",
+      visualDescEn:
+        "Mr. Sherif (a 100% human friendly smart Egyptian male teacher wearing neat glasses and a tidy smart-casual shirt)",
+      actionPoseEn: "walking calmly and explaining with expressive human hands",
+      speakingCueEn: "speaking with accurate human mouth lip-sync and clear friendly expressions",
+      listenerReactionEn: "smiling thoughtfully and nodding",
+      mouthPartEn: "mouth",
+    };
   }
   if (/صقر/.test(s)) {
-    return "the Smart Falcon (a noble friendly 3D Pixar falcon with golden-brown feathers and keen bright eyes)";
+    return {
+      kind: "bird",
+      speciesAr: "طائر صقر حقيقي بأجنحة وريش ومخالب ومنقار بدون أي جسم بشري أو ملابس بشرية",
+      shortLabelEn: "the Smart Falcon bird",
+      visualDescEn:
+        "the Smart Falcon (a natural-sized noble 3D Pixar falcon bird with golden-brown feathers, real feathered wings, bird talons, and hooked beak — 100% pure non-human bird anatomy, NO human body, NO clothes, NO human arms)",
+      actionPoseEn: "perched nobly on a wooden perch or gliding with spread feathered wings beside Mr. Sherif at natural bird scale",
+      speakingCueEn: "moving its falcon beak expressively while perched as a 100% real feathered falcon bird",
+      listenerReactionEn: "tilting its keen feathered bird head and rustling its wings attentively",
+      mouthPartEn: "beak",
+    };
   }
   if (/جدو/.test(s)) {
-    return "Grandpa Gedo (a warm loving Egyptian grandfather with silver hair, friendly glasses, and cozy traditional vest)";
+    return {
+      kind: "human",
+      speciesAr: "جد بشري حكيم كامل",
+      shortLabelEn: "Grandpa Gedo",
+      visualDescEn:
+        "Grandpa Gedo (a 100% human warm loving Egyptian grandfather with silver hair, friendly glasses, and cozy traditional vest)",
+      actionPoseEn: "walking gently and gesturing warmly with expressive human hands",
+      speakingCueEn: "speaking with accurate human mouth lip-sync and kind grandfatherly expressions",
+      listenerReactionEn: "chuckling warmly and nodding kindly",
+      mouthPartEn: "mouth",
+    };
   }
   if (/فأر/.test(s)) {
-    return "the Playful Little Mouse (a cute tiny 3D Pixar mouse with big round ears and a cheerful smile)";
+    return {
+      kind: "quadruped",
+      speciesAr: "فأر حقيقي صغير جداً بحجم الكف يمشي على أربع قوائم بدون أي جسم بشري أو ملابس",
+      shortLabelEn: "the tiny Playful Mouse",
+      visualDescEn:
+        "the Playful Little Mouse (a tiny palm-sized cute 3D Pixar mouse with big round mouse ears, whiskers, four tiny paws, and thin tail — 100% pure miniature mouse anatomy, NO human body, NO human clothes)",
+      actionPoseEn: "scampering playfully on four tiny paws along a wooden table or ledge beside Grandpa Gedo at miniature mouse scale",
+      speakingCueEn: "moving its tiny mouse snout expressively while staying a palm-sized real 3D mouse",
+      listenerReactionEn: "twitching its whiskers and perking up its round mouse ears",
+      mouthPartEn: "snout",
+    };
   }
   if (/تيتة|تيته/.test(s)) {
-    return "Grandma Teta (a kind loving Egyptian grandmother with a warm headscarf, gentle glasses, and sweet smile)";
+    return {
+      kind: "human",
+      speciesAr: "جدة بشرية حنونة كاملة",
+      shortLabelEn: "Grandma Teta",
+      visualDescEn:
+        "Grandma Teta (a 100% human kind loving Egyptian grandmother with a warm headscarf, gentle glasses, and sweet smile)",
+      actionPoseEn: "walking gently and gesturing affectionately with human hands",
+      speakingCueEn: "speaking with accurate human mouth lip-sync and loving expressions",
+      listenerReactionEn: "smiling tenderly and nodding",
+      mouthPartEn: "mouth",
+    };
   }
   if (/باندا/.test(s)) {
-    return "the Cuddly Panda (a friendly cute 3D Pixar baby panda bear)";
+    return {
+      kind: "quadruped",
+      speciesAr: "دب باندا صغير حقيقي بفرو أبيض وأسود يمشي ويجلس على قوائمه بدون أي جسم بشري أو ملابس",
+      shortLabelEn: "the baby Panda cub",
+      visualDescEn:
+        "the Cuddly Baby Panda (a small roly-poly 3D Pixar baby panda bear cub with natural black-and-white fur and four furry paws — 100% pure baby panda bear anatomy, NO human body, NO human clothes, NO human hands)",
+      actionPoseEn: "sitting and ambling playfully on furry panda paws beside Grandma Teta at small cub scale",
+      speakingCueEn: "moving its cute panda muzzle expressively while remaining a 100% real furry baby panda cub",
+      listenerReactionEn: "tilting its round furry panda head and munching a green bamboo leaf happily",
+      mouthPartEn: "muzzle",
+    };
   }
   if (/نوران/.test(s)) {
-    return "Engineer Nouran (a clever cheerful 10-year-old Egyptian girl engineer wearing a yellow safety helmet, denim overalls, and holding smart tools)";
+    return {
+      kind: "human",
+      speciesAr: "طفلة مهندسة بشرية كاملة",
+      shortLabelEn: "Engineer Nouran",
+      visualDescEn:
+        "Engineer Nouran (a 100% human clever cheerful 10-year-old Egyptian girl engineer wearing a yellow safety helmet and denim overalls)",
+      actionPoseEn: "walking confidently and demonstrating ideas with expressive human hands",
+      speakingCueEn: "speaking with accurate human mouth lip-sync and bright enthusiastic expressions",
+      listenerReactionEn: "smiling brightly and nodding",
+      mouthPartEn: "mouth",
+    };
   }
   if (/نمر|فرفوش|نمور/.test(s)) {
-    return "Namoor (a cheerful friendly 3D Pixar cute tiger cub with bright orange stripes and big friendly smile)";
+    return {
+      kind: "quadruped",
+      speciesAr: "شبل نمر صغير حقيقي يمشي على أربع قوائم بدون أي جسم بشري أو ملابس بشرية",
+      shortLabelEn: "Namoor the little tiger cub",
+      visualDescEn:
+        "Namoor (a small cute four-legged 3D Pixar orange tiger cub with black stripes, four furry paws, and striped tail — 100% pure baby tiger cub anatomy, NO human body, NO clothes, NO human hands)",
+      actionPoseEn: "trotting and bounding playfully on all four furry paws beside Engineer Nouran at small cub scale",
+      speakingCueEn: "moving its cute tiger cub muzzle expressively while standing on four paws as a 100% real tiger cub",
+      listenerReactionEn: "wagging its striped tail and tilting its cute tiger cub head on four paws",
+      mouthPartEn: "muzzle",
+    };
   }
   if (/تامر|ياسين/.test(s)) {
-    return "Knight Tamer (a brave 10-year-old Arabian oasis boy knight wearing a shining golden-trimmed tunic and cape)";
+    return {
+      kind: "human",
+      speciesAr: "فتى فارس بشري كامل",
+      shortLabelEn: "Knight Tamer",
+      visualDescEn:
+        "Knight Tamer (a 100% human brave 10-year-old Arabian oasis boy knight wearing a shining golden-trimmed tunic and cape)",
+      actionPoseEn: "stepping bravely and gesturing nobly with human hands",
+      speakingCueEn: "speaking with accurate human mouth lip-sync and brave warm expressions",
+      listenerReactionEn: "smiling nobly and nodding",
+      mouthPartEn: "mouth",
+    };
   }
   if (/كركور|ببغاء/.test(s)) {
-    return "Karkour (a vibrant colorful 3D Pixar wise parrot with emerald and scarlet feathers)";
+    return {
+      kind: "bird",
+      speciesAr: "طائر ببغاء حقيقي صغير بريش ملون وأجنحة ومنقار بدون أي جسم بشري أو ملابس",
+      shortLabelEn: "Karkour the colorful parrot",
+      visualDescEn:
+        "Karkour (a small vibrant emerald-and-scarlet 3D Pixar parrot bird with real feathered wings, bird talons, and curved beak — 100% pure non-human parrot bird anatomy, NO human body, NO clothes, NO human arms)",
+      actionPoseEn: "perched on a palm branch or Knight Tamer's shoulder and fluttering its colorful feathered wings at real parrot scale",
+      speakingCueEn: "moving its curved parrot beak expressively while perched as a 100% real feathered parrot",
+      listenerReactionEn: "fluttering its scarlet-and-emerald wings and bobbing its parrot head",
+      mouthPartEn: "beak",
+    };
   }
   if (/عمرو|فارس المستكشف/.test(s)) {
-    return "Explorer Amr (an adventurous 9-year-old Egyptian boy explorer wearing a khaki safari hat, explorer vest, and compass)";
+    return {
+      kind: "human",
+      speciesAr: "طفل مستكشف بشري كامل",
+      shortLabelEn: "Explorer Amr",
+      visualDescEn:
+        "Explorer Amr (a 100% human adventurous 9-year-old Egyptian boy explorer wearing a khaki safari hat, explorer vest, and compass)",
+      actionPoseEn: "walking along the trail and pointing with expressive human hands",
+      speakingCueEn: "speaking with accurate human mouth lip-sync and excited explorer expressions",
+      listenerReactionEn: "smiling adventurously and watching closely",
+      mouthPartEn: "mouth",
+    };
   }
   if (/زعتر|ثعلب/.test(s)) {
-    return "Zaatar (a clever cute 3D Pixar little orange fox wearing an explorer bandana)";
+    return {
+      kind: "quadruped",
+      speciesAr: "ثعلب صغير حقيقي يمشي على أربع قوائم وذيل كثيف بدون أي جسم بشري أو ملابس",
+      shortLabelEn: "Zaatar the little fox",
+      visualDescEn:
+        "Zaatar (a small cute four-legged 3D Pixar orange kit fox walking on four paws with pointed fox ears and a fluffy white-tipped tail — 100% pure real small fox anatomy, NO human body, NO clothes, NO human hands)",
+      actionPoseEn: "trotting nimbly on all four paws along the trail beside Explorer Amr at small fox scale",
+      speakingCueEn: "moving its cute fox muzzle expressively while standing on all four paws as a 100% real small fox",
+      listenerReactionEn: "perking up its fox ears and swishing its fluffy tail on four paws",
+      mouthPartEn: "muzzle",
+    };
   }
   if (/جنى|نور رائدة/.test(s)) {
-    return "Astronaut Jana (a bright 9-year-old Egyptian girl astronaut wearing a sleek white-and-purple space suit with open helmet visor)";
+    return {
+      kind: "human",
+      speciesAr: "طفلة رائدة فضاء بشرية كاملة",
+      shortLabelEn: "Astronaut Jana",
+      visualDescEn:
+        "Astronaut Jana (a 100% human bright 9-year-old Egyptian girl astronaut wearing a sleek white-and-purple space suit with open helmet visor showing her human face)",
+      actionPoseEn: "stepping lightly and gesturing with gloved human hands",
+      speakingCueEn: "speaking with accurate human mouth lip-sync and bright curious expressions",
+      listenerReactionEn: "smiling with wonder and nodding",
+      mouthPartEn: "mouth",
+    };
   }
   if (/بلبل|روبوت/.test(s)) {
-    return "Bulbul (a cute friendly small round 3D Pixar helper robot with glowing blue expressive eyes)";
+    return {
+      kind: "robot",
+      speciesAr: "روبوت كروي طائر صغير ولطيف بحجم الكرة بدون أي جسم بشري",
+      shortLabelEn: "Bulbul the tiny floating robot",
+      visualDescEn:
+        "Bulbul (a tiny basketball-sized round hovering 3D Pixar mini helper pod robot with glowing blue digital eyes and small side thrusters — 100% small spherical robot pod, NO human body, NO human face)",
+      actionPoseEn: "hovering smoothly in mid-air near shoulder height beside Astronaut Jana",
+      speakingCueEn: "pulsing its glowing expressive vocal light bar while hovering as a tiny spherical pod robot",
+      listenerReactionEn: "bobbing happily in mid-air and blinking its glowing blue robot eyes",
+      mouthPartEn: "vocal light display",
+    };
   }
   if (/شوشو|كريم/.test(s)) {
-    return "Captain Shoushou (a brave 9-year-old Egyptian boy sea captain wearing a crisp white-and-navy captain hat and blue maritime jacket)";
+    return {
+      kind: "human",
+      speciesAr: "طفل قبطان بشري كامل",
+      shortLabelEn: "Captain Shoushou",
+      visualDescEn:
+        "Captain Shoushou (a 100% human brave 9-year-old Egyptian boy sea captain wearing a crisp white-and-navy captain hat and blue maritime jacket)",
+      actionPoseEn: "standing on the boat deck or dock and gesturing with expressive human hands",
+      speakingCueEn: "speaking with accurate human mouth lip-sync and cheerful maritime energy",
+      listenerReactionEn: "smiling happily from the boat deck and waving",
+      mouthPartEn: "mouth",
+    };
   }
   if (/مرجان|دلفين/.test(s)) {
-    return "Marjan (a playful smiling 3D Pixar azure-blue dolphin jumping and swimming gracefully)";
+    return {
+      kind: "dolphin",
+      speciesAr: "دلفين بحري حقيقي يسبح ويقفز في الماء بزعانف وذيل بحري بدون أي جسم بشري أو أرجل",
+      shortLabelEn: "Marjan the playful dolphin",
+      visualDescEn:
+        "Marjan (a cute real-anatomy 3D Pixar azure-blue marine dolphin with smooth fins and tail fluke in the sparkling turquoise water — 100% pure marine dolphin anatomy in water, NO legs, NO human body, NO clothes)",
+      actionPoseEn: "swimming and bobbing joyfully with its head above the sparkling ocean water right beside Captain Shoushou's boat deck",
+      speakingCueEn: "moving its smiling dolphin rostrum expressively from the water while remaining a 100% real marine dolphin",
+      listenerReactionEn: "splashing playfully in the turquoise waves and nodding its dolphin head",
+      mouthPartEn: "dolphin mouth",
+    };
   }
   if (/كارمن|سلمى/.test(s)) {
-    return "Inventor Carmen (a creative 9-year-old Egyptian girl inventor with curly hair, cute goggles on her forehead, and colorful workshop apron)";
+    return {
+      kind: "human",
+      speciesAr: "طفلة مخترعة بشرية كاملة",
+      shortLabelEn: "Inventor Carmen",
+      visualDescEn:
+        "Inventor Carmen (a 100% human creative 9-year-old Egyptian girl inventor with curly hair, cute goggles on her forehead, and colorful workshop apron)",
+      actionPoseEn: "walking around her workbench and gesturing with expressive human hands",
+      speakingCueEn: "speaking with accurate human mouth lip-sync and lively inventive expressions",
+      listenerReactionEn: "smiling brightly and watching closely",
+      mouthPartEn: "mouth",
+    };
   }
   if (/سمسم|سنجاب/.test(s)) {
-    return "Simsim (an energetic cute 3D Pixar flying squirrel with fluffy tail)";
+    return {
+      kind: "quadruped",
+      speciesAr: "سنجاب حقيقي صغير جداً بذيل كثيف يقف على غصن أو طاولة بدون أي جسم بشري أو ملابس",
+      shortLabelEn: "Simsim the tiny squirrel",
+      visualDescEn:
+        "Simsim (a tiny cute palm-sized 3D Pixar brown squirrel with big fluffy tail, tiny paws, and bright eyes — 100% pure small squirrel anatomy, NO human body, NO clothes, NO human hands)",
+      actionPoseEn: "scampering and perching on a wooden workbench or tree branch beside Inventor Carmen at tiny squirrel scale",
+      speakingCueEn: "moving its tiny cute squirrel mouth expressively while perched as a 100% real miniature squirrel",
+      listenerReactionEn: "flicking its fluffy squirrel tail and tilting its tiny head curiously",
+      mouthPartEn: "squirrel mouth",
+    };
   }
   if (/أرنوب|أرنب/.test(s)) {
-    return "Arnoob (a cute cheerful 3D Pixar white bunny rabbit nurse wearing a tiny nurse cap)";
+    return {
+      kind: "quadruped",
+      speciesAr: "أرنب أبيض حقيقي صغير يقفز على أربع قوائم بأذنين طويلتين بدون أي جسم بشري أو ملابس بشرية",
+      shortLabelEn: "Arnoob the little white bunny",
+      visualDescEn:
+        "Arnoob (a small cute fluffy white 3D Pixar bunny rabbit on four paws with long pink-lined rabbit ears, cotton tail, and twitching pink nose — 100% pure small rabbit anatomy, NO human body, NO clothing, NO human hands)",
+      actionPoseEn: "hopping and sitting adorably on all four fluffy paws at small pet rabbit scale beside Dr. Noreen",
+      speakingCueEn: "moving its cute bunny mouth expressively while sitting on four paws as a 100% real small white rabbit",
+      listenerReactionEn: "wiggling its long bunny ears and hopping happily on four paws",
+      mouthPartEn: "bunny mouth",
+    };
   }
-  return "Dr. Noreen (a cheerful 9-year-old Egyptian girl junior doctor wearing a neat white lab coat, pink shirt, and stethoscope)";
+  return {
+    kind: "human",
+    speciesAr: "طفلة طبيبة بشرية كاملة",
+    shortLabelEn: "Dr. Noreen",
+    visualDescEn:
+      "Dr. Noreen (a 100% human cheerful 9-year-old Egyptian girl junior doctor wearing a neat white lab coat, pink shirt, and stethoscope)",
+    actionPoseEn: "walking warmly and gesturing with expressive human hands",
+    speakingCueEn: "speaking with accurate human mouth lip-sync and caring bright expressions",
+    listenerReactionEn: "smiling kindly and nodding",
+    mouthPartEn: "mouth",
+  };
+}
+
+function sanitizeAiVisualScenePromptAgainstChimeras(rawPromptEn) {
+  let clean = String(rawPromptEn || "").replace(/\s+/g, " ").trim();
+  if (!clean) return "";
+  clean = clean
+    .replace(/\b(anthropomorphic|humanoid|furry|bipedal|man-bird|bird-man|animal-headed|bird-headed)\b/gi, "")
+    .replace(/\b(both\s+(characters\s+)?)?(walking|running|standing|crouching|stepping|marching)\s+(forward\s+)?side\s+by\s+side\b/gi, "exploring the scene together")
+    .replace(/\bwith\s+lively\s+hand\s+(and\s+body\s+)?gestures\b/gi, "with expressive natural motion")
+    .replace(/\bwearing\s+(a\s+)?(tiny\s+|cute\s+)?(nurse|doctor|explorer|school)?\s*(uniform|coat|shirt|jacket|pants|dress|outfit|clothes)\b/gi, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  return clean;
+}
+
+function describeCharacterVisualAppearanceEn(charName) {
+  return getCharacterSpeciesProfileEn(charName).visualDescEn;
 }
 
 function inferSupportingCastAndSettingEn(combinedArabicText, heroName = "") {
@@ -2439,43 +2779,53 @@ function buildMultiCharacterStoryPrompts({
   totalScenes,
   topicText,
 }) {
-  const heroDesc = describeCharacterVisualAppearanceEn(heroName);
-  const compDesc = describeCharacterVisualAppearanceEn(companionName);
+  const heroProfile = getCharacterSpeciesProfileEn(heroName);
+  const compProfile = getCharacterSpeciesProfileEn(companionName);
+  const heroDesc = heroProfile.visualDescEn;
+  const compDesc = compProfile.visualDescEn;
   const combinedAr = `${topicText || ""} ${sceneTitle || ""} ${dialogueArabic || ""}`;
   const { supportingCast, settingEn, foleyTheme, foleyPromptCueEn } = inferSupportingCastAndSettingEn(combinedAr, heroName);
-  const castWithClause = supportingCast ? ` together with ${supportingCast}` : "";
-  const customAction = String(aiVisualScenePromptEn || "")
-    .replace(/\s+/g, " ")
-    .trim();
+  const castWithClause = supportingCast ? ` alongside ${supportingCast}` : "";
+  const customAction = sanitizeAiVisualScenePromptAgainstChimeras(aiVisualScenePromptEn);
 
   const progressRatio = totalScenes > 1 ? sceneIndex / (totalScenes - 1) : 0;
   let stageAction = "";
   if (sceneIndex === 0) {
-    stageAction = `walking forward side by side into ${settingEn}, discovering the situation${castWithClause}, pointing and gesturing expressively`;
+    stageAction = `${heroProfile.shortLabelEn} (${heroProfile.actionPoseEn}) enters ${settingEn}${castWithClause} while ${compProfile.shortLabelEn} is ${compProfile.actionPoseEn}`;
   } else if (progressRatio < 0.5) {
-    stageAction = `moving closer together in ${settingEn}${castWithClause}, examining the problem and coordinating their teamwork`;
+    stageAction = `${heroProfile.shortLabelEn} kneels/moves closer to inspect the situation in ${settingEn}${castWithClause} while ${compProfile.shortLabelEn} stays ${compProfile.actionPoseEn}`;
   } else if (sceneIndex < totalScenes - 1) {
-    stageAction = `actively working side by side in ${settingEn} to solve the challenge${castWithClause} with dynamic coordinated cartoon movement`;
+    stageAction = `${heroProfile.shortLabelEn} uses human hands and tools to solve the challenge in ${settingEn}${castWithClause} while ${compProfile.shortLabelEn} helps naturally by ${compProfile.actionPoseEn}`;
   } else {
-    stageAction = `stepping forward happily, waving, and celebrating together in ${settingEn}${castWithClause} with joyful smiles`;
+    stageAction = `${heroProfile.shortLabelEn} smiles and waves happily in ${settingEn}${castWithClause} while ${compProfile.shortLabelEn} celebrates by ${compProfile.actionPoseEn}`;
   }
 
-  const unifiedAction = customAction.length > 20
-    ? `${customAction} in ${settingEn}${castWithClause}`
-    : stageAction;
+  const unifiedAction =
+    customAction.length > 20
+      ? `${customAction} in ${settingEn}${castWithClause} (${heroProfile.shortLabelEn} as 100% human, and ${compProfile.shortLabelEn} ${compProfile.actionPoseEn})`
+      : stageAction;
 
-  const isCompSpeaking = speakerName && companionName && speakerName === companionName;
-  const activeSpeakerDesc = isCompSpeaking ? compDesc : heroDesc;
-  const listenerDesc = isCompSpeaking ? heroDesc : compDesc;
+  const isCompSpeaking = Boolean(speakerName && companionName && speakerName === companionName);
+  const speciesLockRule =
+    compProfile.kind !== "human"
+      ? `STRICT ANATOMY LOCK: ${heroProfile.shortLabelEn} is 100% human with a normal human face and human body; ${compProfile.shortLabelEn} is a 100% real-anatomy small non-human ${compProfile.kind} at natural miniature pet/bird scale — NEVER draw a human body with an animal or bird head, NEVER draw anthropomorphic furry clothes or human hands on ${compProfile.shortLabelEn}.`
+      : "";
 
   const sceneKeyframePrompt =
-    `3D Pixar Disney animated movie medium-wide shot featuring BOTH characters clearly facing the camera together in the same frame: ${heroDesc} AND ${compDesc}${castWithClause}. ` +
-    `Action: they are ${unifiedAction}. ` +
-    `Rich 3D environment (${settingEn}), warm cinematic lighting, clear expressive faces and mouths visible for lip-sync dialogue, pure clean movie frame, strictly NO text, NO letters, NO logos, NO banners, NO split screen.`;
+    `3D Pixar Disney animated feature film medium-wide shot in ${settingEn}: ` +
+    `Character 1 (Human Hero): ${heroDesc}. ` +
+    `Character 2 (Small Non-Human Companion): ${compDesc}. ` +
+    `Scene Action: ${unifiedAction}. ${speciesLockRule} ` +
+    `Warm cinematic lighting, ultra-crisp 4K Pixar textures, expressive faces clearly visible, pure clean movie frame, strictly NO text, NO letters, NO logos, NO banners, NO split screen.`;
+
+  const speakingInteractionClause = isCompSpeaking
+    ? `${compProfile.shortLabelEn} is ${compProfile.speakingCueEn}, while the human hero ${heroProfile.shortLabelEn} (${heroProfile.listenerReactionEn}) listens closely`
+    : `${heroProfile.shortLabelEn} is ${heroProfile.speakingCueEn} and ${heroProfile.actionPoseEn}, while ${compProfile.shortLabelEn} (${compProfile.listenerReactionEn}) accompanies them`;
 
   const videoMotionPrompt =
-    `3D Pixar animated cartoon movie scene with accurate lip-sync and natural sound effects: ${activeSpeakerDesc} is speaking the dialogue with accurate expressive mouth lip-sync, natural blinking, and lively hand and body gestures, while ${listenerDesc} reacts, nods, and moves alongside them${castWithClause}, ` +
-    `${unifiedAction}. Natural realistic foley sound effects (${foleyPromptCueEn}), steady smooth cinema camera, vibrant Pixar 3D character acting, no static freeze, no text.`;
+    `3D Pixar animated cartoon movie scene in ${settingEn}: ${speakingInteractionClause}${castWithClause}. ` +
+    `${unifiedAction}. ${speciesLockRule} ` +
+    `Synchronized natural physical foley sound effects (${foleyPromptCueEn}), smooth cinema camera, lively 3D animation, no static freeze, no text.`;
 
   return {
     sceneKeyframePrompt,
@@ -2484,6 +2834,8 @@ function buildMultiCharacterStoryPrompts({
     settingEn,
     foleyTheme,
     foleyPromptCueEn,
+    heroProfile,
+    compProfile,
   };
 }
 
@@ -2511,8 +2863,8 @@ function buildCartoonSceneMotionPrompt({
       topicText,
     }).videoMotionPrompt;
   }
-  const charDesc = describeCharacterVisualAppearanceEn(speakerName);
-  return `High quality 3D Pixar Disney style kids cartoon animation of ${charDesc}, speaking with accurate expressive lip-sync, blinking eyes, warm smile, lively body gestures and footsteps in a vibrant 3D cartoon world. Smooth natural motion, no text.`;
+  const spkProfile = getCharacterSpeciesProfileEn(speakerName);
+  return `High quality 3D Pixar Disney style kids cartoon animation of ${spkProfile.visualDescEn}, ${spkProfile.speakingCueEn}, ${spkProfile.actionPoseEn} in a vibrant 3D cartoon world. Smooth natural motion, no text.`;
 }
 
 async function synthesizeContextualFoleySfxWav({
@@ -2665,32 +3017,45 @@ async function cropCharacterReferenceWithoutBanner(rawImgPath, outJpgPath) {
 async function buildCleanLocalDuoStoryFrameJpg({
   heroCleanPath,
   compCleanPath,
+  companionName = "",
   targetW,
   targetH,
   sceneIndex,
   outJpgPath,
 }) {
-  const swapSides = sceneIndex % 2 === 1;
-  const leftImg = swapSides ? compCleanPath : heroCleanPath;
-  const rightImg = swapSides ? heroCleanPath : compCleanPath;
-  const charH = Math.round(targetH * (targetH > targetW ? 0.56 : 0.86));
-  const charW = Math.round(targetW * 0.54);
-  const leftX = Math.max(0, Math.round(targetW * 0.02));
-  const rightX = Math.max(0, targetW - charW - Math.round(targetW * 0.02));
-  const posY = Math.max(0, Math.round((targetH - charH) * 0.58));
+  const compKind = companionName ? getCharacterSpeciesProfileEn(companionName).kind : "quadruped";
+  const isAerialSmall = compKind === "bird" || compKind === "butterfly" || compKind === "robot";
+  const heroH = Math.round(targetH * (targetH > targetW ? 0.58 : 0.86));
+  const heroW = Math.round(targetW * 0.58);
+  const compScaleFactor = compKind === "human" ? 1.0 : isAerialSmall ? 0.44 : 0.56;
+  const compH = Math.max(96, Math.round(heroH * compScaleFactor));
+  const compW = Math.max(96, Math.round(heroW * compScaleFactor));
+
+  const heroOnLeft = sceneIndex % 2 === 0;
+  const heroX = heroOnLeft
+    ? Math.max(0, Math.round(targetW * 0.03))
+    : Math.max(0, targetW - heroW - Math.round(targetW * 0.03));
+  const heroY = Math.max(0, Math.round((targetH - heroH) * 0.58));
+
+  const compX = heroOnLeft
+    ? Math.max(0, targetW - compW - Math.round(targetW * 0.05))
+    : Math.max(0, Math.round(targetW * 0.05));
+  const compY = isAerialSmall
+    ? Math.max(16, Math.round(heroY * 0.55))
+    : Math.max(16, heroY + heroH - compH);
 
   await execFileAsync("ffmpeg", [
     "-y",
     "-i",
-    leftImg,
+    heroCleanPath,
     "-i",
-    rightImg,
+    compCleanPath,
     "-filter_complex",
     `[0:v]scale=${targetW}:${targetH}:flags=lanczos:force_original_aspect_ratio=increase,crop=${targetW}:${targetH},boxblur=26:5,eq=brightness=0.03:saturation=1.22[bg];` +
-      `[0:v]scale=${charW}:${charH}:flags=lanczos:force_original_aspect_ratio=decrease[c1];` +
-      `[1:v]scale=${charW}:${charH}:flags=lanczos:force_original_aspect_ratio=decrease[c2];` +
-      `[bg][c1]overlay=x=${leftX}:y=${posY}[tmp1];` +
-      `[tmp1][c2]overlay=x=${rightX}:y=${posY},setsar=1,format=yuvj420p[outv]`,
+      `[0:v]scale=${heroW}:${heroH}:flags=lanczos:force_original_aspect_ratio=decrease[ch];` +
+      `[1:v]scale=${compW}:${compH}:flags=lanczos:force_original_aspect_ratio=decrease[cc];` +
+      `[bg][ch]overlay=x=${heroX}:y=${heroY}[tmp1];` +
+      `[tmp1][cc]overlay=x=${compX}:y=${compY},setsar=1,format=yuvj420p[outv]`,
     "-map",
     "[outv]",
     "-frames:v",
@@ -2952,17 +3317,26 @@ async function synthesizeArabicFushaViaDeapiSpeech({
           label: "v1/client/txt2audio",
         },
       ],
-      buildRequestInit: () => ({
+      buildRequestInit: (attempt) => ({
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: ttsModel,
-          voice: "default",
-          lang: "ar",
-          speed: 1,
-          format: "wav",
-          sample_rate: 24000,
-          text: chunks[cIdx],
-        }),
+        body: JSON.stringify(
+          attempt === 1
+            ? {
+                model: ttsModel,
+                voice: "default",
+                lang: "ar",
+                speed: 1,
+                format: "mp3",
+                sample_rate: 24000,
+                text: chunks[cIdx],
+              }
+            : {
+                model: ttsModel,
+                lang: "ar",
+                format: "mp3",
+                text: chunks[cIdx],
+              }
+        ),
       }),
     });
 
@@ -3075,23 +3449,22 @@ function buildNativeJointAudioVideoShotPrompt({
   shotIndex = 0,
   totalShots = 1,
 }) {
-  const heroDesc = describeCharacterVisualAppearanceEn(heroName);
-  const compDesc = companionName ? describeCharacterVisualAppearanceEn(companionName) : "";
+  const heroProfile = getCharacterSpeciesProfileEn(heroName);
+  const compProfile = companionName ? getCharacterSpeciesProfileEn(companionName) : null;
   const speakerIsCompanion =
-    companionName && String(speakerName || "").trim() === String(companionName || "").trim();
-  const activeSpeakerEn = speakerIsCompanion
-    ? compDesc.split("(")[0].trim()
-    : heroDesc.split("(")[0].trim();
+    Boolean(compProfile && companionName && String(speakerName || "").trim() === String(companionName || "").trim());
+  const activeProfile = speakerIsCompanion && compProfile ? compProfile : heroProfile;
+  const listenerProfile = speakerIsCompanion ? heroProfile : compProfile;
 
   const themeFoleyMap = {
-    water: "gentle ocean waves splashing against the boat, playful water droplets, seabirds calling softly, footsteps on wooden deck",
-    sea: "gentle ocean waves splashing against the boat, playful water droplets, seabirds calling softly, footsteps on wooden deck",
-    space: "futuristic soft spacecraft hum, playful gentle control-panel chimes, light footsteps inside the cabin",
-    workshop: "light wooden and metallic tool clinks, footsteps on clean workshop floor, mechanical toy gears clicking",
-    forest: "crisp footsteps on grassy path, rustling green tree leaves, cheerful songbirds chirping, gentle breeze",
-    oasis: "soft footsteps on warm golden sand, palm fronds rustling in the breeze, trickling oasis water stream",
-    clinic: "light footsteps in bright pediatric room, gentle stethoscope and medical kit handling sounds",
-    park: "natural footsteps walking on garden path, rustling leaves, cheerful birds chirping, lively outdoor ambiance",
+    water: "gentle ocean waves splashing against the boat hull, playful water droplets, soft seabird calls, and crisp footsteps on the wooden deck",
+    sea: "gentle ocean waves splashing against the boat hull, playful water droplets, soft seabird calls, and crisp footsteps on the wooden deck",
+    space: "soft spacecraft cabin hum, gentle futuristic console chimes, and light footsteps across the deck",
+    workshop: "light wooden and metallic tool clinks, footsteps on the clean workshop floor, and playful mechanical gadget clicks",
+    forest: "crisp footsteps walking on the grassy orchard path, green tree leaves rustling in a gentle breeze, and cheerful songbird wing flutters",
+    oasis: "soft footsteps on warm golden oasis sand, palm fronds rustling gently, and clear spring water trickling nearby",
+    clinic: "light footsteps in the sunny pediatric room and gentle medical kit handling clicks",
+    park: "natural footsteps crunching softly on the garden path, rustling tree leaves in a light breeze, and lively outdoor nature foley",
   };
   const foleyDesc = [
     String(soundEffectsEn || "").trim(),
@@ -3107,16 +3480,25 @@ function buildNativeJointAudioVideoShotPrompt({
 
   const shotProgressionCue =
     totalShots > 1
-      ? `Continuous story shot ${shotIndex + 1} of ${totalShots}: characters continue moving naturally forward together in the environment with dynamic Pixar body acting.`
-      : `Dynamic continuous story shot: characters walk, gesture, and interact together physically throughout the scene.`;
+      ? `In continuous story shot ${shotIndex + 1} of ${totalShots}, the camera glides smoothly at medium-wide Pixar cinema framing.`
+      : `The camera glides smoothly at medium-wide Pixar cinema framing with lively natural motion.`;
+
+  const anatomyAnchor =
+    compProfile && compProfile.kind !== "human"
+      ? ` ${heroProfile.shortLabelEn} has a 100% normal human face and human body, while ${compProfile.shortLabelEn} remains a 100% pure small real-anatomy ${compProfile.kind} at miniature pet scale with zero human body or human clothes.`
+      : "";
+
+  const speechActionSentence = cleanSpeech
+    ? `${activeProfile.shortLabelEn} (${activeProfile.speakingCueEn}) speaks clearly, warmly, and naturally in fluent child-friendly Modern Standard Arabic: "${cleanSpeech}"${
+        listenerProfile ? `, while ${listenerProfile.shortLabelEn} (${listenerProfile.listenerReactionEn}) reacts warmly.` : "."
+      }`
+    : "";
 
   return (
-    `Masterpiece 4K 3D Pixar-Disney animated feature film shot, ultra-sharp textures, rich cinematic lighting, vibrant colors, smooth 24fps character animation. ` +
-    `${shotProgressionCue} ${baseMotionPrompt} ` +
-    (cleanSpeech
-      ? `${activeSpeakerEn} faces their friend with expressive lip-synced mouth movements and speaks clearly and warmly in fluent child-friendly Modern Standard Arabic (العربية الفصحى السلسة للأطفال): "${cleanSpeech}". `
-      : "") +
-    `DIEGETIC SOUNDTRACK & REALISTIC FOLEY AUDIO: Crisp synchronized environmental sound effects (${foleyDesc}) matching every footstep, hand gesture, and physical movement on screen, with crystal-clear natural Arabic voice and zero background music or static noise.`
+    `A vibrant 4K 3D Pixar-Disney animated feature film scene with rich cinematic lighting and smooth 24fps animation. ` +
+    `${shotProgressionCue} ${baseMotionPrompt}${anatomyAnchor} ` +
+    `${speechActionSentence} ` +
+    `Throughout the shot, authentic synchronized diegetic foley sound effects play clearly in the environment — including ${foleyDesc} — matching every physical movement and spoken Arabic word naturally.`
   );
 }
 
@@ -3210,6 +3592,8 @@ async function generateMultiCharacterStoryKeyframeViaDeapi({
   catalog,
   heroCleanPath,
   compCleanPath,
+  heroName = "",
+  companionName = "",
   sceneKeyframePrompt,
   targetW,
   targetH,
@@ -3219,6 +3603,10 @@ async function generateMultiCharacterStoryKeyframeViaDeapi({
   formatTag,
 }) {
   const keyframeOutPath = path.join(tmpDir, `deapi_story_keyframe_${formatTag}_${sceneIndex}.jpg`);
+  const heroProfile = getCharacterSpeciesProfileEn(heroName);
+  const compProfile = companionName ? getCharacterSpeciesProfileEn(companionName) : { kind: "quadruped" };
+  const companionIsNonHuman = compProfile.kind !== "human";
+  const keyframeNegativePrompt = `text, watermark, banner, nameplate, logo, split screen, static card, blurry, lowres, deformed, ${ANTI_CHIMERA_NEGATIVE_PROMPT}`;
   const editCandidates = (catalog?.img2imgCandidates || [catalog?.img2img].filter(Boolean)).filter(
     (m) => m?.slug && !_sessionUnavailableSlugs.has(m.slug)
   );
@@ -3226,6 +3614,9 @@ async function generateMultiCharacterStoryKeyframeViaDeapi({
   if (editCandidates.length > 0 && heroCleanPath && compCleanPath) {
     const heroBuf = fs.readFileSync(heroCleanPath);
     const compBuf = fs.readFileSync(compCleanPath);
+    const editRefPrompt = companionIsNonHuman
+      ? `Using the provided reference portrait strictly for the 100% human hero ${heroProfile.shortLabelEn} (preserving their exact human face, hair, and outfit), render this full 3D Pixar scene: ${sceneKeyframePrompt}`
+      : sceneKeyframePrompt;
 
     for (const editModel of editCandidates.slice(0, 2)) {
       try {
@@ -3243,16 +3634,20 @@ async function generateMultiCharacterStoryKeyframeViaDeapi({
         const imgH = snapDimensionToGrid(desiredImgH, minH, maxH, mult);
         const editSteps = Number(editDefaults.steps ?? 24) || 24;
 
-        const combinedRefPath = path.join(tmpDir, `deapi_duoref_${formatTag}_${sceneIndex}.jpg`);
-        await buildCleanLocalDuoStoryFrameJpg({
-          heroCleanPath,
-          compCleanPath,
-          targetW: imgW,
-          targetH: imgH,
-          sceneIndex,
-          outJpgPath: combinedRefPath,
-        });
-        const combinedBuf = fs.readFileSync(combinedRefPath);
+        let combinedBuf = null;
+        if (!companionIsNonHuman) {
+          const combinedRefPath = path.join(tmpDir, `deapi_duoref_${formatTag}_${sceneIndex}.jpg`);
+          await buildCleanLocalDuoStoryFrameJpg({
+            heroCleanPath,
+            compCleanPath,
+            companionName,
+            targetW: imgW,
+            targetH: imgH,
+            sceneIndex,
+            outJpgPath: combinedRefPath,
+          });
+          combinedBuf = fs.readFileSync(combinedRefPath);
+        }
 
         const { requestId, statusBaseUrl } = await submitDeapiJobWithRateLimitRecovery({
           apiKey,
@@ -3266,7 +3661,7 @@ async function generateMultiCharacterStoryKeyframeViaDeapi({
           ],
           buildRequestInit: (attempt) => {
             const form = new FormData();
-            form.append("prompt", sceneKeyframePrompt);
+            form.append("prompt", editRefPrompt);
             form.append("model", String(editModel.slug));
             form.append("steps", String(editSteps));
             form.append("seed", "-1");
@@ -3274,12 +3669,19 @@ async function generateMultiCharacterStoryKeyframeViaDeapi({
               form.append("width", String(imgW));
               form.append("height", String(imgH));
               form.append("images[]", new Blob([heroBuf], { type: "image/jpeg" }), "hero_ref.jpg");
-              form.append("images[]", new Blob([compBuf], { type: "image/jpeg" }), "companion_ref.jpg");
+              // Prevent animal/bird-head chimera: NEVER pass a 1024x1024 animal portrait bust as a second person portrait!
+              if (!companionIsNonHuman) {
+                form.append("images[]", new Blob([compBuf], { type: "image/jpeg" }), "companion_ref.jpg");
+              }
               if (editInfo.features?.supports_negative_prompt !== false) {
-                form.append("negative_prompt", "text, watermark, banner, nameplate, logo, split screen, static card, blurry, lowres, deformed");
+                form.append("negative_prompt", keyframeNegativePrompt);
               }
             } else {
-              form.append("image", new Blob([combinedBuf], { type: "image/jpeg" }), "duo_scene_ref.jpg");
+              form.append(
+                "image",
+                new Blob([companionIsNonHuman ? heroBuf : combinedBuf], { type: "image/jpeg" }),
+                "hero_scene_ref.jpg"
+              );
             }
             return { body: form };
           },
@@ -3366,7 +3768,7 @@ async function generateMultiCharacterStoryKeyframeViaDeapi({
               payload.steps = Number(txtDefaults.steps);
             }
             if (txtInfo.features?.supports_negative_prompt !== false) {
-              payload.negative_prompt = "text, watermark, banner, nameplate, logo, split screen, ugly, blurry, lowres, deformed, horror";
+              payload.negative_prompt = `text, watermark, banner, nameplate, logo, split screen, ugly, blurry, lowres, deformed, horror, ${ANTI_CHIMERA_NEGATIVE_PROMPT}`;
             }
           }
           return {
@@ -3532,6 +3934,8 @@ async function generateAnimatedSceneClipViaDeapi({
       catalog,
       heroCleanPath,
       compCleanPath,
+      heroName: effectiveHeroName,
+      companionName: effectiveCompName,
       sceneKeyframePrompt: prompts.sceneKeyframePrompt,
       targetW: baseParams.width,
       targetH: baseParams.height,
@@ -3546,6 +3950,7 @@ async function generateAnimatedSceneClipViaDeapi({
       initialKeyframePath = await buildCleanLocalDuoStoryFrameJpg({
         heroCleanPath,
         compCleanPath,
+        companionName: effectiveCompName,
         targetW: baseParams.width,
         targetH: baseParams.height,
         sceneIndex,
@@ -3570,14 +3975,23 @@ async function generateAnimatedSceneClipViaDeapi({
     try {
       const targetSceneSec = Math.max(
         isShort ? 13.5 : 36.0,
-        Number(sceneDurationSec) || (isShort ? 16.8 : 40.0)
+        Number(sceneDurationSec) || (isShort ? 16.8 : 41.5)
       );
+
+      const isNativeAudioCapableVideoModel = (m) => {
+        const sl = String(m?.slug || "").toLowerCase();
+        const inf = Array.isArray(m?.inference_types) ? m.inference_types.map((t) => String(t).toLowerCase()) : [];
+        return /seedance|ltx2|ltx-2|ltx_2/i.test(sl) || inf.includes("aud2video");
+      };
 
       const getOrderedActiveVideoCandidates = () => {
         const filtered = (catalog.videoCandidates || [catalog.img2video].filter(Boolean)).filter(
           (m) => m?.slug && !_sessionUnavailableSlugs.has(m.slug)
         );
-        return filtered.length > 0 ? filtered : [catalog.img2video];
+        const list = filtered.length > 0 ? filtered : [catalog.img2video];
+        const jointCapable = list.filter(isNativeAudioCapableVideoModel);
+        const rest = list.filter((m) => !isNativeAudioCapableVideoModel(m));
+        return [...jointCapable, ...rest];
       };
 
       const computeMaxShotWindowForModel = (modelObj) => {
@@ -3692,7 +4106,7 @@ async function generateAnimatedSceneClipViaDeapi({
                 if (candParams.supportsNegative && attempt !== 2) {
                   form.append(
                     "negative_prompt",
-                    "silent video, muted audio, closed mouth while speaking, frozen face, static image, blurry, lowres, pixelated, distorted face, extra limbs, watermark, text, banner"
+                    `silent video, muted audio, background music, musical score, singing, closed mouth while speaking, frozen face, static image, blurry, lowres, pixelated, distorted face, extra limbs, watermark, text, banner, ${ANTI_CHIMERA_NEGATIVE_PROMPT}`
                   );
                 }
                 return { body: form };
@@ -3794,12 +4208,12 @@ async function generateAnimatedSceneClipViaDeapi({
               tmpDir,
             });
           } catch {}
-          const fallbackFoleyWav = await buildSceneFoleyAmbienceWav(
-            prompts.foleyTheme || "park",
-            targetShotDurSec,
+          const fallbackFoleyWav = await synthesizeContextualFoleySfxWav({
+            foleyTheme: prompts.foleyTheme || "park",
+            durationSec: targetShotDurSec,
+            sceneIndex: `${formatTag}_fb_${sceneIndex}_${sIdx}`,
             tmpDir,
-            `${formatTag}_fb_${sceneIndex}_${sIdx}`
-          );
+          });
           if (fallbackSpeechPath && fs.existsSync(fallbackSpeechPath)) {
             await execFileAsync("ffmpeg", [
               "-y",
@@ -4081,7 +4495,7 @@ async function generateAnimatedSceneClipViaDeapi({
             if (chunkParams.supportsNegative && attempt !== 2) {
               form.append(
                 "negative_prompt",
-                "closed mouth while speaking, frozen face, static image, blurry, distorted face, extra limbs, watermark, text, banner"
+                `closed mouth while speaking, frozen face, static image, blurry, distorted face, extra limbs, watermark, text, banner, ${ANTI_CHIMERA_NEGATIVE_PROMPT}`
               );
             }
             return { body: form };
@@ -4323,7 +4737,7 @@ async function generateAnimatedSceneClipViaDeapi({
       if (fallbackParams.supportsNegative && attempt !== 2) {
         form.append(
           "negative_prompt",
-          "blurry, distorted face, extra limbs, morphing identity, horror, ugly, watermark, text, banner, static freeze"
+          `blurry, distorted face, extra limbs, morphing identity, horror, ugly, watermark, text, banner, static freeze, ${ANTI_CHIMERA_NEGATIVE_PROMPT}`
         );
       }
       return { body: form };
@@ -4558,7 +4972,8 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "fusha")
   } catch {}
 
   const deapiApiKey = String(process.env.DEAPI_API_KEY || "").trim();
-  const useNativeJointEngineAudio = dialect === "fusha" && Boolean(deapiApiKey) && process.env.DEAPI_NATIVE_VOICE === "1";
+  const useNativeJointEngineAudio =
+    dialect === "fusha" && Boolean(deapiApiKey) && process.env.DEAPI_NATIVE_VOICE !== "0";
 
   // STEP 1: Prepare scene scripts & timing
   // When using Native Joint Engine Audio (Fusha + deAPI), the video model itself speaks the dialogue and generates real Foley SFX!
@@ -4722,6 +5137,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "fusha")
       await buildCleanLocalDuoStoryFrameJpg({
         heroCleanPath: heroClean,
         compCleanPath: compClean,
+        companionName,
         targetW: overscanW,
         targetH: overscanH,
         sceneIndex: tagIdx,
@@ -4833,6 +5249,21 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "fusha")
             }). Using HD duo motion fallback.`
           );
         }
+      }
+    }
+
+    // Post-animation duration floor guard so actual native shot durations always satisfy Pre-Upload Gate
+    const postAnimTotalSec = preparedScenes.reduce((acc, s) => acc + s.durationSec, 0);
+    if (postAnimTotalSec < minTotalSec && preparedScenes.length > 0) {
+      let postDeficit = minTotalSec - postAnimTotalSec;
+      let pIdx = 0;
+      while (postDeficit > 0) {
+        const pad = Math.min(postDeficit, 0.25);
+        preparedScenes[pIdx % preparedScenes.length].durationSec = Number(
+          (preparedScenes[pIdx % preparedScenes.length].durationSec + pad).toFixed(2)
+        );
+        postDeficit -= pad;
+        pIdx++;
       }
     }
 
@@ -6486,8 +6917,9 @@ async function generateFreshAiEpisodeForRunner({
           : "باللهجة المصرية القاهرية الطبيعية للأطفال بنسبة 100%"
       }.
 
-البطل الرئيسي: "${team.mainCharacterName}" (الأداة: ${team.heroProp}).
-المرافق: "${team.companionName}" (الأداة: ${team.compProp}).
+البطل الرئيسي: "${team.mainCharacterName}" (شخصية بشرية كاملة 100% — الأداة: ${team.heroProp}).
+المرافق: "${team.companionName}" (${getCharacterSpeciesProfileEn(team.companionName).speciesAr} — الأداة: ${team.compProp}).
+⚠️ قاعدة تشريح وبناء بصري صارمة وغير قابلة للكسر: البطل الرئيسي "${team.mainCharacterName}" إنسان بشري طبيعي 100%، بينما المرافق "${team.companionName}" هو (${getCharacterSpeciesProfileEn(team.companionName).speciesAr}) بحجمه وتشريحه الطبيعي كحيوان أو طائر أو مرافق صغير؛ يُمنع منعاً باتاً وصف المرافق في visualScenePromptEn كإنسان برأس حيوان/طائر أو بجسم بشري أو يرتدي ملابس بشرية أو يمشي على قدمين كالبشر أو يمسك الأشياء بأيدٍ بشرية!
 الموضوع والدرس: مغامرة أصيلة وممتعة مستوحاة من: "${topic}".
 
 🎯 الهدف الأهم والمحوري: تقديم قصة وحبكة درامية مفهومة وواضحة جداً للطفل مع أفعال حركية ومؤثرات صوتية طبيعية حية (خطوات مشي وجري، خرير أو رشات ماء، حفيف أوراق الشجر، زقزقة عصافير، صوت الأدوات):
@@ -6530,7 +6962,7 @@ ${recentTitlesList}
       "speakerName": "${team.mainCharacterName}",
       "title": "عنوان المشهد",
       "dialogueArabic": "الحوار الكرتوني المباشر الصادر من فم هذه الشخصية فقط دون أي راوي",
-      "visualScenePromptEn": "English Pixar 3D visual action description (25-40 words) showing BOTH the Hero and Companion together in the same shot with any supporting story characters actively walking, running, crouching, or working together physically to act out this exact scene, 4K sharp lighting, no text",
+      "visualScenePromptEn": "English Pixar 3D visual action description (25-40 words): the 100% human hero (${getCharacterSpeciesProfileEn(team.mainCharacterName).shortLabelEn}) acts with human body/hands while the small non-human companion (${getCharacterSpeciesProfileEn(team.companionName).shortLabelEn}: ${getCharacterSpeciesProfileEn(team.companionName).kind}) acts with 100% real ${getCharacterSpeciesProfileEn(team.companionName).kind} anatomy (fluttering/perching for birds, four paws for animals, swimming for dolphin — NEVER humanoid, NEVER human body with animal/bird head, NEVER animal wearing clothes), 4K sharp lighting, no text",
       "soundEffectsEn": "Concise English list of realistic synchronized Foley sound effects matching the physical action in this scene (e.g. crisp footsteps on grass, gentle water splash, wooden tool click, cheerful bird chirps), no music"
     }
   ]
