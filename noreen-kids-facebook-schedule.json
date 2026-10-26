@@ -2652,6 +2652,16 @@
     {
       "topic": "تامر وكركور ومهمة إنقاذ جسر مهرجان الواحة",
       "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم"
+    },
+    {
+      "topic": "كارمن وسمسم وجهاز تقطير المطر لحديقة الورد",
+      "mainCharacterName": "كارمن المخترعة الصغيرة",
+      "companionName": "سمسم السنجاب الطائر"
+    },
+    {
+      "topic": "تامر وكركور ومهمة إنقاذ جسر مهرجان الواحة",
+      "mainCharacterName": "تامر فارس الواحة",
       "companionName": "كركور الببغاء الحكيم",
       "timestampIso": "2026-10-26T11:15:02.878Z"
     },
@@ -2814,28 +2824,6 @@
       "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس",
       "timestampIso": "2026-10-19T22:17:08.482Z"
-    },
-    {
-      "topic": "أم ملك وسر دولاب الألوان في مدرسة السعادة",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح"
-    },
-    {
-      "topic": "ذياد وفرفوشة ومهمة دواء الشتاء للعم صابر",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة"
-    },
-    {
-      "topic": "أم ملك وسر دولاب الألوان في مدرسة السعادة",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "timestampIso": "2026-10-19T20:39:55.003Z"
-    },
-    {
-      "topic": "ذياد وفرفوشة ومهمة دواء الشتاء للعم صابر",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة",
-      "timestampIso": "2026-10-19T20:39:55.003Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-25 · 23:41 بتوقيت مصر",
