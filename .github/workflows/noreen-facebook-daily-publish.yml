@@ -12,7 +12,7 @@ on:
         type: choice
         default: 'short_only (تشغيل قصير فقط - Short 9:16)'
         options:
-          - 'daily_schedule (الجدولة اليومية: قصير + طويل)'
+          - 'daily_schedule (الجدولة اليومية: تشغيل قصير فقط - Short 9:16)'
           - 'short_only (تشغيل قصير فقط - Short 9:16)'
           - 'long_only (تشغيل طويل فقط - Long 16:9)'
           - 'both_now (تشغيل الاثنين معاً: قصير + طويل)'
