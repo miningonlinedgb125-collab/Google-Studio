@@ -2985,14 +2985,14 @@ async function synthesizeContextualFoleySfxWav({
   // Smooth ambient nature textures (gentle air breeze and leaf rustle / surf without percussive pounding)
   const windFreq = hasWaterAction ? 490 : foleyTheme === "oasis" ? 640 : 540;
   const leafFreq = hasWaterAction ? 1450 : 2350;
-  const windGain = hasWaterAction ? 0.95 : isRunning ? 0.85 : 0.70;
+  const windGain = hasWaterAction ? 1.25 : isRunning ? 1.15 : 0.95;
 
   const filterComplex =
     `[0:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo[tones];` +
     `[1:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,asplit=2[n_wind][n_leaf];` +
     `[n_wind]bandpass=f=${windFreq}:width_type=h:w=580,tremolo=f=0.35:d=0.55,volume=${windGain}[wind_bed];` +
-    `[n_leaf]bandpass=f=${leafFreq}:width_type=h:w=1400,tremolo=f=0.55:d=0.45,volume=0.65[leaf_bed];` +
-    `[tones][wind_bed][leaf_bed]amix=inputs=3:weights='1.25 0.70 0.60':normalize=0,highpass=f=185,lowpass=f=12000,volume=1.0,alimiter=limit=0.90[outa]`;
+    `[n_leaf]bandpass=f=${leafFreq}:width_type=h:w=1400,tremolo=f=0.55:d=0.45,volume=0.85[leaf_bed];` +
+    `[tones][wind_bed][leaf_bed]amix=inputs=3:weights='1.30 0.85 0.75':normalize=0,highpass=f=185,lowpass=f=12000,volume=1.55,alimiter=limit=0.92[outa]`;
 
   await execFileAsync("ffmpeg", [
     "-y",
@@ -3003,7 +3003,7 @@ async function synthesizeContextualFoleySfxWav({
     "-f",
     "lavfi",
     "-i",
-    `anoisesrc=color=pink:r=48000:a=0.16:d=${dur}`,
+    `anoisesrc=color=pink:r=48000:a=0.28:d=${dur}`,
     "-filter_complex",
     filterComplex,
     "-map",
