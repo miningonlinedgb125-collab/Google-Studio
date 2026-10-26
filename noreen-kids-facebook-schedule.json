@@ -2658,6 +2658,16 @@
     {
       "topic": "سباق المزلقة المائية وتختوخ وزقلط بيقعوا في حوض الكور",
       "mainCharacterName": "تختوخ",
+      "companionName": "الكلب زقلط"
+    },
+    {
+      "topic": "سورة الناس وحماية القلوب والنية الطيبة وكيف نكون",
+      "mainCharacterName": "الشيخ محمود",
+      "companionName": "الديك الفصيح"
+    },
+    {
+      "topic": "سباق المزلقة المائية وتختوخ وزقلط بيقعوا في حوض الكور",
+      "mainCharacterName": "تختوخ",
       "companionName": "الكلب زقلط",
       "timestampIso": "2026-10-26T18:29:58.982Z"
     },
@@ -2820,59 +2830,32 @@
       "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا",
       "timestampIso": "2026-10-25T03:49:20.924Z"
-    },
-    {
-      "topic": "كارمن وسمسم واختراع حصادة التفاح الذكية للبستان",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر"
-    },
-    {
-      "topic": "تامر وكركور وسر خيمة التسامح في واحة النخيل",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم"
-    },
-    {
-      "topic": "كارمن وسمسم واختراع حصادة التفاح الذكية للبستان",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر",
-      "timestampIso": "2026-10-25T02:57:22.500Z"
-    },
-    {
-      "topic": "تامر وكركور وسر خيمة التسامح في واحة النخيل",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم",
-      "timestampIso": "2026-10-25T02:57:22.500Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-25 · 21:58 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-40221019085",
-    "uploadMode": "daily_schedule",
+    "id": "gh-run-40377752112",
+    "uploadMode": "manual_instant",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-25 (21:58 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792952758242-gb8d",
-    "longEpisodeId": "ep-gh-long-1792952825355-womx",
-    "shortEpisodeTitle": "Noreen Kids: جدي الحكيم والفأر المشاكس ومفاجأة بيت الجدة الدافئ | مغامرات جدي الحكيم والفأر المشاكس",
-    "longEpisodeTitle": "Noreen Kids: شال الصوف الملون الذي نسجته جدتي الحنون لتدفئة | مغامرات جدتي الحنون والدب باندا",
-    "shortTitle": "Noreen Kids: جدي الحكيم والفأر المشاكس ومفاجأة بيت الجدة الدافئ | مغامرات جدي الحكيم والفأر المشاكس",
-    "longTitle": "Noreen Kids: شال الصوف الملون الذي نسجته جدتي الحنون لتدفئة | مغامرات جدتي الحنون والدب باندا",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-26 (21:50 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1793039351736-ze56",
+    "longEpisodeId": "ep-gh-long-1793039398982-sklv",
+    "shortEpisodeTitle": "Noreen Kids: سباق المزلقة المائية وتختوخ وزقلط بيقعوا في حوض الكور | مغامرات تختوخ والكلب زقلط",
+    "longEpisodeTitle": "سورة الناس وحماية القلوب والنية الطيبة وكيف نكون",
+    "shortTitle": "Noreen Kids: سباق المزلقة المائية وتختوخ وزقلط بيقعوا في حوض الكور | مغامرات تختوخ والكلب زقلط",
+    "longTitle": "سورة الناس وحماية القلوب والنية الطيبة وكيف نكون",
     "shortPlaylistId": "PLPwfeXzB3ozU",
-    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "fusha",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "B0TLLMoLke0",
-    "youtubeLongVideoId": "E6h5PE7HbIc",
-    "facebookShortVideoId": "1433042242313449",
-    "facebookLongVideoId": "1104797118942070",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1433042242313449",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1104797118942070",
-    "facebookShortTitle": "Noreen Kids | جدي الحكيم والفأر المشاكس ومفاجأة بيت الجدة الدافئ - مغامرة جدو والفأر المشاكس",
-    "facebookLongTitle": "Noreen Kids | شال الصوف الملون الذي نسجته جدتي الحنون لتدفئة - مغامرة تيتة والدب باندا",
+    "youtubeShortVideoId": "rKW4EUhr8QU",
+    "facebookShortVideoId": "1072712972473545",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1072712972473545",
+    "facebookShortTitle": "Noreen Kids | سباق المزلقة المائية وتختوخ وزقلط بيقعوا في حوض الكور - مغامرة تختوخ والكلب زقلط",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2880,16 +2863,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 1920,
-      "height": 1080,
+      "width": 1080,
+      "height": 1920,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 412,
-      "fileSizeBytes": 133620040,
-      "inspectedAt": "21:58"
+      "durationSec": 68,
+      "fileSizeBytes": 87367352,
+      "inspectedAt": "21:50"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2898,7 +2881,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-25T18:58:06.236Z"
+    "reportedAtIso": "2026-10-26T18:50:12.607Z"
   },
   "heroFairRotationIndex": 15,
   "interactiveHeroRotationIndex": 5,
