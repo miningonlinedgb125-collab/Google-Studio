@@ -38,7 +38,7 @@ function decryptVault(vaultHex) {
 }
 
 function parseRunMode(raw) {
-  const s = String(raw || "daily_schedule").toLowerCase();
+  const s = String(raw || "short_only").toLowerCase();
   if (
     s.includes("engagement_only") ||
     s.includes("منشور تفاعلي") ||
@@ -47,10 +47,10 @@ function parseRunMode(raw) {
   ) {
     return "engagement_only";
   }
-  if (s.includes("short_only") || s.includes("قصير فقط")) return "short_only";
   if (s.includes("long_only") || s.includes("طويل فقط")) return "long_only";
   if (s.includes("both_now") || s.includes("الاثنين معاً") || s.includes("الاثنين معا")) return "both_now";
-  return "daily_schedule";
+  // Daily automated runs and standard runs are strictly short_only (one short video per run)
+  return "short_only";
 }
 
 function computeNextCairoPublishIso(dailyPublishTime24 = "19:00") {
@@ -2932,9 +2932,9 @@ async function synthesizeContextualFoleySfxWav({
     creatureCallExpr =
       "0.23*lt(mod(t+0.45,3.00),0.32)*(sin(2*PI*(520+240*mod(t+0.45,0.16)/0.16)*t)+0.4*sin(4*PI*560*t))*exp(-14*mod(t+0.45,0.16))";
   } else if (/أرنوب|أرنب|\brabbit|\bbunny/i.test(combinedCtx)) {
-    // Bouncy rabbit double-hop spring thud + cute soft squeak
+    // Playful rabbit cheerful melodic double-chirp hop (clean high frequencies, 0% low-freq bump)
     creatureCallExpr =
-      "0.21*exp(-20*mod(t*2.65,1))*sin(2*PI*(165+95*exp(-15*mod(t*2.65,1)))*t)+0.15*lt(mod(t+0.6,2.90),0.18)*sin(2*PI*(1880+320*mod(t+0.6,0.18)/0.18)*t)*sin(PI*mod(t+0.6,2.90)/0.18)";
+      "0.18*lt(mod(t+0.40,2.80),0.22)*sin(2*PI*(1240+420*sin(PI*mod(t+0.40,0.22)/0.22))*t)*exp(-12*mod(t+0.40,0.11))+0.16*lt(mod(t+0.65,2.80),0.18)*sin(2*PI*(1880+320*mod(t+0.65,0.18)/0.18)*t)*sin(PI*mod(t+0.65,2.80)/0.18)";
   } else if (/مرجان|دلفين|حوت|سلحفاة|فقمة|\bdolphin|\bwhale/i.test(combinedCtx)) {
     // Playful dolphin whistle + clicks
     creatureCallExpr =
@@ -2979,31 +2979,20 @@ async function synthesizeContextualFoleySfxWav({
       "0.14*sin(2*PI*(1320+410*mod(floor(t*1.7),4))*t)*exp(-11*mod(t*1.7,1))";
   }
 
-  // Input 0: Stereo tonal & body impacts (alternating L/R heel-toe footsteps + creature calls + water/prop accents)
-  const leftHeel = `0.38*(0.65+0.35*mod(floor(t*${stepRate}),2))*sin(2*PI*${stepBodyFreq}*t)*exp(-24*mod(t*${stepRate},1))`;
-  const rightHeel = `0.38*(1.0-0.35*mod(floor(t*${stepRate}),2))*sin(2*PI*${stepBodyFreq}*t)*exp(-24*mod(t*${stepRate},1))`;
-  const stereoToneExpr = `${leftHeel}+1.30*(${creatureCallExpr})+1.20*(${scenePropAccentExpr})|${rightHeel}+1.45*(${creatureCallExpr})+1.15*(${scenePropAccentExpr})`;
+  // Pure character sound effects and contextual environmental accents (no low-frequency knocking!)
+  const stereoToneExpr = `1.25*(${creatureCallExpr})+1.15*(${scenePropAccentExpr})|1.30*(${creatureCallExpr})+1.10*(${scenePropAccentExpr})`;
 
-  // Input 1: Broadband percussive step-crunch + feathered wing-flap envelope (multiplied with filtered pink noise so footsteps & wings sound 100% physical on earth/grass/wood!)
-  const wingFlapEnv = hasBirdWings
-    ? `+0.92*lt(mod(t+0.25,2.75),0.46)*exp(-13*mod(t*7.5,1))`
-    : "";
-  const crunchEnvExpr = `0.95*exp(-17*mod(t*${stepRate},1))+0.42*exp(-22*mod(t*${stepRate}+0.52,1))${wingFlapEnv}`;
-
-  // Input 2: Pink noise split into (a) physical footstep/wing texture, (b) moving outdoor wind gusts, and (c) rustling leaves / surf wash
+  // Smooth ambient nature textures (gentle air breeze and leaf rustle / surf without percussive pounding)
   const windFreq = hasWaterAction ? 490 : foleyTheme === "oasis" ? 640 : 540;
   const leafFreq = hasWaterAction ? 1450 : 2350;
-  const windGain = hasWaterAction ? 1.85 : isRunning ? 1.70 : 1.50;
+  const windGain = hasWaterAction ? 0.95 : isRunning ? 0.85 : 0.70;
 
   const filterComplex =
     `[0:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo[tones];` +
-    `[1:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo[step_env];` +
-    `[2:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,asplit=3[n_step][n_wind][n_leaf];` +
-    `[n_step]bandpass=f=${stepCrunchFreq}:width_type=h:w=1450,volume=3.5[n_step_bp];` +
-    `[n_step_bp][step_env]amultiply,volume=${isRunning ? "1.65" : "1.40"}[step_crunch];` +
-    `[n_wind]bandpass=f=${windFreq}:width_type=h:w=620,tremolo=f=0.38:d=0.68,volume=${windGain}[wind_bed];` +
-    `[n_leaf]bandpass=f=${leafFreq}:width_type=h:w=1600,tremolo=f=0.68:d=0.58,volume=1.35[leaf_bed];` +
-    `[tones][step_crunch][wind_bed][leaf_bed]amix=inputs=4:weights='1.15 1.35 1.10 0.95':normalize=0,highpass=f=55,lowpass=f=14500,volume=2.25,alimiter=limit=0.92[outa]`;
+    `[1:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,asplit=2[n_wind][n_leaf];` +
+    `[n_wind]bandpass=f=${windFreq}:width_type=h:w=580,tremolo=f=0.35:d=0.55,volume=${windGain}[wind_bed];` +
+    `[n_leaf]bandpass=f=${leafFreq}:width_type=h:w=1400,tremolo=f=0.55:d=0.45,volume=0.65[leaf_bed];` +
+    `[tones][wind_bed][leaf_bed]amix=inputs=3:weights='1.25 0.70 0.60':normalize=0,highpass=f=185,lowpass=f=12000,volume=1.0,alimiter=limit=0.90[outa]`;
 
   await execFileAsync("ffmpeg", [
     "-y",
@@ -3014,11 +3003,7 @@ async function synthesizeContextualFoleySfxWav({
     "-f",
     "lavfi",
     "-i",
-    `aevalsrc='${crunchEnvExpr}|${crunchEnvExpr}':s=48000:c=stereo:d=${dur}`,
-    "-f",
-    "lavfi",
-    "-i",
-    `anoisesrc=color=pink:r=48000:a=0.28:d=${dur}`,
+    `anoisesrc=color=pink:r=48000:a=0.16:d=${dur}`,
     "-filter_complex",
     filterComplex,
     "-map",
@@ -5895,8 +5880,8 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "fusha")
       const nativeCinemaMixFilter =
         `[0:a]aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,apad=whole_dur=${dur},asplit=2[nat_v][nat_sc];` +
         `[1:a]aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,afade=t=in:st=0:d=0.15,afade=t=out:st=${fadeOutSt}:d=0.45[fx_in];` +
-        `[fx_in][nat_sc]sidechaincompress=threshold=0.055:ratio=2.2:attack=18:release=220[fx_ducked];` +
-        `[nat_v][fx_ducked]amix=inputs=2:duration=first:weights='1.0 0.78':normalize=0,alimiter=limit=0.96,asetpts=PTS-STARTPTS,aformat=sample_fmts=s16:sample_rates=48000:channel_layouts=stereo[outa]`;
+        `[fx_in][nat_sc]sidechaincompress=threshold=0.015:ratio=8.5:attack=8:release=340[fx_ducked];` +
+        `[nat_v][fx_ducked]amix=inputs=2:duration=first:weights='1.0 0.28':normalize=0,alimiter=limit=0.96,asetpts=PTS-STARTPTS,aformat=sample_fmts=s16:sample_rates=48000:channel_layouts=stereo[outa]`;
 
       await execFileAsync("ffmpeg", [
         "-y",
@@ -5941,10 +5926,10 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "fusha")
         : `[1:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,afade=t=in:st=0:d=0.20,afade=t=out:st=${fadeOutSt}:d=0.55[sfx_raw];`;
 
       const cinemaMixFilter =
-        `[0:a]aresample=48000${voiceDelayFilter},aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=2.10,apad=whole_dur=${dur},asplit=2[v_main][v_sc1];` +
+        `[0:a]aresample=48000${voiceDelayFilter},aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=2.20,apad=whole_dur=${dur},asplit=2[v_main][v_sc1];` +
         sfxCombineFilter +
-        `[sfx_raw][v_sc1]sidechaincompress=threshold=0.05:ratio=2.3:attack=15:release=220[sfx_ducked];` +
-        `[v_main][sfx_ducked]amix=inputs=2:duration=first:weights='1.0 0.80':normalize=0,alimiter=limit=0.96,asetpts=PTS-STARTPTS,aformat=sample_fmts=s16:sample_rates=48000:channel_layouts=stereo[outa]`;
+        `[sfx_raw][v_sc1]sidechaincompress=threshold=0.015:ratio=8.5:attack=8:release=340[sfx_ducked];` +
+        `[v_main][sfx_ducked]amix=inputs=2:duration=first:weights='1.0 0.28':normalize=0,alimiter=limit=0.96,asetpts=PTS-STARTPTS,aformat=sample_fmts=s16:sample_rates=48000:channel_layouts=stereo[outa]`;
 
       await execFileAsync("ffmpeg", [
         ...mixInputs,
@@ -7172,7 +7157,7 @@ function buildSmartEpisodeForRunner({
 
   // Short video: Coherent 4-scene narrative arc (1: Introduction & Discovery, 2: Encountering the Challenge, 3: Practical Solution & Success, 4: Celebration & Interactive Challenge)
   const selectedTemplates = isShort
-    ? [sceneTemplates[0], sceneTemplates[1], sceneTemplates[5], sceneTemplates[7]]
+    ? [sceneTemplates[0], sceneTemplates[1], sceneTemplates[4], sceneTemplates[7]]
     : sceneTemplates.slice(0, count);
   const minWordsPerScene = isShort ? 12 : 35;
   const scenes = selectedTemplates.map((tpl, idx) => {
@@ -7532,7 +7517,9 @@ async function generateFreshAiEpisodeForRunner({
 
 ${languageDirectives}
 
-قواعد توزيع المتحدثين وتسلسل الحبكة الإلزامي بين المشاهد (حوار تمثيلي مباشر بين البطلين وجهاً لوجه دون أي راوٍ خارجي):${
+قواعد توزيع المتحدثين والحوار التفاعلي الإلزامي بين الأبطال (حوار تمثيلي حي ومباشر بين البطل والمرافق والشخصيات وجهاً لوجه دون أي راوٍ):
+- المرافق "${team.companionName}" شخصية حيوية متكلمة ومؤثرة جداً، يتحدث بحماس وينادي البطل والشخصيات الأخرى الموجودة بالقصة (مثل تيتة أو الأصدقاء أو الكائنات) بالاسم ويرد عليهم ويتعاون معهم.
+${
   isShort
     ? `
 - المشهد 1: المتحدث هو "${team.mainCharacterName}" (يبدأ بحماس وتشويق أثناء حركتهما معاً، يصف الموقف والمشكلة المحددة التي شاهداها وينادي صديقه).
@@ -10375,7 +10362,7 @@ async function main() {
     });
   }
 
-  if (runMode === "long_only" || runMode === "both_now" || runMode === "daily_schedule") {
+  if (runMode === "long_only" || runMode === "both_now") {
     tasks.push({
       label: "Long 3D Episode (16:9)",
       videoFormat: "long_16_9",
