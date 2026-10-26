@@ -10269,50 +10269,23 @@ async function main() {
     chosenShortEp = schedule.shortEpisode;
     chosenLongEp = schedule.longEpisode;
   } else {
-    // Role-Swap Engine: In alternate cycles, heroes switch roles between Short and Long
-    // so every character gets both vertical Shorts (9:16) and horizontal full episodes (16:9)!
-    const isRoleSwapped = Boolean(
-      schedule.heroRoleSwapCycle ?? fbSchedule.heroRoleSwapCycle ?? false
-    );
-    const shortTeamIndex = isRoleSwapped
-      ? (fairIndex + 1) % RUNNER_CHARACTER_TEAMS.length
-      : fairIndex;
-    const longTeamIndex = isRoleSwapped
-      ? fairIndex
-      : (fairIndex + 1) % RUNNER_CHARACTER_TEAMS.length;
-
-    // 1. Strict Fair Rotation selection for Short video
+    // 1. Strict Fair Rotation selection for Short video ONLY (single hero per daily run across all 14 heroes)
     const shortPick = selectNonRepeatingTeamAndTopicForRunner({
       excludedHeroes,
       excludedTitles,
-      preferredTeamIndex: shortTeamIndex,
+      preferredTeamIndex: fairIndex,
       avoidTeamNames: new Set(),
     });
 
-    // 2. Strict Fair Rotation selection for Long video (guarantees 2 distinct heroes every day)
-    const longAvoidNames = new Set([shortPick.team.mainCharacterName]);
-    const longPick = selectNonRepeatingTeamAndTopicForRunner({
-      excludedHeroes,
-      excludedTitles: [...excludedTitles, shortPick.topic],
-      preferredTeamIndex: longTeamIndex,
-      avoidTeamNames: longAvoidNames,
-    });
-
-    // Advance fair rotation index for next run & toggle role swap upon completing full cycle of 14 heroes
-    let nextFairIndex = (fairIndex + 2) % RUNNER_CHARACTER_TEAMS.length;
-    let nextRoleSwap = isRoleSwapped;
-    if (runMode === "short_only" || runMode === "long_only") {
-      nextFairIndex = (fairIndex + 1) % RUNNER_CHARACTER_TEAMS.length;
-    } else if (fairIndex + 2 >= RUNNER_CHARACTER_TEAMS.length) {
-      nextRoleSwap = !isRoleSwapped;
-    }
+    // Advance fair rotation index by 1 for next run across the 14 heroes
+    const nextFairIndex = (fairIndex + 1) % RUNNER_CHARACTER_TEAMS.length;
     schedule.heroFairRotationIndex = nextFairIndex;
     fbSchedule.heroFairRotationIndex = nextFairIndex;
-    schedule.heroRoleSwapCycle = nextRoleSwap;
-    fbSchedule.heroRoleSwapCycle = nextRoleSwap;
+    delete schedule.heroRoleSwapCycle;
+    delete fbSchedule.heroRoleSwapCycle;
 
     console.log(
-      `✨ [Strict Fair Rotation & AI Infinite Stories] Short Hero="${shortPick.team.mainCharacterName}" (${shortPick.topic}) | Long Hero="${longPick.team.mainCharacterName}" (${longPick.topic}) | NextRotationIndex=${nextFairIndex}`
+      `✨ [Strict Fair Rotation & AI Infinite Stories] Short Hero="${shortPick.team.mainCharacterName}" (${shortPick.topic}) | NextRotationIndex=${nextFairIndex}`
     );
 
     chosenShortEp = await generateFreshAiEpisodeForRunner({
@@ -10323,31 +10296,43 @@ async function main() {
       dailyTime,
       excludedTitles,
     });
-    chosenLongEp = await generateFreshAiEpisodeForRunner({
-      team: longPick.team,
-      topic: longPick.topic,
-      videoFormat: "long_16_9",
-      dialect: dailyDialect,
-      dailyTime,
-      excludedTitles: [...excludedTitles, chosenShortEp?.title || shortPick.topic],
-    });
 
-    // Persist into recentStoryHistory
+    // Generate Long episode ONLY if runMode explicitly requires long video (manual long_only or both_now)
+    if (runMode === "long_only" || runMode === "both_now") {
+      const longPick = selectNonRepeatingTeamAndTopicForRunner({
+        excludedHeroes,
+        excludedTitles: [...excludedTitles, shortPick.topic],
+        preferredTeamIndex: (fairIndex + 1) % RUNNER_CHARACTER_TEAMS.length,
+        avoidTeamNames: new Set([shortPick.team.mainCharacterName]),
+      });
+      chosenLongEp = await generateFreshAiEpisodeForRunner({
+        team: longPick.team,
+        topic: longPick.topic,
+        videoFormat: "long_16_9",
+        dialect: dailyDialect,
+        dailyTime,
+        excludedTitles: [...excludedTitles, chosenShortEp?.title || shortPick.topic],
+      });
+    } else {
+      chosenLongEp = null;
+    }
+
+    // Persist into recentStoryHistory (only Short hero in daily runs)
     if (!Array.isArray(schedule.recentStoryHistory)) schedule.recentStoryHistory = [];
-    schedule.recentStoryHistory.unshift(
-      {
-        topic: chosenShortEp?.title || shortPick.topic,
-        mainCharacterName: shortPick.team.mainCharacterName,
-        companionName: shortPick.team.companionName,
+    schedule.recentStoryHistory.unshift({
+      topic: chosenShortEp?.title || shortPick.topic,
+      mainCharacterName: shortPick.team.mainCharacterName,
+      companionName: shortPick.team.companionName,
+      timestampIso: new Date().toISOString(),
+    });
+    if (chosenLongEp) {
+      schedule.recentStoryHistory.splice(1, 0, {
+        topic: chosenLongEp?.title,
+        mainCharacterName: chosenLongEp?.mainCharacterName,
+        companionName: chosenLongEp?.companionName,
         timestampIso: new Date().toISOString(),
-      },
-      {
-        topic: chosenLongEp?.title || longPick.topic,
-        mainCharacterName: longPick.team.mainCharacterName,
-        companionName: longPick.team.companionName,
-        timestampIso: new Date().toISOString(),
-      }
-    );
+      });
+    }
     schedule.recentStoryHistory = schedule.recentStoryHistory.slice(0, 100);
     fbSchedule.recentStoryHistory = schedule.recentStoryHistory;
   }
