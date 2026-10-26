@@ -37,6 +37,16 @@
     {
       "topic": "تامر وكركور ومهمة إنقاذ جسر مهرجان الواحة",
       "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم"
+    },
+    {
+      "topic": "كارمن وسمسم وجهاز تقطير المطر لحديقة الورد",
+      "mainCharacterName": "كارمن المخترعة الصغيرة",
+      "companionName": "سمسم السنجاب الطائر"
+    },
+    {
+      "topic": "تامر وكركور ومهمة إنقاذ جسر مهرجان الواحة",
+      "mainCharacterName": "تامر فارس الواحة",
       "companionName": "كركور الببغاء الحكيم",
       "timestampIso": "2026-10-26T11:15:02.878Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس",
       "timestampIso": "2026-10-19T22:17:08.482Z"
-    },
-    {
-      "topic": "أم ملك وسر دولاب الألوان في مدرسة السعادة",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح"
-    },
-    {
-      "topic": "ذياد وفرفوشة ومهمة دواء الشتاء للعم صابر",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة"
-    },
-    {
-      "topic": "أم ملك وسر دولاب الألوان في مدرسة السعادة",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "timestampIso": "2026-10-19T20:39:55.003Z"
-    },
-    {
-      "topic": "ذياد وفرفوشة ومهمة دواء الشتاء للعم صابر",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة",
-      "timestampIso": "2026-10-19T20:39:55.003Z"
     }
   ],
   "scheduledHistory": [
@@ -2688,27 +2676,32 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٦‏/١٠‏/٢٠٢٦، ٢:٢٨:٤٣ م",
   "lastCloudRunReport": {
-    "id": "gh-run-40231352083",
-    "uploadMode": "manual_instant",
+    "id": "gh-run-40312416137",
+    "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-25 (23:41 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792960620147-u8ny",
-    "longEpisodeId": "ep-gh-long-1792960672407-2uqc",
-    "shortEpisodeTitle": "Noreen Kids: كارمن وسمسم ومناطيد المحبة الطائرة بين القرى | مغامرات كارمن وسمسم",
-    "longEpisodeTitle": "تنظيف شاطئ الأصداف الملونة وحماية السلاحف البحرية",
-    "shortTitle": "Noreen Kids: كارمن وسمسم ومناطيد المحبة الطائرة بين القرى | مغامرات كارمن وسمسم",
-    "longTitle": "تنظيف شاطئ الأصداف الملونة وحماية السلاحف البحرية",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-26 (14:28 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1793013277590-x29o",
+    "longEpisodeId": "ep-gh-long-1793013302878-u4l7",
+    "shortEpisodeTitle": "Noreen Kids: تامر وكركور ومهمة إنقاذ جسر مهرجان الواحة | مغامرات تامر وكركور",
+    "longEpisodeTitle": "Noreen Kids: كارمن وسمسم وجهاز تقطير المطر لحديقة الورد | مغامرات كارمن وسمسم",
+    "shortTitle": "Noreen Kids: تامر وكركور ومهمة إنقاذ جسر مهرجان الواحة | مغامرات تامر وكركور",
+    "longTitle": "Noreen Kids: كارمن وسمسم وجهاز تقطير المطر لحديقة الورد | مغامرات كارمن وسمسم",
     "shortPlaylistId": "PLPwfeXzB3ozU",
+    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "aZnnapgZbMw",
-    "facebookShortVideoId": "1870064020822884",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1870064020822884",
-    "facebookShortTitle": "Noreen Kids | كارمن وسمسم ومناطيد المحبة الطائرة بين القرى - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
+    "youtubeShortVideoId": "uYmzkcf33TM",
+    "youtubeLongVideoId": "YN8SqI12PWA",
+    "facebookShortVideoId": "1404250741821173",
+    "facebookLongVideoId": "1485554096724172",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1404250741821173",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1485554096724172",
+    "facebookShortTitle": "Noreen Kids | تامر وكركور ومهمة إنقاذ جسر مهرجان الواحة - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
+    "facebookLongTitle": "Noreen Kids | كارمن وسمسم وجهاز تقطير المطر لحديقة الورد - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2716,16 +2709,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 720,
-      "height": 1280,
+      "width": 1280,
+      "height": 720,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 61,
-      "fileSizeBytes": 11691622,
-      "inspectedAt": "23:41"
+      "durationSec": 397,
+      "fileSizeBytes": 59276001,
+      "inspectedAt": "14:28"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2734,7 +2727,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-25T20:41:40.296Z"
+    "reportedAtIso": "2026-10-26T11:28:46.382Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
