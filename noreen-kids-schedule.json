@@ -37,6 +37,16 @@
     {
       "topic": "سدرة وبناء أعلى برج ملون من المكعبات السحرية",
       "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "ملك ولوليتا وإسعاف ركبة عمر في حديقة الزهور",
+      "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "سدرة وبناء أعلى برج ملون من المكعبات السحرية",
+      "mainCharacterName": "سدرة الصغنونة",
       "companionName": "الفراشة الملونة",
       "timestampIso": "2026-10-28T11:23:08.189Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "تيتة",
       "companionName": "الدب باندا",
       "timestampIso": "2026-10-20T10:09:01.798Z"
-    },
-    {
-      "topic": "أستاذ شريف والصقر في مهمة تنظيم وقت اللعب",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "جدو والفأر المشاكس وسر نخلة الخير في بستان الواحة",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "أستاذ شريف والصقر في مهمة تنظيم وقت اللعب",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-10-19T22:17:08.482Z"
-    },
-    {
-      "topic": "جدو والفأر المشاكس وسر نخلة الخير في بستان الواحة",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-10-19T22:17:08.482Z"
     }
   ],
   "scheduledHistory": [
@@ -2694,27 +2682,32 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٨‏/١٠‏/٢٠٢٦، ٢:٣٣:٥٦ م",
   "lastCloudRunReport": {
-    "id": "gh-run-40231352083",
-    "uploadMode": "manual_instant",
+    "id": "gh-run-40679055619",
+    "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-25 (23:41 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1792960620147-u8ny",
-    "longEpisodeId": "ep-gh-long-1792960672407-2uqc",
-    "shortEpisodeTitle": "Noreen Kids: كارمن وسمسم ومناطيد المحبة الطائرة بين القرى | مغامرات كارمن وسمسم",
-    "longEpisodeTitle": "تنظيف شاطئ الأصداف الملونة وحماية السلاحف البحرية",
-    "shortTitle": "Noreen Kids: كارمن وسمسم ومناطيد المحبة الطائرة بين القرى | مغامرات كارمن وسمسم",
-    "longTitle": "تنظيف شاطئ الأصداف الملونة وحماية السلاحف البحرية",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-28 (14:33 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1793186466176-5r0v",
+    "longEpisodeId": "ep-gh-long-1793186588189-ldv9",
+    "shortEpisodeTitle": "Noreen Kids: سدرة وبناء أعلى برج ملون من المكعبات السحرية | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "longEpisodeTitle": "Noreen Kids: ملك ولوليتا وإسعاف ركبة عمر في حديقة الزهور | مغامرات الطبيبة ملك والقطة لوليتا",
+    "shortTitle": "Noreen Kids: سدرة وبناء أعلى برج ملون من المكعبات السحرية | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "longTitle": "Noreen Kids: ملك ولوليتا وإسعاف ركبة عمر في حديقة الزهور | مغامرات الطبيبة ملك والقطة لوليتا",
     "shortPlaylistId": "PLPwfeXzB3ozU",
+    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "aZnnapgZbMw",
-    "facebookShortVideoId": "1870064020822884",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1870064020822884",
-    "facebookShortTitle": "Noreen Kids | كارمن وسمسم ومناطيد المحبة الطائرة بين القرى - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
+    "youtubeShortVideoId": "IfnZ6Gi94Ic",
+    "youtubeLongVideoId": "HMMgZ-k7SqM",
+    "facebookShortVideoId": "3185167681818318",
+    "facebookLongVideoId": "1728063262300703",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/3185167681818318",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1728063262300703",
+    "facebookShortTitle": "Noreen Kids | سدرة وبناء أعلى برج ملون من المكعبات السحرية - مغامرة سدرة الصغنونة والفراشة الملونة",
+    "facebookLongTitle": "Noreen Kids | ملك ولوليتا وإسعاف ركبة عمر في حديقة الزهور - مغامرة ملك والقطة لوليتا",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2722,16 +2715,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 720,
-      "height": 1280,
+      "width": 1280,
+      "height": 720,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 61,
-      "fileSizeBytes": 11691622,
-      "inspectedAt": "23:41"
+      "durationSec": 333,
+      "fileSizeBytes": 35525755,
+      "inspectedAt": "14:33"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2740,7 +2733,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-25T20:41:40.296Z"
+    "reportedAtIso": "2026-10-28T11:33:59.513Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
