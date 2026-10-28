@@ -2661,6 +2661,16 @@
     {
       "topic": "سدرة وبناء أعلى برج ملون من المكعبات السحرية",
       "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "ملك ولوليتا وإسعاف ركبة عمر في حديقة الزهور",
+      "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "سدرة وبناء أعلى برج ملون من المكعبات السحرية",
+      "mainCharacterName": "سدرة الصغنونة",
       "companionName": "الفراشة الملونة",
       "timestampIso": "2026-10-28T11:23:08.189Z"
     },
@@ -2823,28 +2833,6 @@
       "mainCharacterName": "تيتة",
       "companionName": "الدب باندا",
       "timestampIso": "2026-10-20T10:09:01.798Z"
-    },
-    {
-      "topic": "أستاذ شريف والصقر في مهمة تنظيم وقت اللعب",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "جدو والفأر المشاكس وسر نخلة الخير في بستان الواحة",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "أستاذ شريف والصقر في مهمة تنظيم وقت اللعب",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-10-19T22:17:08.482Z"
-    },
-    {
-      "topic": "جدو والفأر المشاكس وسر نخلة الخير في بستان الواحة",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-10-19T22:17:08.482Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-27 · 23:34 بتوقيت مصر",
