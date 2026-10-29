@@ -37,6 +37,16 @@
     {
       "topic": "ذياد والعصفورة وإصلاح قطار الأيتام العجيب",
       "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة"
+    },
+    {
+      "topic": "حكاية إذاعة الصباح وثقة زياد في مدرسة الأمل",
+      "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح"
+    },
+    {
+      "topic": "ذياد والعصفورة وإصلاح قطار الأيتام العجيب",
+      "mainCharacterName": "ذياد",
       "companionName": "العصفورة الفرفوشة",
       "timestampIso": "2026-10-29T02:21:31.133Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "الشيخ محمود",
       "companionName": "الديك الفصيح",
       "timestampIso": "2026-10-20T14:51:33.233Z"
-    },
-    {
-      "topic": "جدو والفأر المشاكس وسر صندوق ألعاب زمان",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
-    },
-    {
-      "topic": "جدو والفأر المشاكس وسر صندوق ألعاب زمان",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-10-20T10:09:01.798Z"
-    },
-    {
-      "topic": "مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "timestampIso": "2026-10-20T10:09:01.798Z"
     }
   ],
   "scheduledHistory": [
