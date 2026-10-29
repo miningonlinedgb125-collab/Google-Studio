@@ -2661,6 +2661,16 @@
     {
       "topic": "ذياد والعصفورة وإصلاح قطار الأيتام العجيب",
       "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة"
+    },
+    {
+      "topic": "حكاية إذاعة الصباح وثقة زياد في مدرسة الأمل",
+      "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح"
+    },
+    {
+      "topic": "ذياد والعصفورة وإصلاح قطار الأيتام العجيب",
+      "mainCharacterName": "ذياد",
       "companionName": "العصفورة الفرفوشة",
       "timestampIso": "2026-10-29T02:21:31.133Z"
     },
@@ -2823,43 +2833,21 @@
       "mainCharacterName": "الشيخ محمود",
       "companionName": "الديك الفصيح",
       "timestampIso": "2026-10-20T14:51:33.233Z"
-    },
-    {
-      "topic": "جدو والفأر المشاكس وسر صندوق ألعاب زمان",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
-    },
-    {
-      "topic": "جدو والفأر المشاكس وسر صندوق ألعاب زمان",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-10-20T10:09:01.798Z"
-    },
-    {
-      "topic": "مربى الفراولة اللذيذة وسر البركة في الطعام بالبسملة والشكر",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "timestampIso": "2026-10-20T10:09:01.798Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-28 · 14:34 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-40574672000",
+    "id": "gh-run-40805321968",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-27 (23:34 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1793132605444-8vht",
-    "longEpisodeId": "ep-gh-long-1793132623373-7xce",
-    "shortEpisodeTitle": "Noreen Kids: تامر وكركور وسر حماية نبع الماء الصافي | مغامرات تامر وكركور",
-    "longEpisodeTitle": "Noreen Kids: كارمن وسمسم: روبوت التنظيف العجيب في البيت | مغامرات كارمن وسمسم",
-    "shortTitle": "Noreen Kids: تامر وكركور وسر حماية نبع الماء الصافي | مغامرات تامر وكركور",
-    "longTitle": "Noreen Kids: كارمن وسمسم: روبوت التنظيف العجيب في البيت | مغامرات كارمن وسمسم",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-29 (05:40 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1793240393321-1ycl",
+    "longEpisodeId": "ep-gh-long-1793240491133-m2hb",
+    "shortEpisodeTitle": "Noreen Kids: ذياد والعصفورة وإصلاح قطار الأيتام العجيب | مغامرات ذياد والعصفورة الفرفوشة",
+    "longEpisodeTitle": "Noreen Kids: حكاية إذاعة الصباح وثقة زياد في مدرسة الأمل | مغامرات أم ملك والبطريق المرح",
+    "shortTitle": "Noreen Kids: ذياد والعصفورة وإصلاح قطار الأيتام العجيب | مغامرات ذياد والعصفورة الفرفوشة",
+    "longTitle": "Noreen Kids: حكاية إذاعة الصباح وثقة زياد في مدرسة الأمل | مغامرات أم ملك والبطريق المرح",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2868,14 +2856,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "FSNZWXqnYQM",
-    "youtubeLongVideoId": "qAHuxZkR414",
-    "facebookShortVideoId": "2270867153484567",
-    "facebookLongVideoId": "3111173129237179",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2270867153484567",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/3111173129237179",
-    "facebookShortTitle": "Noreen Kids | تامر وكركور وسر حماية نبع الماء الصافي - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
-    "facebookLongTitle": "Noreen Kids | كارمن وسمسم: روبوت التنظيف العجيب في البيت - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
+    "youtubeShortVideoId": "Ez9Z2fNe7pI",
+    "youtubeLongVideoId": "yuoFMELsPjY",
+    "facebookShortVideoId": "2137273030515966",
+    "facebookLongVideoId": "1667292061608266",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2137273030515966",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1667292061608266",
+    "facebookShortTitle": "Noreen Kids | ذياد والعصفورة وإصلاح قطار الأيتام العجيب - مغامرة ذياد والعصفورة الفرفوشة",
+    "facebookLongTitle": "Noreen Kids | حكاية إذاعة الصباح وثقة زياد في مدرسة الأمل - مغامرة أم ملك والبطريق المرح",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2890,9 +2878,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 344,
-      "fileSizeBytes": 48591012,
-      "inspectedAt": "23:34"
+      "durationSec": 377,
+      "fileSizeBytes": 42383442,
+      "inspectedAt": "05:40"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2901,7 +2889,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-27T20:34:20.992Z"
+    "reportedAtIso": "2026-10-29T02:40:55.402Z"
   },
   "heroFairRotationIndex": 11,
   "interactiveHeroRotationIndex": 5,
