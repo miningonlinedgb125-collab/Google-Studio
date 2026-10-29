@@ -66,6 +66,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122121058377484976",
+      "photoId": "122121058341484976",
+      "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع أم ملك والبطريق المرح",
+      "title": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع أم ملك والبطريق المرح",
+      "caption": "يا أهلاً بكل مامي وسوبر بطل في عيلتنا الجميلة! جاهزين لتحدي ذكاء جديد وممتع؟ 🐧✨\n\n🌀 بطلنا المحبوب \"أم ملك\" واقف على اليمين ومحتاج يوصل بسرعة لصاحبه \"البطريق المرح\" على الشمال، وقدامهم 3 مسارات ملونة [ 1 ، 2 ، 3 ].. بس مسار واحد بس هو اللي هيجمعهم ببعض! 🤔🔍\n\n👀 يلا يا شطار مع مامي، امشوا بصوابعكم الذكية ورا المسار وقولوا لنا: أنهي رقم هو الطريق الصح؟ 🕵️‍♂️💡\n\n💬 مستنيين إجابتكم مع اسم بطلكم أو أميرتكم في التعليقات، عشان \"أم ملك\" و\"البطريق المرح\" يحيّوهم بالاسم مخصوص في حلقة بكرة! 🥳🎉\n\n🔔 متنسوش تعملوا متابعة لصفحتنا وتفعلوا الجرس وشير للمنشور عشان يوصل لكل الشطار وتكبر عيلتنا سوا! 🚀❤️\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
+      "heroName": "أم ملك",
+      "companionName": "البطريق المرح",
+      "publishedAtCairo": "2026-10-29 · 05:37 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122121058377484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122121018597484976",
       "photoId": "122121018573484976",
       "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع ذياد والعصفورة الفرفوشة",
@@ -532,18 +544,6 @@
       "publishedAtCairo": "2026-10-15 · 12:57 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122116691841484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122116512165484976",
-      "photoId": "122116512141484976",
-      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع تيتة والدب باندا",
-      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع تيتة والدب باندا",
-      "caption": "يا هلا بأحلى مامي وأشطر كتاكيت في عيلة \"نورين كيدز\"! 👵🐼🎈\n\nتيتة وحبيبها \"الدب باندا\" رجعولكم النهاردة بتحدي ذكاء وقوة ملاحظة عالي جداً ومحتاج أبطال حقيقيين! 🕵️‍♂️✨\n\n🔹 ركزوا كويس أوي وقارنوا بين الصورة [ أ ] والصورة [ ب ].. يا ترى مين الشاطر اللي هيكتشف الـ 3 فروقات الذكية المستخبية؟ 👀🔍  \n🔹 اكتبوا الفروقات التلاتة في التعليقات ومعاها اسم بطلكم الصغير، عشان تيتة والدب باندا يحيوه بالاسم مخصوص في حلقة بكرة! 💬🎉  \n🔹 متنسوش تدوسوا متابعة للصفحة وتفعلوا الجرس 🔔 وشير للبوست عشان نتحدى باقي صحابنا الشطار! 🚀❤️  \n\n🔍 عايزين فوازير وتحديات أكتر؟ اضغطوا على تصنيف [تحدي الشطار] أو [أبطال نورين كيدز] أعلى البوست لمتابعة كل الألعاب السابقة مع أطفالكم! 🕵️‍♂️✨\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #فروقات_بين_الصورتين #أمهات_مصر",
-      "heroName": "تيتة",
-      "companionName": "الدب باندا",
-      "publishedAtCairo": "2026-10-15 · 01:24 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122116512165484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -807,14 +807,15 @@
       "id": "gh-run-40805321968",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-29 (05:29 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-29 (05:40 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1793240393321-1ycl",
       "longEpisodeId": "ep-gh-long-1793240491133-m2hb",
       "shortEpisodeTitle": "Noreen Kids: ذياد والعصفورة وإصلاح قطار الأيتام العجيب | مغامرات ذياد والعصفورة الفرفوشة",
-      "longEpisodeTitle": "حكاية إذاعة الصباح وثقة زياد في مدرسة الأمل",
+      "longEpisodeTitle": "Noreen Kids: حكاية إذاعة الصباح وثقة زياد في مدرسة الأمل | مغامرات أم ملك والبطريق المرح",
       "shortTitle": "Noreen Kids: ذياد والعصفورة وإصلاح قطار الأيتام العجيب | مغامرات ذياد والعصفورة الفرفوشة",
-      "longTitle": "حكاية إذاعة الصباح وثقة زياد في مدرسة الأمل",
+      "longTitle": "Noreen Kids: حكاية إذاعة الصباح وثقة زياد في مدرسة الأمل | مغامرات أم ملك والبطريق المرح",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -822,9 +823,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "Ez9Z2fNe7pI",
+      "youtubeLongVideoId": "yuoFMELsPjY",
       "facebookShortVideoId": "2137273030515966",
+      "facebookLongVideoId": "1667292061608266",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2137273030515966",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1667292061608266",
       "facebookShortTitle": "Noreen Kids | ذياد والعصفورة وإصلاح قطار الأيتام العجيب - مغامرة ذياد والعصفورة الفرفوشة",
+      "facebookLongTitle": "Noreen Kids | حكاية إذاعة الصباح وثقة زياد في مدرسة الأمل - مغامرة أم ملك والبطريق المرح",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -832,16 +837,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 61,
-        "fileSizeBytes": 9950986,
-        "inspectedAt": "05:29"
+        "durationSec": 377,
+        "fileSizeBytes": 42383442,
+        "inspectedAt": "05:40"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
