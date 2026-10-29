@@ -37,6 +37,16 @@
     {
       "topic": "جدو والفأر المشاكس وإنقاذ النحلة النشيطة زوزو",
       "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "أستاذ شريف وسر الميزان العادل في السوق",
+      "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "جدو والفأر المشاكس وإنقاذ النحلة النشيطة زوزو",
+      "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس",
       "timestampIso": "2026-10-29T11:41:44.009Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-10-20T17:19:27.107Z"
-    },
-    {
-      "topic": "تختوخ وزقلط وسر طيارة الورق العالقة في الشجرة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط"
-    },
-    {
-      "topic": "الشيخ محمود والديك الفصيح وسر شتلة الياسمين",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح"
-    },
-    {
-      "topic": "تختوخ وزقلط وسر طيارة الورق العالقة في الشجرة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط",
-      "timestampIso": "2026-10-20T14:51:33.233Z"
-    },
-    {
-      "topic": "الشيخ محمود والديك الفصيح وسر شتلة الياسمين",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح",
-      "timestampIso": "2026-10-20T14:51:33.233Z"
     }
   ],
   "scheduledHistory": [
@@ -2700,16 +2688,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٩‏/١٠‏/٢٠٢٦، ٣:٠٥:٥٥ م",
   "lastCloudRunReport": {
-    "id": "gh-run-40679055619",
+    "id": "gh-run-40865834007",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-28 (14:33 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1793186466176-5r0v",
-    "longEpisodeId": "ep-gh-long-1793186588189-ldv9",
-    "shortEpisodeTitle": "Noreen Kids: سدرة وبناء أعلى برج ملون من المكعبات السحرية | مغامرات سدرة الصغنونة والفراشة الملونة",
-    "longEpisodeTitle": "Noreen Kids: ملك ولوليتا وإسعاف ركبة عمر في حديقة الزهور | مغامرات الطبيبة ملك والقطة لوليتا",
-    "shortTitle": "Noreen Kids: سدرة وبناء أعلى برج ملون من المكعبات السحرية | مغامرات سدرة الصغنونة والفراشة الملونة",
-    "longTitle": "Noreen Kids: ملك ولوليتا وإسعاف ركبة عمر في حديقة الزهور | مغامرات الطبيبة ملك والقطة لوليتا",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-29 (15:05 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1793273589103-rndf",
+    "longEpisodeId": "ep-gh-long-1793274104009-4pz7",
+    "shortEpisodeTitle": "Noreen Kids: جدو والفأر المشاكس وإنقاذ النحلة النشيطة زوزو | مغامرات جدو والفأر المشاكس",
+    "longEpisodeTitle": "Noreen Kids: أستاذ شريف وسر الميزان العادل في السوق | مغامرات أستاذ شريف والصقر الذكي",
+    "shortTitle": "Noreen Kids: جدو والفأر المشاكس وإنقاذ النحلة النشيطة زوزو | مغامرات جدو والفأر المشاكس",
+    "longTitle": "Noreen Kids: أستاذ شريف وسر الميزان العادل في السوق | مغامرات أستاذ شريف والصقر الذكي",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2718,14 +2706,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "IfnZ6Gi94Ic",
-    "youtubeLongVideoId": "HMMgZ-k7SqM",
-    "facebookShortVideoId": "3185167681818318",
-    "facebookLongVideoId": "1728063262300703",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/3185167681818318",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1728063262300703",
-    "facebookShortTitle": "Noreen Kids | سدرة وبناء أعلى برج ملون من المكعبات السحرية - مغامرة سدرة الصغنونة والفراشة الملونة",
-    "facebookLongTitle": "Noreen Kids | ملك ولوليتا وإسعاف ركبة عمر في حديقة الزهور - مغامرة ملك والقطة لوليتا",
+    "youtubeShortVideoId": "bLZmMaZ5LpI",
+    "youtubeLongVideoId": "NSJxw39HhLc",
+    "facebookShortVideoId": "1625157012427451",
+    "facebookLongVideoId": "1561383612425740",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1625157012427451",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1561383612425740",
+    "facebookShortTitle": "Noreen Kids | جدو والفأر المشاكس وإنقاذ النحلة النشيطة زوزو - مغامرة جدو والفأر المشاكس",
+    "facebookLongTitle": "Noreen Kids | أستاذ شريف وسر الميزان العادل في السوق - مغامرة أستاذ شريف والصقر الذكي",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2740,9 +2728,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 333,
-      "fileSizeBytes": 35525755,
-      "inspectedAt": "14:33"
+      "durationSec": 309,
+      "fileSizeBytes": 36343644,
+      "inspectedAt": "15:05"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2751,7 +2739,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-28T11:33:59.513Z"
+    "reportedAtIso": "2026-10-29T12:05:58.819Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
