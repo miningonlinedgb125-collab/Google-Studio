@@ -2663,6 +2663,16 @@
     {
       "topic": "جدو والفأر المشاكس وإنقاذ النحلة النشيطة زوزو",
       "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "أستاذ شريف وسر الميزان العادل في السوق",
+      "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "جدو والفأر المشاكس وإنقاذ النحلة النشيطة زوزو",
+      "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس",
       "timestampIso": "2026-10-29T11:41:44.009Z"
     },
@@ -2825,28 +2835,6 @@
       "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-10-20T17:19:27.107Z"
-    },
-    {
-      "topic": "تختوخ وزقلط وسر طيارة الورق العالقة في الشجرة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط"
-    },
-    {
-      "topic": "الشيخ محمود والديك الفصيح وسر شتلة الياسمين",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح"
-    },
-    {
-      "topic": "تختوخ وزقلط وسر طيارة الورق العالقة في الشجرة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط",
-      "timestampIso": "2026-10-20T14:51:33.233Z"
-    },
-    {
-      "topic": "الشيخ محمود والديك الفصيح وسر شتلة الياسمين",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح",
-      "timestampIso": "2026-10-20T14:51:33.233Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-29 · 05:40 بتوقيت مصر",
