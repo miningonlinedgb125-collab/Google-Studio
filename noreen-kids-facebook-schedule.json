@@ -2663,6 +2663,16 @@
     {
       "topic": "تختوخ وزقلط وسر النافورة العجيبة في الحديقة",
       "mainCharacterName": "تختوخ",
+      "companionName": "الكلب زقلط"
+    },
+    {
+      "topic": "تيتة والدب باندا وسر زهرة القمر المفقودة",
+      "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا"
+    },
+    {
+      "topic": "تختوخ وزقلط وسر النافورة العجيبة في الحديقة",
+      "mainCharacterName": "تختوخ",
       "companionName": "الكلب زقلط",
       "timestampIso": "2026-10-29T20:19:04.105Z"
     },
@@ -2825,43 +2835,21 @@
       "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش",
       "timestampIso": "2026-10-20T17:43:42.174Z"
-    },
-    {
-      "topic": "نوران والنمر وفكرة قبة النجوم لحماية العصافير",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "سر مية الغابة والنبع اللي نشف فجأة",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "نوران والنمر وفكرة قبة النجوم لحماية العصافير",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-10-20T17:19:27.107Z"
-    },
-    {
-      "topic": "سر مية الغابة والنبع اللي نشف فجأة",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-10-20T17:19:27.107Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-29 · 15:06 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-40805321968",
+    "id": "gh-run-40947448088",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-29 (05:40 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1793240393321-1ycl",
-    "longEpisodeId": "ep-gh-long-1793240491133-m2hb",
-    "shortEpisodeTitle": "Noreen Kids: ذياد والعصفورة وإصلاح قطار الأيتام العجيب | مغامرات ذياد والعصفورة الفرفوشة",
-    "longEpisodeTitle": "Noreen Kids: حكاية إذاعة الصباح وثقة زياد في مدرسة الأمل | مغامرات أم ملك والبطريق المرح",
-    "shortTitle": "Noreen Kids: ذياد والعصفورة وإصلاح قطار الأيتام العجيب | مغامرات ذياد والعصفورة الفرفوشة",
-    "longTitle": "Noreen Kids: حكاية إذاعة الصباح وثقة زياد في مدرسة الأمل | مغامرات أم ملك والبطريق المرح",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-29 (23:41 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1793305105682-4mho",
+    "longEpisodeId": "ep-gh-long-1793305144105-v2k5",
+    "shortEpisodeTitle": "Noreen Kids: تختوخ وزقلط وسر النافورة العجيبة في الحديقة | مغامرات تختوخ والكلب زقلط",
+    "longEpisodeTitle": "Noreen Kids: تيتة والدب باندا وسر زهرة القمر المفقودة | مغامرات تيتة والدب باندا",
+    "shortTitle": "Noreen Kids: تختوخ وزقلط وسر النافورة العجيبة في الحديقة | مغامرات تختوخ والكلب زقلط",
+    "longTitle": "Noreen Kids: تيتة والدب باندا وسر زهرة القمر المفقودة | مغامرات تيتة والدب باندا",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2870,14 +2858,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "Ez9Z2fNe7pI",
-    "youtubeLongVideoId": "yuoFMELsPjY",
-    "facebookShortVideoId": "2137273030515966",
-    "facebookLongVideoId": "1667292061608266",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2137273030515966",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1667292061608266",
-    "facebookShortTitle": "Noreen Kids | ذياد والعصفورة وإصلاح قطار الأيتام العجيب - مغامرة ذياد والعصفورة الفرفوشة",
-    "facebookLongTitle": "Noreen Kids | حكاية إذاعة الصباح وثقة زياد في مدرسة الأمل - مغامرة أم ملك والبطريق المرح",
+    "youtubeShortVideoId": "QKWzhS31G1Q",
+    "youtubeLongVideoId": "ut4gK0uF--w",
+    "facebookShortVideoId": "2613115325838531",
+    "facebookLongVideoId": "1737931700638471",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2613115325838531",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1737931700638471",
+    "facebookShortTitle": "Noreen Kids | تختوخ وزقلط وسر النافورة العجيبة في الحديقة - مغامرة تختوخ والكلب زقلط",
+    "facebookLongTitle": "Noreen Kids | تيتة والدب باندا وسر زهرة القمر المفقودة - مغامرة تيتة والدب باندا",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2892,9 +2880,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 377,
-      "fileSizeBytes": 42383442,
-      "inspectedAt": "05:40"
+      "durationSec": 372,
+      "fileSizeBytes": 45602570,
+      "inspectedAt": "23:41"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2903,7 +2891,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-29T02:40:55.402Z"
+    "reportedAtIso": "2026-10-29T20:41:08.709Z"
   },
   "heroFairRotationIndex": 15,
   "interactiveHeroRotationIndex": 5,
