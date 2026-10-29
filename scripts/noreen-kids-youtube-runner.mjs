@@ -2352,6 +2352,8 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       "+cgop",
       "-pix_fmt",
       "yuv420p",
+      "-color_range",
+      "tv",
       "-colorspace",
       "bt709",
       "-color_primaries",
@@ -2395,6 +2397,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
         "-level:v", "4.1",
         "-crf", "20",
         "-pix_fmt", "yuv420p",
+        "-color_range", "tv",
         "-g", "60",
         "-keyint_min", "60",
         "-sc_threshold", "0",
@@ -6552,7 +6555,7 @@ async function main() {
     const avDrift = Math.abs(vDur - aDur);
     if (
       vCodec !== "h264" ||
-      pixFmt !== "yuv420p" ||
+      (pixFmt !== "yuv420p" && pixFmt !== "yuvj420p") ||
       aCodec !== "aac" ||
       aSampleRate !== 48000 ||
       aChannels !== 2

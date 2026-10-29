@@ -284,7 +284,7 @@ export function inspectShortPipelinePreUploadGate({
   const height = Number(videoStream?.height || 0);
   const isStreamCompliant =
     vCodec === "h264" &&
-    pixFmt === "yuv420p" &&
+    (pixFmt === "yuv420p" || pixFmt === "yuvj420p") &&
     aCodec === "aac" &&
     aSampleRate === 48000 &&
     aChannels === 2 &&
@@ -614,6 +614,8 @@ export async function runFullShortPipelineUnitTest() {
         "4.1",
         "-pix_fmt",
         "yuv420p",
+        "-color_range",
+        "tv",
         "-colorspace",
         "bt709",
         "-color_primaries",
