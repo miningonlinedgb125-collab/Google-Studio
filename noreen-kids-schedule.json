@@ -37,6 +37,16 @@
     {
       "topic": "الطبيبة نورين والضمادة السحرية لهزيمة الخوف",
       "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "سورة قريش ونعمة الأمان وشكر الله على نعمة الطعام",
+      "mainCharacterName": "الشيخ محمود",
+      "companionName": "الديك الفصيح"
+    },
+    {
+      "topic": "الطبيبة نورين والضمادة السحرية لهزيمة الخوف",
+      "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-10-30T11:24:55.799Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي",
       "timestampIso": "2026-10-20T19:18:17.289Z"
-    },
-    {
-      "topic": "عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي"
-    },
-    {
-      "topic": "إصلاح منارة المرجان المضيئة بأدوات الهندسة",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "timestampIso": "2026-10-20T17:43:42.174Z"
-    },
-    {
-      "topic": "إصلاح منارة المرجان المضيئة بأدوات الهندسة",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-10-20T17:43:42.174Z"
     }
   ],
   "scheduledHistory": [
@@ -2705,16 +2693,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٣٠‏/١٠‏/٢٠٢٦، ١:٣٩:٤٢ م",
   "lastCloudRunReport": {
-    "id": "gh-run-40865834007",
+    "id": "gh-run-41047674833",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-29 (15:05 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1793273589103-rndf",
-    "longEpisodeId": "ep-gh-long-1793274104009-4pz7",
-    "shortEpisodeTitle": "Noreen Kids: جدو والفأر المشاكس وإنقاذ النحلة النشيطة زوزو | مغامرات جدو والفأر المشاكس",
-    "longEpisodeTitle": "Noreen Kids: أستاذ شريف وسر الميزان العادل في السوق | مغامرات أستاذ شريف والصقر الذكي",
-    "shortTitle": "Noreen Kids: جدو والفأر المشاكس وإنقاذ النحلة النشيطة زوزو | مغامرات جدو والفأر المشاكس",
-    "longTitle": "Noreen Kids: أستاذ شريف وسر الميزان العادل في السوق | مغامرات أستاذ شريف والصقر الذكي",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-30 (13:39 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1793359471100-6ti6",
+    "longEpisodeId": "ep-gh-long-1793359495799-6h7i",
+    "shortEpisodeTitle": "Noreen Kids: الطبيبة نورين والضمادة السحرية لهزيمة الخوف | مغامرات الطبيبة نورين وأرنوب",
+    "longEpisodeTitle": "Noreen Kids: سورة قريش ونعمة الأمان وشكر الله على نعمة الطعام | مغامرات الشيخ محمود والديك الفصيح",
+    "shortTitle": "Noreen Kids: الطبيبة نورين والضمادة السحرية لهزيمة الخوف | مغامرات الطبيبة نورين وأرنوب",
+    "longTitle": "Noreen Kids: سورة قريش ونعمة الأمان وشكر الله على نعمة الطعام | مغامرات الشيخ محمود والديك الفصيح",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2723,14 +2711,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "bLZmMaZ5LpI",
-    "youtubeLongVideoId": "NSJxw39HhLc",
-    "facebookShortVideoId": "1625157012427451",
-    "facebookLongVideoId": "1561383612425740",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1625157012427451",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1561383612425740",
-    "facebookShortTitle": "Noreen Kids | جدو والفأر المشاكس وإنقاذ النحلة النشيطة زوزو - مغامرة جدو والفأر المشاكس",
-    "facebookLongTitle": "Noreen Kids | أستاذ شريف وسر الميزان العادل في السوق - مغامرة أستاذ شريف والصقر الذكي",
+    "youtubeShortVideoId": "PdZZh7gXdGU",
+    "youtubeLongVideoId": "1IJps-CUn10",
+    "facebookShortVideoId": "1042315498318396",
+    "facebookLongVideoId": "1783478862704714",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1042315498318396",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1783478862704714",
+    "facebookShortTitle": "Noreen Kids | الطبيبة نورين والضمادة السحرية لهزيمة الخوف - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
+    "facebookLongTitle": "Noreen Kids | سورة قريش ونعمة الأمان وشكر الله على نعمة الطعام - مغامرة الشيخ محمود والديك الفصيح",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2745,9 +2733,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 309,
-      "fileSizeBytes": 36343644,
-      "inspectedAt": "15:05"
+      "durationSec": 314,
+      "fileSizeBytes": 39541801,
+      "inspectedAt": "13:39"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2756,7 +2744,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-29T12:05:58.819Z"
+    "reportedAtIso": "2026-10-30T11:39:44.737Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
