@@ -68,6 +68,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122121931503484976",
+      "photoId": "122121931473484976",
+      "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع الشيخ محمود والديك الفصيح",
+      "title": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع الشيخ محمود والديك الفصيح",
+      "caption": "يا صباح الفل والنشاط على أحلى أمهات وأشطر كتاكيت في الدنيا! ☀️✨ \n\nتحدي النهاردة محتاج قوة ملاحظة وذكاء أبطالنا الصغيرين.. الشيخ محمود واقف على اليمين وعايز يوصل لصاحبه \"الديك الفصيح\" على الشمال 🐓🧭\nقدامنا 3 مسارات ملونة [ 1 ، 2 ، 3 ].. بس مسار واحد بس هو اللي سالك وهيخليهم يتقابلوا! 🎨🔍\n\nيا ترى مين العبقري اللي هيمشي ورا الطريق الصح ويقولنا رقم كام؟ 🕵️‍♂️💡\n\nاكتبوا الإجابة الصح مع اسم بطلكم أو أميرتكم في التعليقات 💬👇 علشان الشيخ محمود والديك الفصيح يحيّوهم بالاسم في حلقة بكرة! 🎉👏\n\nمتنسوش تعملوا شير للبوست وتدوسوا متابعة للصفحة وتفعلوا الجرس 🔔 عشان متفوتكمش التحديات الجاية! ❤️\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
+      "heroName": "الشيخ محمود",
+      "companionName": "الديك الفصيح",
+      "publishedAtCairo": "2026-10-30 · 13:35 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122121931503484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122121928773484976",
       "photoId": "122121928749484976",
       "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع دكتورة نورين وأرنوب",
@@ -534,18 +546,6 @@
       "publishedAtCairo": "2026-10-16 · 13:01 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122117045823484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122117043753484976",
-      "photoId": "122117043729484976",
-      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع تامر وكركور",
-      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع تامر وكركور",
-      "caption": "🎉 فزورة قوة التركيز وسرعة البديهة من عالم Noreen Kids! 🎉\nبصوا كويس على الصورتين [ أ ] و [ ب ].. فيه 3 اختلافات ذكية مستخبية! يا ترى عيونكم الحلوة هتطلعهم؟ 👀✨\n👇 اكتبوا لنا الفروقات الـ 3 في تعليق مع اسم طفلكم الجميل علشان نرحب بيه في حلقة النهاردة! 💖🎬\n🔔 واضغطوا متابعة للصفحة ولايك للبوست عشان متفوتكمش حكاياتنا اليومية! 👍🌟\n#نورين_كيدز #Noreen_Kids #فزورة_اليوم #كرتون_3D #أمهات_مصر",
-      "heroName": "تامر",
-      "companionName": "كركور",
-      "publishedAtCairo": "2026-10-16 · 12:51 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122117043753484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -809,14 +809,15 @@
       "id": "gh-run-41047674833",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-30 (13:27 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-30 (13:39 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1793359471100-6ti6",
       "longEpisodeId": "ep-gh-long-1793359495799-6h7i",
       "shortEpisodeTitle": "Noreen Kids: الطبيبة نورين والضمادة السحرية لهزيمة الخوف | مغامرات الطبيبة نورين وأرنوب",
-      "longEpisodeTitle": "سورة قريش ونعمة الأمان وشكر الله على نعمة الطعام",
+      "longEpisodeTitle": "Noreen Kids: سورة قريش ونعمة الأمان وشكر الله على نعمة الطعام | مغامرات الشيخ محمود والديك الفصيح",
       "shortTitle": "Noreen Kids: الطبيبة نورين والضمادة السحرية لهزيمة الخوف | مغامرات الطبيبة نورين وأرنوب",
-      "longTitle": "سورة قريش ونعمة الأمان وشكر الله على نعمة الطعام",
+      "longTitle": "Noreen Kids: سورة قريش ونعمة الأمان وشكر الله على نعمة الطعام | مغامرات الشيخ محمود والديك الفصيح",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -824,9 +825,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "PdZZh7gXdGU",
+      "youtubeLongVideoId": "1IJps-CUn10",
       "facebookShortVideoId": "1042315498318396",
+      "facebookLongVideoId": "1783478862704714",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1042315498318396",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1783478862704714",
       "facebookShortTitle": "Noreen Kids | الطبيبة نورين والضمادة السحرية لهزيمة الخوف - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
+      "facebookLongTitle": "Noreen Kids | سورة قريش ونعمة الأمان وشكر الله على نعمة الطعام - مغامرة الشيخ محمود والديك الفصيح",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -834,16 +839,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 60,
-        "fileSizeBytes": 9206497,
-        "inspectedAt": "13:27"
+        "durationSec": 314,
+        "fileSizeBytes": 39541801,
+        "inspectedAt": "13:39"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
