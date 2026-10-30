@@ -2673,6 +2673,16 @@
     {
       "topic": "المهندسة نوران وابتكار مصعد المكتبة الطائرة",
       "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "عمرو وزعتر ولغز الشبل التائه في جبل الثلج",
+      "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي"
+    },
+    {
+      "topic": "المهندسة نوران وابتكار مصعد المكتبة الطائرة",
+      "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش",
       "timestampIso": "2026-10-30T20:07:05.704Z"
     },
@@ -2835,43 +2845,21 @@
       "mainCharacterName": "شوشو القبطان الصغير",
       "companionName": "مرجان الدلفين المرح",
       "timestampIso": "2026-10-25T20:37:52.407Z"
-    },
-    {
-      "topic": "جنى وبلبل وإنقاذ نبتة المريخ العطشانة",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف"
-    },
-    {
-      "topic": "رحلة المنطاد البلوري وإنقاذ فلة في الوادي",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي"
-    },
-    {
-      "topic": "جنى وبلبل وإنقاذ نبتة المريخ العطشانة",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف",
-      "timestampIso": "2026-10-20T19:18:17.289Z"
-    },
-    {
-      "topic": "رحلة المنطاد البلوري وإنقاذ فلة في الوادي",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "timestampIso": "2026-10-20T19:18:17.289Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-30 · 13:39 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-40947448088",
+    "id": "gh-run-41119206329",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-29 (23:41 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1793305105682-4mho",
-    "longEpisodeId": "ep-gh-long-1793305144105-v2k5",
-    "shortEpisodeTitle": "Noreen Kids: تختوخ وزقلط وسر النافورة العجيبة في الحديقة | مغامرات تختوخ والكلب زقلط",
-    "longEpisodeTitle": "Noreen Kids: تيتة والدب باندا وسر زهرة القمر المفقودة | مغامرات تيتة والدب باندا",
-    "shortTitle": "Noreen Kids: تختوخ وزقلط وسر النافورة العجيبة في الحديقة | مغامرات تختوخ والكلب زقلط",
-    "longTitle": "Noreen Kids: تيتة والدب باندا وسر زهرة القمر المفقودة | مغامرات تيتة والدب باندا",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-30 (22:25 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1793390370139-hwbr",
+    "longEpisodeId": "ep-gh-long-1793390825704-djgf",
+    "shortEpisodeTitle": "Noreen Kids: المهندسة نوران وابتكار مصعد المكتبة الطائرة | مغامرات المهندسة نوران والنمر الفرفوش",
+    "longEpisodeTitle": "Noreen Kids: عمرو وزعتر ولغز الشبل التائه في جبل الثلج | مغامرات عمرو وزعتر",
+    "shortTitle": "Noreen Kids: المهندسة نوران وابتكار مصعد المكتبة الطائرة | مغامرات المهندسة نوران والنمر الفرفوش",
+    "longTitle": "Noreen Kids: عمرو وزعتر ولغز الشبل التائه في جبل الثلج | مغامرات عمرو وزعتر",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2880,14 +2868,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "QKWzhS31G1Q",
-    "youtubeLongVideoId": "ut4gK0uF--w",
-    "facebookShortVideoId": "2613115325838531",
-    "facebookLongVideoId": "1737931700638471",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2613115325838531",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1737931700638471",
-    "facebookShortTitle": "Noreen Kids | تختوخ وزقلط وسر النافورة العجيبة في الحديقة - مغامرة تختوخ والكلب زقلط",
-    "facebookLongTitle": "Noreen Kids | تيتة والدب باندا وسر زهرة القمر المفقودة - مغامرة تيتة والدب باندا",
+    "youtubeShortVideoId": "NSQWx0P9PGk",
+    "youtubeLongVideoId": "y_skOv9cPYA",
+    "facebookShortVideoId": "3110265532638683",
+    "facebookLongVideoId": "1152202014155563",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/3110265532638683",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1152202014155563",
+    "facebookShortTitle": "Noreen Kids | المهندسة نوران وابتكار مصعد المكتبة الطائرة - مغامرة المهندسة نوران والنمر الفرفوش",
+    "facebookLongTitle": "Noreen Kids | عمرو وزعتر ولغز الشبل التائه في جبل الثلج - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2902,9 +2890,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 372,
-      "fileSizeBytes": 45602570,
-      "inspectedAt": "23:41"
+      "durationSec": 365,
+      "fileSizeBytes": 40653292,
+      "inspectedAt": "22:25"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2913,7 +2901,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-29T20:41:08.709Z"
+    "reportedAtIso": "2026-10-30T20:25:51.176Z"
   },
   "heroFairRotationIndex": 3,
   "interactiveHeroRotationIndex": 5,
