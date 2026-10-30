@@ -68,6 +68,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122122050429484976",
+      "photoId": "122122050399484976",
+      "themeTitle": "تحدي الصورة المختلفة (من 1 إلى 4) مع عمرو وزعتر",
+      "title": "تحدي الصورة المختلفة (من 1 إلى 4) مع عمرو وزعتر",
+      "caption": "🔍 تحدي قوة الملاحظة السريعة مع عمرو وزعتر! 🌟\nأبطالنا الشطار وأمهاتنا الغاليين.. بصوا كويس جداً على الصور الـ 4 المرقمة [ 1 ، 2 ، 3 ، 4 ]! 👀✨\nفيه 3 صور متطابقين تماماً.. وصورة واحدة بس هي اللي مختلفة وفيها تفصيلة ذكية! 🕵️‍♂️💡\nمين أشطر بطل أو بطلة هيعرف يكتشف رقم الصورة المختلفة؟ 🤔\n1️⃣ اكتبوا رقم الصورة المختلفة في تعليق 👇\n2️⃣ واكتبوا اسم طفلكم الشاطر علشان عمرو وزعتر يحيوه بالاسم ويبعتوله وسام الشطارة! 🏅🎬\n🔔 متنسوش متابعة صفحتنا Noreen Kids لتحديات يومية ممتعة! 👍💖\n#نورين_كيدز #Noreen_Kids #تحدي_الشطار #أبطال_نورين_كيدز #ذكاء_الأطفال #أمهات_مصر",
+      "heroName": "عمرو",
+      "companionName": "زعتر",
+      "publishedAtCairo": "2026-10-30 · 22:24 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122122050429484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122122049067484976",
       "photoId": "122122049043484976",
       "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع المهندسة نوران والنمر الفرفوش",
@@ -534,18 +546,6 @@
       "publishedAtCairo": "2026-10-16 · 22:08 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122117163825484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122117160933484976",
-      "photoId": "122117160885484976",
-      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع سدرة الصغنونة والفراشة الملونة",
-      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع سدرة الصغنونة والفراشة الملونة",
-      "caption": "يا مساء السُكّر على أحلى مامي وأشطر كتاكيت في الدنيا! 🌸✨ بطلتنا العسولة \"سدرة الصغنونة\" وصاحبتها \"الفراشة الملونة\" مجهزين لكم تحدي ذكاء خطييير ومسلي جداً! 🦋👧\n\n🔍 ركزوا جامد كدة في الصورتين [ أ ] و [ ب ].. مين البطل الشاطر اللي قوة ملاحظته 10/10 وهيطلع الـ 3 اختلافات المستخبيين؟ 🕵️‍♂️🎨\n\n💬 اكتبوا لنا الإجابة الصح مع \"اسم طفلكم البطل\" في التعليقات، عشان سدرة والفراشة الملونة يحيّوه بالاسم بنفسهم في حلقة بكرة! 🥳🎉\n\n🔔 متنسوش تعملوا متابعة لصفحتنا وتفعلوا الجرس، وشير للبوست عشان نتحدى باقي أصحابنا الشطار! 🚀❤️\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
-      "heroName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "publishedAtCairo": "2026-10-16 · 21:54 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122117160933484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -809,14 +809,15 @@
       "id": "gh-run-41119206329",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-30 (22:15 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-30 (22:25 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1793390370139-hwbr",
       "longEpisodeId": "ep-gh-long-1793390825704-djgf",
       "shortEpisodeTitle": "Noreen Kids: المهندسة نوران وابتكار مصعد المكتبة الطائرة | مغامرات المهندسة نوران والنمر الفرفوش",
-      "longEpisodeTitle": "عمرو وزعتر ولغز الشبل التائه في جبل الثلج",
+      "longEpisodeTitle": "Noreen Kids: عمرو وزعتر ولغز الشبل التائه في جبل الثلج | مغامرات عمرو وزعتر",
       "shortTitle": "Noreen Kids: المهندسة نوران وابتكار مصعد المكتبة الطائرة | مغامرات المهندسة نوران والنمر الفرفوش",
-      "longTitle": "عمرو وزعتر ولغز الشبل التائه في جبل الثلج",
+      "longTitle": "Noreen Kids: عمرو وزعتر ولغز الشبل التائه في جبل الثلج | مغامرات عمرو وزعتر",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -824,9 +825,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "NSQWx0P9PGk",
+      "youtubeLongVideoId": "y_skOv9cPYA",
       "facebookShortVideoId": "3110265532638683",
+      "facebookLongVideoId": "1152202014155563",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/3110265532638683",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1152202014155563",
       "facebookShortTitle": "Noreen Kids | المهندسة نوران وابتكار مصعد المكتبة الطائرة - مغامرة المهندسة نوران والنمر الفرفوش",
+      "facebookLongTitle": "Noreen Kids | عمرو وزعتر ولغز الشبل التائه في جبل الثلج - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -834,16 +839,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 63,
-        "fileSizeBytes": 10747904,
-        "inspectedAt": "22:15"
+        "durationSec": 365,
+        "fileSizeBytes": 40653292,
+        "inspectedAt": "22:25"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
