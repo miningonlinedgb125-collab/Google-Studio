@@ -809,7 +809,7 @@
       "id": "gh-run-41194659512",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-31 (13:11 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-31 (13:12 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1793444243849-941e",
       "longEpisodeId": "ep-gh-long-1793444419447-pd5v",
       "shortEpisodeTitle": "Noreen Kids: جنى وبدلة الفضاء الذكية وإنقاذ نبتة المحطة | مغامرات جنى وبلبل",
@@ -848,7 +848,7 @@
         "fastStartMoovFirst": true,
         "durationSec": 348,
         "fileSizeBytes": 44753224,
-        "inspectedAt": "13:11"
+        "inspectedAt": "13:12"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2673,6 +2673,16 @@
     {
       "topic": "جنى وبدلة الفضاء الذكية وإنقاذ نبتة المحطة",
       "mainCharacterName": "جنى رائدة الفضاء",
+      "companionName": "بلبل الروبوت اللطيف"
+    },
+    {
+      "topic": "شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر",
+      "mainCharacterName": "شوشو القبطان الصغير",
+      "companionName": "مرجان الدلفين المرح"
+    },
+    {
+      "topic": "جنى وبدلة الفضاء الذكية وإنقاذ نبتة المحطة",
+      "mainCharacterName": "جنى رائدة الفضاء",
       "companionName": "بلبل الروبوت اللطيف",
       "timestampIso": "2026-10-31T11:00:19.447Z"
     },
@@ -2835,28 +2845,6 @@
       "mainCharacterName": "كارمن المخترعة الصغيرة",
       "companionName": "سمسم السنجاب الطائر",
       "timestampIso": "2026-10-27T20:23:43.373Z"
-    },
-    {
-      "topic": "كارمن وسمسم ومناطيد المحبة الطائرة بين القرى",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر"
-    },
-    {
-      "topic": "تنظيف شاطئ الأصداف الملونة وحماية السلاحف البحرية",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح"
-    },
-    {
-      "topic": "كارمن وسمسم ومناطيد المحبة الطائرة بين القرى",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر",
-      "timestampIso": "2026-10-25T20:37:52.407Z"
-    },
-    {
-      "topic": "تنظيف شاطئ الأصداف الملونة وحماية السلاحف البحرية",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح",
-      "timestampIso": "2026-10-25T20:37:52.407Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-30 · 22:25 بتوقيت مصر",
