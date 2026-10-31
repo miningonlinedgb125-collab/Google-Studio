@@ -37,6 +37,16 @@
     {
       "topic": "جنى وبدلة الفضاء الذكية وإنقاذ نبتة المحطة",
       "mainCharacterName": "جنى رائدة الفضاء",
+      "companionName": "بلبل الروبوت اللطيف"
+    },
+    {
+      "topic": "شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر",
+      "mainCharacterName": "شوشو القبطان الصغير",
+      "companionName": "مرجان الدلفين المرح"
+    },
+    {
+      "topic": "جنى وبدلة الفضاء الذكية وإنقاذ نبتة المحطة",
+      "mainCharacterName": "جنى رائدة الفضاء",
       "companionName": "بلبل الروبوت اللطيف",
       "timestampIso": "2026-10-31T11:00:19.447Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "كارمن المخترعة الصغيرة",
       "companionName": "سمسم السنجاب الطائر",
       "timestampIso": "2026-10-27T20:23:43.373Z"
-    },
-    {
-      "topic": "كارمن وسمسم ومناطيد المحبة الطائرة بين القرى",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر"
-    },
-    {
-      "topic": "تنظيف شاطئ الأصداف الملونة وحماية السلاحف البحرية",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح"
-    },
-    {
-      "topic": "كارمن وسمسم ومناطيد المحبة الطائرة بين القرى",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر",
-      "timestampIso": "2026-10-25T20:37:52.407Z"
-    },
-    {
-      "topic": "تنظيف شاطئ الأصداف الملونة وحماية السلاحف البحرية",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح",
-      "timestampIso": "2026-10-25T20:37:52.407Z"
     }
   ],
   "scheduledHistory": [
@@ -228,7 +216,7 @@
       "id": "gh-run-41194659512",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-31 (13:11 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-31 (13:12 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1793444243849-941e",
       "longEpisodeId": "ep-gh-long-1793444419447-pd5v",
       "shortEpisodeTitle": "Noreen Kids: جنى وبدلة الفضاء الذكية وإنقاذ نبتة المحطة | مغامرات جنى وبلبل",
@@ -267,7 +255,7 @@
         "fastStartMoovFirst": true,
         "durationSec": 348,
         "fileSizeBytes": 44753224,
-        "inspectedAt": "13:11"
+        "inspectedAt": "13:12"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2710,16 +2698,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٣١‏/١٠‏/٢٠٢٦، ١:١١:٥٩ م",
   "lastCloudRunReport": {
-    "id": "gh-run-41047674833",
+    "id": "gh-run-41194659512",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-30 (13:39 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1793359471100-6ti6",
-    "longEpisodeId": "ep-gh-long-1793359495799-6h7i",
-    "shortEpisodeTitle": "Noreen Kids: الطبيبة نورين والضمادة السحرية لهزيمة الخوف | مغامرات الطبيبة نورين وأرنوب",
-    "longEpisodeTitle": "Noreen Kids: سورة قريش ونعمة الأمان وشكر الله على نعمة الطعام | مغامرات الشيخ محمود والديك الفصيح",
-    "shortTitle": "Noreen Kids: الطبيبة نورين والضمادة السحرية لهزيمة الخوف | مغامرات الطبيبة نورين وأرنوب",
-    "longTitle": "Noreen Kids: سورة قريش ونعمة الأمان وشكر الله على نعمة الطعام | مغامرات الشيخ محمود والديك الفصيح",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-31 (13:12 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1793444243849-941e",
+    "longEpisodeId": "ep-gh-long-1793444419447-pd5v",
+    "shortEpisodeTitle": "Noreen Kids: جنى وبدلة الفضاء الذكية وإنقاذ نبتة المحطة | مغامرات جنى وبلبل",
+    "longEpisodeTitle": "Noreen Kids: شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر | مغامرات شوشو ومرجان",
+    "shortTitle": "Noreen Kids: جنى وبدلة الفضاء الذكية وإنقاذ نبتة المحطة | مغامرات جنى وبلبل",
+    "longTitle": "Noreen Kids: شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر | مغامرات شوشو ومرجان",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2728,14 +2716,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "PdZZh7gXdGU",
-    "youtubeLongVideoId": "1IJps-CUn10",
-    "facebookShortVideoId": "1042315498318396",
-    "facebookLongVideoId": "1783478862704714",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1042315498318396",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1783478862704714",
-    "facebookShortTitle": "Noreen Kids | الطبيبة نورين والضمادة السحرية لهزيمة الخوف - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
-    "facebookLongTitle": "Noreen Kids | سورة قريش ونعمة الأمان وشكر الله على نعمة الطعام - مغامرة الشيخ محمود والديك الفصيح",
+    "youtubeShortVideoId": "URwBj-yGxAU",
+    "youtubeLongVideoId": "x6_0_ERBuU4",
+    "facebookShortVideoId": "4425477601096799",
+    "facebookLongVideoId": "2459910074539601",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/4425477601096799",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2459910074539601",
+    "facebookShortTitle": "Noreen Kids | جنى وبدلة الفضاء الذكية وإنقاذ نبتة المحطة - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
+    "facebookLongTitle": "Noreen Kids | شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2750,9 +2738,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 314,
-      "fileSizeBytes": 39541801,
-      "inspectedAt": "13:39"
+      "durationSec": 348,
+      "fileSizeBytes": 44753224,
+      "inspectedAt": "13:12"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2761,7 +2749,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-30T11:39:44.737Z"
+    "reportedAtIso": "2026-10-31T11:12:02.533Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
