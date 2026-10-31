@@ -68,6 +68,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122122328049484976",
+      "photoId": "122122328019484976",
+      "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع تامر وكركور",
+      "title": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع تامر وكركور",
+      "caption": "يا صباح الفل والنشاط على أحلى مامي وأشطر كتاكيت في الدنيا! 🌟\n\nبطلنا المحبوب \"تامر\" واقف على اليمين ونفسه يوصل لصاحبه \"كركور\" على الشمال.. وقدامهم 3 مسارات ملونة [ 1 ، 2 ، 3 ]، بس طريق واحد بس هو اللي هيجمعهم ببعض! 🕵️‍♂️🔍\n\nيلا ورونا شطارة وقوة ملاحظة أبطالنا.. تتبعوا المسار واكتبوا لنا في التعليقات \"رقم الطريق الصح\" مع \"اسم طفلكم الشاطر\"، عشان تامر وكركور يحيوه مخصوص بالاسم في حلقة بكرة! 🥳🎉\n\nومتنسوش تفعّلوا زر المتابعة والجرس 🔔 وشير للبوست عشان نلعب ونتحدى كل أصحابنا الحلوين! 🚀❤️\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
+      "heroName": "تامر",
+      "companionName": "كركور",
+      "publishedAtCairo": "2026-10-31 · 21:34 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122122328049484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122122326207484976",
       "photoId": "122122326183484976",
       "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع كارمن وسمسم",
@@ -534,18 +546,6 @@
       "publishedAtCairo": "2026-10-17 · 21:10 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122117452335484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122117449485484976",
-      "photoId": "122117449461484976",
-      "themeTitle": "تحدي الصورة المختلفة (من 1 إلى 4) مع جدو والفأر المشاكس",
-      "title": "تحدي الصورة المختلفة (من 1 إلى 4) مع جدو والفأر المشاكس",
-      "caption": "🔍 تحدي قوة الملاحظة السريعة مع جدو والفأر المشاكس! 🌟\nأبطالنا الشطار وأمهاتنا الغاليين.. بصوا كويس جداً على الصور الـ 4 المرقمة [ 1 ، 2 ، 3 ، 4 ]! 👀✨\nفيه 3 صور متطابقين تماماً.. وصورة واحدة بس هي اللي مختلفة وفيها تفصيلة ذكية! 🕵️‍♂️💡\nمين أشطر بطل أو بطلة هيعرف يكتشف رقم الصورة المختلفة؟ 🤔\n1️⃣ اكتبوا رقم الصورة المختلفة في تعليق 👇\n2️⃣ واكتبوا اسم طفلكم الشاطر علشان جدو والفأر المشاكس يحيوه بالاسم ويبعتوله وسام الشطارة! 🏅🎬\n🔔 متنسوش متابعة صفحتنا Noreen Kids لتحديات يومية ممتعة! 👍💖\n#نورين_كيدز #Noreen_Kids #تحدي_الشطار #أبطال_نورين_كيدز #ذكاء_الأطفال #أمهات_مصر",
-      "heroName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "publishedAtCairo": "2026-10-17 · 20:59 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122117449485484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -809,14 +809,15 @@
       "id": "gh-run-41233422738",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-31 (21:27 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-31 (21:39 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1793474338575-py9d",
       "longEpisodeId": "ep-gh-long-1793474478076-mlkw",
       "shortEpisodeTitle": "Noreen Kids: كارمن وسمسم وابتكار كراسات الرسم العجيبة | مغامرات كارمن وسمسم",
-      "longEpisodeTitle": "تامر وكركور وسر خيمة التسامح في واحة النخيل",
+      "longEpisodeTitle": "Noreen Kids: تامر وكركور وسر خيمة التسامح في واحة النخيل | مغامرات تامر وكركور",
       "shortTitle": "Noreen Kids: كارمن وسمسم وابتكار كراسات الرسم العجيبة | مغامرات كارمن وسمسم",
-      "longTitle": "تامر وكركور وسر خيمة التسامح في واحة النخيل",
+      "longTitle": "Noreen Kids: تامر وكركور وسر خيمة التسامح في واحة النخيل | مغامرات تامر وكركور",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -824,9 +825,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "sHfT5m4liPM",
+      "youtubeLongVideoId": "PFdZ2PGApOI",
       "facebookShortVideoId": "4484803761778443",
+      "facebookLongVideoId": "2349203465817594",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/4484803761778443",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2349203465817594",
       "facebookShortTitle": "Noreen Kids | كارمن وسمسم وابتكار كراسات الرسم العجيبة - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
+      "facebookLongTitle": "Noreen Kids | تامر وكركور وسر خيمة التسامح في واحة النخيل - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -834,16 +839,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 60,
-        "fileSizeBytes": 11523850,
-        "inspectedAt": "21:27"
+        "durationSec": 338,
+        "fileSizeBytes": 45812285,
+        "inspectedAt": "21:39"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
