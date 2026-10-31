@@ -68,6 +68,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122122226727484976",
+      "photoId": "122122226703484976",
+      "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع شوشو ومرجان",
+      "title": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع شوشو ومرجان",
+      "caption": "🧭 تحدي المتاهة الذكية مع شوشو ومرجان! 🌟\nبطلنا \"شوشو\" عايز يوصل لصديقه \"مرجان\" بأسرع وقت، ومحتاج مساعدة أذكى أبطال! 🏃‍♂️💨\nقدامكم 3 مسارات ملونة:\n🔴 المسار رقم [ 1 ]\n🟢 المسار رقم [ 2 ]\n🔵 المسار رقم [ 3 ]\nيا ترى أنهي طريق فيهم هو اللي هيوصله للهدف من غير أي عوائق؟ 👀🔍\n👇 تتبعوا الخط بعيونكم واكتبوا رقم المسار الصح واسم طفلكم علشان شوشو يشكره بنفسه! 🎬🏅\n🔔 متنسوش لايك ومتابعة لصفحة Noreen Kids لمغامرات جديدة كل يوم! 💖👍\n#نورين_كيدز #Noreen_Kids #متاهة_الأذكياء #تحدي_الشطار #أمهات_مصر",
+      "heroName": "شوشو",
+      "companionName": "مرجان",
+      "publishedAtCairo": "2026-10-31 · 13:10 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122122226727484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122122224267484976",
       "photoId": "122122224243484976",
       "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع جنى وبلبل",
@@ -534,18 +546,6 @@
       "publishedAtCairo": "2026-10-17 · 12:36 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122117345511484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122117342925484976",
-      "photoId": "122117342901484976",
-      "themeTitle": "تحدي الصورة المختلفة (من 1 إلى 4) مع ذياد والعصفورة الفرفوشة",
-      "title": "تحدي الصورة المختلفة (من 1 إلى 4) مع ذياد والعصفورة الفرفوشة",
-      "caption": "يا مساء السكر على أحلى مامي وأشطر كتاكيت في الدنيا! 🌟 بطلنا \"ذياد\" وصاحبته \"العصفورة الفرفوشة\" محضرين لكم النهاردة تحدي ذكاء وملاحظة خطييير! 🕵️‍♂️🔍\n\nقدامكم 4 صور لـ ذياد [ 1 ، 2 ، 3 ، 4 ].. فيه 3 صور توأم شبه بعض بالملّي، وصورة واحدة بس هي اللي مختلفة وبتضحك علينا! 🧐 يا ترى بطلنا الصغير هيعرف يطلع رقم الصورة المختلفة؟\n\nيلا ورونا شطارة أبطالنا واكتبوا رقم الصورة مع \"اسم البطل الصغير\" في الكومنتات 👇 عشان ذياد والعصفورة الفرفوشة يحيوه مخصوص بالاسم في حلقة بكرة! 🎈🎉\n\nمتنسوش تدوسوا متابعة وتفعلوا الجرس 🔔 واعملوا شير للبوست عشان نتحدى باقي صحابنا الشطار! 💪❤️\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
-      "heroName": "ذياد",
-      "companionName": "العصفورة الفرفوشة",
-      "publishedAtCairo": "2026-10-17 · 12:23 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122117342925484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -809,14 +809,15 @@
       "id": "gh-run-41194659512",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-31 (13:05 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-31 (13:11 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1793444243849-941e",
       "longEpisodeId": "ep-gh-long-1793444419447-pd5v",
       "shortEpisodeTitle": "Noreen Kids: جنى وبدلة الفضاء الذكية وإنقاذ نبتة المحطة | مغامرات جنى وبلبل",
-      "longEpisodeTitle": "شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر",
+      "longEpisodeTitle": "Noreen Kids: شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر | مغامرات شوشو ومرجان",
       "shortTitle": "Noreen Kids: جنى وبدلة الفضاء الذكية وإنقاذ نبتة المحطة | مغامرات جنى وبلبل",
-      "longTitle": "شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر",
+      "longTitle": "Noreen Kids: شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر | مغامرات شوشو ومرجان",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -824,9 +825,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "URwBj-yGxAU",
+      "youtubeLongVideoId": "x6_0_ERBuU4",
       "facebookShortVideoId": "4425477601096799",
+      "facebookLongVideoId": "2459910074539601",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/4425477601096799",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2459910074539601",
       "facebookShortTitle": "Noreen Kids | جنى وبدلة الفضاء الذكية وإنقاذ نبتة المحطة - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
+      "facebookLongTitle": "Noreen Kids | شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -834,16 +839,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 60,
-        "fileSizeBytes": 10485760,
-        "inspectedAt": "13:05"
+        "durationSec": 348,
+        "fileSizeBytes": 44753224,
+        "inspectedAt": "13:11"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
