@@ -2673,6 +2673,16 @@
     {
       "topic": "كارمن وسمسم وابتكار كراسات الرسم العجيبة",
       "mainCharacterName": "كارمن المخترعة الصغيرة",
+      "companionName": "سمسم السنجاب الطائر"
+    },
+    {
+      "topic": "تامر وكركور وسر خيمة التسامح في واحة النخيل",
+      "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم"
+    },
+    {
+      "topic": "كارمن وسمسم وابتكار كراسات الرسم العجيبة",
+      "mainCharacterName": "كارمن المخترعة الصغيرة",
       "companionName": "سمسم السنجاب الطائر",
       "timestampIso": "2026-10-31T19:21:18.076Z"
     },
@@ -2835,43 +2845,21 @@
       "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا",
       "timestampIso": "2026-10-28T11:23:08.189Z"
-    },
-    {
-      "topic": "تامر وكركور وسر حماية نبع الماء الصافي",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم"
-    },
-    {
-      "topic": "كارمن وسمسم: روبوت التنظيف العجيب في البيت",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر"
-    },
-    {
-      "topic": "تامر وكركور وسر حماية نبع الماء الصافي",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم",
-      "timestampIso": "2026-10-27T20:23:43.373Z"
-    },
-    {
-      "topic": "كارمن وسمسم: روبوت التنظيف العجيب في البيت",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر",
-      "timestampIso": "2026-10-27T20:23:43.373Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-31 · 13:12 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-41119206329",
+    "id": "gh-run-41233422738",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-30 (22:25 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1793390370139-hwbr",
-    "longEpisodeId": "ep-gh-long-1793390825704-djgf",
-    "shortEpisodeTitle": "Noreen Kids: المهندسة نوران وابتكار مصعد المكتبة الطائرة | مغامرات المهندسة نوران والنمر الفرفوش",
-    "longEpisodeTitle": "Noreen Kids: عمرو وزعتر ولغز الشبل التائه في جبل الثلج | مغامرات عمرو وزعتر",
-    "shortTitle": "Noreen Kids: المهندسة نوران وابتكار مصعد المكتبة الطائرة | مغامرات المهندسة نوران والنمر الفرفوش",
-    "longTitle": "Noreen Kids: عمرو وزعتر ولغز الشبل التائه في جبل الثلج | مغامرات عمرو وزعتر",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-31 (21:39 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1793474338575-py9d",
+    "longEpisodeId": "ep-gh-long-1793474478076-mlkw",
+    "shortEpisodeTitle": "Noreen Kids: كارمن وسمسم وابتكار كراسات الرسم العجيبة | مغامرات كارمن وسمسم",
+    "longEpisodeTitle": "Noreen Kids: تامر وكركور وسر خيمة التسامح في واحة النخيل | مغامرات تامر وكركور",
+    "shortTitle": "Noreen Kids: كارمن وسمسم وابتكار كراسات الرسم العجيبة | مغامرات كارمن وسمسم",
+    "longTitle": "Noreen Kids: تامر وكركور وسر خيمة التسامح في واحة النخيل | مغامرات تامر وكركور",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2880,14 +2868,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "NSQWx0P9PGk",
-    "youtubeLongVideoId": "y_skOv9cPYA",
-    "facebookShortVideoId": "3110265532638683",
-    "facebookLongVideoId": "1152202014155563",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/3110265532638683",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1152202014155563",
-    "facebookShortTitle": "Noreen Kids | المهندسة نوران وابتكار مصعد المكتبة الطائرة - مغامرة المهندسة نوران والنمر الفرفوش",
-    "facebookLongTitle": "Noreen Kids | عمرو وزعتر ولغز الشبل التائه في جبل الثلج - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
+    "youtubeShortVideoId": "sHfT5m4liPM",
+    "youtubeLongVideoId": "PFdZ2PGApOI",
+    "facebookShortVideoId": "4484803761778443",
+    "facebookLongVideoId": "2349203465817594",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/4484803761778443",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2349203465817594",
+    "facebookShortTitle": "Noreen Kids | كارمن وسمسم وابتكار كراسات الرسم العجيبة - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
+    "facebookLongTitle": "Noreen Kids | تامر وكركور وسر خيمة التسامح في واحة النخيل - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2902,9 +2890,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 365,
-      "fileSizeBytes": 40653292,
-      "inspectedAt": "22:25"
+      "durationSec": 338,
+      "fileSizeBytes": 45812285,
+      "inspectedAt": "21:39"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2913,7 +2901,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-30T20:25:51.176Z"
+    "reportedAtIso": "2026-10-31T19:39:10.804Z"
   },
   "heroFairRotationIndex": 7,
   "interactiveHeroRotationIndex": 5,
