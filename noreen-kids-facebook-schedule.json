@@ -2678,6 +2678,16 @@
     {
       "topic": "دكتورة ملك ولوليتا وسر تطعيم الكلبوب مشمش",
       "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "سدرة وفراشتها وسر زهرة النور الضاحكة",
+      "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "دكتورة ملك ولوليتا وسر تطعيم الكلبوب مشمش",
+      "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا",
       "timestampIso": "2026-11-01T11:54:37.826Z"
     },
@@ -2840,28 +2850,6 @@
       "mainCharacterName": "أم ملك",
       "companionName": "البطريق المرح",
       "timestampIso": "2026-10-29T02:21:31.133Z"
-    },
-    {
-      "topic": "سدرة وبناء أعلى برج ملون من المكعبات السحرية",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة"
-    },
-    {
-      "topic": "ملك ولوليتا وإسعاف ركبة عمر في حديقة الزهور",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا"
-    },
-    {
-      "topic": "سدرة وبناء أعلى برج ملون من المكعبات السحرية",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "timestampIso": "2026-10-28T11:23:08.189Z"
-    },
-    {
-      "topic": "ملك ولوليتا وإسعاف ركبة عمر في حديقة الزهور",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "timestampIso": "2026-10-28T11:23:08.189Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-10-31 · 21:39 بتوقيت مصر",
