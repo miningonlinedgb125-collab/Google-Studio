@@ -68,6 +68,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122122509807484976",
+      "photoId": "122122509777484976",
+      "themeTitle": "تحدي الصورة المختلفة (من 1 إلى 4) مع سدرة الصغنونة والفراشة الملونة",
+      "title": "تحدي الصورة المختلفة (من 1 إلى 4) مع سدرة الصغنونة والفراشة الملونة",
+      "caption": "يا هلا بكل الماميز الشاطرين وأبطالنا الحلوين! 🌸 بطلتنا المحبوبة \"سدرة الصغنونة\" وصديقتها \"الفراشة الملونة\" محضرين ليكم تحدي ذكاء وملاحظة قمر زيهم النهاردة! 🦋✨\n\n🔍 قدامكم 4 صور [ 1 ، 2 ، 3 ، 4 ].. فيه 3 صور شبه بعض بالظبط، وصورة واحدة بس هي اللي مختلفة وهربانة منهم! يا ترى مين البطل الشاطر اللي هيعرف رقم الصورة المختلفة؟ 👀\n\n💬 مستنيين إجاباتكم واسم بطلكم أو أميرتكم في التعليقات، عشان \"سدرة الصغنونة\" و\"الفراشة الملونة\" هيبعتوا ليهم تحية وبوسة كبيرة بالاسم في حلقة بكرة! 🥳🎉\n\n🔔 متنسوش تعملوا شير للبوست عشان تشاركوا التحدي مع صحابكم، وتابعوا الصفحة وفعلوا الجرس عشان متفوتكمش التحية بكـرة! 💖\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
+      "heroName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة",
+      "publishedAtCairo": "2026-11-01 · 14:02 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122122509807484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122122507335484976",
       "photoId": "122122507311484976",
       "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع دكتورة ملك والقطة لوليتا",
@@ -534,18 +546,6 @@
       "publishedAtCairo": "2026-10-18 · 04:26 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122117544681484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122117459697484976",
-      "photoId": "122117459667484976",
-      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع تختوخ والكلب زقلط",
-      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع تختوخ والكلب زقلط",
-      "caption": "يا هلا بأحلى أمهات وأشطر كتاكيت في الدنيا! 🌟 بطلنا المحبوب \"تختوخ\" وصديقه الوفي \"الكلب زقلط\" محضرين لكم النهاردة تحدي محتاج عيون صقر وتركيز عالي جداً! 👀🔍\n\n🔍 ركزوا كويس أوي في الصورتين [ أ ] و [ ب ]، وقولوا لنا: مين البطل الذكي اللي هيعرف يكتشف \"3 اختلافات\" مستخبية بينهم؟ 🐶✨\n\n💬 اكتبوا الإجابة فوراً ومعاها \"اسم طفلكم البطل\" في التعليقات، عشان تختوخ والكلب زقلط يحيوه بنفسه بالاسم وينزل اسمه في حلقة بكرة! 🥳🎉\n\n🔔 متنسوش تعملوا متابعة لصفحتنا Noreen Kids، وفعلوا الجرس عشان يوصلكم كل جديد، وشير للبوست وتحدوا بيه كل أصحابكم الشطار! 🚀❤️\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
-      "heroName": "تختوخ",
-      "companionName": "الكلب زقلط",
-      "publishedAtCairo": "2026-10-17 · 21:45 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122117459697484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -809,14 +809,15 @@
       "id": "gh-run-41303583969",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-01 (13:57 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-01 (14:05 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1793533934378-xe7t",
       "longEpisodeId": "ep-gh-long-1793534077826-1658",
       "shortEpisodeTitle": "Noreen Kids: دكتورة ملك ولوليتا وسر تطعيم الكلبوب مشمش | مغامرات الطبيبة ملك والقطة لوليتا",
-      "longEpisodeTitle": "سدرة وفراشتها وسر زهرة النور الضاحكة",
+      "longEpisodeTitle": "Noreen Kids: سدرة وفراشتها وسر زهرة النور الضاحكة | مغامرات سدرة الصغنونة والفراشة الملونة",
       "shortTitle": "Noreen Kids: دكتورة ملك ولوليتا وسر تطعيم الكلبوب مشمش | مغامرات الطبيبة ملك والقطة لوليتا",
-      "longTitle": "سدرة وفراشتها وسر زهرة النور الضاحكة",
+      "longTitle": "Noreen Kids: سدرة وفراشتها وسر زهرة النور الضاحكة | مغامرات سدرة الصغنونة والفراشة الملونة",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -824,9 +825,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "hj2Kxhj3SmM",
+      "youtubeLongVideoId": "yIjy_Z89FUo",
       "facebookShortVideoId": "1436302738007090",
+      "facebookLongVideoId": "1668275978236276",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1436302738007090",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1668275978236276",
       "facebookShortTitle": "Noreen Kids | دكتورة ملك ولوليتا وسر تطعيم الكلبوب مشمش - مغامرة ملك والقطة لوليتا",
+      "facebookLongTitle": "Noreen Kids | سدرة وفراشتها وسر زهرة النور الضاحكة - مغامرة سدرة الصغنونة والفراشة الملونة",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -834,16 +839,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 62,
-        "fileSizeBytes": 9248440,
-        "inspectedAt": "13:57"
+        "durationSec": 343,
+        "fileSizeBytes": 40097546,
+        "inspectedAt": "14:05"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
