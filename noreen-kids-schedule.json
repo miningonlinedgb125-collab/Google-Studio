@@ -37,6 +37,16 @@
     {
       "topic": "دكتورة ملك ولوليتا وسر تطعيم الكلبوب مشمش",
       "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "سدرة وفراشتها وسر زهرة النور الضاحكة",
+      "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "دكتورة ملك ولوليتا وسر تطعيم الكلبوب مشمش",
+      "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا",
       "timestampIso": "2026-11-01T11:54:37.826Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "أم ملك",
       "companionName": "البطريق المرح",
       "timestampIso": "2026-10-29T02:21:31.133Z"
-    },
-    {
-      "topic": "سدرة وبناء أعلى برج ملون من المكعبات السحرية",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة"
-    },
-    {
-      "topic": "ملك ولوليتا وإسعاف ركبة عمر في حديقة الزهور",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا"
-    },
-    {
-      "topic": "سدرة وبناء أعلى برج ملون من المكعبات السحرية",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "timestampIso": "2026-10-28T11:23:08.189Z"
-    },
-    {
-      "topic": "ملك ولوليتا وإسعاف ركبة عمر في حديقة الزهور",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "timestampIso": "2026-10-28T11:23:08.189Z"
     }
   ],
   "scheduledHistory": [
@@ -2715,16 +2703,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "١‏/١١‏/٢٠٢٦، ٢:٠٥:١٤ م",
   "lastCloudRunReport": {
-    "id": "gh-run-41194659512",
+    "id": "gh-run-41303583969",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-10-31 (13:12 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1793444243849-941e",
-    "longEpisodeId": "ep-gh-long-1793444419447-pd5v",
-    "shortEpisodeTitle": "Noreen Kids: جنى وبدلة الفضاء الذكية وإنقاذ نبتة المحطة | مغامرات جنى وبلبل",
-    "longEpisodeTitle": "Noreen Kids: شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر | مغامرات شوشو ومرجان",
-    "shortTitle": "Noreen Kids: جنى وبدلة الفضاء الذكية وإنقاذ نبتة المحطة | مغامرات جنى وبلبل",
-    "longTitle": "Noreen Kids: شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر | مغامرات شوشو ومرجان",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-01 (14:05 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1793533934378-xe7t",
+    "longEpisodeId": "ep-gh-long-1793534077826-1658",
+    "shortEpisodeTitle": "Noreen Kids: دكتورة ملك ولوليتا وسر تطعيم الكلبوب مشمش | مغامرات الطبيبة ملك والقطة لوليتا",
+    "longEpisodeTitle": "Noreen Kids: سدرة وفراشتها وسر زهرة النور الضاحكة | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "shortTitle": "Noreen Kids: دكتورة ملك ولوليتا وسر تطعيم الكلبوب مشمش | مغامرات الطبيبة ملك والقطة لوليتا",
+    "longTitle": "Noreen Kids: سدرة وفراشتها وسر زهرة النور الضاحكة | مغامرات سدرة الصغنونة والفراشة الملونة",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2733,14 +2721,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "URwBj-yGxAU",
-    "youtubeLongVideoId": "x6_0_ERBuU4",
-    "facebookShortVideoId": "4425477601096799",
-    "facebookLongVideoId": "2459910074539601",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/4425477601096799",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2459910074539601",
-    "facebookShortTitle": "Noreen Kids | جنى وبدلة الفضاء الذكية وإنقاذ نبتة المحطة - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
-    "facebookLongTitle": "Noreen Kids | شوشو ومرجان وسر اللؤلؤة الموسيقية في قاع البحر - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
+    "youtubeShortVideoId": "hj2Kxhj3SmM",
+    "youtubeLongVideoId": "yIjy_Z89FUo",
+    "facebookShortVideoId": "1436302738007090",
+    "facebookLongVideoId": "1668275978236276",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1436302738007090",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1668275978236276",
+    "facebookShortTitle": "Noreen Kids | دكتورة ملك ولوليتا وسر تطعيم الكلبوب مشمش - مغامرة ملك والقطة لوليتا",
+    "facebookLongTitle": "Noreen Kids | سدرة وفراشتها وسر زهرة النور الضاحكة - مغامرة سدرة الصغنونة والفراشة الملونة",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2755,9 +2743,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 348,
-      "fileSizeBytes": 44753224,
-      "inspectedAt": "13:12"
+      "durationSec": 343,
+      "fileSizeBytes": 40097546,
+      "inspectedAt": "14:05"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2766,7 +2754,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-10-31T11:12:02.533Z"
+    "reportedAtIso": "2026-11-01T12:05:16.828Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
