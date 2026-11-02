@@ -2678,6 +2678,16 @@
     {
       "topic": "تيتة والدب باندا وسر شال الحنان الدافئ",
       "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا"
+    },
+    {
+      "topic": "تختوخ وزقلط وسر الكيكة الطائرة في المطبخ",
+      "mainCharacterName": "تختوخ",
+      "companionName": "الكلب زقلط"
+    },
+    {
+      "topic": "تيتة والدب باندا وسر شال الحنان الدافئ",
+      "mainCharacterName": "تيتة",
       "companionName": "الدب باندا",
       "timestampIso": "2026-11-02T23:16:43.829Z"
     },
@@ -2840,43 +2850,21 @@
       "mainCharacterName": "الشيخ محمود",
       "companionName": "الديك الفصيح",
       "timestampIso": "2026-10-30T11:24:55.799Z"
-    },
-    {
-      "topic": "تختوخ وزقلط وسر النافورة العجيبة في الحديقة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط"
-    },
-    {
-      "topic": "تيتة والدب باندا وسر زهرة القمر المفقودة",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
-    },
-    {
-      "topic": "تختوخ وزقلط وسر النافورة العجيبة في الحديقة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط",
-      "timestampIso": "2026-10-29T20:19:04.105Z"
-    },
-    {
-      "topic": "تيتة والدب باندا وسر زهرة القمر المفقودة",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "timestampIso": "2026-10-29T20:19:04.105Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-02 · 15:44 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-41342711508",
+    "id": "gh-run-41542742523",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-01 (22:29 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1793561971719-tf2l",
-    "longEpisodeId": "ep-gh-long-1793562078571-bv91",
-    "shortEpisodeTitle": "Noreen Kids: أم ملك والبطريق وسر معرض الرسم المدرسي | مغامرات أم ملك والبطريق المرح",
-    "longEpisodeTitle": "Noreen Kids: ذياد والفرفوشة وسر محفظة عم محمود المفقودة | مغامرات ذياد والعصفورة الفرفوشة",
-    "shortTitle": "Noreen Kids: أم ملك والبطريق وسر معرض الرسم المدرسي | مغامرات أم ملك والبطريق المرح",
-    "longTitle": "Noreen Kids: ذياد والفرفوشة وسر محفظة عم محمود المفقودة | مغامرات ذياد والعصفورة الفرفوشة",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-03 (01:33 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1793661109632-abi6",
+    "longEpisodeId": "ep-gh-long-1793661403829-ml1c",
+    "shortEpisodeTitle": "Noreen Kids: تيتة والدب باندا وسر شال الحنان الدافئ | مغامرات تيتة والدب باندا",
+    "longEpisodeTitle": "Noreen Kids: تختوخ وزقلط وسر الكيكة الطائرة في المطبخ | مغامرات تختوخ والكلب زقلط",
+    "shortTitle": "Noreen Kids: تيتة والدب باندا وسر شال الحنان الدافئ | مغامرات تيتة والدب باندا",
+    "longTitle": "Noreen Kids: تختوخ وزقلط وسر الكيكة الطائرة في المطبخ | مغامرات تختوخ والكلب زقلط",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2885,14 +2873,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "wQDxZxQTgP8",
-    "youtubeLongVideoId": "1amhYMHpIpI",
-    "facebookShortVideoId": "1881315766556779",
-    "facebookLongVideoId": "1129858383013218",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1881315766556779",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1129858383013218",
-    "facebookShortTitle": "Noreen Kids | أم ملك والبطريق وسر معرض الرسم المدرسي - مغامرة أم ملك والبطريق المرح",
-    "facebookLongTitle": "Noreen Kids | ذياد والفرفوشة وسر محفظة عم محمود المفقودة - مغامرة ذياد والعصفورة الفرفوشة",
+    "youtubeShortVideoId": "sDbsKY_xY90",
+    "youtubeLongVideoId": "tZM3DSH-pYY",
+    "facebookShortVideoId": "1444151557853573",
+    "facebookLongVideoId": "2231965964383424",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1444151557853573",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2231965964383424",
+    "facebookShortTitle": "Noreen Kids | تيتة والدب باندا وسر شال الحنان الدافئ - مغامرة تيتة والدب باندا",
+    "facebookLongTitle": "Noreen Kids | تختوخ وزقلط وسر الكيكة الطائرة في المطبخ - مغامرة تختوخ والكلب زقلط",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2907,9 +2895,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 305,
-      "fileSizeBytes": 34634465,
-      "inspectedAt": "22:29"
+      "durationSec": 314,
+      "fileSizeBytes": 39657144,
+      "inspectedAt": "01:33"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2918,7 +2906,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-01T20:29:30.700Z"
+    "reportedAtIso": "2026-11-02T23:33:53.397Z"
   },
   "heroFairRotationIndex": 15,
   "interactiveHeroRotationIndex": 5,
