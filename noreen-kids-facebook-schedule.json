@@ -2678,6 +2678,16 @@
     {
       "topic": "أستاذ شريف وجدول المهام لإنقاذ ورشة النجارة",
       "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "جدو والفأر المشاكس وسر صندوق ألعاب زمان",
+      "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "أستاذ شريف وجدول المهام لإنقاذ ورشة النجارة",
+      "mainCharacterName": "أستاذ شريف",
       "companionName": "الصقر الذكي",
       "timestampIso": "2026-11-02T13:31:56.459Z"
     },
@@ -2840,28 +2850,6 @@
       "mainCharacterName": "تيتة",
       "companionName": "الدب باندا",
       "timestampIso": "2026-10-29T20:19:04.105Z"
-    },
-    {
-      "topic": "جدو والفأر المشاكس وإنقاذ النحلة النشيطة زوزو",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "أستاذ شريف وسر الميزان العادل في السوق",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "جدو والفأر المشاكس وإنقاذ النحلة النشيطة زوزو",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-10-29T11:41:44.009Z"
-    },
-    {
-      "topic": "أستاذ شريف وسر الميزان العادل في السوق",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-10-29T11:41:44.009Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-01 · 22:29 بتوقيت مصر",
