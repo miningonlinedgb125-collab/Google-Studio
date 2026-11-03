@@ -37,6 +37,16 @@
     {
       "topic": "لغز آثار أقدام شبل الثلج الضائع في الجبل",
       "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي"
+    },
+    {
+      "topic": "نوران والفرفوش وسر نافورة الموسيقى الكريستالية",
+      "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "لغز آثار أقدام شبل الثلج الضائع في الجبل",
+      "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي",
       "timestampIso": "2026-11-03T21:19:02.391Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "شوشو القبطان الصغير",
       "companionName": "مرجان الدلفين المرح",
       "timestampIso": "2026-10-31T11:00:19.447Z"
-    },
-    {
-      "topic": "المهندسة نوران وابتكار مصعد المكتبة الطائرة",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "عمرو وزعتر ولغز الشبل التائه في جبل الثلج",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي"
-    },
-    {
-      "topic": "المهندسة نوران وابتكار مصعد المكتبة الطائرة",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-10-30T20:07:05.704Z"
-    },
-    {
-      "topic": "عمرو وزعتر ولغز الشبل التائه في جبل الثلج",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "timestampIso": "2026-10-30T20:07:05.705Z"
     }
   ],
   "scheduledHistory": [
