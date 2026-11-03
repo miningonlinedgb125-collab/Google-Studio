@@ -2678,6 +2678,16 @@
     {
       "topic": "لغز آثار أقدام شبل الثلج الضائع في الجبل",
       "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي"
+    },
+    {
+      "topic": "نوران والفرفوش وسر نافورة الموسيقى الكريستالية",
+      "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "لغز آثار أقدام شبل الثلج الضائع في الجبل",
+      "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي",
       "timestampIso": "2026-11-03T21:19:02.391Z"
     },
@@ -2840,43 +2850,21 @@
       "mainCharacterName": "شوشو القبطان الصغير",
       "companionName": "مرجان الدلفين المرح",
       "timestampIso": "2026-10-31T11:00:19.447Z"
-    },
-    {
-      "topic": "المهندسة نوران وابتكار مصعد المكتبة الطائرة",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "عمرو وزعتر ولغز الشبل التائه في جبل الثلج",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي"
-    },
-    {
-      "topic": "المهندسة نوران وابتكار مصعد المكتبة الطائرة",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-10-30T20:07:05.704Z"
-    },
-    {
-      "topic": "عمرو وزعتر ولغز الشبل التائه في جبل الثلج",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "timestampIso": "2026-10-30T20:07:05.705Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-03 · 15:19 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-41542742523",
+    "id": "gh-run-41717324655",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-03 (01:33 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1793661109632-abi6",
-    "longEpisodeId": "ep-gh-long-1793661403829-ml1c",
-    "shortEpisodeTitle": "Noreen Kids: تيتة والدب باندا وسر شال الحنان الدافئ | مغامرات تيتة والدب باندا",
-    "longEpisodeTitle": "Noreen Kids: تختوخ وزقلط وسر الكيكة الطائرة في المطبخ | مغامرات تختوخ والكلب زقلط",
-    "shortTitle": "Noreen Kids: تيتة والدب باندا وسر شال الحنان الدافئ | مغامرات تيتة والدب باندا",
-    "longTitle": "Noreen Kids: تختوخ وزقلط وسر الكيكة الطائرة في المطبخ | مغامرات تختوخ والكلب زقلط",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-03 (23:29 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1793739724942-abtc",
+    "longEpisodeId": "ep-gh-long-1793740742391-3eqd",
+    "shortEpisodeTitle": "Noreen Kids: لغز آثار أقدام شبل الثلج الضائع في الجبل | مغامرات عمرو وزعتر",
+    "longEpisodeTitle": "Noreen Kids: نوران والفرفوش وسر نافورة الموسيقى الكريستالية | مغامرات المهندسة نوران والنمر الفرفوش",
+    "shortTitle": "Noreen Kids: لغز آثار أقدام شبل الثلج الضائع في الجبل | مغامرات عمرو وزعتر",
+    "longTitle": "Noreen Kids: نوران والفرفوش وسر نافورة الموسيقى الكريستالية | مغامرات المهندسة نوران والنمر الفرفوش",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2885,14 +2873,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "sDbsKY_xY90",
-    "youtubeLongVideoId": "tZM3DSH-pYY",
-    "facebookShortVideoId": "1444151557853573",
-    "facebookLongVideoId": "2231965964383424",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1444151557853573",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2231965964383424",
-    "facebookShortTitle": "Noreen Kids | تيتة والدب باندا وسر شال الحنان الدافئ - مغامرة تيتة والدب باندا",
-    "facebookLongTitle": "Noreen Kids | تختوخ وزقلط وسر الكيكة الطائرة في المطبخ - مغامرة تختوخ والكلب زقلط",
+    "youtubeShortVideoId": "kizI1sV1WN0",
+    "youtubeLongVideoId": "z5_dfkhlnFg",
+    "facebookShortVideoId": "1117079944408817",
+    "facebookLongVideoId": "1084828827983571",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1117079944408817",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1084828827983571",
+    "facebookShortTitle": "Noreen Kids | لغز آثار أقدام شبل الثلج الضائع في الجبل - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
+    "facebookLongTitle": "Noreen Kids | نوران والفرفوش وسر نافورة الموسيقى الكريستالية - مغامرة المهندسة نوران والنمر الفرفوش",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2907,9 +2895,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 314,
-      "fileSizeBytes": 39657144,
-      "inspectedAt": "01:33"
+      "durationSec": 305,
+      "fileSizeBytes": 36763075,
+      "inspectedAt": "23:29"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2918,7 +2906,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-02T23:33:53.397Z"
+    "reportedAtIso": "2026-11-03T21:29:23.407Z"
   },
   "heroFairRotationIndex": 3,
   "interactiveHeroRotationIndex": 5,
