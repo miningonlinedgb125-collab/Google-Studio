@@ -37,6 +37,16 @@
     {
       "topic": "ساعة التنظيم الذكي مع الشيخ محمود والديك الفصيح",
       "mainCharacterName": "الشيخ محمود",
+      "companionName": "الديك الفصيح"
+    },
+    {
+      "topic": "سر الابتسامة المنورة وإزاي نحافظ على سناننا بيضا وقوية",
+      "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "ساعة التنظيم الذكي مع الشيخ محمود والديك الفصيح",
+      "mainCharacterName": "الشيخ محمود",
       "companionName": "الديك الفصيح",
       "timestampIso": "2026-11-03T12:49:00.872Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي",
       "timestampIso": "2026-10-30T20:07:05.705Z"
-    },
-    {
-      "topic": "الطبيبة نورين والضمادة السحرية لهزيمة الخوف",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "سورة قريش ونعمة الأمان وشكر الله على نعمة الطعام",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح"
-    },
-    {
-      "topic": "الطبيبة نورين والضمادة السحرية لهزيمة الخوف",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-10-30T11:24:55.799Z"
-    },
-    {
-      "topic": "سورة قريش ونعمة الأمان وشكر الله على نعمة الطعام",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح",
-      "timestampIso": "2026-10-30T11:24:55.799Z"
     }
   ],
   "scheduledHistory": [
@@ -228,14 +216,15 @@
       "id": "gh-run-41638498959",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-03 (15:12 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-03 (15:19 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1793710104317-x3fk",
       "longEpisodeId": "ep-gh-long-1793710140872-5gex",
       "shortEpisodeTitle": "Noreen Kids: ساعة التنظيم الذكي مع الشيخ محمود والديك الفصيح | مغامرات الشيخ محمود والديك الفصيح",
-      "longEpisodeTitle": "سر الابتسامة المنورة وإزاي نحافظ على سناننا بيضا وقوية",
+      "longEpisodeTitle": "Noreen Kids: سر الابتسامة المنورة وإزاي نحافظ على سناننا بيضا وقوية | مغامرات الطبيبة نورين وأرنوب",
       "shortTitle": "Noreen Kids: ساعة التنظيم الذكي مع الشيخ محمود والديك الفصيح | مغامرات الشيخ محمود والديك الفصيح",
-      "longTitle": "سر الابتسامة المنورة وإزاي نحافظ على سناننا بيضا وقوية",
+      "longTitle": "Noreen Kids: سر الابتسامة المنورة وإزاي نحافظ على سناننا بيضا وقوية | مغامرات الطبيبة نورين وأرنوب",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -243,9 +232,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "dZna9dFmlkg",
+      "youtubeLongVideoId": "CnYntn-PwYk",
       "facebookShortVideoId": "1465100575821443",
+      "facebookLongVideoId": "870868776083857",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1465100575821443",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/870868776083857",
       "facebookShortTitle": "Noreen Kids | ساعة التنظيم الذكي مع الشيخ محمود والديك الفصيح - مغامرة الشيخ محمود والديك الفصيح",
+      "facebookLongTitle": "Noreen Kids | سر الابتسامة المنورة وإزاي نحافظ على سناننا بيضا وقوية - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -253,16 +246,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 63,
-        "fileSizeBytes": 10590618,
-        "inspectedAt": "15:12"
+        "durationSec": 305,
+        "fileSizeBytes": 32705085,
+        "inspectedAt": "15:19"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2708,18 +2701,18 @@
   "firstCommentEnabled": true,
   "autoCommentResponderEnabled": true,
   "facebookAutoCommentResponderEnabled": true,
-  "lastAutoCommentScanAtCairo": "٣‏/١١‏/٢٠٢٦، ٣:١٢:٠١ م",
+  "lastAutoCommentScanAtCairo": "٣‏/١١‏/٢٠٢٦، ٣:١٩:٣٣ م",
   "lastCloudRunReport": {
-    "id": "gh-run-41453283247",
+    "id": "gh-run-41638498959",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-02 (15:44 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1793626230709-rt1o",
-    "longEpisodeId": "ep-gh-long-1793626316459-jk10",
-    "shortEpisodeTitle": "Noreen Kids: أستاذ شريف وجدول المهام لإنقاذ ورشة النجارة | مغامرات أستاذ شريف والصقر الذكي",
-    "longEpisodeTitle": "Noreen Kids: جدو والفأر المشاكس وسر صندوق ألعاب زمان | مغامرات جدو والفأر المشاكس",
-    "shortTitle": "Noreen Kids: أستاذ شريف وجدول المهام لإنقاذ ورشة النجارة | مغامرات أستاذ شريف والصقر الذكي",
-    "longTitle": "Noreen Kids: جدو والفأر المشاكس وسر صندوق ألعاب زمان | مغامرات جدو والفأر المشاكس",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-03 (15:19 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1793710104317-x3fk",
+    "longEpisodeId": "ep-gh-long-1793710140872-5gex",
+    "shortEpisodeTitle": "Noreen Kids: ساعة التنظيم الذكي مع الشيخ محمود والديك الفصيح | مغامرات الشيخ محمود والديك الفصيح",
+    "longEpisodeTitle": "Noreen Kids: سر الابتسامة المنورة وإزاي نحافظ على سناننا بيضا وقوية | مغامرات الطبيبة نورين وأرنوب",
+    "shortTitle": "Noreen Kids: ساعة التنظيم الذكي مع الشيخ محمود والديك الفصيح | مغامرات الشيخ محمود والديك الفصيح",
+    "longTitle": "Noreen Kids: سر الابتسامة المنورة وإزاي نحافظ على سناننا بيضا وقوية | مغامرات الطبيبة نورين وأرنوب",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2728,14 +2721,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "CUc79XhBt1g",
-    "youtubeLongVideoId": "_z0I4oTOWN0",
-    "facebookShortVideoId": "1707713447608824",
-    "facebookLongVideoId": "1863486288151520",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1707713447608824",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1863486288151520",
-    "facebookShortTitle": "Noreen Kids | أستاذ شريف وجدول المهام لإنقاذ ورشة النجارة - مغامرة أستاذ شريف والصقر الذكي",
-    "facebookLongTitle": "Noreen Kids | جدو والفأر المشاكس وسر صندوق ألعاب زمان - مغامرة جدو والفأر المشاكس",
+    "youtubeShortVideoId": "dZna9dFmlkg",
+    "youtubeLongVideoId": "CnYntn-PwYk",
+    "facebookShortVideoId": "1465100575821443",
+    "facebookLongVideoId": "870868776083857",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1465100575821443",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/870868776083857",
+    "facebookShortTitle": "Noreen Kids | ساعة التنظيم الذكي مع الشيخ محمود والديك الفصيح - مغامرة الشيخ محمود والديك الفصيح",
+    "facebookLongTitle": "Noreen Kids | سر الابتسامة المنورة وإزاي نحافظ على سناننا بيضا وقوية - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2750,9 +2743,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 314,
-      "fileSizeBytes": 40045117,
-      "inspectedAt": "15:44"
+      "durationSec": 305,
+      "fileSizeBytes": 32705085,
+      "inspectedAt": "15:19"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2761,7 +2754,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-02T13:44:36.431Z"
+    "reportedAtIso": "2026-11-03T13:19:40.962Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
@@ -2781,7 +2774,7 @@
     "122120878095484976_1427092526305832",
     "122120833065484976_1926545904979880"
   ],
-  "lastFacebookAutoCommentScanAtCairo": "٣‏/١١‏/٢٠٢٦، ٣:١١:٥٨ م",
+  "lastFacebookAutoCommentScanAtCairo": "٣‏/١١‏/٢٠٢٦، ٣:١٩:٣١ م",
   "heroFairRotationIndex": 1,
   "interactiveHeroRotationIndex": 1,
   "heroRoleSwapCycle": true
