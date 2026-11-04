@@ -5243,6 +5243,7 @@ async function publishDailyInteractive3DPhotoPostForRunner({
   const compImg = resolveCharacterAvatarPath(compName, compName);
   const cardPath = path.join(tmpDir, `interactive_3d_card_${Date.now()}.jpg`);
   const svgPath = path.join(tmpDir, `interactive_puzzle_overlay_${Date.now()}.svg`);
+  let overlayImgPath = "";
 
   let themeTitle = "";
   let bannerText = "";
@@ -5290,6 +5291,13 @@ async function publishDailyInteractive3DPhotoPostForRunner({
       </g>
     </svg>`;
     fs.writeFileSync(svgPath, svg);
+    overlayImgPath = await convertSvgToPngIfPossible(
+      svgPath,
+      path.join(tmpDir, path.basename(svgPath, ".svg") + ".png")
+    );
+    if (!fs.existsSync(overlayImgPath) || fs.statSync(overlayImgPath).size <= 200) {
+      throw new Error("Interactive challenge overlay was not generated correctly.");
+    }
 
     const panels = [0, 1, 2, 3].map((idx) => {
       if (idx === oddIdx) {
@@ -5353,6 +5361,13 @@ async function publishDailyInteractive3DPhotoPostForRunner({
       ${starsSvg}
     </svg>`;
     fs.writeFileSync(svgPath, svg);
+    overlayImgPath = await convertSvgToPngIfPossible(
+      svgPath,
+      path.join(tmpDir, path.basename(svgPath, ".svg") + ".png")
+    );
+    if (!fs.existsSync(overlayImgPath) || fs.statSync(overlayImgPath).size <= 200) {
+      throw new Error("Interactive challenge overlay was not generated correctly.");
+    }
 
     const filterGraph = [
       `[0:v]scale=640:646:force_original_aspect_ratio=increase,crop=640:646[c];`,
@@ -5505,6 +5520,13 @@ async function publishDailyInteractive3DPhotoPostForRunner({
       <rect x="0" y="0" width="1280" height="720" fill="none" stroke="#f59e0b" stroke-width="8"/>
     </svg>`;
     fs.writeFileSync(svgPath, svg);
+    overlayImgPath = await convertSvgToPngIfPossible(
+      svgPath,
+      path.join(tmpDir, path.basename(svgPath, ".svg") + ".png")
+    );
+    if (!fs.existsSync(overlayImgPath) || fs.statSync(overlayImgPath).size <= 200) {
+      throw new Error("Interactive challenge overlay was not generated correctly.");
+    }
 
     const filterGraph = [
       `[0:v]scale=330:646:force_original_aspect_ratio=increase,crop=330:646[h];`,
@@ -5594,6 +5616,13 @@ async function publishDailyInteractive3DPhotoPostForRunner({
       <rect x="0" y="0" width="1280" height="720" fill="none" stroke="#f59e0b" stroke-width="8"/>
     </svg>`;
     fs.writeFileSync(svgPath, puzzleSvg);
+    overlayImgPath = await convertSvgToPngIfPossible(
+      svgPath,
+      path.join(tmpDir, path.basename(svgPath, ".svg") + ".png")
+    );
+    if (!fs.existsSync(overlayImgPath) || fs.statSync(overlayImgPath).size <= 200) {
+      throw new Error("Interactive challenge overlay was not generated correctly.");
+    }
 
     const compRightScale = `[0:v]scale=320:646:force_original_aspect_ratio=increase,crop=320:646[c_r];`;
     const filterGraph = [
