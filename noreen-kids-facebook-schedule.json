@@ -68,6 +68,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122123442657484976",
+      "photoId": "122123442633484976",
+      "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع جنى وبلبل",
+      "title": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع جنى وبلبل",
+      "caption": "🧭 تحدي المتاهة الذكية مع جنى وبلبل! 🌟\nبطلنا \"جنى\" عايز يوصل لصديقه \"بلبل\" بأسرع وقت، ومحتاج مساعدة أذكى أبطال! 🏃‍♂️💨\nقدامكم 3 مسارات ملونة:\n🔴 المسار رقم [ 1 ]\n🟢 المسار رقم [ 2 ]\n🔵 المسار رقم [ 3 ]\nيا ترى أنهي طريق فيهم هو اللي هيوصله للهدف من غير أي عوائق؟ 👀🔍\n👇 تتبعوا الخط بعيونكم واكتبوا رقم المسار الصح واسم طفلكم علشان جنى يشكره بنفسه! 🎬🏅\n🔔 متنسوش لايك ومتابعة لصفحة Noreen Kids لمغامرات جديدة كل يوم! 💖👍\n#نورين_كيدز #Noreen_Kids #متاهة_الأذكياء #تحدي_الشطار #أمهات_مصر",
+      "heroName": "جنى",
+      "companionName": "بلبل",
+      "publishedAtCairo": "2026-11-04 · 15:09 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122123442657484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122123440173484976",
       "photoId": "122123440143484976",
       "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع شوشو ومرجان",
@@ -534,18 +546,6 @@
       "publishedAtCairo": "2026-10-20 · 13:20 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122118297357484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122118295455484976",
-      "photoId": "122118295425484976",
-      "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع جدو والفأر المشاكس",
-      "title": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع جدو والفأر المشاكس",
-      "caption": "🧭 تحدي المتاهة الذكية مع جدو والفأر المشاكس! 🌟\nبطلنا \"جدو\" عايز يوصل لصديقه \"الفأر المشاكس\" بأسرع وقت، ومحتاج مساعدة أذكى أبطال! 🏃‍♂️💨\nقدامكم 3 مسارات ملونة:\n🔴 المسار رقم [ 1 ]\n🟢 المسار رقم [ 2 ]\n🔵 المسار رقم [ 3 ]\nيا ترى أنهي طريق فيهم هو اللي هيوصله للهدف من غير أي عوائق؟ 👀🔍\n👇 تتبعوا الخط بعيونكم واكتبوا رقم المسار الصح واسم طفلكم علشان جدو يشكره بنفسه! 🎬🏅\n🔔 متنسوش لايك ومتابعة لصفحة Noreen Kids لمغامرات جديدة كل يوم! 💖👍\n#نورين_كيدز #Noreen_Kids #متاهة_الأذكياء #تحدي_الشطار #أمهات_مصر",
-      "heroName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "publishedAtCairo": "2026-10-20 · 13:10 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122118295455484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -809,14 +809,15 @@
       "id": "gh-run-41833890255",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-04 (15:04 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-04 (15:11 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1793797227967-ugp5",
       "longEpisodeId": "ep-gh-long-1793797270202-k2ls",
       "shortEpisodeTitle": "Noreen Kids: شوشو ومرجان وإنقاذ الحوت الصغير العالق | مغامرات شوشو ومرجان",
-      "longEpisodeTitle": "جنى وروبوت الفضاء وسر الكتاب الطائر بين النجوم",
+      "longEpisodeTitle": "Noreen Kids: جنى وروبوت الفضاء وسر الكتاب الطائر بين النجوم | مغامرات جنى وبلبل",
       "shortTitle": "Noreen Kids: شوشو ومرجان وإنقاذ الحوت الصغير العالق | مغامرات شوشو ومرجان",
-      "longTitle": "جنى وروبوت الفضاء وسر الكتاب الطائر بين النجوم",
+      "longTitle": "Noreen Kids: جنى وروبوت الفضاء وسر الكتاب الطائر بين النجوم | مغامرات جنى وبلبل",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -824,9 +825,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "_rLrMAEy-HE",
+      "youtubeLongVideoId": "rmZRu48GQoE",
       "facebookShortVideoId": "1142858061582669",
+      "facebookLongVideoId": "1124241466760549",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1142858061582669",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1124241466760549",
       "facebookShortTitle": "Noreen Kids | شوشو ومرجان وإنقاذ الحوت الصغير العالق - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
+      "facebookLongTitle": "Noreen Kids | جنى وروبوت الفضاء وسر الكتاب الطائر بين النجوم - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -834,16 +839,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 60,
-        "fileSizeBytes": 9867100,
-        "inspectedAt": "15:04"
+        "durationSec": 361,
+        "fileSizeBytes": 45696942,
+        "inspectedAt": "15:11"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
