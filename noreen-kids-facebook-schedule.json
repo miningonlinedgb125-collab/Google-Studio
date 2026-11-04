@@ -2678,6 +2678,16 @@
     {
       "topic": "مهمة إنقاذ العصفور الصغير ورقم النجدة",
       "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "تامر وكركور وتحدي جسر الشلال المكسور",
+      "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم"
+    },
+    {
+      "topic": "مهمة إنقاذ العصفور الصغير ورقم النجدة",
+      "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا",
       "timestampIso": "2026-11-04T21:21:53.741Z"
     },
@@ -2840,43 +2850,22 @@
       "mainCharacterName": "ذياد",
       "companionName": "العصفورة الفرفوشة",
       "timestampIso": "2026-11-01T19:41:18.571Z"
-    },
-    {
-      "topic": "دكتورة ملك ولوليتا وسر تطعيم الكلبوب مشمش",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا"
-    },
-    {
-      "topic": "سدرة وفراشتها وسر زهرة النور الضاحكة",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة"
-    },
-    {
-      "topic": "دكتورة ملك ولوليتا وسر تطعيم الكلبوب مشمش",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "timestampIso": "2026-11-01T11:54:37.826Z"
-    },
-    {
-      "topic": "سدرة وفراشتها وسر زهرة النور الضاحكة",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "timestampIso": "2026-11-01T11:54:37.826Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-04 · 21:28 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-41894264667",
-    "uploadMode": "manual_instant",
+    "id": "gh-run-41914756125",
+    "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-04 (21:28 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1793819579317-4zfx",
-    "longEpisodeId": "ep-gh-long-1793819630654-gzfi",
-    "shortEpisodeTitle": "لغز القلعة القديمة وفك شفرة بوابات الشجاعة بالكلمة الطيبة",
-    "longEpisodeTitle": "Noreen Kids: ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام | مغامرات كارمن وسمسم",
-    "shortTitle": "لغز القلعة القديمة وفك شفرة بوابات الشجاعة بالكلمة الطيبة",
-    "longTitle": "Noreen Kids: ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام | مغامرات كارمن وسمسم",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-04 (23:54 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1793827268304-ekdx",
+    "longEpisodeId": "ep-gh-long-1793827313741-qx9v",
+    "shortEpisodeTitle": "Noreen Kids: مهمة إنقاذ العصفور الصغير ورقم النجدة | مغامرات الطبيبة ملك والقطة لوليتا",
+    "longEpisodeTitle": "Noreen Kids: تامر وكركور وتحدي جسر الشلال المكسور | مغامرات تامر وكركور",
+    "shortTitle": "Noreen Kids: مهمة إنقاذ العصفور الصغير ورقم النجدة | مغامرات الطبيبة ملك والقطة لوليتا",
+    "longTitle": "Noreen Kids: تامر وكركور وتحدي جسر الشلال المكسور | مغامرات تامر وكركور",
+    "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
@@ -2884,10 +2873,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeLongVideoId": "uE8vBoZ7cU0",
-    "facebookLongVideoId": "1642219520939366",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1642219520939366",
-    "facebookLongTitle": "Noreen Kids | ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الط",
+    "youtubeShortVideoId": "uSL4C8dNa24",
+    "youtubeLongVideoId": "mD-p7RZSNV4",
+    "facebookShortVideoId": "1769512214338529",
+    "facebookLongVideoId": "1662806148879862",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1769512214338529",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1662806148879862",
+    "facebookShortTitle": "Noreen Kids | مهمة إنقاذ العصفور الصغير ورقم النجدة - مغامرة ملك والقطة لوليتا",
+    "facebookLongTitle": "Noreen Kids | تامر وكركور وتحدي جسر الشلال المكسور - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2902,9 +2895,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 307,
-      "fileSizeBytes": 43065016,
-      "inspectedAt": "21:28"
+      "durationSec": 424,
+      "fileSizeBytes": 60397978,
+      "inspectedAt": "23:54"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2913,7 +2906,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-04T19:28:32.690Z"
+    "reportedAtIso": "2026-11-04T21:54:31.371Z"
   },
   "heroFairRotationIndex": 8,
   "interactiveHeroRotationIndex": 5,
