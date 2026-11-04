@@ -1837,7 +1837,7 @@ async function prepareCircularChannelWatermarkPng({ logoSrcPath, isShort, outPng
   return null;
 }
 
-async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptian", targetPlatform = "youtube") {
+async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptian", targetPlatform = "youtube", preExistingPreparedScenes = null) {
   const isFb = String(targetPlatform || "").toLowerCase().includes("facebook");
   const isShort = videoFormat === "short_9_16";
   const isVertical = isShort || isFb;
@@ -1971,8 +1971,12 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     ]);
   } catch {}
 
-  // STEP 1: Synthesize all scene voiceovers first and measure exact audio durations so dialogue is NEVER cut off
-  const preparedScenes = [];
+  // STEP 1: Synthesize all scene voiceovers first (or reuse pre-existing cached voiceovers from shared run)
+  let preparedScenes = [];
+  if (Array.isArray(preExistingPreparedScenes) && preExistingPreparedScenes.length === scenes.length) {
+    console.log(`   ♻️ [Voice Cache Hit] Reusing ${preExistingPreparedScenes.length} already synthesized Egyptian voice tracks for ${targetPlatform} (Zero redundant API calls)!`);
+    preparedScenes = preExistingPreparedScenes.map(s => ({ ...s, scene: { ...s.scene } }));
+  } else {
   for (let i = 0; i < scenes.length; i++) {
     const isHeroTurn = i % 2 === 0;
     const spk = isHeroTurn ? heroName : companionName;
@@ -2083,6 +2087,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       s.durationSec = Number((s.voiceDurSec + 0.35).toFixed(2));
     }
   }
+  } // End of voice synthesis & caching block
   
   const overscanW = Math.round(W * 1.14);
   const overscanH = Math.round(H * 1.14);
@@ -2457,6 +2462,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     finalMp4,
   ]);
 
+  renderEpisodeMp4.lastPreparedScenes = preparedScenes;
   return finalMp4;
 }
 
@@ -6520,10 +6526,11 @@ async function main() {
     console.log("------------------------------------------------------------------");
     console.log(`🎬 [Step 2/5] Rendering Shared MP4 for ${task.label} (${tIdx + 1}/${tasks.length})...`);
     const ytMp4Path = await renderEpisodeMp4(task.episode, task.videoFormat, tmpDir, dailyDialect, "youtube");
+    const sharedVoiceScenes = renderEpisodeMp4.lastPreparedScenes || null;
     let fbMp4Path = null;
     if (shouldUploadToFacebook && facebookPageAccessToken) {
       console.log(`🎬 [Facebook 9:16 Pipeline] Rendering Dedicated 1080x1920 Fullscreen Vertical MP4 for Facebook (${task.label})...`);
-      fbMp4Path = await renderEpisodeMp4(task.episode, task.videoFormat, tmpDir, dailyDialect, "facebook");
+      fbMp4Path = await renderEpisodeMp4(task.episode, task.videoFormat, tmpDir, dailyDialect, "facebook", sharedVoiceScenes);
     }
     const mp4Path = ytMp4Path;
 

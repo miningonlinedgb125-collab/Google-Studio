@@ -21,7 +21,7 @@ on:
 jobs:
   generate-and-upload-noreen-kids:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120
     permissions:
       contents: write
       actions: read
@@ -39,12 +39,7 @@ jobs:
 
       - name: 3. Install FFmpeg, ffprobe & Gemini Live Native Audio SDK (@google/genai)
         run: |
-          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
-            sudo apt-get update -y
-            sudo apt-get install -y --no-install-recommends ffmpeg
-          else
-            echo "✅ FFmpeg & ffprobe pre-installed: $(ffmpeg -version | head -n 1)"
-          fi
+          echo "✅ FFmpeg & ffprobe version check: $(ffmpeg -version 2>&1 | head -n 1)"
           npm install --no-save --legacy-peer-deps @google/genai msedge-tts
 
       - name: 4. Run Pre-Upload Short Pipeline Unit Test Gate (Duration 60-80s, Egyptian Dialogue, Zero External Images)
