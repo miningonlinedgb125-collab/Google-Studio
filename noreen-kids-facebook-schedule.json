@@ -2668,6 +2668,16 @@
     {
       "topic": "حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي",
       "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "ورشة الألعاب الذكية لإسعاد أصدقائنا الأطفال",
+      "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة"
+    },
+    {
+      "topic": "حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي",
+      "mainCharacterName": "أستاذ شريف",
       "companionName": "الصقر الذكي",
       "timestampIso": "2026-11-04T22:38:10.866Z"
     },
@@ -2830,71 +2840,32 @@
       "topic": "جدو والفأر المشاكس وسر صندوق ألعاب زمان",
       "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "أستاذ شريف وجدول المهام لإنقاذ ورشة النجارة",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-11-02T13:31:56.459Z"
-    },
-    {
-      "topic": "جدو والفأر المشاكس وسر صندوق ألعاب زمان",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-11-02T13:31:56.459Z"
-    },
-    {
-      "topic": "أم ملك والبطريق وسر معرض الرسم المدرسي",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح"
-    },
-    {
-      "topic": "ذياد والفرفوشة وسر محفظة عم محمود المفقودة",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة"
-    },
-    {
-      "topic": "أم ملك والبطريق وسر معرض الرسم المدرسي",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "timestampIso": "2026-11-01T19:41:18.571Z"
-    },
-    {
-      "topic": "ذياد والفرفوشة وسر محفظة عم محمود المفقودة",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة",
-      "timestampIso": "2026-11-01T19:41:18.571Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-04 · 23:54 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-41914756125",
-    "uploadMode": "daily_schedule",
+    "id": "gh-run-41926542376",
+    "uploadMode": "manual_instant",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-04 (23:54 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1793827268304-ekdx",
-    "longEpisodeId": "ep-gh-long-1793827313741-qx9v",
-    "shortEpisodeTitle": "Noreen Kids: مهمة إنقاذ العصفور الصغير ورقم النجدة | مغامرات الطبيبة ملك والقطة لوليتا",
-    "longEpisodeTitle": "Noreen Kids: تامر وكركور وتحدي جسر الشلال المكسور | مغامرات تامر وكركور",
-    "shortTitle": "Noreen Kids: مهمة إنقاذ العصفور الصغير ورقم النجدة | مغامرات الطبيبة ملك والقطة لوليتا",
-    "longTitle": "Noreen Kids: تامر وكركور وتحدي جسر الشلال المكسور | مغامرات تامر وكركور",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-05 (00:43 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1793831845480-neut",
+    "longEpisodeId": "ep-gh-long-1793831890866-0bhy",
+    "shortEpisodeTitle": "Noreen Kids: حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي | مغامرات أستاذ شريف والصقر الذكي",
+    "longEpisodeTitle": "ورشة الألعاب الذكية لإسعاد أصدقائنا الأطفال",
+    "shortTitle": "Noreen Kids: حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي | مغامرات أستاذ شريف والصقر الذكي",
+    "longTitle": "ورشة الألعاب الذكية لإسعاد أصدقائنا الأطفال",
     "shortPlaylistId": "PLPwfeXzB3ozU",
-    "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
     "madeForKids": false,
     "containsSyntheticMedia": false,
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "uSL4C8dNa24",
-    "youtubeLongVideoId": "mD-p7RZSNV4",
-    "facebookShortVideoId": "1769512214338529",
-    "facebookLongVideoId": "1662806148879862",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1769512214338529",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1662806148879862",
-    "facebookShortTitle": "Noreen Kids | مهمة إنقاذ العصفور الصغير ورقم النجدة - مغامرة ملك والقطة لوليتا",
-    "facebookLongTitle": "Noreen Kids | تامر وكركور وتحدي جسر الشلال المكسور - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
+    "youtubeShortVideoId": "4E1E0FDbAEU",
+    "facebookShortVideoId": "2207711850183789",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2207711850183789",
+    "facebookShortTitle": "Noreen Kids | حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي - مغامرة أستاذ شريف والصقر الذكي",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2902,16 +2873,16 @@
       "videoCodec": "h264",
       "videoProfile": "High",
       "pixelFormat": "yuv420p",
-      "width": 1280,
-      "height": 720,
+      "width": 720,
+      "height": 1280,
       "fps": 30,
       "audioCodec": "aac",
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 424,
-      "fileSizeBytes": 60397978,
-      "inspectedAt": "23:54"
+      "durationSec": 64,
+      "fileSizeBytes": 10223616,
+      "inspectedAt": "00:43"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2920,7 +2891,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-04T21:54:31.371Z"
+    "reportedAtIso": "2026-11-04T22:43:15.901Z"
   },
   "heroFairRotationIndex": 11,
   "interactiveHeroRotationIndex": 5,
