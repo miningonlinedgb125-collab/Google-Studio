@@ -5199,17 +5199,18 @@ async function publishDailyInteractive3DPhotoPostForRunner({
   if (specificHeroName) {
     const cleanSpecHero = String(specificHeroName).trim();
     const cleanSpecComp = String(specificCompanionName || "").trim();
+    const heroNorm = cleanSpecHero.replace(/^(الطبيبة|دكتورة|المهندسة|القبطان|المخترعة|الفارس|الشيخ)\\s+/, "");
     pick = RUNNER_CHARACTER_TEAMS.find(
       (team) =>
-        team.mainCharacterName === cleanSpecHero &&
-        (!cleanSpecComp || team.companionName === cleanSpecComp)
-    ) || RUNNER_CHARACTER_TEAMS.find(
-      (team) => team.mainCharacterName === cleanSpecHero
+        (team.mainCharacterName === cleanSpecHero || team.mainCharacterName === heroNorm) &&
+        (!cleanSpecComp || team.companionName === cleanSpecComp || team.companionName.includes(cleanSpecComp) || cleanSpecComp.includes(team.companionName))
     ) || RUNNER_CHARACTER_TEAMS.find(
       (team) =>
-        cleanSpecHero === "أم ملك"
-          ? team.mainCharacterName.includes("أم ملك")
-          : team.mainCharacterName.startsWith(cleanSpecHero)
+        team.mainCharacterName === cleanSpecHero ||
+        team.mainCharacterName === heroNorm ||
+        (cleanSpecHero === "أم ملك" ? team.mainCharacterName.includes("أم ملك") : (cleanSpecHero !== "أم ملك" && team.mainCharacterName !== "أم ملك" && (cleanSpecHero.includes(team.mainCharacterName) || team.mainCharacterName.includes(heroNorm))))
+    ) || RUNNER_CHARACTER_TEAMS.find(
+      (team) => cleanSpecComp && (team.companionName === cleanSpecComp || team.companionName.includes(cleanSpecComp) || cleanSpecComp.includes(team.companionName))
     );
   }
   const interactiveRotIdx = Number(fbSchedule?.interactiveHeroRotationIndex ?? 0);
