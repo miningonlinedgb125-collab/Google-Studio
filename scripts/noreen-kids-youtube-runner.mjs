@@ -5021,6 +5021,19 @@ ${shortHero} و${shortComp} بيجهزوا لحكاية جديدة، والنج�
   return pool[Math.abs(Number(seed) || 0) % pool.length];
 }
 
+async function convertSvgToPngIfPossible(svgPath, outPngPath, width = 1280, height = 720) {
+  try {
+    const { execFile } = await import("child_process");
+    const { promisify } = await import("util");
+    const execFileAsync = promisify(execFile);
+    await execFileAsync("rsvg-convert", ["-w", String(width), "-h", String(height), "-f", "png", "-o", outPngPath, svgPath]);
+    if (fs.existsSync(outPngPath) && fs.statSync(outPngPath).size > 200) {
+      return outPngPath;
+    }
+  } catch {}
+  return svgPath;
+}
+
 async function publishDailyInteractive3DPhotoPostForRunner({
   rawPageAccessToken,
   pageId,
@@ -5297,7 +5310,7 @@ async function publishDailyInteractive3DPhotoPostForRunner({
     await execFileAsync("ffmpeg", [
       "-y",
       "-i", heroImg,
-      "-i", svgPath,
+      "-i", overlayImgPath,
       "-filter_complex", filterGraph,
       "-map", "[outv]",
       "-frames:v", "1",
@@ -5353,7 +5366,7 @@ async function publishDailyInteractive3DPhotoPostForRunner({
       "-y",
       "-i", compImg,
       "-i", heroImg,
-      "-i", svgPath,
+      "-i", overlayImgPath,
       "-filter_complex", filterGraph,
       "-map", "[outv]",
       "-frames:v", "1",
@@ -5506,7 +5519,7 @@ async function publishDailyInteractive3DPhotoPostForRunner({
       "-y",
       "-i", heroImg,
       "-i", compImg,
-      "-i", svgPath,
+      "-i", overlayImgPath,
       "-filter_complex", filterGraph,
       "-map", "[outv]",
       "-frames:v", "1",
@@ -5599,7 +5612,7 @@ async function publishDailyInteractive3DPhotoPostForRunner({
       "-y",
       "-i", compImg,
       "-i", heroImg,
-      "-i", svgPath,
+      "-i", overlayImgPath,
       "-filter_complex", filterGraph,
       "-map", "[outv]",
       "-frames:v", "1",
