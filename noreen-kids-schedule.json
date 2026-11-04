@@ -37,6 +37,16 @@
     {
       "topic": "حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي",
       "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "ورشة الألعاب الذكية لإسعاد أصدقائنا الأطفال",
+      "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة"
+    },
+    {
+      "topic": "حساب المسافات على الخريطة وسرعة الوصول بالصقر الذكي",
+      "mainCharacterName": "أستاذ شريف",
       "companionName": "الصقر الذكي",
       "timestampIso": "2026-11-04T22:38:10.866Z"
     },
@@ -199,40 +209,6 @@
       "topic": "جدو والفأر المشاكس وسر صندوق ألعاب زمان",
       "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "أستاذ شريف وجدول المهام لإنقاذ ورشة النجارة",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-11-02T13:31:56.459Z"
-    },
-    {
-      "topic": "جدو والفأر المشاكس وسر صندوق ألعاب زمان",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-11-02T13:31:56.459Z"
-    },
-    {
-      "topic": "أم ملك والبطريق وسر معرض الرسم المدرسي",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح"
-    },
-    {
-      "topic": "ذياد والفرفوشة وسر محفظة عم محمود المفقودة",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة"
-    },
-    {
-      "topic": "أم ملك والبطريق وسر معرض الرسم المدرسي",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "timestampIso": "2026-11-01T19:41:18.571Z"
-    },
-    {
-      "topic": "ذياد والفرفوشة وسر محفظة عم محمود المفقودة",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة",
-      "timestampIso": "2026-11-01T19:41:18.571Z"
     }
   ],
   "scheduledHistory": [
