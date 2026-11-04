@@ -1837,10 +1837,12 @@ async function prepareCircularChannelWatermarkPng({ logoSrcPath, isShort, outPng
   return null;
 }
 
-async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptian") {
+async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptian", targetPlatform = "youtube") {
+  const isFb = String(targetPlatform || "").toLowerCase().includes("facebook");
   const isShort = videoFormat === "short_9_16";
-  const W = isShort ? 720 : 1280;
-  const H = isShort ? 1280 : 720;
+  const isVertical = isShort || isFb;
+  const W = isFb ? 1080 : (isShort ? 720 : 1280);
+  const H = isFb ? 1920 : (isShort ? 1280 : 720);
   const scenes =
     Array.isArray(episode?.scenes) && episode.scenes.length > 0
       ? episode.scenes
@@ -1910,21 +1912,22 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
   const thumbnail1280Path = path.join(tmpDir, `thumbnail_1280x720_${videoFormat}.jpg`);
   const verticalPosterPath = path.join(tmpDir, `vertical_poster_${videoFormat}.jpg`);
   try {
-    if (isShort) {
+    if (isVertical) {
+      const halfPosterW = Math.floor(W / 2);
       await execFileAsync("ffmpeg", [
         "-y",
         "-i", compImg,
         "-i", heroImg,
         "-filter_complex",
-        `[0:v]scale=360:1280:force_original_aspect_ratio=increase,crop=360:1280,eq=saturation=1.35:contrast=1.14:brightness=0.03[left];` +
-        `[1:v]scale=360:1280:force_original_aspect_ratio=increase,crop=360:1280,eq=saturation=1.35:contrast=1.14:brightness=0.03[right];` +
+        `[0:v]scale=${halfPosterW}:${H}:force_original_aspect_ratio=increase,crop=${halfPosterW}:${H},eq=saturation=1.35:contrast=1.14:brightness=0.03[left];` +
+        `[1:v]scale=${W - halfPosterW}:${H}:force_original_aspect_ratio=increase,crop=${W - halfPosterW}:${H},eq=saturation=1.35:contrast=1.14:brightness=0.03[right];` +
         `[left][right]hstack=inputs=2,` +
-        `drawbox=x=354:y=0:w=12:h=1280:color=0xF59E0B@0.95:t=fill,` +
-        `drawbox=x=358:y=0:w=4:h=1280:color=0xFEF08A@1.0:t=fill,` +
-        `drawbox=x=0:y=0:w=720:h=1280:color=0xFBBF24@1.0:t=14,` +
-        `drawbox=x=14:y=14:w=692:h=1252:color=0x06B6D4@0.90:t=6,` +
-        `drawbox=x=40:y=40:w=640:h=120:color=0x0F172A@0.92:t=fill,` +
-        `drawbox=x=40:y=40:w=640:h=120:color=0xFBBF24@1.0:t=6,` +
+        `drawbox=x=${halfPosterW - 6}:y=0:w=12:h=${H}:color=0xF59E0B@0.95:t=fill,` +
+        `drawbox=x=${halfPosterW - 2}:y=0:w=4:h=${H}:color=0xFEF08A@1.0:t=fill,` +
+        `drawbox=x=0:y=0:w=${W}:h=${H}:color=0xFBBF24@1.0:t=14,` +
+        `drawbox=x=14:y=14:w=${W - 28}:h=${H - 28}:color=0x06B6D4@0.90:t=6,` +
+        `drawbox=x=${Math.round(W * 0.055)}:y=40:w=${Math.round(W * 0.89)}:h=120:color=0x0F172A@0.92:t=fill,` +
+        `drawbox=x=${Math.round(W * 0.055)}:y=40:w=${Math.round(W * 0.89)}:h=120:color=0xFBBF24@1.0:t=6,` +
         `setsar=1[outv]`,
         "-map", "[outv]",
         "-frames:v", "1",
@@ -1985,8 +1988,8 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       const greetPrefix =
         dialect === "fusha"
           ? `أَهْلاً وَسَهْلاً بِكُلِّ أَعْضَاءِ وَأَبْطَالِ عَائِلَةِ قَنَاةِ نُورِين كِيدْز الْغَالِين! أَنَا ${spk} وَمَعِي رَفِيقِي ${prt}!`
-          : isShort
-          ? `أهلاً بيكم يا أبطال عيلة نورين كيدز! أنا ${spk} ومعايا ${prt}!`
+          : (isVertical || isFb)
+          ? `يا خبر يا أبطال عيلة نورين كيدز! بصوا بسرعة معايا هنا، أنا ${spk} ومعايا ${prt}!`
           : `أهلاً وسهلاً بكل أعضاء وعيلة قناة نورين كيدز الغاليين في كل مكان! ازيكم يا أشطر وأجمل أبطال؟ وحشتونا أوي! أنا ${spk} ومعايا رفيق المغامرة ${prt}، منورين عالمنا السحري النهارده!`;
       sceneDialogue = stripped ? `${greetPrefix} ${stripped}` : greetPrefix;
     }
@@ -2115,15 +2118,15 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
   };
 
   // Prepare persistent circular channel watermark (Broadcast Bug: Top-Right, 88% opacity)
-  const wmLayout = computeChannelWatermarkLayout(isShort, W, H);
+  const wmLayout = computeChannelWatermarkLayout(isVertical, W, H);
   const watermarkLogoSrc = resolveChannelWatermarkLogoPath(process.cwd());
   let channelWatermarkPng = null;
   if (watermarkLogoSrc) {
     try {
       channelWatermarkPng = await prepareCircularChannelWatermarkPng({
         logoSrcPath: watermarkLogoSrc,
-        isShort,
-        outPngPath: path.join(tmpDir, `channel_watermark_${videoFormat}.png`),
+        isShort: isVertical,
+        outPngPath: path.join(tmpDir, `channel_watermark_${videoFormat}_${targetPlatform}.png`),
         W,
         H,
       });
@@ -2388,8 +2391,8 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     renderedItems.map((r) => `file '${r.wavPath.replace(/'/g, "'\\''")}'`).join("\n")
   );
 
-  const finalMp4 = path.join(tmpDir, `noreen_kids_${videoFormat}.mp4`);
-  const vEncoderArgs = isShort
+  const finalMp4 = path.join(tmpDir, `noreen_kids_${videoFormat}_${targetPlatform}.mp4`);
+  const vEncoderArgs = (isShort || isFb)
     ? [
         "-c:v", "libx264",
         "-preset", "veryfast",
@@ -6516,7 +6519,13 @@ async function main() {
     const task = tasks[tIdx];
     console.log("------------------------------------------------------------------");
     console.log(`🎬 [Step 2/5] Rendering Shared MP4 for ${task.label} (${tIdx + 1}/${tasks.length})...`);
-    const mp4Path = await renderEpisodeMp4(task.episode, task.videoFormat, tmpDir, dailyDialect);
+    const ytMp4Path = await renderEpisodeMp4(task.episode, task.videoFormat, tmpDir, dailyDialect, "youtube");
+    let fbMp4Path = null;
+    if (shouldUploadToFacebook && facebookPageAccessToken) {
+      console.log(`🎬 [Facebook 9:16 Pipeline] Rendering Dedicated 1080x1920 Fullscreen Vertical MP4 for Facebook (${task.label})...`);
+      fbMp4Path = await renderEpisodeMp4(task.episode, task.videoFormat, tmpDir, dailyDialect, "facebook");
+    }
+    const mp4Path = ytMp4Path;
 
     console.log(`🔍 [Step 3/5] Running Pre-Upload Unit Test & ffprobe Gate on ${path.basename(mp4Path)}...`);
     const { stdout: probeOut } = await execFileAsync("ffprobe", [
@@ -6681,11 +6690,12 @@ async function main() {
     let fbUploadRes = null;
     if (shouldUploadToFacebook && facebookPageAccessToken) {
       try {
-        console.log(`📘 [Step 5/5] Uploading EXACT SAME MP4 + Cover to Facebook Page (${facebookPageId}) with Independent Facebook Settings...`);
+        const fbUploadFile = fbMp4Path || mp4Path;
+        console.log(`📘 [Step 5/5] Uploading 1080x1920 Vertical 9:16 MP4 (${path.basename(fbUploadFile)}) + Cover to Facebook Page (${facebookPageId}) with Independent Facebook Settings...`);
         fbUploadRes = await uploadMp4ToFacebookPage({
           rawPageAccessToken: facebookPageAccessToken,
           pageId: facebookPageId,
-          mp4Path,
+          mp4Path: fbUploadFile,
           thumbnailJpgPath: expectedThumbPath,
           videoFormat: task.videoFormat,
           episode: task.episode,
