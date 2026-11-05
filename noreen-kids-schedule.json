@@ -37,6 +37,16 @@
     {
       "topic": "سر الصندوق الخشبي القديم وذكريات زمان",
       "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "موازنة ميزانية حفلة نهاية العام وشراء الزينة بأفضل",
+      "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "سر الصندوق الخشبي القديم وذكريات زمان",
+      "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس",
       "timestampIso": "2026-11-05T13:13:23.855Z"
     },
@@ -199,28 +209,6 @@
       "topic": "تختوخ وزقلط وسر الكيكة الطائرة في المطبخ",
       "mainCharacterName": "تختوخ",
       "companionName": "الكلب زقلط"
-    },
-    {
-      "topic": "تيتة والدب باندا وسر شال الحنان الدافئ",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "timestampIso": "2026-11-02T23:16:43.829Z"
-    },
-    {
-      "topic": "تختوخ وزقلط وسر الكيكة الطائرة في المطبخ",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط",
-      "timestampIso": "2026-11-02T23:16:43.829Z"
-    },
-    {
-      "topic": "أستاذ شريف وجدول المهام لإنقاذ ورشة النجارة",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "جدو والفأر المشاكس وسر صندوق ألعاب زمان",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
     }
   ],
   "scheduledHistory": [
@@ -2705,16 +2693,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٥‏/١١‏/٢٠٢٦، ٣:٤١:٣١ م",
   "lastCloudRunReport": {
-    "id": "gh-run-41833890255",
+    "id": "gh-run-42033453716",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-04 (15:11 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1793797227967-ugp5",
-    "longEpisodeId": "ep-gh-long-1793797270202-k2ls",
-    "shortEpisodeTitle": "Noreen Kids: شوشو ومرجان وإنقاذ الحوت الصغير العالق | مغامرات شوشو ومرجان",
-    "longEpisodeTitle": "Noreen Kids: جنى وروبوت الفضاء وسر الكتاب الطائر بين النجوم | مغامرات جنى وبلبل",
-    "shortTitle": "Noreen Kids: شوشو ومرجان وإنقاذ الحوت الصغير العالق | مغامرات شوشو ومرجان",
-    "longTitle": "Noreen Kids: جنى وروبوت الفضاء وسر الكتاب الطائر بين النجوم | مغامرات جنى وبلبل",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-05 (15:41 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1793884363658-h8v8",
+    "longEpisodeId": "ep-gh-long-1793884403855-jsk3",
+    "shortEpisodeTitle": "Noreen Kids: سر الصندوق الخشبي القديم وذكريات زمان | مغامرات جدو والفأر المشاكس",
+    "longEpisodeTitle": "Noreen Kids: موازنة ميزانية حفلة نهاية العام وشراء الزينة بأفضل | مغامرات أستاذ شريف والصقر الذكي",
+    "shortTitle": "Noreen Kids: سر الصندوق الخشبي القديم وذكريات زمان | مغامرات جدو والفأر المشاكس",
+    "longTitle": "Noreen Kids: موازنة ميزانية حفلة نهاية العام وشراء الزينة بأفضل | مغامرات أستاذ شريف والصقر الذكي",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2723,14 +2711,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "_rLrMAEy-HE",
-    "youtubeLongVideoId": "rmZRu48GQoE",
-    "facebookShortVideoId": "1142858061582669",
-    "facebookLongVideoId": "1124241466760549",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1142858061582669",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1124241466760549",
-    "facebookShortTitle": "Noreen Kids | شوشو ومرجان وإنقاذ الحوت الصغير العالق - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
-    "facebookLongTitle": "Noreen Kids | جنى وروبوت الفضاء وسر الكتاب الطائر بين النجوم - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
+    "youtubeShortVideoId": "dY5aKdrDI3I",
+    "youtubeLongVideoId": "wbjHpZn9l8I",
+    "facebookShortVideoId": "1843955966797795",
+    "facebookLongVideoId": "1149728144675227",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1843955966797795",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1149728144675227",
+    "facebookShortTitle": "Noreen Kids | سر الصندوق الخشبي القديم وذكريات زمان - مغامرة جدو والفأر المشاكس",
+    "facebookLongTitle": "Noreen Kids | موازنة ميزانية حفلة نهاية العام وشراء الزينة بأفضل - مغامرة أستاذ شريف والصقر الذكي",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2745,9 +2733,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 361,
-      "fileSizeBytes": 45696942,
-      "inspectedAt": "15:11"
+      "durationSec": 316,
+      "fileSizeBytes": 37119590,
+      "inspectedAt": "15:41"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2756,7 +2744,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-04T13:11:44.827Z"
+    "reportedAtIso": "2026-11-05T13:41:35.970Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
