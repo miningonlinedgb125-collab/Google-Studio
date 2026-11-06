@@ -37,6 +37,16 @@
     {
       "topic": "مهمة فريق النظافة لتنظيم ألعاب غابة النور",
       "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "الشيخ محمود والديك الفصيح وسر القلوب الصافية",
+      "mainCharacterName": "الشيخ محمود",
+      "companionName": "الديك الفصيح"
+    },
+    {
+      "topic": "مهمة فريق النظافة لتنظيم ألعاب غابة النور",
+      "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-11-06T13:27:53.517Z"
     },
@@ -199,28 +209,6 @@
       "topic": "نوران والفرفوش وسر نافورة الموسيقى الكريستالية",
       "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "لغز آثار أقدام شبل الثلج الضائع في الجبل",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "timestampIso": "2026-11-03T21:19:02.391Z"
-    },
-    {
-      "topic": "نوران والفرفوش وسر نافورة الموسيقى الكريستالية",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-11-03T21:19:02.391Z"
-    },
-    {
-      "topic": "ساعة التنظيم الذكي مع الشيخ محمود والديك الفصيح",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح"
-    },
-    {
-      "topic": "سر الابتسامة المنورة وإزاي نحافظ على سناننا بيضا وقوية",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
     }
   ],
   "scheduledHistory": [
@@ -2710,16 +2698,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٦‏/١١‏/٢٠٢٦، ٣:٥٥:٢٦ م",
   "lastCloudRunReport": {
-    "id": "gh-run-42033453716",
+    "id": "gh-run-42221424131",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-05 (15:41 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1793884363658-h8v8",
-    "longEpisodeId": "ep-gh-long-1793884403855-jsk3",
-    "shortEpisodeTitle": "Noreen Kids: سر الصندوق الخشبي القديم وذكريات زمان | مغامرات جدو والفأر المشاكس",
-    "longEpisodeTitle": "Noreen Kids: موازنة ميزانية حفلة نهاية العام وشراء الزينة بأفضل | مغامرات أستاذ شريف والصقر الذكي",
-    "shortTitle": "Noreen Kids: سر الصندوق الخشبي القديم وذكريات زمان | مغامرات جدو والفأر المشاكس",
-    "longTitle": "Noreen Kids: موازنة ميزانية حفلة نهاية العام وشراء الزينة بأفضل | مغامرات أستاذ شريف والصقر الذكي",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-06 (15:55 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1793971617916-4j29",
+    "longEpisodeId": "ep-gh-long-1793971673517-hjr1",
+    "shortEpisodeTitle": "Noreen Kids: مهمة فريق النظافة لتنظيم ألعاب غابة النور | مغامرات الطبيبة نورين وأرنوب",
+    "longEpisodeTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر القلوب الصافية | مغامرات الشيخ محمود والديك الفصيح",
+    "shortTitle": "Noreen Kids: مهمة فريق النظافة لتنظيم ألعاب غابة النور | مغامرات الطبيبة نورين وأرنوب",
+    "longTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر القلوب الصافية | مغامرات الشيخ محمود والديك الفصيح",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2728,14 +2716,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "dY5aKdrDI3I",
-    "youtubeLongVideoId": "wbjHpZn9l8I",
-    "facebookShortVideoId": "1843955966797795",
-    "facebookLongVideoId": "1149728144675227",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1843955966797795",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1149728144675227",
-    "facebookShortTitle": "Noreen Kids | سر الصندوق الخشبي القديم وذكريات زمان - مغامرة جدو والفأر المشاكس",
-    "facebookLongTitle": "Noreen Kids | موازنة ميزانية حفلة نهاية العام وشراء الزينة بأفضل - مغامرة أستاذ شريف والصقر الذكي",
+    "youtubeShortVideoId": "6NjrItS6CNQ",
+    "youtubeLongVideoId": "l8DOVG-R2Rg",
+    "facebookShortVideoId": "1647946380392242",
+    "facebookLongVideoId": "1371128691574768",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1647946380392242",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1371128691574768",
+    "facebookShortTitle": "Noreen Kids | مهمة فريق النظافة لتنظيم ألعاب غابة النور - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
+    "facebookLongTitle": "Noreen Kids | الشيخ محمود والديك الفصيح وسر القلوب الصافية - مغامرة الشيخ محمود والديك الفصيح",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2750,9 +2738,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 316,
-      "fileSizeBytes": 37119590,
-      "inspectedAt": "15:41"
+      "durationSec": 378,
+      "fileSizeBytes": 48224010,
+      "inspectedAt": "15:55"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2761,7 +2749,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-05T13:41:35.970Z"
+    "reportedAtIso": "2026-11-06T13:55:31.053Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
