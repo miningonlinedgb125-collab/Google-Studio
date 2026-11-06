@@ -68,6 +68,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122124108093484976",
+      "photoId": "122124108069484976",
+      "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع عمرو وزعتر",
+      "title": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع عمرو وزعتر",
+      "caption": "✨ مين أسرع بطل هيعد كل النجوم الذهبية في الصورة؟ ✨\nعمرو وزعتر بيجهزوا لحكاية جديدة، والنجوم اللامعة بتنور طريقهم! 🌟\nيلا يا شطار يا حلوين.. عدّوا النجوم مع ماما واكتبوا لنا العدد المظبوط في تعليق! 👀🔢\n👇 اكتبوا الحل واسم البطل عشان نوجهله تحية خاصة بالاسم في الحلقة القادمة! 🎬💖\n🔔 شير للتحدي ومتابعة لصفحة Noreen Kids لمزيد من الألعاب المفيدة! 👍\n#نورين_كيدز #Noreen_Kids #فوازير_أطفال #تحدي_الشطار #أمهات_مصر",
+      "heroName": "عمرو",
+      "companionName": "زعتر",
+      "publishedAtCairo": "2026-11-06 · 23:27 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122124108093484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122124103107484976",
       "photoId": "122124103083484976",
       "themeTitle": "تحدي الصورة المختلفة (من 1 إلى 4) مع المهندسة نوران والنمر الفرفوش",
@@ -534,18 +546,6 @@
       "publishedAtCairo": "2026-10-27 · 23:32 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122120668167484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122120666961484976",
-      "photoId": "122120666937484976",
-      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع تامر وكركور",
-      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع تامر وكركور",
-      "caption": "🎉 فزورة قوة التركيز وسرعة البديهة من عالم Noreen Kids! 🎉\nبصوا كويس على الصورتين [ أ ] و [ ب ].. فيه 3 اختلافات ذكية مستخبية! يا ترى عيونكم الحلوة هتطلعهم؟ 👀✨\n👇 اكتبوا لنا الفروقات الـ 3 في تعليق مع اسم طفلكم الجميل علشان نرحب بيه في حلقة النهاردة! 💖🎬\n🔔 واضغطوا متابعة للصفحة ولايك للبوست عشان متفوتكمش حكاياتنا اليومية! 👍🌟\n#نورين_كيدز #Noreen_Kids #فزورة_اليوم #كرتون_3D #أمهات_مصر",
-      "heroName": "تامر",
-      "companionName": "كركور",
-      "publishedAtCairo": "2026-10-27 · 23:24 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122120666961484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -809,14 +809,15 @@
       "id": "gh-run-42292031079",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-06 (23:06 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-06 (23:38 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1793998796065-vq1g",
       "longEpisodeId": "ep-gh-long-1793998853515-reah",
       "shortEpisodeTitle": "Noreen Kids: اختراع طاحونة الهواء الملونة لإنارة القرية | مغامرات المهندسة نوران والنمر الفرفوش",
-      "longEpisodeTitle": "عمرو وزعتر وقارب البردي والجزيرة المضيئة",
+      "longEpisodeTitle": "Noreen Kids: عمرو وزعتر وقارب البردي والجزيرة المضيئة | مغامرات عمرو وزعتر",
       "shortTitle": "Noreen Kids: اختراع طاحونة الهواء الملونة لإنارة القرية | مغامرات المهندسة نوران والنمر الفرفوش",
-      "longTitle": "عمرو وزعتر وقارب البردي والجزيرة المضيئة",
+      "longTitle": "Noreen Kids: عمرو وزعتر وقارب البردي والجزيرة المضيئة | مغامرات عمرو وزعتر",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -824,9 +825,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "bUd7Nq2dunA",
+      "youtubeLongVideoId": "v3Y86p6HLS4",
       "facebookShortVideoId": "2246099976790114",
+      "facebookLongVideoId": "1838269094158787",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2246099976790114",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1838269094158787",
       "facebookShortTitle": "Noreen Kids | اختراع طاحونة الهواء الملونة لإنارة القرية - مغامرة المهندسة نوران والنمر الفرفوش",
+      "facebookLongTitle": "Noreen Kids | عمرو وزعتر وقارب البردي والجزيرة المضيئة - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -834,16 +839,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 64,
-        "fileSizeBytes": 11114906,
-        "inspectedAt": "23:06"
+        "durationSec": 399,
+        "fileSizeBytes": 45592084,
+        "inspectedAt": "23:38"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
