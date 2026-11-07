@@ -68,6 +68,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122124405867484976",
+      "photoId": "122124405843484976",
+      "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع تامر وكركور",
+      "title": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع تامر وكركور",
+      "caption": "يا مساء الفل والنشاط على أحلى مامي وأشطر كتاكيت في \"نورين كيدز\"! 🌟 جاهزين لمغامرة ذكاء جديدة وممتعة؟\n\n🧩 بطلنا المحبوب \"تامر\" واقف على اليمين ومحتاج يوصل لرفيق دربه \"كركور\" اللي على الشمال، وقدامنا 3 مسارات ملونة [ 1 ، 2 ، 3 ].. بس مسار واحد بس هو اللي مفتوح وهيخليهم يتقابلوا! 🔍👀\n\n🚀 شغلوا عيونكم الشقية وتتبعوا الطريق الصح، وقولوا لنا: تامر هيمشي في المسار رقم كام؟\n\n💬 مستنيين إجاباتكم مع اسم بطلكم الصغير في التعليقات عشان تامر وكركور يحيوه بالاسم ويسقفوا له في حلقة بكرة! 🎉🎙️\n\n🔔 متنسوش تعملوا متابعة وتفعلوا الجرس وشير للبوست عشان نتحدى كل أصحابنا الشطار! 🔁❤️\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
+      "heroName": "تامر",
+      "companionName": "كركور",
+      "publishedAtCairo": "2026-11-07 · 21:52 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122124405867484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122124402489484976",
       "photoId": "122124402459484976",
       "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع كارمن وسمسم",
@@ -534,18 +546,6 @@
       "publishedAtCairo": "2026-10-29 · 05:37 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122121058377484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122121018597484976",
-      "photoId": "122121018573484976",
-      "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع ذياد والعصفورة الفرفوشة",
-      "title": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع ذياد والعصفورة الفرفوشة",
-      "caption": "يا مامي يا شاطرة ويا كتاكيتنا الحلوين، جاهزين لأقوى تحدي ذكاء وسرعة ملاحظة مع بطلنا \"ذياد\" وصديقته \"العصفورة الفرفوشة\"؟ 🥳✨\n\n👀 ركّزوا جامد في الصورة كده.. فيه نجوم ذهبية بتلمع ومستخبية بشطارة، يا ترى مين البطل الشاطر اللي هيعرف يعدّهم صح؟ 🌟🧐\n\n💬 اكتبوا لنا العدد الصح فوراً ومعاه \"اسم طفلكم البطل\" في الكومنتات، عشان ذياد والعصفورة الفرفوشة هيبعتوا له أحلى تحية ويسلّموا عليه بالاسم في حلقة بكرة! 🎈👏\n\n🔔 متنسوش تدوسوا متابعة للصفحة وتشيروا البوست، وخلي كل أصحابكم يدخلوا التحدي معانا! 🚀❤️\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
-      "heroName": "ذياد",
-      "companionName": "العصفورة الفرفوشة",
-      "publishedAtCairo": "2026-10-29 · 05:22 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122121018597484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -809,14 +809,15 @@
       "id": "gh-run-42406035462",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-07 (21:38 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-07 (21:56 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1794079859417-snx7",
       "longEpisodeId": "ep-gh-long-1794079973281-wbo5",
       "shortEpisodeTitle": "Noreen Kids: كارمن وسمسم واختراع أجنحة الطيران الآمنة | مغامرات كارمن وسمسم",
-      "longEpisodeTitle": "تامر وكركور وسر وسام الوفاء في مهرجان الواحة",
+      "longEpisodeTitle": "Noreen Kids: تامر وكركور وسر وسام الوفاء في مهرجان الواحة | مغامرات تامر وكركور",
       "shortTitle": "Noreen Kids: كارمن وسمسم واختراع أجنحة الطيران الآمنة | مغامرات كارمن وسمسم",
-      "longTitle": "تامر وكركور وسر وسام الوفاء في مهرجان الواحة",
+      "longTitle": "Noreen Kids: تامر وكركور وسر وسام الوفاء في مهرجان الواحة | مغامرات تامر وكركور",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -824,9 +825,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "VqYDoutMyvM",
+      "youtubeLongVideoId": "Ft4iliFMxsI",
       "facebookShortVideoId": "1654538646023696",
+      "facebookLongVideoId": "2285158928725566",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1654538646023696",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2285158928725566",
       "facebookShortTitle": "Noreen Kids | كارمن وسمسم واختراع أجنحة الطيران الآمنة - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
+      "facebookLongTitle": "Noreen Kids | تامر وكركور وسر وسام الوفاء في مهرجان الواحة - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -834,16 +839,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 67,
-        "fileSizeBytes": 12006195,
-        "inspectedAt": "21:38"
+        "durationSec": 343,
+        "fileSizeBytes": 45843743,
+        "inspectedAt": "21:56"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
