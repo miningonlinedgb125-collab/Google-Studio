@@ -68,6 +68,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122124275949484976",
+      "photoId": "122124275925484976",
+      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع شوشو ومرجان",
+      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع شوشو ومرجان",
+      "caption": "🎉 فزورة قوة التركيز وسرعة البديهة من عالم Noreen Kids! 🎉\nبصوا كويس على الصورتين [ أ ] و [ ب ].. فيه 3 اختلافات ذكية مستخبية! يا ترى عيونكم الحلوة هتطلعهم؟ 👀✨\n👇 اكتبوا لنا الفروقات الـ 3 في تعليق مع اسم طفلكم الجميل علشان نرحب بيه في حلقة النهاردة! 💖🎬\n🔔 واضغطوا متابعة للصفحة ولايك للبوست عشان متفوتكمش حكاياتنا اليومية! 👍🌟\n#نورين_كيدز #Noreen_Kids #فزورة_اليوم #كرتون_3D #أمهات_مصر",
+      "heroName": "شوشو",
+      "companionName": "مرجان",
+      "publishedAtCairo": "2026-11-07 · 14:09 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122124275949484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122124273009484976",
       "photoId": "122124272985484976",
       "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع جنى وبلبل",
@@ -534,18 +546,6 @@
       "publishedAtCairo": "2026-10-28 · 14:29 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122120834859484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122120832903484976",
-      "photoId": "122120832879484976",
-      "themeTitle": "تحدي الصورة المختلفة (من 1 إلى 4) مع سدرة الصغنونة والفراشة الملونة",
-      "title": "تحدي الصورة المختلفة (من 1 إلى 4) مع سدرة الصغنونة والفراشة الملونة",
-      "caption": "🔍 تحدي قوة الملاحظة السريعة مع سدرة الصغنونة والفراشة الملونة! 🌟\nأبطالنا الشطار وأمهاتنا الغاليين.. بصوا كويس جداً على الصور الـ 4 المرقمة [ 1 ، 2 ، 3 ، 4 ]! 👀✨\nفيه 3 صور متطابقين تماماً.. وصورة واحدة بس هي اللي مختلفة وفيها تفصيلة ذكية! 🕵️‍♂️💡\nمين أشطر بطل أو بطلة هيعرف يكتشف رقم الصورة المختلفة؟ 🤔\n1️⃣ اكتبوا رقم الصورة المختلفة في تعليق 👇\n2️⃣ واكتبوا اسم طفلكم الشاطر علشان سدرة الصغنونة والفراشة الملونة يحيوه بالاسم ويبعتوله وسام الشطارة! 🏅🎬\n🔔 متنسوش متابعة صفحتنا Noreen Kids لتحديات يومية ممتعة! 👍💖\n#نورين_كيدز #Noreen_Kids #تحدي_الشطار #أبطال_نورين_كيدز #ذكاء_الأطفال #أمهات_مصر",
-      "heroName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "publishedAtCairo": "2026-10-28 · 14:24 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122120832903484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -809,14 +809,15 @@
       "id": "gh-run-42369306533",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-07 (13:55 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-07 (14:17 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1794051880911-142s",
       "longEpisodeId": "ep-gh-long-1794052064333-vhsz",
       "shortEpisodeTitle": "Noreen Kids: لغز الكوكب البنفسجي في مرصد المكتبة الطائرة | مغامرات جنى وبلبل",
-      "longEpisodeTitle": "شوشو القبطان الصغير وإنقاذ بوصلة السفينة الضائعة",
+      "longEpisodeTitle": "Noreen Kids: شوشو القبطان الصغير وإنقاذ بوصلة السفينة الضائعة | مغامرات شوشو ومرجان",
       "shortTitle": "Noreen Kids: لغز الكوكب البنفسجي في مرصد المكتبة الطائرة | مغامرات جنى وبلبل",
-      "longTitle": "شوشو القبطان الصغير وإنقاذ بوصلة السفينة الضائعة",
+      "longTitle": "Noreen Kids: شوشو القبطان الصغير وإنقاذ بوصلة السفينة الضائعة | مغامرات شوشو ومرجان",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -824,9 +825,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "JkpAco-dDiE",
+      "youtubeLongVideoId": "v4T6PGmndoU",
       "facebookShortVideoId": "1131163986334399",
+      "facebookLongVideoId": "4801230806765313",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1131163986334399",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/4801230806765313",
       "facebookShortTitle": "Noreen Kids | لغز الكوكب البنفسجي في مرصد المكتبة الطائرة - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
+      "facebookLongTitle": "Noreen Kids | شوشو القبطان الصغير وإنقاذ بوصلة السفينة الضائعة - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -834,16 +839,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 66,
-        "fileSizeBytes": 11481907,
-        "inspectedAt": "13:55"
+        "durationSec": 365,
+        "fileSizeBytes": 46714061,
+        "inspectedAt": "14:17"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
