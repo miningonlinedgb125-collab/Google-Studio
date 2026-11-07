@@ -37,6 +37,16 @@
     {
       "topic": "لغز الكوكب البنفسجي في مرصد المكتبة الطائرة",
       "mainCharacterName": "جنى رائدة الفضاء",
+      "companionName": "بلبل الروبوت اللطيف"
+    },
+    {
+      "topic": "شوشو القبطان الصغير وإنقاذ بوصلة السفينة الضائعة",
+      "mainCharacterName": "شوشو القبطان الصغير",
+      "companionName": "مرجان الدلفين المرح"
+    },
+    {
+      "topic": "لغز الكوكب البنفسجي في مرصد المكتبة الطائرة",
+      "mainCharacterName": "جنى رائدة الفضاء",
       "companionName": "بلبل الروبوت اللطيف",
       "timestampIso": "2026-11-07T11:47:44.333Z"
     },
@@ -199,28 +209,6 @@
       "topic": "ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام",
       "mainCharacterName": "كارمن المخترعة الصغيرة",
       "companionName": "سمسم السنجاب الطائر"
-    },
-    {
-      "topic": "لغز القلعة القديمة وفك شفرة بوابات الشجاعة بالكلمة الطيبة",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم",
-      "timestampIso": "2026-11-04T19:13:50.654Z"
-    },
-    {
-      "topic": "ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر",
-      "timestampIso": "2026-11-04T19:13:50.655Z"
-    },
-    {
-      "topic": "شوشو ومرجان وإنقاذ الحوت الصغير العالق",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح"
-    },
-    {
-      "topic": "جنى وروبوت الفضاء وسر الكتاب الطائر بين النجوم",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف"
     }
   ],
   "scheduledHistory": [
@@ -2715,16 +2703,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٧‏/١١‏/٢٠٢٦، ٢:١٧:٠٩ م",
   "lastCloudRunReport": {
-    "id": "gh-run-42221424131",
+    "id": "gh-run-42369306533",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-06 (15:55 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1793971617916-4j29",
-    "longEpisodeId": "ep-gh-long-1793971673517-hjr1",
-    "shortEpisodeTitle": "Noreen Kids: مهمة فريق النظافة لتنظيم ألعاب غابة النور | مغامرات الطبيبة نورين وأرنوب",
-    "longEpisodeTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر القلوب الصافية | مغامرات الشيخ محمود والديك الفصيح",
-    "shortTitle": "Noreen Kids: مهمة فريق النظافة لتنظيم ألعاب غابة النور | مغامرات الطبيبة نورين وأرنوب",
-    "longTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر القلوب الصافية | مغامرات الشيخ محمود والديك الفصيح",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-07 (14:17 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1794051880911-142s",
+    "longEpisodeId": "ep-gh-long-1794052064333-vhsz",
+    "shortEpisodeTitle": "Noreen Kids: لغز الكوكب البنفسجي في مرصد المكتبة الطائرة | مغامرات جنى وبلبل",
+    "longEpisodeTitle": "Noreen Kids: شوشو القبطان الصغير وإنقاذ بوصلة السفينة الضائعة | مغامرات شوشو ومرجان",
+    "shortTitle": "Noreen Kids: لغز الكوكب البنفسجي في مرصد المكتبة الطائرة | مغامرات جنى وبلبل",
+    "longTitle": "Noreen Kids: شوشو القبطان الصغير وإنقاذ بوصلة السفينة الضائعة | مغامرات شوشو ومرجان",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2733,14 +2721,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "6NjrItS6CNQ",
-    "youtubeLongVideoId": "l8DOVG-R2Rg",
-    "facebookShortVideoId": "1647946380392242",
-    "facebookLongVideoId": "1371128691574768",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1647946380392242",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1371128691574768",
-    "facebookShortTitle": "Noreen Kids | مهمة فريق النظافة لتنظيم ألعاب غابة النور - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
-    "facebookLongTitle": "Noreen Kids | الشيخ محمود والديك الفصيح وسر القلوب الصافية - مغامرة الشيخ محمود والديك الفصيح",
+    "youtubeShortVideoId": "JkpAco-dDiE",
+    "youtubeLongVideoId": "v4T6PGmndoU",
+    "facebookShortVideoId": "1131163986334399",
+    "facebookLongVideoId": "4801230806765313",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1131163986334399",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/4801230806765313",
+    "facebookShortTitle": "Noreen Kids | لغز الكوكب البنفسجي في مرصد المكتبة الطائرة - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
+    "facebookLongTitle": "Noreen Kids | شوشو القبطان الصغير وإنقاذ بوصلة السفينة الضائعة - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2755,9 +2743,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 378,
-      "fileSizeBytes": 48224010,
-      "inspectedAt": "15:55"
+      "durationSec": 365,
+      "fileSizeBytes": 46714061,
+      "inspectedAt": "14:17"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2766,7 +2754,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-06T13:55:31.053Z"
+    "reportedAtIso": "2026-11-07T12:17:11.973Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
