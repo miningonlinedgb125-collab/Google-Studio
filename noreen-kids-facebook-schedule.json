@@ -2683,6 +2683,16 @@
     {
       "topic": "كارمن وسمسم واختراع أجنحة الطيران الآمنة",
       "mainCharacterName": "كارمن المخترعة الصغيرة",
+      "companionName": "سمسم السنجاب الطائر"
+    },
+    {
+      "topic": "تامر وكركور وسر وسام الوفاء في مهرجان الواحة",
+      "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم"
+    },
+    {
+      "topic": "كارمن وسمسم واختراع أجنحة الطيران الآمنة",
+      "mainCharacterName": "كارمن المخترعة الصغيرة",
       "companionName": "سمسم السنجاب الطائر",
       "timestampIso": "2026-11-07T19:32:53.281Z"
     },
@@ -2845,43 +2855,21 @@
       "topic": "تامر وكركور وتحدي جسر الشلال المكسور",
       "mainCharacterName": "تامر فارس الواحة",
       "companionName": "كركور الببغاء الحكيم"
-    },
-    {
-      "topic": "مهمة إنقاذ العصفور الصغير ورقم النجدة",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "timestampIso": "2026-11-04T21:21:53.741Z"
-    },
-    {
-      "topic": "تامر وكركور وتحدي جسر الشلال المكسور",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم",
-      "timestampIso": "2026-11-04T21:21:53.741Z"
-    },
-    {
-      "topic": "لغز القلعة القديمة وفك شفرة بوابات الشجاعة بالكلمة الطيبة",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم"
-    },
-    {
-      "topic": "ابتكار النظارة المكبرة لاكتشاف عالم النمل الصغير والنظام",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-07 · 14:17 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-42292031079",
+    "id": "gh-run-42406035462",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-06 (23:38 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1793998796065-vq1g",
-    "longEpisodeId": "ep-gh-long-1793998853515-reah",
-    "shortEpisodeTitle": "Noreen Kids: اختراع طاحونة الهواء الملونة لإنارة القرية | مغامرات المهندسة نوران والنمر الفرفوش",
-    "longEpisodeTitle": "Noreen Kids: عمرو وزعتر وقارب البردي والجزيرة المضيئة | مغامرات عمرو وزعتر",
-    "shortTitle": "Noreen Kids: اختراع طاحونة الهواء الملونة لإنارة القرية | مغامرات المهندسة نوران والنمر الفرفوش",
-    "longTitle": "Noreen Kids: عمرو وزعتر وقارب البردي والجزيرة المضيئة | مغامرات عمرو وزعتر",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-07 (21:56 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1794079859417-snx7",
+    "longEpisodeId": "ep-gh-long-1794079973281-wbo5",
+    "shortEpisodeTitle": "Noreen Kids: كارمن وسمسم واختراع أجنحة الطيران الآمنة | مغامرات كارمن وسمسم",
+    "longEpisodeTitle": "Noreen Kids: تامر وكركور وسر وسام الوفاء في مهرجان الواحة | مغامرات تامر وكركور",
+    "shortTitle": "Noreen Kids: كارمن وسمسم واختراع أجنحة الطيران الآمنة | مغامرات كارمن وسمسم",
+    "longTitle": "Noreen Kids: تامر وكركور وسر وسام الوفاء في مهرجان الواحة | مغامرات تامر وكركور",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2890,14 +2878,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "bUd7Nq2dunA",
-    "youtubeLongVideoId": "v3Y86p6HLS4",
-    "facebookShortVideoId": "2246099976790114",
-    "facebookLongVideoId": "1838269094158787",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2246099976790114",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1838269094158787",
-    "facebookShortTitle": "Noreen Kids | اختراع طاحونة الهواء الملونة لإنارة القرية - مغامرة المهندسة نوران والنمر الفرفوش",
-    "facebookLongTitle": "Noreen Kids | عمرو وزعتر وقارب البردي والجزيرة المضيئة - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
+    "youtubeShortVideoId": "VqYDoutMyvM",
+    "youtubeLongVideoId": "Ft4iliFMxsI",
+    "facebookShortVideoId": "1654538646023696",
+    "facebookLongVideoId": "2285158928725566",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1654538646023696",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2285158928725566",
+    "facebookShortTitle": "Noreen Kids | كارمن وسمسم واختراع أجنحة الطيران الآمنة - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
+    "facebookLongTitle": "Noreen Kids | تامر وكركور وسر وسام الوفاء في مهرجان الواحة - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2912,9 +2900,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 399,
-      "fileSizeBytes": 45592084,
-      "inspectedAt": "23:38"
+      "durationSec": 343,
+      "fileSizeBytes": 45843743,
+      "inspectedAt": "21:56"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2923,7 +2911,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-06T21:38:28.094Z"
+    "reportedAtIso": "2026-11-07T19:56:31.243Z"
   },
   "heroFairRotationIndex": 7,
   "interactiveHeroRotationIndex": 5,
