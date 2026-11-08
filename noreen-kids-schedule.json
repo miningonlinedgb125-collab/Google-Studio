@@ -37,6 +37,16 @@
     {
       "topic": "ملك ولوليتا وفحص البلبل شادي المغرد",
       "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "سدرة والفراشة وسر ألوان قوس قزح لماما",
+      "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "ملك ولوليتا وفحص البلبل شادي المغرد",
+      "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا",
       "timestampIso": "2026-11-08T12:04:21.972Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "ذياد",
       "companionName": "العصفورة الفرفوشة",
       "timestampIso": "2026-11-04T22:38:10.867Z"
-    },
-    {
-      "topic": "مذيع المدرسة الشجاع وسر المعلومات الذهبية",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "timestampIso": "2026-11-04T22:02:54.513Z"
-    },
-    {
-      "topic": "سدرة والفراشة في رحلة حروف الحديقة العجيبة",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "timestampIso": "2026-11-04T22:02:54.513Z"
-    },
-    {
-      "topic": "مهمة إنقاذ العصفور الصغير ورقم النجدة",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا"
-    },
-    {
-      "topic": "تامر وكركور وتحدي جسر الشلال المكسور",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم"
     }
   ],
   "scheduledHistory": [
@@ -2720,16 +2708,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٨‏/١١‏/٢٠٢٦، ٢:٢٤:٠١ م",
   "lastCloudRunReport": {
-    "id": "gh-run-42369306533",
+    "id": "gh-run-42477836385",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-07 (14:17 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1794051880911-142s",
-    "longEpisodeId": "ep-gh-long-1794052064333-vhsz",
-    "shortEpisodeTitle": "Noreen Kids: لغز الكوكب البنفسجي في مرصد المكتبة الطائرة | مغامرات جنى وبلبل",
-    "longEpisodeTitle": "Noreen Kids: شوشو القبطان الصغير وإنقاذ بوصلة السفينة الضائعة | مغامرات شوشو ومرجان",
-    "shortTitle": "Noreen Kids: لغز الكوكب البنفسجي في مرصد المكتبة الطائرة | مغامرات جنى وبلبل",
-    "longTitle": "Noreen Kids: شوشو القبطان الصغير وإنقاذ بوصلة السفينة الضائعة | مغامرات شوشو ومرجان",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-08 (14:24 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1794139191780-v1vx",
+    "longEpisodeId": "ep-gh-long-1794139461972-xro7",
+    "shortEpisodeTitle": "Noreen Kids: ملك ولوليتا وفحص البلبل شادي المغرد | مغامرات الطبيبة ملك والقطة لوليتا",
+    "longEpisodeTitle": "Noreen Kids: سدرة والفراشة وسر ألوان قوس قزح لماما | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "shortTitle": "Noreen Kids: ملك ولوليتا وفحص البلبل شادي المغرد | مغامرات الطبيبة ملك والقطة لوليتا",
+    "longTitle": "Noreen Kids: سدرة والفراشة وسر ألوان قوس قزح لماما | مغامرات سدرة الصغنونة والفراشة الملونة",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2738,14 +2726,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "JkpAco-dDiE",
-    "youtubeLongVideoId": "v4T6PGmndoU",
-    "facebookShortVideoId": "1131163986334399",
-    "facebookLongVideoId": "4801230806765313",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1131163986334399",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/4801230806765313",
-    "facebookShortTitle": "Noreen Kids | لغز الكوكب البنفسجي في مرصد المكتبة الطائرة - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
-    "facebookLongTitle": "Noreen Kids | شوشو القبطان الصغير وإنقاذ بوصلة السفينة الضائعة - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
+    "youtubeShortVideoId": "dUWQCvp3mu0",
+    "youtubeLongVideoId": "Zn4dKlDVI68",
+    "facebookShortVideoId": "1769526414345532",
+    "facebookLongVideoId": "2295292191251891",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1769526414345532",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2295292191251891",
+    "facebookShortTitle": "Noreen Kids | ملك ولوليتا وفحص البلبل شادي المغرد - مغامرة ملك والقطة لوليتا",
+    "facebookLongTitle": "Noreen Kids | سدرة والفراشة وسر ألوان قوس قزح لماما - مغامرة سدرة الصغنونة والفراشة الملونة",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2760,9 +2748,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 365,
-      "fileSizeBytes": 46714061,
-      "inspectedAt": "14:17"
+      "durationSec": 305,
+      "fileSizeBytes": 35242639,
+      "inspectedAt": "14:24"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2771,7 +2759,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-07T12:17:11.973Z"
+    "reportedAtIso": "2026-11-08T12:24:04.273Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
