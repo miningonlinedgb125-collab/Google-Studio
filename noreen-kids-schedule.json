@@ -37,6 +37,16 @@
     {
       "topic": "أستاذ شريف وسر معادلة الكنز البلوري العجيب",
       "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "حكاية جدو والفأر وسر إنقاذ الشجرة المباركة",
+      "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "أستاذ شريف وسر معادلة الكنز البلوري العجيب",
+      "mainCharacterName": "أستاذ شريف",
       "companionName": "الصقر الذكي",
       "timestampIso": "2026-11-09T14:15:48.718Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "تيتة",
       "companionName": "الدب باندا",
       "timestampIso": "2026-11-05T21:32:35.891Z"
-    },
-    {
-      "topic": "سر الصندوق الخشبي القديم وذكريات زمان",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "موازنة ميزانية حفلة نهاية العام وشراء الزينة بأفضل",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "سر الصندوق الخشبي القديم وذكريات زمان",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-11-05T13:13:23.855Z"
-    },
-    {
-      "topic": "موازنة ميزانية حفلة نهاية العام وشراء الزينة بأفضل",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-11-05T13:13:23.856Z"
     }
   ],
   "scheduledHistory": [
@@ -2720,16 +2708,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٩‏/١١‏/٢٠٢٦، ٤:٣٣:٥٠ م",
   "lastCloudRunReport": {
-    "id": "gh-run-42477836385",
+    "id": "gh-run-42629349170",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-08 (14:24 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1794139191780-v1vx",
-    "longEpisodeId": "ep-gh-long-1794139461972-xro7",
-    "shortEpisodeTitle": "Noreen Kids: ملك ولوليتا وفحص البلبل شادي المغرد | مغامرات الطبيبة ملك والقطة لوليتا",
-    "longEpisodeTitle": "Noreen Kids: سدرة والفراشة وسر ألوان قوس قزح لماما | مغامرات سدرة الصغنونة والفراشة الملونة",
-    "shortTitle": "Noreen Kids: ملك ولوليتا وفحص البلبل شادي المغرد | مغامرات الطبيبة ملك والقطة لوليتا",
-    "longTitle": "Noreen Kids: سدرة والفراشة وسر ألوان قوس قزح لماما | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-09 (16:33 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1794233423422-dtzk",
+    "longEpisodeId": "ep-gh-long-1794233748718-7q1n",
+    "shortEpisodeTitle": "Noreen Kids: أستاذ شريف وسر معادلة الكنز البلوري العجيب | مغامرات أستاذ شريف والصقر الذكي",
+    "longEpisodeTitle": "Noreen Kids: حكاية جدو والفأر وسر إنقاذ الشجرة المباركة | مغامرات جدو والفأر المشاكس",
+    "shortTitle": "Noreen Kids: أستاذ شريف وسر معادلة الكنز البلوري العجيب | مغامرات أستاذ شريف والصقر الذكي",
+    "longTitle": "Noreen Kids: حكاية جدو والفأر وسر إنقاذ الشجرة المباركة | مغامرات جدو والفأر المشاكس",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2738,14 +2726,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "dUWQCvp3mu0",
-    "youtubeLongVideoId": "Zn4dKlDVI68",
-    "facebookShortVideoId": "1769526414345532",
-    "facebookLongVideoId": "2295292191251891",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1769526414345532",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2295292191251891",
-    "facebookShortTitle": "Noreen Kids | ملك ولوليتا وفحص البلبل شادي المغرد - مغامرة ملك والقطة لوليتا",
-    "facebookLongTitle": "Noreen Kids | سدرة والفراشة وسر ألوان قوس قزح لماما - مغامرة سدرة الصغنونة والفراشة الملونة",
+    "youtubeShortVideoId": "BgK45ernL-s",
+    "youtubeLongVideoId": "iMDkQljX7i0",
+    "facebookShortVideoId": "1102042882606665",
+    "facebookLongVideoId": "2198674714367495",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1102042882606665",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2198674714367495",
+    "facebookShortTitle": "Noreen Kids | أستاذ شريف وسر معادلة الكنز البلوري العجيب - مغامرة أستاذ شريف والصقر الذكي",
+    "facebookLongTitle": "Noreen Kids | حكاية جدو والفأر وسر إنقاذ الشجرة المباركة - مغامرة جدو والفأر المشاكس",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2760,9 +2748,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 305,
-      "fileSizeBytes": 35242639,
-      "inspectedAt": "14:24"
+      "durationSec": 339,
+      "fileSizeBytes": 42488300,
+      "inspectedAt": "16:33"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2771,7 +2759,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-08T12:24:04.273Z"
+    "reportedAtIso": "2026-11-09T14:33:53.950Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
