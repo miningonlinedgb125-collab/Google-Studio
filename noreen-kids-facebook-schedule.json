@@ -68,6 +68,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122124955113484976",
+      "photoId": "122124955089484976",
+      "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع جدو والفأر المشاكس",
+      "title": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع جدو والفأر المشاكس",
+      "caption": "✨ مين أسرع بطل هيعد كل النجوم الذهبية في الصورة؟ ✨\nجدو والفأر المشاكس بيجهزوا لحكاية جديدة، والنجوم اللامعة بتنور طريقهم! 🌟\nيلا يا شطار يا حلوين.. عدّوا النجوم مع ماما واكتبوا لنا العدد المظبوط في تعليق! 👀🔢\n👇 اكتبوا الحل واسم البطل عشان نوجهله تحية خاصة بالاسم في الحلقة القادمة! 🎬💖\n🔔 شير للتحدي ومتابعة لصفحة Noreen Kids لمزيد من الألعاب المفيدة! 👍\n#نورين_كيدز #Noreen_Kids #فوازير_أطفال #تحدي_الشطار #أمهات_مصر",
+      "heroName": "جدو",
+      "companionName": "الفأر المشاكس",
+      "publishedAtCairo": "2026-11-09 · 16:31 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122124955113484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122124944535484976",
       "photoId": "122124944487484976",
       "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع أستاذ شريف والصقر الذكي",
@@ -534,18 +546,6 @@
       "publishedAtCairo": "2026-10-30 · 13:35 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122121931503484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122121928773484976",
-      "photoId": "122121928749484976",
-      "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع دكتورة نورين وأرنوب",
-      "title": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع دكتورة نورين وأرنوب",
-      "caption": "🧭 تحدي المتاهة الذكية مع دكتورة نورين وأرنوب! 🌟\nبطلنا \"دكتورة نورين\" عايز يوصل لصديقه \"أرنوب\" بأسرع وقت، ومحتاج مساعدة أذكى أبطال! 🏃‍♂️💨\nقدامكم 3 مسارات ملونة:\n🔴 المسار رقم [ 1 ]\n🟢 المسار رقم [ 2 ]\n🔵 المسار رقم [ 3 ]\nيا ترى أنهي طريق فيهم هو اللي هيوصله للهدف من غير أي عوائق؟ 👀🔍\n👇 تتبعوا الخط بعيونكم واكتبوا رقم المسار الصح واسم طفلكم علشان دكتورة نورين يشكره بنفسه! 🎬🏅\n🔔 متنسوش لايك ومتابعة لصفحة Noreen Kids لمغامرات جديدة كل يوم! 💖👍\n#نورين_كيدز #Noreen_Kids #متاهة_الأذكياء #تحدي_الشطار #أمهات_مصر",
-      "heroName": "دكتورة نورين",
-      "companionName": "أرنوب",
-      "publishedAtCairo": "2026-10-30 · 13:26 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122121928773484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -809,14 +809,15 @@
       "id": "gh-run-42629349170",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-09 (16:20 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-09 (16:33 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1794233423422-dtzk",
       "longEpisodeId": "ep-gh-long-1794233748718-7q1n",
       "shortEpisodeTitle": "Noreen Kids: أستاذ شريف وسر معادلة الكنز البلوري العجيب | مغامرات أستاذ شريف والصقر الذكي",
-      "longEpisodeTitle": "حكاية جدو والفأر وسر إنقاذ الشجرة المباركة",
+      "longEpisodeTitle": "Noreen Kids: حكاية جدو والفأر وسر إنقاذ الشجرة المباركة | مغامرات جدو والفأر المشاكس",
       "shortTitle": "Noreen Kids: أستاذ شريف وسر معادلة الكنز البلوري العجيب | مغامرات أستاذ شريف والصقر الذكي",
-      "longTitle": "حكاية جدو والفأر وسر إنقاذ الشجرة المباركة",
+      "longTitle": "Noreen Kids: حكاية جدو والفأر وسر إنقاذ الشجرة المباركة | مغامرات جدو والفأر المشاكس",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -824,9 +825,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "BgK45ernL-s",
+      "youtubeLongVideoId": "iMDkQljX7i0",
       "facebookShortVideoId": "1102042882606665",
+      "facebookLongVideoId": "2198674714367495",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1102042882606665",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2198674714367495",
       "facebookShortTitle": "Noreen Kids | أستاذ شريف وسر معادلة الكنز البلوري العجيب - مغامرة أستاذ شريف والصقر الذكي",
+      "facebookLongTitle": "Noreen Kids | حكاية جدو والفأر وسر إنقاذ الشجرة المباركة - مغامرة جدو والفأر المشاكس",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -834,16 +839,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 60,
-        "fileSizeBytes": 9646899,
-        "inspectedAt": "16:20"
+        "durationSec": 339,
+        "fileSizeBytes": 42488300,
+        "inspectedAt": "16:33"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
