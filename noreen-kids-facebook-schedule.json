@@ -2683,6 +2683,16 @@
     {
       "topic": "أستاذ شريف وسر معادلة الكنز البلوري العجيب",
       "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "حكاية جدو والفأر وسر إنقاذ الشجرة المباركة",
+      "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "أستاذ شريف وسر معادلة الكنز البلوري العجيب",
+      "mainCharacterName": "أستاذ شريف",
       "companionName": "الصقر الذكي",
       "timestampIso": "2026-11-09T14:15:48.718Z"
     },
@@ -2845,28 +2855,6 @@
       "mainCharacterName": "تيتة",
       "companionName": "الدب باندا",
       "timestampIso": "2026-11-05T21:32:35.891Z"
-    },
-    {
-      "topic": "سر الصندوق الخشبي القديم وذكريات زمان",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "موازنة ميزانية حفلة نهاية العام وشراء الزينة بأفضل",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "سر الصندوق الخشبي القديم وذكريات زمان",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-11-05T13:13:23.855Z"
-    },
-    {
-      "topic": "موازنة ميزانية حفلة نهاية العام وشراء الزينة بأفضل",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-11-05T13:13:23.856Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-08 · 22:10 بتوقيت مصر",
