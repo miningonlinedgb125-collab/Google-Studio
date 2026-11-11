@@ -37,6 +37,16 @@
     {
       "topic": "شوشو ومرجان وسر صندوق ذكريات السفينة الغارقة",
       "mainCharacterName": "شوشو القبطان الصغير",
+      "companionName": "مرجان الدلفين المرح"
+    },
+    {
+      "topic": "جنى وروبوتها بلبل ولغز نغمات الفضاء العجيبة",
+      "mainCharacterName": "جنى رائدة الفضاء",
+      "companionName": "بلبل الروبوت اللطيف"
+    },
+    {
+      "topic": "شوشو ومرجان وسر صندوق ذكريات السفينة الغارقة",
+      "mainCharacterName": "شوشو القبطان الصغير",
       "companionName": "مرجان الدلفين المرح",
       "timestampIso": "2026-11-11T12:57:33.820Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "تامر فارس الواحة",
       "companionName": "كركور الببغاء الحكيم",
       "timestampIso": "2026-11-07T19:32:53.281Z"
-    },
-    {
-      "topic": "لغز الكوكب البنفسجي في مرصد المكتبة الطائرة",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف"
-    },
-    {
-      "topic": "شوشو القبطان الصغير وإنقاذ بوصلة السفينة الضائعة",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح"
-    },
-    {
-      "topic": "لغز الكوكب البنفسجي في مرصد المكتبة الطائرة",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف",
-      "timestampIso": "2026-11-07T11:47:44.333Z"
-    },
-    {
-      "topic": "شوشو القبطان الصغير وإنقاذ بوصلة السفينة الضائعة",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح",
-      "timestampIso": "2026-11-07T11:47:44.333Z"
     }
   ],
   "scheduledHistory": [
@@ -2730,16 +2718,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "١١‏/١١‏/٢٠٢٦، ٣:٢٤:٢٣ م",
   "lastCloudRunReport": {
-    "id": "gh-run-42824637656",
+    "id": "gh-run-43022577359",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-10 (16:12 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1794318666603-u6s9",
-    "longEpisodeId": "ep-gh-long-1794318695067-tbjd",
-    "shortEpisodeTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر الطير الأبابيل | مغامرات الشيخ محمود والديك الفصيح",
-    "longEpisodeTitle": "Noreen Kids: الطبيبة نورين وإنقاذ العصفور المنور في الغابة | مغامرات الطبيبة نورين وأرنوب",
-    "shortTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر الطير الأبابيل | مغامرات الشيخ محمود والديك الفصيح",
-    "longTitle": "Noreen Kids: الطبيبة نورين وإنقاذ العصفور المنور في الغابة | مغامرات الطبيبة نورين وأرنوب",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-11 (15:24 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1794401476120-m9zy",
+    "longEpisodeId": "ep-gh-long-1794401853820-ol2r",
+    "shortEpisodeTitle": "Noreen Kids: شوشو ومرجان وسر صندوق ذكريات السفينة الغارقة | مغامرات شوشو ومرجان",
+    "longEpisodeTitle": "Noreen Kids: جنى وروبوتها بلبل ولغز نغمات الفضاء العجيبة | مغامرات جنى وبلبل",
+    "shortTitle": "Noreen Kids: شوشو ومرجان وسر صندوق ذكريات السفينة الغارقة | مغامرات شوشو ومرجان",
+    "longTitle": "Noreen Kids: جنى وروبوتها بلبل ولغز نغمات الفضاء العجيبة | مغامرات جنى وبلبل",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2748,14 +2736,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "1fI3gaQkj30",
-    "youtubeLongVideoId": "WjLvDidIyOs",
-    "facebookShortVideoId": "1502668255013710",
-    "facebookLongVideoId": "1568100132008678",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1502668255013710",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1568100132008678",
-    "facebookShortTitle": "Noreen Kids | الشيخ محمود والديك الفصيح وسر الطير الأبابيل - مغامرة الشيخ محمود والديك الفصيح",
-    "facebookLongTitle": "Noreen Kids | الطبيبة نورين وإنقاذ العصفور المنور في الغابة - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
+    "youtubeShortVideoId": "DAXQgfLjpyE",
+    "youtubeLongVideoId": "iBaF8AZV_8Y",
+    "facebookShortVideoId": "29134635139508712",
+    "facebookLongVideoId": "1640947794071317",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/29134635139508712",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1640947794071317",
+    "facebookShortTitle": "Noreen Kids | شوشو ومرجان وسر صندوق ذكريات السفينة الغارقة - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
+    "facebookLongTitle": "Noreen Kids | جنى وروبوتها بلبل ولغز نغمات الفضاء العجيبة - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2770,9 +2758,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 364,
-      "fileSizeBytes": 38870712,
-      "inspectedAt": "16:12"
+      "durationSec": 305,
+      "fileSizeBytes": 38650511,
+      "inspectedAt": "15:24"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2781,7 +2769,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-10T14:12:48.948Z"
+    "reportedAtIso": "2026-11-11T13:24:26.599Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
