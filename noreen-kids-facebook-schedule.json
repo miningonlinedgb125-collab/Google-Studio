@@ -68,6 +68,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122125723503484976",
+      "photoId": "122125723479484976",
+      "themeTitle": "تحدي الصورة المختلفة (من 1 إلى 4) مع كارمن وسمسم",
+      "title": "تحدي الصورة المختلفة (من 1 إلى 4) مع كارمن وسمسم",
+      "caption": "يا صباح الفل والجمال على أحلى مامي وأشطر كتاكيت في الدنيا! 🌸✨ بطلنا المحبوب \"كارمن\" وصديقه \"سمسم\" محضرين لكم تحدي جديد ومحتاج قوة ملاحظة وتركيز عالي جداً! 🧐🔍\n\nقدامكم 4 صور لكارمن.. فيهم 3 صور توأم ومتطابقين بالظبط، وصورة واحدة بس هي اللي مختلفة! يا ترى مين البطل الصغير اللي هيعرف يطلع رقم الصورة المختلفة؟ [ 1 ، 2 ، 3 ، 4 ]؟ 🤔🎯\n\nيلا يا مامي، شجعي بطلك وشاركونا الإجابة مع كتابة \"اسم طفلك\" في الكومنتات ✍️👇 علشان كارمن وسمسم يحيوه بالاسم ويسلّموا عليه في حلقة بكرة! 🥳🎉\n\nوما تنسوش تعملوا شير للبوست وتفعلوا جرس المتابعة 🔔 لصفحتنا، علشان ما تفوتكمش مغامراتنا وتحدياتنا الجاية! 💖\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
+      "heroName": "كارمن",
+      "companionName": "سمسم",
+      "publishedAtCairo": "2026-11-12 · 00:41 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122125723503484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122125718589484976",
       "photoId": "122125718565484976",
       "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع تامر وكركور",
@@ -534,18 +546,6 @@
       "publishedAtCairo": "2026-11-01 · 22:23 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122122619775484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122122617375484976",
-      "photoId": "122122617345484976",
-      "themeTitle": "تحدي الصورة المختلفة (من 1 إلى 4) مع أم ملك والبطريق المرح",
-      "title": "تحدي الصورة المختلفة (من 1 إلى 4) مع أم ملك والبطريق المرح",
-      "caption": "يا أهلاً بكل مامي وكل بطل شطور في عيلتنا الجميلة! 🌟 مستعدين لتحدي الذكاء والتركيز النهارده؟ \n\nأم ملك وصديقها \"البطريق المرح\" حبوا يلعبوا معاكم لعبة ممتعة 🐧🔍.. قدامكم 4 صور [ 1 ، 2 ، 3 ، 4 ]، فيهم 3 صور توأم وشبه بعض بالظبط، وصورة واحدة بس هي اللي مختلفة ومستخبية! 🧐\n\nيا ترى مين صاحب أقوى قوة ملاحظة هيعرف يطلّع رقم الصورة المختلفة؟ 🤔 \nاكتبوا الحل بسرعة مع اسم بطلكم الجميل في التعليقات، عشان أم ملك والبطريق المرح يحيّوه مخصوص بالاسم في حلقة بكرة! 🥳🎉\n\nومتنسوش تعملوا شير للبوست وتفعلوا المتابعة للصفحة 🔔 عشان يوصلكم كل جديد ومغامراتنا متفوتكوش أبداً! ❤️\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
-      "heroName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "publishedAtCairo": "2026-11-01 · 22:13 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122122617375484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -809,14 +809,15 @@
       "id": "gh-run-43107198341",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-12 (00:24 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-12 (00:48 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1794435252260-vx8v",
       "longEpisodeId": "ep-gh-long-1794435519670-w5ha",
       "shortEpisodeTitle": "Noreen Kids: تامر وكركور وسر المراية الصادقة بالواحة | مغامرات تامر وكركور",
-      "longEpisodeTitle": "كارمن وسمسم وسر جهاز سقاية حديقة الورد",
+      "longEpisodeTitle": "Noreen Kids: كارمن وسمسم وسر جهاز سقاية حديقة الورد | مغامرات كارمن وسمسم",
       "shortTitle": "Noreen Kids: تامر وكركور وسر المراية الصادقة بالواحة | مغامرات تامر وكركور",
-      "longTitle": "كارمن وسمسم وسر جهاز سقاية حديقة الورد",
+      "longTitle": "Noreen Kids: كارمن وسمسم وسر جهاز سقاية حديقة الورد | مغامرات كارمن وسمسم",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -824,9 +825,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "Sg1u3wMY9uA",
+      "youtubeLongVideoId": "5j4mvLCQDPI",
       "facebookShortVideoId": "2907096949659376",
+      "facebookLongVideoId": "1748948586905613",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2907096949659376",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1748948586905613",
       "facebookShortTitle": "Noreen Kids | تامر وكركور وسر المراية الصادقة بالواحة - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
+      "facebookLongTitle": "Noreen Kids | كارمن وسمسم وسر جهاز سقاية حديقة الورد - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -834,16 +839,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 60,
-        "fileSizeBytes": 11209277,
-        "inspectedAt": "00:24"
+        "durationSec": 371,
+        "fileSizeBytes": 53362033,
+        "inspectedAt": "00:48"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
