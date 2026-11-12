@@ -37,6 +37,16 @@
     {
       "topic": "ذياد والعصفورة الفرفوشة: إصلاح ممر الحي المظلم",
       "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة"
+    },
+    {
+      "topic": "يوم النشاط المدرسي وتحدي فريق المهام الصعب",
+      "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح"
+    },
+    {
+      "topic": "ذياد والعصفورة الفرفوشة: إصلاح ممر الحي المظلم",
+      "mainCharacterName": "ذياد",
       "companionName": "العصفورة الفرفوشة",
       "timestampIso": "2026-11-12T21:52:23.050Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس",
       "timestampIso": "2026-11-09T14:15:48.718Z"
-    },
-    {
-      "topic": "أم ملك والبطريق وسر شنطة المدرسة المنظمة",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح"
-    },
-    {
-      "topic": "شهامة ذياد وسر المحفظة الضائعة لعم صابر",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة"
-    },
-    {
-      "topic": "أم ملك والبطريق وسر شنطة المدرسة المنظمة",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "timestampIso": "2026-11-08T19:42:46.486Z"
-    },
-    {
-      "topic": "شهامة ذياد وسر المحفظة الضائعة لعم صابر",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة",
-      "timestampIso": "2026-11-08T19:42:46.486Z"
     }
   ],
   "scheduledHistory": [
