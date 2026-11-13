@@ -2703,6 +2703,16 @@
     {
       "topic": "تختوخ وزقلط: مهمة إطعام قطط الحارة",
       "mainCharacterName": "تختوخ",
+      "companionName": "الكلب زقلط"
+    },
+    {
+      "topic": "تيتة والدب باندا وسر الشوربة الدافية السحرية",
+      "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا"
+    },
+    {
+      "topic": "تختوخ وزقلط: مهمة إطعام قطط الحارة",
+      "mainCharacterName": "تختوخ",
       "companionName": "الكلب زقلط",
       "timestampIso": "2026-11-13T21:28:22.982Z"
     },
@@ -2865,43 +2875,21 @@
       "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-11-10T13:51:35.067Z"
-    },
-    {
-      "topic": "تيتة والدب باندا وسر زهرة الفل الدبلانة",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
-    },
-    {
-      "topic": "مغامرة تختوخ وزقلط وسر تذكرة كريم الضائعة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط"
-    },
-    {
-      "topic": "تيتة والدب باندا وسر زهرة الفل الدبلانة",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "timestampIso": "2026-11-09T23:53:02.956Z"
-    },
-    {
-      "topic": "مغامرة تختوخ وزقلط وسر تذكرة كريم الضائعة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط",
-      "timestampIso": "2026-11-09T23:53:02.956Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-13 · 15:29 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-43314114160",
+    "id": "gh-run-43510479152",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-13 (00:15 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1794520294074-721n",
-    "longEpisodeId": "ep-gh-long-1794520343050-vx8n",
-    "shortEpisodeTitle": "Noreen Kids: ذياد والعصفورة الفرفوشة: إصلاح ممر الحي المظلم | مغامرات ذياد والعصفورة الفرفوشة",
-    "longEpisodeTitle": "Noreen Kids: يوم النشاط المدرسي وتحدي فريق المهام الصعب | مغامرات أم ملك والبطريق المرح",
-    "shortTitle": "Noreen Kids: ذياد والعصفورة الفرفوشة: إصلاح ممر الحي المظلم | مغامرات ذياد والعصفورة الفرفوشة",
-    "longTitle": "Noreen Kids: يوم النشاط المدرسي وتحدي فريق المهام الصعب | مغامرات أم ملك والبطريق المرح",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-13 (23:52 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1794605218698-h1hr",
+    "longEpisodeId": "ep-gh-long-1794605302982-xmg7",
+    "shortEpisodeTitle": "Noreen Kids: تختوخ وزقلط: مهمة إطعام قطط الحارة | مغامرات تختوخ والكلب زقلط",
+    "longEpisodeTitle": "Noreen Kids: تيتة والدب باندا وسر الشوربة الدافية السحرية | مغامرات تيتة والدب باندا",
+    "shortTitle": "Noreen Kids: تختوخ وزقلط: مهمة إطعام قطط الحارة | مغامرات تختوخ والكلب زقلط",
+    "longTitle": "Noreen Kids: تيتة والدب باندا وسر الشوربة الدافية السحرية | مغامرات تيتة والدب باندا",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2910,14 +2898,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "J6FV12moffw",
-    "youtubeLongVideoId": "0FxV59fbq8w",
-    "facebookShortVideoId": "1473761634628985",
-    "facebookLongVideoId": "29628443526752581",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1473761634628985",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/29628443526752581",
-    "facebookShortTitle": "Noreen Kids | ذياد والعصفورة الفرفوشة: إصلاح ممر الحي المظلم - مغامرة ذياد والعصفورة الفرفوشة",
-    "facebookLongTitle": "Noreen Kids | يوم النشاط المدرسي وتحدي فريق المهام الصعب - مغامرة أم ملك والبطريق المرح",
+    "youtubeShortVideoId": "YtWeBmCKHWE",
+    "youtubeLongVideoId": "pljp0xv5ghk",
+    "facebookShortVideoId": "5546588692232412",
+    "facebookLongVideoId": "1447528154216140",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/5546588692232412",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1447528154216140",
+    "facebookShortTitle": "Noreen Kids | تختوخ وزقلط: مهمة إطعام قطط الحارة - مغامرة تختوخ والكلب زقلط",
+    "facebookLongTitle": "Noreen Kids | تيتة والدب باندا وسر الشوربة الدافية السحرية - مغامرة تيتة والدب باندا",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2932,9 +2920,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 348,
-      "fileSizeBytes": 39017513,
-      "inspectedAt": "00:15"
+      "durationSec": 374,
+      "fileSizeBytes": 45717914,
+      "inspectedAt": "23:52"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2943,7 +2931,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-12T22:15:21.651Z"
+    "reportedAtIso": "2026-11-13T21:52:19.625Z"
   },
   "heroFairRotationIndex": 15,
   "interactiveHeroRotationIndex": 5,
