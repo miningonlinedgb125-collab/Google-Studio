@@ -37,6 +37,16 @@
     {
       "topic": "المهندسة نوران وجسر قوس قزح في مدينة السحاب",
       "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "عمرو وزعتر: إنقاذ غزال الوادي المفقود",
+      "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي"
+    },
+    {
+      "topic": "المهندسة نوران وجسر قوس قزح في مدينة السحاب",
+      "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش",
       "timestampIso": "2026-11-14T19:57:23.638Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "جنى رائدة الفضاء",
       "companionName": "بلبل الروبوت اللطيف",
       "timestampIso": "2026-11-11T12:57:33.820Z"
-    },
-    {
-      "topic": "عمرو وزعتر وسر كهف الصدى والخريطة المغنية",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي"
-    },
-    {
-      "topic": "نوران والنمر الفرفوش وسر قطار الألعاب",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "عمرو وزعتر وسر كهف الصدى والخريطة المغنية",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "timestampIso": "2026-11-10T21:24:29.491Z"
-    },
-    {
-      "topic": "نوران والنمر الفرفوش وسر قطار الألعاب",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-11-10T21:24:29.492Z"
     }
   ],
   "scheduledHistory": [
