@@ -2703,6 +2703,16 @@
     {
       "topic": "الطبيبة نورين وتحدي طاقة الخضار السحرية",
       "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "الشيخ محمود والديك الفصيح وسر نهر الكوثر الجميل",
+      "mainCharacterName": "الشيخ محمود",
+      "companionName": "الديك الفصيح"
+    },
+    {
+      "topic": "الطبيبة نورين وتحدي طاقة الخضار السحرية",
+      "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-11-14T12:23:35.037Z"
     },
@@ -2865,28 +2875,6 @@
       "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش",
       "timestampIso": "2026-11-10T21:24:29.492Z"
-    },
-    {
-      "topic": "الشيخ محمود والديك الفصيح وسر الطير الأبابيل",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح"
-    },
-    {
-      "topic": "الطبيبة نورين وإنقاذ العصفور المنور في الغابة",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "الشيخ محمود والديك الفصيح وسر الطير الأبابيل",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح",
-      "timestampIso": "2026-11-10T13:51:35.067Z"
-    },
-    {
-      "topic": "الطبيبة نورين وإنقاذ العصفور المنور في الغابة",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-11-10T13:51:35.067Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-13 · 23:52 بتوقيت مصر",
