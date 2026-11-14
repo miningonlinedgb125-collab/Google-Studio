@@ -37,6 +37,16 @@
     {
       "topic": "الطبيبة نورين وتحدي طاقة الخضار السحرية",
       "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "الشيخ محمود والديك الفصيح وسر نهر الكوثر الجميل",
+      "mainCharacterName": "الشيخ محمود",
+      "companionName": "الديك الفصيح"
+    },
+    {
+      "topic": "الطبيبة نورين وتحدي طاقة الخضار السحرية",
+      "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-11-14T12:23:35.037Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش",
       "timestampIso": "2026-11-10T21:24:29.492Z"
-    },
-    {
-      "topic": "الشيخ محمود والديك الفصيح وسر الطير الأبابيل",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح"
-    },
-    {
-      "topic": "الطبيبة نورين وإنقاذ العصفور المنور في الغابة",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "الشيخ محمود والديك الفصيح وسر الطير الأبابيل",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح",
-      "timestampIso": "2026-11-10T13:51:35.067Z"
-    },
-    {
-      "topic": "الطبيبة نورين وإنقاذ العصفور المنور في الغابة",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-11-10T13:51:35.067Z"
     }
   ],
   "scheduledHistory": [
@@ -2740,16 +2728,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "١٤‏/١١‏/٢٠٢٦، ٢:٥٥:٠٠ م",
   "lastCloudRunReport": {
-    "id": "gh-run-43430594489",
+    "id": "gh-run-43593439656",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-13 (15:29 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1794575343666-9k0o",
-    "longEpisodeId": "ep-gh-long-1794575408511-0u5d",
-    "shortEpisodeTitle": "Noreen Kids: جدو والفأر المشاكس وسر النخلة الصابرة | مغامرات جدو والفأر المشاكس",
-    "longEpisodeTitle": "Noreen Kids: أستاذ شريف وتحدي جدول الضرب في مدرسة النجوم | مغامرات أستاذ شريف والصقر الذكي",
-    "shortTitle": "Noreen Kids: جدو والفأر المشاكس وسر النخلة الصابرة | مغامرات جدو والفأر المشاكس",
-    "longTitle": "Noreen Kids: أستاذ شريف وتحدي جدول الضرب في مدرسة النجوم | مغامرات أستاذ شريف والصقر الذكي",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-14 (14:55 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1794658993785-a4up",
+    "longEpisodeId": "ep-gh-long-1794659015037-oos4",
+    "shortEpisodeTitle": "Noreen Kids: الطبيبة نورين وتحدي طاقة الخضار السحرية | مغامرات الطبيبة نورين وأرنوب",
+    "longEpisodeTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر نهر الكوثر الجميل | مغامرات الشيخ محمود والديك الفصيح",
+    "shortTitle": "Noreen Kids: الطبيبة نورين وتحدي طاقة الخضار السحرية | مغامرات الطبيبة نورين وأرنوب",
+    "longTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر نهر الكوثر الجميل | مغامرات الشيخ محمود والديك الفصيح",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2758,14 +2746,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "P3gZwE2PSuw",
-    "youtubeLongVideoId": "QuylDYgWgN0",
-    "facebookShortVideoId": "1027493950382582",
-    "facebookLongVideoId": "1695168102236242",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1027493950382582",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1695168102236242",
-    "facebookShortTitle": "Noreen Kids | جدو والفأر المشاكس وسر النخلة الصابرة - مغامرة جدو والفأر المشاكس",
-    "facebookLongTitle": "Noreen Kids | أستاذ شريف وتحدي جدول الضرب في مدرسة النجوم - مغامرة أستاذ شريف والصقر الذكي",
+    "youtubeShortVideoId": "1ZI3q6V8VTY",
+    "youtubeLongVideoId": "L3RTbozGJjE",
+    "facebookShortVideoId": "1171893828502983",
+    "facebookLongVideoId": "1033712663090649",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1171893828502983",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1033712663090649",
+    "facebookShortTitle": "Noreen Kids | الطبيبة نورين وتحدي طاقة الخضار السحرية - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
+    "facebookLongTitle": "Noreen Kids | الشيخ محمود والديك الفصيح وسر نهر الكوثر الجميل - مغامرة الشيخ محمود والديك الفصيح",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2780,9 +2768,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 393,
-      "fileSizeBytes": 45906657,
-      "inspectedAt": "15:29"
+      "durationSec": 352,
+      "fileSizeBytes": 47940895,
+      "inspectedAt": "14:55"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2791,7 +2779,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-13T13:29:38.725Z"
+    "reportedAtIso": "2026-11-14T12:55:03.103Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
