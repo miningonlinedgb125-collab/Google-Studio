@@ -2703,6 +2703,16 @@
     {
       "topic": "كارمن وسمسم: سر تدوير الورق والرسومات الملونة",
       "mainCharacterName": "كارمن المخترعة الصغيرة",
+      "companionName": "سمسم السنجاب الطائر"
+    },
+    {
+      "topic": "تامر وكركور وشجرة الأمانة الذهبية في الغابة",
+      "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم"
+    },
+    {
+      "topic": "كارمن وسمسم: سر تدوير الورق والرسومات الملونة",
+      "mainCharacterName": "كارمن المخترعة الصغيرة",
       "companionName": "سمسم السنجاب الطائر",
       "timestampIso": "2026-11-15T20:25:46.440Z"
     },
@@ -2865,43 +2875,21 @@
       "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا",
       "timestampIso": "2026-11-12T13:51:33.956Z"
-    },
-    {
-      "topic": "تامر وكركور وسر المراية الصادقة بالواحة",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم"
-    },
-    {
-      "topic": "كارمن وسمسم وسر جهاز سقاية حديقة الورد",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر"
-    },
-    {
-      "topic": "تامر وكركور وسر المراية الصادقة بالواحة",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم",
-      "timestampIso": "2026-11-11T22:18:39.670Z"
-    },
-    {
-      "topic": "كارمن وسمسم وسر جهاز سقاية حديقة الورد",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر",
-      "timestampIso": "2026-11-11T22:18:39.670Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-15 · 15:14 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-43634677131",
+    "id": "gh-run-43757798373",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-14 (22:28 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1794686215132-anv7",
-    "longEpisodeId": "ep-gh-long-1794686243638-c6ga",
-    "shortEpisodeTitle": "Noreen Kids: المهندسة نوران وجسر قوس قزح في مدينة السحاب | مغامرات المهندسة نوران والنمر الفرفوش",
-    "longEpisodeTitle": "Noreen Kids: عمرو وزعتر: إنقاذ غزال الوادي المفقود | مغامرات عمرو وزعتر",
-    "shortTitle": "Noreen Kids: المهندسة نوران وجسر قوس قزح في مدينة السحاب | مغامرات المهندسة نوران والنمر الفرفوش",
-    "longTitle": "Noreen Kids: عمرو وزعتر: إنقاذ غزال الوادي المفقود | مغامرات عمرو وزعتر",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-15 (22:50 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1794774308784-znbm",
+    "longEpisodeId": "ep-gh-long-1794774346440-af7p",
+    "shortEpisodeTitle": "Noreen Kids: كارمن وسمسم: سر تدوير الورق والرسومات الملونة | مغامرات كارمن وسمسم",
+    "longEpisodeTitle": "Noreen Kids: تامر وكركور وشجرة الأمانة الذهبية في الغابة | مغامرات تامر وكركور",
+    "shortTitle": "Noreen Kids: كارمن وسمسم: سر تدوير الورق والرسومات الملونة | مغامرات كارمن وسمسم",
+    "longTitle": "Noreen Kids: تامر وكركور وشجرة الأمانة الذهبية في الغابة | مغامرات تامر وكركور",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2910,14 +2898,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "DpQ6TOJDMV4",
-    "youtubeLongVideoId": "kaZ9lGx4yIU",
-    "facebookShortVideoId": "2073754006675630",
-    "facebookLongVideoId": "1837696270717368",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2073754006675630",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1837696270717368",
-    "facebookShortTitle": "Noreen Kids | المهندسة نوران وجسر قوس قزح في مدينة السحاب - مغامرة المهندسة نوران والنمر الفرفوش",
-    "facebookLongTitle": "Noreen Kids | عمرو وزعتر: إنقاذ غزال الوادي المفقود - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
+    "youtubeShortVideoId": "bYZEvE29mN8",
+    "youtubeLongVideoId": "ChHUUvI64qg",
+    "facebookShortVideoId": "2418382228905106",
+    "facebookLongVideoId": "1103845999298664",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2418382228905106",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1103845999298664",
+    "facebookShortTitle": "Noreen Kids | كارمن وسمسم: سر تدوير الورق والرسومات الملونة - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
+    "facebookLongTitle": "Noreen Kids | تامر وكركور وشجرة الأمانة الذهبية في الغابة - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2932,9 +2920,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 361,
-      "fileSizeBytes": 39908803,
-      "inspectedAt": "22:28"
+      "durationSec": 334,
+      "fileSizeBytes": 44375736,
+      "inspectedAt": "22:50"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2943,7 +2931,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-14T20:28:59.951Z"
+    "reportedAtIso": "2026-11-15T20:50:57.216Z"
   },
   "heroFairRotationIndex": 7,
   "interactiveHeroRotationIndex": 5,
