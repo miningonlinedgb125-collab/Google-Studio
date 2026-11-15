@@ -68,6 +68,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122126846649484976",
+      "photoId": "122126846625484976",
+      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع تامر وكركور",
+      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع تامر وكركور",
+      "caption": "يا هلا بأشطر مامي وأحلى كتاكيت في الدنيا! 🌟 تامر وصاحبه كركور مجهزين لكم النهاردة تحدي يوزن الذكاء بالدهب! 🔍👦  \n\nركزوا كويس أوي أوي بين الصورتين [ أ ] و [ ب ].. مين الشاطر اللي هيلمح الـ 3 اختلافات المستخبية بذكاء؟ 🤔💡  \n\nيلا ورونا شطارتكم واكتبوا الحل مع اسم بطلكم الصغير في التعليقات، عشان تامر وكركور يحيوه مخصوص بالاسم في حلقة بكرة! 🥳🎉  \n\nمستنيين إيه؟ شيروا التحدي وفعلوا جرس المتابعة 🔔 عشان يوصلكم كل جديد وتفضلوا دايماً من شطار نورين كيدز! 💖  \n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
+      "heroName": "تامر",
+      "companionName": "كركور",
+      "publishedAtCairo": "2026-11-15 · 22:47 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122126846649484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122126843847484976",
       "photoId": "122126843817484976",
       "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع كارمن وسمسم",
@@ -534,18 +546,6 @@
       "publishedAtCairo": "2026-11-06 · 15:31 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122123995119484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122123840805484976",
-      "photoId": "122123840781484976",
-      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع تيتة والدب باندا",
-      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع تيتة والدب باندا",
-      "caption": "🎉 فزورة قوة التركيز وسرعة البديهة من عالم Noreen Kids! 🎉\nبصوا كويس على الصورتين [ أ ] و [ ب ].. فيه 3 اختلافات ذكية مستخبية! يا ترى عيونكم الحلوة هتطلعهم؟ 👀✨\n👇 اكتبوا لنا الفروقات الـ 3 في تعليق مع اسم طفلكم الجميل علشان نرحب بيه في حلقة النهاردة! 💖🎬\n🔔 واضغطوا متابعة للصفحة ولايك للبوست عشان متفوتكمش حكاياتنا اليومية! 👍🌟\n#نورين_كيدز #Noreen_Kids #فزورة_اليوم #كرتون_3D #أمهات_مصر",
-      "heroName": "تيتة",
-      "companionName": "الدب باندا",
-      "publishedAtCairo": "2026-11-06 · 00:01 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122123840805484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -809,14 +809,15 @@
       "id": "gh-run-43757798373",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-15 (22:30 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-15 (22:50 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1794774308784-znbm",
       "longEpisodeId": "ep-gh-long-1794774346440-af7p",
       "shortEpisodeTitle": "Noreen Kids: كارمن وسمسم: سر تدوير الورق والرسومات الملونة | مغامرات كارمن وسمسم",
-      "longEpisodeTitle": "تامر وكركور وشجرة الأمانة الذهبية في الغابة",
+      "longEpisodeTitle": "Noreen Kids: تامر وكركور وشجرة الأمانة الذهبية في الغابة | مغامرات تامر وكركور",
       "shortTitle": "Noreen Kids: كارمن وسمسم: سر تدوير الورق والرسومات الملونة | مغامرات كارمن وسمسم",
-      "longTitle": "تامر وكركور وشجرة الأمانة الذهبية في الغابة",
+      "longTitle": "Noreen Kids: تامر وكركور وشجرة الأمانة الذهبية في الغابة | مغامرات تامر وكركور",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -824,9 +825,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "bYZEvE29mN8",
+      "youtubeLongVideoId": "ChHUUvI64qg",
       "facebookShortVideoId": "2418382228905106",
+      "facebookLongVideoId": "1103845999298664",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2418382228905106",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1103845999298664",
       "facebookShortTitle": "Noreen Kids | كارمن وسمسم: سر تدوير الورق والرسومات الملونة - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
+      "facebookLongTitle": "Noreen Kids | تامر وكركور وشجرة الأمانة الذهبية في الغابة - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -834,16 +839,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 61,
-        "fileSizeBytes": 11670651,
-        "inspectedAt": "22:30"
+        "durationSec": 334,
+        "fileSizeBytes": 44375736,
+        "inspectedAt": "22:50"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
