@@ -37,6 +37,16 @@
     {
       "topic": "جنى وبلبل وسر إنقاذ مسبار زحل الشجاع",
       "mainCharacterName": "جنى رائدة الفضاء",
+      "companionName": "بلبل الروبوت اللطيف"
+    },
+    {
+      "topic": "شوشو ومرجان وسر ابتسامة قنديل البحر الخجول",
+      "mainCharacterName": "شوشو القبطان الصغير",
+      "companionName": "مرجان الدلفين المرح"
+    },
+    {
+      "topic": "جنى وبلبل وسر إنقاذ مسبار زحل الشجاع",
+      "mainCharacterName": "جنى رائدة الفضاء",
       "companionName": "بلبل الروبوت اللطيف",
       "timestampIso": "2026-11-15T12:50:46.053Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "كارمن المخترعة الصغيرة",
       "companionName": "سمسم السنجاب الطائر",
       "timestampIso": "2026-11-11T22:18:39.670Z"
-    },
-    {
-      "topic": "شوشو ومرجان وسر صندوق ذكريات السفينة الغارقة",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح"
-    },
-    {
-      "topic": "جنى وروبوتها بلبل ولغز نغمات الفضاء العجيبة",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف"
-    },
-    {
-      "topic": "شوشو ومرجان وسر صندوق ذكريات السفينة الغارقة",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح",
-      "timestampIso": "2026-11-11T12:57:33.820Z"
-    },
-    {
-      "topic": "جنى وروبوتها بلبل ولغز نغمات الفضاء العجيبة",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف",
-      "timestampIso": "2026-11-11T12:57:33.820Z"
     }
   ],
   "scheduledHistory": [
@@ -2740,16 +2728,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "١٥‏/١١‏/٢٠٢٦، ٣:١٤:٤٢ م",
   "lastCloudRunReport": {
-    "id": "gh-run-43593439656",
+    "id": "gh-run-43715250466",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-14 (14:55 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1794658993785-a4up",
-    "longEpisodeId": "ep-gh-long-1794659015037-oos4",
-    "shortEpisodeTitle": "Noreen Kids: الطبيبة نورين وتحدي طاقة الخضار السحرية | مغامرات الطبيبة نورين وأرنوب",
-    "longEpisodeTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر نهر الكوثر الجميل | مغامرات الشيخ محمود والديك الفصيح",
-    "shortTitle": "Noreen Kids: الطبيبة نورين وتحدي طاقة الخضار السحرية | مغامرات الطبيبة نورين وأرنوب",
-    "longTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر نهر الكوثر الجميل | مغامرات الشيخ محمود والديك الفصيح",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-15 (15:14 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1794746806852-fgqz",
+    "longEpisodeId": "ep-gh-long-1794747046053-0d8y",
+    "shortEpisodeTitle": "Noreen Kids: جنى وبلبل وسر إنقاذ مسبار زحل الشجاع | مغامرات جنى وبلبل",
+    "longEpisodeTitle": "Noreen Kids: شوشو ومرجان وسر ابتسامة قنديل البحر الخجول | مغامرات شوشو ومرجان",
+    "shortTitle": "Noreen Kids: جنى وبلبل وسر إنقاذ مسبار زحل الشجاع | مغامرات جنى وبلبل",
+    "longTitle": "Noreen Kids: شوشو ومرجان وسر ابتسامة قنديل البحر الخجول | مغامرات شوشو ومرجان",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2758,14 +2746,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "1ZI3q6V8VTY",
-    "youtubeLongVideoId": "L3RTbozGJjE",
-    "facebookShortVideoId": "1171893828502983",
-    "facebookLongVideoId": "1033712663090649",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1171893828502983",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1033712663090649",
-    "facebookShortTitle": "Noreen Kids | الطبيبة نورين وتحدي طاقة الخضار السحرية - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
-    "facebookLongTitle": "Noreen Kids | الشيخ محمود والديك الفصيح وسر نهر الكوثر الجميل - مغامرة الشيخ محمود والديك الفصيح",
+    "youtubeShortVideoId": "yNDUjiaI_Vk",
+    "youtubeLongVideoId": "UKYi-osxrLk",
+    "facebookShortVideoId": "1695171808693027",
+    "facebookLongVideoId": "1106810255518585",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1695171808693027",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1106810255518585",
+    "facebookShortTitle": "Noreen Kids | جنى وبلبل وسر إنقاذ مسبار زحل الشجاع - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
+    "facebookLongTitle": "Noreen Kids | شوشو ومرجان وسر ابتسامة قنديل البحر الخجول - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2780,9 +2768,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 352,
-      "fileSizeBytes": 47940895,
-      "inspectedAt": "14:55"
+      "durationSec": 335,
+      "fileSizeBytes": 43117445,
+      "inspectedAt": "15:14"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2791,7 +2779,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-14T12:55:03.103Z"
+    "reportedAtIso": "2026-11-15T13:14:45.820Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
