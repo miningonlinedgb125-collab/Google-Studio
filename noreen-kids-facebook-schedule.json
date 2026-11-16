@@ -2703,6 +2703,16 @@
     {
       "topic": "ملك ولوليتا في مهمة إنقاذ صديق المدرسة",
       "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "سدرة والفراشة وسر بناء البرج السحري المتين",
+      "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "ملك ولوليتا في مهمة إنقاذ صديق المدرسة",
+      "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا",
       "timestampIso": "2026-11-16T13:46:55.687Z"
     },
@@ -2865,28 +2875,6 @@
       "mainCharacterName": "أم ملك",
       "companionName": "البطريق المرح",
       "timestampIso": "2026-11-12T21:52:23.051Z"
-    },
-    {
-      "topic": "سدرة والفراشة ولغز خروف المزرعة الضايع",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة"
-    },
-    {
-      "topic": "ملك ولوليتا وسر إنقاذ عم توفيق في الحديقة",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا"
-    },
-    {
-      "topic": "سدرة والفراشة ولغز خروف المزرعة الضايع",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "timestampIso": "2026-11-12T13:51:33.956Z"
-    },
-    {
-      "topic": "ملك ولوليتا وسر إنقاذ عم توفيق في الحديقة",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "timestampIso": "2026-11-12T13:51:33.956Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-15 · 22:51 بتوقيت مصر",
