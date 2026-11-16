@@ -37,6 +37,16 @@
     {
       "topic": "ملك ولوليتا في مهمة إنقاذ صديق المدرسة",
       "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "سدرة والفراشة وسر بناء البرج السحري المتين",
+      "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "ملك ولوليتا في مهمة إنقاذ صديق المدرسة",
+      "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا",
       "timestampIso": "2026-11-16T13:46:55.687Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "أم ملك",
       "companionName": "البطريق المرح",
       "timestampIso": "2026-11-12T21:52:23.051Z"
-    },
-    {
-      "topic": "سدرة والفراشة ولغز خروف المزرعة الضايع",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة"
-    },
-    {
-      "topic": "ملك ولوليتا وسر إنقاذ عم توفيق في الحديقة",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا"
-    },
-    {
-      "topic": "سدرة والفراشة ولغز خروف المزرعة الضايع",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "timestampIso": "2026-11-12T13:51:33.956Z"
-    },
-    {
-      "topic": "ملك ولوليتا وسر إنقاذ عم توفيق في الحديقة",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "timestampIso": "2026-11-12T13:51:33.956Z"
     }
   ],
   "scheduledHistory": [
@@ -2740,16 +2728,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "١٦‏/١١‏/٢٠٢٦، ٤:٠٤:٤٩ م",
   "lastCloudRunReport": {
-    "id": "gh-run-43715250466",
+    "id": "gh-run-43877509780",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-15 (15:14 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1794746806852-fgqz",
-    "longEpisodeId": "ep-gh-long-1794747046053-0d8y",
-    "shortEpisodeTitle": "Noreen Kids: جنى وبلبل وسر إنقاذ مسبار زحل الشجاع | مغامرات جنى وبلبل",
-    "longEpisodeTitle": "Noreen Kids: شوشو ومرجان وسر ابتسامة قنديل البحر الخجول | مغامرات شوشو ومرجان",
-    "shortTitle": "Noreen Kids: جنى وبلبل وسر إنقاذ مسبار زحل الشجاع | مغامرات جنى وبلبل",
-    "longTitle": "Noreen Kids: شوشو ومرجان وسر ابتسامة قنديل البحر الخجول | مغامرات شوشو ومرجان",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-16 (16:04 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1794836325900-ass0",
+    "longEpisodeId": "ep-gh-long-1794836815687-jz3t",
+    "shortEpisodeTitle": "Noreen Kids: ملك ولوليتا في مهمة إنقاذ صديق المدرسة | مغامرات الطبيبة ملك والقطة لوليتا",
+    "longEpisodeTitle": "Noreen Kids: سدرة والفراشة وسر بناء البرج السحري المتين | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "shortTitle": "Noreen Kids: ملك ولوليتا في مهمة إنقاذ صديق المدرسة | مغامرات الطبيبة ملك والقطة لوليتا",
+    "longTitle": "Noreen Kids: سدرة والفراشة وسر بناء البرج السحري المتين | مغامرات سدرة الصغنونة والفراشة الملونة",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2758,14 +2746,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "yNDUjiaI_Vk",
-    "youtubeLongVideoId": "UKYi-osxrLk",
-    "facebookShortVideoId": "1695171808693027",
-    "facebookLongVideoId": "1106810255518585",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1695171808693027",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1106810255518585",
-    "facebookShortTitle": "Noreen Kids | جنى وبلبل وسر إنقاذ مسبار زحل الشجاع - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
-    "facebookLongTitle": "Noreen Kids | شوشو ومرجان وسر ابتسامة قنديل البحر الخجول - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
+    "youtubeShortVideoId": "8pm0R1rYlfI",
+    "youtubeLongVideoId": "HY91OZ0dw2k",
+    "facebookShortVideoId": "1153495640462972",
+    "facebookLongVideoId": "1926258055206449",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1153495640462972",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1926258055206449",
+    "facebookShortTitle": "Noreen Kids | ملك ولوليتا في مهمة إنقاذ صديق المدرسة - مغامرة ملك والقطة لوليتا",
+    "facebookLongTitle": "Noreen Kids | سدرة والفراشة وسر بناء البرج السحري المتين - مغامرة سدرة الصغنونة والفراشة الملونة",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2780,9 +2768,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 335,
-      "fileSizeBytes": 43117445,
-      "inspectedAt": "15:14"
+      "durationSec": 310,
+      "fileSizeBytes": 36469473,
+      "inspectedAt": "16:04"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2791,7 +2779,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-15T13:14:45.820Z"
+    "reportedAtIso": "2026-11-16T14:04:53.480Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
