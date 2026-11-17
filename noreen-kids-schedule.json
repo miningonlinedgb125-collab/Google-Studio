@@ -37,6 +37,16 @@
     {
       "topic": "سر بركة مربى الفراولة اللذيذة مع تيتة وباندا",
       "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا"
+    },
+    {
+      "topic": "تختوخ وزقلط وسر كرتونة الألعاب العجيبة",
+      "mainCharacterName": "تختوخ",
+      "companionName": "الكلب زقلط"
+    },
+    {
+      "topic": "سر بركة مربى الفراولة اللذيذة مع تيتة وباندا",
+      "mainCharacterName": "تيتة",
       "companionName": "الدب باندا",
       "timestampIso": "2026-11-17T23:12:28.316Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "الشيخ محمود",
       "companionName": "الديك الفصيح",
       "timestampIso": "2026-11-14T12:23:35.037Z"
-    },
-    {
-      "topic": "تختوخ وزقلط: مهمة إطعام قطط الحارة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط"
-    },
-    {
-      "topic": "تيتة والدب باندا وسر الشوربة الدافية السحرية",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
-    },
-    {
-      "topic": "تختوخ وزقلط: مهمة إطعام قطط الحارة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط",
-      "timestampIso": "2026-11-13T21:28:22.982Z"
-    },
-    {
-      "topic": "تيتة والدب باندا وسر الشوربة الدافية السحرية",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "timestampIso": "2026-11-13T21:28:22.982Z"
     }
   ],
   "scheduledHistory": [
