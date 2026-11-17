@@ -2703,6 +2703,16 @@
     {
       "topic": "سر بركة مربى الفراولة اللذيذة مع تيتة وباندا",
       "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا"
+    },
+    {
+      "topic": "تختوخ وزقلط وسر كرتونة الألعاب العجيبة",
+      "mainCharacterName": "تختوخ",
+      "companionName": "الكلب زقلط"
+    },
+    {
+      "topic": "سر بركة مربى الفراولة اللذيذة مع تيتة وباندا",
+      "mainCharacterName": "تيتة",
       "companionName": "الدب باندا",
       "timestampIso": "2026-11-17T23:12:28.316Z"
     },
@@ -2865,43 +2875,21 @@
       "mainCharacterName": "الشيخ محمود",
       "companionName": "الديك الفصيح",
       "timestampIso": "2026-11-14T12:23:35.037Z"
-    },
-    {
-      "topic": "تختوخ وزقلط: مهمة إطعام قطط الحارة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط"
-    },
-    {
-      "topic": "تيتة والدب باندا وسر الشوربة الدافية السحرية",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
-    },
-    {
-      "topic": "تختوخ وزقلط: مهمة إطعام قطط الحارة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط",
-      "timestampIso": "2026-11-13T21:28:22.982Z"
-    },
-    {
-      "topic": "تيتة والدب باندا وسر الشوربة الدافية السحرية",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "timestampIso": "2026-11-13T21:28:22.982Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-17 · 16:48 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-43981779409",
+    "id": "gh-run-44194083113",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-17 (02:11 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1794872829866-f3db",
-    "longEpisodeId": "ep-gh-long-1794872856573-pwm7",
-    "shortEpisodeTitle": "Noreen Kids: رحلة تجهيز الحقيبة وسر النشاط الصباحي | مغامرات أم ملك والبطريق المرح",
-    "longEpisodeTitle": "Noreen Kids: ذياد والعصفورة الفرفوشة ومساعدة عم إبراهيم | مغامرات ذياد والعصفورة الفرفوشة",
-    "shortTitle": "Noreen Kids: رحلة تجهيز الحقيبة وسر النشاط الصباحي | مغامرات أم ملك والبطريق المرح",
-    "longTitle": "Noreen Kids: ذياد والعصفورة الفرفوشة ومساعدة عم إبراهيم | مغامرات ذياد والعصفورة الفرفوشة",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-18 (01:38 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1794956730797-71sn",
+    "longEpisodeId": "ep-gh-long-1794957148316-qo4t",
+    "shortEpisodeTitle": "Noreen Kids: سر بركة مربى الفراولة اللذيذة مع تيتة وباندا | مغامرات تيتة والدب باندا",
+    "longEpisodeTitle": "Noreen Kids: تختوخ وزقلط وسر كرتونة الألعاب العجيبة | مغامرات تختوخ والكلب زقلط",
+    "shortTitle": "Noreen Kids: سر بركة مربى الفراولة اللذيذة مع تيتة وباندا | مغامرات تيتة والدب باندا",
+    "longTitle": "Noreen Kids: تختوخ وزقلط وسر كرتونة الألعاب العجيبة | مغامرات تختوخ والكلب زقلط",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2910,14 +2898,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "aG3bcN6B-RA",
-    "youtubeLongVideoId": "IdnylGoEylQ",
-    "facebookShortVideoId": "1580394570438728",
-    "facebookLongVideoId": "1118559727714041",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1580394570438728",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1118559727714041",
-    "facebookShortTitle": "Noreen Kids | رحلة تجهيز الحقيبة وسر النشاط الصباحي - مغامرة أم ملك والبطريق المرح",
-    "facebookLongTitle": "Noreen Kids | ذياد والعصفورة الفرفوشة ومساعدة عم إبراهيم - مغامرة ذياد والعصفورة الفرفوشة",
+    "youtubeShortVideoId": "FrUK3_MkKds",
+    "youtubeLongVideoId": "rV8hn68ZhnU",
+    "facebookShortVideoId": "1663941978722163",
+    "facebookLongVideoId": "1451720869732829",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1663941978722163",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1451720869732829",
+    "facebookShortTitle": "Noreen Kids | سر بركة مربى الفراولة اللذيذة مع تيتة وباندا - مغامرة تيتة والدب باندا",
+    "facebookLongTitle": "Noreen Kids | تختوخ وزقلط وسر كرتونة الألعاب العجيبة - مغامرة تختوخ والكلب زقلط",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2932,9 +2920,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 401,
-      "fileSizeBytes": 45109740,
-      "inspectedAt": "02:11"
+      "durationSec": 345,
+      "fileSizeBytes": 43065016,
+      "inspectedAt": "01:38"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2943,7 +2931,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-17T00:11:49.709Z"
+    "reportedAtIso": "2026-11-17T23:38:24.376Z"
   },
   "heroFairRotationIndex": 15,
   "interactiveHeroRotationIndex": 5,
