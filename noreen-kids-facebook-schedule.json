@@ -2703,6 +2703,16 @@
     {
       "topic": "سر سورة الإخلاص مع الشيخ محمود والديك الفصيح",
       "mainCharacterName": "الشيخ محمود",
+      "companionName": "الديك الفصيح"
+    },
+    {
+      "topic": "الطبيبة نورين وإنقاذ جناج العصفور الصغير",
+      "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "سر سورة الإخلاص مع الشيخ محمود والديك الفصيح",
+      "mainCharacterName": "الشيخ محمود",
       "companionName": "الديك الفصيح",
       "timestampIso": "2026-11-18T14:10:40.511Z"
     },
@@ -2865,28 +2875,6 @@
       "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي",
       "timestampIso": "2026-11-14T19:57:23.638Z"
-    },
-    {
-      "topic": "الطبيبة نورين وتحدي طاقة الخضار السحرية",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "الشيخ محمود والديك الفصيح وسر نهر الكوثر الجميل",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح"
-    },
-    {
-      "topic": "الطبيبة نورين وتحدي طاقة الخضار السحرية",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-11-14T12:23:35.037Z"
-    },
-    {
-      "topic": "الشيخ محمود والديك الفصيح وسر نهر الكوثر الجميل",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح",
-      "timestampIso": "2026-11-14T12:23:35.037Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-18 · 01:38 بتوقيت مصر",
