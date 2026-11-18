@@ -68,6 +68,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122127777135484976",
+      "photoId": "122127777111484976",
+      "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع دكتورة نورين وأرنوب",
+      "title": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع دكتورة نورين وأرنوب",
+      "caption": "✨ مين أسرع بطل هيعد كل النجوم الذهبية في الصورة؟ ✨\nدكتورة نورين وأرنوب بيجهزوا لحكاية جديدة، والنجوم اللامعة بتنور طريقهم! 🌟\nيلا يا شطار يا حلوين.. عدّوا النجوم مع ماما واكتبوا لنا العدد المظبوط في تعليق! 👀🔢\n👇 اكتبوا الحل واسم البطل عشان نوجهله تحية خاصة بالاسم في الحلقة القادمة! 🎬💖\n🔔 شير للتحدي ومتابعة لصفحة Noreen Kids لمزيد من الألعاب المفيدة! 👍\n#نورين_كيدز #Noreen_Kids #فوازير_أطفال #تحدي_الشطار #أمهات_مصر",
+      "heroName": "دكتورة نورين",
+      "companionName": "أرنوب",
+      "publishedAtCairo": "2026-11-18 · 16:34 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122127777135484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122127773775484976",
       "photoId": "122127773745484976",
       "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع الشيخ محمود والديك الفصيح",
@@ -534,18 +546,6 @@
       "publishedAtCairo": "2026-11-08 · 21:45 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122124694035484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122124599463484976",
-      "photoId": "122124599439484976",
-      "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع سدرة الصغنونة والفراشة الملونة",
-      "title": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع سدرة الصغنونة والفراشة الملونة",
-      "caption": "✨ مين أسرع بطل هيعد كل النجوم الذهبية في الصورة؟ ✨\nسدرة الصغنونة والفراشة الملونة بيجهزوا لحكاية جديدة، والنجوم اللامعة بتنور طريقهم! 🌟\nيلا يا شطار يا حلوين.. عدّوا النجوم مع ماما واكتبوا لنا العدد المظبوط في تعليق! 👀🔢\n👇 اكتبوا الحل واسم البطل عشان نوجهله تحية خاصة بالاسم في الحلقة القادمة! 🎬💖\n🔔 شير للتحدي ومتابعة لصفحة Noreen Kids لمزيد من الألعاب المفيدة! 👍\n#نورين_كيدز #Noreen_Kids #فوازير_أطفال #تحدي_الشطار #أمهات_مصر",
-      "heroName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "publishedAtCairo": "2026-11-08 · 14:22 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122124599463484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -809,14 +809,15 @@
       "id": "gh-run-44318797176",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-18 (16:17 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-18 (16:37 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1795010983060-gx4d",
       "longEpisodeId": "ep-gh-long-1795011040511-wkhq",
       "shortEpisodeTitle": "Noreen Kids: سر سورة الإخلاص مع الشيخ محمود والديك الفصيح | مغامرات الشيخ محمود والديك الفصيح",
-      "longEpisodeTitle": "الطبيبة نورين وإنقاذ جناج العصفور الصغير",
+      "longEpisodeTitle": "Noreen Kids: الطبيبة نورين وإنقاذ جناج العصفور الصغير | مغامرات الطبيبة نورين وأرنوب",
       "shortTitle": "Noreen Kids: سر سورة الإخلاص مع الشيخ محمود والديك الفصيح | مغامرات الشيخ محمود والديك الفصيح",
-      "longTitle": "الطبيبة نورين وإنقاذ جناج العصفور الصغير",
+      "longTitle": "Noreen Kids: الطبيبة نورين وإنقاذ جناج العصفور الصغير | مغامرات الطبيبة نورين وأرنوب",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -824,9 +825,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "ZMyg6uY6gxM",
+      "youtubeLongVideoId": "ztmgZ47qDa0",
       "facebookShortVideoId": "1587622396501486",
+      "facebookLongVideoId": "1601500371662048",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1587622396501486",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1601500371662048",
       "facebookShortTitle": "Noreen Kids | سر سورة الإخلاص مع الشيخ محمود والديك الفصيح - مغامرة الشيخ محمود والديك الفصيح",
+      "facebookLongTitle": "Noreen Kids | الطبيبة نورين وإنقاذ جناج العصفور الصغير - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -834,16 +839,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 60,
-        "fileSizeBytes": 10013901,
-        "inspectedAt": "16:17"
+        "durationSec": 412,
+        "fileSizeBytes": 45141197,
+        "inspectedAt": "16:37"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
