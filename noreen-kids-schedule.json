@@ -37,6 +37,16 @@
     {
       "topic": "سر سورة الإخلاص مع الشيخ محمود والديك الفصيح",
       "mainCharacterName": "الشيخ محمود",
+      "companionName": "الديك الفصيح"
+    },
+    {
+      "topic": "الطبيبة نورين وإنقاذ جناج العصفور الصغير",
+      "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "سر سورة الإخلاص مع الشيخ محمود والديك الفصيح",
+      "mainCharacterName": "الشيخ محمود",
       "companionName": "الديك الفصيح",
       "timestampIso": "2026-11-18T14:10:40.511Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي",
       "timestampIso": "2026-11-14T19:57:23.638Z"
-    },
-    {
-      "topic": "الطبيبة نورين وتحدي طاقة الخضار السحرية",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "الشيخ محمود والديك الفصيح وسر نهر الكوثر الجميل",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح"
-    },
-    {
-      "topic": "الطبيبة نورين وتحدي طاقة الخضار السحرية",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-11-14T12:23:35.037Z"
-    },
-    {
-      "topic": "الشيخ محمود والديك الفصيح وسر نهر الكوثر الجميل",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح",
-      "timestampIso": "2026-11-14T12:23:35.037Z"
     }
   ],
   "scheduledHistory": [
@@ -2740,16 +2728,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "١٨‏/١١‏/٢٠٢٦، ٤:٣٧:١٣ م",
   "lastCloudRunReport": {
-    "id": "gh-run-44102297221",
+    "id": "gh-run-44318797176",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-17 (16:48 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1794925414255-gtt0",
-    "longEpisodeId": "ep-gh-long-1794925448047-5cij",
-    "shortEpisodeTitle": "Noreen Kids: لعبة الميزان العادل وسر الأمانة في البيع | مغامرات أستاذ شريف والصقر الذكي",
-    "longEpisodeTitle": "Noreen Kids: سر الفانوس الأثري وكلمة الحق الصادقة | مغامرات جدو والفأر المشاكس",
-    "shortTitle": "Noreen Kids: لعبة الميزان العادل وسر الأمانة في البيع | مغامرات أستاذ شريف والصقر الذكي",
-    "longTitle": "Noreen Kids: سر الفانوس الأثري وكلمة الحق الصادقة | مغامرات جدو والفأر المشاكس",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-18 (16:37 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1795010983060-gx4d",
+    "longEpisodeId": "ep-gh-long-1795011040511-wkhq",
+    "shortEpisodeTitle": "Noreen Kids: سر سورة الإخلاص مع الشيخ محمود والديك الفصيح | مغامرات الشيخ محمود والديك الفصيح",
+    "longEpisodeTitle": "Noreen Kids: الطبيبة نورين وإنقاذ جناج العصفور الصغير | مغامرات الطبيبة نورين وأرنوب",
+    "shortTitle": "Noreen Kids: سر سورة الإخلاص مع الشيخ محمود والديك الفصيح | مغامرات الشيخ محمود والديك الفصيح",
+    "longTitle": "Noreen Kids: الطبيبة نورين وإنقاذ جناج العصفور الصغير | مغامرات الطبيبة نورين وأرنوب",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2758,14 +2746,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "9Zmn_bJ7BVQ",
-    "youtubeLongVideoId": "uqzKJi8iZuc",
-    "facebookShortVideoId": "1512485634033078",
-    "facebookLongVideoId": "1799782974575788",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1512485634033078",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1799782974575788",
-    "facebookShortTitle": "Noreen Kids | لعبة الميزان العادل وسر الأمانة في البيع - مغامرة أستاذ شريف والصقر الذكي",
-    "facebookLongTitle": "Noreen Kids | سر الفانوس الأثري وكلمة الحق الصادقة - مغامرة جدو والفأر المشاكس",
+    "youtubeShortVideoId": "ZMyg6uY6gxM",
+    "youtubeLongVideoId": "ztmgZ47qDa0",
+    "facebookShortVideoId": "1587622396501486",
+    "facebookLongVideoId": "1601500371662048",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1587622396501486",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1601500371662048",
+    "facebookShortTitle": "Noreen Kids | سر سورة الإخلاص مع الشيخ محمود والديك الفصيح - مغامرة الشيخ محمود والديك الفصيح",
+    "facebookLongTitle": "Noreen Kids | الطبيبة نورين وإنقاذ جناج العصفور الصغير - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2780,9 +2768,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 375,
-      "fileSizeBytes": 45980058,
-      "inspectedAt": "16:48"
+      "durationSec": 412,
+      "fileSizeBytes": 45141197,
+      "inspectedAt": "16:37"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2791,7 +2779,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-17T14:48:56.533Z"
+    "reportedAtIso": "2026-11-18T14:37:18.068Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
