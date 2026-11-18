@@ -2703,6 +2703,16 @@
     {
       "topic": "عمرو وزعتر في إنقاذ وادي الفراشات الذهبية",
       "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي"
+    },
+    {
+      "topic": "نوران والنمر الفرفوش وسر قلعة الكريستال القوية",
+      "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "عمرو وزعتر في إنقاذ وادي الفراشات الذهبية",
+      "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي",
       "timestampIso": "2026-11-18T22:46:44.177Z"
     },
@@ -2865,43 +2875,21 @@
       "mainCharacterName": "شوشو القبطان الصغير",
       "companionName": "مرجان الدلفين المرح",
       "timestampIso": "2026-11-15T12:50:46.053Z"
-    },
-    {
-      "topic": "المهندسة نوران وجسر قوس قزح في مدينة السحاب",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "عمرو وزعتر: إنقاذ غزال الوادي المفقود",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي"
-    },
-    {
-      "topic": "المهندسة نوران وجسر قوس قزح في مدينة السحاب",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-11-14T19:57:23.638Z"
-    },
-    {
-      "topic": "عمرو وزعتر: إنقاذ غزال الوادي المفقود",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "timestampIso": "2026-11-14T19:57:23.638Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-18 · 16:37 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-44194083113",
+    "id": "gh-run-44412931019",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-18 (01:38 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1794956730797-71sn",
-    "longEpisodeId": "ep-gh-long-1794957148316-qo4t",
-    "shortEpisodeTitle": "Noreen Kids: سر بركة مربى الفراولة اللذيذة مع تيتة وباندا | مغامرات تيتة والدب باندا",
-    "longEpisodeTitle": "Noreen Kids: تختوخ وزقلط وسر كرتونة الألعاب العجيبة | مغامرات تختوخ والكلب زقلط",
-    "shortTitle": "Noreen Kids: سر بركة مربى الفراولة اللذيذة مع تيتة وباندا | مغامرات تيتة والدب باندا",
-    "longTitle": "Noreen Kids: تختوخ وزقلط وسر كرتونة الألعاب العجيبة | مغامرات تختوخ والكلب زقلط",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-19 (01:15 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1795041384559-u5hy",
+    "longEpisodeId": "ep-gh-long-1795042004177-bvth",
+    "shortEpisodeTitle": "Noreen Kids: عمرو وزعتر في إنقاذ وادي الفراشات الذهبية | مغامرات عمرو وزعتر",
+    "longEpisodeTitle": "Noreen Kids: نوران والنمر الفرفوش وسر قلعة الكريستال القوية | مغامرات المهندسة نوران والنمر الفرفوش",
+    "shortTitle": "Noreen Kids: عمرو وزعتر في إنقاذ وادي الفراشات الذهبية | مغامرات عمرو وزعتر",
+    "longTitle": "Noreen Kids: نوران والنمر الفرفوش وسر قلعة الكريستال القوية | مغامرات المهندسة نوران والنمر الفرفوش",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2910,14 +2898,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "FrUK3_MkKds",
-    "youtubeLongVideoId": "rV8hn68ZhnU",
-    "facebookShortVideoId": "1663941978722163",
-    "facebookLongVideoId": "1451720869732829",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1663941978722163",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1451720869732829",
-    "facebookShortTitle": "Noreen Kids | سر بركة مربى الفراولة اللذيذة مع تيتة وباندا - مغامرة تيتة والدب باندا",
-    "facebookLongTitle": "Noreen Kids | تختوخ وزقلط وسر كرتونة الألعاب العجيبة - مغامرة تختوخ والكلب زقلط",
+    "youtubeShortVideoId": "qnW7MLlT2K0",
+    "youtubeLongVideoId": "8rykrI2fXuA",
+    "facebookShortVideoId": "1115322897958219",
+    "facebookLongVideoId": "1166278035778761",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1115322897958219",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1166278035778761",
+    "facebookShortTitle": "Noreen Kids | عمرو وزعتر في إنقاذ وادي الفراشات الذهبية - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
+    "facebookLongTitle": "Noreen Kids | نوران والنمر الفرفوش وسر قلعة الكريستال القوية - مغامرة المهندسة نوران والنمر الفرفوش",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2932,9 +2920,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 345,
-      "fileSizeBytes": 43065016,
-      "inspectedAt": "01:38"
+      "durationSec": 400,
+      "fileSizeBytes": 47657779,
+      "inspectedAt": "01:15"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2943,7 +2931,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-17T23:38:24.376Z"
+    "reportedAtIso": "2026-11-18T23:15:16.242Z"
   },
   "heroFairRotationIndex": 3,
   "interactiveHeroRotationIndex": 5,
