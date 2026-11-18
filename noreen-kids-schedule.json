@@ -37,6 +37,16 @@
     {
       "topic": "عمرو وزعتر في إنقاذ وادي الفراشات الذهبية",
       "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي"
+    },
+    {
+      "topic": "نوران والنمر الفرفوش وسر قلعة الكريستال القوية",
+      "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "عمرو وزعتر في إنقاذ وادي الفراشات الذهبية",
+      "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي",
       "timestampIso": "2026-11-18T22:46:44.177Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "شوشو القبطان الصغير",
       "companionName": "مرجان الدلفين المرح",
       "timestampIso": "2026-11-15T12:50:46.053Z"
-    },
-    {
-      "topic": "المهندسة نوران وجسر قوس قزح في مدينة السحاب",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "عمرو وزعتر: إنقاذ غزال الوادي المفقود",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي"
-    },
-    {
-      "topic": "المهندسة نوران وجسر قوس قزح في مدينة السحاب",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-11-14T19:57:23.638Z"
-    },
-    {
-      "topic": "عمرو وزعتر: إنقاذ غزال الوادي المفقود",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "timestampIso": "2026-11-14T19:57:23.638Z"
     }
   ],
   "scheduledHistory": [
