@@ -68,6 +68,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122128158801484976",
+      "photoId": "122128158777484976",
+      "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع كارمن وسمسم",
+      "title": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع كارمن وسمسم",
+      "caption": "يا أحلى مامي ويا أشطر أبطال في الدنيا.. جه وقت التحدي الممتع مع \"كارمن\" وصديقه \"سمسم\"! 🌟🔍\n\n✨ ركّزوا كويس أوي مع كتاكيتكم في الصورة، ودوروا على النجوم الدهبية اللي بتلمع.. يا ترى شطارة وسرعة ملاحظة بطلكم هتعرف تعد في كام نجمة مستخبية بالظبط؟ ⭐️👀\n\n📝 اكتبولنا العدد المظبوط مع \"اسم طفلكم الجميل\" في الكومنتات، عشان كارمن وسمسم هيحيّوا أبطالنا الشطار بالاسم في حلقة بكرة! 🎬🥳\n\n🔔 متنسوش تدوسوا متابعة لصفحتنا وتفعلوا الجرس وشيروا البوست مع كل الماميز وأصحابكم عشان يشاركونا التحدي! 💖🚀\n.\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
+      "heroName": "كارمن",
+      "companionName": "سمسم",
+      "publishedAtCairo": "2026-11-20 · 01:04 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122128158801484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122128156119484976",
       "photoId": "122128156095484976",
       "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع تامر وكركور",
@@ -534,18 +546,6 @@
       "publishedAtCairo": "2026-11-10 · 15:56 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122125249311484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122125069857484976",
-      "photoId": "122125069833484976",
-      "themeTitle": "تحدي الصورة المختلفة (من 1 إلى 4) مع تختوخ والكلب زقلط",
-      "title": "تحدي الصورة المختلفة (من 1 إلى 4) مع تختوخ والكلب زقلط",
-      "caption": "يا هلا بكل مامي وكل بطل وبطلة من حبايبنا! تختوخ وصاحبه الوفي الكلب \"زقلط\" محتارين النهاردة ومحتاجين قوة ملاحظة أبطالنا الشطار 🕵️‍♂️🐶\n\n🔍 قدامكم 4 صور للبطل تختوخ.. فيهم 3 صور شبه بعض بالملّي، وصورة واحدة بس مختلفة ومستخبية! يا ترى فين الشاطر اللي هيعرف رقم الصورة المختلفة؟ [ 1 ، 2 ، 3 ، 4 ]؟ 🤔💡\n\n🎉 اكتبوا لنا الحل الصح واسم بطلكم الجميل في التعليقات، عشان تختوخ والكلب زقلط يحيّوه بالاسم ويسقفوا له في حلقة بكرة! 👏🥳\n\n🔔 متنسوش تدوسوا متابعة للصفحة وتشغلوا الجرس 🔔 واعملوا شير للبوست عشان نتحدى كل صحابنا الأذكياء! 🚀❤️\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
-      "heroName": "تختوخ",
-      "companionName": "الكلب زقلط",
-      "publishedAtCairo": "2026-11-10 · 02:18 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122125069857484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -809,14 +809,15 @@
       "id": "gh-run-44630619101",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-20 (00:50 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-20 (01:09 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1795128166060-m62x",
       "longEpisodeId": "ep-gh-long-1795128360428-8ong",
       "shortEpisodeTitle": "Noreen Kids: تامر وكركور وسر الساعة الرملية في واحة الكريستال | مغامرات تامر وكركور",
-      "longEpisodeTitle": "كارمن وسمسم وسر جهاز تحلية مياه الورد الذكي",
+      "longEpisodeTitle": "Noreen Kids: كارمن وسمسم وسر جهاز تحلية مياه الورد الذكي | مغامرات كارمن وسمسم",
       "shortTitle": "Noreen Kids: تامر وكركور وسر الساعة الرملية في واحة الكريستال | مغامرات تامر وكركور",
-      "longTitle": "كارمن وسمسم وسر جهاز تحلية مياه الورد الذكي",
+      "longTitle": "Noreen Kids: كارمن وسمسم وسر جهاز تحلية مياه الورد الذكي | مغامرات كارمن وسمسم",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -824,9 +825,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "qRftGZh7BoE",
+      "youtubeLongVideoId": "M2kVGVrWgn8",
       "facebookShortVideoId": "29044234478582389",
+      "facebookLongVideoId": "1753062325763711",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/29044234478582389",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1753062325763711",
       "facebookShortTitle": "Noreen Kids | تامر وكركور وسر الساعة الرملية في واحة الكريستال - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
+      "facebookLongTitle": "Noreen Kids | كارمن وسمسم وسر جهاز تحلية مياه الورد الذكي - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -834,16 +839,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 60,
-        "fileSizeBytes": 11754537,
-        "inspectedAt": "00:50"
+        "durationSec": 354,
+        "fileSizeBytes": 52722401,
+        "inspectedAt": "01:09"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
