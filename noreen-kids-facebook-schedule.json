@@ -68,6 +68,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122128065441484976",
+      "photoId": "122128065417484976",
+      "themeTitle": "تحدي الصورة المختلفة (من 1 إلى 4) مع جنى وبلبل",
+      "title": "تحدي الصورة المختلفة (من 1 إلى 4) مع جنى وبلبل",
+      "caption": "🔍 تحدي قوة الملاحظة السريعة مع جنى وبلبل! 🌟\nأبطالنا الشطار وأمهاتنا الغاليين.. بصوا كويس جداً على الصور الـ 4 المرقمة [ 1 ، 2 ، 3 ، 4 ]! 👀✨\nفيه 3 صور متطابقين تماماً.. وصورة واحدة بس هي اللي مختلفة وفيها تفصيلة ذكية! 🕵️‍♂️💡\nمين أشطر بطل أو بطلة هيعرف يكتشف رقم الصورة المختلفة؟ 🤔\n1️⃣ اكتبوا رقم الصورة المختلفة في تعليق 👇\n2️⃣ واكتبوا اسم طفلكم الشاطر علشان جنى وبلبل يحيوه بالاسم ويبعتوله وسام الشطارة! 🏅🎬\n🔔 متنسوش متابعة صفحتنا Noreen Kids لتحديات يومية ممتعة! 👍💖\n#نورين_كيدز #Noreen_Kids #تحدي_الشطار #أبطال_نورين_كيدز #ذكاء_الأطفال #أمهات_مصر",
+      "heroName": "جنى",
+      "companionName": "بلبل",
+      "publishedAtCairo": "2026-11-19 · 16:49 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122128065441484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122128062357484976",
       "photoId": "122128062333484976",
       "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع شوشو ومرجان",
@@ -534,18 +546,6 @@
       "publishedAtCairo": "2026-11-10 · 01:56 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122125067055484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122124955113484976",
-      "photoId": "122124955089484976",
-      "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع جدو والفأر المشاكس",
-      "title": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع جدو والفأر المشاكس",
-      "caption": "✨ مين أسرع بطل هيعد كل النجوم الذهبية في الصورة؟ ✨\nجدو والفأر المشاكس بيجهزوا لحكاية جديدة، والنجوم اللامعة بتنور طريقهم! 🌟\nيلا يا شطار يا حلوين.. عدّوا النجوم مع ماما واكتبوا لنا العدد المظبوط في تعليق! 👀🔢\n👇 اكتبوا الحل واسم البطل عشان نوجهله تحية خاصة بالاسم في الحلقة القادمة! 🎬💖\n🔔 شير للتحدي ومتابعة لصفحة Noreen Kids لمزيد من الألعاب المفيدة! 👍\n#نورين_كيدز #Noreen_Kids #فوازير_أطفال #تحدي_الشطار #أمهات_مصر",
-      "heroName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "publishedAtCairo": "2026-11-09 · 16:31 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122124955113484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -809,14 +809,15 @@
       "id": "gh-run-44543408719",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-19 (16:36 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-19 (16:51 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1795098394403-knec",
       "longEpisodeId": "ep-gh-long-1795098414274-8lbm",
       "shortEpisodeTitle": "Noreen Kids: شوشو ومرجان ينقذان الحوت من شبكة الصيادين | مغامرات شوشو ومرجان",
-      "longEpisodeTitle": "جنى وبلبل وإنقاذ ضوء قمر الكريستال المظلم",
+      "longEpisodeTitle": "Noreen Kids: جنى وبلبل وإنقاذ ضوء قمر الكريستال المظلم | مغامرات جنى وبلبل",
       "shortTitle": "Noreen Kids: شوشو ومرجان ينقذان الحوت من شبكة الصيادين | مغامرات شوشو ومرجان",
-      "longTitle": "جنى وبلبل وإنقاذ ضوء قمر الكريستال المظلم",
+      "longTitle": "Noreen Kids: جنى وبلبل وإنقاذ ضوء قمر الكريستال المظلم | مغامرات جنى وبلبل",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -824,9 +825,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "RzP9HyMKch4",
+      "youtubeLongVideoId": "sb8PdrNfUL4",
       "facebookShortVideoId": "990867900276639",
+      "facebookLongVideoId": "2005422290129162",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/990867900276639",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2005422290129162",
       "facebookShortTitle": "Noreen Kids | شوشو ومرجان ينقذان الحوت من شبكة الصيادين - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
+      "facebookLongTitle": "Noreen Kids | جنى وبلبل وإنقاذ ضوء قمر الكريستال المظلم - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -834,16 +839,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 60,
-        "fileSizeBytes": 9688842,
-        "inspectedAt": "16:36"
+        "durationSec": 355,
+        "fileSizeBytes": 44658852,
+        "inspectedAt": "16:51"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
