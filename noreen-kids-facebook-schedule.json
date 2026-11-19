@@ -2703,6 +2703,16 @@
     {
       "topic": "تامر وكركور وسر الساعة الرملية في واحة الكريستال",
       "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم"
+    },
+    {
+      "topic": "كارمن وسمسم وسر جهاز تحلية مياه الورد الذكي",
+      "mainCharacterName": "كارمن المخترعة الصغيرة",
+      "companionName": "سمسم السنجاب الطائر"
+    },
+    {
+      "topic": "تامر وكركور وسر الساعة الرملية في واحة الكريستال",
+      "mainCharacterName": "تامر فارس الواحة",
       "companionName": "كركور الببغاء الحكيم",
       "timestampIso": "2026-11-19T22:46:00.428Z"
     },
@@ -2865,43 +2875,21 @@
       "mainCharacterName": "سدرة الصغنونة",
       "companionName": "الفراشة الملونة",
       "timestampIso": "2026-11-16T13:46:55.687Z"
-    },
-    {
-      "topic": "كارمن وسمسم: سر تدوير الورق والرسومات الملونة",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر"
-    },
-    {
-      "topic": "تامر وكركور وشجرة الأمانة الذهبية في الغابة",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم"
-    },
-    {
-      "topic": "كارمن وسمسم: سر تدوير الورق والرسومات الملونة",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر",
-      "timestampIso": "2026-11-15T20:25:46.440Z"
-    },
-    {
-      "topic": "تامر وكركور وشجرة الأمانة الذهبية في الغابة",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم",
-      "timestampIso": "2026-11-15T20:25:46.440Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-19 · 16:51 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-44412931019",
+    "id": "gh-run-44630619101",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-19 (01:15 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1795041384559-u5hy",
-    "longEpisodeId": "ep-gh-long-1795042004177-bvth",
-    "shortEpisodeTitle": "Noreen Kids: عمرو وزعتر في إنقاذ وادي الفراشات الذهبية | مغامرات عمرو وزعتر",
-    "longEpisodeTitle": "Noreen Kids: نوران والنمر الفرفوش وسر قلعة الكريستال القوية | مغامرات المهندسة نوران والنمر الفرفوش",
-    "shortTitle": "Noreen Kids: عمرو وزعتر في إنقاذ وادي الفراشات الذهبية | مغامرات عمرو وزعتر",
-    "longTitle": "Noreen Kids: نوران والنمر الفرفوش وسر قلعة الكريستال القوية | مغامرات المهندسة نوران والنمر الفرفوش",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-20 (01:09 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1795128166060-m62x",
+    "longEpisodeId": "ep-gh-long-1795128360428-8ong",
+    "shortEpisodeTitle": "Noreen Kids: تامر وكركور وسر الساعة الرملية في واحة الكريستال | مغامرات تامر وكركور",
+    "longEpisodeTitle": "Noreen Kids: كارمن وسمسم وسر جهاز تحلية مياه الورد الذكي | مغامرات كارمن وسمسم",
+    "shortTitle": "Noreen Kids: تامر وكركور وسر الساعة الرملية في واحة الكريستال | مغامرات تامر وكركور",
+    "longTitle": "Noreen Kids: كارمن وسمسم وسر جهاز تحلية مياه الورد الذكي | مغامرات كارمن وسمسم",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2910,14 +2898,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "qnW7MLlT2K0",
-    "youtubeLongVideoId": "8rykrI2fXuA",
-    "facebookShortVideoId": "1115322897958219",
-    "facebookLongVideoId": "1166278035778761",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1115322897958219",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1166278035778761",
-    "facebookShortTitle": "Noreen Kids | عمرو وزعتر في إنقاذ وادي الفراشات الذهبية - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
-    "facebookLongTitle": "Noreen Kids | نوران والنمر الفرفوش وسر قلعة الكريستال القوية - مغامرة المهندسة نوران والنمر الفرفوش",
+    "youtubeShortVideoId": "qRftGZh7BoE",
+    "youtubeLongVideoId": "M2kVGVrWgn8",
+    "facebookShortVideoId": "29044234478582389",
+    "facebookLongVideoId": "1753062325763711",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/29044234478582389",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1753062325763711",
+    "facebookShortTitle": "Noreen Kids | تامر وكركور وسر الساعة الرملية في واحة الكريستال - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
+    "facebookLongTitle": "Noreen Kids | كارمن وسمسم وسر جهاز تحلية مياه الورد الذكي - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2932,9 +2920,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 400,
-      "fileSizeBytes": 47657779,
-      "inspectedAt": "01:15"
+      "durationSec": 354,
+      "fileSizeBytes": 52722401,
+      "inspectedAt": "01:09"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2943,7 +2931,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-18T23:15:16.242Z"
+    "reportedAtIso": "2026-11-19T23:09:41.321Z"
   },
   "heroFairRotationIndex": 7,
   "interactiveHeroRotationIndex": 5,
