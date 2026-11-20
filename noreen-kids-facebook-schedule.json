@@ -2703,6 +2703,16 @@
     {
       "topic": "سدرة والفراشة وسر مكعبات البهجة ومشاركة",
       "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "ملك ولوليتا وعملية إنقاذ أرنب الوادي الشجاع",
+      "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "سدرة والفراشة وسر مكعبات البهجة ومشاركة",
+      "mainCharacterName": "سدرة الصغنونة",
       "companionName": "الفراشة الملونة",
       "timestampIso": "2026-11-20T14:02:42.915Z"
     },
@@ -2865,28 +2875,6 @@
       "mainCharacterName": "ذياد",
       "companionName": "العصفورة الفرفوشة",
       "timestampIso": "2026-11-16T23:47:36.573Z"
-    },
-    {
-      "topic": "ملك ولوليتا في مهمة إنقاذ صديق المدرسة",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا"
-    },
-    {
-      "topic": "سدرة والفراشة وسر بناء البرج السحري المتين",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة"
-    },
-    {
-      "topic": "ملك ولوليتا في مهمة إنقاذ صديق المدرسة",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "timestampIso": "2026-11-16T13:46:55.687Z"
-    },
-    {
-      "topic": "سدرة والفراشة وسر بناء البرج السحري المتين",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "timestampIso": "2026-11-16T13:46:55.687Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-20 · 01:09 بتوقيت مصر",
