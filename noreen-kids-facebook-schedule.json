@@ -2703,6 +2703,16 @@
     {
       "topic": "ذياد والعصفورة وإنقاذ الجار في ليلة البرد",
       "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة"
+    },
+    {
+      "topic": "أم ملك ومسابقة المكتبة وتحدي القصص الضائعة",
+      "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح"
+    },
+    {
+      "topic": "ذياد والعصفورة وإنقاذ الجار في ليلة البرد",
+      "mainCharacterName": "ذياد",
       "companionName": "العصفورة الفرفوشة",
       "timestampIso": "2026-11-20T22:18:21.062Z"
     },
@@ -2865,43 +2875,21 @@
       "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس",
       "timestampIso": "2026-11-17T14:24:08.047Z"
-    },
-    {
-      "topic": "رحلة تجهيز الحقيبة وسر النشاط الصباحي",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح"
-    },
-    {
-      "topic": "ذياد والعصفورة الفرفوشة ومساعدة عم إبراهيم",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة"
-    },
-    {
-      "topic": "رحلة تجهيز الحقيبة وسر النشاط الصباحي",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "timestampIso": "2026-11-16T23:47:36.573Z"
-    },
-    {
-      "topic": "ذياد والعصفورة الفرفوشة ومساعدة عم إبراهيم",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة",
-      "timestampIso": "2026-11-16T23:47:36.573Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-20 · 16:24 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-44630619101",
+    "id": "gh-run-44827264967",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-20 (01:09 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1795128166060-m62x",
-    "longEpisodeId": "ep-gh-long-1795128360428-8ong",
-    "shortEpisodeTitle": "Noreen Kids: تامر وكركور وسر الساعة الرملية في واحة الكريستال | مغامرات تامر وكركور",
-    "longEpisodeTitle": "Noreen Kids: كارمن وسمسم وسر جهاز تحلية مياه الورد الذكي | مغامرات كارمن وسمسم",
-    "shortTitle": "Noreen Kids: تامر وكركور وسر الساعة الرملية في واحة الكريستال | مغامرات تامر وكركور",
-    "longTitle": "Noreen Kids: كارمن وسمسم وسر جهاز تحلية مياه الورد الذكي | مغامرات كارمن وسمسم",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-21 (00:38 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1795213061607-tf8y",
+    "longEpisodeId": "ep-gh-long-1795213101062-y8gr",
+    "shortEpisodeTitle": "Noreen Kids: ذياد والعصفورة وإنقاذ الجار في ليلة البرد | مغامرات ذياد والعصفورة الفرفوشة",
+    "longEpisodeTitle": "Noreen Kids: أم ملك ومسابقة المكتبة وتحدي القصص الضائعة | مغامرات أم ملك والبطريق المرح",
+    "shortTitle": "Noreen Kids: ذياد والعصفورة وإنقاذ الجار في ليلة البرد | مغامرات ذياد والعصفورة الفرفوشة",
+    "longTitle": "Noreen Kids: أم ملك ومسابقة المكتبة وتحدي القصص الضائعة | مغامرات أم ملك والبطريق المرح",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2910,14 +2898,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "qRftGZh7BoE",
-    "youtubeLongVideoId": "M2kVGVrWgn8",
-    "facebookShortVideoId": "29044234478582389",
-    "facebookLongVideoId": "1753062325763711",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/29044234478582389",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1753062325763711",
-    "facebookShortTitle": "Noreen Kids | تامر وكركور وسر الساعة الرملية في واحة الكريستال - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
-    "facebookLongTitle": "Noreen Kids | كارمن وسمسم وسر جهاز تحلية مياه الورد الذكي - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
+    "youtubeShortVideoId": "W1cIWyFRZnY",
+    "youtubeLongVideoId": "3fi_WhVdYS0",
+    "facebookShortVideoId": "2273917673154104",
+    "facebookLongVideoId": "1118800144458821",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2273917673154104",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1118800144458821",
+    "facebookShortTitle": "Noreen Kids | ذياد والعصفورة وإنقاذ الجار في ليلة البرد - مغامرة ذياد والعصفورة الفرفوشة",
+    "facebookLongTitle": "Noreen Kids | أم ملك ومسابقة المكتبة وتحدي القصص الضائعة - مغامرة أم ملك والبطريق المرح",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2932,9 +2920,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 354,
-      "fileSizeBytes": 52722401,
-      "inspectedAt": "01:09"
+      "durationSec": 349,
+      "fileSizeBytes": 39090913,
+      "inspectedAt": "00:38"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2943,7 +2931,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-19T23:09:41.321Z"
+    "reportedAtIso": "2026-11-20T22:38:38.926Z"
   },
   "heroFairRotationIndex": 11,
   "interactiveHeroRotationIndex": 5,
