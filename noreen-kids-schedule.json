@@ -37,6 +37,16 @@
     {
       "topic": "تختوخ وزقلط وسر كيكة الفراولة الطايرة",
       "mainCharacterName": "تختوخ",
+      "companionName": "الكلب زقلط"
+    },
+    {
+      "topic": "تيتة والدب باندا وسر سلة مفاجأة حفظ القرآن",
+      "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا"
+    },
+    {
+      "topic": "تختوخ وزقلط وسر كيكة الفراولة الطايرة",
+      "mainCharacterName": "تختوخ",
       "companionName": "الكلب زقلط",
       "timestampIso": "2026-11-21T20:57:51.874Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-11-18T14:10:40.511Z"
-    },
-    {
-      "topic": "سر بركة مربى الفراولة اللذيذة مع تيتة وباندا",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
-    },
-    {
-      "topic": "تختوخ وزقلط وسر كرتونة الألعاب العجيبة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط"
-    },
-    {
-      "topic": "سر بركة مربى الفراولة اللذيذة مع تيتة وباندا",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "timestampIso": "2026-11-17T23:12:28.316Z"
-    },
-    {
-      "topic": "تختوخ وزقلط وسر كرتونة الألعاب العجيبة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط",
-      "timestampIso": "2026-11-17T23:12:28.316Z"
     }
   ],
   "scheduledHistory": [
@@ -228,7 +216,7 @@
       "id": "gh-run-44948643916",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-21 (23:17 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-21 (23:18 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1795294530198-ai3y",
       "longEpisodeId": "ep-gh-long-1795294671874-08op",
       "shortEpisodeTitle": "Noreen Kids: تختوخ وزقلط وسر كيكة الفراولة الطايرة | مغامرات تختوخ والكلب زقلط",
@@ -267,7 +255,7 @@
         "fastStartMoovFirst": true,
         "durationSec": 311,
         "fileSizeBytes": 37822136,
-        "inspectedAt": "23:17"
+        "inspectedAt": "23:18"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
