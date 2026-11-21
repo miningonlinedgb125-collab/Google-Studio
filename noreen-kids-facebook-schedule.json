@@ -809,7 +809,7 @@
       "id": "gh-run-44948643916",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-21 (23:17 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-21 (23:18 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1795294530198-ai3y",
       "longEpisodeId": "ep-gh-long-1795294671874-08op",
       "shortEpisodeTitle": "Noreen Kids: تختوخ وزقلط وسر كيكة الفراولة الطايرة | مغامرات تختوخ والكلب زقلط",
@@ -848,7 +848,7 @@
         "fastStartMoovFirst": true,
         "durationSec": 311,
         "fileSizeBytes": 37822136,
-        "inspectedAt": "23:17"
+        "inspectedAt": "23:18"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
@@ -2708,6 +2708,16 @@
     {
       "topic": "تختوخ وزقلط وسر كيكة الفراولة الطايرة",
       "mainCharacterName": "تختوخ",
+      "companionName": "الكلب زقلط"
+    },
+    {
+      "topic": "تيتة والدب باندا وسر سلة مفاجأة حفظ القرآن",
+      "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا"
+    },
+    {
+      "topic": "تختوخ وزقلط وسر كيكة الفراولة الطايرة",
+      "mainCharacterName": "تختوخ",
       "companionName": "الكلب زقلط",
       "timestampIso": "2026-11-21T20:57:51.874Z"
     },
@@ -2870,43 +2880,21 @@
       "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-11-18T14:10:40.511Z"
-    },
-    {
-      "topic": "سر بركة مربى الفراولة اللذيذة مع تيتة وباندا",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
-    },
-    {
-      "topic": "تختوخ وزقلط وسر كرتونة الألعاب العجيبة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط"
-    },
-    {
-      "topic": "سر بركة مربى الفراولة اللذيذة مع تيتة وباندا",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "timestampIso": "2026-11-17T23:12:28.316Z"
-    },
-    {
-      "topic": "تختوخ وزقلط وسر كرتونة الألعاب العجيبة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط",
-      "timestampIso": "2026-11-17T23:12:28.316Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-21 · 16:20 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-44827264967",
+    "id": "gh-run-44948643916",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-21 (00:38 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1795213061607-tf8y",
-    "longEpisodeId": "ep-gh-long-1795213101062-y8gr",
-    "shortEpisodeTitle": "Noreen Kids: ذياد والعصفورة وإنقاذ الجار في ليلة البرد | مغامرات ذياد والعصفورة الفرفوشة",
-    "longEpisodeTitle": "Noreen Kids: أم ملك ومسابقة المكتبة وتحدي القصص الضائعة | مغامرات أم ملك والبطريق المرح",
-    "shortTitle": "Noreen Kids: ذياد والعصفورة وإنقاذ الجار في ليلة البرد | مغامرات ذياد والعصفورة الفرفوشة",
-    "longTitle": "Noreen Kids: أم ملك ومسابقة المكتبة وتحدي القصص الضائعة | مغامرات أم ملك والبطريق المرح",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-21 (23:18 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1795294530198-ai3y",
+    "longEpisodeId": "ep-gh-long-1795294671874-08op",
+    "shortEpisodeTitle": "Noreen Kids: تختوخ وزقلط وسر كيكة الفراولة الطايرة | مغامرات تختوخ والكلب زقلط",
+    "longEpisodeTitle": "Noreen Kids: تيتة والدب باندا وسر سلة مفاجأة حفظ القرآن | مغامرات تيتة والدب باندا",
+    "shortTitle": "Noreen Kids: تختوخ وزقلط وسر كيكة الفراولة الطايرة | مغامرات تختوخ والكلب زقلط",
+    "longTitle": "Noreen Kids: تيتة والدب باندا وسر سلة مفاجأة حفظ القرآن | مغامرات تيتة والدب باندا",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2915,14 +2903,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "W1cIWyFRZnY",
-    "youtubeLongVideoId": "3fi_WhVdYS0",
-    "facebookShortVideoId": "2273917673154104",
-    "facebookLongVideoId": "1118800144458821",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2273917673154104",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1118800144458821",
-    "facebookShortTitle": "Noreen Kids | ذياد والعصفورة وإنقاذ الجار في ليلة البرد - مغامرة ذياد والعصفورة الفرفوشة",
-    "facebookLongTitle": "Noreen Kids | أم ملك ومسابقة المكتبة وتحدي القصص الضائعة - مغامرة أم ملك والبطريق المرح",
+    "youtubeShortVideoId": "zFp-6n2LGdg",
+    "youtubeLongVideoId": "OrN1EEd8540",
+    "facebookShortVideoId": "1835997367466368",
+    "facebookLongVideoId": "2257114178169765",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1835997367466368",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2257114178169765",
+    "facebookShortTitle": "Noreen Kids | تختوخ وزقلط وسر كيكة الفراولة الطايرة - مغامرة تختوخ والكلب زقلط",
+    "facebookLongTitle": "Noreen Kids | تيتة والدب باندا وسر سلة مفاجأة حفظ القرآن - مغامرة تيتة والدب باندا",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2937,9 +2925,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 349,
-      "fileSizeBytes": 39090913,
-      "inspectedAt": "00:38"
+      "durationSec": 311,
+      "fileSizeBytes": 37822136,
+      "inspectedAt": "23:18"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2948,7 +2936,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-20T22:38:38.926Z"
+    "reportedAtIso": "2026-11-21T21:18:00.138Z"
   },
   "heroFairRotationIndex": 15,
   "interactiveHeroRotationIndex": 5,
