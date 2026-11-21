@@ -37,6 +37,16 @@
     {
       "topic": "جدو والفأر في رحلة البذرة والصبر الكبير",
       "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "رحلة أستاذ شريف والترتيب الذكي للواجبات",
+      "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "جدو والفأر في رحلة البذرة والصبر الكبير",
+      "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس",
       "timestampIso": "2026-11-21T13:48:46.767Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "تختوخ",
       "companionName": "الكلب زقلط",
       "timestampIso": "2026-11-17T23:12:28.316Z"
-    },
-    {
-      "topic": "لعبة الميزان العادل وسر الأمانة في البيع",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "سر الفانوس الأثري وكلمة الحق الصادقة",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "لعبة الميزان العادل وسر الأمانة في البيع",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-11-17T14:24:08.047Z"
-    },
-    {
-      "topic": "سر الفانوس الأثري وكلمة الحق الصادقة",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-11-17T14:24:08.047Z"
     }
   ],
   "scheduledHistory": [
@@ -2745,16 +2733,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢١‏/١١‏/٢٠٢٦، ٤:٢٠:٥١ م",
   "lastCloudRunReport": {
-    "id": "gh-run-44749148108",
+    "id": "gh-run-44908914840",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-20 (16:24 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1795183297850-9a9y",
-    "longEpisodeId": "ep-gh-long-1795183362915-vm49",
-    "shortEpisodeTitle": "Noreen Kids: سدرة والفراشة وسر مكعبات البهجة ومشاركة | مغامرات سدرة الصغنونة والفراشة الملونة",
-    "longEpisodeTitle": "Noreen Kids: ملك ولوليتا وعملية إنقاذ أرنب الوادي الشجاع | مغامرات الطبيبة ملك والقطة لوليتا",
-    "shortTitle": "Noreen Kids: سدرة والفراشة وسر مكعبات البهجة ومشاركة | مغامرات سدرة الصغنونة والفراشة الملونة",
-    "longTitle": "Noreen Kids: ملك ولوليتا وعملية إنقاذ أرنب الوادي الشجاع | مغامرات الطبيبة ملك والقطة لوليتا",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-21 (16:20 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1795268899592-7mck",
+    "longEpisodeId": "ep-gh-long-1795268926767-ik16",
+    "shortEpisodeTitle": "Noreen Kids: جدو والفأر في رحلة البذرة والصبر الكبير | مغامرات جدو والفأر المشاكس",
+    "longEpisodeTitle": "Noreen Kids: رحلة أستاذ شريف والترتيب الذكي للواجبات | مغامرات أستاذ شريف والصقر الذكي",
+    "shortTitle": "Noreen Kids: جدو والفأر في رحلة البذرة والصبر الكبير | مغامرات جدو والفأر المشاكس",
+    "longTitle": "Noreen Kids: رحلة أستاذ شريف والترتيب الذكي للواجبات | مغامرات أستاذ شريف والصقر الذكي",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2763,14 +2751,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "VfAIjlCmhi4",
-    "youtubeLongVideoId": "_H3jphw3oVs",
-    "facebookShortVideoId": "2224826398446788",
-    "facebookLongVideoId": "28881422904890686",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2224826398446788",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/28881422904890686",
-    "facebookShortTitle": "Noreen Kids | سدرة والفراشة وسر مكعبات البهجة ومشاركة - مغامرة سدرة الصغنونة والفراشة الملونة",
-    "facebookLongTitle": "Noreen Kids | ملك ولوليتا وعملية إنقاذ أرنب الوادي الشجاع - مغامرة ملك والقطة لوليتا",
+    "youtubeShortVideoId": "IUpqCi3BJ7M",
+    "youtubeLongVideoId": "vywjxHgpABA",
+    "facebookShortVideoId": "29178926871749065",
+    "facebookLongVideoId": "2329758181211108",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/29178926871749065",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2329758181211108",
+    "facebookShortTitle": "Noreen Kids | جدو والفأر في رحلة البذرة والصبر الكبير - مغامرة جدو والفأر المشاكس",
+    "facebookLongTitle": "Noreen Kids | رحلة أستاذ شريف والترتيب الذكي للواجبات - مغامرة أستاذ شريف والصقر الذكي",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2785,9 +2773,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 357,
-      "fileSizeBytes": 38503711,
-      "inspectedAt": "16:24"
+      "durationSec": 378,
+      "fileSizeBytes": 45130711,
+      "inspectedAt": "16:20"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2796,7 +2784,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-20T14:24:22.753Z"
+    "reportedAtIso": "2026-11-21T14:20:54.117Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
