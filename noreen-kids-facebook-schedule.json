@@ -2708,6 +2708,16 @@
     {
       "topic": "جدو والفأر في رحلة البذرة والصبر الكبير",
       "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "رحلة أستاذ شريف والترتيب الذكي للواجبات",
+      "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "جدو والفأر في رحلة البذرة والصبر الكبير",
+      "mainCharacterName": "جدو",
       "companionName": "الفأر المشاكس",
       "timestampIso": "2026-11-21T13:48:46.767Z"
     },
@@ -2870,28 +2880,6 @@
       "mainCharacterName": "تختوخ",
       "companionName": "الكلب زقلط",
       "timestampIso": "2026-11-17T23:12:28.316Z"
-    },
-    {
-      "topic": "لعبة الميزان العادل وسر الأمانة في البيع",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "سر الفانوس الأثري وكلمة الحق الصادقة",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "لعبة الميزان العادل وسر الأمانة في البيع",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-11-17T14:24:08.047Z"
-    },
-    {
-      "topic": "سر الفانوس الأثري وكلمة الحق الصادقة",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-11-17T14:24:08.047Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-21 · 00:38 بتوقيت مصر",
