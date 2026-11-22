@@ -2713,6 +2713,16 @@
     {
       "topic": "سر الفواكه السحرية وإنقاذ القرد بندق الشقي",
       "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "الشيخ محمود والديك وسر الاستعاذة وسورة الفلق",
+      "mainCharacterName": "الشيخ محمود",
+      "companionName": "الديك الفصيح"
+    },
+    {
+      "topic": "سر الفواكه السحرية وإنقاذ القرد بندق الشقي",
+      "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-11-22T13:50:19.618Z"
     },
@@ -2875,28 +2885,6 @@
       "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش",
       "timestampIso": "2026-11-18T22:46:44.177Z"
-    },
-    {
-      "topic": "سر سورة الإخلاص مع الشيخ محمود والديك الفصيح",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح"
-    },
-    {
-      "topic": "الطبيبة نورين وإنقاذ جناج العصفور الصغير",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "سر سورة الإخلاص مع الشيخ محمود والديك الفصيح",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح",
-      "timestampIso": "2026-11-18T14:10:40.511Z"
-    },
-    {
-      "topic": "الطبيبة نورين وإنقاذ جناج العصفور الصغير",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-11-18T14:10:40.511Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-21 · 23:18 بتوقيت مصر",
