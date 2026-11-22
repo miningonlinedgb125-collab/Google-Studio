@@ -37,6 +37,16 @@
     {
       "topic": "سر الفواكه السحرية وإنقاذ القرد بندق الشقي",
       "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "الشيخ محمود والديك وسر الاستعاذة وسورة الفلق",
+      "mainCharacterName": "الشيخ محمود",
+      "companionName": "الديك الفصيح"
+    },
+    {
+      "topic": "سر الفواكه السحرية وإنقاذ القرد بندق الشقي",
+      "mainCharacterName": "الطبيبة نورين",
       "companionName": "أرنوب الشقي الممرض",
       "timestampIso": "2026-11-22T13:50:19.618Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "المهندسة نوران",
       "companionName": "النمر الفرفوش",
       "timestampIso": "2026-11-18T22:46:44.177Z"
-    },
-    {
-      "topic": "سر سورة الإخلاص مع الشيخ محمود والديك الفصيح",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح"
-    },
-    {
-      "topic": "الطبيبة نورين وإنقاذ جناج العصفور الصغير",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "سر سورة الإخلاص مع الشيخ محمود والديك الفصيح",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح",
-      "timestampIso": "2026-11-18T14:10:40.511Z"
-    },
-    {
-      "topic": "الطبيبة نورين وإنقاذ جناج العصفور الصغير",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-11-18T14:10:40.511Z"
     }
   ],
   "scheduledHistory": [
@@ -2750,16 +2738,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٢‏/١١‏/٢٠٢٦، ٤:٠٨:١٣ م",
   "lastCloudRunReport": {
-    "id": "gh-run-44908914840",
+    "id": "gh-run-45026875406",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-21 (16:20 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1795268899592-7mck",
-    "longEpisodeId": "ep-gh-long-1795268926767-ik16",
-    "shortEpisodeTitle": "Noreen Kids: جدو والفأر في رحلة البذرة والصبر الكبير | مغامرات جدو والفأر المشاكس",
-    "longEpisodeTitle": "Noreen Kids: رحلة أستاذ شريف والترتيب الذكي للواجبات | مغامرات أستاذ شريف والصقر الذكي",
-    "shortTitle": "Noreen Kids: جدو والفأر في رحلة البذرة والصبر الكبير | مغامرات جدو والفأر المشاكس",
-    "longTitle": "Noreen Kids: رحلة أستاذ شريف والترتيب الذكي للواجبات | مغامرات أستاذ شريف والصقر الذكي",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-22 (16:08 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1795354588056-kk43",
+    "longEpisodeId": "ep-gh-long-1795355419618-lv9b",
+    "shortEpisodeTitle": "Noreen Kids: سر الفواكه السحرية وإنقاذ القرد بندق الشقي | مغامرات الطبيبة نورين وأرنوب",
+    "longEpisodeTitle": "Noreen Kids: الشيخ محمود والديك وسر الاستعاذة وسورة الفلق | مغامرات الشيخ محمود والديك الفصيح",
+    "shortTitle": "Noreen Kids: سر الفواكه السحرية وإنقاذ القرد بندق الشقي | مغامرات الطبيبة نورين وأرنوب",
+    "longTitle": "Noreen Kids: الشيخ محمود والديك وسر الاستعاذة وسورة الفلق | مغامرات الشيخ محمود والديك الفصيح",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2768,14 +2756,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "IUpqCi3BJ7M",
-    "youtubeLongVideoId": "vywjxHgpABA",
-    "facebookShortVideoId": "29178926871749065",
-    "facebookLongVideoId": "2329758181211108",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/29178926871749065",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2329758181211108",
-    "facebookShortTitle": "Noreen Kids | جدو والفأر في رحلة البذرة والصبر الكبير - مغامرة جدو والفأر المشاكس",
-    "facebookLongTitle": "Noreen Kids | رحلة أستاذ شريف والترتيب الذكي للواجبات - مغامرة أستاذ شريف والصقر الذكي",
+    "youtubeShortVideoId": "XkgCizKnipw",
+    "youtubeLongVideoId": "7eWZVbc2Mwo",
+    "facebookShortVideoId": "1878015893648000",
+    "facebookLongVideoId": "1478776830870538",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1878015893648000",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1478776830870538",
+    "facebookShortTitle": "Noreen Kids | سر الفواكه السحرية وإنقاذ القرد بندق الشقي - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
+    "facebookLongTitle": "Noreen Kids | الشيخ محمود والديك وسر الاستعاذة وسورة الفلق - مغامرة الشيخ محمود والديك الفصيح",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2790,9 +2778,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 378,
-      "fileSizeBytes": 45130711,
-      "inspectedAt": "16:20"
+      "durationSec": 311,
+      "fileSizeBytes": 39321600,
+      "inspectedAt": "16:08"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2801,7 +2789,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-21T14:20:54.117Z"
+    "reportedAtIso": "2026-11-22T14:08:16.560Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
