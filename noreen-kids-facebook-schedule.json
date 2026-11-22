@@ -68,6 +68,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122129147553484976",
+      "photoId": "122129147529484976",
+      "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع عمرو وزعتر",
+      "title": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع عمرو وزعتر",
+      "caption": "✨ مين أسرع بطل هيعد كل النجوم الذهبية في الصورة؟ ✨\nعمرو وزعتر بيجهزوا لحكاية جديدة، والنجوم اللامعة بتنور طريقهم! 🌟\nيلا يا شطار يا حلوين.. عدّوا النجوم مع ماما واكتبوا لنا العدد المظبوط في تعليق! 👀🔢\n👇 اكتبوا الحل واسم البطل عشان نوجهله تحية خاصة بالاسم في الحلقة القادمة! 🎬💖\n🔔 شير للتحدي ومتابعة لصفحة Noreen Kids لمزيد من الألعاب المفيدة! 👍\n#نورين_كيدز #Noreen_Kids #فوازير_أطفال #تحدي_الشطار #أمهات_مصر",
+      "heroName": "عمرو",
+      "companionName": "زعتر",
+      "publishedAtCairo": "2026-11-22 · 23:29 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122129147553484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122129144685484976",
       "photoId": "122129144661484976",
       "themeTitle": "تحدي الصورة المختلفة (من 1 إلى 4) مع المهندسة نوران والنمر الفرفوش",
@@ -534,18 +546,6 @@
       "publishedAtCairo": "2026-11-13 · 15:12 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122126174445484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122125996395484976",
-      "photoId": "122125996371484976",
-      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع أم ملك والبطريق المرح",
-      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع أم ملك والبطريق المرح",
-      "caption": "🎉 فزورة قوة التركيز وسرعة البديهة من عالم Noreen Kids! 🎉\nبصوا كويس على الصورتين [ أ ] و [ ب ].. فيه 3 اختلافات ذكية مستخبية! يا ترى عيونكم الحلوة هتطلعهم؟ 👀✨\n👇 اكتبوا لنا الفروقات الـ 3 في تعليق مع اسم طفلكم الجميل علشان نرحب بيه في حلقة النهاردة! 💖🎬\n🔔 واضغطوا متابعة للصفحة ولايك للبوست عشان متفوتكمش حكاياتنا اليومية! 👍🌟\n#نورين_كيدز #Noreen_Kids #فزورة_اليوم #كرتون_3D #أمهات_مصر",
-      "heroName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "publishedAtCairo": "2026-11-13 · 00:10 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122125996395484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -809,14 +809,15 @@
       "id": "gh-run-45069726344",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-22 (23:15 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-22 (23:31 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1795381431230-v2sm",
       "longEpisodeId": "ep-gh-long-1795381532456-kbx0",
       "shortEpisodeTitle": "Noreen Kids: ابتكار المصعد الهوائي لمكتبة السماء العالية | مغامرات المهندسة نوران والنمر الفرفوش",
-      "longEpisodeTitle": "عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات",
+      "longEpisodeTitle": "Noreen Kids: عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات | مغامرات عمرو وزعتر",
       "shortTitle": "Noreen Kids: ابتكار المصعد الهوائي لمكتبة السماء العالية | مغامرات المهندسة نوران والنمر الفرفوش",
-      "longTitle": "عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات",
+      "longTitle": "Noreen Kids: عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات | مغامرات عمرو وزعتر",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -824,9 +825,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "l1XGNNCg5Y0",
+      "youtubeLongVideoId": "ZF2X8CyG57s",
       "facebookShortVideoId": "2593994357748575",
+      "facebookLongVideoId": "2637698220029176",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2593994357748575",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2637698220029176",
       "facebookShortTitle": "Noreen Kids | ابتكار المصعد الهوائي لمكتبة السماء العالية - مغامرة المهندسة نوران والنمر الفرفوش",
+      "facebookLongTitle": "Noreen Kids | عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات - مغامرة عمرو المستكشف وزعتر الثعلب الذكي",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -834,16 +839,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 64,
-        "fileSizeBytes": 11796480,
-        "inspectedAt": "23:15"
+        "durationSec": 352,
+        "fileSizeBytes": 38440796,
+        "inspectedAt": "23:31"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
