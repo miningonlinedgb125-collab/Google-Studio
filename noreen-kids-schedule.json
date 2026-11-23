@@ -37,6 +37,16 @@
     {
       "topic": "سر حزام الكويكبات الموسيقي والألحان الفضائية المبهجة",
       "mainCharacterName": "جنى رائدة الفضاء",
+      "companionName": "بلبل الروبوت اللطيف"
+    },
+    {
+      "topic": "سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر",
+      "mainCharacterName": "شوشو القبطان الصغير",
+      "companionName": "مرجان الدلفين المرح"
+    },
+    {
+      "topic": "سر حزام الكويكبات الموسيقي والألحان الفضائية المبهجة",
+      "mainCharacterName": "جنى رائدة الفضاء",
       "companionName": "بلبل الروبوت اللطيف",
       "timestampIso": "2026-11-23T16:00:29.391Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "كارمن المخترعة الصغيرة",
       "companionName": "سمسم السنجاب الطائر",
       "timestampIso": "2026-11-19T22:46:00.428Z"
-    },
-    {
-      "topic": "شوشو ومرجان ينقذان الحوت من شبكة الصيادين",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح"
-    },
-    {
-      "topic": "جنى وبلبل وإنقاذ ضوء قمر الكريستال المظلم",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف"
-    },
-    {
-      "topic": "شوشو ومرجان ينقذان الحوت من شبكة الصيادين",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح",
-      "timestampIso": "2026-11-19T14:26:54.274Z"
-    },
-    {
-      "topic": "جنى وبلبل وإنقاذ ضوء قمر الكريستال المظلم",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف",
-      "timestampIso": "2026-11-19T14:26:54.275Z"
     }
   ],
   "scheduledHistory": [
@@ -2755,16 +2743,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٣‏/١١‏/٢٠٢٦، ٦:٢٤:٠٧ م",
   "lastCloudRunReport": {
-    "id": "gh-run-45026875406",
+    "id": "gh-run-45210846102",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-22 (16:08 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1795354588056-kk43",
-    "longEpisodeId": "ep-gh-long-1795355419618-lv9b",
-    "shortEpisodeTitle": "Noreen Kids: سر الفواكه السحرية وإنقاذ القرد بندق الشقي | مغامرات الطبيبة نورين وأرنوب",
-    "longEpisodeTitle": "Noreen Kids: الشيخ محمود والديك وسر الاستعاذة وسورة الفلق | مغامرات الشيخ محمود والديك الفصيح",
-    "shortTitle": "Noreen Kids: سر الفواكه السحرية وإنقاذ القرد بندق الشقي | مغامرات الطبيبة نورين وأرنوب",
-    "longTitle": "Noreen Kids: الشيخ محمود والديك وسر الاستعاذة وسورة الفلق | مغامرات الشيخ محمود والديك الفصيح",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-23 (18:24 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1795449580558-1f59",
+    "longEpisodeId": "ep-gh-long-1795449629391-q1ej",
+    "shortEpisodeTitle": "Noreen Kids: سر حزام الكويكبات الموسيقي والألحان الفضائية المبهجة | مغامرات جنى وبلبل",
+    "longEpisodeTitle": "Noreen Kids: سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر | مغامرات شوشو ومرجان",
+    "shortTitle": "Noreen Kids: سر حزام الكويكبات الموسيقي والألحان الفضائية المبهجة | مغامرات جنى وبلبل",
+    "longTitle": "Noreen Kids: سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر | مغامرات شوشو ومرجان",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2773,14 +2761,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "XkgCizKnipw",
-    "youtubeLongVideoId": "7eWZVbc2Mwo",
-    "facebookShortVideoId": "1878015893648000",
-    "facebookLongVideoId": "1478776830870538",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1878015893648000",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1478776830870538",
-    "facebookShortTitle": "Noreen Kids | سر الفواكه السحرية وإنقاذ القرد بندق الشقي - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
-    "facebookLongTitle": "Noreen Kids | الشيخ محمود والديك وسر الاستعاذة وسورة الفلق - مغامرة الشيخ محمود والديك الفصيح",
+    "youtubeShortVideoId": "JZeHv34CfbI",
+    "youtubeLongVideoId": "L9XiWpnJe3s",
+    "facebookShortVideoId": "1674244684254376",
+    "facebookLongVideoId": "2936523473383825",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1674244684254376",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2936523473383825",
+    "facebookShortTitle": "Noreen Kids | سر حزام الكويكبات الموسيقي والألحان الفضائية المبهجة - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
+    "facebookLongTitle": "Noreen Kids | سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2795,9 +2783,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 311,
-      "fileSizeBytes": 39321600,
-      "inspectedAt": "16:08"
+      "durationSec": 308,
+      "fileSizeBytes": 39678116,
+      "inspectedAt": "18:24"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2806,7 +2794,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-22T14:08:16.560Z"
+    "reportedAtIso": "2026-11-23T16:24:11.370Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
