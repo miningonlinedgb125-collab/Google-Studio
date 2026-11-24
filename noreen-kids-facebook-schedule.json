@@ -68,6 +68,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122129753277484976",
+      "photoId": "122129753253484976",
+      "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع تامر وكركور",
+      "title": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع تامر وكركور",
+      "caption": "🧭 تحدي المتاهة الذكية مع تامر وكركور! 🌟\nبطلنا \"تامر\" عايز يوصل لصديقه \"كركور\" بأسرع وقت، ومحتاج مساعدة أذكى أبطال! 🏃‍♂️💨\nقدامكم 3 مسارات ملونة:\n🔴 المسار رقم [ 1 ]\n🟢 المسار رقم [ 2 ]\n🔵 المسار رقم [ 3 ]\nيا ترى أنهي طريق فيهم هو اللي هيوصله للهدف من غير أي عوائق؟ 👀🔍\n👇 تتبعوا الخط بعيونكم واكتبوا رقم المسار الصح واسم طفلكم علشان تامر يشكره بنفسه! 🎬🏅\n🔔 متنسوش لايك ومتابعة لصفحة Noreen Kids لمغامرات جديدة كل يوم! 💖👍\n#نورين_كيدز #Noreen_Kids #متاهة_الأذكياء #تحدي_الشطار #أمهات_مصر",
+      "heroName": "تامر",
+      "companionName": "كركور",
+      "publishedAtCairo": "2026-11-24 · 22:51 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122129753277484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122129751513484976",
       "photoId": "122129751489484976",
       "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع كارمن وسمسم",
@@ -534,18 +546,6 @@
       "publishedAtCairo": "2026-11-14 · 14:27 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122126441757484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122126302311484976",
-      "photoId": "122126302287484976",
-      "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع تيتة والدب باندا",
-      "title": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع تيتة والدب باندا",
-      "caption": "🧭 تحدي المتاهة الذكية مع تيتة والدب باندا! 🌟\nبطلنا \"تيتة\" عايز يوصل لصديقه \"الدب باندا\" بأسرع وقت، ومحتاج مساعدة أذكى أبطال! 🏃‍♂️💨\nقدامكم 3 مسارات ملونة:\n🔴 المسار رقم [ 1 ]\n🟢 المسار رقم [ 2 ]\n🔵 المسار رقم [ 3 ]\nيا ترى أنهي طريق فيهم هو اللي هيوصله للهدف من غير أي عوائق؟ 👀🔍\n👇 تتبعوا الخط بعيونكم واكتبوا رقم المسار الصح واسم طفلكم علشان تيتة يشكره بنفسه! 🎬🏅\n🔔 متنسوش لايك ومتابعة لصفحة Noreen Kids لمغامرات جديدة كل يوم! 💖👍\n#نورين_كيدز #Noreen_Kids #متاهة_الأذكياء #تحدي_الشطار #أمهات_مصر",
-      "heroName": "تيتة",
-      "companionName": "الدب باندا",
-      "publishedAtCairo": "2026-11-13 · 23:50 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122126302311484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -809,14 +809,15 @@
       "id": "gh-run-45310408466",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-24 (22:42 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-24 (22:52 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1795552766144-olh5",
       "longEpisodeId": "ep-gh-long-1795552792609-rcs8",
       "shortEpisodeTitle": "Noreen Kids: كارمن وسمسم ومصباح الحركة المضيء للجميع | مغامرات كارمن وسمسم",
-      "longEpisodeTitle": "لغز القلعة القديمة وبوابات الشجاعة",
+      "longEpisodeTitle": "Noreen Kids: لغز القلعة القديمة وبوابات الشجاعة | مغامرات تامر وكركور",
       "shortTitle": "Noreen Kids: كارمن وسمسم ومصباح الحركة المضيء للجميع | مغامرات كارمن وسمسم",
-      "longTitle": "لغز القلعة القديمة وبوابات الشجاعة",
+      "longTitle": "Noreen Kids: لغز القلعة القديمة وبوابات الشجاعة | مغامرات تامر وكركور",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -824,9 +825,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "1synnsY6RBE",
+      "youtubeLongVideoId": "8P5cju8r2P4",
       "facebookShortVideoId": "2075957433056879",
+      "facebookLongVideoId": "1845339053464949",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2075957433056879",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1845339053464949",
       "facebookShortTitle": "Noreen Kids | كارمن وسمسم ومصباح الحركة المضيء للجميع - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
+      "facebookLongTitle": "Noreen Kids | لغز القلعة القديمة وبوابات الشجاعة - مغامرة تامر فارس الواحة وكركور الببغاء الحكيم",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -834,16 +839,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 60,
-        "fileSizeBytes": 11335107,
-        "inspectedAt": "22:42"
+        "durationSec": 386,
+        "fileSizeBytes": 51128566,
+        "inspectedAt": "22:52"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
