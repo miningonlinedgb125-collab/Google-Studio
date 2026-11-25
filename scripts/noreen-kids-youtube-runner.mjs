@@ -15,6 +15,15 @@ import { execFile } from "child_process";
 import { promisify } from "util";
 import { MsEdgeTTS, OUTPUT_FORMAT } from "msedge-tts";
 import { GoogleGenAI, Modality } from "@google/genai";
+import {
+  resolvePlatformRenderProfile,
+  buildFacebookCameraFramingConfig,
+  selectShortMicroReelScenes,
+  buildLongTeaserMicroReelEpisode,
+  computeMicroReelTimingPlan,
+  validatePlatformVideoFfprobeReport,
+  validateFacebookVideoFfprobeReport,
+} from "./facebook-micro-reel-helpers.mjs";
 
 const execFileAsync = promisify(execFile);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -1838,11 +1847,8 @@ async function prepareCircularChannelWatermarkPng({ logoSrcPath, isShort, outPng
 }
 
 async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptian", targetPlatform = "youtube", preExistingPreparedScenes = null) {
-  const isFb = String(targetPlatform || "").toLowerCase().includes("facebook");
-  const isShort = videoFormat === "short_9_16";
-  const isVertical = isShort || isFb;
-  const W = isFb ? 1080 : (isShort ? 720 : 1280);
-  const H = isFb ? 1920 : (isShort ? 1280 : 720);
+  const platformProfile = resolvePlatformRenderProfile(videoFormat, targetPlatform);
+  const { isFb, isFbMicroReel, isMicroFormat, isShort, isVertical, W, H, overscanW, overscanH, panRangeX, panRangeY } = platformProfile;
   const scenes =
     Array.isArray(episode?.scenes) && episode.scenes.length > 0
       ? episode.scenes
@@ -2017,18 +2023,28 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       voiceDurSec: synth.voiceDurSec,
       durationSec: naturalDur,
     });
+
+    if (isMicroFormat && !episode?.isFbTeaserReel) {
+      const runningVoiceSec = preparedScenes.reduce((acc, s) => acc + Number(s.voiceDurSec || 0), 0);
+      if (runningVoiceSec >= 13.5) {
+        console.log(`   ⚡ [Micro-Format Early Stop] Reached ${runningVoiceSec.toFixed(1)}s complete speech at scene ${i + 1}; keeping tight 15-20s pace!`);
+        break;
+      }
+    }
   }
 
   // Natural pacing preserved: each scene plays at authentic 1.0x human speaking speed
 
-  // Enforce total duration bounds: Short strictly [60..80s] (target 65..75s), Long strictly [300..600s] (target 305..580s)
-  const minTotalSec = isShort ? 60 : 305;
-  const maxTotalSec = isShort ? 75 : 590;
-  const maxSafeVoiceSec = isShort ? 68 : 550;
+  // Enforce total duration bounds (Unified YouTube + Facebook Plan):
+  // - YouTube Micro-Shorts & Facebook Micro-Reels: [15..20.5s]
+  // - Long Episodes (YouTube 1280x720 & Facebook 1080x1920): [305..590s]
+  const minTotalSec = isMicroFormat ? 15 : (isShort ? 60 : 305);
+  const maxTotalSec = isMicroFormat ? 20.5 : (isShort ? 75 : 590);
+  const maxSafeVoiceSec = isMicroFormat ? 19.5 : (isShort ? 68 : 550);
   let totalVoiceSec = preparedScenes.reduce((acc, s) => acc + s.voiceDurSec, 0);
 
   if (totalVoiceSec > maxSafeVoiceSec) {
-    const targetVoiceSec = isShort ? 62 : 520;
+    const targetVoiceSec = isMicroFormat ? 18.0 : (isShort ? 62 : 520);
     const speedRatio = Math.min(1.35, Math.max(1.05, totalVoiceSec / targetVoiceSec));
     console.log(
       `   ⚡ [Audio Timing Optimization] Total voice duration (${totalVoiceSec.toFixed(1)}s) exceeds safe threshold (${maxSafeVoiceSec}s) for ${videoFormat}. Applying gentle lossless atempo=${speedRatio.toFixed(2)} to guarantee compliance with [${minTotalSec}..${maxTotalSec}s] gate...`
@@ -2088,11 +2104,54 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     }
   }
   } // End of voice synthesis & caching block
-  
-  const overscanW = Math.round(W * 1.14);
-  const overscanH = Math.round(H * 1.14);
-  const panRangeX = Math.max(8, overscanW - W);
-  const panRangeY = Math.max(8, overscanH - H);
+
+  // When reusing cached YouTube voiceovers for a 15-20s Facebook Micro-Reel,
+  // smoothly enforce [15..20.5s] into dedicated temp WAV files without altering YouTube cache!
+  if (isMicroFormat && Array.isArray(preExistingPreparedScenes)) {
+    const plan = computeMicroReelTimingPlan(preparedScenes, 15, 20.5);
+    if (plan.needsTempo) {
+      console.log(
+        `   ⚡ [Facebook Micro-Reel Pacing] Compressing cached voice (${plan.totalVoiceSec.toFixed(1)}s -> ~18.5s via atempo=${plan.speedRatio.toFixed(2)}) cleanly...`
+      );
+      for (let i = 0; i < preparedScenes.length; i++) {
+        const srcAudio = preparedScenes[i].audioPath;
+        const reelTempoWav = path.join(tmpDir, `fb_reel_tempo_${targetPlatform}_${i}.wav`);
+        try {
+          await execFileAsync("ffmpeg", [
+            "-y",
+            "-i", srcAudio,
+            "-filter:a", `atempo=${plan.speedRatio.toFixed(3)}`,
+            "-ar", "24000",
+            "-ac", "1",
+            "-c:a", "pcm_s16le",
+            reelTempoWav,
+          ]);
+          if (fs.existsSync(reelTempoWav) && fs.statSync(reelTempoWav).size > 1000) {
+            const newDur = await measureAudioDurationSec(reelTempoWav, preparedScenes[i].voiceDurSec / plan.speedRatio);
+            preparedScenes[i].audioPath = reelTempoWav;
+            preparedScenes[i].voiceDurSec = newDur;
+            preparedScenes[i].durationSec = Number((newDur + 0.42).toFixed(2));
+          }
+        } catch {}
+      }
+    }
+    const reelTotal = preparedScenes.reduce((acc, s) => acc + s.durationSec, 0);
+    if (reelTotal < 15) {
+      const add = Number((15 - reelTotal).toFixed(2));
+      preparedScenes[preparedScenes.length - 1].durationSec = Number(
+        (preparedScenes[preparedScenes.length - 1].durationSec + add).toFixed(2)
+      );
+    } else if (reelTotal > 21) {
+      let excess = reelTotal - 20.5;
+      for (let i = preparedScenes.length - 1; i >= 0 && excess > 0; i--) {
+        const minAllowed = Number((preparedScenes[i].voiceDurSec + 0.25).toFixed(2));
+        const reducible = Math.max(0, preparedScenes[i].durationSec - minAllowed);
+        const cut = Math.min(excess, reducible);
+        preparedScenes[i].durationSec = Number((preparedScenes[i].durationSec - cut).toFixed(2));
+        excess -= cut;
+      }
+    }
+  }
 
   // Stage 1: Pre-bake and pre-scale unique character portraits once (Pixar 3D color grading + yuv420p)
   // so FFmpeg does not re-evaluate scale+eq filters on 9,000-15,000 frames in Long videos.
@@ -2101,7 +2160,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     if (prebakedMap.has(rawImgPath)) {
       return prebakedMap.get(rawImgPath);
     }
-    const bakedPath = path.join(tmpDir, `prebaked_static_${tagIdx}.jpg`);
+    const bakedPath = path.join(tmpDir, `prebaked_static_${videoFormat}_${targetPlatform}_${tagIdx}.jpg`);
     await execFileAsync("ffmpeg", [
       "-y",
       "-i",
@@ -2140,6 +2199,29 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     }
   }
   const hasChannelWatermark = Boolean(channelWatermarkPng && fs.existsSync(channelWatermarkPng));
+  let multiShotDuoPrebaked = null;
+  {
+    const duoOverscanPath = path.join(tmpDir, `duo_overscan_${videoFormat}_${targetPlatform}.jpg`);
+    const halfOW = Math.floor(overscanW / 2);
+    try {
+      await execFileAsync("ffmpeg", [
+        "-y",
+        "-i", compImg,
+        "-i", heroImg,
+        "-filter_complex",
+        `[0:v]scale=${halfOW}:${overscanH}:force_original_aspect_ratio=increase,crop=${halfOW}:${overscanH}[left];` +
+        `[1:v]scale=${overscanW - halfOW}:${overscanH}:force_original_aspect_ratio=increase,crop=${overscanW - halfOW}:${overscanH}[right];` +
+        `[left][right]hstack=inputs=2,eq=saturation=1.18:contrast=1.06,vignette=PI/6,drawbox=x=${halfOW - 4}:y=0:w=8:h=${overscanH}:color=0xFBBF24@0.95:t=fill,setsar=1,format=yuv420p[outv]`,
+        "-map", "[outv]",
+        "-frames:v", "1",
+        "-q:v", "2",
+        duoOverscanPath,
+      ]);
+      if (fs.existsSync(duoOverscanPath) && fs.statSync(duoOverscanPath).size > 1000) {
+        multiShotDuoPrebaked = duoOverscanPath;
+      }
+    } catch {}
+  }
 
   // Stage 2: Render scene segments in parallel batches (Closed-GOP H.264 video-only + sample-accurate 48kHz Stereo PCM .wav)
   // Separating PCM audio from video segment concatenation eliminates AAC 1024-sample boundary gaps in Long videos.
@@ -2154,6 +2236,9 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     // Strictly show the speaking character's full portrait (Hero when Hero speaks, Companion when Companion speaks)
     const shotImg = activeImg;
     const prebakedImg = await getPrebakedPortrait(shotImg, i);
+    const partnerRawImg = activeImg === heroImg ? compImg : heroImg;
+    const partnerPrebaked = await getPrebakedPortrait(partnerRawImg, `p_${i}`);
+    const duoImgReady = multiShotDuoPrebaked || prebakedImg;
 
     console.log(
       `   -> [Scene ${i + 1}/${preparedScenes.length}] Speaker="${
@@ -2165,7 +2250,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     const gentleTempo = 1.0;
     const tempoChain = "";
 
-    const mixedWav = path.join(tmpDir, `scene_mixed_${i}.wav`);
+    const mixedWav = path.join(tmpDir, `scene_mixed_${videoFormat}_${targetPlatform}_${i}.wav`);
     await execFileAsync("ffmpeg", [
       "-y",
       "-i",
@@ -2192,7 +2277,7 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       mixedWav,
     ]);
 
-    const sceneVidOnlyMp4 = path.join(tmpDir, `scene_vid_${i}.mp4`);
+    const sceneVidOnlyMp4 = path.join(tmpDir, `scene_vid_${videoFormat}_${targetPlatform}_${i}.mp4`);
     const fadeOutStart = Math.max(0.4, Number((dur - 0.35).toFixed(2)));
     const combinedStoryText = `${rawTopicText} ${sc.dialogueArabic || ""} ${sc.title || ""} ${sc.speakerName || ""}`;
     let sprite1Lavfi =
@@ -2227,38 +2312,70 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
       borderColorHex = "0xF59E0B";
     }
 
-    const halfSpanX = Math.round(panRangeX * 0.5);
-    const halfSpanY = Math.round(panRangeY * 0.5);
-    const ampX = Math.max(4, Math.round(panRangeX * 0.45));
-    const ampY = Math.max(4, Math.round(panRangeY * 0.42));
-    const camExprX =
-      i % 2 === 0
-        ? `${halfSpanX}+${ampX}*sin(2*PI*t/9.5)`
-        : `${halfSpanX}-${ampX}*cos(2*PI*t/10.0)`;
-    const camExprY =
-      i % 2 === 0
-        ? `${halfSpanY}+${ampY}*cos(2*PI*t/12.0)`
-        : `${halfSpanY}+${ampY}*sin(2*PI*t/11.5)`;
+    const camCfg = buildFacebookCameraFramingConfig({
+      isFb,
+      isVertical,
+      isFbMicroReel,
+      isMicroFormat,
+      sceneIndex: i,
+      panRangeX,
+      panRangeY,
+      dur,
+    });
 
     const marginX = Math.round(W * 0.07);
     const rangeX = Math.max(120, W - marginX * 2 - 48);
     const bottomY = Math.round(H * 0.92);
     const travelY = Math.max(160, Math.round(H * 0.85));
 
-    const isScene1WithPoster = i === 0 && isShort && fs.existsSync(verticalPosterPath);
-    const isScene2WithSecret = i === 1;
+    const isScene1WithPoster = camCfg.isScene1WithPosterAllowed && i === 0 && isShort && fs.existsSync(verticalPosterPath);
+    const isScene2WithSecret = i === 1 && dur >= 8.2;
     const isFinalScene = i === preparedScenes.length - 1;
 
     const secretSpriteLavfi = "color=c=black@0.0:s=130x130:r=30:d=0.04,format=rgba,geq=r=255:g=220:b=50:a='clip(255*exp(-((X-65)*(X-65)+(Y-65)*(Y-65))/650)+180*exp(-pow(abs(X-65)*abs(Y-65),0.6)/35),0,255)',format=yuva420p,loop=loop=-1:size=1:start=0";
 
-    const filterSteps = [
-      `[0:v]format=yuv420p,loop=loop=-1:size=1:start=0,fps=30,trim=duration=${dur},crop=${W}:${H}:x='${camExprX}':y='${camExprY}'[base_raw]`,
-    ];
+    let currentInputIdx = 3;
+    const extraSceneInputs = [];
+    let posterInputIdx = -1;
+    let secretInputIdx = -1;
+    let partnerInputIdx = -1;
+    let duoInputIdx = -1;
+
+    if (isScene1WithPoster) {
+      posterInputIdx = currentInputIdx++;
+      extraSceneInputs.push("-loop", "1", "-i", verticalPosterPath);
+    } else if (isScene2WithSecret) {
+      secretInputIdx = currentInputIdx++;
+      extraSceneInputs.push("-f", "lavfi", "-i", secretSpriteLavfi);
+    }
+
+    const useMultiShot = Boolean(camCfg.enableMultiShot && partnerPrebaked && duoImgReady);
+    if (useMultiShot) {
+      partnerInputIdx = currentInputIdx++;
+      extraSceneInputs.push("-i", partnerPrebaked);
+      duoInputIdx = currentInputIdx++;
+      extraSceneInputs.push("-i", duoImgReady);
+    }
+
+    const filterSteps = [];
+    if (useMultiShot) {
+      filterSteps.push(
+        `[0:v]format=yuv420p,loop=loop=-1:size=1:start=0,fps=30,trim=duration=${dur},crop=${W}:${H}:x='${camCfg.camExprX}':y='${camCfg.camExprY}'[fb_main]`,
+        `[${partnerInputIdx}:v]format=yuv420p,loop=loop=-1:size=1:start=0,fps=30,trim=duration=${dur},crop=${W}:${H}:x='${camCfg.camPartnerX}':y='${camCfg.camPartnerY}'[fb_partner]`,
+        `[${duoInputIdx}:v]format=yuv420p,loop=loop=-1:size=1:start=0,fps=30,trim=duration=${dur},crop=${W}:${H}:x='${camCfg.camDuoX}':y='${camCfg.camDuoY}'[fb_duo]`,
+        `[fb_main][fb_duo]overlay=x=0:y=0:enable='eq(mod(floor(t/${camCfg.shotIntervalSec}),3),1)':shortest=1[fb_m1]`,
+        `[fb_m1][fb_partner]overlay=x=0:y=0:enable='eq(mod(floor(t/${camCfg.shotIntervalSec}),3),2)':shortest=1[base_raw]`
+      );
+    } else {
+      filterSteps.push(
+        `[0:v]format=yuv420p,loop=loop=-1:size=1:start=0,fps=30,trim=duration=${dur},crop=${W}:${H}:x='${camCfg.camExprX}':y='${camCfg.camExprY}'[base_raw]`
+      );
+    }
 
     let currentBase = "base_raw";
     if (isScene1WithPoster) {
       filterSteps.push(
-        `[3:v]fade=t=out:st=0.55:d=0.20:alpha=1[post_faded]`,
+        `[${posterInputIdx}:v]fade=t=out:st=0.55:d=0.20:alpha=1[post_faded]`,
         `[${currentBase}][post_faded]overlay=x=0:y=0:enable='lte(t,0.75)':format=yuv420[base_poster]`
       );
       currentBase = "base_poster";
@@ -2277,19 +2394,9 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
     let preDecorated = "v5";
     if (isScene2WithSecret) {
       filterSteps.push(
-        `[${preDecorated}][3:v]overlay=x=${W - 170}:y=180:enable='between(t,6.5,7.8)':format=yuv420[v_secret]`
+        `[${preDecorated}][${secretInputIdx}:v]overlay=x=${W - 170}:y=180:enable='between(t,6.5,7.8)':format=yuv420[v_secret]`
       );
       preDecorated = "v_secret";
-    }
-
-    let currentInputIdx = 3;
-    const extraSceneInputs = [];
-    if (isScene1WithPoster) {
-      extraSceneInputs.push("-loop", "1", "-i", verticalPosterPath);
-      currentInputIdx++;
-    } else if (isScene2WithSecret) {
-      extraSceneInputs.push("-f", "lavfi", "-i", secretSpriteLavfi);
-      currentInputIdx++;
     }
 
     const finalBoxes = `drawbox=x=0:y=0:w=${W}:h=${H}:color=${borderColorHex}@0.88:t=8`;
@@ -2385,8 +2492,8 @@ async function renderEpisodeMp4(episode, videoFormat, tmpDir, dialect = "egyptia
 
   // Stage 3: Concatenate Closed-GOP H.264 video stream + Continuous PCM audio stream in a single pass
   // with AAC-LC 48kHz Stereo, BT.709 color tags, and +faststart moov atom at the front of the file.
-  const concatVidTxt = path.join(tmpDir, `concat_vid_${videoFormat}.txt`);
-  const concatAudTxt = path.join(tmpDir, `concat_aud_${videoFormat}.txt`);
+  const concatVidTxt = path.join(tmpDir, `concat_vid_${videoFormat}_${targetPlatform}.txt`);
+  const concatAudTxt = path.join(tmpDir, `concat_aud_${videoFormat}_${targetPlatform}.txt`);
   fs.writeFileSync(
     concatVidTxt,
     renderedItems.map((r) => `file '${r.videoPath.replace(/'/g, "'\\''")}'`).join("\n")
@@ -6571,9 +6678,119 @@ async function main() {
     const ytMp4Path = await renderEpisodeMp4(task.episode, task.videoFormat, tmpDir, dailyDialect, "youtube");
     const sharedVoiceScenes = renderEpisodeMp4.lastPreparedScenes || null;
     let fbMp4Path = null;
+    let fbEpisodeForPrimaryUpload = task.episode;
+    let fbTeaserMp4Path = null;
+    let fbTeaserEpisode = null;
     if (shouldUploadToFacebook && facebookPageAccessToken) {
-      console.log(`🎬 [Facebook 9:16 Pipeline] Rendering Dedicated 1080x1920 Fullscreen Vertical MP4 for Facebook (${task.label})...`);
-      fbMp4Path = await renderEpisodeMp4(task.episode, task.videoFormat, tmpDir, dailyDialect, "facebook", sharedVoiceScenes);
+      if (task.videoFormat === "short_9_16") {
+        const microPlan = selectShortMicroReelScenes(task.episode, sharedVoiceScenes, 15, 20.5);
+        if (microPlan) {
+          fbEpisodeForPrimaryUpload = microPlan.microEpisode;
+          console.log(`⚡ [Facebook Micro-Reel #1 Pipeline] Rendering 1080x1920 High-Retention 15-20s Story Hook Reel (Fast 3.6s Cuts, 0 extra TTS calls)...`);
+          fbMp4Path = await renderEpisodeMp4(microPlan.microEpisode, "short_9_16", tmpDir, dailyDialect, "facebook_reel", microPlan.selectedPreparedScenes);
+        } else {
+          fbMp4Path = await renderEpisodeMp4(task.episode, "short_9_16", tmpDir, dailyDialect, "facebook_reel", sharedVoiceScenes);
+        }
+        const { stdout: fbProbeOut } = await execFileAsync("ffprobe", [
+          "-v", "quiet", "-print_format", "json", "-show_format", "-show_streams", fbMp4Path,
+        ]);
+        const fbCheck = validateFacebookVideoFfprobeReport(JSON.parse(fbProbeOut || "{}"), { expectMicroReel: true });
+        if (!fbCheck.valid) {
+          throw new Error(`[Facebook Micro-Reel Gate FAILED] ${fbCheck.errors.join(" | ")}`);
+        }
+        console.log(`✅ [Facebook Micro-Reel Gate PASS] ${fbCheck.width}x${fbCheck.height} | Duration=${fbCheck.durSec.toFixed(1)}s | Fast 3.6s Multi-Shot Cuts Ready!`);
+      } else {
+        console.log(`🎬 [Facebook 9:16 Long Pipeline] Rendering 1080x1920 Fullscreen Vertical Episode with Fast First-20s Multi-Shot Pacing...`);
+        fbMp4Path = await renderEpisodeMp4(task.episode, task.videoFormat, tmpDir, dailyDialect, "facebook", sharedVoiceScenes);
+        const { stdout: fbLongProbeOut } = await execFileAsync("ffprobe", [
+          "-v", "quiet", "-print_format", "json", "-show_format", "-show_streams", fbMp4Path,
+        ]);
+        const fbLongCheck = validateFacebookVideoFfprobeReport(JSON.parse(fbLongProbeOut || "{}"), { expectMicroReel: false });
+        if (!fbLongCheck.valid) {
+          throw new Error(`[Facebook Long Gate FAILED] ${fbLongCheck.errors.join(" | ")}`);
+        }
+        console.log(`✅ [Facebook Long Gate PASS] ${fbLongCheck.width}x${fbLongCheck.height} | Duration=${fbLongCheck.durSec.toFixed(1)}s`);
+
+        // Shared Teaser Micro-Episode #2 is prepared right below for BOTH YouTube & Facebook
+      }
+    }
+
+    // For Long Episode task: build & render Teaser Micro-Short #2 (YouTube 720x1280) + Teaser Micro-Reel #2 (Facebook 1080x1920) sharing ONE voice synthesis!
+    let ytTeaserMp4Path = null;
+    let ytTeaserEpisode = null;
+    let ytTeaserThumbPath = null;
+    if (task.videoFormat === "long_16_9") {
+      const teaserTmpDir = path.join(tmpDir, `teaser_micro_${tIdx}`);
+      fs.mkdirSync(teaserTmpDir, { recursive: true });
+      const baseTeaserEp = buildLongTeaserMicroReelEpisode(task.episode, dailyDialect);
+      let sharedTeaserVoiceScenes = null;
+
+      if (shouldUploadToYouTube && accessToken) {
+        try {
+          ytTeaserEpisode = baseTeaserEp;
+          console.log(`🔥 [YouTube Micro-Short #2 Pipeline] Rendering 720x1280 15-20s Episode Teaser Short (2-Character Hook + Fast 3.6s Cuts)...`);
+          ytTeaserMp4Path = await renderEpisodeMp4(ytTeaserEpisode, "short_9_16", teaserTmpDir, dailyDialect, "youtube_teaser_short");
+          sharedTeaserVoiceScenes = renderEpisodeMp4.lastPreparedScenes || null;
+          ytTeaserThumbPath = path.join(teaserTmpDir, "thumbnail_1280x720_short_9_16.jpg");
+          const { stdout: ytTeaserProbeOut } = await execFileAsync("ffprobe", [
+            "-v", "quiet", "-print_format", "json", "-show_format", "-show_streams", ytTeaserMp4Path,
+          ]);
+          const ytTeaserCheck = validatePlatformVideoFfprobeReport(JSON.parse(ytTeaserProbeOut || "{}"), {
+            platform: "youtube",
+            isShort: true,
+            expectMicroReel: true,
+          });
+          if (!ytTeaserCheck.valid) {
+            throw new Error(ytTeaserCheck.errors.join(" | "));
+          }
+          console.log(`✅ [YouTube Teaser Micro-Short Gate PASS] ${ytTeaserCheck.width}x${ytTeaserCheck.height} | Duration=${ytTeaserCheck.durSec.toFixed(1)}s`);
+        } catch (ytTeaserErr) {
+          console.warn(`⚠️ [YouTube Teaser Short Notice] ${ytTeaserErr?.message || ytTeaserErr}`);
+          ytTeaserMp4Path = null;
+        }
+      }
+
+      if (shouldUploadToFacebook && facebookPageAccessToken) {
+        try {
+          fbTeaserEpisode = baseTeaserEp;
+          console.log(`🔥 [Facebook Micro-Reel #2 Pipeline] Rendering 1080x1920 15-20s Episode Teaser Reel (Fast 3.6s Cuts, reusing teaser voice if cached)...`);
+          fbTeaserMp4Path = await renderEpisodeMp4(
+            fbTeaserEpisode,
+            "short_9_16",
+            teaserTmpDir,
+            dailyDialect,
+            "facebook_teaser_reel",
+            sharedTeaserVoiceScenes
+          );
+          const { stdout: fbTeaserProbeOut } = await execFileAsync("ffprobe", [
+            "-v", "quiet", "-print_format", "json", "-show_format", "-show_streams", fbTeaserMp4Path,
+          ]);
+          const fbTeaserCheck = validateFacebookVideoFfprobeReport(JSON.parse(fbTeaserProbeOut || "{}"), { expectMicroReel: true });
+          if (!fbTeaserCheck.valid) {
+            throw new Error(fbTeaserCheck.errors.join(" | "));
+          }
+          console.log(`✅ [Facebook Teaser Micro-Reel Gate PASS] ${fbTeaserCheck.width}x${fbTeaserCheck.height} | Duration=${fbTeaserCheck.durSec.toFixed(1)}s`);
+        } catch (teaserErr) {
+          console.warn(`⚠️ [Facebook Teaser Reel Notice] Falling back cleanly: ${teaserErr?.message || teaserErr}`);
+          fbTeaserMp4Path = null;
+          if (Array.isArray(sharedVoiceScenes) && sharedVoiceScenes.length > 0) {
+            try {
+              const fallbackScene = sharedVoiceScenes[0];
+              fbTeaserEpisode = { ...baseTeaserEp, scenes: [{ ...fallbackScene.scene }] };
+              fbTeaserMp4Path = await renderEpisodeMp4(
+                fbTeaserEpisode,
+                "short_9_16",
+                teaserTmpDir,
+                dailyDialect,
+                "facebook_teaser_reel",
+                [{ ...fallbackScene, scene: { ...fallbackScene.scene } }]
+              );
+            } catch {
+              fbTeaserMp4Path = null;
+            }
+          }
+        }
+      }
     }
     const mp4Path = ytMp4Path;
 
@@ -6594,8 +6811,8 @@ async function main() {
     const aStream = streams.find((s) => s.codec_type === "audio");
 
     // 1. Duration & YouTube Standard Encoding Gate (H.264, AAC-LC, yuv420p, 48kHz Stereo, Closed-GOP, FastStart)
-    if (task.videoFormat === "short_9_16" && (durSec < 50 || durSec > 95)) {
-      throw new Error(`[Pre-Upload Unit Test FAILED] Short duration (${durSec}s) outside required 50-95s gate. Upload blocked.`);
+    if (task.videoFormat === "short_9_16" && (durSec < 13 || durSec > 24)) {
+      throw new Error(`[Pre-Upload Unit Test FAILED] Micro-Short duration (${durSec}s) outside required 13-24s gate. Upload blocked.`);
     }
     if (task.videoFormat === "long_16_9" && (durSec < 300 || durSec > 600)) {
       throw new Error(`[Pre-Upload Unit Test FAILED] Long duration (${durSec}s) outside required 300-600s gate. Upload blocked.`);
@@ -6737,7 +6954,42 @@ async function main() {
       }
     }
 
+    let ytTeaserUploadRes = null;
+    if (shouldUploadToYouTube && accessToken && ytTeaserMp4Path && fs.existsSync(ytTeaserMp4Path) && ytTeaserEpisode) {
+      try {
+        const teaserPkg = ytTeaserEpisode.youtubePackage || {};
+        console.log(`🔥 [Step 4B/5] Uploading YouTube Micro-Short #2 (${path.basename(ytTeaserMp4Path)}) to Shorts Playlist (${shortsPlaylistId})...`);
+        ytTeaserUploadRes = await uploadMp4ToYouTube({
+          accessToken,
+          mp4Path: ytTeaserMp4Path,
+          thumbnailJpgPath: (ytTeaserThumbPath && fs.existsSync(ytTeaserThumbPath)) ? ytTeaserThumbPath : expectedThumbPath,
+          thumbnailBase64: null,
+          title: teaserPkg.videoTitleAr || ytTeaserEpisode.title,
+          description: teaserPkg.descriptionAr || ytTeaserEpisode.subtitle,
+          tags: teaserPkg.tags,
+          privacyStatus,
+          madeForKids,
+          containsSyntheticMedia,
+          categoryId,
+          publishAtIso,
+          playlistId: shortsPlaylistId,
+        });
+        console.log(`🎉 YOUTUBE TEASER SHORT SUCCESS! Video ID: ${ytTeaserUploadRes.videoId}`);
+        console.log(`🔗 YouTube Teaser Short URL: https://www.youtube.com/watch?v=${ytTeaserUploadRes.videoId}`);
+        if (schedule.firstCommentEnabled !== false && ytTeaserUploadRes.videoId) {
+          await postYouTubeFirstComment({
+            accessToken,
+            videoId: ytTeaserUploadRes.videoId,
+            message: buildInteractiveChallengeMessage(ytTeaserEpisode, "youtube"),
+          });
+        }
+      } catch (ytTeaserUpErr) {
+        console.warn(`⚠️ [YouTube Teaser Short Upload Warning]: ${ytTeaserUpErr?.message || ytTeaserUpErr}`);
+      }
+    }
+
     let fbUploadRes = null;
+    let fbTeaserReelUploadRes = null;
     if (shouldUploadToFacebook && facebookPageAccessToken) {
       try {
         const fbUploadFile = fbMp4Path || mp4Path;
@@ -6748,24 +7000,54 @@ async function main() {
           mp4Path: fbUploadFile,
           thumbnailJpgPath: expectedThumbPath,
           videoFormat: task.videoFormat,
-          episode: task.episode,
+          episode: fbEpisodeForPrimaryUpload,
           facebookSettings,
-          customFacebookPackages,
+          customFacebookPackages: fbEpisodeForPrimaryUpload?.isFbMicroReel ? {} : customFacebookPackages,
         });
         console.log(`🎉 FACEBOOK SUCCESS! Uploaded Facebook Video ID: ${fbUploadRes.facebookVideoId}`);
         console.log(`📝 Facebook Title: ${fbUploadRes.facebookTitle}`);
         console.log(`🔗 Facebook Permalink: ${fbUploadRes.facebookPermalinkUrl}`);
-        
+          
         if (schedule.firstCommentEnabled !== false && fbUploadRes.facebookVideoId) {
           const fbComment = await postFacebookFirstComment({
             rawPageAccessToken: facebookPageAccessToken,
             pageId: facebookPageId,
             videoId: fbUploadRes.facebookVideoId,
             postId: fbUploadRes.facebookPostId,
-            message: buildInteractiveChallengeMessage(task.episode, "facebook"),
+            message: buildInteractiveChallengeMessage(fbEpisodeForPrimaryUpload, "facebook"),
           });
           console.log(`💬 Facebook first challenge comment: ${fbComment.success ? "POSTED ✓" : "FAILED (upload kept successful)"}`);
         }
+
+        if (fbTeaserMp4Path && fs.existsSync(fbTeaserMp4Path) && fbTeaserEpisode) {
+          try {
+            console.log(`🔥 [Step 5B/5] Uploading 2nd 1080x1920 Micro-Reel (${path.basename(fbTeaserMp4Path)}) to Facebook Reels (${facebookPageId})...`);
+            fbTeaserReelUploadRes = await uploadMp4ToFacebookPage({
+              rawPageAccessToken: facebookPageAccessToken,
+              pageId: facebookPageId,
+              mp4Path: fbTeaserMp4Path,
+              thumbnailJpgPath: expectedThumbPath,
+              videoFormat: "short_9_16",
+              episode: fbTeaserEpisode,
+              facebookSettings,
+              customFacebookPackages: {},
+            });
+            console.log(`🎉 FACEBOOK TEASER REEL SUCCESS! Video ID: ${fbTeaserReelUploadRes.facebookVideoId}`);
+            console.log(`🔗 Facebook Teaser Reel Permalink: ${fbTeaserReelUploadRes.facebookPermalinkUrl}`);
+            if (schedule.firstCommentEnabled !== false && fbTeaserReelUploadRes.facebookVideoId) {
+              await postFacebookFirstComment({
+                rawPageAccessToken: facebookPageAccessToken,
+                pageId: facebookPageId,
+                videoId: fbTeaserReelUploadRes.facebookVideoId,
+                postId: fbTeaserReelUploadRes.facebookPostId,
+                message: buildInteractiveChallengeMessage(fbTeaserEpisode, "facebook"),
+              });
+            }
+          } catch (teaserUploadErr) {
+            console.warn(`⚠️ [Facebook Teaser Reel Upload Warning]: ${teaserUploadErr?.message || teaserUploadErr}`);
+          }
+        }
+
         if (schedule.facebookAutoCommentResponderEnabled !== false && fbUploadRes.facebookVideoId) {
           const fbReplies = await scanAndAutoReplyFacebookVideoComments({
             rawPageAccessToken: facebookPageAccessToken,
@@ -6798,6 +7080,11 @@ async function main() {
       facebookTitle: fbUploadRes?.facebookTitle || null,
       facebookCaption: fbUploadRes?.facebookCaption || null,
       facebookHashtags: fbUploadRes?.facebookHashtags || null,
+      youtubeTeaserShortVideoId: ytTeaserUploadRes?.videoId || null,
+      youtubeTeaserShortTitle: ytTeaserUploadRes?.cleanTitle || null,
+      facebookTeaserReelVideoId: fbTeaserReelUploadRes?.facebookVideoId || null,
+      facebookTeaserReelPermalinkUrl: fbTeaserReelUploadRes?.facebookPermalinkUrl || null,
+      facebookTeaserReelTitle: fbTeaserReelUploadRes?.facebookTitle || null,
       videoFormat: task.videoFormat,
       label: task.label,
       durationSec: durSec,
@@ -7270,8 +7557,11 @@ async function main() {
       "|---|---|---|---|---|---|---|",
       ...results.map(
         (r) =>
-          `| ${r.label} | ${r.cleanTitle} | ${r.facebookTitle || "—"} | ${r.durationSec}s | ${r.fileSizeMb} MB | [YouTube](https://youtu.be/${r.videoId}) | ${
-            r.facebookPermalinkUrl ? `[Facebook](${r.facebookPermalinkUrl})` : "—"
+          `| ${r.label} | ${r.cleanTitle} | ${r.facebookTitle || "—"} | ${r.durationSec}s | ${r.fileSizeMb} MB | ${[r.videoId ? `[YouTube](https://youtu.be/${r.videoId})` : null, r.youtubeTeaserShortVideoId ? `[Teaser Short](https://youtu.be/${r.youtubeTeaserShortVideoId})` : null].filter(Boolean).join(" / ") || "—"} | ${
+            [
+              r.facebookPermalinkUrl ? `[Facebook](${r.facebookPermalinkUrl})` : null,
+              r.facebookTeaserReelPermalinkUrl ? `[Teaser Reel](${r.facebookTeaserReelPermalinkUrl})` : null,
+            ].filter(Boolean).join(" / ") || "—"
           } |`
       ),
       "",
