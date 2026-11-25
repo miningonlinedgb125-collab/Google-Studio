@@ -2718,6 +2718,16 @@
     {
       "topic": "كيف نخطط لمصروفنا الأسبوعي وشراء ما نحتاجه قبل ما",
       "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "حكمة جدو في حل الخلاف بين أطفال الحارة بالعدل والرضا",
+      "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "كيف نخطط لمصروفنا الأسبوعي وشراء ما نحتاجه قبل ما",
+      "mainCharacterName": "أستاذ شريف",
       "companionName": "الصقر الذكي",
       "timestampIso": "2026-11-25T15:37:15.660Z"
     },
@@ -2880,28 +2890,6 @@
       "mainCharacterName": "تيتة",
       "companionName": "الدب باندا",
       "timestampIso": "2026-11-21T20:57:51.874Z"
-    },
-    {
-      "topic": "جدو والفأر في رحلة البذرة والصبر الكبير",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "رحلة أستاذ شريف والترتيب الذكي للواجبات",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "جدو والفأر في رحلة البذرة والصبر الكبير",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-11-21T13:48:46.767Z"
-    },
-    {
-      "topic": "رحلة أستاذ شريف والترتيب الذكي للواجبات",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-11-21T13:48:46.767Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-25 · 04:23 بتوقيت مصر",
