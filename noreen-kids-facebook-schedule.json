@@ -68,6 +68,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122130019917484976",
+      "photoId": "122130019893484976",
+      "themeTitle": "تحدي الصورة المختلفة (من 1 إلى 4) مع تختوخ والكلب زقلط",
+      "title": "تحدي الصورة المختلفة (من 1 إلى 4) مع تختوخ والكلب زقلط",
+      "caption": "يا هلا بكل مامي شطورة وكل بطل عبقري! بطلنا المحبوب \"تختوخ\" وصاحبه الوفي \"الكلب زقلط\" محضرينلكم تحدي ذكاء وملاحظة من العيار الثقيل 🕵️‍♂️🐶  \nقدامكم 4 صور لـ \"تختوخ\"، فيهم 3 صور توأم وشبه بعض بالظبط، وصورة واحدة بس هي اللي مختلفة ومحيرة الكل.. يا ترى مين الشاطر اللي هيعرف رقم كام هي الصورة المختلفة؟ [ 1 ، 2 ، 3 ، 4 ] 🔍✨  \nاكتبي الإجابة الصح في التعليقات ومعاها اسم بطلك أو بنوتك الشطورة، عشان \"تختوخ\" و\"الكلب زقلط\" يحيّوهم بالاسم في حلقة بكرة! 🌟🎉  \nاعملوا شير للمنشور عشان نتحدى كل أصحابنا، وما تنسوش تتابعوا الصفحة وتفعلوا الجرس 🔔 عشان ما يفوتكوش أي تحدي جديد ومغامرة ممتعة! 💖  \n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
+      "heroName": "تختوخ",
+      "companionName": "الكلب زقلط",
+      "publishedAtCairo": "2026-11-26 · 01:55 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122130019917484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122130017841484976",
       "photoId": "122130017817484976",
       "themeTitle": "تحدي الصورة المختلفة (من 1 إلى 4) مع تيتة والدب باندا",
@@ -534,18 +546,6 @@
       "publishedAtCairo": "2026-11-16 · 15:49 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122127145761484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122126846649484976",
-      "photoId": "122126846625484976",
-      "themeTitle": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع تامر وكركور",
-      "title": "تحدي قوة الملاحظة (3 فروقات بين أ و ب) مع تامر وكركور",
-      "caption": "يا هلا بأشطر مامي وأحلى كتاكيت في الدنيا! 🌟 تامر وصاحبه كركور مجهزين لكم النهاردة تحدي يوزن الذكاء بالدهب! 🔍👦  \n\nركزوا كويس أوي أوي بين الصورتين [ أ ] و [ ب ].. مين الشاطر اللي هيلمح الـ 3 اختلافات المستخبية بذكاء؟ 🤔💡  \n\nيلا ورونا شطارتكم واكتبوا الحل مع اسم بطلكم الصغير في التعليقات، عشان تامر وكركور يحيوه مخصوص بالاسم في حلقة بكرة! 🥳🎉  \n\nمستنيين إيه؟ شيروا التحدي وفعلوا جرس المتابعة 🔔 عشان يوصلكم كل جديد وتفضلوا دايماً من شطار نورين كيدز! 💖  \n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
-      "heroName": "تامر",
-      "companionName": "كركور",
-      "publishedAtCairo": "2026-11-15 · 22:47 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122126846649484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -809,14 +809,15 @@
       "id": "gh-run-45722653863",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-26 (01:45 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-26 (01:59 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1795649961825-sdzc",
       "longEpisodeId": "ep-gh-long-1795650095369-6vld",
       "shortEpisodeTitle": "Noreen Kids: تيتة والدب باندا وشال الدفء لأطفال الملجأ | مغامرات تيتة والدب باندا",
-      "longEpisodeTitle": "سباق الزحليقة المائية وسر حوض الكور الملونة",
+      "longEpisodeTitle": "Noreen Kids: سباق الزحليقة المائية وسر حوض الكور الملونة | مغامرات تختوخ والكلب زقلط",
       "shortTitle": "Noreen Kids: تيتة والدب باندا وشال الدفء لأطفال الملجأ | مغامرات تيتة والدب باندا",
-      "longTitle": "سباق الزحليقة المائية وسر حوض الكور الملونة",
+      "longTitle": "Noreen Kids: سباق الزحليقة المائية وسر حوض الكور الملونة | مغامرات تختوخ والكلب زقلط",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -824,9 +825,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "DVyqLCVhCew",
+      "youtubeLongVideoId": "pDjWdU8KJRY",
       "facebookShortVideoId": "1132502433031656",
+      "facebookLongVideoId": "1116964507835131",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1132502433031656",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1116964507835131",
       "facebookShortTitle": "🎬 ريلز سريع | تيتة والدب باندا وشال الدفء لأطفال الملجأ مع تيتة والدب باندا",
+      "facebookLongTitle": "Noreen Kids | سباق الزحليقة المائية وسر حوض الكور الملونة - مغامرة تختوخ والكلب زقلط",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -834,16 +839,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 16,
-        "fileSizeBytes": 2768241,
-        "inspectedAt": "01:45"
+        "durationSec": 305,
+        "fileSizeBytes": 41576038,
+        "inspectedAt": "01:59"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
