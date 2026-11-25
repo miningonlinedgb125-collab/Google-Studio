@@ -68,6 +68,18 @@
   ],
   "interactivePhotoPostsLog": [
     {
+      "postId": "1330185823512542_122129798283484976",
+      "photoId": "122129798259484976",
+      "themeTitle": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع ذياد والعصفورة الفرفوشة",
+      "title": "تحدي سرعة العد والتركيز (كم نجمة ذهبية؟) مع ذياد والعصفورة الفرفوشة",
+      "caption": "✨ مين أسرع بطل هيعد كل النجوم الذهبية في الصورة؟ ✨\nذياد والعصفورة الفرفوشة بيجهزوا لحكاية جديدة، والنجوم اللامعة بتنور طريقهم! 🌟\nيلا يا شطار يا حلوين.. عدّوا النجوم مع ماما واكتبوا لنا العدد المظبوط في تعليق! 👀🔢\n👇 اكتبوا الحل واسم البطل عشان نوجهله تحية خاصة بالاسم في الحلقة القادمة! 🎬💖\n🔔 شير للتحدي ومتابعة لصفحة Noreen Kids لمزيد من الألعاب المفيدة! 👍\n#نورين_كيدز #Noreen_Kids #فوازير_أطفال #تحدي_الشطار #أمهات_مصر",
+      "heroName": "ذياد",
+      "companionName": "العصفورة الفرفوشة",
+      "publishedAtCairo": "2026-11-25 · 04:20 بتوقيت مصر",
+      "permalinkUrl": "https://www.facebook.com/1330185823512542_122129798283484976",
+      "postKind": "video_challenge"
+    },
+    {
       "postId": "1330185823512542_122129795517484976",
       "photoId": "122129795493484976",
       "themeTitle": "تحدي المتاهة الذكية (أي مسار يوصل للصديق؟) مع أم ملك والبطريق المرح",
@@ -534,18 +546,6 @@
       "publishedAtCairo": "2026-11-15 · 14:53 بتوقيت مصر",
       "permalinkUrl": "https://www.facebook.com/1330185823512542_122126715735484976",
       "postKind": "video_challenge"
-    },
-    {
-      "postId": "1330185823512542_122126562159484976",
-      "photoId": "122126562135484976",
-      "themeTitle": "تحدي الصورة المختلفة (من 1 إلى 4) مع عمرو وزعتر",
-      "title": "تحدي الصورة المختلفة (من 1 إلى 4) مع عمرو وزعتر",
-      "caption": "يا صباح الفل والجمال على أحلى مامي وأشطر كتاكيت في الدنيا! 🌞✨\n\nبطلنا المحبوب \"عمرو\" وصديقه \"زعتر\" عاملين مسابقة للأذكياء ومحتاجين قوة ملاحظتكم السريعة 🕵️‍♂️🔍.. قدامكم 4 صور لعمرو، فيه [3 متطابقين تماماً] و[صورة واحدة بس مختلفة] ومحتاجة بطل نبيه يكتشفها! 🧐\n\nمين يقدر يساعد عمرو وزعتر ويقولنا رقم الصورة المختلفة: [ 1 ولا 2 ولا 3 ولا 4 ]؟ 🤔👇\n\nاكتبي رقم الصورة مع اسم بطلك الصغير في الكومنتات، وعمرو وزعتر هيحيوه بالاسم ويبعتوا له أحلى سلام في حلقة بكرة! 🎙️🥳\n\nيلا دوسوا متابعة للصفحة وفعلوا الجرس 🔔 واعملوا شير للبوست عشان نتحدى كل أصحابنا الشطار! 🚀❤️\n\n#تحدي_الشطار #أبطال_نورين_كيدز #نورين_كيدز #Noreen_Kids #كرتون_3D #أمهات_مصر",
-      "heroName": "عمرو",
-      "companionName": "زعتر",
-      "publishedAtCairo": "2026-11-14 · 22:23 بتوقيت مصر",
-      "permalinkUrl": "https://www.facebook.com/1330185823512542_122126562159484976",
-      "postKind": "video_challenge"
     }
   ],
   "facebook": {
@@ -809,14 +809,15 @@
       "id": "gh-run-45529588973",
       "uploadMode": "daily_schedule",
       "triggerSource": "github_actions_cloud",
-      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-25 (04:03 بتوقيت مصر)",
+      "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-25 (04:23 بتوقيت مصر)",
       "shortEpisodeId": "ep-gh-short-1795572030398-y9xt",
       "longEpisodeId": "ep-gh-long-1795572057978-jla8",
       "shortEpisodeTitle": "Noreen Kids: أم ملك والبطريق في معرض الرسم المبدع | مغامرات أم ملك والبطريق المرح",
-      "longEpisodeTitle": "رحلة ذياد والعصفورة لإنقاذ مفتاح البوابة",
+      "longEpisodeTitle": "Noreen Kids: رحلة ذياد والعصفورة لإنقاذ مفتاح البوابة | مغامرات ذياد والعصفورة الفرفوشة",
       "shortTitle": "Noreen Kids: أم ملك والبطريق في معرض الرسم المبدع | مغامرات أم ملك والبطريق المرح",
-      "longTitle": "رحلة ذياد والعصفورة لإنقاذ مفتاح البوابة",
+      "longTitle": "Noreen Kids: رحلة ذياد والعصفورة لإنقاذ مفتاح البوابة | مغامرات ذياد والعصفورة الفرفوشة",
       "shortPlaylistId": "PLPwfeXzB3ozU",
+      "longPlaylistId": "PLbjN20PzrCYk",
       "privacyStatus": "public",
       "madeForKids": false,
       "containsSyntheticMedia": false,
@@ -824,9 +825,13 @@
       "dialect": "egyptian",
       "status": "uploaded_live",
       "youtubeShortVideoId": "SD-RtI-kpOs",
+      "youtubeLongVideoId": "jATNNpxmFIk",
       "facebookShortVideoId": "1714251666891491",
+      "facebookLongVideoId": "2250197965921445",
       "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1714251666891491",
+      "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2250197965921445",
       "facebookShortTitle": "🎬 ريلز سريع | أم ملك والبطريق في معرض الرسم المبدع مع أم ملك والبطريق المرح",
+      "facebookLongTitle": "Noreen Kids | رحلة ذياد والعصفورة لإنقاذ مفتاح البوابة - مغامرة ذياد والعصفورة الفرفوشة",
       "ffprobeReport": {
         "valid": true,
         "passed": true,
@@ -834,16 +839,16 @@
         "videoCodec": "h264",
         "videoProfile": "High",
         "pixelFormat": "yuv420p",
-        "width": 720,
-        "height": 1280,
+        "width": 1280,
+        "height": 720,
         "fps": 30,
         "audioCodec": "aac",
         "audioSampleRate": 48000,
         "audioChannels": 2,
         "fastStartMoovFirst": true,
-        "durationSec": 16,
-        "fileSizeBytes": 2537554,
-        "inspectedAt": "04:03"
+        "durationSec": 394,
+        "fileSizeBytes": 46986691,
+        "inspectedAt": "04:23"
       },
       "processingDetails": {
         "processingStatus": "succeeded",
