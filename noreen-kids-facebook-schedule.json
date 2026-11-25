@@ -2718,6 +2718,16 @@
     {
       "topic": "أم ملك والبطريق في معرض الرسم المبدع",
       "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح"
+    },
+    {
+      "topic": "رحلة ذياد والعصفورة لإنقاذ مفتاح البوابة",
+      "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة"
+    },
+    {
+      "topic": "أم ملك والبطريق في معرض الرسم المبدع",
+      "mainCharacterName": "أم ملك",
       "companionName": "البطريق المرح",
       "timestampIso": "2026-11-25T02:00:57.978Z"
     },
@@ -2880,28 +2890,6 @@
       "mainCharacterName": "أستاذ شريف",
       "companionName": "الصقر الذكي",
       "timestampIso": "2026-11-21T13:48:46.767Z"
-    },
-    {
-      "topic": "ذياد والعصفورة وإنقاذ الجار في ليلة البرد",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة"
-    },
-    {
-      "topic": "أم ملك ومسابقة المكتبة وتحدي القصص الضائعة",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح"
-    },
-    {
-      "topic": "ذياد والعصفورة وإنقاذ الجار في ليلة البرد",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة",
-      "timestampIso": "2026-11-20T22:18:21.062Z"
-    },
-    {
-      "topic": "أم ملك ومسابقة المكتبة وتحدي القصص الضائعة",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "timestampIso": "2026-11-20T22:18:21.062Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-25 · 02:15 بتوقيت مصر",
