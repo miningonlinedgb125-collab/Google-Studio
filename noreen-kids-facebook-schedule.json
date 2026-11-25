@@ -2718,6 +2718,16 @@
     {
       "topic": "تيتة والدب باندا وشال الدفء لأطفال الملجأ",
       "mainCharacterName": "تيتة",
+      "companionName": "الدب باندا"
+    },
+    {
+      "topic": "سباق الزحليقة المائية وسر حوض الكور الملونة",
+      "mainCharacterName": "تختوخ",
+      "companionName": "الكلب زقلط"
+    },
+    {
+      "topic": "تيتة والدب باندا وشال الدفء لأطفال الملجأ",
+      "mainCharacterName": "تيتة",
       "companionName": "الدب باندا",
       "timestampIso": "2026-11-25T23:41:35.369Z"
     },
@@ -2880,43 +2890,21 @@
       "mainCharacterName": "الشيخ محمود",
       "companionName": "الديك الفصيح",
       "timestampIso": "2026-11-22T13:50:19.618Z"
-    },
-    {
-      "topic": "تختوخ وزقلط وسر كيكة الفراولة الطايرة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط"
-    },
-    {
-      "topic": "تيتة والدب باندا وسر سلة مفاجأة حفظ القرآن",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا"
-    },
-    {
-      "topic": "تختوخ وزقلط وسر كيكة الفراولة الطايرة",
-      "mainCharacterName": "تختوخ",
-      "companionName": "الكلب زقلط",
-      "timestampIso": "2026-11-21T20:57:51.874Z"
-    },
-    {
-      "topic": "تيتة والدب باندا وسر سلة مفاجأة حفظ القرآن",
-      "mainCharacterName": "تيتة",
-      "companionName": "الدب باندا",
-      "timestampIso": "2026-11-21T20:57:51.874Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-25 · 04:23 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-45513570702",
+    "id": "gh-run-45722653863",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-25 (02:15 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1795564508312-zx6k",
-    "longEpisodeId": "ep-gh-long-1795564659282-4g16",
-    "shortEpisodeTitle": "Noreen Kids: ملك ولوليتا وإنقاذ الجرو الصغير بطل الشوارع | مغامرات الطبيبة ملك والقطة لوليتا",
-    "longEpisodeTitle": "Noreen Kids: سدرة وألعاب المكعبات ومشاركة الحلوى اللذيذة | مغامرات سدرة الصغنونة والفراشة الملونة",
-    "shortTitle": "Noreen Kids: ملك ولوليتا وإنقاذ الجرو الصغير بطل الشوارع | مغامرات الطبيبة ملك والقطة لوليتا",
-    "longTitle": "Noreen Kids: سدرة وألعاب المكعبات ومشاركة الحلوى اللذيذة | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-26 (01:59 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1795649961825-sdzc",
+    "longEpisodeId": "ep-gh-long-1795650095369-6vld",
+    "shortEpisodeTitle": "Noreen Kids: تيتة والدب باندا وشال الدفء لأطفال الملجأ | مغامرات تيتة والدب باندا",
+    "longEpisodeTitle": "Noreen Kids: سباق الزحليقة المائية وسر حوض الكور الملونة | مغامرات تختوخ والكلب زقلط",
+    "shortTitle": "Noreen Kids: تيتة والدب باندا وشال الدفء لأطفال الملجأ | مغامرات تيتة والدب باندا",
+    "longTitle": "Noreen Kids: سباق الزحليقة المائية وسر حوض الكور الملونة | مغامرات تختوخ والكلب زقلط",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2925,14 +2913,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "P6l6sjTG47I",
-    "youtubeLongVideoId": "DkyT-mgopFs",
-    "facebookShortVideoId": "1830809771306869",
-    "facebookLongVideoId": "1517606957096453",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1830809771306869",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1517606957096453",
-    "facebookShortTitle": "Noreen Kids | ملك ولوليتا وإنقاذ الجرو الصغير بطل الشوارع - مغامرة ملك والقطة لوليتا",
-    "facebookLongTitle": "Noreen Kids | سدرة وألعاب المكعبات ومشاركة الحلوى اللذيذة - مغامرة سدرة الصغنونة والفراشة الملونة",
+    "youtubeShortVideoId": "DVyqLCVhCew",
+    "youtubeLongVideoId": "pDjWdU8KJRY",
+    "facebookShortVideoId": "1132502433031656",
+    "facebookLongVideoId": "1116964507835131",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1132502433031656",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1116964507835131",
+    "facebookShortTitle": "🎬 ريلز سريع | تيتة والدب باندا وشال الدفء لأطفال الملجأ مع تيتة والدب باندا",
+    "facebookLongTitle": "Noreen Kids | سباق الزحليقة المائية وسر حوض الكور الملونة - مغامرة تختوخ والكلب زقلط",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2947,9 +2935,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 361,
-      "fileSizeBytes": 42037412,
-      "inspectedAt": "02:15"
+      "durationSec": 305,
+      "fileSizeBytes": 41576038,
+      "inspectedAt": "01:59"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2958,7 +2946,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-25T00:15:32.427Z"
+    "reportedAtIso": "2026-11-25T23:59:39.673Z"
   },
   "heroFairRotationIndex": 15,
   "interactiveHeroRotationIndex": 5,
