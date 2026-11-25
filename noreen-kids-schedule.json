@@ -37,6 +37,16 @@
     {
       "topic": "كيف نخطط لمصروفنا الأسبوعي وشراء ما نحتاجه قبل ما",
       "mainCharacterName": "أستاذ شريف",
+      "companionName": "الصقر الذكي"
+    },
+    {
+      "topic": "حكمة جدو في حل الخلاف بين أطفال الحارة بالعدل والرضا",
+      "mainCharacterName": "جدو",
+      "companionName": "الفأر المشاكس"
+    },
+    {
+      "topic": "كيف نخطط لمصروفنا الأسبوعي وشراء ما نحتاجه قبل ما",
+      "mainCharacterName": "أستاذ شريف",
       "companionName": "الصقر الذكي",
       "timestampIso": "2026-11-25T15:37:15.660Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "تيتة",
       "companionName": "الدب باندا",
       "timestampIso": "2026-11-21T20:57:51.874Z"
-    },
-    {
-      "topic": "جدو والفأر في رحلة البذرة والصبر الكبير",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس"
-    },
-    {
-      "topic": "رحلة أستاذ شريف والترتيب الذكي للواجبات",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي"
-    },
-    {
-      "topic": "جدو والفأر في رحلة البذرة والصبر الكبير",
-      "mainCharacterName": "جدو",
-      "companionName": "الفأر المشاكس",
-      "timestampIso": "2026-11-21T13:48:46.767Z"
-    },
-    {
-      "topic": "رحلة أستاذ شريف والترتيب الذكي للواجبات",
-      "mainCharacterName": "أستاذ شريف",
-      "companionName": "الصقر الذكي",
-      "timestampIso": "2026-11-21T13:48:46.767Z"
     }
   ],
   "scheduledHistory": [
@@ -2755,16 +2743,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٥‏/١١‏/٢٠٢٦، ٥:٥٢:١٢ م",
   "lastCloudRunReport": {
-    "id": "gh-run-45529588973",
+    "id": "gh-run-45646707882",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-25 (04:23 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1795572030398-y9xt",
-    "longEpisodeId": "ep-gh-long-1795572057978-jla8",
-    "shortEpisodeTitle": "Noreen Kids: أم ملك والبطريق في معرض الرسم المبدع | مغامرات أم ملك والبطريق المرح",
-    "longEpisodeTitle": "Noreen Kids: رحلة ذياد والعصفورة لإنقاذ مفتاح البوابة | مغامرات ذياد والعصفورة الفرفوشة",
-    "shortTitle": "Noreen Kids: أم ملك والبطريق في معرض الرسم المبدع | مغامرات أم ملك والبطريق المرح",
-    "longTitle": "Noreen Kids: رحلة ذياد والعصفورة لإنقاذ مفتاح البوابة | مغامرات ذياد والعصفورة الفرفوشة",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-25 (17:52 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1795620985060-dlpz",
+    "longEpisodeId": "ep-gh-long-1795621035660-4eqx",
+    "shortEpisodeTitle": "Noreen Kids: كيف نخطط لمصروفنا الأسبوعي وشراء ما نحتاجه قبل ما | مغامرات أستاذ شريف والصقر الذكي",
+    "longEpisodeTitle": "Noreen Kids: حكمة جدو في حل الخلاف بين أطفال الحارة بالعدل والرضا | مغامرات جدو والفأر المشاكس",
+    "shortTitle": "Noreen Kids: كيف نخطط لمصروفنا الأسبوعي وشراء ما نحتاجه قبل ما | مغامرات أستاذ شريف والصقر الذكي",
+    "longTitle": "Noreen Kids: حكمة جدو في حل الخلاف بين أطفال الحارة بالعدل والرضا | مغامرات جدو والفأر المشاكس",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2773,14 +2761,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "SD-RtI-kpOs",
-    "youtubeLongVideoId": "jATNNpxmFIk",
-    "facebookShortVideoId": "1714251666891491",
-    "facebookLongVideoId": "2250197965921445",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1714251666891491",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2250197965921445",
-    "facebookShortTitle": "🎬 ريلز سريع | أم ملك والبطريق في معرض الرسم المبدع مع أم ملك والبطريق المرح",
-    "facebookLongTitle": "Noreen Kids | رحلة ذياد والعصفورة لإنقاذ مفتاح البوابة - مغامرة ذياد والعصفورة الفرفوشة",
+    "youtubeShortVideoId": "JN7Vj4t-t9U",
+    "youtubeLongVideoId": "UE3KW6yesDU",
+    "facebookShortVideoId": "1352580663562418",
+    "facebookLongVideoId": "1444632307339038",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1352580663562418",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1444632307339038",
+    "facebookShortTitle": "🎬 ريلز سريع | كيف نخطط لمصروفنا الأسبوعي وشراء ما نحتاجه قبل ما مع أستاذ شريف والصقر الذكي",
+    "facebookLongTitle": "Noreen Kids | حكمة جدو في حل الخلاف بين أطفال الحارة بالعدل والرضا - مغامرة جدو والفأر المشاكس",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2795,9 +2783,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 394,
-      "fileSizeBytes": 46986691,
-      "inspectedAt": "04:23"
+      "durationSec": 326,
+      "fileSizeBytes": 43473961,
+      "inspectedAt": "17:52"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2806,7 +2794,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-25T02:23:54.794Z"
+    "reportedAtIso": "2026-11-25T15:52:18.718Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
