@@ -37,6 +37,16 @@
     {
       "topic": "ملك ولوليتا وإنقاذ الجرو الصغير بطل الشوارع",
       "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "سدرة وألعاب المكعبات ومشاركة الحلوى اللذيذة",
+      "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "ملك ولوليتا وإنقاذ الجرو الصغير بطل الشوارع",
+      "mainCharacterName": "ملك",
       "companionName": "القطة لوليتا",
       "timestampIso": "2026-11-24T23:57:39.282Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "أم ملك",
       "companionName": "البطريق المرح",
       "timestampIso": "2026-11-20T22:18:21.062Z"
-    },
-    {
-      "topic": "سدرة والفراشة وسر مكعبات البهجة ومشاركة",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة"
-    },
-    {
-      "topic": "ملك ولوليتا وعملية إنقاذ أرنب الوادي الشجاع",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا"
-    },
-    {
-      "topic": "سدرة والفراشة وسر مكعبات البهجة ومشاركة",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "timestampIso": "2026-11-20T14:02:42.915Z"
-    },
-    {
-      "topic": "ملك ولوليتا وعملية إنقاذ أرنب الوادي الشجاع",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "timestampIso": "2026-11-20T14:02:42.915Z"
     }
   ],
   "scheduledHistory": [
