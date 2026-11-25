@@ -37,6 +37,16 @@
     {
       "topic": "أم ملك والبطريق في معرض الرسم المبدع",
       "mainCharacterName": "أم ملك",
+      "companionName": "البطريق المرح"
+    },
+    {
+      "topic": "رحلة ذياد والعصفورة لإنقاذ مفتاح البوابة",
+      "mainCharacterName": "ذياد",
+      "companionName": "العصفورة الفرفوشة"
+    },
+    {
+      "topic": "أم ملك والبطريق في معرض الرسم المبدع",
+      "mainCharacterName": "أم ملك",
       "companionName": "البطريق المرح",
       "timestampIso": "2026-11-25T02:00:57.978Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "أستاذ شريف",
       "companionName": "الصقر الذكي",
       "timestampIso": "2026-11-21T13:48:46.767Z"
-    },
-    {
-      "topic": "ذياد والعصفورة وإنقاذ الجار في ليلة البرد",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة"
-    },
-    {
-      "topic": "أم ملك ومسابقة المكتبة وتحدي القصص الضائعة",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح"
-    },
-    {
-      "topic": "ذياد والعصفورة وإنقاذ الجار في ليلة البرد",
-      "mainCharacterName": "ذياد",
-      "companionName": "العصفورة الفرفوشة",
-      "timestampIso": "2026-11-20T22:18:21.062Z"
-    },
-    {
-      "topic": "أم ملك ومسابقة المكتبة وتحدي القصص الضائعة",
-      "mainCharacterName": "أم ملك",
-      "companionName": "البطريق المرح",
-      "timestampIso": "2026-11-20T22:18:21.062Z"
     }
   ],
   "scheduledHistory": [
@@ -2755,16 +2743,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٥‏/١١‏/٢٠٢٦، ٤:٢٣:٥١ ص",
   "lastCloudRunReport": {
-    "id": "gh-run-45210846102",
+    "id": "gh-run-45529588973",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-23 (18:24 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1795449580558-1f59",
-    "longEpisodeId": "ep-gh-long-1795449629391-q1ej",
-    "shortEpisodeTitle": "Noreen Kids: سر حزام الكويكبات الموسيقي والألحان الفضائية المبهجة | مغامرات جنى وبلبل",
-    "longEpisodeTitle": "Noreen Kids: سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر | مغامرات شوشو ومرجان",
-    "shortTitle": "Noreen Kids: سر حزام الكويكبات الموسيقي والألحان الفضائية المبهجة | مغامرات جنى وبلبل",
-    "longTitle": "Noreen Kids: سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر | مغامرات شوشو ومرجان",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-25 (04:23 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1795572030398-y9xt",
+    "longEpisodeId": "ep-gh-long-1795572057978-jla8",
+    "shortEpisodeTitle": "Noreen Kids: أم ملك والبطريق في معرض الرسم المبدع | مغامرات أم ملك والبطريق المرح",
+    "longEpisodeTitle": "Noreen Kids: رحلة ذياد والعصفورة لإنقاذ مفتاح البوابة | مغامرات ذياد والعصفورة الفرفوشة",
+    "shortTitle": "Noreen Kids: أم ملك والبطريق في معرض الرسم المبدع | مغامرات أم ملك والبطريق المرح",
+    "longTitle": "Noreen Kids: رحلة ذياد والعصفورة لإنقاذ مفتاح البوابة | مغامرات ذياد والعصفورة الفرفوشة",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2773,14 +2761,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "JZeHv34CfbI",
-    "youtubeLongVideoId": "L9XiWpnJe3s",
-    "facebookShortVideoId": "1674244684254376",
-    "facebookLongVideoId": "2936523473383825",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1674244684254376",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2936523473383825",
-    "facebookShortTitle": "Noreen Kids | سر حزام الكويكبات الموسيقي والألحان الفضائية المبهجة - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
-    "facebookLongTitle": "Noreen Kids | سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر - مغامرة شوشو القبطان الصغير ومرجان الدلفين المرح",
+    "youtubeShortVideoId": "SD-RtI-kpOs",
+    "youtubeLongVideoId": "jATNNpxmFIk",
+    "facebookShortVideoId": "1714251666891491",
+    "facebookLongVideoId": "2250197965921445",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1714251666891491",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/2250197965921445",
+    "facebookShortTitle": "🎬 ريلز سريع | أم ملك والبطريق في معرض الرسم المبدع مع أم ملك والبطريق المرح",
+    "facebookLongTitle": "Noreen Kids | رحلة ذياد والعصفورة لإنقاذ مفتاح البوابة - مغامرة ذياد والعصفورة الفرفوشة",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2795,9 +2783,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 308,
-      "fileSizeBytes": 39678116,
-      "inspectedAt": "18:24"
+      "durationSec": 394,
+      "fileSizeBytes": 46986691,
+      "inspectedAt": "04:23"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2806,7 +2794,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-23T16:24:11.370Z"
+    "reportedAtIso": "2026-11-25T02:23:54.794Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
