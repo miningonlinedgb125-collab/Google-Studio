@@ -37,6 +37,16 @@
     {
       "topic": "الشيخ محمود والديك الفصيح وسر نهر الكوثر",
       "mainCharacterName": "الشيخ محمود",
+      "companionName": "الديك الفصيح"
+    },
+    {
+      "topic": "سر النوم بدري وقوة اللبن الدافي للنمو",
+      "mainCharacterName": "الطبيبة نورين",
+      "companionName": "أرنوب الشقي الممرض"
+    },
+    {
+      "topic": "الشيخ محمود والديك الفصيح وسر نهر الكوثر",
+      "mainCharacterName": "الشيخ محمود",
       "companionName": "الديك الفصيح",
       "timestampIso": "2026-11-26T15:14:24.502Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي",
       "timestampIso": "2026-11-22T21:05:32.456Z"
-    },
-    {
-      "topic": "سر الفواكه السحرية وإنقاذ القرد بندق الشقي",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض"
-    },
-    {
-      "topic": "الشيخ محمود والديك وسر الاستعاذة وسورة الفلق",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح"
-    },
-    {
-      "topic": "سر الفواكه السحرية وإنقاذ القرد بندق الشقي",
-      "mainCharacterName": "الطبيبة نورين",
-      "companionName": "أرنوب الشقي الممرض",
-      "timestampIso": "2026-11-22T13:50:19.618Z"
-    },
-    {
-      "topic": "الشيخ محمود والديك وسر الاستعاذة وسورة الفلق",
-      "mainCharacterName": "الشيخ محمود",
-      "companionName": "الديك الفصيح",
-      "timestampIso": "2026-11-22T13:50:19.618Z"
     }
   ],
   "scheduledHistory": [
@@ -2755,16 +2743,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٦‏/١١‏/٢٠٢٦، ٥:٣١:٣٧ م",
   "lastCloudRunReport": {
-    "id": "gh-run-45646707882",
+    "id": "gh-run-45846635599",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-25 (17:52 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1795620985060-dlpz",
-    "longEpisodeId": "ep-gh-long-1795621035660-4eqx",
-    "shortEpisodeTitle": "Noreen Kids: كيف نخطط لمصروفنا الأسبوعي وشراء ما نحتاجه قبل ما | مغامرات أستاذ شريف والصقر الذكي",
-    "longEpisodeTitle": "Noreen Kids: حكمة جدو في حل الخلاف بين أطفال الحارة بالعدل والرضا | مغامرات جدو والفأر المشاكس",
-    "shortTitle": "Noreen Kids: كيف نخطط لمصروفنا الأسبوعي وشراء ما نحتاجه قبل ما | مغامرات أستاذ شريف والصقر الذكي",
-    "longTitle": "Noreen Kids: حكمة جدو في حل الخلاف بين أطفال الحارة بالعدل والرضا | مغامرات جدو والفأر المشاكس",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-26 (17:31 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1795706041476-42n2",
+    "longEpisodeId": "ep-gh-long-1795706064502-u945",
+    "shortEpisodeTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر نهر الكوثر | مغامرات الشيخ محمود والديك الفصيح",
+    "longEpisodeTitle": "Noreen Kids: سر النوم بدري وقوة اللبن الدافي للنمو | مغامرات الطبيبة نورين وأرنوب",
+    "shortTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر نهر الكوثر | مغامرات الشيخ محمود والديك الفصيح",
+    "longTitle": "Noreen Kids: سر النوم بدري وقوة اللبن الدافي للنمو | مغامرات الطبيبة نورين وأرنوب",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2773,14 +2761,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "JN7Vj4t-t9U",
-    "youtubeLongVideoId": "UE3KW6yesDU",
-    "facebookShortVideoId": "1352580663562418",
-    "facebookLongVideoId": "1444632307339038",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1352580663562418",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1444632307339038",
-    "facebookShortTitle": "🎬 ريلز سريع | كيف نخطط لمصروفنا الأسبوعي وشراء ما نحتاجه قبل ما مع أستاذ شريف والصقر الذكي",
-    "facebookLongTitle": "Noreen Kids | حكمة جدو في حل الخلاف بين أطفال الحارة بالعدل والرضا - مغامرة جدو والفأر المشاكس",
+    "youtubeShortVideoId": "F6YM-uImZiQ",
+    "youtubeLongVideoId": "lgfTTE3SBjg",
+    "facebookShortVideoId": "2119172299467022",
+    "facebookLongVideoId": "1483208273717288",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2119172299467022",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1483208273717288",
+    "facebookShortTitle": "🎬 ريلز سريع | الشيخ محمود والديك الفصيح وسر نهر الكوثر مع الشيخ محمود والديك الفصيح",
+    "facebookLongTitle": "Noreen Kids | سر النوم بدري وقوة اللبن الدافي للنمو - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2795,9 +2783,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 326,
-      "fileSizeBytes": 43473961,
-      "inspectedAt": "17:52"
+      "durationSec": 394,
+      "fileSizeBytes": 46378516,
+      "inspectedAt": "17:31"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2806,7 +2794,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-25T15:52:18.718Z"
+    "reportedAtIso": "2026-11-26T15:31:41.308Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
