@@ -2718,6 +2718,16 @@
     {
       "topic": "سر ريشة الطاووس المفقودة في ليلة اكتمال البدر",
       "mainCharacterName": "تامر فارس الواحة",
+      "companionName": "كركور الببغاء الحكيم"
+    },
+    {
+      "topic": "كارمن وسمسم وسر أجنحة الطيران الآمن للسناجب",
+      "mainCharacterName": "كارمن المخترعة الصغيرة",
+      "companionName": "سمسم السنجاب الطائر"
+    },
+    {
+      "topic": "سر ريشة الطاووس المفقودة في ليلة اكتمال البدر",
+      "mainCharacterName": "تامر فارس الواحة",
       "companionName": "كركور الببغاء الحكيم",
       "timestampIso": "2026-11-27T23:27:38.109Z"
     },
@@ -2880,43 +2890,21 @@
       "mainCharacterName": "سدرة الصغنونة",
       "companionName": "الفراشة الملونة",
       "timestampIso": "2026-11-24T23:57:39.282Z"
-    },
-    {
-      "topic": "كارمن وسمسم ومصباح الحركة المضيء للجميع",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر"
-    },
-    {
-      "topic": "لغز القلعة القديمة وبوابات الشجاعة",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم"
-    },
-    {
-      "topic": "كارمن وسمسم ومصباح الحركة المضيء للجميع",
-      "mainCharacterName": "كارمن المخترعة الصغيرة",
-      "companionName": "سمسم السنجاب الطائر",
-      "timestampIso": "2026-11-24T20:39:52.609Z"
-    },
-    {
-      "topic": "لغز القلعة القديمة وبوابات الشجاعة",
-      "mainCharacterName": "تامر فارس الواحة",
-      "companionName": "كركور الببغاء الحكيم",
-      "timestampIso": "2026-11-24T20:39:52.609Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-27 · 17:21 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-45913092206",
+    "id": "gh-run-46082454627",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-27 (02:11 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1795737088485-szeo",
-    "longEpisodeId": "ep-gh-long-1795737138913-c8xn",
-    "shortEpisodeTitle": "Noreen Kids: عمرو وزعتر وسر إنقاذ عنقاء السحاب المضيء | مغامرات عمرو وزعتر",
-    "longEpisodeTitle": "Noreen Kids: إصلاح منارة المرجان المضيئة بالذكاء | مغامرات المهندسة نوران والنمر الفرفوش",
-    "shortTitle": "Noreen Kids: عمرو وزعتر وسر إنقاذ عنقاء السحاب المضيء | مغامرات عمرو وزعتر",
-    "longTitle": "Noreen Kids: إصلاح منارة المرجان المضيئة بالذكاء | مغامرات المهندسة نوران والنمر الفرفوش",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-28 (01:41 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1795822019852-3eog",
+    "longEpisodeId": "ep-gh-long-1795822058109-gowh",
+    "shortEpisodeTitle": "Noreen Kids: سر ريشة الطاووس المفقودة في ليلة اكتمال البدر | مغامرات تامر وكركور",
+    "longEpisodeTitle": "Noreen Kids: كارمن وسمسم وسر أجنحة الطيران الآمن للسناجب | مغامرات كارمن وسمسم",
+    "shortTitle": "Noreen Kids: سر ريشة الطاووس المفقودة في ليلة اكتمال البدر | مغامرات تامر وكركور",
+    "longTitle": "Noreen Kids: كارمن وسمسم وسر أجنحة الطيران الآمن للسناجب | مغامرات كارمن وسمسم",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2925,14 +2913,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "v5EwIYQ5-TA",
-    "youtubeLongVideoId": "l9sDWl_atkc",
-    "facebookShortVideoId": "1697369608473683",
-    "facebookLongVideoId": "1140984228893971",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1697369608473683",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1140984228893971",
-    "facebookShortTitle": "🎬 ريلز سريع | عمرو وزعتر وسر إنقاذ عنقاء السحاب المضيء مع عمرو المستكشف وزعتر الثعلب الذكي",
-    "facebookLongTitle": "Noreen Kids | إصلاح منارة المرجان المضيئة بالذكاء - مغامرة المهندسة نوران والنمر الفرفوش",
+    "youtubeShortVideoId": "E_N3dOaTkB0",
+    "youtubeLongVideoId": "L0O_dQ4Uv1s",
+    "facebookShortVideoId": "1169768238967126",
+    "facebookLongVideoId": "1642772357589287",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1169768238967126",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1642772357589287",
+    "facebookShortTitle": "🎬 ريلز سريع | سر ريشة الطاووس المفقودة في ليلة اكتمال البدر مع تامر فارس الواحة وكركور الببغاء الحكيم",
+    "facebookLongTitle": "Noreen Kids | كارمن وسمسم وسر أجنحة الطيران الآمن للسناجب - مغامرة كارمن المخترعة الصغيرة وسمسم السنجاب الطائر",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2947,9 +2935,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 349,
-      "fileSizeBytes": 48381297,
-      "inspectedAt": "02:11"
+      "durationSec": 330,
+      "fileSizeBytes": 50394563,
+      "inspectedAt": "01:41"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2958,7 +2946,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-27T00:11:53.937Z"
+    "reportedAtIso": "2026-11-27T23:41:05.056Z"
   },
   "heroFairRotationIndex": 7,
   "interactiveHeroRotationIndex": 5,
