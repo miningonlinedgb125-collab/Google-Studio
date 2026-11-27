@@ -2718,6 +2718,16 @@
     {
       "topic": "عمرو وزعتر وسر إنقاذ عنقاء السحاب المضيء",
       "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي"
+    },
+    {
+      "topic": "إصلاح منارة المرجان المضيئة بالذكاء",
+      "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "عمرو وزعتر وسر إنقاذ عنقاء السحاب المضيء",
+      "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي",
       "timestampIso": "2026-11-26T23:52:18.913Z"
     },
@@ -2880,43 +2890,21 @@
       "mainCharacterName": "شوشو القبطان الصغير",
       "companionName": "مرجان الدلفين المرح",
       "timestampIso": "2026-11-23T16:00:29.392Z"
-    },
-    {
-      "topic": "ابتكار المصعد الهوائي لمكتبة السماء العالية",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي"
-    },
-    {
-      "topic": "ابتكار المصعد الهوائي لمكتبة السماء العالية",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-11-22T21:05:32.456Z"
-    },
-    {
-      "topic": "عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "timestampIso": "2026-11-22T21:05:32.456Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-26 · 17:31 بتوقيت مصر",
   "lastScheduledInteractivePhotoDateKey": "2026-10-11",
   "lastFacebookCloudRunReport": {
-    "id": "gh-run-45722653863",
+    "id": "gh-run-45913092206",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-26 (01:59 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1795649961825-sdzc",
-    "longEpisodeId": "ep-gh-long-1795650095369-6vld",
-    "shortEpisodeTitle": "Noreen Kids: تيتة والدب باندا وشال الدفء لأطفال الملجأ | مغامرات تيتة والدب باندا",
-    "longEpisodeTitle": "Noreen Kids: سباق الزحليقة المائية وسر حوض الكور الملونة | مغامرات تختوخ والكلب زقلط",
-    "shortTitle": "Noreen Kids: تيتة والدب باندا وشال الدفء لأطفال الملجأ | مغامرات تيتة والدب باندا",
-    "longTitle": "Noreen Kids: سباق الزحليقة المائية وسر حوض الكور الملونة | مغامرات تختوخ والكلب زقلط",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-27 (02:11 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1795737088485-szeo",
+    "longEpisodeId": "ep-gh-long-1795737138913-c8xn",
+    "shortEpisodeTitle": "Noreen Kids: عمرو وزعتر وسر إنقاذ عنقاء السحاب المضيء | مغامرات عمرو وزعتر",
+    "longEpisodeTitle": "Noreen Kids: إصلاح منارة المرجان المضيئة بالذكاء | مغامرات المهندسة نوران والنمر الفرفوش",
+    "shortTitle": "Noreen Kids: عمرو وزعتر وسر إنقاذ عنقاء السحاب المضيء | مغامرات عمرو وزعتر",
+    "longTitle": "Noreen Kids: إصلاح منارة المرجان المضيئة بالذكاء | مغامرات المهندسة نوران والنمر الفرفوش",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2925,14 +2913,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "DVyqLCVhCew",
-    "youtubeLongVideoId": "pDjWdU8KJRY",
-    "facebookShortVideoId": "1132502433031656",
-    "facebookLongVideoId": "1116964507835131",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1132502433031656",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1116964507835131",
-    "facebookShortTitle": "🎬 ريلز سريع | تيتة والدب باندا وشال الدفء لأطفال الملجأ مع تيتة والدب باندا",
-    "facebookLongTitle": "Noreen Kids | سباق الزحليقة المائية وسر حوض الكور الملونة - مغامرة تختوخ والكلب زقلط",
+    "youtubeShortVideoId": "v5EwIYQ5-TA",
+    "youtubeLongVideoId": "l9sDWl_atkc",
+    "facebookShortVideoId": "1697369608473683",
+    "facebookLongVideoId": "1140984228893971",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1697369608473683",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1140984228893971",
+    "facebookShortTitle": "🎬 ريلز سريع | عمرو وزعتر وسر إنقاذ عنقاء السحاب المضيء مع عمرو المستكشف وزعتر الثعلب الذكي",
+    "facebookLongTitle": "Noreen Kids | إصلاح منارة المرجان المضيئة بالذكاء - مغامرة المهندسة نوران والنمر الفرفوش",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2947,9 +2935,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 305,
-      "fileSizeBytes": 41576038,
-      "inspectedAt": "01:59"
+      "durationSec": 349,
+      "fileSizeBytes": 48381297,
+      "inspectedAt": "02:11"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2958,7 +2946,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-25T23:59:39.673Z"
+    "reportedAtIso": "2026-11-27T00:11:53.937Z"
   },
   "heroFairRotationIndex": 3,
   "interactiveHeroRotationIndex": 5,
