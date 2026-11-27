@@ -37,6 +37,16 @@
     {
       "topic": "لغز الفانوس البحري في كهف الشعاب المضيئة",
       "mainCharacterName": "شوشو القبطان الصغير",
+      "companionName": "مرجان الدلفين المرح"
+    },
+    {
+      "topic": "لغز الكوكب البنفسجي في مرصد المكتبة الطائرة",
+      "mainCharacterName": "جنى رائدة الفضاء",
+      "companionName": "بلبل الروبوت اللطيف"
+    },
+    {
+      "topic": "لغز الفانوس البحري في كهف الشعاب المضيئة",
+      "mainCharacterName": "شوشو القبطان الصغير",
       "companionName": "مرجان الدلفين المرح",
       "timestampIso": "2026-11-27T15:05:25.396Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "تامر فارس الواحة",
       "companionName": "كركور الببغاء الحكيم",
       "timestampIso": "2026-11-24T20:39:52.609Z"
-    },
-    {
-      "topic": "سر حزام الكويكبات الموسيقي والألحان الفضائية المبهجة",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف"
-    },
-    {
-      "topic": "سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح"
-    },
-    {
-      "topic": "سر حزام الكويكبات الموسيقي والألحان الفضائية المبهجة",
-      "mainCharacterName": "جنى رائدة الفضاء",
-      "companionName": "بلبل الروبوت اللطيف",
-      "timestampIso": "2026-11-23T16:00:29.391Z"
-    },
-    {
-      "topic": "سباق الدلافين السريع وتعلم الروح الرياضية ومساعدة الخاسر",
-      "mainCharacterName": "شوشو القبطان الصغير",
-      "companionName": "مرجان الدلفين المرح",
-      "timestampIso": "2026-11-23T16:00:29.392Z"
     }
   ],
   "scheduledHistory": [
@@ -2755,16 +2743,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٧‏/١١‏/٢٠٢٦، ٥:٢١:٣٨ م",
   "lastCloudRunReport": {
-    "id": "gh-run-45846635599",
+    "id": "gh-run-46021382609",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-26 (17:31 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1795706041476-42n2",
-    "longEpisodeId": "ep-gh-long-1795706064502-u945",
-    "shortEpisodeTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر نهر الكوثر | مغامرات الشيخ محمود والديك الفصيح",
-    "longEpisodeTitle": "Noreen Kids: سر النوم بدري وقوة اللبن الدافي للنمو | مغامرات الطبيبة نورين وأرنوب",
-    "shortTitle": "Noreen Kids: الشيخ محمود والديك الفصيح وسر نهر الكوثر | مغامرات الشيخ محمود والديك الفصيح",
-    "longTitle": "Noreen Kids: سر النوم بدري وقوة اللبن الدافي للنمو | مغامرات الطبيبة نورين وأرنوب",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-27 (17:21 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1795791852675-adh7",
+    "longEpisodeId": "ep-gh-long-1795791925396-bdyu",
+    "shortEpisodeTitle": "Noreen Kids: لغز الفانوس البحري في كهف الشعاب المضيئة | مغامرات شوشو ومرجان",
+    "longEpisodeTitle": "Noreen Kids: لغز الكوكب البنفسجي في مرصد المكتبة الطائرة | مغامرات جنى وبلبل",
+    "shortTitle": "Noreen Kids: لغز الفانوس البحري في كهف الشعاب المضيئة | مغامرات شوشو ومرجان",
+    "longTitle": "Noreen Kids: لغز الكوكب البنفسجي في مرصد المكتبة الطائرة | مغامرات جنى وبلبل",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2773,14 +2761,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "F6YM-uImZiQ",
-    "youtubeLongVideoId": "lgfTTE3SBjg",
-    "facebookShortVideoId": "2119172299467022",
-    "facebookLongVideoId": "1483208273717288",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/2119172299467022",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1483208273717288",
-    "facebookShortTitle": "🎬 ريلز سريع | الشيخ محمود والديك الفصيح وسر نهر الكوثر مع الشيخ محمود والديك الفصيح",
-    "facebookLongTitle": "Noreen Kids | سر النوم بدري وقوة اللبن الدافي للنمو - مغامرة الطبيبة نورين وأرنوب الشقي الممرض",
+    "youtubeShortVideoId": "aErUAzuHvTE",
+    "youtubeLongVideoId": "W146EfZ_QQY",
+    "facebookShortVideoId": "4530128137270838",
+    "facebookLongVideoId": "1506275438055753",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/4530128137270838",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1506275438055753",
+    "facebookShortTitle": "🎬 ريلز سريع | لغز الفانوس البحري في كهف الشعاب المضيئة مع شوشو القبطان الصغير ومرجان الدلفين المرح",
+    "facebookLongTitle": "Noreen Kids | لغز الكوكب البنفسجي في مرصد المكتبة الطائرة - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2795,9 +2783,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 394,
-      "fileSizeBytes": 46378516,
-      "inspectedAt": "17:31"
+      "durationSec": 330,
+      "fileSizeBytes": 45067796,
+      "inspectedAt": "17:21"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2806,7 +2794,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-26T15:31:41.308Z"
+    "reportedAtIso": "2026-11-27T15:21:41.213Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
