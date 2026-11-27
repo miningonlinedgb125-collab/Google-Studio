@@ -37,6 +37,16 @@
     {
       "topic": "عمرو وزعتر وسر إنقاذ عنقاء السحاب المضيء",
       "mainCharacterName": "عمرو المستكشف",
+      "companionName": "زعتر الثعلب الذكي"
+    },
+    {
+      "topic": "إصلاح منارة المرجان المضيئة بالذكاء",
+      "mainCharacterName": "المهندسة نوران",
+      "companionName": "النمر الفرفوش"
+    },
+    {
+      "topic": "عمرو وزعتر وسر إنقاذ عنقاء السحاب المضيء",
+      "mainCharacterName": "عمرو المستكشف",
       "companionName": "زعتر الثعلب الذكي",
       "timestampIso": "2026-11-26T23:52:18.913Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "شوشو القبطان الصغير",
       "companionName": "مرجان الدلفين المرح",
       "timestampIso": "2026-11-23T16:00:29.392Z"
-    },
-    {
-      "topic": "ابتكار المصعد الهوائي لمكتبة السماء العالية",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش"
-    },
-    {
-      "topic": "عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي"
-    },
-    {
-      "topic": "ابتكار المصعد الهوائي لمكتبة السماء العالية",
-      "mainCharacterName": "المهندسة نوران",
-      "companionName": "النمر الفرفوش",
-      "timestampIso": "2026-11-22T21:05:32.456Z"
-    },
-    {
-      "topic": "عمرو وزعتر وسر البذرة العجيبة في غابة اليراعات",
-      "mainCharacterName": "عمرو المستكشف",
-      "companionName": "زعتر الثعلب الذكي",
-      "timestampIso": "2026-11-22T21:05:32.456Z"
     }
   ],
   "scheduledHistory": [
