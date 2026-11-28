@@ -37,6 +37,16 @@
     {
       "topic": "سدرة والفراشة وسر رقصة حروف الأبجدية التائهة",
       "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "ملك ولوليتا وعيادة إنقاذ الأصدقاء الأليفة",
+      "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "سدرة والفراشة وسر رقصة حروف الأبجدية التائهة",
+      "mainCharacterName": "سدرة الصغنونة",
       "companionName": "الفراشة الملونة",
       "timestampIso": "2026-11-28T14:17:31.238Z"
     },
@@ -199,28 +209,6 @@
       "mainCharacterName": "ذياد",
       "companionName": "العصفورة الفرفوشة",
       "timestampIso": "2026-11-25T02:00:57.978Z"
-    },
-    {
-      "topic": "ملك ولوليتا وإنقاذ الجرو الصغير بطل الشوارع",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا"
-    },
-    {
-      "topic": "سدرة وألعاب المكعبات ومشاركة الحلوى اللذيذة",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة"
-    },
-    {
-      "topic": "ملك ولوليتا وإنقاذ الجرو الصغير بطل الشوارع",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "timestampIso": "2026-11-24T23:57:39.282Z"
-    },
-    {
-      "topic": "سدرة وألعاب المكعبات ومشاركة الحلوى اللذيذة",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "timestampIso": "2026-11-24T23:57:39.282Z"
     }
   ],
   "scheduledHistory": [
@@ -2755,16 +2743,16 @@
   "facebookAutoCommentResponderEnabled": true,
   "lastAutoCommentScanAtCairo": "٢٨‏/١١‏/٢٠٢٦، ٤:٤٢:٠٧ م",
   "lastCloudRunReport": {
-    "id": "gh-run-46021382609",
+    "id": "gh-run-46153315437",
     "uploadMode": "daily_schedule",
     "triggerSource": "github_actions_cloud",
-    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-27 (17:21 بتوقيت مصر)",
-    "shortEpisodeId": "ep-gh-short-1795791852675-adh7",
-    "longEpisodeId": "ep-gh-long-1795791925396-bdyu",
-    "shortEpisodeTitle": "Noreen Kids: لغز الفانوس البحري في كهف الشعاب المضيئة | مغامرات شوشو ومرجان",
-    "longEpisodeTitle": "Noreen Kids: لغز الكوكب البنفسجي في مرصد المكتبة الطائرة | مغامرات جنى وبلبل",
-    "shortTitle": "Noreen Kids: لغز الفانوس البحري في كهف الشعاب المضيئة | مغامرات شوشو ومرجان",
-    "longTitle": "Noreen Kids: لغز الكوكب البنفسجي في مرصد المكتبة الطائرة | مغامرات جنى وبلبل",
+    "scheduledDateCairo": "سحابة GitHub الموحدة (YT+FB) · 2026-11-28 (16:42 بتوقيت مصر)",
+    "shortEpisodeId": "ep-gh-short-1795875430674-o939",
+    "longEpisodeId": "ep-gh-long-1795875451238-pe03",
+    "shortEpisodeTitle": "Noreen Kids: سدرة والفراشة وسر رقصة حروف الأبجدية التائهة | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "longEpisodeTitle": "Noreen Kids: ملك ولوليتا وعيادة إنقاذ الأصدقاء الأليفة | مغامرات الطبيبة ملك والقطة لوليتا",
+    "shortTitle": "Noreen Kids: سدرة والفراشة وسر رقصة حروف الأبجدية التائهة | مغامرات سدرة الصغنونة والفراشة الملونة",
+    "longTitle": "Noreen Kids: ملك ولوليتا وعيادة إنقاذ الأصدقاء الأليفة | مغامرات الطبيبة ملك والقطة لوليتا",
     "shortPlaylistId": "PLPwfeXzB3ozU",
     "longPlaylistId": "PLbjN20PzrCYk",
     "privacyStatus": "public",
@@ -2773,14 +2761,14 @@
     "categoryId": "1",
     "dialect": "egyptian",
     "status": "uploaded_live",
-    "youtubeShortVideoId": "aErUAzuHvTE",
-    "youtubeLongVideoId": "W146EfZ_QQY",
-    "facebookShortVideoId": "4530128137270838",
-    "facebookLongVideoId": "1506275438055753",
-    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/4530128137270838",
-    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1506275438055753",
-    "facebookShortTitle": "🎬 ريلز سريع | لغز الفانوس البحري في كهف الشعاب المضيئة مع شوشو القبطان الصغير ومرجان الدلفين المرح",
-    "facebookLongTitle": "Noreen Kids | لغز الكوكب البنفسجي في مرصد المكتبة الطائرة - مغامرة جنى رائدة الفضاء وبلبل الروبوت اللطيف",
+    "youtubeShortVideoId": "jlO_Vq_lJ3A",
+    "youtubeLongVideoId": "axlS2L_bdL8",
+    "facebookShortVideoId": "1035439549578940",
+    "facebookLongVideoId": "1505973111598155",
+    "facebookShortPermalinkUrl": "https://www.facebook.com/reel/1035439549578940",
+    "facebookLongPermalinkUrl": "https://www.facebook.com/1330185823512542/videos/1505973111598155",
+    "facebookShortTitle": "🎬 ريلز سريع | سدرة والفراشة وسر رقصة حروف الأبجدية التائهة مع سدرة الصغنونة والفراشة الملونة",
+    "facebookLongTitle": "Noreen Kids | ملك ولوليتا وعيادة إنقاذ الأصدقاء الأليفة - مغامرة ملك والقطة لوليتا",
     "ffprobeReport": {
       "valid": true,
       "passed": true,
@@ -2795,9 +2783,9 @@
       "audioSampleRate": 48000,
       "audioChannels": 2,
       "fastStartMoovFirst": true,
-      "durationSec": 330,
-      "fileSizeBytes": 45067796,
-      "inspectedAt": "17:21"
+      "durationSec": 360,
+      "fileSizeBytes": 41659924,
+      "inspectedAt": "16:42"
     },
     "processingDetails": {
       "processingStatus": "succeeded",
@@ -2806,7 +2794,7 @@
       "timeLeftMs": 0,
       "fileDetailsAvailability": "available"
     },
-    "reportedAtIso": "2026-11-27T15:21:41.213Z"
+    "reportedAtIso": "2026-11-28T14:42:10.600Z"
   },
   "facebookRepliedCommentIds": [
     "122108050131484976_1437940118283880",
