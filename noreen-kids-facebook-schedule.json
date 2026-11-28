@@ -2718,6 +2718,16 @@
     {
       "topic": "سدرة والفراشة وسر رقصة حروف الأبجدية التائهة",
       "mainCharacterName": "سدرة الصغنونة",
+      "companionName": "الفراشة الملونة"
+    },
+    {
+      "topic": "ملك ولوليتا وعيادة إنقاذ الأصدقاء الأليفة",
+      "mainCharacterName": "ملك",
+      "companionName": "القطة لوليتا"
+    },
+    {
+      "topic": "سدرة والفراشة وسر رقصة حروف الأبجدية التائهة",
+      "mainCharacterName": "سدرة الصغنونة",
       "companionName": "الفراشة الملونة",
       "timestampIso": "2026-11-28T14:17:31.238Z"
     },
@@ -2880,28 +2890,6 @@
       "mainCharacterName": "ذياد",
       "companionName": "العصفورة الفرفوشة",
       "timestampIso": "2026-11-25T02:00:57.978Z"
-    },
-    {
-      "topic": "ملك ولوليتا وإنقاذ الجرو الصغير بطل الشوارع",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا"
-    },
-    {
-      "topic": "سدرة وألعاب المكعبات ومشاركة الحلوى اللذيذة",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة"
-    },
-    {
-      "topic": "ملك ولوليتا وإنقاذ الجرو الصغير بطل الشوارع",
-      "mainCharacterName": "ملك",
-      "companionName": "القطة لوليتا",
-      "timestampIso": "2026-11-24T23:57:39.282Z"
-    },
-    {
-      "topic": "سدرة وألعاب المكعبات ومشاركة الحلوى اللذيذة",
-      "mainCharacterName": "سدرة الصغنونة",
-      "companionName": "الفراشة الملونة",
-      "timestampIso": "2026-11-24T23:57:39.282Z"
     }
   ],
   "lastAutoCommentScanAtCairo": "2026-11-28 · 01:41 بتوقيت مصر",
